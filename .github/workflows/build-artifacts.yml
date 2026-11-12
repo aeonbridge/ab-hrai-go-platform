@@ -1,0 +1,64 @@
+name: Build and publish HRAI-GO artifacts
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'schemas/**'
+      - 'examples/**'
+      - 'ontologies/**'
+      - 'assets/**'
+      - 'scripts/build-artifacts.sh'
+      - '.github/workflows/build-artifacts.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Install LaTeX and PDF tooling
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq \
+            texlive-xetex texlive-latex-extra texlive-lang-portuguese \
+            texlive-fonts-recommended fonts-noto-core fonts-dejavu-core \
+            poppler-utils zip
+      - name: Compile LaTeX, archives, and previews
+        run: bash scripts/build-artifacts.sh
+      - name: Verify expected deliverables
+        run: |
+          test -s artifacts/hrai-go/HRAI-GO_Plataforma_Inteligencia_Regulatoria_Shadow_Council.pdf
+          test -s artifacts/scse/SCSE_Shadow_Council_Simulation_Spec.pdf
+          test -s artifacts/scse/SCSE_Ontology_TTL_OWL.zip
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          for p in Path('artifacts').rglob('*.zip'):
+              with ZipFile(p) as z:
+                  assert z.testzip() is None, str(p)
+          print('All generated ZIP archives passed integrity checks')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hrai-go-complete-deliverables
+          path: artifacts/
+          if-no-files-found: error
+          retention-days: 30
+      - name: Commit compiled deliverables to main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f artifacts/
+          if git diff --cached --quiet; then
+            echo "All compiled deliverables already match main."
+          else
+            git commit -m "build: publish compiled HRAI-GO and SCSE artifacts [skip ci]"
+            git push origin HEAD:main
+          fi
