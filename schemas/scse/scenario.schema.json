@@ -1,0 +1,368 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/scse/schemas/scenario.schema.json",
+  "title": "SCSE Scenario Request v1.0",
+  "description": "The source list is an input claim, not a verified legal status. Authoritative validation is required before publication.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "scenarioId",
+    "mode",
+    "jurisdiction",
+    "asOfDate",
+    "question",
+    "regulatorySources",
+    "council",
+    "simulation"
+  ],
+  "properties": {
+    "scenarioId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{2,79}$"
+    },
+    "mode": {
+      "enum": [
+        "regulatoryPolicy",
+        "solutionCompliance"
+      ]
+    },
+    "jurisdiction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "name"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2
+        },
+        "regionCode": {
+          "type": "string"
+        }
+      }
+    },
+    "asOfDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "question": {
+      "type": "string",
+      "minLength": 10
+    },
+    "regulatorySources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "contextSources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "solution": {
+      "$ref": "#/$defs/solution"
+    },
+    "council": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "strategy",
+        "targetSeats"
+      ],
+      "properties": {
+        "strategy": {
+          "const": "documentedPerspectiveCoverage"
+        },
+        "targetSeats": {
+          "type": "integer",
+          "minimum": 4,
+          "maximum": 1000
+        },
+        "strata": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "seats"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "seats": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "sourceIds": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "requiredReview": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "simulation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rounds",
+        "replicates",
+        "randomSeed"
+      ],
+      "properties": {
+        "rounds": {
+          "type": "integer",
+          "minimum": 3,
+          "maximum": 30
+        },
+        "replicates": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "randomSeed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tokenBudget": {
+          "type": "integer",
+          "minimum": 1000
+        },
+        "maxCostUsd": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "branches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/branch"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "status",
+        "uri"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "proposed",
+            "enactedNotEffective",
+            "effective",
+            "suspended",
+            "repealed",
+            "superseded",
+            "unknown"
+          ]
+        },
+        "uri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "version": {
+          "type": "string"
+        },
+        "observedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "validFrom": {
+          "type": "string",
+          "format": "date"
+        },
+        "validUntil": {
+          "type": "string",
+          "format": "date"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "kind": {
+          "enum": [
+            "law",
+            "bill",
+            "regulation",
+            "decree",
+            "guidance",
+            "standard",
+            "research",
+            "policyDocument",
+            "other"
+          ]
+        }
+      }
+    },
+    "solution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "summary",
+        "artifactType"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 3
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 10
+        },
+        "artifactType": {
+          "enum": [
+            "briefing",
+            "specification",
+            "architecture",
+            "deployedSystem"
+          ]
+        },
+        "artifactUris": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "systemRoles": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "provider",
+              "deployer",
+              "importer",
+              "distributor",
+              "operator",
+              "other"
+            ]
+          }
+        },
+        "dataCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "decisionAutonomy": {
+          "enum": [
+            "advisory",
+            "humanApproval",
+            "automated",
+            "unknown"
+          ]
+        },
+        "evidenceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "branch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "hypothesis",
+        "patch"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "hypothesis": {
+          "type": "string",
+          "minLength": 5
+        },
+        "patch": {
+          "type": "object"
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "solutionCompliance"
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      },
+      "then": {
+        "required": [
+          "solution"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "regulatoryPolicy"
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      },
+      "then": {
+        "not": {
+          "required": [
+            "solution"
+          ]
+        }
+      }
+    }
+  ]
+}

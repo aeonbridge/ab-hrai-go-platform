@@ -1,0 +1,50 @@
+{
+  "scenarioId": "BR-SOLUTION-001",
+  "mode": "solutionCompliance",
+  "jurisdiction": {
+    "code": "BR",
+    "name": "Brazil"
+  },
+  "asOfDate": "2026-11-11",
+  "question": "Which currently applicable requirements and documentary gaps should be examined?",
+  "regulatorySources": [
+    {
+      "id": "LGPD",
+      "title": "Brazilian Data Protection Law",
+      "status": "effective",
+      "uri": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm",
+      "kind": "law"
+    },
+    {
+      "id": "PL2338",
+      "title": "PL 2338/2023",
+      "status": "proposed",
+      "uri": "https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2487262",
+      "kind": "bill"
+    }
+  ],
+  "solution": {
+    "id": "demo-recruitment-01",
+    "title": "Recruitment Screening Assistant",
+    "summary": "Synthetic application specification involving candidate ranking and personal data.",
+    "artifactType": "briefing",
+    "systemRoles": [
+      "provider",
+      "operator"
+    ],
+    "dataCategories": [
+      "candidateProfiles"
+    ],
+    "decisionAutonomy": "humanApproval",
+    "evidenceIds": []
+  },
+  "council": {
+    "strategy": "documentedPerspectiveCoverage",
+    "targetSeats": 20
+  },
+  "simulation": {
+    "rounds": 6,
+    "replicates": 3,
+    "randomSeed": 17
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "scenarioId": "BR-POLICY-001",
+  "mode": "regulatoryPolicy",
+  "jurisdiction": {
+    "code": "BR",
+    "name": "Brazil"
+  },
+  "asOfDate": "2026-11-11",
+  "question": "What institutional and social trade-offs merit review in a national AI proposal?",
+  "regulatorySources": [
+    {
+      "id": "PL2338",
+      "title": "PL 2338/2023",
+      "status": "proposed",
+      "uri": "https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2487262",
+      "kind": "bill"
+    }
+  ],
+  "council": {
+    "strategy": "documentedPerspectiveCoverage",
+    "targetSeats": 20
+  },
+  "simulation": {
+    "rounds": 6,
+    "replicates": 3,
+    "randomSeed": 42,
+    "branches": [
+      {
+        "id": "lower-costs",
+        "hypothesis": "Assess an alternative with lower documentation burden.",
+        "patch": {
+          "documentationTier": "scaledByRisk"
+        },
+        "assumptions": [
+          "No fundamental-rights protection is waived by the scenario."
+        ]
+      }
+    ]
+  }
+}
