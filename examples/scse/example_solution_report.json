@@ -1,0 +1,80 @@
+{
+  "runId": "demo-run-001",
+  "scenarioId": "BR-SOLUTION-001",
+  "mode": "solutionCompliance",
+  "asOfDate": "2026-11-11",
+  "manifest": {
+    "snapshotHash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "models": [
+      "demonstration-model-v1"
+    ],
+    "syntheticCouncil": true,
+    "runSeed": 17
+  },
+  "sourceInventory": [
+    {
+      "id": "LGPD",
+      "uri": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm",
+      "verificationStatus": "pending"
+    },
+    {
+      "id": "PL2338",
+      "uri": "https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2487262",
+      "verificationStatus": "pending"
+    }
+  ],
+  "findings": [
+    {
+      "id": "finding-demo-1",
+      "requirementId": "lgpd-evidence-check-demo",
+      "status": "insufficientEvidence",
+      "legalSourceIds": [
+        "LGPD"
+      ],
+      "evidenceIds": [],
+      "rationale": "This sample has no verified provision extraction nor application evidence. The status is illustrative.",
+      "reviewedByHuman": false
+    },
+    {
+      "id": "finding-demo-2",
+      "requirementId": "pl-2338-prospect-demo",
+      "status": "proposalOnly",
+      "legalSourceIds": [
+        "PL2338"
+      ],
+      "evidenceIds": [],
+      "rationale": "The legislative proposal is explored as a non-binding prospective scenario.",
+      "reviewedByHuman": false
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim-demo-1",
+      "text": "A synthetic worker-rights agent requests additional appeal safeguards.",
+      "classification": "syntheticPerspective",
+      "sourceIds": [],
+      "agentId": "synthetic-worker-seat-1"
+    }
+  ],
+  "minorityOpinions": [
+    {
+      "claimId": "claim-demo-1",
+      "rationale": "The council keeps the position unresolved pending human and source review.",
+      "sourceIds": [],
+      "perspectiveAgentIds": [
+        "synthetic-worker-seat-1"
+      ]
+    }
+  ],
+  "tensions": [],
+  "limitations": [
+    "Entirely synthetic demonstration, not an executed legal or empirical assessment.",
+    "Official source content, legal provisions and compliance evidence were not retrieved for this sample."
+  ],
+  "unresolvedQuestions": [
+    "Which specific legal provisions apply after source verification?"
+  ],
+  "nextActions": [
+    "Review the official legal texts and collect technical evidence before issuing a legal finding."
+  ]
+}
