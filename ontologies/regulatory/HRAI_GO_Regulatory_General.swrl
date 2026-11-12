@@ -1,0 +1,59 @@
+# HRAI-GO Regulatory General Ontology SWRL (v1.0.0)
+# Expressions below are standalone SWRLTab-style rules; names are comments.
+# No rule certifies legal applicability, enactment, or application compliance.
+Prefix: hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#>
+Prefix: swrlb: <http://www.w3.org/2003/11/swrlb#>
+
+# R01_ProvisionJurisdictionOrigin: Jurisdictional origin, not enforceability.
+hrai:LegalProvision(?p) ^ hrai:provisionOfVersion(?p,?v) ^ hrai:versionOfInstrument(?v,?ins) ^ hrai:instrumentInJurisdiction(?ins,?j) -> hrai:provisionInJurisdiction(?p,?j)
+
+# R02_RequirementJurisdictionOrigin: Provenance origin, not binding applicability.
+hrai:NormativeRequirement(?req) ^ hrai:derivedFromProvision(?req,?p) ^ hrai:provisionInJurisdiction(?p,?j) -> hrai:hasJurisdictionalOrigin(?req,?j)
+
+# R03_PolicyMechanismCountry: Connects an explicitly recorded policy mechanism to its jurisdiction.
+hrai:RegulatoryModel(?model) ^ hrai:adoptedByJurisdiction(?model,?j) ^ hrai:usesPolicyInstrument(?model,?instrument) -> hrai:policyInstrumentInJurisdiction(?instrument,?j)
+
+# R04_IndicatorJurisdiction: Associates national context with an indicator.
+hrai:ContextIndicator(?indicator) ^ hrai:indicatorMeasuredFor(?indicator,?context) ^ hrai:contextOfJurisdiction(?context,?j) -> hrai:indicatorRelevantToJurisdiction(?indicator,?j)
+
+# R05_ContestedClaim: Explicit challenge, not a finding of falsehood.
+hrai:PolicyClaim(?claim) ^ hrai:challengedByClaim(?claim,?counter) -> hrai:ContestedPolicyClaim(?claim)
+
+# R06_ContestedTension: A tension contains a contested claim.
+hrai:RegulatoryTension(?tension) ^ hrai:hasPolicyClaim(?tension,?claim) ^ hrai:ContestedPolicyClaim(?claim) -> hrai:ContestedRegulatoryTension(?tension)
+
+# R07_DeliberationStakeholder: A stakeholder's attributed position participates in deliberation.
+hrai:Deliberation(?deliberation) ^ hrai:deliberationIncludesPosition(?deliberation,?position) ^ hrai:positionExpressedBy(?position,?stakeholder) -> hrai:deliberationIncludesStakeholder(?deliberation,?stakeholder)
+
+# R08_IndicatorAssessedAlternative: An alternative was examined using context indicators.
+hrai:PolicyImpactAssessment(?assessment) ^ hrai:assessesPolicyAlternative(?assessment,?alternative) ^ hrai:assessmentUsesIndicator(?assessment,?indicator) -> hrai:IndicatorAssessedAlternative(?alternative)
+
+# R09_ApprovedCandidate: Review metadata, not automatic ABox publication.
+hrai:CandidateAssertion(?candidate) ^ hrai:hasReviewDecision(?candidate,?review) ^ hrai:ApprovalDecision(?review) -> hrai:ReviewedAndApprovedCandidate(?candidate)
+
+# R10_VersionChangeProvisionCandidates: Potential provision changes await exact diff review.
+hrai:RegulatoryChangeEvent(?event) ^ hrai:changeAffectsVersion(?event,?version) ^ hrai:versionContainsProvision(?version,?provision) -> hrai:changePotentiallyAffectsProvision(?event,?provision)
+
+# R11_ProvisionChangeRequirementCandidates: Propagates potential impact, not a legal judgment.
+hrai:RegulatoryChangeEvent(?event) ^ hrai:changePotentiallyAffectsProvision(?event,?provision) ^ hrai:derivedFromProvision(?requirement,?provision) -> hrai:changePotentiallyAffectsRequirement(?event,?requirement)
+
+# R12_RequirementChangeAssessmentReview: Flags dependencies for re-evaluation.
+hrai:ComplianceAssessment(?assessment) ^ hrai:assessesRequirement(?assessment,?requirement) ^ hrai:changePotentiallyAffectsRequirement(?event,?requirement) -> hrai:assessmentNeedsReviewDueTo(?assessment,?event)
+
+# R13_ApplicationReviewImpact: Flags an impacted application without asserting noncompliance.
+hrai:ComplianceAssessment(?assessment) ^ hrai:assessesApplication(?assessment,?application) ^ hrai:assessmentNeedsReviewDueTo(?assessment,?event) -> hrai:applicationPotentiallyImpactedBy(?application,?event)
+
+# R14_ControlRequirementCandidate: Potential control association, not proof of satisfaction.
+hrai:AIApplication(?application) ^ hrai:applicationImplementsControl(?application,?control) ^ hrai:requirementNeedsControl(?requirement,?control) -> hrai:controlPotentiallyAddressesRequirement(?control,?requirement)
+
+# R15_ChangeSource: Source provenance for a change event.
+hrai:RegulatoryChangeEvent(?event) ^ hrai:changeObservedInSnapshot(?event,?snapshot) ^ hrai:snapshotOfSource(?snapshot,?source) -> hrai:changeHasSource(?event,?source)
+
+# R16_TensionNationalContext: Link tensions to an explicit national context.
+hrai:RegulatoryTension(?tension) ^ hrai:tensionInJurisdiction(?tension,?j) ^ hrai:contextOfJurisdiction(?context,?j) -> hrai:tensionHasContext(?tension,?context)
+
+# R17_EvidenceAttachedClaim: Evidence attachment alone does not verify truth.
+hrai:PolicyClaim(?claim) ^ hrai:claimSupportedByEvidence(?claim,?evidence) -> hrai:EvidencedPolicyClaim(?claim)
+
+# R18_UpperIndicatorThreshold: Explicit investigative threshold, not an automatic legal violation.
+hrai:ContextIndicator(?indicator) ^ hrai:hasNumericValue(?indicator,?value) ^ hrai:hasUpperAlertThreshold(?indicator,?threshold) ^ swrlb:greaterThan(?value,?threshold) -> hrai:ThresholdExceededIndicator(?indicator)
