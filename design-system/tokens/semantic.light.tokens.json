@@ -1,0 +1,121 @@
+{
+  "$description": "HRAI-GO semantic tokens, light theme (default). Same keys as semantic.dark.tokens.json. Components reference only this layer and the domain layer.",
+  "color": {
+    "$type": "color",
+    "bg": {
+      "canvas":  { "$value": "{color.ink.25}",  "$description": "Page background." },
+      "surface": { "$value": "{color.ink.0}",   "$description": "Cards, panels, sheets." },
+      "subtle":  { "$value": "{color.ink.50}",  "$description": "Table stripes, secondary panels, inset areas." },
+      "muted":   { "$value": "{color.ink.100}", "$description": "Disabled fills, skeletons." },
+      "inverse": { "$value": "{color.ink.900}", "$description": "Tooltips, toasts." },
+      "scrim":   { "$value": "#1C1B1999", "$description": "Overlay behind modals and sheets (ink.900 at 60%)." }
+    },
+    "text": {
+      "primary":   { "$value": "{color.ink.900}" },
+      "secondary": { "$value": "{color.ink.700}" },
+      "tertiary":  { "$value": "{color.ink.600}", "$description": "Metadata. Still meets 4.5:1 on canvas, surface and subtle." },
+      "disabled":  { "$value": "{color.ink.400}", "$description": "Disabled controls only (WCAG exempt). Never for readable content." },
+      "inverse":   { "$value": "{color.ink.0}" },
+      "link":      { "$value": "{color.civic.700}" },
+      "linkHover": { "$value": "{color.civic.900}" }
+    },
+    "border": {
+      "subtle":  { "$value": "{color.ink.200}", "$description": "Decorative dividers. Must not be the only boundary of an interactive control." },
+      "default": { "$value": "{color.ink.300}", "$description": "Card and panel outlines." },
+      "control": { "$value": "{color.ink.500}", "$description": "Input, checkbox and select boundaries (>= 3:1)." },
+      "strong":  { "$value": "{color.ink.700}" },
+      "focus":   { "$value": "{color.civic.600}", "$description": "Focus ring, drawn 3px wide with a 2px offset." }
+    },
+    "action": {
+      "primary": {
+        "bg":      { "$value": "{color.civic.700}" },
+        "bgHover": { "$value": "{color.civic.800}" },
+        "bgPress": { "$value": "{color.civic.900}" },
+        "fg":      { "$value": "{color.ink.0}" }
+      },
+      "secondary": {
+        "bg":      { "$value": "{color.ink.0}" },
+        "bgHover": { "$value": "{color.civic.50}" },
+        "border":  { "$value": "{color.civic.700}" },
+        "fg":      { "$value": "{color.civic.700}" }
+      },
+      "ghost": {
+        "bgHover": { "$value": "{color.ink.100}" },
+        "fg":      { "$value": "{color.ink.800}" }
+      },
+      "danger": {
+        "bg":      { "$value": "{color.crimson.700}" },
+        "bgHover": { "$value": "{color.crimson.800}" },
+        "fg":      { "$value": "{color.ink.0}" }
+      },
+      "selected": {
+        "bg": { "$value": "{color.civic.50}" },
+        "fg": { "$value": "{color.civic.800}" },
+        "indicator": { "$value": "{color.civic.600}" }
+      }
+    },
+    "tone": {
+      "$description": "Tone triplets used by every status. fg = text and icon on bg and on surface; bg = tinted fill; border = outline (>= 3:1 on surface); solid = strong fill with solidFg text.",
+      "neutral": {
+        "fg":      { "$value": "{color.ink.700}" },
+        "bg":      { "$value": "{color.ink.50}" },
+        "border":  { "$value": "{color.ink.500}" },
+        "solid":   { "$value": "{color.ink.700}" },
+        "solidFg": { "$value": "{color.ink.0}" }
+      },
+      "civic": {
+        "fg":      { "$value": "{color.civic.700}" },
+        "bg":      { "$value": "{color.civic.50}" },
+        "border":  { "$value": "{color.civic.600}" },
+        "solid":   { "$value": "{color.civic.700}" },
+        "solidFg": { "$value": "{color.ink.0}" }
+      },
+      "verdant": {
+        "fg":      { "$value": "{color.verdant.700}" },
+        "bg":      { "$value": "{color.verdant.50}" },
+        "border":  { "$value": "{color.verdant.600}" },
+        "solid":   { "$value": "{color.verdant.700}" },
+        "solidFg": { "$value": "{color.ink.0}" }
+      },
+      "crimson": {
+        "fg":      { "$value": "{color.crimson.700}" },
+        "bg":      { "$value": "{color.crimson.50}" },
+        "border":  { "$value": "{color.crimson.600}" },
+        "solid":   { "$value": "{color.crimson.700}" },
+        "solidFg": { "$value": "{color.ink.0}" }
+      },
+      "ochre": {
+        "fg":      { "$value": "{color.ochre.700}" },
+        "bg":      { "$value": "{color.ochre.50}" },
+        "border":  { "$value": "{color.ochre.600}" },
+        "solid":   { "$value": "{color.ochre.700}" },
+        "solidFg": { "$value": "{color.ink.0}" }
+      },
+      "iris": {
+        "fg":      { "$value": "{color.iris.700}" },
+        "bg":      { "$value": "{color.iris.50}" },
+        "border":  { "$value": "{color.iris.600}" },
+        "solid":   { "$value": "{color.iris.700}" },
+        "solidFg": { "$value": "{color.ink.0}" }
+      },
+      "lagoon": {
+        "fg":      { "$value": "{color.lagoon.700}" },
+        "bg":      { "$value": "{color.lagoon.50}" },
+        "border":  { "$value": "{color.lagoon.600}" },
+        "solid":   { "$value": "{color.lagoon.700}" },
+        "solidFg": { "$value": "{color.ink.0}" }
+      }
+    },
+    "simulation": {
+      "hatchBg":   { "$value": "{color.ink.50}" },
+      "hatchLine": { "$value": "{color.ink.200}", "$description": "Diagonal 45-degree stripes, 6px period. Decorative; the label carries the meaning." },
+      "labelFg":   { "$value": "{color.ink.800}" }
+    }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "sm": { "$value": { "color": "#1C1B1914", "offsetX": "0px", "offsetY": "1px", "blur": "2px", "spread": "0px" } },
+    "md": { "$value": { "color": "#1C1B191F", "offsetX": "0px", "offsetY": "4px", "blur": "12px", "spread": "-2px" } },
+    "lg": { "$value": { "color": "#1C1B1929", "offsetX": "0px", "offsetY": "12px", "blur": "32px", "spread": "-4px" } }
+  }
+}
