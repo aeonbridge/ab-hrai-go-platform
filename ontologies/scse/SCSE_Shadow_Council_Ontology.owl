@@ -1,0 +1,2157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:hrai="https://example.org/hrai-go#"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+   xmlns:scse="https://example.org/hrai-go/scse#"
+   xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#runId">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label xml:lang="en">runId</rdfs:label>
+    <rdfs:comment xml:lang="en">Stable execution identifier.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SimulationRun"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasCoverageDimension">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasCoverageDimension</rdfs:label>
+    <rdfs:comment xml:lang="en">Defines a dimension considered during seat allocation.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SamplingFrame"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#CoverageDimension"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#gapAffectsStratum">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">gapAffectsStratum</rdfs:label>
+    <rdfs:comment xml:lang="en">Stratum affected by a coverage gap.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#CoverageGap"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#StakeholderStratum"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1a58ccfaa91549cb87644fb0379549f8">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#produces"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R08_round"/>
+    <swrl:argument2 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R08_claim"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#SampleRound">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#DeliberationRound"/>
+    <scse:roundIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</scse:roundIndex>
+    <scse:produces rdf:resource="https://example.org/hrai-go/scse/example#SampleClaim"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0e996000f4804cb881375c89b829979d">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+    <swrl:classPredicate rdf:resource="https://example.org/hrai-go/scse#ComplianceFinding"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R06_finding"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne42f531420044b5a986aeba841c9d066">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go#hasUnverifiedEvidence"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R05_requirement"/>
+    <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl:argument2>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#R06_FindingRequiresEvidenceReview">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+    <rdfs:label xml:lang="en">R06_FindingRequiresEvidenceReview</rdfs:label>
+    <rdfs:comment xml:lang="en">Insufficient-evidence finding requires review; missing evidence is not proof of violation.</rdfs:comment>
+    <swrl:body rdf:nodeID="N6a102cabc26d4068a9464f99ddaa7e78"/>
+    <swrl:head rdf:nodeID="N9455d0d3515b497280a7feb660da3c03"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#SampleRecruitmentBriefing">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#SolutionArtifact"/>
+    <scse:title>Synthetic recruitment screening assistant</scse:title>
+    <scse:summary>Fictitious screening application; no technical or legal assessment was performed.</scse:summary>
+    <scse:artifactType>briefing</scse:artifactType>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N47b1ca7a246f4bcabdfe56e7178668f8">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#PendingReview"/>
+    <rdf:rest rdf:nodeID="Ne5244d7abc0343b6bd90b2849fa66b13"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#DemoFinding">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#ComplianceFinding"/>
+    <scse:hasFindingStatus rdf:resource="https://example.org/hrai-go/scse#InsufficientEvidenceStatus"/>
+    <scse:hasApplicableRequirement rdf:resource="https://example.org/hrai-go/scse/example#DemoRequirement"/>
+    <scse:groundedIn rdf:resource="https://example.org/hrai-go/scse/example#DraftProvisionState"/>
+    <scse:rationale>Insufficient evidence example attached to a hypothetical proposed provision.</scse:rationale>
+    <scse:reviewedByHuman rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</scse:reviewedByHuman>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#produces">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">produces</rdfs:label>
+    <rdfs:comment xml:lang="en">Round produced a claim.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#DeliberationRound"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#ArgumentClaim"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#SyntheticPerspective">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#ClaimClassification"/>
+    <rdfs:label xml:lang="en">SyntheticPerspective</rdfs:label>
+    <rdfs:comment xml:lang="en">Synthetic stakeholder perspective</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#worldUsesRegulation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">worldUsesRegulation</rdfs:label>
+    <rdfs:comment xml:lang="en">Regulatory snapshot frozen into the simulated world.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#WorldSnapshot"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#RegulatorySnapshot"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#disclosure">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">disclosure</rdfs:label>
+    <rdfs:comment xml:lang="en">Required disclosure of synthetic or authorized status.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#PerspectiveCharter"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7e9132f79d0c4995813228a890f5523a">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#EffectiveStatus"/>
+    <rdf:rest rdf:nodeID="Ne54762aa914d4949ad4eb2d399c2900e"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na60885de30784c0aab1ab83a458a296c">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#FailedSourceVerification"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#DemoAssessment">
+    <rdf:type rdf:resource="https://example.org/hrai-go#ComplianceAssessment"/>
+    <hrai:hasApplicableRequirement rdf:resource="https://example.org/hrai-go/scse/example#DemoRequirement"/>
+    <scse:hasFinding rdf:resource="https://example.org/hrai-go/scse/example#DemoFinding"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasMinorityOpinion">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasMinorityOpinion</rdfs:label>
+    <rdfs:comment xml:lang="en">Preserves minority opinions.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#CouncilReport"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#MinorityOpinion"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#groundedIn">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">groundedIn</rdfs:label>
+    <rdfs:comment xml:lang="en">Finding based on the legally contextualized state of a provision.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ComplianceFinding"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#LegalProvisionState"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasLegalStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label xml:lang="en">hasLegalStatus</rdfs:label>
+    <rdfs:comment xml:lang="en">Legal status as evaluated for a dated source snapshot.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#LegalProvisionState"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#LegalStatus"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#perspectiveGroundedIn">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">perspectiveGroundedIn</rdfs:label>
+    <rdfs:comment xml:lang="en">Grounding of a documented perspective in evidence.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#DocumentedPerspective"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#EvidenceRecord"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#evidenceText">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">evidenceText</rdfs:label>
+    <rdfs:comment xml:lang="en">Citable evidence excerpt or summary.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#EvidenceRecord"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#RegulatorySnapshot">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">RegulatorySnapshot</rdfs:label>
+    <rdfs:comment xml:lang="en">As-of collection of versioned legal provision states and source material.</rdfs:comment>
+    <owl:disjointWith rdf:resource="https://example.org/hrai-go/scse#NationalContextSnapshot"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N22c1e4597a59405980aef0b8bb0d1030">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#SolutionComplianceMode"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#ScenarioBranch">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">ScenarioBranch</rdfs:label>
+    <rdfs:comment xml:lang="en">Controlled intervention, patch and assumptions applied to a base scenario.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasStratum">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasStratum</rdfs:label>
+    <rdfs:comment xml:lang="en">Identifies which stakeholder stratum a seat is allocated to.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#CouncilSeat"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#StakeholderStratum"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#evidenceHash">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">evidenceHash</rdfs:label>
+    <rdfs:comment xml:lang="en">Evidence content digest.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#EvidenceRecord"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#SourceVerificationStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">SourceVerificationStatus</rdfs:label>
+    <rdfs:comment xml:lang="en">Controlled status of provenance/source verification.</rdfs:comment>
+    <owl:oneOf rdf:nodeID="N61f227b8797f49bba1dedf2ab5e42bd7"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#syntheticCouncil">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label xml:lang="en">syntheticCouncil</rdfs:label>
+    <rdfs:comment xml:lang="en">Council is synthetic and not a human-population survey.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ModelManifest"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasFindingStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label xml:lang="en">hasFindingStatus</rdfs:label>
+    <rdfs:comment xml:lang="en">Assigns a controlled result status.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ComplianceFinding"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#FindingStatus"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#systemRole">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">systemRole</rdfs:label>
+    <rdfs:comment xml:lang="en">Provider, deployer, operator or another role.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SolutionArtifact"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#ScenarioMode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">ScenarioMode</rdfs:label>
+    <rdfs:comment xml:lang="en">Controlled value indicating which simulation regime is requested.</rdfs:comment>
+    <owl:oneOf rdf:nodeID="Nc36aa56a7a41466788816575a53488bf"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#runHasClaim">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">runHasClaim</rdfs:label>
+    <rdfs:comment xml:lang="en">Claim produced in a run through a round.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SimulationRun"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#ArgumentClaim"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#SimulationProject">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">SimulationProject</rdfs:label>
+    <rdfs:comment xml:lang="en">Project containing scenarios, owners, scope and access controls.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#PendingReview">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#ReviewStatus"/>
+    <rdfs:label xml:lang="en">PendingReview</rdfs:label>
+    <rdfs:comment xml:lang="en">Pending formal review</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N84a5ec4714d144e1a959b7f008f767db">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#hasRound"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R04_run"/>
+    <swrl:argument2 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R04_round"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasCouncilAgent">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasCouncilAgent</rdfs:label>
+    <rdfs:comment xml:lang="en">A council agent reached through a seat assignment.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ShadowCouncil"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#PerspectiveAgent"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#documentedPositions">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">documentedPositions</rdfs:label>
+    <rdfs:comment xml:lang="en">Documented positions of a simulated perspective.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#PerspectiveCharter"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#seatJustification">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">seatJustification</rdfs:label>
+    <rdfs:comment xml:lang="en">Basis for allocating this synthetic seat.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#CouncilSeat"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N95e07858f6a74a3b85a483835fa115a6">
+    <rdf:first rdf:nodeID="N7c7ba8190d2845deab07f6dff05db5a6"/>
+    <rdf:rest rdf:nodeID="Nfd0ce7f63d2741988bd82280fa4301a3"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#allowedActions">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">allowedActions</rdfs:label>
+    <rdfs:comment xml:lang="en">Permitted agent actions.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#PerspectiveCharter"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nef9b291787884e098b311b51134a9506">
+    <rdf:first rdf:nodeID="N6d8b289d26d34d8f9c929e1b9d221d09"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1fc5888b86cc42ea80d84e5300ec6d6e">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#hasCouncilAgent"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R01_council"/>
+    <swrl:argument2 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R01_agent"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4396ba18df654c038eef669d1f36bcbf">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#RejectedReview"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N653585b5cdff49438d25d2a8fed94bf9">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+    <swrl:classPredicate rdf:resource="https://example.org/hrai-go/scse#ComplianceFinding"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R07_finding"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#roundIndex">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label xml:lang="en">roundIndex</rdfs:label>
+    <rdfs:comment xml:lang="en">Ordered round number.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#DeliberationRound"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#ModelManifest">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">ModelManifest</rdfs:label>
+    <rdfs:comment xml:lang="en">Frozen reproducibility metadata for the models and configurations used in a run.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasFinding">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasFinding</rdfs:label>
+    <rdfs:comment xml:lang="en">Contains a bounded finding in an assessment.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go#ComplianceAssessment"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#ComplianceFinding"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#minorityClaim">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">minorityClaim</rdfs:label>
+    <rdfs:comment xml:lang="en">Claim underlying a minority opinion.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#MinorityOpinion"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#ArgumentClaim"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5184c914d88a488ba308dcb2ab3ef9d5">
+    <rdf:first rdf:nodeID="Ne3acad67d0204c6691344b1857f5dff0"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#DraftProvisionState">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#LegalProvisionState"/>
+    <scse:describesProvision rdf:resource="https://example.org/hrai-go/scse/example#HypotheticalProvision"/>
+    <scse:hasLegalStatus rdf:resource="https://example.org/hrai-go/scse#ProposedStatus"/>
+    <scse:hasReviewState rdf:resource="https://example.org/hrai-go/scse#PendingReview"/>
+    <scse:hasSource rdf:resource="https://example.org/hrai-go/scse/example#HypotheticalSource"/>
+    <scse:recordedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-11T12:00:00+00:00</scse:recordedAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#WorkerRightsAgent">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#PerspectiveAgent"/>
+    <scse:hasCharter rdf:resource="https://example.org/hrai-go/scse/example#WorkerRightsCharter"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#CompliantEvidencedStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#FindingStatus"/>
+    <rdfs:label xml:lang="en">CompliantEvidencedStatus</rdfs:label>
+    <rdfs:comment xml:lang="en">Requirement-scoped compliance sufficiently evidenced</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#sourceUri">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">sourceUri</rdfs:label>
+    <rdfs:comment xml:lang="en">URI identifying the referenced source document.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SourceDocument"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go#hasApplicableRequirement">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasApplicableRequirement</rdfs:label>
+    <rdfs:comment xml:lang="en">Requirement determined applicable to an assessment in a contextualized evaluation.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go#ComplianceAssessment"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go#NormativeRequirement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#limitation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">limitation</rdfs:label>
+    <rdfs:comment xml:lang="en">Known methodological or empirical limitation.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#CouncilReport"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#decisionAutonomy">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">decisionAutonomy</rdfs:label>
+    <rdfs:comment xml:lang="en">Human approval, automated, advisory or unknown decision autonomy.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SolutionArtifact"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne4efe199c1f44e8c8fba509baf9efe86">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+    <swrl:classPredicate rdf:resource="https://example.org/hrai-go/scse#DeliberationRound"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R08_round"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N79f113390f1b4acb94d339934ee86e58">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#hasCharter"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R03_agent"/>
+    <swrl:argument2 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R03_charter"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#unresolvedQuestion">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">unresolvedQuestion</rdfs:label>
+    <rdfs:comment xml:lang="en">Unresolved issue requiring verification.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#CouncilReport"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#FutureObligationStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#FindingStatus"/>
+    <rdfs:label xml:lang="en">FutureObligationStatus</rdfs:label>
+    <rdfs:comment xml:lang="en">Enacted requirement not yet applicable</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#ShadowCouncil">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">ShadowCouncil</rdfs:label>
+    <rdfs:comment xml:lang="en">Council of synthetic seats whose views must not be represented as polling real persons.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#involvesClaim">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">involvesClaim</rdfs:label>
+    <rdfs:comment xml:lang="en">Connects a tension to an argument.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#PolicyTension"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#ArgumentClaim"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nabb84df3f1c440adade776db8732df3f">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+    <owl:distinctMembers rdf:nodeID="Nebda9a1b7d2040318de12d290513ec64"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6d8b289d26d34d8f9c929e1b9d221d09">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#charterGroundedIn"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R03_charter"/>
+    <swrl:argument2 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R03_evidence"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#randomSeed">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">randomSeed</rdfs:label>
+    <rdfs:comment xml:lang="en">PRNG seed; does not imply exact reproducibility with external models.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SimulationRun"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N576b097d4e414cbea19b223eab7ae4c3">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+    <swrl:classPredicate rdf:resource="https://example.org/hrai-go/scse#ShadowCouncil"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R01_council"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf2bd241a88934252be10864de9a11f4d">
+    <rdf:first rdf:nodeID="N84a5ec4714d144e1a959b7f008f767db"/>
+    <rdf:rest rdf:nodeID="Nc736d0c5d47c4693bb12fbe1374eabcc"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N77b13cc8ce6b499c8d95e63b37d01fab">
+    <rdf:first rdf:nodeID="N79f113390f1b4acb94d339934ee86e58"/>
+    <rdf:rest rdf:nodeID="Nef9b291787884e098b311b51134a9506"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasProvisionState">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasProvisionState</rdfs:label>
+    <rdfs:comment xml:lang="en">Contains a legal state of a provision.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#RegulatorySnapshot"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#LegalProvisionState"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb01eb868e2504f3b93abb6746d751ad5">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#ProposedStatus"/>
+    <rdf:rest rdf:nodeID="N4da114b229bc417aa5a9e3ede033ffe6"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#projectUsesRegulation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">projectUsesRegulation</rdfs:label>
+    <rdfs:comment xml:lang="en">Regulatory snapshot used by a project through a scenario.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SimulationProject"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#RegulatorySnapshot"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N328408cebcfd428e94de564821711c0f">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#EvidenceBasedFinding"/>
+    <rdf:rest rdf:nodeID="N6c00cabf5c28486bad1f36d46f947dbf"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#eventTimestamp">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">eventTimestamp</rdfs:label>
+    <rdfs:comment xml:lang="en">Timestamp of a deliberation event.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#DeliberationEvent"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#relatesToObjective">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">relatesToObjective</rdfs:label>
+    <rdfs:comment xml:lang="en">Associates a tension with a public-policy objective.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#PolicyTension"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#PolicyObjective"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#interventionPatch">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">interventionPatch</rdfs:label>
+    <rdfs:comment xml:lang="en">Serialized declarative patch, e.g., JSON string.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SimulationIntervention"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#DeliberationRound">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">DeliberationRound</rdfs:label>
+    <rdfs:comment xml:lang="en">Controlled ordered stage of a council debate with permitted activities and events.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#EvidenceBasedFinding">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#ClaimClassification"/>
+    <rdfs:label xml:lang="en">EvidenceBasedFinding</rdfs:label>
+    <rdfs:comment xml:lang="en">Sourced analytical observation</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ncee2cfb1e609497b84808143f3ecce68">
+    <rdf:first rdf:nodeID="N10f2b6cca52541f5be86797b486f3f17"/>
+    <rdf:rest rdf:nodeID="N77b13cc8ce6b499c8d95e63b37d01fab"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1d4c9bf8dfb643298318508f7a022d39">
+    <rdf:first rdf:nodeID="N61999ea5b09a4ca182eacbb2f5dead4e"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <owl:versionIRI rdf:resource="https://example.org/hrai-go/scse/1.0.0"/>
+    <owl:versionInfo>1.0.0</owl:versionInfo>
+    <dcterms:title xml:lang="en">Shadow Council Simulation Environment Ontology</dcterms:title>
+    <dcterms:description xml:lang="en">Standalone proposed OWL 2 ontology for regulatory-policy and solution-compliance shadow-council simulations. Includes synthetic illustration individuals and safe positive SWRL inference rules. No legal certification or population representativeness is implied.</dcterms:description>
+    <dcterms:source>SCSE Shadow Council Simulation Specification v1.0 and HRAI-GO conceptual proposal (user-provided documents).</dcterms:source>
+    <rdfs:comment xml:lang="en">Example.org is an intentionally nonproduction namespace; substitute an owned persistent identifier before publication.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasIntervention">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasIntervention</rdfs:label>
+    <rdfs:comment xml:lang="en">Branch intervention with declared changes.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ScenarioBranch"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#SimulationIntervention"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#artifactType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">artifactType</rdfs:label>
+    <rdfs:comment xml:lang="en">Briefing, specification, architecture or deployed system.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SolutionArtifact"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#reportsRun">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">reportsRun</rdfs:label>
+    <rdfs:comment xml:lang="en">Run summarized by a report.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#CouncilReport"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#SimulationRun"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#HypotheticalSource">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#SourceDocument"/>
+    <scse:sourceUri rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://example.org/hypothetical-proposal</scse:sourceUri>
+    <scse:hasSourceVerificationStatus rdf:resource="https://example.org/hrai-go/scse#PendingSourceVerification"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#SampleWorld">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#WorldSnapshot"/>
+    <scse:worldUsesRegulation rdf:resource="https://example.org/hrai-go/scse/example#IllustrativeRegulatorySnapshot"/>
+    <scse:worldUsesContext rdf:resource="https://example.org/hrai-go/scse/example#BrazilContextSnapshot"/>
+    <scse:worldIncludesSolution rdf:resource="https://example.org/hrai-go/scse/example#SampleRecruitmentBriefing"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#PerspectiveCharter">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">PerspectiveCharter</rdfs:label>
+    <rdfs:comment xml:lang="en">Explicit constraints, documented positions, blind spots and permitted actions of a perspective agent.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#branchDerivedFrom">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">branchDerivedFrom</rdfs:label>
+    <rdfs:comment xml:lang="en">The base scenario from which a branch derives.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ScenarioBranch"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#ScenarioDefinition"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#reportsClaim">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">reportsClaim</rdfs:label>
+    <rdfs:comment xml:lang="en">Report includes a claim or position.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#CouncilReport"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#ArgumentClaim"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#ArgumentClaim">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">ArgumentClaim</rdfs:label>
+    <rdfs:comment xml:lang="en">Proposition open to support, challenge, withdrawal and evidence review.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasCharter">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasCharter</rdfs:label>
+    <rdfs:comment xml:lang="en">Connects an agent to its bounded perspective charter.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#PerspectiveAgent"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#PerspectiveCharter"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#RegulatoryPolicyScenario">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">RegulatoryPolicyScenario</rdfs:label>
+    <rdfs:comment xml:lang="en">Scenario dedicated to regulatory policy evaluation.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="https://example.org/hrai-go/scse#ScenarioDefinition"/>
+    <rdfs:subClassOf rdf:nodeID="Nc4ddb1b7e7954ab49427ed9e8b56f46f"/>
+    <owl:disjointWith rdf:resource="https://example.org/hrai-go/scse#SolutionComplianceScenario"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#LegalProvisionState">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">LegalProvisionState</rdfs:label>
+    <rdfs:comment xml:lang="en">Time- and source-qualified representation of the legal status of a provision.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#worldIncludesSolution">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">worldIncludesSolution</rdfs:label>
+    <rdfs:comment xml:lang="en">Solution included in the simulated world if applicable.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#WorldSnapshot"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#SolutionArtifact"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc4ddb1b7e7954ab49427ed9e8b56f46f">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="https://example.org/hrai-go/scse#hasMode"/>
+    <owl:hasValue rdf:resource="https://example.org/hrai-go/scse#RegulatoryPolicyMode"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#R05_AssessmentRequiresEvidenceReview">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+    <rdfs:label xml:lang="en">R05_AssessmentRequiresEvidenceReview</rdfs:label>
+    <rdfs:comment xml:lang="en">Known unverified requirement evidence triggers review, but never a noncompliance conclusion.</rdfs:comment>
+    <swrl:body rdf:nodeID="N990f9625995c4e2ea627b483c933300f"/>
+    <swrl:head rdf:nodeID="Ne027a3cf1bc64e4b8087e9fa945114ba"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#VerifiedSource">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#SourceVerificationStatus"/>
+    <rdfs:label xml:lang="en">VerifiedSource</rdfs:label>
+    <rdfs:comment xml:lang="en">Source verified</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#SmallEnterpriseSeat">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#CouncilSeat"/>
+    <scse:hasStratum rdf:resource="https://example.org/hrai-go/scse/example#SmallEnterpriseStratum"/>
+    <scse:assignedAgent rdf:resource="https://example.org/hrai-go/scse/example#SmallEnterpriseAgent"/>
+    <scse:seatJustification>Illustrative synthetic stakeholder slot; not an actual entrepreneur.</scse:seatJustification>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#R03_AgentEvidenceGrounding">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+    <rdfs:label xml:lang="en">R03_AgentEvidenceGrounding</rdfs:label>
+    <rdfs:comment xml:lang="en">Infer agent documentary grounding via its charter.</rdfs:comment>
+    <swrl:body rdf:nodeID="Ncee2cfb1e609497b84808143f3ecce68"/>
+    <swrl:head rdf:nodeID="N88119f0bb9cf472eb8b0e8ee9d308408"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N72565a369fff4c07bae71883cc248476">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#SolutionComplianceMode"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#modelVersion">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">modelVersion</rdfs:label>
+    <rdfs:comment xml:lang="en">Specific model version used in a run.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ModelManifest"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#SolutionComplianceScenario">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">SolutionComplianceScenario</rdfs:label>
+    <rdfs:comment xml:lang="en">Scenario dedicated to assessing a solution against a legal snapshot.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="https://example.org/hrai-go/scse#ScenarioDefinition"/>
+    <rdfs:subClassOf rdf:nodeID="N0bd75dfd889043a9903e07da286dad02"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#asOfDate">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label xml:lang="en">asOfDate</rdfs:label>
+    <rdfs:comment xml:lang="en">Evaluation date for regulatory applicability.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ScenarioDefinition"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#RequiresLegalReviewStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#FindingStatus"/>
+    <rdfs:label xml:lang="en">RequiresLegalReviewStatus</rdfs:label>
+    <rdfs:comment xml:lang="en">Unresolved interpretative issue</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#PerspectiveAgent">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">PerspectiveAgent</rdfs:label>
+    <rdfs:comment xml:lang="en">Artificial agent whose bounded simulated perspective is linked to a charter and sources.</rdfs:comment>
+    <owl:disjointWith rdf:resource="https://example.org/hrai-go/scse#CouncilSeat"/>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#SoftwareAgent"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#SamplingFrame">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">SamplingFrame</rdfs:label>
+    <rdfs:comment xml:lang="en">Declared collection of documented positions used to select synthetic seats.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#SampleClaim">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#ArgumentClaim"/>
+    <scse:claimText>A synthetic stakeholder perspective suggests documenting routes for appeal.</scse:claimText>
+    <scse:hasClaimClassification rdf:resource="https://example.org/hrai-go/scse#SyntheticPerspective"/>
+    <scse:supportedBy rdf:resource="https://example.org/hrai-go/scse/example#SyntheticEvidence"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasEvidenceRecord">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasEvidenceRecord</rdfs:label>
+    <rdfs:comment xml:lang="en">Technical evidence associated with a solution.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SolutionArtifact"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#EvidenceRecord"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0735bfcff464476791b67bf60b3587a8">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#runHasClaim"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R04_run"/>
+    <swrl:argument2 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R04_claim"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#tensionDescription">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">tensionDescription</rdfs:label>
+    <rdfs:comment xml:lang="en">Description of an identified tension.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#PolicyTension"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4f0865d85c3f40a6ad1b3d295c341b54">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#NoncompliantEvidencedStatus"/>
+    <rdf:rest rdf:nodeID="N93ad3c7e96464a40ad8126438aa9110e"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#FindingStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">FindingStatus</rdfs:label>
+    <rdfs:comment xml:lang="en">Controlled evidence-bounded status for a compliance finding.</rdfs:comment>
+    <owl:oneOf rdf:nodeID="N14f299a1ff6b4a28adcb8b4d77b8248a"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#Hypothesis">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#ClaimClassification"/>
+    <rdfs:label xml:lang="en">Hypothesis</rdfs:label>
+    <rdfs:comment xml:lang="en">Hypothesis requiring test</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#charterGroundedIn">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">charterGroundedIn</rdfs:label>
+    <rdfs:comment xml:lang="en">Charter support in a specific evidence record.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#PerspectiveCharter"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#EvidenceRecord"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2ae858a80c95411f9534dcfede3c4d4f">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#ProposedStatus"/>
+    <rdf:rest rdf:nodeID="N389eb205614648e88cc4b49c7d4090b5"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#RejectedReview">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#ReviewStatus"/>
+    <rdfs:label xml:lang="en">RejectedReview</rdfs:label>
+    <rdfs:comment xml:lang="en">Rejected by reviewer</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#RegulatoryPolicyMode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#ScenarioMode"/>
+    <rdfs:label xml:lang="en">RegulatoryPolicyMode</rdfs:label>
+    <rdfs:comment xml:lang="en">Policy regulatory simulation</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#SourceDocument">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">SourceDocument</rdfs:label>
+    <rdfs:comment xml:lang="en">Document or official source referenced by legal or empirical statements.</rdfs:comment>
+    <owl:disjointWith rdf:resource="https://example.org/hrai-go/scse#EvidenceRecord"/>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#R02_CouncilCoversStratum">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+    <rdfs:label xml:lang="en">R02_CouncilCoversStratum</rdfs:label>
+    <rdfs:comment xml:lang="en">Infer declared stratum coverage; never infer actual population representativeness.</rdfs:comment>
+    <swrl:body rdf:nodeID="Nc617a6f250174d51ad51592f430df0ad"/>
+    <swrl:head rdf:nodeID="N5184c914d88a488ba308dcb2ab3ef9d5"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#validFrom">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">validFrom</rdfs:label>
+    <rdfs:comment xml:lang="en">Beginning of the asserted valid interval for this legal version.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#LegalProvisionState"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nef2f5ba1783d4537bc34f38789ffaf1a">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#PendingSourceVerification"/>
+    <rdf:rest rdf:nodeID="N833ec46915e64923bfbf5ea7a50e8a4e"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9455d0d3515b497280a7feb660da3c03">
+    <rdf:first rdf:nodeID="N45e23d8625ec40cc87cb0484f1c90732"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#EnactedNotEffectiveStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#LegalStatus"/>
+    <rdfs:label xml:lang="en">EnactedNotEffectiveStatus</rdfs:label>
+    <rdfs:comment xml:lang="en">Enacted but not yet effective</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#eventClaim">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">eventClaim</rdfs:label>
+    <rdfs:comment xml:lang="en">Claim referenced by an event.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#DeliberationEvent"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#ArgumentClaim"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7cc92e0d46bf4388873fa13fafc07436">
+    <rdf:first rdf:nodeID="N35e9a7c2c20e4a559b2008b0293061f5"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N50826e77c97e4e99a236b49adf8bb202">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#hasEvent"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R08_round"/>
+    <swrl:argument2 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R08_event"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#NotApplicableStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#FindingStatus"/>
+    <rdfs:label xml:lang="en">NotApplicableStatus</rdfs:label>
+    <rdfs:comment xml:lang="en">Verified non-applicability</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R07_finding">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#SuspendedStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#LegalStatus"/>
+    <rdfs:label xml:lang="en">SuspendedStatus</rdfs:label>
+    <rdfs:comment xml:lang="en">Temporarily suspended</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N389eb205614648e88cc4b49c7d4090b5">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#EnactedNotEffectiveStatus"/>
+    <rdf:rest rdf:nodeID="N43c70b9685004d5c9bbace8e4cbce128"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#role">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">role</rdfs:label>
+    <rdfs:comment xml:lang="en">Simulated perspective role, not real identity.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#PerspectiveCharter"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N880c7a211dc04fc4b3048c826cd6945d">
+    <rdf:first rdf:nodeID="N1778b5fa60a34b97a653abcaad561575"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na4571a088a3945dda79359c692e73f83">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#hasLegalStatus"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R07_legalstate"/>
+    <swrl:argument2 rdf:resource="https://example.org/hrai-go/scse#ProposedStatus"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#eventAgent">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">eventAgent</rdfs:label>
+    <rdfs:comment xml:lang="en">Agent that produced an event.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#DeliberationEvent"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#PerspectiveAgent"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#documentsPerspective">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">documentsPerspective</rdfs:label>
+    <rdfs:comment xml:lang="en">A documented perspective used to construct a charter.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#PerspectiveCharter"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#DocumentedPerspective"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#jurisdictionCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label xml:lang="en">jurisdictionCode</rdfs:label>
+    <rdfs:comment xml:lang="en">ISO 3166-1 alpha-2 code for country-level jurisdictions.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go#Jurisdiction"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#Reviewed">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#ReviewStatus"/>
+    <rdfs:label xml:lang="en">Reviewed</rdfs:label>
+    <rdfs:comment xml:lang="en">Reviewed by assigned reviewer</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#summary">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">summary</rdfs:label>
+    <rdfs:comment xml:lang="en">Summary of the solution or proposed architecture.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SolutionArtifact"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasBranch">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasBranch</rdfs:label>
+    <rdfs:comment xml:lang="en">An explicit counterfactual branch.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ScenarioDefinition"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#ScenarioBranch"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfd44307663f9418f9220ca263707936c">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go#requiresEvidenceReview"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R05_assessment"/>
+    <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl:argument2>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#requiresProspectiveReview">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">requiresProspectiveReview</rdfs:label>
+    <rdfs:comment xml:lang="en">Finding cites a proposed legal state and needs explicit prospective treatment.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ComplianceFinding"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#proposesAlternative">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">proposesAlternative</rdfs:label>
+    <rdfs:comment xml:lang="en">Links a claim to a proposed alternative.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ArgumentClaim"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#PolicyAlternative"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#requiresHumanVerification">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">requiresHumanVerification</rdfs:label>
+    <rdfs:comment xml:lang="en">Council report requires responsible human verification.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#CouncilReport"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne4e4ef8b1a004fa19b766617152b2b20">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#usesRegulation"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R09_scenario"/>
+    <swrl:argument2 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R09_regulation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasClaimClassification">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label xml:lang="en">hasClaimClassification</rdfs:label>
+    <rdfs:comment xml:lang="en">Epistemic classification of an argument.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ArgumentClaim"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#ClaimClassification"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#R09_ProjectRegulation">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+    <rdfs:label xml:lang="en">R09_ProjectRegulation</rdfs:label>
+    <rdfs:comment xml:lang="en">Infer project references to regulatory snapshots through scenarios.</rdfs:comment>
+    <swrl:body rdf:nodeID="Na464fb6792a343028d999c3224ff93e0"/>
+    <swrl:head rdf:nodeID="N681108226b2f4099b0de337b186df1ac"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasSeat">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasSeat</rdfs:label>
+    <rdfs:comment xml:lang="en">Includes a designated synthetic council seat.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ShadowCouncil"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#CouncilSeat"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3168f0f9ac3141a1bf5c092dbcc7069f">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#VerifiedLegalFact"/>
+    <rdf:rest rdf:nodeID="N328408cebcfd428e94de564821711c0f"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#assumption">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">assumption</rdfs:label>
+    <rdfs:comment xml:lang="en">Explicit assumption for a counterfactual intervention.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ScenarioBranch"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nbc71e312ba154150bc90e03293a404ff">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#SupersededStatus"/>
+    <rdf:rest rdf:nodeID="Na00e626ba5ff4f548d1a42c224692f49"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#dataCategory">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">dataCategory</rdfs:label>
+    <rdfs:comment xml:lang="en">Category of processed data.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SolutionArtifact"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N43c70b9685004d5c9bbace8e4cbce128">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#EffectiveStatus"/>
+    <rdf:rest rdf:nodeID="N67ef98d3a07b46aeaada8062aebb7a8c"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R03_evidence">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#SolutionArtifact">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">SolutionArtifact</rdfs:label>
+    <rdfs:comment xml:lang="en">Briefing, technical specification, architecture or deployed-system description to assess.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasRound">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasRound</rdfs:label>
+    <rdfs:comment xml:lang="en">Contains a recorded deliberation round.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SimulationRun"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#DeliberationRound"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N18107b5220c1457091f14edb21410720">
+    <rdf:first rdf:nodeID="Na4571a088a3945dda79359c692e73f83"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasScenario">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasScenario</rdfs:label>
+    <rdfs:comment xml:lang="en">Contains a scenario.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SimulationProject"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#ScenarioDefinition"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#findingSupportedBy">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">findingSupportedBy</rdfs:label>
+    <rdfs:comment xml:lang="en">Evidence supporting a compliance finding.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ComplianceFinding"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#EvidenceRecord"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7cd9f72fe5d54d59a724d948aec342c2">
+    <rdf:first rdf:nodeID="Nc4138cf2c9e048469be26aa755afe2da"/>
+    <rdf:rest rdf:nodeID="Nf2bd241a88934252be10864de9a11f4d"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#constraints">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">constraints</rdfs:label>
+    <rdfs:comment xml:lang="en">Boundaries for a perspective agent.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#PerspectiveCharter"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#SmallEnterpriseAgent">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#PerspectiveAgent"/>
+    <scse:hasCharter rdf:resource="https://example.org/hrai-go/scse/example#SmallEnterpriseCharter"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#needsEvidenceReview">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">needsEvidenceReview</rdfs:label>
+    <rdfs:comment xml:lang="en">A finding explicitly requires evidence review.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ComplianceFinding"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#versionHash">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label xml:lang="en">versionHash</rdfs:label>
+    <rdfs:comment xml:lang="en">Hash of the identified legal version or source state.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#LegalProvisionState"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#SampleReport">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#CouncilReport"/>
+    <scse:reportsRun rdf:resource="https://example.org/hrai-go/scse/example#SampleRun"/>
+    <scse:reportsClaim rdf:resource="https://example.org/hrai-go/scse/example#SampleClaim"/>
+    <scse:reportsFinding rdf:resource="https://example.org/hrai-go/scse/example#DemoFinding"/>
+    <scse:requiresHumanVerification rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</scse:requiresHumanVerification>
+    <scse:limitation>This dataset is synthetic and not an executed simulation or a verified legal analysis.</scse:limitation>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasCoverageGap">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasCoverageGap</rdfs:label>
+    <rdfs:comment xml:lang="en">Records a missing or weakly grounded perspective.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ShadowCouncil"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#CoverageGap"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N14f299a1ff6b4a28adcb8b4d77b8248a">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#CompliantEvidencedStatus"/>
+    <rdf:rest rdf:nodeID="N4f0865d85c3f40a6ad1b3d295c341b54"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasJurisdiction">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasJurisdiction</rdfs:label>
+    <rdfs:comment xml:lang="en">Jurisdiction selected for the scenario.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ScenarioDefinition"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go#Jurisdiction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R01_council">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6ca2147838d747b9bf0fee631fb0af46">
+    <rdf:first rdf:nodeID="N50826e77c97e4e99a236b49adf8bb202"/>
+    <rdf:rest rdf:nodeID="N722347f3691b48648a762287a3f5510d"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#R07_ProposedProvisionNeedsProspectiveReview">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+    <rdfs:label xml:lang="en">R07_ProposedProvisionNeedsProspectiveReview</rdfs:label>
+    <rdfs:comment xml:lang="en">Proposed legal states trigger prospective review only; they are not current binding obligations.</rdfs:comment>
+    <swrl:body rdf:nodeID="N7cc1fed0e2a943ef8ed9045889eef151"/>
+    <swrl:head rdf:nodeID="Nfaf8ef7858ec476dabe000fc4403a501"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd09d8198d57847eeb4b334c73c7aa6c6">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#isGroundedIn"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R03_agent"/>
+    <swrl:argument2 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R03_evidence"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#FailedSourceVerification">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#SourceVerificationStatus"/>
+    <rdfs:label xml:lang="en">FailedSourceVerification</rdfs:label>
+    <rdfs:comment xml:lang="en">Source verification failed</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R04_round">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#question">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">question</rdfs:label>
+    <rdfs:comment xml:lang="en">Explicit scenario research/evaluation question.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ScenarioDefinition"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd39d58dde82f4a64b4b2c6829c51d84c">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#RejectedReview"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hypothesis">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">hypothesis</rdfs:label>
+    <rdfs:comment xml:lang="en">Hypothesis to test in an alternative scenario.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ScenarioBranch"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N61999ea5b09a4ca182eacbb2f5dead4e">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#hasFindingStatus"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R06_finding"/>
+    <swrl:argument2 rdf:resource="https://example.org/hrai-go/scse#InsufficientEvidenceStatus"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na464fb6792a343028d999c3224ff93e0">
+    <rdf:first rdf:nodeID="N29f6b75b395a43fea462629f76794159"/>
+    <rdf:rest rdf:nodeID="N95e07858f6a74a3b85a483835fa115a6"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#EvidenceRecord">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">EvidenceRecord</rdfs:label>
+    <rdfs:comment xml:lang="en">Citable record with provenance, verification status and version metadata.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#supportedBy">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">supportedBy</rdfs:label>
+    <rdfs:comment xml:lang="en">Evidence supporting a claim.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ArgumentClaim"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#EvidenceRecord"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#VerifiedLegalFact">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#ClaimClassification"/>
+    <rdfs:label xml:lang="en">VerifiedLegalFact</rdfs:label>
+    <rdfs:comment xml:lang="en">Verified legal fact with sourced applicability</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#scenarioId">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label xml:lang="en">scenarioId</rdfs:label>
+    <rdfs:comment xml:lang="en">Stable scenario identifier.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ScenarioDefinition"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go#NormativeRequirement">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">NormativeRequirement</rdfs:label>
+    <rdfs:comment xml:lang="en">Normative requirement interpreted from legal provisions and assessed in a specified context.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#SampleRun">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#SimulationRun"/>
+    <scse:executesScenario rdf:resource="https://example.org/hrai-go/scse/example#SampleRecruitmentScenario"/>
+    <scse:materializes rdf:resource="https://example.org/hrai-go/scse/example#SampleWorld"/>
+    <scse:hasRound rdf:resource="https://example.org/hrai-go/scse/example#SampleRound"/>
+    <scse:hasComplianceAssessment rdf:resource="https://example.org/hrai-go/scse/example#DemoAssessment"/>
+    <scse:runId>DEMO-RUN-001</scse:runId>
+    <scse:randomSeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">17</scse:randomSeed>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasSource">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasSource</rdfs:label>
+    <rdfs:comment xml:lang="en">Source for a legal provision state.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#LegalProvisionState"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#SourceDocument"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N02f27cf28c8a41da9199f7a51b106ce4">
+    <rdf:first rdf:nodeID="N1fc5888b86cc42ea80d84e5300ec6d6e"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne3acad67d0204c6691344b1857f5dff0">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#coversStratum"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R02_council"/>
+    <swrl:argument2 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R02_stratum"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#NationalContextSnapshot">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">NationalContextSnapshot</rdfs:label>
+    <rdfs:comment xml:lang="en">Temporal capture of national and institutional indicators used by a scenario.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Neab2930029cf46cc8aec988a2e5a8428">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#NotApplicableStatus"/>
+    <rdf:rest rdf:nodeID="N6fab33867fcf4ee69e052584d4a190be"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#contentHash">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">contentHash</rdfs:label>
+    <rdfs:comment xml:lang="en">Content digest for event evidence or replay.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#DeliberationEvent"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N722347f3691b48648a762287a3f5510d">
+    <rdf:first rdf:nodeID="N7bcd1cfeeceb4903990270fe7264ec45"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#UnknownClaimClass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#ClaimClassification"/>
+    <rdfs:label xml:lang="en">UnknownClaimClass</rdfs:label>
+    <rdfs:comment xml:lang="en">Unclassified claim</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasModelManifest">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasModelManifest</rdfs:label>
+    <rdfs:comment xml:lang="en">Frozen model and execution details.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SimulationRun"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#ModelManifest"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N35e9a7c2c20e4a559b2008b0293061f5">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#assignedAgent"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R01_seat"/>
+    <swrl:argument2 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R01_agent"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#WorkerRightsSeat">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#CouncilSeat"/>
+    <scse:hasStratum rdf:resource="https://example.org/hrai-go/scse/example#WorkerRightsStratum"/>
+    <scse:assignedAgent rdf:resource="https://example.org/hrai-go/scse/example#WorkerRightsAgent"/>
+    <scse:seatJustification>Illustrative synthetic documented-perspective slot; not a statistical respondent.</scse:seatJustification>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasApplicableRequirement">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasApplicableRequirement</rdfs:label>
+    <rdfs:comment xml:lang="en">Requirement evaluated by the finding.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ComplianceFinding"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go#NormativeRequirement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#UnknownLegalStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#LegalStatus"/>
+    <rdfs:label xml:lang="en">UnknownLegalStatus</rdfs:label>
+    <rdfs:comment xml:lang="en">Status not sufficiently verified</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#describesProvision">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">describesProvision</rdfs:label>
+    <rdfs:comment xml:lang="en">Refers to the stable identity of a legal provision.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#LegalProvisionState"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go#LegalProvision"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#materializes">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">materializes</rdfs:label>
+    <rdfs:comment xml:lang="en">Materializes one frozen version of a simulation world.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SimulationRun"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#WorldSnapshot"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#ClaimClassification">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">ClaimClassification</rdfs:label>
+    <rdfs:comment xml:lang="en">Controlled classification separating verified claims from synthetic positions.</rdfs:comment>
+    <owl:oneOf rdf:nodeID="N3168f0f9ac3141a1bf5c092dbcc7069f"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasEvent">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasEvent</rdfs:label>
+    <rdfs:comment xml:lang="en">Contains an auditable deliberation event.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#DeliberationRound"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#DeliberationEvent"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc37edaccd5444851b5d8518adc20ce67">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#RepealedStatus"/>
+    <rdf:rest rdf:nodeID="N694998c317e24639b2593608cc54ae44"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#R08_RoundProducesEventClaim">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+    <rdfs:label xml:lang="en">R08_RoundProducesEventClaim</rdfs:label>
+    <rdfs:comment xml:lang="en">Associate claims with recorded round events, not with human respondents.</rdfs:comment>
+    <swrl:body rdf:nodeID="N63ee66f348864321b3719a1379e0c5c3"/>
+    <swrl:head rdf:nodeID="Nb3618b428957445891ecc8c529efdd33"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1778b5fa60a34b97a653abcaad561575">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#hasStratum"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R02_seat"/>
+    <swrl:argument2 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R02_stratum"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#replicateIndex">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">replicateIndex</rdfs:label>
+    <rdfs:comment xml:lang="en">Index of a repeated stochastic run.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SimulationRun"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#ComplianceFinding">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">ComplianceFinding</rdfs:label>
+    <rdfs:comment xml:lang="en">Requirement-scoped, evidence-bounded assessment outcome, not automatic legal certification.</rdfs:comment>
+    <owl:disjointWith rdf:resource="https://example.org/hrai-go/scse#ArgumentClaim"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0e59a38beb414c0fb5c2a94fb7ca6b17">
+    <rdf:first rdf:nodeID="Ne42f531420044b5a986aeba841c9d066"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#extractionConfidence">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">extractionConfidence</rdfs:label>
+    <rdfs:comment xml:lang="en">Extraction confidence; not legal certainty.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#LegalProvisionState"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#PolicyTension">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">PolicyTension</rdfs:label>
+    <rdfs:comment xml:lang="en">Claimed conflict or trade-off among policy objectives requiring examination.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#contextJurisdiction">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">contextJurisdiction</rdfs:label>
+    <rdfs:comment xml:lang="en">Jurisdiction described by a national-context snapshot.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#NationalContextSnapshot"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go#Jurisdiction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#ReviewStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">ReviewStatus</rdfs:label>
+    <rdfs:comment xml:lang="en">Controlled review status for source or knowledge validation.</rdfs:comment>
+    <owl:oneOf rdf:nodeID="N47b1ca7a246f4bcabdfe56e7178668f8"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#executesScenario">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">executesScenario</rdfs:label>
+    <rdfs:comment xml:lang="en">Identifies the scenario executed by the run.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SimulationRun"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#ScenarioDefinition"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7cc1fed0e2a943ef8ed9045889eef151">
+    <rdf:first rdf:nodeID="N653585b5cdff49438d25d2a8fed94bf9"/>
+    <rdf:rest rdf:nodeID="N347d712a74a8438e965dfbf5a599c631"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#validUntil">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">validUntil</rdfs:label>
+    <rdfs:comment xml:lang="en">End of the asserted valid interval, when known.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#LegalProvisionState"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N60e443f5a6324e9db4db10b6123cc10c">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#requiresProspectiveReview"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R07_finding"/>
+    <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl:argument2>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#blindSpots">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">blindSpots</rdfs:label>
+    <rdfs:comment xml:lang="en">Documented limitations in an agent charter.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#PerspectiveCharter"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#rationale">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">rationale</rdfs:label>
+    <rdfs:comment xml:lang="en">Requirement-specific justification of a finding.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ComplianceFinding"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6fab33867fcf4ee69e052584d4a190be">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#RequiresLegalReviewStatus"/>
+    <rdf:rest rdf:nodeID="N3e5bc89292134ada9c73457cdbd8e0d4"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7bcd1cfeeceb4903990270fe7264ec45">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#eventClaim"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R08_event"/>
+    <swrl:argument2 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R08_claim"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#SampleProject">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#SimulationProject"/>
+    <scse:hasScenario rdf:resource="https://example.org/hrai-go/scse/example#SampleRecruitmentScenario"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#SampleCouncil">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#ShadowCouncil"/>
+    <scse:hasSeat rdf:resource="https://example.org/hrai-go/scse/example#WorkerRightsSeat"/>
+    <scse:hasSeat rdf:resource="https://example.org/hrai-go/scse/example#SmallEnterpriseSeat"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N93ad3c7e96464a40ad8126438aa9110e">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#InsufficientEvidenceStatus"/>
+    <rdf:rest rdf:nodeID="Neab2930029cf46cc8aec988a2e5a8428"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc736d0c5d47c4693bb12fbe1374eabcc">
+    <rdf:first rdf:nodeID="Ndba89f7c8d7e48ecbd9dd9cff0bce5cf"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nff87674c43c44f30a7595309347a8c89">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#UnknownClaimClass"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#interests">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">interests</rdfs:label>
+    <rdfs:comment xml:lang="en">Interests documented for an agent charter.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#PerspectiveCharter"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#worldUsesContext">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">worldUsesContext</rdfs:label>
+    <rdfs:comment xml:lang="en">National context frozen into the simulated world.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#WorldSnapshot"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#NationalContextSnapshot"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#SupersededStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#LegalStatus"/>
+    <rdfs:label xml:lang="en">SupersededStatus</rdfs:label>
+    <rdfs:comment xml:lang="en">Replaced by a successor</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N19fe448902384cd8b5856dbfe6e13b42">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+    <owl:distinctMembers rdf:nodeID="N8706d279622e4018b80e644258587542"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#reviewedByHuman">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">reviewedByHuman</rdfs:label>
+    <rdfs:comment xml:lang="en">Whether a human reviewer approved this specific finding.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ComplianceFinding"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#R04_RunProducesClaim">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+    <rdfs:label xml:lang="en">R04_RunProducesClaim</rdfs:label>
+    <rdfs:comment xml:lang="en">Infer which claims were produced during a specific run.</rdfs:comment>
+    <swrl:body rdf:nodeID="N7cd9f72fe5d54d59a724d948aec342c2"/>
+    <swrl:head rdf:nodeID="N100aaccd0c8d45138cc840c251023a55"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#StakeholderStratum">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">StakeholderStratum</rdfs:label>
+    <rdfs:comment xml:lang="en">Documented perspective category used for synthetic council coverage, not a human probability sample.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#ProposalOnlyStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#FindingStatus"/>
+    <rdfs:label xml:lang="en">ProposalOnlyStatus</rdfs:label>
+    <rdfs:comment xml:lang="en">Potential future requirement from a proposal</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N833ec46915e64923bfbf5ea7a50e8a4e">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#FailedSourceVerification"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#recordedAt">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">recordedAt</rdfs:label>
+    <rdfs:comment xml:lang="en">Time at which this legal-state assertion entered the database.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#LegalProvisionState"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6a102cabc26d4068a9464f99ddaa7e78">
+    <rdf:first rdf:nodeID="N0e996000f4804cb881375c89b829979d"/>
+    <rdf:rest rdf:nodeID="N1d4c9bf8dfb643298318508f7a022d39"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#minorityAgent">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">minorityAgent</rdfs:label>
+    <rdfs:comment xml:lang="en">Synthetic agent associated with a dissenting claim.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#MinorityOpinion"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#PerspectiveAgent"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfaf8ef7858ec476dabe000fc4403a501">
+    <rdf:first rdf:nodeID="N60e443f5a6324e9db4db10b6123cc10c"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#nextAction">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">nextAction</rdfs:label>
+    <rdfs:comment xml:lang="en">Recommended next investigative action, not an automatic legal requirement.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#CouncilReport"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#usesContext">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">usesContext</rdfs:label>
+    <rdfs:comment xml:lang="en">Uses a versioned national context.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ScenarioDefinition"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#NationalContextSnapshot"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0bd75dfd889043a9903e07da286dad02">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="https://example.org/hrai-go/scse#hasMode"/>
+    <owl:hasValue rdf:resource="https://example.org/hrai-go/scse#SolutionComplianceMode"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#Brazil">
+    <rdf:type rdf:resource="https://example.org/hrai-go#Jurisdiction"/>
+    <scse:jurisdictionCode>BR</scse:jurisdictionCode>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9ace0af042ec4bbb875caa0718bb29c4">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#hasSeat"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R02_council"/>
+    <swrl:argument2 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R02_seat"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#challenges">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">challenges</rdfs:label>
+    <rdfs:comment xml:lang="en">A claim that challenges another claim.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ArgumentClaim"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#ArgumentClaim"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#WorldSnapshot">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">WorldSnapshot</rdfs:label>
+    <rdfs:comment xml:lang="en">Frozen simulation world state containing legal, national and application inputs.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#snapshotJurisdiction">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">snapshotJurisdiction</rdfs:label>
+    <rdfs:comment xml:lang="en">Jurisdiction within which snapshot applicability is considered.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#RegulatorySnapshot"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go#Jurisdiction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7263a0c9f8b64cb793677d4c3cb3209d">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#ProposalOnlyStatus"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R07_legalstate">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na3b5ea3c1d494b7c9c4d7a364ddd9296">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#Reviewed"/>
+    <rdf:rest rdf:nodeID="N4396ba18df654c038eef669d1f36bcbf"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#SmallEnterpriseCharter">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#PerspectiveCharter"/>
+    <scse:charterGroundedIn rdf:resource="https://example.org/hrai-go/scse/example#SyntheticEvidence"/>
+    <scse:disclosure>Fictional example only; no real organization or person is represented.</scse:disclosure>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#usesRegulation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">usesRegulation</rdfs:label>
+    <rdfs:comment xml:lang="en">Uses a regulatory snapshot.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ScenarioDefinition"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#RegulatorySnapshot"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#LegalException">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">LegalException</rdfs:label>
+    <rdfs:comment xml:lang="en">Expressly represented possible exception to a versioned legal provision.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4da114b229bc417aa5a9e3ede033ffe6">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#EnactedNotEffectiveStatus"/>
+    <rdf:rest rdf:nodeID="N7e9132f79d0c4995813228a890f5523a"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasComplianceAssessment">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasComplianceAssessment</rdfs:label>
+    <rdfs:comment xml:lang="en">Assessment issued separately from synthetic council deliberation.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SimulationRun"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go#ComplianceAssessment"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#title">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">title</rdfs:label>
+    <rdfs:comment xml:lang="en">Title of a solution artifact.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SolutionArtifact"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#WorkerRightsCharter">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#PerspectiveCharter"/>
+    <scse:charterGroundedIn rdf:resource="https://example.org/hrai-go/scse/example#SyntheticEvidence"/>
+    <scse:disclosure>Fictional example only; no real organization or person is represented.</scse:disclosure>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N45e23d8625ec40cc87cb0484f1c90732">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#needsEvidenceReview"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R06_finding"/>
+    <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl:argument2>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#coversStratum">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">coversStratum</rdfs:label>
+    <rdfs:comment xml:lang="en">Stakeholder stratum represented as a documented perspective in the council.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ShadowCouncil"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#StakeholderStratum"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1b410cf9a04340658f88f0951d1342ce">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#RegulatoryPolicyMode"/>
+    <rdf:rest rdf:nodeID="N22c1e4597a59405980aef0b8bb0d1030"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ncfe7ec8680464a7f973b83eac9cde8b9">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#UnknownLegalStatus"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasSamplingFrame">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasSamplingFrame</rdfs:label>
+    <rdfs:comment xml:lang="en">Declared universe of documented perspectives.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ShadowCouncil"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#SamplingFrame"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#DeliberationEvent">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">DeliberationEvent</rdfs:label>
+    <rdfs:comment xml:lang="en">Auditable action within a deliberation round linked to claims and execution.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#reportsFinding">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">reportsFinding</rdfs:label>
+    <rdfs:comment xml:lang="en">Report describes a legal finding without changing it.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#CouncilReport"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#ComplianceFinding"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#InsufficientEvidenceStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#FindingStatus"/>
+    <rdfs:label xml:lang="en">InsufficientEvidenceStatus</rdfs:label>
+    <rdfs:comment xml:lang="en">Insufficient evidence for a determination</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go#requiresEvidenceReview">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">requiresEvidenceReview</rdfs:label>
+    <rdfs:comment xml:lang="en">Positive review-needed indicator inferred from known unverified evidence.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go#ComplianceAssessment"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3c8651d1ca41465cbc1441144ff00ade">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#NoncompliantEvidencedStatus"/>
+    <rdf:rest rdf:nodeID="N8125f0f37722418ba2951df38d0925d5"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#SampleRecruitmentScenario">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#SolutionComplianceScenario"/>
+    <scse:hasMode rdf:resource="https://example.org/hrai-go/scse#SolutionComplianceMode"/>
+    <scse:scenarioId>BR-SOLUTION-EXAMPLE-001</scse:scenarioId>
+    <scse:asOfDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-11-11</scse:asOfDate>
+    <scse:question>What documentary gaps would a hypothetical recruitment AI require verification for?</scse:question>
+    <scse:hasJurisdiction rdf:resource="https://example.org/hrai-go/scse/example#Brazil"/>
+    <scse:usesRegulation rdf:resource="https://example.org/hrai-go/scse/example#IllustrativeRegulatorySnapshot"/>
+    <scse:usesContext rdf:resource="https://example.org/hrai-go/scse/example#BrazilContextSnapshot"/>
+    <scse:evaluates rdf:resource="https://example.org/hrai-go/scse/example#SampleRecruitmentBriefing"/>
+    <scse:instantiatesCouncil rdf:resource="https://example.org/hrai-go/scse/example#SampleCouncil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#PolicyAlternative">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">PolicyAlternative</rdfs:label>
+    <rdfs:comment xml:lang="en">Candidate regulatory intervention or alternative policy design.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc4092ee6e0024c2eb5cee66d6c7f709b">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+    <swrl:classPredicate rdf:resource="https://example.org/hrai-go/scse#ShadowCouncil"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R02_council"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne5244d7abc0343b6bd90b2849fa66b13">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#Reviewed"/>
+    <rdf:rest rdf:nodeID="Nd39d58dde82f4a64b4b2c6829c51d84c"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0504ce8c96414d4db978c6d39935c03e">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#PendingSourceVerification"/>
+    <rdf:rest rdf:nodeID="Na60885de30784c0aab1ab83a458a296c"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasMode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label xml:lang="en">hasMode</rdfs:label>
+    <rdfs:comment xml:lang="en">Controlled simulation mode.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ScenarioDefinition"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#ScenarioMode"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7c7ba8190d2845deab07f6dff05db5a6">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#hasScenario"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R09_project"/>
+    <swrl:argument2 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R09_scenario"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#evaluates">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">evaluates</rdfs:label>
+    <rdfs:comment xml:lang="en">Evaluates a solution artifact.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ScenarioDefinition"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#SolutionArtifact"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne027a3cf1bc64e4b8087e9fa945114ba">
+    <rdf:first rdf:nodeID="Nfd44307663f9418f9220ca263707936c"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#SyntheticEvidence">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#EvidenceRecord"/>
+    <scse:sourceEvidence rdf:resource="https://example.org/hrai-go/scse/example#SyntheticPerspectiveSource"/>
+    <scse:evidenceText>Synthetic placeholder evidence; must be replaced with verifiable publications before real use.</scse:evidenceText>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#assignedAgent">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">assignedAgent</rdfs:label>
+    <rdfs:comment xml:lang="en">Assigns an agent to this council seat.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#CouncilSeat"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#PerspectiveAgent"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasSourceVerificationStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label xml:lang="en">hasSourceVerificationStatus</rdfs:label>
+    <rdfs:comment xml:lang="en">Verification status of the referenced document.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SourceDocument"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#SourceVerificationStatus"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3cc7f291650f43d5accd6d8c8ab803ff">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#SyntheticPerspective"/>
+    <rdf:rest rdf:nodeID="Nd28012f1488948488f78cec3e0b3cbf5"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#NoncompliantEvidencedStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#FindingStatus"/>
+    <rdfs:label xml:lang="en">NoncompliantEvidencedStatus</rdfs:label>
+    <rdfs:comment xml:lang="en">Positive evidence of inconsistency with a requirement</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#instantiatesCouncil">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">instantiatesCouncil</rdfs:label>
+    <rdfs:comment xml:lang="en">Instantiates a synthetic shadow council.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ScenarioDefinition"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#ShadowCouncil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#sourceEvidence">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">sourceEvidence</rdfs:label>
+    <rdfs:comment xml:lang="en">Source document recorded by evidence.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#EvidenceRecord"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#SourceDocument"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go#ComplianceAssessment">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">ComplianceAssessment</rdfs:label>
+    <rdfs:comment xml:lang="en">Evidence-bounded assessment concerning applicability and satisfaction of requirements.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#claimText">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">claimText</rdfs:label>
+    <rdfs:comment xml:lang="en">Proposition expressed by an agent.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ArgumentClaim"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne07addf357444171a2e0f0152434f8dd">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#projectUsesRegulation"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R09_project"/>
+    <swrl:argument2 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R09_regulation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#sourceId">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">sourceId</rdfs:label>
+    <rdfs:comment xml:lang="en">External identifier of source material.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SourceDocument"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#WorkerRightsStratum">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#StakeholderStratum"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N63c8752966e546c4b28adb18c4c0d663">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#groundedIn"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R07_finding"/>
+    <swrl:argument2 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R07_legalstate"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8706d279622e4018b80e644258587542">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#VerifiedLegalFact"/>
+    <rdf:rest rdf:nodeID="Nd9157bb7cd5c4dae8a2ff184311b2b0f"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go#LegalProvision">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">LegalProvision</rdfs:label>
+    <rdfs:comment xml:lang="en">Identifiable source legal provision, independent of its versioned state.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N670d40107f654770a549823522346020">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#ProposalOnlyStatus"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R02_council">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#reportsTension">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">reportsTension</rdfs:label>
+    <rdfs:comment xml:lang="en">Report includes a policy tension.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#CouncilReport"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#PolicyTension"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N88119f0bb9cf472eb8b0e8ee9d308408">
+    <rdf:first rdf:nodeID="Nd09d8198d57847eeb4b334c73c7aa6c6"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd9157bb7cd5c4dae8a2ff184311b2b0f">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#EvidenceBasedFinding"/>
+    <rdf:rest rdf:nodeID="N3cc7f291650f43d5accd6d8c8ab803ff"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasReviewState">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasReviewState</rdfs:label>
+    <rdfs:comment xml:lang="en">Verification/review state of legal source extraction.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#LegalProvisionState"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#ReviewStatus"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#RepealedStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#LegalStatus"/>
+    <rdfs:label xml:lang="en">RepealedStatus</rdfs:label>
+    <rdfs:comment xml:lang="en">Repealed</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#snapshotHash">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:label xml:lang="en">snapshotHash</rdfs:label>
+    <rdfs:comment xml:lang="en">SHA-256 content hash of the frozen world snapshot.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#ModelManifest"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb79dd9ae32ef49488c327be85b8ec249">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#VerifiedSource"/>
+    <rdf:rest rdf:nodeID="Nef2f5ba1783d4537bc34f38789ffaf1a"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#SolutionComplianceMode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#ScenarioMode"/>
+    <rdfs:label xml:lang="en">SolutionComplianceMode</rdfs:label>
+    <rdfs:comment xml:lang="en">Application compliance simulation</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne2acd717aa904fed96be886f9cacf1c0">
+    <rdf:first rdf:nodeID="Ncd65ade0007b4412a97f112341868d70"/>
+    <rdf:rest rdf:nodeID="N0e59a38beb414c0fb5c2a94fb7ca6b17"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N643ac01a8a254ab3a0fbdf5ce24f88e6">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#hasSeat"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R01_council"/>
+    <swrl:argument2 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R01_seat"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go#Jurisdiction">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Jurisdiction</rdfs:label>
+    <rdfs:comment xml:lang="en">Territorial jurisdiction governing applicability of legal provisions.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N10f2b6cca52541f5be86797b486f3f17">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+    <swrl:classPredicate rdf:resource="https://example.org/hrai-go/scse#PerspectiveAgent"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R03_agent"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2bbdcd02897e4aa4815e6224b3e2af78">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#Hypothesis"/>
+    <rdf:rest rdf:nodeID="N4df8e64f70a94bc7a1aede768175267e"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N347d712a74a8438e965dfbf5a599c631">
+    <rdf:first rdf:nodeID="N63c8752966e546c4b28adb18c4c0d663"/>
+    <rdf:rest rdf:nodeID="N18107b5220c1457091f14edb21410720"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ncd65ade0007b4412a97f112341868d70">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go#hasApplicableRequirement"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R05_assessment"/>
+    <swrl:argument2 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R05_requirement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#IllustrativeRegulatorySnapshot">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#RegulatorySnapshot"/>
+    <scse:snapshotJurisdiction rdf:resource="https://example.org/hrai-go/scse/example#Brazil"/>
+    <scse:hasProvisionState rdf:resource="https://example.org/hrai-go/scse/example#DraftProvisionState"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#PendingSourceVerification">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#SourceVerificationStatus"/>
+    <rdfs:label xml:lang="en">PendingSourceVerification</rdfs:label>
+    <rdfs:comment xml:lang="en">Source pending verification</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N63ee66f348864321b3719a1379e0c5c3">
+    <rdf:first rdf:nodeID="Ne4efe199c1f44e8c8fba509baf9efe86"/>
+    <rdf:rest rdf:nodeID="N6ca2147838d747b9bf0fee631fb0af46"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ndba89f7c8d7e48ecbd9dd9cff0bce5cf">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://example.org/hrai-go/scse#produces"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R04_round"/>
+    <swrl:argument2 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R04_claim"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R09_regulation">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N694998c317e24639b2593608cc54ae44">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#SupersededStatus"/>
+    <rdf:rest rdf:nodeID="Ncfe7ec8680464a7f973b83eac9cde8b9"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#ProposedStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#LegalStatus"/>
+    <rdfs:label xml:lang="en">ProposedStatus</rdfs:label>
+    <rdfs:comment xml:lang="en">Unenacted proposal only</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#hasException">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasException</rdfs:label>
+    <rdfs:comment xml:lang="en">Records a possible legal exception (never silently assumed).</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#LegalProvisionState"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#LegalException"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nebb84d1fa247499f85513ad1f2c269ff">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#RequiresLegalReviewStatus"/>
+    <rdf:rest rdf:nodeID="Nc4b37318cd604fdebf22775c019bcd5c"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#CoverageGap">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">CoverageGap</rdfs:label>
+    <rdfs:comment xml:lang="en">Perspective for which sufficient reliable source grounding was not found.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6c00cabf5c28486bad1f36d46f947dbf">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#SyntheticPerspective"/>
+    <rdf:rest rdf:nodeID="N2bbdcd02897e4aa4815e6224b3e2af78"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#CouncilReport">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">CouncilReport</rdfs:label>
+    <rdfs:comment xml:lang="en">Integrated evidence-backed outputs, minority positions, uncertainties and limitations.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3e5bc89292134ada9c73457cdbd8e0d4">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#FutureObligationStatus"/>
+    <rdf:rest rdf:nodeID="N7263a0c9f8b64cb793677d4c3cb3209d"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N990f9625995c4e2ea627b483c933300f">
+    <rdf:first rdf:nodeID="N65a393be688e4c0e82c7152e42985c59"/>
+    <rdf:rest rdf:nodeID="Ne2acd717aa904fed96be886f9cacf1c0"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#coverageBasis">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">coverageBasis</rdfs:label>
+    <rdfs:comment xml:lang="en">Published method used to select documented perspectives.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#SamplingFrame"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#R01_CouncilAgent">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+    <rdfs:label xml:lang="en">R01_CouncilAgent</rdfs:label>
+    <rdfs:comment xml:lang="en">Infer a synthetic council agent through its allocated seat.</rdfs:comment>
+    <swrl:body rdf:nodeID="N4604adc64cd24bb39776d003272ac301"/>
+    <swrl:head rdf:nodeID="N02f27cf28c8a41da9199f7a51b106ce4"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#conflictOfInterest">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">conflictOfInterest</rdfs:label>
+    <rdfs:comment xml:lang="en">Conflict-of-interest disclosure.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#PerspectiveCharter"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#SimulationRun">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">SimulationRun</rdfs:label>
+    <rdfs:comment xml:lang="en">One execution with configuration, random seed, replay data and immutable inputs.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#CoverageDimension">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">CoverageDimension</rdfs:label>
+    <rdfs:comment xml:lang="en">Dimension of perspective coverage such as role, impact exposure or territory.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#isGroundedIn">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">isGroundedIn</rdfs:label>
+    <rdfs:comment xml:lang="en">Documentation grounding a perspective agent.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go/scse#PerspectiveAgent"/>
+    <rdfs:range rdf:resource="https://example.org/hrai-go/scse#EvidenceRecord"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfd0ce7f63d2741988bd82280fa4301a3">
+    <rdf:first rdf:nodeID="Ne4e4ef8b1a004fa19b766617152b2b20"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N67ef98d3a07b46aeaada8062aebb7a8c">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#SuspendedStatus"/>
+    <rdf:rest rdf:nodeID="Nf328e874aa394b198b4cf418847c4722"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb3618b428957445891ecc8c529efdd33">
+    <rdf:first rdf:nodeID="N1a58ccfaa91549cb87644fb0379549f8"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N61f227b8797f49bba1dedf2ab5e42bd7">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#VerifiedSource"/>
+    <rdf:rest rdf:nodeID="N0504ce8c96414d4db978c6d39935c03e"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#ScenarioDefinition">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">ScenarioDefinition</rdfs:label>
+    <rdfs:comment xml:lang="en">Frozen question, jurisdiction, mode, relevant sources, and assumptions of a simulation.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N100aaccd0c8d45138cc840c251023a55">
+    <rdf:first rdf:nodeID="N0735bfcff464476791b67bf60b3587a8"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6a4e1199c43e4c6eae94591336c13431">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+    <owl:distinctMembers rdf:nodeID="Nb01eb868e2504f3b93abb6746d751ad5"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R05_requirement">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#LegalStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">LegalStatus</rdfs:label>
+    <rdfs:comment xml:lang="en">Controlled legal-status value for a specific provision state at a given time.</rdfs:comment>
+    <owl:oneOf rdf:nodeID="N2ae858a80c95411f9534dcfede3c4d4f"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R03_charter">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#PolicyObjective">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">PolicyObjective</rdfs:label>
+    <rdfs:comment xml:lang="en">Explicit regulatory or public-policy objective.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R02_seat">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na00e626ba5ff4f548d1a42c224692f49">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#UnknownLegalStatus"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#EffectiveStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#LegalStatus"/>
+    <rdfs:label xml:lang="en">EffectiveStatus</rdfs:label>
+    <rdfs:comment xml:lang="en">Currently effective for a scope and date</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd7721a677b0444fd8faa73e6b644591e">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+    <owl:distinctMembers rdf:nodeID="N1b410cf9a04340658f88f0951d1342ce"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc617a6f250174d51ad51592f430df0ad">
+    <rdf:first rdf:nodeID="Nc4092ee6e0024c2eb5cee66d6c7f709b"/>
+    <rdf:rest rdf:nodeID="Naa563ed4528e4c629ca96d5cffaeb760"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8ead2bf8fdec4b3d913a29e1cc471a99">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+    <owl:distinctMembers rdf:nodeID="Nb79dd9ae32ef49488c327be85b8ec249"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb015311377144cb9a5eaf203f9896526">
+    <rdf:first rdf:nodeID="N643ac01a8a254ab3a0fbdf5ce24f88e6"/>
+    <rdf:rest rdf:nodeID="N7cc92e0d46bf4388873fa13fafc07436"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R08_event">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne54762aa914d4949ad4eb2d399c2900e">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#SuspendedStatus"/>
+    <rdf:rest rdf:nodeID="Nc37edaccd5444851b5d8518adc20ce67"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R04_run">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R06_finding">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go#hasUnverifiedEvidence">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">hasUnverifiedEvidence</rdfs:label>
+    <rdfs:comment xml:lang="en">Explicit review flag on a known requirement; missing values are not interpreted as false.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://example.org/hrai-go#NormativeRequirement"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N65a393be688e4c0e82c7152e42985c59">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+    <swrl:classPredicate rdf:resource="https://example.org/hrai-go#ComplianceAssessment"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R05_assessment"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc36aa56a7a41466788816575a53488bf">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#RegulatoryPolicyMode"/>
+    <rdf:rest rdf:nodeID="N72565a369fff4c07bae71883cc248476"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#MinorityOpinion">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">MinorityOpinion</rdfs:label>
+    <rdfs:comment xml:lang="en">Preserved dissenting view with rationale and documentary limitations.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#BrazilContextSnapshot">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#NationalContextSnapshot"/>
+    <scse:contextJurisdiction rdf:resource="https://example.org/hrai-go/scse/example#Brazil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nebda9a1b7d2040318de12d290513ec64">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#CompliantEvidencedStatus"/>
+    <rdf:rest rdf:nodeID="N3c8651d1ca41465cbc1441144ff00ade"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R05_assessment">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#CouncilSeat">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">CouncilSeat</rdfs:label>
+    <rdfs:comment xml:lang="en">Synthetic seat allocated to a stratum with an explicit source basis and justification.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#SimulationIntervention">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">SimulationIntervention</rdfs:label>
+    <rdfs:comment xml:lang="en">Explicit change applied within a counterfactual branch.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc3751cdc17ed4fada8b18aa380e6cf17">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+    <owl:distinctMembers rdf:nodeID="N5150f4aa82b3451c8ae193f6056ed922"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd28012f1488948488f78cec3e0b3cbf5">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#Hypothesis"/>
+    <rdf:rest rdf:nodeID="Nff87674c43c44f30a7595309347a8c89"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N29f6b75b395a43fea462629f76794159">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+    <swrl:classPredicate rdf:resource="https://example.org/hrai-go/scse#SimulationProject"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R09_project"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse#DocumentedPerspective">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">DocumentedPerspective</rdfs:label>
+    <rdfs:comment xml:lang="en">Evidence-attributed position, not a fabricated claim of stakeholder identity.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#DemoRequirement">
+    <rdf:type rdf:resource="https://example.org/hrai-go#NormativeRequirement"/>
+    <hrai:hasUnverifiedEvidence rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</hrai:hasUnverifiedEvidence>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R03_agent">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4df8e64f70a94bc7a1aede768175267e">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#UnknownClaimClass"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5150f4aa82b3451c8ae193f6056ed922">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#PendingReview"/>
+    <rdf:rest rdf:nodeID="Na3b5ea3c1d494b7c9c4d7a364ddd9296"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3d4397ecc9714c6ba40afcd4481c7b08">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#NotApplicableStatus"/>
+    <rdf:rest rdf:nodeID="Nebb84d1fa247499f85513ad1f2c269ff"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R04_claim">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#SyntheticPerspectiveSource">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#SourceDocument"/>
+    <scse:sourceUri rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://example.org/synthetic-evidence</scse:sourceUri>
+    <scse:hasSourceVerificationStatus rdf:resource="https://example.org/hrai-go/scse#PendingSourceVerification"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Naa563ed4528e4c629ca96d5cffaeb760">
+    <rdf:first rdf:nodeID="N9ace0af042ec4bbb875caa0718bb29c4"/>
+    <rdf:rest rdf:nodeID="N880c7a211dc04fc4b3048c826cd6945d"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc4138cf2c9e048469be26aa755afe2da">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+    <swrl:classPredicate rdf:resource="https://example.org/hrai-go/scse#SimulationRun"/>
+    <swrl:argument1 rdf:resource="https://example.org/hrai-go/scse/swrl-var#R04_run"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf328e874aa394b198b4cf418847c4722">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#RepealedStatus"/>
+    <rdf:rest rdf:nodeID="Nbc71e312ba154150bc90e03293a404ff"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#HypotheticalProvision">
+    <rdf:type rdf:resource="https://example.org/hrai-go#LegalProvision"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R08_round">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8125f0f37722418ba2951df38d0925d5">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#InsufficientEvidenceStatus"/>
+    <rdf:rest rdf:nodeID="N3d4397ecc9714c6ba40afcd4481c7b08"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R08_claim">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc4b37318cd604fdebf22775c019bcd5c">
+    <rdf:first rdf:resource="https://example.org/hrai-go/scse#FutureObligationStatus"/>
+    <rdf:rest rdf:nodeID="N670d40107f654770a549823522346020"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4604adc64cd24bb39776d003272ac301">
+    <rdf:first rdf:nodeID="N576b097d4e414cbea19b223eab7ae4c3"/>
+    <rdf:rest rdf:nodeID="Nb015311377144cb9a5eaf203f9896526"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N681108226b2f4099b0de337b186df1ac">
+    <rdf:first rdf:nodeID="Ne07addf357444171a2e0f0152434f8dd"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R02_stratum">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R09_scenario">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R01_agent">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R01_seat">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/swrl-var#R09_project">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://example.org/hrai-go/scse/example#SmallEnterpriseStratum">
+    <rdf:type rdf:resource="https://example.org/hrai-go/scse#StakeholderStratum"/>
+  </rdf:Description>
+</rdf:RDF>

@@ -1,0 +1,1431 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ex: <https://example.org/hrai-go/scse/example#> .
+@prefix hrai: <https://example.org/hrai-go#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix scse: <https://example.org/hrai-go/scse#> .
+@prefix swrl: <http://www.w3.org/2003/11/swrl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/hrai-go/scse> a owl:Ontology ;
+    dcterms:description "Standalone proposed OWL 2 ontology for regulatory-policy and solution-compliance shadow-council simulations. Includes synthetic illustration individuals and safe positive SWRL inference rules. No legal certification or population representativeness is implied."@en ;
+    dcterms:source "SCSE Shadow Council Simulation Specification v1.0 and HRAI-GO conceptual proposal (user-provided documents)." ;
+    dcterms:title "Shadow Council Simulation Environment Ontology"@en ;
+    rdfs:comment "Example.org is an intentionally nonproduction namespace; substitute an owned persistent identifier before publication."@en ;
+    owl:versionIRI <https://example.org/hrai-go/scse/1.0.0> ;
+    owl:versionInfo "1.0.0" .
+
+scse:R01_CouncilAgent a swrl:Imp ;
+    rdfs:label "R01_CouncilAgent"@en ;
+    rdfs:comment "Infer a synthetic council agent through its allocated seat."@en ;
+    swrl:body ( [ a swrl:ClassAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R01_council> ;
+                swrl:classPredicate scse:ShadowCouncil ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R01_council> ;
+                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R01_seat> ;
+                swrl:propertyPredicate scse:hasSeat ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R01_seat> ;
+                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R01_agent> ;
+                swrl:propertyPredicate scse:assignedAgent ] ) ;
+    swrl:head ( [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R01_council> ;
+                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R01_agent> ;
+                swrl:propertyPredicate scse:hasCouncilAgent ] ) .
+
+scse:R02_CouncilCoversStratum a swrl:Imp ;
+    rdfs:label "R02_CouncilCoversStratum"@en ;
+    rdfs:comment "Infer declared stratum coverage; never infer actual population representativeness."@en ;
+    swrl:body ( [ a swrl:ClassAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R02_council> ;
+                swrl:classPredicate scse:ShadowCouncil ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R02_council> ;
+                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R02_seat> ;
+                swrl:propertyPredicate scse:hasSeat ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R02_seat> ;
+                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R02_stratum> ;
+                swrl:propertyPredicate scse:hasStratum ] ) ;
+    swrl:head ( [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R02_council> ;
+                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R02_stratum> ;
+                swrl:propertyPredicate scse:coversStratum ] ) .
+
+scse:R03_AgentEvidenceGrounding a swrl:Imp ;
+    rdfs:label "R03_AgentEvidenceGrounding"@en ;
+    rdfs:comment "Infer agent documentary grounding via its charter."@en ;
+    swrl:body ( [ a swrl:ClassAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R03_agent> ;
+                swrl:classPredicate scse:PerspectiveAgent ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R03_agent> ;
+                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R03_charter> ;
+                swrl:propertyPredicate scse:hasCharter ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R03_charter> ;
+                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R03_evidence> ;
+                swrl:propertyPredicate scse:charterGroundedIn ] ) ;
+    swrl:head ( [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R03_agent> ;
+                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R03_evidence> ;
+                swrl:propertyPredicate scse:isGroundedIn ] ) .
+
+scse:R04_RunProducesClaim a swrl:Imp ;
+    rdfs:label "R04_RunProducesClaim"@en ;
+    rdfs:comment "Infer which claims were produced during a specific run."@en ;
+    swrl:body ( [ a swrl:ClassAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R04_run> ;
+                swrl:classPredicate scse:SimulationRun ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R04_run> ;
+                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R04_round> ;
+                swrl:propertyPredicate scse:hasRound ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R04_round> ;
+                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R04_claim> ;
+                swrl:propertyPredicate scse:produces ] ) ;
+    swrl:head ( [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R04_run> ;
+                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R04_claim> ;
+                swrl:propertyPredicate scse:runHasClaim ] ) .
+
+scse:R05_AssessmentRequiresEvidenceReview a swrl:Imp ;
+    rdfs:label "R05_AssessmentRequiresEvidenceReview"@en ;
+    rdfs:comment "Known unverified requirement evidence triggers review, but never a noncompliance conclusion."@en ;
+    swrl:body ( [ a swrl:ClassAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R05_assessment> ;
+                swrl:classPredicate hrai:ComplianceAssessment ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R05_assessment> ;
+                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R05_requirement> ;
+                swrl:propertyPredicate hrai:hasApplicableRequirement ] [ a swrl:DatavaluedPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R05_requirement> ;
+                swrl:argument2 true ;
+                swrl:propertyPredicate hrai:hasUnverifiedEvidence ] ) ;
+    swrl:head ( [ a swrl:DatavaluedPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R05_assessment> ;
+                swrl:argument2 true ;
+                swrl:propertyPredicate hrai:requiresEvidenceReview ] ) .
+
+scse:R06_FindingRequiresEvidenceReview a swrl:Imp ;
+    rdfs:label "R06_FindingRequiresEvidenceReview"@en ;
+    rdfs:comment "Insufficient-evidence finding requires review; missing evidence is not proof of violation."@en ;
+    swrl:body ( [ a swrl:ClassAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R06_finding> ;
+                swrl:classPredicate scse:ComplianceFinding ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R06_finding> ;
+                swrl:argument2 scse:InsufficientEvidenceStatus ;
+                swrl:propertyPredicate scse:hasFindingStatus ] ) ;
+    swrl:head ( [ a swrl:DatavaluedPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R06_finding> ;
+                swrl:argument2 true ;
+                swrl:propertyPredicate scse:needsEvidenceReview ] ) .
+
+scse:R07_ProposedProvisionNeedsProspectiveReview a swrl:Imp ;
+    rdfs:label "R07_ProposedProvisionNeedsProspectiveReview"@en ;
+    rdfs:comment "Proposed legal states trigger prospective review only; they are not current binding obligations."@en ;
+    swrl:body ( [ a swrl:ClassAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R07_finding> ;
+                swrl:classPredicate scse:ComplianceFinding ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R07_finding> ;
+                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R07_legalstate> ;
+                swrl:propertyPredicate scse:groundedIn ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R07_legalstate> ;
+                swrl:argument2 scse:ProposedStatus ;
+                swrl:propertyPredicate scse:hasLegalStatus ] ) ;
+    swrl:head ( [ a swrl:DatavaluedPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R07_finding> ;
+                swrl:argument2 true ;
+                swrl:propertyPredicate scse:requiresProspectiveReview ] ) .
+
+scse:R08_RoundProducesEventClaim a swrl:Imp ;
+    rdfs:label "R08_RoundProducesEventClaim"@en ;
+    rdfs:comment "Associate claims with recorded round events, not with human respondents."@en ;
+    swrl:body ( [ a swrl:ClassAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R08_round> ;
+                swrl:classPredicate scse:DeliberationRound ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R08_round> ;
+                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R08_event> ;
+                swrl:propertyPredicate scse:hasEvent ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R08_event> ;
+                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R08_claim> ;
+                swrl:propertyPredicate scse:eventClaim ] ) ;
+    swrl:head ( [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R08_round> ;
+                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R08_claim> ;
+                swrl:propertyPredicate scse:produces ] ) .
+
+scse:R09_ProjectRegulation a swrl:Imp ;
+    rdfs:label "R09_ProjectRegulation"@en ;
+    rdfs:comment "Infer project references to regulatory snapshots through scenarios."@en ;
+    swrl:body ( [ a swrl:ClassAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R09_project> ;
+                swrl:classPredicate scse:SimulationProject ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R09_project> ;
+                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R09_scenario> ;
+                swrl:propertyPredicate scse:hasScenario ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R09_scenario> ;
+                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R09_regulation> ;
+                swrl:propertyPredicate scse:usesRegulation ] ) ;
+    swrl:head ( [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R09_project> ;
+                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R09_regulation> ;
+                swrl:propertyPredicate scse:projectUsesRegulation ] ) .
+
+scse:RegulatoryPolicyScenario a owl:Class ;
+    rdfs:label "RegulatoryPolicyScenario"@en ;
+    rdfs:comment "Scenario dedicated to regulatory policy evaluation."@en ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:hasValue scse:RegulatoryPolicyMode ;
+            owl:onProperty scse:hasMode ],
+        scse:ScenarioDefinition ;
+    owl:disjointWith scse:SolutionComplianceScenario .
+
+scse:allowedActions a owl:DatatypeProperty ;
+    rdfs:label "allowedActions"@en ;
+    rdfs:comment "Permitted agent actions."@en ;
+    rdfs:domain scse:PerspectiveCharter ;
+    rdfs:range xsd:string .
+
+scse:artifactType a owl:DatatypeProperty ;
+    rdfs:label "artifactType"@en ;
+    rdfs:comment "Briefing, specification, architecture or deployed system."@en ;
+    rdfs:domain scse:SolutionArtifact ;
+    rdfs:range xsd:string .
+
+scse:asOfDate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "asOfDate"@en ;
+    rdfs:comment "Evaluation date for regulatory applicability."@en ;
+    rdfs:domain scse:ScenarioDefinition ;
+    rdfs:range xsd:date .
+
+scse:assumption a owl:DatatypeProperty ;
+    rdfs:label "assumption"@en ;
+    rdfs:comment "Explicit assumption for a counterfactual intervention."@en ;
+    rdfs:domain scse:ScenarioBranch ;
+    rdfs:range xsd:string .
+
+scse:blindSpots a owl:DatatypeProperty ;
+    rdfs:label "blindSpots"@en ;
+    rdfs:comment "Documented limitations in an agent charter."@en ;
+    rdfs:domain scse:PerspectiveCharter ;
+    rdfs:range xsd:string .
+
+scse:branchDerivedFrom a owl:ObjectProperty ;
+    rdfs:label "branchDerivedFrom"@en ;
+    rdfs:comment "The base scenario from which a branch derives."@en ;
+    rdfs:domain scse:ScenarioBranch ;
+    rdfs:range scse:ScenarioDefinition .
+
+scse:challenges a owl:ObjectProperty ;
+    rdfs:label "challenges"@en ;
+    rdfs:comment "A claim that challenges another claim."@en ;
+    rdfs:domain scse:ArgumentClaim ;
+    rdfs:range scse:ArgumentClaim .
+
+scse:claimText a owl:DatatypeProperty ;
+    rdfs:label "claimText"@en ;
+    rdfs:comment "Proposition expressed by an agent."@en ;
+    rdfs:domain scse:ArgumentClaim ;
+    rdfs:range xsd:string .
+
+scse:conflictOfInterest a owl:DatatypeProperty ;
+    rdfs:label "conflictOfInterest"@en ;
+    rdfs:comment "Conflict-of-interest disclosure."@en ;
+    rdfs:domain scse:PerspectiveCharter ;
+    rdfs:range xsd:string .
+
+scse:constraints a owl:DatatypeProperty ;
+    rdfs:label "constraints"@en ;
+    rdfs:comment "Boundaries for a perspective agent."@en ;
+    rdfs:domain scse:PerspectiveCharter ;
+    rdfs:range xsd:string .
+
+scse:contentHash a owl:DatatypeProperty ;
+    rdfs:label "contentHash"@en ;
+    rdfs:comment "Content digest for event evidence or replay."@en ;
+    rdfs:domain scse:DeliberationEvent ;
+    rdfs:range xsd:string .
+
+scse:contextJurisdiction a owl:ObjectProperty ;
+    rdfs:label "contextJurisdiction"@en ;
+    rdfs:comment "Jurisdiction described by a national-context snapshot."@en ;
+    rdfs:domain scse:NationalContextSnapshot ;
+    rdfs:range hrai:Jurisdiction .
+
+scse:coverageBasis a owl:DatatypeProperty ;
+    rdfs:label "coverageBasis"@en ;
+    rdfs:comment "Published method used to select documented perspectives."@en ;
+    rdfs:domain scse:SamplingFrame ;
+    rdfs:range xsd:string .
+
+scse:dataCategory a owl:DatatypeProperty ;
+    rdfs:label "dataCategory"@en ;
+    rdfs:comment "Category of processed data."@en ;
+    rdfs:domain scse:SolutionArtifact ;
+    rdfs:range xsd:string .
+
+scse:decisionAutonomy a owl:DatatypeProperty ;
+    rdfs:label "decisionAutonomy"@en ;
+    rdfs:comment "Human approval, automated, advisory or unknown decision autonomy."@en ;
+    rdfs:domain scse:SolutionArtifact ;
+    rdfs:range xsd:string .
+
+scse:describesProvision a owl:ObjectProperty ;
+    rdfs:label "describesProvision"@en ;
+    rdfs:comment "Refers to the stable identity of a legal provision."@en ;
+    rdfs:domain scse:LegalProvisionState ;
+    rdfs:range hrai:LegalProvision .
+
+scse:disclosure a owl:DatatypeProperty ;
+    rdfs:label "disclosure"@en ;
+    rdfs:comment "Required disclosure of synthetic or authorized status."@en ;
+    rdfs:domain scse:PerspectiveCharter ;
+    rdfs:range xsd:string .
+
+scse:documentedPositions a owl:DatatypeProperty ;
+    rdfs:label "documentedPositions"@en ;
+    rdfs:comment "Documented positions of a simulated perspective."@en ;
+    rdfs:domain scse:PerspectiveCharter ;
+    rdfs:range xsd:string .
+
+scse:documentsPerspective a owl:ObjectProperty ;
+    rdfs:label "documentsPerspective"@en ;
+    rdfs:comment "A documented perspective used to construct a charter."@en ;
+    rdfs:domain scse:PerspectiveCharter ;
+    rdfs:range scse:DocumentedPerspective .
+
+scse:evaluates a owl:ObjectProperty ;
+    rdfs:label "evaluates"@en ;
+    rdfs:comment "Evaluates a solution artifact."@en ;
+    rdfs:domain scse:ScenarioDefinition ;
+    rdfs:range scse:SolutionArtifact .
+
+scse:eventAgent a owl:ObjectProperty ;
+    rdfs:label "eventAgent"@en ;
+    rdfs:comment "Agent that produced an event."@en ;
+    rdfs:domain scse:DeliberationEvent ;
+    rdfs:range scse:PerspectiveAgent .
+
+scse:eventTimestamp a owl:DatatypeProperty ;
+    rdfs:label "eventTimestamp"@en ;
+    rdfs:comment "Timestamp of a deliberation event."@en ;
+    rdfs:domain scse:DeliberationEvent ;
+    rdfs:range xsd:dateTime .
+
+scse:evidenceHash a owl:DatatypeProperty ;
+    rdfs:label "evidenceHash"@en ;
+    rdfs:comment "Evidence content digest."@en ;
+    rdfs:domain scse:EvidenceRecord ;
+    rdfs:range xsd:string .
+
+scse:evidenceText a owl:DatatypeProperty ;
+    rdfs:label "evidenceText"@en ;
+    rdfs:comment "Citable evidence excerpt or summary."@en ;
+    rdfs:domain scse:EvidenceRecord ;
+    rdfs:range xsd:string .
+
+scse:executesScenario a owl:ObjectProperty ;
+    rdfs:label "executesScenario"@en ;
+    rdfs:comment "Identifies the scenario executed by the run."@en ;
+    rdfs:domain scse:SimulationRun ;
+    rdfs:range scse:ScenarioDefinition .
+
+scse:extractionConfidence a owl:DatatypeProperty ;
+    rdfs:label "extractionConfidence"@en ;
+    rdfs:comment "Extraction confidence; not legal certainty."@en ;
+    rdfs:domain scse:LegalProvisionState ;
+    rdfs:range xsd:decimal .
+
+scse:findingSupportedBy a owl:ObjectProperty ;
+    rdfs:label "findingSupportedBy"@en ;
+    rdfs:comment "Evidence supporting a compliance finding."@en ;
+    rdfs:domain scse:ComplianceFinding ;
+    rdfs:range scse:EvidenceRecord .
+
+scse:gapAffectsStratum a owl:ObjectProperty ;
+    rdfs:label "gapAffectsStratum"@en ;
+    rdfs:comment "Stratum affected by a coverage gap."@en ;
+    rdfs:domain scse:CoverageGap ;
+    rdfs:range scse:StakeholderStratum .
+
+scse:hasApplicableRequirement a owl:ObjectProperty ;
+    rdfs:label "hasApplicableRequirement"@en ;
+    rdfs:comment "Requirement evaluated by the finding."@en ;
+    rdfs:domain scse:ComplianceFinding ;
+    rdfs:range hrai:NormativeRequirement .
+
+scse:hasBranch a owl:ObjectProperty ;
+    rdfs:label "hasBranch"@en ;
+    rdfs:comment "An explicit counterfactual branch."@en ;
+    rdfs:domain scse:ScenarioDefinition ;
+    rdfs:range scse:ScenarioBranch .
+
+scse:hasClaimClassification a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "hasClaimClassification"@en ;
+    rdfs:comment "Epistemic classification of an argument."@en ;
+    rdfs:domain scse:ArgumentClaim ;
+    rdfs:range scse:ClaimClassification .
+
+scse:hasComplianceAssessment a owl:ObjectProperty ;
+    rdfs:label "hasComplianceAssessment"@en ;
+    rdfs:comment "Assessment issued separately from synthetic council deliberation."@en ;
+    rdfs:domain scse:SimulationRun ;
+    rdfs:range hrai:ComplianceAssessment .
+
+scse:hasCoverageDimension a owl:ObjectProperty ;
+    rdfs:label "hasCoverageDimension"@en ;
+    rdfs:comment "Defines a dimension considered during seat allocation."@en ;
+    rdfs:domain scse:SamplingFrame ;
+    rdfs:range scse:CoverageDimension .
+
+scse:hasCoverageGap a owl:ObjectProperty ;
+    rdfs:label "hasCoverageGap"@en ;
+    rdfs:comment "Records a missing or weakly grounded perspective."@en ;
+    rdfs:domain scse:ShadowCouncil ;
+    rdfs:range scse:CoverageGap .
+
+scse:hasEvidenceRecord a owl:ObjectProperty ;
+    rdfs:label "hasEvidenceRecord"@en ;
+    rdfs:comment "Technical evidence associated with a solution."@en ;
+    rdfs:domain scse:SolutionArtifact ;
+    rdfs:range scse:EvidenceRecord .
+
+scse:hasException a owl:ObjectProperty ;
+    rdfs:label "hasException"@en ;
+    rdfs:comment "Records a possible legal exception (never silently assumed)."@en ;
+    rdfs:domain scse:LegalProvisionState ;
+    rdfs:range scse:LegalException .
+
+scse:hasFinding a owl:ObjectProperty ;
+    rdfs:label "hasFinding"@en ;
+    rdfs:comment "Contains a bounded finding in an assessment."@en ;
+    rdfs:domain hrai:ComplianceAssessment ;
+    rdfs:range scse:ComplianceFinding .
+
+scse:hasIntervention a owl:ObjectProperty ;
+    rdfs:label "hasIntervention"@en ;
+    rdfs:comment "Branch intervention with declared changes."@en ;
+    rdfs:domain scse:ScenarioBranch ;
+    rdfs:range scse:SimulationIntervention .
+
+scse:hasJurisdiction a owl:ObjectProperty ;
+    rdfs:label "hasJurisdiction"@en ;
+    rdfs:comment "Jurisdiction selected for the scenario."@en ;
+    rdfs:domain scse:ScenarioDefinition ;
+    rdfs:range hrai:Jurisdiction .
+
+scse:hasMinorityOpinion a owl:ObjectProperty ;
+    rdfs:label "hasMinorityOpinion"@en ;
+    rdfs:comment "Preserves minority opinions."@en ;
+    rdfs:domain scse:CouncilReport ;
+    rdfs:range scse:MinorityOpinion .
+
+scse:hasModelManifest a owl:ObjectProperty ;
+    rdfs:label "hasModelManifest"@en ;
+    rdfs:comment "Frozen model and execution details."@en ;
+    rdfs:domain scse:SimulationRun ;
+    rdfs:range scse:ModelManifest .
+
+scse:hasProvisionState a owl:ObjectProperty ;
+    rdfs:label "hasProvisionState"@en ;
+    rdfs:comment "Contains a legal state of a provision."@en ;
+    rdfs:domain scse:RegulatorySnapshot ;
+    rdfs:range scse:LegalProvisionState .
+
+scse:hasReviewState a owl:ObjectProperty ;
+    rdfs:label "hasReviewState"@en ;
+    rdfs:comment "Verification/review state of legal source extraction."@en ;
+    rdfs:domain scse:LegalProvisionState ;
+    rdfs:range scse:ReviewStatus .
+
+scse:hasSamplingFrame a owl:ObjectProperty ;
+    rdfs:label "hasSamplingFrame"@en ;
+    rdfs:comment "Declared universe of documented perspectives."@en ;
+    rdfs:domain scse:ShadowCouncil ;
+    rdfs:range scse:SamplingFrame .
+
+scse:hasSource a owl:ObjectProperty ;
+    rdfs:label "hasSource"@en ;
+    rdfs:comment "Source for a legal provision state."@en ;
+    rdfs:domain scse:LegalProvisionState ;
+    rdfs:range scse:SourceDocument .
+
+scse:hasSourceVerificationStatus a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "hasSourceVerificationStatus"@en ;
+    rdfs:comment "Verification status of the referenced document."@en ;
+    rdfs:domain scse:SourceDocument ;
+    rdfs:range scse:SourceVerificationStatus .
+
+scse:hypothesis a owl:DatatypeProperty ;
+    rdfs:label "hypothesis"@en ;
+    rdfs:comment "Hypothesis to test in an alternative scenario."@en ;
+    rdfs:domain scse:ScenarioBranch ;
+    rdfs:range xsd:string .
+
+scse:instantiatesCouncil a owl:ObjectProperty ;
+    rdfs:label "instantiatesCouncil"@en ;
+    rdfs:comment "Instantiates a synthetic shadow council."@en ;
+    rdfs:domain scse:ScenarioDefinition ;
+    rdfs:range scse:ShadowCouncil .
+
+scse:interests a owl:DatatypeProperty ;
+    rdfs:label "interests"@en ;
+    rdfs:comment "Interests documented for an agent charter."@en ;
+    rdfs:domain scse:PerspectiveCharter ;
+    rdfs:range xsd:string .
+
+scse:interventionPatch a owl:DatatypeProperty ;
+    rdfs:label "interventionPatch"@en ;
+    rdfs:comment "Serialized declarative patch, e.g., JSON string."@en ;
+    rdfs:domain scse:SimulationIntervention ;
+    rdfs:range xsd:string .
+
+scse:involvesClaim a owl:ObjectProperty ;
+    rdfs:label "involvesClaim"@en ;
+    rdfs:comment "Connects a tension to an argument."@en ;
+    rdfs:domain scse:PolicyTension ;
+    rdfs:range scse:ArgumentClaim .
+
+scse:jurisdictionCode a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "jurisdictionCode"@en ;
+    rdfs:comment "ISO 3166-1 alpha-2 code for country-level jurisdictions."@en ;
+    rdfs:domain hrai:Jurisdiction ;
+    rdfs:range xsd:string .
+
+scse:limitation a owl:DatatypeProperty ;
+    rdfs:label "limitation"@en ;
+    rdfs:comment "Known methodological or empirical limitation."@en ;
+    rdfs:domain scse:CouncilReport ;
+    rdfs:range xsd:string .
+
+scse:materializes a owl:ObjectProperty ;
+    rdfs:label "materializes"@en ;
+    rdfs:comment "Materializes one frozen version of a simulation world."@en ;
+    rdfs:domain scse:SimulationRun ;
+    rdfs:range scse:WorldSnapshot .
+
+scse:minorityAgent a owl:ObjectProperty ;
+    rdfs:label "minorityAgent"@en ;
+    rdfs:comment "Synthetic agent associated with a dissenting claim."@en ;
+    rdfs:domain scse:MinorityOpinion ;
+    rdfs:range scse:PerspectiveAgent .
+
+scse:minorityClaim a owl:ObjectProperty ;
+    rdfs:label "minorityClaim"@en ;
+    rdfs:comment "Claim underlying a minority opinion."@en ;
+    rdfs:domain scse:MinorityOpinion ;
+    rdfs:range scse:ArgumentClaim .
+
+scse:modelVersion a owl:DatatypeProperty ;
+    rdfs:label "modelVersion"@en ;
+    rdfs:comment "Specific model version used in a run."@en ;
+    rdfs:domain scse:ModelManifest ;
+    rdfs:range xsd:string .
+
+scse:nextAction a owl:DatatypeProperty ;
+    rdfs:label "nextAction"@en ;
+    rdfs:comment "Recommended next investigative action, not an automatic legal requirement."@en ;
+    rdfs:domain scse:CouncilReport ;
+    rdfs:range xsd:string .
+
+scse:perspectiveGroundedIn a owl:ObjectProperty ;
+    rdfs:label "perspectiveGroundedIn"@en ;
+    rdfs:comment "Grounding of a documented perspective in evidence."@en ;
+    rdfs:domain scse:DocumentedPerspective ;
+    rdfs:range scse:EvidenceRecord .
+
+scse:proposesAlternative a owl:ObjectProperty ;
+    rdfs:label "proposesAlternative"@en ;
+    rdfs:comment "Links a claim to a proposed alternative."@en ;
+    rdfs:domain scse:ArgumentClaim ;
+    rdfs:range scse:PolicyAlternative .
+
+scse:question a owl:DatatypeProperty ;
+    rdfs:label "question"@en ;
+    rdfs:comment "Explicit scenario research/evaluation question."@en ;
+    rdfs:domain scse:ScenarioDefinition ;
+    rdfs:range xsd:string .
+
+scse:randomSeed a owl:DatatypeProperty ;
+    rdfs:label "randomSeed"@en ;
+    rdfs:comment "PRNG seed; does not imply exact reproducibility with external models."@en ;
+    rdfs:domain scse:SimulationRun ;
+    rdfs:range xsd:integer .
+
+scse:rationale a owl:DatatypeProperty ;
+    rdfs:label "rationale"@en ;
+    rdfs:comment "Requirement-specific justification of a finding."@en ;
+    rdfs:domain scse:ComplianceFinding ;
+    rdfs:range xsd:string .
+
+scse:recordedAt a owl:DatatypeProperty ;
+    rdfs:label "recordedAt"@en ;
+    rdfs:comment "Time at which this legal-state assertion entered the database."@en ;
+    rdfs:domain scse:LegalProvisionState ;
+    rdfs:range xsd:dateTime .
+
+scse:relatesToObjective a owl:ObjectProperty ;
+    rdfs:label "relatesToObjective"@en ;
+    rdfs:comment "Associates a tension with a public-policy objective."@en ;
+    rdfs:domain scse:PolicyTension ;
+    rdfs:range scse:PolicyObjective .
+
+scse:replicateIndex a owl:DatatypeProperty ;
+    rdfs:label "replicateIndex"@en ;
+    rdfs:comment "Index of a repeated stochastic run."@en ;
+    rdfs:domain scse:SimulationRun ;
+    rdfs:range xsd:nonNegativeInteger .
+
+scse:reportsClaim a owl:ObjectProperty ;
+    rdfs:label "reportsClaim"@en ;
+    rdfs:comment "Report includes a claim or position."@en ;
+    rdfs:domain scse:CouncilReport ;
+    rdfs:range scse:ArgumentClaim .
+
+scse:reportsFinding a owl:ObjectProperty ;
+    rdfs:label "reportsFinding"@en ;
+    rdfs:comment "Report describes a legal finding without changing it."@en ;
+    rdfs:domain scse:CouncilReport ;
+    rdfs:range scse:ComplianceFinding .
+
+scse:reportsRun a owl:ObjectProperty ;
+    rdfs:label "reportsRun"@en ;
+    rdfs:comment "Run summarized by a report."@en ;
+    rdfs:domain scse:CouncilReport ;
+    rdfs:range scse:SimulationRun .
+
+scse:reportsTension a owl:ObjectProperty ;
+    rdfs:label "reportsTension"@en ;
+    rdfs:comment "Report includes a policy tension."@en ;
+    rdfs:domain scse:CouncilReport ;
+    rdfs:range scse:PolicyTension .
+
+scse:requiresHumanVerification a owl:DatatypeProperty ;
+    rdfs:label "requiresHumanVerification"@en ;
+    rdfs:comment "Council report requires responsible human verification."@en ;
+    rdfs:domain scse:CouncilReport ;
+    rdfs:range xsd:boolean .
+
+scse:reviewedByHuman a owl:DatatypeProperty ;
+    rdfs:label "reviewedByHuman"@en ;
+    rdfs:comment "Whether a human reviewer approved this specific finding."@en ;
+    rdfs:domain scse:ComplianceFinding ;
+    rdfs:range xsd:boolean .
+
+scse:role a owl:DatatypeProperty ;
+    rdfs:label "role"@en ;
+    rdfs:comment "Simulated perspective role, not real identity."@en ;
+    rdfs:domain scse:PerspectiveCharter ;
+    rdfs:range xsd:string .
+
+scse:roundIndex a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "roundIndex"@en ;
+    rdfs:comment "Ordered round number."@en ;
+    rdfs:domain scse:DeliberationRound ;
+    rdfs:range xsd:nonNegativeInteger .
+
+scse:runId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "runId"@en ;
+    rdfs:comment "Stable execution identifier."@en ;
+    rdfs:domain scse:SimulationRun ;
+    rdfs:range xsd:string .
+
+scse:scenarioId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "scenarioId"@en ;
+    rdfs:comment "Stable scenario identifier."@en ;
+    rdfs:domain scse:ScenarioDefinition ;
+    rdfs:range xsd:string .
+
+scse:seatJustification a owl:DatatypeProperty ;
+    rdfs:label "seatJustification"@en ;
+    rdfs:comment "Basis for allocating this synthetic seat."@en ;
+    rdfs:domain scse:CouncilSeat ;
+    rdfs:range xsd:string .
+
+scse:snapshotHash a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "snapshotHash"@en ;
+    rdfs:comment "SHA-256 content hash of the frozen world snapshot."@en ;
+    rdfs:domain scse:ModelManifest ;
+    rdfs:range xsd:string .
+
+scse:snapshotJurisdiction a owl:ObjectProperty ;
+    rdfs:label "snapshotJurisdiction"@en ;
+    rdfs:comment "Jurisdiction within which snapshot applicability is considered."@en ;
+    rdfs:domain scse:RegulatorySnapshot ;
+    rdfs:range hrai:Jurisdiction .
+
+scse:sourceEvidence a owl:ObjectProperty ;
+    rdfs:label "sourceEvidence"@en ;
+    rdfs:comment "Source document recorded by evidence."@en ;
+    rdfs:domain scse:EvidenceRecord ;
+    rdfs:range scse:SourceDocument .
+
+scse:sourceId a owl:DatatypeProperty ;
+    rdfs:label "sourceId"@en ;
+    rdfs:comment "External identifier of source material."@en ;
+    rdfs:domain scse:SourceDocument ;
+    rdfs:range xsd:string .
+
+scse:sourceUri a owl:DatatypeProperty ;
+    rdfs:label "sourceUri"@en ;
+    rdfs:comment "URI identifying the referenced source document."@en ;
+    rdfs:domain scse:SourceDocument ;
+    rdfs:range xsd:anyURI .
+
+scse:summary a owl:DatatypeProperty ;
+    rdfs:label "summary"@en ;
+    rdfs:comment "Summary of the solution or proposed architecture."@en ;
+    rdfs:domain scse:SolutionArtifact ;
+    rdfs:range xsd:string .
+
+scse:supportedBy a owl:ObjectProperty ;
+    rdfs:label "supportedBy"@en ;
+    rdfs:comment "Evidence supporting a claim."@en ;
+    rdfs:domain scse:ArgumentClaim ;
+    rdfs:range scse:EvidenceRecord .
+
+scse:syntheticCouncil a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "syntheticCouncil"@en ;
+    rdfs:comment "Council is synthetic and not a human-population survey."@en ;
+    rdfs:domain scse:ModelManifest ;
+    rdfs:range xsd:boolean .
+
+scse:systemRole a owl:DatatypeProperty ;
+    rdfs:label "systemRole"@en ;
+    rdfs:comment "Provider, deployer, operator or another role."@en ;
+    rdfs:domain scse:SolutionArtifact ;
+    rdfs:range xsd:string .
+
+scse:tensionDescription a owl:DatatypeProperty ;
+    rdfs:label "tensionDescription"@en ;
+    rdfs:comment "Description of an identified tension."@en ;
+    rdfs:domain scse:PolicyTension ;
+    rdfs:range xsd:string .
+
+scse:title a owl:DatatypeProperty ;
+    rdfs:label "title"@en ;
+    rdfs:comment "Title of a solution artifact."@en ;
+    rdfs:domain scse:SolutionArtifact ;
+    rdfs:range xsd:string .
+
+scse:unresolvedQuestion a owl:DatatypeProperty ;
+    rdfs:label "unresolvedQuestion"@en ;
+    rdfs:comment "Unresolved issue requiring verification."@en ;
+    rdfs:domain scse:CouncilReport ;
+    rdfs:range xsd:string .
+
+scse:usesContext a owl:ObjectProperty ;
+    rdfs:label "usesContext"@en ;
+    rdfs:comment "Uses a versioned national context."@en ;
+    rdfs:domain scse:ScenarioDefinition ;
+    rdfs:range scse:NationalContextSnapshot .
+
+scse:validFrom a owl:DatatypeProperty ;
+    rdfs:label "validFrom"@en ;
+    rdfs:comment "Beginning of the asserted valid interval for this legal version."@en ;
+    rdfs:domain scse:LegalProvisionState ;
+    rdfs:range xsd:date .
+
+scse:validUntil a owl:DatatypeProperty ;
+    rdfs:label "validUntil"@en ;
+    rdfs:comment "End of the asserted valid interval, when known."@en ;
+    rdfs:domain scse:LegalProvisionState ;
+    rdfs:range xsd:date .
+
+scse:versionHash a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "versionHash"@en ;
+    rdfs:comment "Hash of the identified legal version or source state."@en ;
+    rdfs:domain scse:LegalProvisionState ;
+    rdfs:range xsd:string .
+
+scse:worldIncludesSolution a owl:ObjectProperty ;
+    rdfs:label "worldIncludesSolution"@en ;
+    rdfs:comment "Solution included in the simulated world if applicable."@en ;
+    rdfs:domain scse:WorldSnapshot ;
+    rdfs:range scse:SolutionArtifact .
+
+scse:worldUsesContext a owl:ObjectProperty ;
+    rdfs:label "worldUsesContext"@en ;
+    rdfs:comment "National context frozen into the simulated world."@en ;
+    rdfs:domain scse:WorldSnapshot ;
+    rdfs:range scse:NationalContextSnapshot .
+
+scse:worldUsesRegulation a owl:ObjectProperty ;
+    rdfs:label "worldUsesRegulation"@en ;
+    rdfs:comment "Regulatory snapshot frozen into the simulated world."@en ;
+    rdfs:domain scse:WorldSnapshot ;
+    rdfs:range scse:RegulatorySnapshot .
+
+ex:SampleProject a scse:SimulationProject ;
+    scse:hasScenario ex:SampleRecruitmentScenario .
+
+ex:SampleReport a scse:CouncilReport ;
+    scse:limitation "This dataset is synthetic and not an executed simulation or a verified legal analysis." ;
+    scse:reportsClaim ex:SampleClaim ;
+    scse:reportsFinding ex:DemoFinding ;
+    scse:reportsRun ex:SampleRun ;
+    scse:requiresHumanVerification true .
+
+hrai:hasApplicableRequirement a owl:ObjectProperty ;
+    rdfs:label "hasApplicableRequirement"@en ;
+    rdfs:comment "Requirement determined applicable to an assessment in a contextualized evaluation."@en ;
+    rdfs:domain hrai:ComplianceAssessment ;
+    rdfs:range hrai:NormativeRequirement .
+
+hrai:hasUnverifiedEvidence a owl:DatatypeProperty ;
+    rdfs:label "hasUnverifiedEvidence"@en ;
+    rdfs:comment "Explicit review flag on a known requirement; missing values are not interpreted as false."@en ;
+    rdfs:domain hrai:NormativeRequirement ;
+    rdfs:range xsd:boolean .
+
+hrai:requiresEvidenceReview a owl:DatatypeProperty ;
+    rdfs:label "requiresEvidenceReview"@en ;
+    rdfs:comment "Positive review-needed indicator inferred from known unverified evidence."@en ;
+    rdfs:domain hrai:ComplianceAssessment ;
+    rdfs:range xsd:boolean .
+
+scse:CoverageDimension a owl:Class ;
+    rdfs:label "CoverageDimension"@en ;
+    rdfs:comment "Dimension of perspective coverage such as role, impact exposure or territory."@en .
+
+scse:LegalException a owl:Class ;
+    rdfs:label "LegalException"@en ;
+    rdfs:comment "Expressly represented possible exception to a versioned legal provision."@en .
+
+scse:PolicyAlternative a owl:Class ;
+    rdfs:label "PolicyAlternative"@en ;
+    rdfs:comment "Candidate regulatory intervention or alternative policy design."@en .
+
+scse:PolicyObjective a owl:Class ;
+    rdfs:label "PolicyObjective"@en ;
+    rdfs:comment "Explicit regulatory or public-policy objective."@en .
+
+scse:assignedAgent a owl:ObjectProperty ;
+    rdfs:label "assignedAgent"@en ;
+    rdfs:comment "Assigns an agent to this council seat."@en ;
+    rdfs:domain scse:CouncilSeat ;
+    rdfs:range scse:PerspectiveAgent .
+
+scse:charterGroundedIn a owl:ObjectProperty ;
+    rdfs:label "charterGroundedIn"@en ;
+    rdfs:comment "Charter support in a specific evidence record."@en ;
+    rdfs:domain scse:PerspectiveCharter ;
+    rdfs:range scse:EvidenceRecord .
+
+scse:coversStratum a owl:ObjectProperty ;
+    rdfs:label "coversStratum"@en ;
+    rdfs:comment "Stakeholder stratum represented as a documented perspective in the council."@en ;
+    rdfs:domain scse:ShadowCouncil ;
+    rdfs:range scse:StakeholderStratum .
+
+scse:eventClaim a owl:ObjectProperty ;
+    rdfs:label "eventClaim"@en ;
+    rdfs:comment "Claim referenced by an event."@en ;
+    rdfs:domain scse:DeliberationEvent ;
+    rdfs:range scse:ArgumentClaim .
+
+scse:groundedIn a owl:ObjectProperty ;
+    rdfs:label "groundedIn"@en ;
+    rdfs:comment "Finding based on the legally contextualized state of a provision."@en ;
+    rdfs:domain scse:ComplianceFinding ;
+    rdfs:range scse:LegalProvisionState .
+
+scse:hasCharter a owl:ObjectProperty ;
+    rdfs:label "hasCharter"@en ;
+    rdfs:comment "Connects an agent to its bounded perspective charter."@en ;
+    rdfs:domain scse:PerspectiveAgent ;
+    rdfs:range scse:PerspectiveCharter .
+
+scse:hasCouncilAgent a owl:ObjectProperty ;
+    rdfs:label "hasCouncilAgent"@en ;
+    rdfs:comment "A council agent reached through a seat assignment."@en ;
+    rdfs:domain scse:ShadowCouncil ;
+    rdfs:range scse:PerspectiveAgent .
+
+scse:hasEvent a owl:ObjectProperty ;
+    rdfs:label "hasEvent"@en ;
+    rdfs:comment "Contains an auditable deliberation event."@en ;
+    rdfs:domain scse:DeliberationRound ;
+    rdfs:range scse:DeliberationEvent .
+
+scse:hasFindingStatus a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "hasFindingStatus"@en ;
+    rdfs:comment "Assigns a controlled result status."@en ;
+    rdfs:domain scse:ComplianceFinding ;
+    rdfs:range scse:FindingStatus .
+
+scse:hasLegalStatus a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "hasLegalStatus"@en ;
+    rdfs:comment "Legal status as evaluated for a dated source snapshot."@en ;
+    rdfs:domain scse:LegalProvisionState ;
+    rdfs:range scse:LegalStatus .
+
+scse:hasRound a owl:ObjectProperty ;
+    rdfs:label "hasRound"@en ;
+    rdfs:comment "Contains a recorded deliberation round."@en ;
+    rdfs:domain scse:SimulationRun ;
+    rdfs:range scse:DeliberationRound .
+
+scse:hasScenario a owl:ObjectProperty ;
+    rdfs:label "hasScenario"@en ;
+    rdfs:comment "Contains a scenario."@en ;
+    rdfs:domain scse:SimulationProject ;
+    rdfs:range scse:ScenarioDefinition .
+
+scse:hasStratum a owl:ObjectProperty ;
+    rdfs:label "hasStratum"@en ;
+    rdfs:comment "Identifies which stakeholder stratum a seat is allocated to."@en ;
+    rdfs:domain scse:CouncilSeat ;
+    rdfs:range scse:StakeholderStratum .
+
+scse:isGroundedIn a owl:ObjectProperty ;
+    rdfs:label "isGroundedIn"@en ;
+    rdfs:comment "Documentation grounding a perspective agent."@en ;
+    rdfs:domain scse:PerspectiveAgent ;
+    rdfs:range scse:EvidenceRecord .
+
+scse:needsEvidenceReview a owl:DatatypeProperty ;
+    rdfs:label "needsEvidenceReview"@en ;
+    rdfs:comment "A finding explicitly requires evidence review."@en ;
+    rdfs:domain scse:ComplianceFinding ;
+    rdfs:range xsd:boolean .
+
+scse:projectUsesRegulation a owl:ObjectProperty ;
+    rdfs:label "projectUsesRegulation"@en ;
+    rdfs:comment "Regulatory snapshot used by a project through a scenario."@en ;
+    rdfs:domain scse:SimulationProject ;
+    rdfs:range scse:RegulatorySnapshot .
+
+scse:requiresProspectiveReview a owl:DatatypeProperty ;
+    rdfs:label "requiresProspectiveReview"@en ;
+    rdfs:comment "Finding cites a proposed legal state and needs explicit prospective treatment."@en ;
+    rdfs:domain scse:ComplianceFinding ;
+    rdfs:range xsd:boolean .
+
+scse:runHasClaim a owl:ObjectProperty ;
+    rdfs:label "runHasClaim"@en ;
+    rdfs:comment "Claim produced in a run through a round."@en ;
+    rdfs:domain scse:SimulationRun ;
+    rdfs:range scse:ArgumentClaim .
+
+scse:usesRegulation a owl:ObjectProperty ;
+    rdfs:label "usesRegulation"@en ;
+    rdfs:comment "Uses a regulatory snapshot."@en ;
+    rdfs:domain scse:ScenarioDefinition ;
+    rdfs:range scse:RegulatorySnapshot .
+
+ex:DemoAssessment a hrai:ComplianceAssessment ;
+    hrai:hasApplicableRequirement ex:DemoRequirement ;
+    scse:hasFinding ex:DemoFinding .
+
+ex:HypotheticalProvision a hrai:LegalProvision .
+
+ex:HypotheticalSource a scse:SourceDocument ;
+    scse:hasSourceVerificationStatus scse:PendingSourceVerification ;
+    scse:sourceUri "https://example.org/hypothetical-proposal"^^xsd:anyURI .
+
+ex:SampleCouncil a scse:ShadowCouncil ;
+    scse:hasSeat ex:SmallEnterpriseSeat,
+        ex:WorkerRightsSeat .
+
+ex:SampleRound a scse:DeliberationRound ;
+    scse:produces ex:SampleClaim ;
+    scse:roundIndex "1"^^xsd:nonNegativeInteger .
+
+ex:SampleRun a scse:SimulationRun ;
+    scse:executesScenario ex:SampleRecruitmentScenario ;
+    scse:hasComplianceAssessment ex:DemoAssessment ;
+    scse:hasRound ex:SampleRound ;
+    scse:materializes ex:SampleWorld ;
+    scse:randomSeed 17 ;
+    scse:runId "DEMO-RUN-001" .
+
+ex:SampleWorld a scse:WorldSnapshot ;
+    scse:worldIncludesSolution ex:SampleRecruitmentBriefing ;
+    scse:worldUsesContext ex:BrazilContextSnapshot ;
+    scse:worldUsesRegulation ex:IllustrativeRegulatorySnapshot .
+
+ex:SmallEnterpriseAgent a scse:PerspectiveAgent ;
+    scse:hasCharter ex:SmallEnterpriseCharter .
+
+ex:SmallEnterpriseCharter a scse:PerspectiveCharter ;
+    scse:charterGroundedIn ex:SyntheticEvidence ;
+    scse:disclosure "Fictional example only; no real organization or person is represented." .
+
+ex:SmallEnterpriseSeat a scse:CouncilSeat ;
+    scse:assignedAgent ex:SmallEnterpriseAgent ;
+    scse:hasStratum ex:SmallEnterpriseStratum ;
+    scse:seatJustification "Illustrative synthetic stakeholder slot; not an actual entrepreneur." .
+
+ex:SmallEnterpriseStratum a scse:StakeholderStratum .
+
+ex:SyntheticPerspectiveSource a scse:SourceDocument ;
+    scse:hasSourceVerificationStatus scse:PendingSourceVerification ;
+    scse:sourceUri "https://example.org/synthetic-evidence"^^xsd:anyURI .
+
+ex:WorkerRightsAgent a scse:PerspectiveAgent ;
+    scse:hasCharter ex:WorkerRightsCharter .
+
+ex:WorkerRightsCharter a scse:PerspectiveCharter ;
+    scse:charterGroundedIn ex:SyntheticEvidence ;
+    scse:disclosure "Fictional example only; no real organization or person is represented." .
+
+ex:WorkerRightsSeat a scse:CouncilSeat ;
+    scse:assignedAgent ex:WorkerRightsAgent ;
+    scse:hasStratum ex:WorkerRightsStratum ;
+    scse:seatJustification "Illustrative synthetic documented-perspective slot; not a statistical respondent." .
+
+ex:WorkerRightsStratum a scse:StakeholderStratum .
+
+hrai:LegalProvision a owl:Class ;
+    rdfs:label "LegalProvision"@en ;
+    rdfs:comment "Identifiable source legal provision, independent of its versioned state."@en .
+
+scse:CompliantEvidencedStatus a owl:NamedIndividual,
+        scse:FindingStatus ;
+    rdfs:label "CompliantEvidencedStatus"@en ;
+    rdfs:comment "Requirement-scoped compliance sufficiently evidenced"@en .
+
+scse:CoverageGap a owl:Class ;
+    rdfs:label "CoverageGap"@en ;
+    rdfs:comment "Perspective for which sufficient reliable source grounding was not found."@en .
+
+scse:DocumentedPerspective a owl:Class ;
+    rdfs:label "DocumentedPerspective"@en ;
+    rdfs:comment "Evidence-attributed position, not a fabricated claim of stakeholder identity."@en .
+
+scse:EffectiveStatus a owl:NamedIndividual,
+        scse:LegalStatus ;
+    rdfs:label "EffectiveStatus"@en ;
+    rdfs:comment "Currently effective for a scope and date"@en .
+
+scse:EnactedNotEffectiveStatus a owl:NamedIndividual,
+        scse:LegalStatus ;
+    rdfs:label "EnactedNotEffectiveStatus"@en ;
+    rdfs:comment "Enacted but not yet effective"@en .
+
+scse:EvidenceBasedFinding a owl:NamedIndividual,
+        scse:ClaimClassification ;
+    rdfs:label "EvidenceBasedFinding"@en ;
+    rdfs:comment "Sourced analytical observation"@en .
+
+scse:FailedSourceVerification a owl:NamedIndividual,
+        scse:SourceVerificationStatus ;
+    rdfs:label "FailedSourceVerification"@en ;
+    rdfs:comment "Source verification failed"@en .
+
+scse:FutureObligationStatus a owl:NamedIndividual,
+        scse:FindingStatus ;
+    rdfs:label "FutureObligationStatus"@en ;
+    rdfs:comment "Enacted requirement not yet applicable"@en .
+
+scse:Hypothesis a owl:NamedIndividual,
+        scse:ClaimClassification ;
+    rdfs:label "Hypothesis"@en ;
+    rdfs:comment "Hypothesis requiring test"@en .
+
+scse:NoncompliantEvidencedStatus a owl:NamedIndividual,
+        scse:FindingStatus ;
+    rdfs:label "NoncompliantEvidencedStatus"@en ;
+    rdfs:comment "Positive evidence of inconsistency with a requirement"@en .
+
+scse:NotApplicableStatus a owl:NamedIndividual,
+        scse:FindingStatus ;
+    rdfs:label "NotApplicableStatus"@en ;
+    rdfs:comment "Verified non-applicability"@en .
+
+scse:ProposalOnlyStatus a owl:NamedIndividual,
+        scse:FindingStatus ;
+    rdfs:label "ProposalOnlyStatus"@en ;
+    rdfs:comment "Potential future requirement from a proposal"@en .
+
+scse:RejectedReview a owl:NamedIndividual,
+        scse:ReviewStatus ;
+    rdfs:label "RejectedReview"@en ;
+    rdfs:comment "Rejected by reviewer"@en .
+
+scse:RepealedStatus a owl:NamedIndividual,
+        scse:LegalStatus ;
+    rdfs:label "RepealedStatus"@en ;
+    rdfs:comment "Repealed"@en .
+
+scse:RequiresLegalReviewStatus a owl:NamedIndividual,
+        scse:FindingStatus ;
+    rdfs:label "RequiresLegalReviewStatus"@en ;
+    rdfs:comment "Unresolved interpretative issue"@en .
+
+scse:Reviewed a owl:NamedIndividual,
+        scse:ReviewStatus ;
+    rdfs:label "Reviewed"@en ;
+    rdfs:comment "Reviewed by assigned reviewer"@en .
+
+scse:SimulationIntervention a owl:Class ;
+    rdfs:label "SimulationIntervention"@en ;
+    rdfs:comment "Explicit change applied within a counterfactual branch."@en .
+
+scse:SolutionComplianceScenario a owl:Class ;
+    rdfs:label "SolutionComplianceScenario"@en ;
+    rdfs:comment "Scenario dedicated to assessing a solution against a legal snapshot."@en ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:hasValue scse:SolutionComplianceMode ;
+            owl:onProperty scse:hasMode ],
+        scse:ScenarioDefinition .
+
+scse:SupersededStatus a owl:NamedIndividual,
+        scse:LegalStatus ;
+    rdfs:label "SupersededStatus"@en ;
+    rdfs:comment "Replaced by a successor"@en .
+
+scse:SuspendedStatus a owl:NamedIndividual,
+        scse:LegalStatus ;
+    rdfs:label "SuspendedStatus"@en ;
+    rdfs:comment "Temporarily suspended"@en .
+
+scse:UnknownClaimClass a owl:NamedIndividual,
+        scse:ClaimClassification ;
+    rdfs:label "UnknownClaimClass"@en ;
+    rdfs:comment "Unclassified claim"@en .
+
+scse:UnknownLegalStatus a owl:NamedIndividual,
+        scse:LegalStatus ;
+    rdfs:label "UnknownLegalStatus"@en ;
+    rdfs:comment "Status not sufficiently verified"@en .
+
+scse:VerifiedLegalFact a owl:NamedIndividual,
+        scse:ClaimClassification ;
+    rdfs:label "VerifiedLegalFact"@en ;
+    rdfs:comment "Verified legal fact with sourced applicability"@en .
+
+scse:VerifiedSource a owl:NamedIndividual,
+        scse:SourceVerificationStatus ;
+    rdfs:label "VerifiedSource"@en ;
+    rdfs:comment "Source verified"@en .
+
+scse:hasMode a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "hasMode"@en ;
+    rdfs:comment "Controlled simulation mode."@en ;
+    rdfs:domain scse:ScenarioDefinition ;
+    rdfs:range scse:ScenarioMode .
+
+scse:hasSeat a owl:ObjectProperty ;
+    rdfs:label "hasSeat"@en ;
+    rdfs:comment "Includes a designated synthetic council seat."@en ;
+    rdfs:domain scse:ShadowCouncil ;
+    rdfs:range scse:CouncilSeat .
+
+scse:produces a owl:ObjectProperty ;
+    rdfs:label "produces"@en ;
+    rdfs:comment "Round produced a claim."@en ;
+    rdfs:domain scse:DeliberationRound ;
+    rdfs:range scse:ArgumentClaim .
+
+ex:BrazilContextSnapshot a scse:NationalContextSnapshot ;
+    scse:contextJurisdiction ex:Brazil .
+
+ex:DemoFinding a scse:ComplianceFinding ;
+    scse:groundedIn ex:DraftProvisionState ;
+    scse:hasApplicableRequirement ex:DemoRequirement ;
+    scse:hasFindingStatus scse:InsufficientEvidenceStatus ;
+    scse:rationale "Insufficient evidence example attached to a hypothetical proposed provision." ;
+    scse:reviewedByHuman false .
+
+ex:DemoRequirement a hrai:NormativeRequirement ;
+    hrai:hasUnverifiedEvidence true .
+
+ex:DraftProvisionState a scse:LegalProvisionState ;
+    scse:describesProvision ex:HypotheticalProvision ;
+    scse:hasLegalStatus scse:ProposedStatus ;
+    scse:hasReviewState scse:PendingReview ;
+    scse:hasSource ex:HypotheticalSource ;
+    scse:recordedAt "2026-11-11T12:00:00+00:00"^^xsd:dateTime .
+
+ex:IllustrativeRegulatorySnapshot a scse:RegulatorySnapshot ;
+    scse:hasProvisionState ex:DraftProvisionState ;
+    scse:snapshotJurisdiction ex:Brazil .
+
+ex:SampleClaim a scse:ArgumentClaim ;
+    scse:claimText "A synthetic stakeholder perspective suggests documenting routes for appeal." ;
+    scse:hasClaimClassification scse:SyntheticPerspective ;
+    scse:supportedBy ex:SyntheticEvidence .
+
+ex:SampleRecruitmentBriefing a scse:SolutionArtifact ;
+    scse:artifactType "briefing" ;
+    scse:summary "Fictitious screening application; no technical or legal assessment was performed." ;
+    scse:title "Synthetic recruitment screening assistant" .
+
+ex:SampleRecruitmentScenario a scse:SolutionComplianceScenario ;
+    scse:asOfDate "2026-11-11"^^xsd:date ;
+    scse:evaluates ex:SampleRecruitmentBriefing ;
+    scse:hasJurisdiction ex:Brazil ;
+    scse:hasMode scse:SolutionComplianceMode ;
+    scse:instantiatesCouncil ex:SampleCouncil ;
+    scse:question "What documentary gaps would a hypothetical recruitment AI require verification for?" ;
+    scse:scenarioId "BR-SOLUTION-EXAMPLE-001" ;
+    scse:usesContext ex:BrazilContextSnapshot ;
+    scse:usesRegulation ex:IllustrativeRegulatorySnapshot .
+
+<https://example.org/hrai-go/scse/swrl-var#R01_agent> a swrl:Variable .
+
+<https://example.org/hrai-go/scse/swrl-var#R01_seat> a swrl:Variable .
+
+<https://example.org/hrai-go/scse/swrl-var#R02_seat> a swrl:Variable .
+
+<https://example.org/hrai-go/scse/swrl-var#R02_stratum> a swrl:Variable .
+
+<https://example.org/hrai-go/scse/swrl-var#R03_charter> a swrl:Variable .
+
+<https://example.org/hrai-go/scse/swrl-var#R03_evidence> a swrl:Variable .
+
+<https://example.org/hrai-go/scse/swrl-var#R04_claim> a swrl:Variable .
+
+<https://example.org/hrai-go/scse/swrl-var#R04_round> a swrl:Variable .
+
+<https://example.org/hrai-go/scse/swrl-var#R05_requirement> a swrl:Variable .
+
+<https://example.org/hrai-go/scse/swrl-var#R07_legalstate> a swrl:Variable .
+
+<https://example.org/hrai-go/scse/swrl-var#R08_claim> a swrl:Variable .
+
+<https://example.org/hrai-go/scse/swrl-var#R08_event> a swrl:Variable .
+
+<https://example.org/hrai-go/scse/swrl-var#R09_regulation> a swrl:Variable .
+
+<https://example.org/hrai-go/scse/swrl-var#R09_scenario> a swrl:Variable .
+
+scse:MinorityOpinion a owl:Class ;
+    rdfs:label "MinorityOpinion"@en ;
+    rdfs:comment "Preserved dissenting view with rationale and documentary limitations."@en .
+
+scse:PendingReview a owl:NamedIndividual,
+        scse:ReviewStatus ;
+    rdfs:label "PendingReview"@en ;
+    rdfs:comment "Pending formal review"@en .
+
+scse:RegulatoryPolicyMode a owl:NamedIndividual,
+        scse:ScenarioMode ;
+    rdfs:label "RegulatoryPolicyMode"@en ;
+    rdfs:comment "Policy regulatory simulation"@en .
+
+scse:SamplingFrame a owl:Class ;
+    rdfs:label "SamplingFrame"@en ;
+    rdfs:comment "Declared collection of documented positions used to select synthetic seats."@en .
+
+scse:ScenarioMode a owl:Class ;
+    rdfs:label "ScenarioMode"@en ;
+    rdfs:comment "Controlled value indicating which simulation regime is requested."@en ;
+    owl:oneOf ( scse:RegulatoryPolicyMode scse:SolutionComplianceMode ) .
+
+scse:SyntheticPerspective a owl:NamedIndividual,
+        scse:ClaimClassification ;
+    rdfs:label "SyntheticPerspective"@en ;
+    rdfs:comment "Synthetic stakeholder perspective"@en .
+
+ex:Brazil a hrai:Jurisdiction ;
+    scse:jurisdictionCode "BR" .
+
+ex:SyntheticEvidence a scse:EvidenceRecord ;
+    scse:evidenceText "Synthetic placeholder evidence; must be replaced with verifiable publications before real use." ;
+    scse:sourceEvidence ex:SyntheticPerspectiveSource .
+
+<https://example.org/hrai-go/scse/swrl-var#R01_council> a swrl:Variable .
+
+<https://example.org/hrai-go/scse/swrl-var#R02_council> a swrl:Variable .
+
+<https://example.org/hrai-go/scse/swrl-var#R03_agent> a swrl:Variable .
+
+<https://example.org/hrai-go/scse/swrl-var#R04_run> a swrl:Variable .
+
+<https://example.org/hrai-go/scse/swrl-var#R05_assessment> a swrl:Variable .
+
+<https://example.org/hrai-go/scse/swrl-var#R06_finding> a swrl:Variable .
+
+<https://example.org/hrai-go/scse/swrl-var#R07_finding> a swrl:Variable .
+
+<https://example.org/hrai-go/scse/swrl-var#R08_round> a swrl:Variable .
+
+<https://example.org/hrai-go/scse/swrl-var#R09_project> a swrl:Variable .
+
+hrai:NormativeRequirement a owl:Class ;
+    rdfs:label "NormativeRequirement"@en ;
+    rdfs:comment "Normative requirement interpreted from legal provisions and assessed in a specified context."@en .
+
+scse:InsufficientEvidenceStatus a owl:NamedIndividual,
+        scse:FindingStatus ;
+    rdfs:label "InsufficientEvidenceStatus"@en ;
+    rdfs:comment "Insufficient evidence for a determination"@en .
+
+scse:ModelManifest a owl:Class ;
+    rdfs:label "ModelManifest"@en ;
+    rdfs:comment "Frozen reproducibility metadata for the models and configurations used in a run."@en .
+
+scse:PendingSourceVerification a owl:NamedIndividual,
+        scse:SourceVerificationStatus ;
+    rdfs:label "PendingSourceVerification"@en ;
+    rdfs:comment "Source pending verification"@en .
+
+scse:PolicyTension a owl:Class ;
+    rdfs:label "PolicyTension"@en ;
+    rdfs:comment "Claimed conflict or trade-off among policy objectives requiring examination."@en .
+
+scse:ProposedStatus a owl:NamedIndividual,
+        scse:LegalStatus ;
+    rdfs:label "ProposedStatus"@en ;
+    rdfs:comment "Unenacted proposal only"@en .
+
+scse:ReviewStatus a owl:Class ;
+    rdfs:label "ReviewStatus"@en ;
+    rdfs:comment "Controlled review status for source or knowledge validation."@en ;
+    owl:oneOf ( scse:PendingReview scse:Reviewed scse:RejectedReview ) .
+
+scse:SimulationProject a owl:Class ;
+    rdfs:label "SimulationProject"@en ;
+    rdfs:comment "Project containing scenarios, owners, scope and access controls."@en .
+
+scse:SolutionComplianceMode a owl:NamedIndividual,
+        scse:ScenarioMode ;
+    rdfs:label "SolutionComplianceMode"@en ;
+    rdfs:comment "Application compliance simulation"@en .
+
+scse:SourceVerificationStatus a owl:Class ;
+    rdfs:label "SourceVerificationStatus"@en ;
+    rdfs:comment "Controlled status of provenance/source verification."@en ;
+    owl:oneOf ( scse:VerifiedSource scse:PendingSourceVerification scse:FailedSourceVerification ) .
+
+hrai:Jurisdiction a owl:Class ;
+    rdfs:label "Jurisdiction"@en ;
+    rdfs:comment "Territorial jurisdiction governing applicability of legal provisions."@en .
+
+scse:DeliberationEvent a owl:Class ;
+    rdfs:label "DeliberationEvent"@en ;
+    rdfs:comment "Auditable action within a deliberation round linked to claims and execution."@en .
+
+scse:NationalContextSnapshot a owl:Class ;
+    rdfs:label "NationalContextSnapshot"@en ;
+    rdfs:comment "Temporal capture of national and institutional indicators used by a scenario."@en .
+
+scse:ScenarioBranch a owl:Class ;
+    rdfs:label "ScenarioBranch"@en ;
+    rdfs:comment "Controlled intervention, patch and assumptions applied to a base scenario."@en .
+
+scse:StakeholderStratum a owl:Class ;
+    rdfs:label "StakeholderStratum"@en ;
+    rdfs:comment "Documented perspective category used for synthetic council coverage, not a human probability sample."@en .
+
+scse:WorldSnapshot a owl:Class ;
+    rdfs:label "WorldSnapshot"@en ;
+    rdfs:comment "Frozen simulation world state containing legal, national and application inputs."@en .
+
+hrai:ComplianceAssessment a owl:Class ;
+    rdfs:label "ComplianceAssessment"@en ;
+    rdfs:comment "Evidence-bounded assessment concerning applicability and satisfaction of requirements."@en .
+
+scse:ClaimClassification a owl:Class ;
+    rdfs:label "ClaimClassification"@en ;
+    rdfs:comment "Controlled classification separating verified claims from synthetic positions."@en ;
+    owl:oneOf ( scse:VerifiedLegalFact scse:EvidenceBasedFinding scse:SyntheticPerspective scse:Hypothesis scse:UnknownClaimClass ) .
+
+scse:DeliberationRound a owl:Class ;
+    rdfs:label "DeliberationRound"@en ;
+    rdfs:comment "Controlled ordered stage of a council debate with permitted activities and events."@en .
+
+scse:RegulatorySnapshot a owl:Class ;
+    rdfs:label "RegulatorySnapshot"@en ;
+    rdfs:comment "As-of collection of versioned legal provision states and source material."@en ;
+    owl:disjointWith scse:NationalContextSnapshot .
+
+scse:CouncilSeat a owl:Class ;
+    rdfs:label "CouncilSeat"@en ;
+    rdfs:comment "Synthetic seat allocated to a stratum with an explicit source basis and justification."@en .
+
+scse:SourceDocument a owl:Class ;
+    rdfs:label "SourceDocument"@en ;
+    rdfs:comment "Document or official source referenced by legal or empirical statements."@en ;
+    rdfs:subClassOf prov:Entity ;
+    owl:disjointWith scse:EvidenceRecord .
+
+scse:FindingStatus a owl:Class ;
+    rdfs:label "FindingStatus"@en ;
+    rdfs:comment "Controlled evidence-bounded status for a compliance finding."@en ;
+    owl:oneOf ( scse:CompliantEvidencedStatus scse:NoncompliantEvidencedStatus scse:InsufficientEvidenceStatus scse:NotApplicableStatus scse:RequiresLegalReviewStatus scse:FutureObligationStatus scse:ProposalOnlyStatus ) .
+
+scse:LegalStatus a owl:Class ;
+    rdfs:label "LegalStatus"@en ;
+    rdfs:comment "Controlled legal-status value for a specific provision state at a given time."@en ;
+    owl:oneOf ( scse:ProposedStatus scse:EnactedNotEffectiveStatus scse:EffectiveStatus scse:SuspendedStatus scse:RepealedStatus scse:SupersededStatus scse:UnknownLegalStatus ) .
+
+scse:PerspectiveAgent a owl:Class ;
+    rdfs:label "PerspectiveAgent"@en ;
+    rdfs:comment "Artificial agent whose bounded simulated perspective is linked to a charter and sources."@en ;
+    rdfs:subClassOf prov:SoftwareAgent ;
+    owl:disjointWith scse:CouncilSeat .
+
+scse:ShadowCouncil a owl:Class ;
+    rdfs:label "ShadowCouncil"@en ;
+    rdfs:comment "Council of synthetic seats whose views must not be represented as polling real persons."@en .
+
+scse:CouncilReport a owl:Class ;
+    rdfs:label "CouncilReport"@en ;
+    rdfs:comment "Integrated evidence-backed outputs, minority positions, uncertainties and limitations."@en .
+
+scse:SolutionArtifact a owl:Class ;
+    rdfs:label "SolutionArtifact"@en ;
+    rdfs:comment "Briefing, technical specification, architecture or deployed-system description to assess."@en .
+
+scse:EvidenceRecord a owl:Class ;
+    rdfs:label "EvidenceRecord"@en ;
+    rdfs:comment "Citable record with provenance, verification status and version metadata."@en ;
+    rdfs:subClassOf prov:Entity .
+
+scse:SimulationRun a owl:Class ;
+    rdfs:label "SimulationRun"@en ;
+    rdfs:comment "One execution with configuration, random seed, replay data and immutable inputs."@en ;
+    rdfs:subClassOf prov:Activity .
+
+scse:ComplianceFinding a owl:Class ;
+    rdfs:label "ComplianceFinding"@en ;
+    rdfs:comment "Requirement-scoped, evidence-bounded assessment outcome, not automatic legal certification."@en ;
+    owl:disjointWith scse:ArgumentClaim .
+
+scse:LegalProvisionState a owl:Class ;
+    rdfs:label "LegalProvisionState"@en ;
+    rdfs:comment "Time- and source-qualified representation of the legal status of a provision."@en .
+
+scse:PerspectiveCharter a owl:Class ;
+    rdfs:label "PerspectiveCharter"@en ;
+    rdfs:comment "Explicit constraints, documented positions, blind spots and permitted actions of a perspective agent."@en .
+
+scse:ArgumentClaim a owl:Class ;
+    rdfs:label "ArgumentClaim"@en ;
+    rdfs:comment "Proposition open to support, challenge, withdrawal and evidence review."@en .
+
+scse:ScenarioDefinition a owl:Class ;
+    rdfs:label "ScenarioDefinition"@en ;
+    rdfs:comment "Frozen question, jurisdiction, mode, relevant sources, and assumptions of a simulation."@en .
+
+[] a owl:AllDifferent ;
+    owl:distinctMembers ( scse:VerifiedLegalFact scse:EvidenceBasedFinding scse:SyntheticPerspective scse:Hypothesis scse:UnknownClaimClass ) .
+
+[] a owl:AllDifferent ;
+    owl:distinctMembers ( scse:ProposedStatus scse:EnactedNotEffectiveStatus scse:EffectiveStatus scse:SuspendedStatus scse:RepealedStatus scse:SupersededStatus scse:UnknownLegalStatus ) .
+
+[] a owl:AllDifferent ;
+    owl:distinctMembers ( scse:VerifiedSource scse:PendingSourceVerification scse:FailedSourceVerification ) .
+
+[] a owl:AllDifferent ;
+    owl:distinctMembers ( scse:CompliantEvidencedStatus scse:NoncompliantEvidencedStatus scse:InsufficientEvidenceStatus scse:NotApplicableStatus scse:RequiresLegalReviewStatus scse:FutureObligationStatus scse:ProposalOnlyStatus ) .
+
+[] a owl:AllDifferent ;
+    owl:distinctMembers ( scse:PendingReview scse:Reviewed scse:RejectedReview ) .
+
+[] a owl:AllDifferent ;
+    owl:distinctMembers ( scse:RegulatoryPolicyMode scse:SolutionComplianceMode ) .
+
