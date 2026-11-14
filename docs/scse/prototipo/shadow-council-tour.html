@@ -135,6 +135,21 @@ body:not(.touring) #hud,body:not(.touring) #panel,body:not(.touring) #hint{opaci
 .prop-head{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .prop h4{margin:0;font:600 15px/1.3 var(--body)}
 .prop p{font-size:13.5px}
+.st{display:inline-flex;align-items:center;gap:5px;font:500 11.5px/1 var(--mono);border-radius:999px;padding:4px 8px;border:1px solid currentColor;white-space:nowrap}
+.st i{font-style:normal;font-weight:700}
+.st-for{color:#5FD3C6}.st-against{color:#FF9A80}.st-amend{color:#F0B860}.st-split{color:#C2B0FF}.st-silent{color:var(--dim)}
+.strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(122px,1fr));gap:4px}
+.strip .cell{display:flex;align-items:center;gap:5px;min-width:0;font:500 11px/1.15 var(--mono);padding:5px 6px;border-radius:7px;border:1px solid currentColor;background:rgba(7,12,22,.35);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.strip .cell i{font-style:normal;font-weight:700}
+.strip .cell.st-silent{border-style:dashed;opacity:.75}
+.args{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:7px}
+.args li{display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:start;font-size:13px}
+details summary{cursor:pointer;font:500 12.5px/1.3 var(--body);color:var(--brass-2)}
+.reading h4{margin:0 0 6px}
+.reading ul{margin:0;padding-left:18px;display:grid;gap:6px;font-size:13.5px}
+.reading .quote{color:var(--muted)}
+.strata-seg{flex-wrap:wrap}
+.strata-seg button{display:inline-flex;align-items:center;gap:6px}
 .signals{font:400 12px/1.4 var(--mono);color:var(--muted)}
 .decide{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .decide button{border:1px solid var(--line-2);background:transparent;border-radius:9px;padding:8px 4px;font:600 12.5px/1 var(--body);cursor:pointer;color:var(--muted)}
@@ -235,33 +250,60 @@ const GAPS = D.topics.filter(t => t.strength === "none");
 const FRAGILE = D.topics.filter(t => t.strength === "proposedOnly" || t.strength === "inferredOnly");
 const N_PROPOSED = D.components.filter(c => c.status === "proposed").length;
 
-/* Example proposals for the review step. They did not come from a real run. */
+/* Example proposals for the review step. They did not come from a real run.
+   pos: where each of the 8 strata stood on the proposal, in its own words. The council does not
+   deliberate a single answer; the runtime packet carries the same shape (stratumPositions). */
 const PROPS = [
   {id:"M001",lens:"omission",change:"add",topic:"participation",title:"Participação social na governança de IA",
    text:"Nenhum componente trata de consulta pública ou controle democrático. Com a troca de governo em janeiro, um canal permanente de participação reduz o risco de o modelo mudar sem debate.",
-   reps:"3/3",seats:6,strata:["civilSociety","workers","affectedGroups"]},
+   reps:"3/3",raised:"civilSociety",pos:{"regulators": ["amend", "Participação sim, com rito e prazo. Consulta aberta sem prazo paralisa a autoridade."], "publicOperators": ["against", "Já existem conselhos e consultas públicas. Um canal novo duplica estrutura e custo."], "business": ["silent", ""], "research": ["for", "Sem canal de participação, a troca de governo interrompe o monitoramento do plano."], "civilSociety": ["for", "Nenhum componente trata de controle democrático. O novo governo pode redesenhar tudo sem debate."], "workers": ["for", "Quem perde ocupação para a IA precisa de assento onde as prioridades são definidas."], "affectedGroups": ["for", "Sem canal próprio, os grupos afetados entram só como dado, nunca como voz."], "infrastructure": ["silent", ""]}},
   {id:"M002",lens:"omission",change:"add",topic:"energy-environment",title:"Energia e água dos data centers",
    text:"O modelo investe em computação nacional (GM-17) e não trata consumo de energia e água. A matriz elétrica renovável (CF-02) só vira vantagem se o custo ambiental for medido.",
-   reps:"2/3",seats:3,strata:["infrastructure","research"]},
+   reps:"2/3",raised:"infrastructure",pos:{"regulators": ["silent", ""], "publicOperators": ["split", "Um assento apoia medir. Outro teme atrasar o edital do supercomputador."], "business": ["against", "Métrica ambiental agora encarece o data center nacional e empurra carga para nuvem estrangeira."], "research": ["for", "Sem medir energia e água, a vantagem da matriz renovável (CF-02) é só retórica."], "civilSociety": ["amend", "Incluir água e impacto nas comunidades vizinhas aos data centers."], "workers": ["silent", ""], "affectedGroups": ["amend", "Medir também onde o data center se instala e quem arca com o custo local."], "infrastructure": ["for", "GM-17 investe em computação e não trata consumo de energia e água."]}},
   {id:"M003",lens:"omission",change:"add",topic:"children-vulnerable",title:"Proteção de crianças e adolescentes",
    text:"Nenhum componente trata de crianças e grupos vulneráveis, mesmo com IA chegando a serviços públicos e plataformas de uso massivo.",
-   reps:"3/3",seats:4,strata:["affectedGroups","civilSociety"]},
+   reps:"3/3",raised:"affectedGroups",pos:{"regulators": ["for", "A autoridade de dados já trata dados de crianças. Falta estender a decisões automatizadas."], "publicOperators": ["silent", ""], "business": ["amend", "Salvaguarda por tipo de uso, não proibição geral de IA em produtos para jovens."], "research": ["silent", ""], "civilSociety": ["for", "IA chega a escolas públicas e plataformas de massa sem salvaguarda específica."], "workers": ["silent", ""], "affectedGroups": ["for", "Nenhum componente trata de crianças e grupos vulneráveis."], "infrastructure": ["silent", ""]}},
   {id:"M004",lens:"excess",change:"remove",comp:"GM-12",title:"Retirar o sandbox até confirmar no texto do PL",
    text:"GM-12 entrou no modelo sem confirmação nas fontes. Contar com ele infla a cobertura de inovação. Melhor retirar e reintroduzir quando o texto for conferido.",
-   reps:"3/3",seats:4,strata:["research","regulators"],flags:["evidência a confirmar"]},
+   reps:"3/3",raised:"research",pos:{"regulators": ["for", "Componente não confirmado na fonte não pode contar como cobertura."], "publicOperators": ["silent", ""], "business": ["against", "Retirar o sandbox sinaliza que a inovação saiu da agenda. Melhor marcar como a confirmar."], "research": ["for", "GM-12 entrou sem fonte e infla a cobertura de inovação."], "civilSociety": ["silent", ""], "workers": ["silent", ""], "affectedGroups": ["silent", ""], "infrastructure": ["amend", "Manter como hipótese explícita, fora da contagem de cobertura, em vez de remover."]},flags:["evidência a confirmar"]},
   {id:"M005",lens:"excess",change:"modify",comp:"GM-04",title:"Tratar o PL 2338 como cenário, não como pilar",
    text:`${N_PROPOSED} dos ${D.components.length} componentes dependem de um projeto ainda não votado. Se o PL parar em 2027 (ramo pl2338-stalled), essas áreas ficam sem cobertura.`,
-   reps:"3/3",seats:5,strata:["regulators","research","business"]},
+   reps:"3/3",raised:"regulators",pos:{"regulators": ["for", "A maior parte dos mecanismos depende de um projeto ainda não votado."], "publicOperators": ["for", "Sem o PL, o SIA não existe. O poder público precisa de um plano B."], "business": ["split", "Um assento apoia. Outro quer o PL como pilar, para dar previsibilidade ao investimento."], "research": ["for", "O ramo pl2338-stalled mostra quantas áreas ficam descobertas."], "civilSociety": ["against", "Rebaixar o PL a cenário enfraquece a pressão pelos direitos que ele traz."], "workers": ["silent", ""], "affectedGroups": ["against", "Os direitos de contestação estão no PL. Tratá-lo como cenário os torna opcionais."], "infrastructure": ["silent", ""]}},
   {id:"M006",lens:"excess",change:"modify",comp:"GM-03",legal:true,title:"LGPD: a revisão de decisões automatizadas não basta para IA",
    text:"O modelo usa a LGPD como base de contestação de decisões de IA. O direito de revisão cobre dados pessoais, não todo uso de IA. Mudar como o modelo descreve uma lei em vigor exige revisão jurídica.",
-   reps:"2/3",seats:3,strata:["civilSociety","affectedGroups"],flags:["revisão jurídica"]},
+   reps:"2/3",raised:"civilSociety",pos:{"regulators": ["amend", "Corrigir a descrição sem sugerir que a LGPD falha onde a autoridade já atua."], "publicOperators": ["silent", ""], "business": ["against", "Ampliar a leitura do art. 20 cria insegurança jurídica para quem já cumpre a LGPD."], "research": ["silent", ""], "civilSociety": ["for", "O direito de revisão cobre dados pessoais, não todo uso de IA."], "workers": ["silent", ""], "affectedGroups": ["for", "Decisões sobre benefícios sociais usam IA e ficam sem via clara de contestação."], "infrastructure": ["silent", ""]},flags:["revisão jurídica"]},
   {id:"M007",lens:"advantage",change:"add",topic:"language-culture",feats:["CF-03","CF-09"],title:"Avaliação pública de modelos em português do Brasil",
    text:"Um conjunto público de testes em português brasileiro, mantido pela base científica pública, faria do país a referência na avaliação de modelos para a língua. Isso depende do idioma e da rede de pesquisa daqui, e não se copia.",
-   reps:"3/3",seats:5,strata:["research","infrastructure","publicOperators"]},
+   reps:"3/3",raised:"research",pos:{"regulators": ["silent", ""], "publicOperators": ["for", "Serviço público em português precisa de teste em português antes de contratar modelo."], "business": ["amend", "Abrir os testes a empresas, com governança que evite captura por um laboratório."], "research": ["for", "Depende do idioma e da rede de pesquisa daqui, e não se copia."], "civilSociety": ["amend", "Incluir línguas indígenas e falas regionais, não só o português padrão."], "workers": ["silent", ""], "affectedGroups": ["for", "Modelos que erram mais com sotaques regionais prejudicam quem já é excluído."], "infrastructure": ["for", "Roda na infraestrutura nacional (GM-17) e dá a ela um uso concreto."]}},
   {id:"M008",lens:"advantage",change:"add",topic:"workforce-skills",feats:["CF-07"],title:"Investir em formação em IA",
    text:"Formar mais profissionais de IA.",
-   reps:"1/3",seats:2,strata:["business"],flags:["genérica: serviria a qualquer país"]},
+   reps:"1/3",raised:"business",pos:{"regulators": ["silent", ""], "publicOperators": ["silent", ""], "business": ["for", "Faltam profissionais de IA no mercado."], "research": ["against", "Genérica: serviria a qualquer país e não usa nenhum traço do contexto."], "civilSociety": ["silent", ""], "workers": ["amend", "Requalificar quem perde ocupação, não só formar especialistas."], "affectedGroups": ["silent", ""], "infrastructure": ["silent", ""]},flags:["genérica: serviria a qualquer país"]},
 ];
+const STANCE = {
+  for:    {pt:"a favor",       g:"✓", c:"#38C2B4"},
+  against:{pt:"contra",        g:"✕", c:"#FF7A59"},
+  amend:  {pt:"propõe ajuste", g:"±", c:"#E8A33D"},
+  split:  {pt:"dividido",      g:"⇄", c:"#A78BFA"},
+  silent: {pt:"sem posição",   g:"·", c:"#4A5568"},
+};
+const STANCE_ORDER = ["for","against","amend","split","silent"];
+/* Illustrative blind (R1) expectations per stratum; also drives the R1 particle flow. */
+const EXPECT = {regulators:["oversight-institutions","enforcement-capacity","impact-assessment"],publicOperators:["public-sector-use","rights-redress","standards-certification"],
+  business:["sme-competition","innovation-sandbox","standards-certification"],research:["open-source-science","monitoring-learning","language-culture"],
+  civilSociety:["participation","transparency","children-vulnerable"],workers:["labor-relations","regional-inequality","workforce-skills"],
+  affectedGroups:["rights-redress","children-vulnerable","regional-inequality"],infrastructure:["energy-environment","compute-infrastructure","data-sovereignty"]};
+function spread(p){ const o = {}; for (const s of D.strata) { const st = p.pos[s.id][0]; (o[st] = o[st] || []).push(s.id); } return o; }
+function stratumReading(sid){
+  const out = {raised:[], for:[], against:[], amend:[], split:[], silent:[], aloneFor:[], aloneAgainst:[]};
+  for (const p of PROPS) {
+    const st = p.pos[sid][0]; out[st].push(p);
+    if (p.raised === sid) out.raised.push(p);
+    const others = D.strata.filter(s => s.id !== sid).map(s => p.pos[s.id][0]);
+    if (st === "for" && !others.includes("for")) out.aloneFor.push(p);
+    if (st === "against" && !others.includes("against")) out.aloneAgainst.push(p);
+  }
+  return out;
+}
 const EXAMPLE_FILL = {
   reviewer:"Equipe de revisão (exemplo)",
   d:{M001:{decision:"accept",rationale:"Lacuna estrutural e a troca de governo aumenta o risco de mudança sem debate."},
@@ -276,6 +318,7 @@ const EXAMPLE_FILL = {
 
 /* ====================================================================== state */
 const state = { step:-1, auto:false, autoTimer:null, coloring:"strata", lens:"omission", picked:null, version:"0.1.0",
+  stratum:"civilSociety", selProp:null,
   review:{reviewer:"", d:{}, applied:null} };
 
 /* ====================================================================== steps */
@@ -343,12 +386,14 @@ const STEPS = [
    <p>Cada achado é testado contra quatro hipóteses de contexto, empilhadas sobre o estado-base, que não muda.</p>
    <ul class="facts">${D.branches.map(b=>`<li><span class="when">${esc(b.id.replace("pl2338-","PL ").replace("pbia-funding-cut","PBIA −50%").replace("new-government-priorities","novo governo"))}</span><span>${esc(b.h)}</span></li>`).join("")}</ul>
    <p class="muted">Proposta que só vale num ramo é frágil. Proposta que sobrevive aos quatro merece atenção primeiro.</p>`},
- {id:"revisao", eyebrow:"Passo 9 · Sua decisão", title:"O conselho propõe. Você decide.", noAuto:true, html:() => reviewHtml()},
- {id:"iteracao", eyebrow:"Passo 10 · Próxima rodada", title:"O ciclo recomeça na nova versão", html:() => iterHtml()},
+ {id:"estratos", eyebrow:"Passo 9 · Sem falso consenso", title:"Cada estrato, sua leitura", html:() => strataHtml()},
+ {id:"revisao", eyebrow:"Passo 10 · Sua decisão", title:"Cada proposta, com a posição de cada estrato. Você decide.", noAuto:true, pick:"seats", html:() => reviewHtml()},
+ {id:"iteracao", eyebrow:"Passo 11 · Próxima rodada", title:"O ciclo recomeça na nova versão", html:() => iterHtml()},
  {id:"fim", eyebrow:"Fim do tour", title:"O que já existe e o que falta", html:() => `
    <div class="cols">
      <div><h4 style="color:var(--teal)">Já existe</h4><ul>
-       <li>Runtime do conselho com 83 testes offline</li>
+       <li>Runtime do conselho com 86 testes offline</li>
+       <li>Pacote de revisão com a posição de cada estrato em cada proposta</li>
        <li>Modo governanceReview com R1 cega e três lentes</li>
        <li>Modelo v0.1.0, taxonomia de ${D.topics.length} áreas, contexto datado</li>
        <li>Revisão humana por linha de comando: folha, decisões, nova versão, comparação</li></ul></div>
@@ -360,7 +405,7 @@ const STEPS = [
        <li>Esta interface</li></ul></div>
    </div>
    <p>Esta tela é um protótipo da aplicação. Hoje o mesmo ciclo roda por linha de comando: <span class="mono">scse run</span>, <span class="mono">scse govern sheet</span>, <span class="mono">scse govern apply</span>.</p>
-   <div class="row"><button class="btn primary" data-go="0">Rever o tour</button><button class="btn" data-go="8">Voltar à decisão</button></div>`},
+   <div class="row"><button class="btn primary" data-go="0">Rever o tour</button><button class="btn" data-go="9">Voltar à decisão</button></div>`},
 ];
 function count(s){ return D.components.filter(c => c.status === s).length; }
 function detailBox(empty){ return `<div class="detail" id="detail"><p class="muted">${esc(empty)}</p></div>`; }
@@ -386,11 +431,38 @@ function lensHtml(){
    </div>
    ${state.lens==="advantage" ? `<p class="muted">Os ${D.features.length} traços de contexto orbitam a lente. Um verificador de outro provedor marca o achado genérico, que serviria a qualquer país.</p>` : ""}`;
 }
+function stanceChip(st, text){ const k = STANCE[st]; return `<span class="st st-${st}"><i aria-hidden="true">${k.g}</i>${esc(text)}</span>`; }
+function strataHtml(){
+  const sid = state.stratum, s = D.strata.find(x => x.id === sid), r = stratumReading(sid);
+  const item = (p, why) => `<li><span class="mono">${p.id}</span> ${esc(p.title)}${why ? `<br><span class="quote">“${esc(why)}”</span>` : ""}</li>`;
+  const block = (st, list) => list.length ? `<div class="reading"><h4>${stanceChip(st, `${STANCE[st].pt} · ${list.length}`)}</h4><ul>${list.map(p => item(p, p.pos[sid][1])).join("")}</ul></div>` : "";
+  return `<p>O conselho não vota e não chega a uma resposta comum. Uma proposta nasce num assento e cada estrato reage a ela, ou fica calado. O pacote de revisão guarda essas reações lado a lado, sem somá-las num veredito.</p>
+   <div class="seg strata-seg" role="group" aria-label="Estrato">${D.strata.map((x,i) => `<button data-stratum="${x.id}" aria-pressed="${x.id===sid}"><i class="sw round" style="background:${STRATA_C[i]}"></i>${esc(STRATA_PT[x.id])}</button>`).join("")}</div>
+   <div class="detail"><span class="id">${esc(s.label)} · ${s.seats} assentos</span>
+     <p><b>Esperava às cegas (R1):</b> ${EXPECT[sid].map(t => esc(TOPIC[t] ? TOPIC[t].label : t)).join(" · ")}</p>
+     <p><b>Levantou:</b> ${r.raised.map(p => `${p.id} ${esc(p.title)}`).join(" · ") || "nenhuma proposta"}</p>
+     ${r.aloneFor.length ? `<p><b>Único estrato a favor:</b> ${r.aloneFor.map(p => p.id).join(", ")}</p>` : ""}
+     ${r.aloneAgainst.length ? `<p><b>Único estrato contra:</b> ${r.aloneAgainst.map(p => p.id).join(", ")}</p>` : ""}</div>
+   ${block("for", r.for)}${block("against", r.against)}${block("amend", r.amend)}${block("split", r.split)}
+   <p class="muted">Sem posição em ${r.silent.length} de ${PROPS.length} propostas${r.silent.length ? ` (${r.silent.map(p => p.id).join(", ")})` : ""}. Calar não é concordar: o estrato não se pronunciou. <span class="tag demo">exemplo</span></p>`;
+}
+function stanceStrip(p){
+  const sp = spread(p);
+  const summary = STANCE_ORDER.filter(k => sp[k]).map(k => `${STANCE[k].pt} ${sp[k].length}`).join(" · ");
+  const sel = state.selProp === p.id;
+  return `<div class="strip" aria-label="Posição de cada estrato em ${p.id}">${D.strata.map(s => { const [st] = p.pos[s.id];
+      return `<span class="cell st-${st}" title="${esc(STRATA_PT[s.id])}: ${STANCE[st].pt}"><i aria-hidden="true">${STANCE[st].g}</i>${esc(STRATA_PT[s.id])}</span>`; }).join("")}</div>
+    <div class="row"><span class="signals">${summary}</span><button class="btn small" data-sel="${p.id}" aria-pressed="${sel}">${sel ? "Apagar no plenário" : "Acender no plenário"}</button></div>
+    <details${sel ? " open" : ""}><summary>Argumento de cada estrato</summary><ul class="args">${D.strata.map(s => { const [st, why] = p.pos[s.id];
+      return `<li>${stanceChip(st, STRATA_PT[s.id])}<span>${why ? esc(why) : `<span class="muted">não se pronunciou</span>`}</span></li>`; }).join("")}</ul></details>`;
+}
 function propLabel(p){ return p.comp ? `${p.comp} · ${COMP[p.comp].title}` : (TOPIC[p.topic] ? TOPIC[p.topic].label : p.topic); }
 function reviewHtml(){
   const r = state.review;
   if (r.applied) return appliedHtml();
-  return `<p>Estas propostas vieram do conselho. Nada muda no modelo até uma pessoa decidir, com nome e justificativa. <span class="tag demo">propostas de exemplo</span></p>
+  return `<p>Cada proposta foi levantada por um estrato e chega com a posição dos oito: quem defendeu, quem contestou, quem pediu ajuste e quem não se pronunciou. Não há resposta do conselho. Nada muda no modelo até uma pessoa decidir, com nome e justificativa. <span class="tag demo">propostas de exemplo</span></p>
+   <div class="legend">${STANCE_ORDER.map(k => stanceChip(k, STANCE[k].pt)).join("")}</div>
+   <p class="muted">“Acender no plenário” pinta cada assento com a posição do seu estrato. Assento apagado: o estrato não se pronunciou.</p>
    <div class="field"><label for="reviewer">Quem decide</label><input id="reviewer" autocomplete="name" placeholder="Seu nome ou o da equipe" value="${esc(r.reviewer)}"></div>
    <div class="row"><button class="btn small" id="fill">Preencher exemplo</button><span class="muted">para apresentar sem digitar</span></div>
    ${PROPS.map(propHtml).join("")}
@@ -406,7 +478,8 @@ function propHtml(p){
       ${(p.flags||[]).map(f=>`<span class="tag ${f.startsWith("revisão")?"legal":"warn"}">${esc(f)}</span>`).join("")}</div>
     <h4>${esc(p.title)}</h4>
     <p>${esc(p.text)}</p>
-    <div class="signals">${esc(propLabel(p))}${p.feats?` · ${p.feats.join(", ")}`:""}<br>réplicas ${p.reps} · ${p.seats} assentos sintéticos · ${p.strata.map(s=>STRATA_PT[s]).join(", ")}</div>
+    <div class="signals">${esc(propLabel(p))}${p.feats?` · ${p.feats.join(", ")}`:""}<br>réplicas ${p.reps} · levantada por ${esc(STRATA_PT[p.raised])}</div>
+    ${stanceStrip(p)}
     <div class="decide" role="group" aria-label="Decisão para ${p.id}">
       ${[["accept","Aceitar"],["modify","Modificar"],["reject","Rejeitar"],["defer","Adiar"]].map(([v,t])=>`<button data-d="${v}" aria-pressed="${d.decision===v}">${t}</button>`).join("")}
     </div>
@@ -442,13 +515,13 @@ function appliedHtml(){
      <p>Por ${esc(a.reviewer)} em 14/11/2026. ${a.applied.length} mudança(s) aplicada(s), ${a.rejected} rejeitada(s), ${a.deferred} adiada(s), ${a.pending} sem decisão.</p></div>
    <ul class="facts">${a.applied.map(x=>`<li><span class="when">${x.op}</span><span>${esc(x.label)}</span></li>`).join("")}</ul>
    <p class="muted">Na torre: blocos novos entram no topo com a cor das propostas do conselho; o bloco retirado vai para a prateleira, sem ser apagado; os modificados ganham contorno de autoria humana. Tudo entra no histórico do modelo.</p>
-   <div class="row"><button class="btn primary" data-go="9">Ver a próxima rodada →</button><button class="btn" id="undo">Refazer a decisão</button></div>`;
+   <div class="row"><button class="btn primary" data-go="10">Ver a próxima rodada →</button><button class="btn" id="undo">Refazer a decisão</button></div>`;
 }
 function iterHtml(){
   const a = state.review.applied;
   if (!a) return `<p>A versão seguinte só existe depois de uma decisão humana. Volte ao passo anterior e decida, ou siga para ver como o ciclo continua.</p>
      <p>A cada volta da espiral: nova rodada sobre a versão revisada, comparação com a anterior e nova decisão.</p>
-     <div class="row"><button class="btn primary" data-go="8">← Decidir agora</button></div>`;
+     <div class="row"><button class="btn primary" data-go="9">← Decidir agora</button></div>`;
   const closed = a.addedTopics.filter(t => GAPS.some(g => g.id === t)).map(t => TOPIC[t].label);
   const open = GAPS.filter(g => !a.addedTopics.includes(g.id)).map(g => g.label);
   return `<p>Nova rodada sobre a v${a.to}. A comparação mostra o que persiste, o que deixou de aparecer e o que é novo. <span class="tag demo">exemplo</span></p>
@@ -476,9 +549,9 @@ function renderPanel(){
 function go(i){
   i = (i + STEPS.length) % STEPS.length;
   const changed = i !== state.step;
-  state.step = i; state.picked = null;
+  state.step = i; state.picked = null; if (changed) state.selProp = null;
   renderPanel();
-  if (changed) { scene3d.enter(STEPS[i].id); try { history.replaceState(null, "", "#" + STEPS[i].id); } catch(e){} }
+  if (changed) { scene3d.enter(STEPS[i].id); if (STEPS[i].id === "estratos") scene3d.focusStratum(state.stratum); try { history.replaceState(null, "", "#" + STEPS[i].id); } catch(e){} }
   scheduleAuto();
 }
 function next(){ go(state.step + 1); }
@@ -512,6 +585,10 @@ panel.addEventListener("click", e => {
   if (t.dataset.go !== undefined) { if (t.dataset.go === "0") resetTourOnly(); go(+t.dataset.go); return; }
   if (t.dataset.col) { state.coloring = t.dataset.col; scene3d.recolorSeats(); renderPanel(); return; }
   if (t.dataset.lens) { state.lens = t.dataset.lens; scene3d.setLens(state.lens); renderPanel(); return; }
+  if (t.dataset.stratum) { state.stratum = t.dataset.stratum; scene3d.focusStratum(state.stratum); renderPanel(); return; }
+  if (t.dataset.sel) { state.selProp = state.selProp === t.dataset.sel ? null : t.dataset.sel;
+    scene3d.stances(state.selProp ? PROPS.find(p => p.id === state.selProp).pos : null);
+    const y = panel.scrollTop; renderPanel(); panel.scrollTop = y; return; }
   if (t.id === "fill") { fillExample(); return; }
   if (t.id === "apply") { applyReview(); return; }
   if (t.id === "undo") { resetReview(); renderPanel(); return; }
@@ -569,6 +646,8 @@ function describe(u){
     return {id:`${c.id} · ${KIND_PT[c.kind]||"Componente"} · ${st.pt}`, h:c.title, p:c.desc + (c.basis === "inferred" && c.note ? ` ${c.note}` : ""),
       extra:`Áreas: ${c.topics.map(t=>TOPIC[t]?TOPIC[t].label:t).join(", ")}${c.basis==="inferred"?" (leitura inferida)":""}`}; }
   if (u.kind === "seat") { const s = D.strata[u.k];
+    if (state.selProp) { const p = PROPS.find(x => x.id === state.selProp), [st, why] = p.pos[s.id];
+      return {id:`${p.id} · ${STANCE[st].pt}`, h:STRATA_PT[s.id] || s.label, p:why || "O estrato não se pronunciou sobre esta proposta.", extra:"Posição de exemplo."}; }
     return {id:`Assento ${u.i+1} · ${PROV[u.p].name}`, h:STRATA_PT[s.id] || s.label, p:`Perspectiva sintética do estrato "${s.label}". Não representa pessoa ou órgão real.`, extra:`Família de modelo nesta réplica: ${PROV[u.p].name}. Na próxima réplica, outra.`}; }
   if (u.kind === "ghost") return {id:"Cadeira vazia", h:"Perspectivas sem fonte", p:D.unrep.join(" · "), extra:"Não são simuladas para não inventar posição. Precisam ser ouvidas."};
   if (u.kind === "topic") { const t = TOPIC[u.id];
@@ -593,7 +672,7 @@ function showTip(u, x, y){
 
 /* ===================================================================== 3D scene */
 const scene3d = (() => {
-  const api = { enter(){}, recolorSeats(){}, setLens(){}, applyChanges(){}, resetChanges(){}, splash(){} };
+  const api = { enter(){}, recolorSeats(){}, setLens(){}, applyChanges(){}, resetChanges(){}, splash(){}, stances(){}, focusStratum(){} };
   if (!window.THREE) { document.body.classList.add("no3d"); return api; }
   let renderer;
   try {
@@ -710,10 +789,26 @@ const scene3d = (() => {
     ghost.position.set(Math.cos(gh)*6, .25, Math.sin(gh)*6); ghost.userData.pick = {kind:"ghost"};
     ring.add(ghost); api._ghost = ghost;
   }
-  api.recolorSeats = () => seats.forEach(s => {
+  api.recolorSeats = () => { calmBloom(false); seats.forEach(s => {
     const c = new T.Color(state.coloring === "provider" ? PROV[s.p].c : STRATA_C[s.k]);
     s.mesh.material.color.copy(c); s.mesh.material.emissive.copy(c); s.base.material.color.copy(c);
-  });
+    s.mesh.material.emissiveIntensity = .16; s.target = 1; s.lit = false;
+    s.base.material.userData.base = .22; s.base.material.opacity = .22 * (G.ring ? G.ring.userData.fade : 1);
+  }); };
+  // Bloom washes saturated seat colours to white; tone it down while seats carry meaning by colour.
+  function calmBloom(on){ if (typeof bloom !== "undefined" && bloom) bloom.strength = on ? .18 : .62; }
+  function paintSeat(s, hex, lit){ const c = new T.Color(hex);
+    s.mesh.material.color.copy(c); s.mesh.material.emissive.copy(c); s.base.material.color.copy(c);
+    s.lit = lit; s.mesh.material.emissiveIntensity = lit ? .22 : .02;
+    s.base.material.userData.base = lit ? .6 : .08; s.base.material.opacity = s.base.material.userData.base * G.ring.userData.fade; }
+  // Light seats by where their stratum stood on one proposal (no blending into a single colour).
+  api.stances = pos => {
+    if (!pos) { api.recolorSeats(); return; }
+    calmBloom(true);
+    seats.forEach(s => { const st = pos[D.strata[s.k].id][0]; paintSeat(s, STANCE[st].c, st !== "silent"); s.target = s.lit ? 1.25 : .75; });
+  };
+  api.focusStratum = sid => { calmBloom(true);
+    seats.forEach(s => { const on = D.strata[s.k].id === sid; paintSeat(s, on ? STRATA_C[s.k] : "#2A3344", on); s.target = on ? 1.35 : .8; }); };
 
   /* ---- governance model tower ---- */
   const tower = group("tower");
@@ -773,12 +868,8 @@ const scene3d = (() => {
 
   /* ---- blind-round expectation flow (illustrative) ---- */
   const flow = group("flow");
-  const PREF = {regulators:["oversight-institutions","enforcement-capacity","impact-assessment"],publicOperators:["public-sector-use","rights-redress","standards-certification"],
-    business:["sme-competition","innovation-sandbox","standards-certification"],research:["open-source-science","monitoring-learning","language-culture"],
-    civilSociety:["participation","transparency","children-vulnerable"],workers:["labor-relations","regional-inequality","workforce-skills"],
-    affectedGroups:["rights-redress","children-vulnerable","regional-inequality"],infrastructure:["energy-environment","compute-infrastructure","data-sovereignty"]};
   const flows = [];
-  seats.forEach((s, i) => { const prefs = PREF[D.strata[s.k].id] || []; prefs.forEach((tid, j) => { if (topicNodes[tid]) flows.push({s, t:topicNodes[tid], ph:(i*.137 + j*.33)%1, k:s.k}); }); });
+  seats.forEach((s, i) => { const prefs = EXPECT[D.strata[s.k].id] || []; prefs.forEach((tid, j) => { if (topicNodes[tid]) flows.push({s, t:topicNodes[tid], ph:(i*.137 + j*.33)%1, k:s.k}); }); });
   const flowGeo = new T.BufferGeometry(); const flowPos = new Float32Array(flows.length*3*4), flowCol = new Float32Array(flows.length*3*4);
   flows.forEach((f, i) => { const c = new T.Color(STRATA_C[f.k]); for (let q = 0; q < 4; q++){ const o = (i*4+q)*3; flowCol[o]=c.r*(1-q*.2); flowCol[o+1]=c.g*(1-q*.2); flowCol[o+2]=c.b*(1-q*.2); } f.t.heat++; });
   flowGeo.setAttribute("position", new T.BufferAttribute(flowPos, 3)); flowGeo.setAttribute("color", new T.BufferAttribute(flowCol, 3));
@@ -894,7 +985,7 @@ const scene3d = (() => {
         const m = mat({color:0xF5D49A, emissive:0xE8A33D, emissiveIntensity:1.2});
         const box = new T.Mesh(new T.BoxGeometry(.56,.56,.56), m); box.userData.pick = {kind:"new", id:ch.id, title:ch.from.title};
         const lb = label(ch.id, {size:.24, color:"#1A1306", bg:"rgba(245,212,154,.95)", font:"600 40px 'IBM Plex Mono', monospace"}); lb.position.y = .5; box.add(lb);
-        const src = seats[(ch.from.strata && D.strata.findIndex(s => s.id === ch.from.strata[0])) * 2 % seats.length] || seats[0];
+        const src = seats.find(s => D.strata[s.k].id === ch.from.raised) || seats[0];
         const from = src.pos.clone(); box.position.copy(from); added.add(box);
         tween(1.8, t => { const e = ease(t); bez(from, target, 4, e, box.position); box.rotation.y = e*Math.PI*2; }, idx*.35);
       } else if (ch.op === "remove") {
@@ -934,7 +1025,8 @@ const scene3d = (() => {
     lentes:     {cam:V(0,7.4,16.5), look:V(0,4.6,1.5), show:{ring:.5, floor:1, tower:.55, topics:.35, lenses:1, dust:1}},
     deliberacao:{cam:V(11,9.5,12.5), look:V(0,1.6,0), show:{ring:1, floor:1, tower:.8, arcs:1, dust:1}},
     ramos:      {cam:V(14,9,13), look:V(0,4.4,0), show:{ring:1, floor:1, tower:.45, branches:1, dust:1}},
-    revisao:    {cam:V(5.2,5.6,7.6), look:V(0,3,0), show:{ring:.6, floor:1, tower:1, dust:1}},
+    estratos:   {cam:V(0,11,14.5), look:V(0,.6,0), show:{ring:1, floor:1, tower:.3, dust:1}},
+    revisao:    {cam:V(3.5,9.5,12.5), look:V(0,2,0), show:{ring:1, floor:1, tower:1, dust:1}},
     iteracao:   {cam:V(12,22,13.5), look:V(0,20.5,0), show:{spiral:1, floor:.6, tower:.6, ring:.4, dust:1}},
     fim:        {cam:V(0,24,38), look:V(0,7,0), show:{ring:1, floor:1, tower:1, spiral:1, topics:.6, dust:1}},
   };
@@ -943,6 +1035,7 @@ const scene3d = (() => {
   const orbit = {yaw:0, pitch:0, zoom:1, drift:0};
   api.enter = id => {
     current = id; const sc = SCENES[id] || SCENES.modelo;
+    api.recolorSeats();
     Object.values(boxes).forEach(b => { if (!b.modified) b.m.emissiveIntensity = b.inferred ? .08 : .2; });
     Object.keys(G).forEach(k => { if (k !== "added") G[k].userData.target = sc.show[k] || 0; });
     orbit.yaw = 0; orbit.pitch = 0; orbit.zoom = 1; orbit.drift = 0;
@@ -968,7 +1061,7 @@ const scene3d = (() => {
   canvas.addEventListener("dblclick", () => { orbit.yaw = 0; orbit.pitch = 0; orbit.zoom = 1; });
   function pick(e){
     const s = STEPS[state.step]; if (!s || !s.pick || !document.body.classList.contains("touring")) return null;
-    const pool = []; const want = {tower:["tower","added"], ring:["ring"], topics:["topics"], branches:["branches"]}[s.pick] || [];
+    const pool = []; const want = {tower:["tower","added"], ring:["ring"], topics:["topics"], branches:["branches"], seats:["ring","tower","added"]}[s.pick] || [];
     want.forEach(k => G[k] && G[k].visible && G[k].traverse(o => { if (o.userData.pick && o.isMesh) pool.push(o); }));
     const r = canvas.getBoundingClientRect(); ndc.set((e.clientX - r.left)/r.width*2 - 1, -((e.clientY - r.top)/r.height)*2 + 1);
     ray.setFromCamera(ndc, camera); const hit = ray.intersectObjects(pool, false)[0];
@@ -1015,6 +1108,8 @@ const scene3d = (() => {
       G.swarm.rotation.y += dt*.25; swGeo.attributes.position.needsUpdate = true;
     }
     // ambient motion
+    if (G.ring.visible) seats.forEach((s, i) => { const want = (s.target || 1) * (s.lit && !REDUCE ? 1 + Math.sin(t*3 + i*.7)*.06 : 1);
+      s.mesh.scale.setScalar(s.mesh.scale.x + (want - s.mesh.scale.x)*Math.min(1, dt*5)); });
     if (G.tower.visible) { spine.material.emissiveIntensity = 1 + Math.sin(t*2)*.3; }
     if (G.veil.visible) G.veil.userData.spin.rotation.y += dt*.2;
     if (G.topics.visible) Object.values(topicNodes).forEach((n, i) => { n.node.rotation.y += dt*.8;

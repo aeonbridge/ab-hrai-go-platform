@@ -382,3 +382,80 @@ def test_two_iterations_with_a_human_in_the_loop(tmp_path, capsys):
     assert not (covered & still_gap)  # accepted topics are no longer gaps
     rc = cli_main(["govern", "diff", str(MODEL), str(v1_path)])
     assert rc == 0 and "added" in capsys.readouterr().out
+
+
+# ------------------------------------------------- per-stratum positions (no false consensus)
+def _seat_of(eng, stratum, n=0):
+    return [s for s in eng.roster.seats if s.stratumId == stratum][n]
+
+
+def _turn(*actions):
+    return {"actions": list(actions), "insufficientGrounding": False, "notes": ""}
+
+
+def test_packet_shows_every_stratum_position_in_its_own_words():
+    eng = _engine(seats=16)
+    author, backer = _seat_of(eng, "civilSociety"), _seat_of(eng, "workers")
+    critic_, editor = _seat_of(eng, "business"), _seat_of(eng, "research")
+    eng._apply(author, "R1", _turn(_action(lens="expectation", topic="participation", text="participação social " * 3)))
+    eng._apply(author, "R2", _turn(_action(lens="omission", change="add", topic="participation",
+                                           text="Falta um canal permanente de participação social.")))
+    fid = next(c.id for c in eng.claims.values() if c.lens == "omission")
+    eng._apply(backer, "R3", _turn(_action(action="support", targetClaimId=fid,
+                                           text="Trabalhadores precisam de assento onde a IA muda o trabalho.")))
+    eng._apply(critic_, "R3", _turn(_action(action="challenge", targetClaimId=fid,
+                                            text="Mais um conselho consultivo atrasa decisões sem mudar resultado.")))
+    eng._apply(editor, "R5", _turn(_action(action="proposeAmendment", targetClaimId=fid, change="add",
+                                           topic="participation", text="Participação com prazo e devolutiva pública.")))
+    packet = gv.build_packet(eng)
+    prop = next(p for p in packet["proposals"] if p["claimId"] == fid)
+    rows = {r["stratumId"]: r for r in prop["stratumPositions"]}
+    assert len(rows) == 8 and set(rows) == {s["stratumId"] for s in packet["strata"]}
+    assert rows["civilSociety"]["stance"] == "for"
+    assert rows["workers"]["stance"] == "for" and "assento" in rows["workers"]["statements"][0]["text"]
+    assert rows["business"]["stance"] == "against" and "atrasa" in rows["business"]["statements"][0]["text"]
+    assert rows["research"]["stance"] == "amend"
+    assert rows["regulators"]["stance"] == "silent" and rows["regulators"]["statements"] == []
+    spread = prop["positionSpread"]
+    assert spread["contested"] and set(spread["for"]) == {"civilSociety", "workers"} and spread["against"] == ["business"]
+    persp = {sp["stratumId"]: sp for sp in packet["strataPerspectives"]}
+    assert persp["business"]["aloneAgainst"] == [prop["proposalId"]]
+    assert persp["civilSociety"]["authored"] == [prop["proposalId"]]
+    assert persp["civilSociety"]["blindExpectations"][0]["topic"] == "participation"
+    sheet = gv.render_sheet(packet)
+    assert "Cada estrato, sua leitura" in sheet and "| Empresas / startups | contra |" in sheet
+    assert "contestada" in sheet and "Um estrato calado não concorda" in sheet
+
+
+def test_split_stratum_and_supports_on_revised_versions():
+    eng = _engine(seats=16)
+    author = _seat_of(eng, "civilSociety")
+    pro, con = _seat_of(eng, "business", 0), _seat_of(eng, "business", 1)
+    eng._apply(author, "R2", _turn(_action(lens="omission", change="add", topic="participation")))
+    fid = next(iter(eng.claims))
+    eng._apply(pro, "R3", _turn(_action(action="support", targetClaimId=fid, text="apoio com ressalva de custo " * 2)))
+    eng._apply(con, "R3", _turn(_action(action="challenge", targetClaimId=fid, text="custo de conformidade alto " * 2)))
+    eng._apply(author, "R4", _turn(_action(action="revise", targetClaimId=fid, text="versão revisada com prazo " * 2)))
+    rid = eng.claims[fid].supersededBy
+    packet = gv.build_packet(eng)
+    prop = next(p for p in packet["proposals"] if p["claimId"] == rid)
+    row = next(r for r in prop["stratumPositions"] if r["stratumId"] == "business")
+    assert row["stance"] == "split" and row["seatsSpoke"] == 2
+    assert all(st["onEarlierVersion"] for st in row["statements"])
+
+
+def test_merge_pools_findings_and_flags_unstable_stances():
+    def rows(stance_by_stratum):
+        return [{"stratumId": k, "label": k, "stance": v, "seatsTotal": 2, "seatsSpoke": int(v != "silent"),
+                 "seatStances": {} if v == "silent" else {f"agent:{k}-01": v}, "statements": []}
+                for k, v in stance_by_stratum.items()]
+    a1 = _prop("P1", "omission", "add", topic="participation", stratumPositions=rows({"workers": "for", "business": "silent"}))
+    a2 = _prop("P2", "omission", "add", topic="participation", stratumPositions=rows({"workers": "silent", "business": "against"}))
+    b1 = _prop("P1", "omission", "add", topic="participation", stratumPositions=rows({"workers": "for", "business": "silent"}))
+    strata = [{"stratumId": "workers", "label": "workers", "seats": 2}, {"stratumId": "business", "label": "business", "seats": 2}]
+    m = gv.merge_packets([_packet(packetId="a", strata=strata, proposals=[a1, a2]),
+                          _packet(packetId="b", runIds=["r2"], strata=strata, proposals=[b1])])
+    pos = {r["stratumId"]: r for r in m["proposals"][0]["stratumPositions"]}
+    assert pos["workers"]["stance"] == "for"  # pooled within replicate 1, held in replicate 2
+    assert pos["business"]["stance"] == "variesAcrossReplicates" and pos["business"]["byReplicate"] == {"1": "against", "2": "silent"}
+    assert [sp["stratumId"] for sp in m["strataPerspectives"]] == ["workers", "business"]

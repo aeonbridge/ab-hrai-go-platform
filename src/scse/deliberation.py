@@ -47,6 +47,7 @@ class Claim:
     targetClaimId: str | None = None
     branchId: str | None = None
     supporters: list[str] = field(default_factory=list)
+    supportNotes: list[dict] = field(default_factory=list)   # {agentId, stratumId, roundId, text}: why they back it
     challengedBy: list[str] = field(default_factory=list)
     amendedBy: list[str] = field(default_factory=list)
     supersededBy: str | None = None
@@ -405,12 +406,15 @@ class DeliberationEngine:
             elif kind == "support":
                 if seat.agentId not in target.supporters:
                     target.supporters.append(seat.agentId)
+                target.supportNotes.append({"agentId": seat.agentId, "stratumId": seat.stratumId,
+                                            "roundId": round_id, "text": action["text"]})
             elif kind == "withdraw":
                 target.status = "withdrawn"
             elif kind == "requestEvidence":
                 self.questions.append({"agentId": seat.agentId, "roundId": round_id, "text": action["text"]})
             elif kind == "submitMinorityOpinion":
-                self.minority.append({"claimId": target_id, "agentId": seat.agentId, "rationale": action["text"],
+                self.minority.append({"claimId": target_id, "agentId": seat.agentId, "stratumId": seat.stratumId,
+                                      "roundId": round_id, "rationale": action["text"],
                                       "sourceIds": valid_src})
             self.ledger.emit("claim.challenged" if kind == "challenge" else "action.accepted",
                              round_id=round_id, agent_id=seat.agentId, action=kind,

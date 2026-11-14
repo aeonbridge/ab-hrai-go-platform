@@ -33,6 +33,12 @@ LEGAL_GUARD = {"effective", "enactedNotEffective"}  # changing these needs a rec
 COMPONENT_KINDS = ("principle", "institution", "instrument", "mechanism", "resource", "metric")
 
 
+NOTICE = ("Propostas levantadas por assentos de um conselho sintético, a decidir por pessoas. O conselho não "
+          "delibera uma resposta única: cada proposta traz a posição de cada estrato, inclusive os que contestaram "
+          "ou ficaram calados. Apoio de assentos é procedência do argumento, não voto, e não substitui evidência "
+          "nem revisão jurídica.")
+
+
 class GovernanceError(ValueError):
     pass
 
@@ -241,11 +247,168 @@ def proposal_key(p: dict) -> str:
     return f"{p['lens']}|{p['change']}|{anchor}"
 
 
+# ------------------------------------------------------------- stratum positions
+# The council does not vote and does not reach a collective answer. Each proposal is shown with
+# where every stratum stood on it (for / against / amend / split / silent), in its own words,
+# so reviewers see the disagreement instead of a seat count that reads like a verdict.
+STANCES = ("for", "against", "amend", "split", "silent", "notSeated")
+STANCE_LABEL = {"for": "a favor", "against": "contra", "amend": "propõe ajuste", "split": "dividido",
+                "silent": "sem posição", "notSeated": "sem assento", "variesAcrossReplicates": "varia entre réplicas"}
+ROUND_ORDER = {f"R{i}": i for i in range(9)}
+
+
+def strata_meta(engine) -> list[dict]:
+    """Every stratum the world pack defines, plus any stratum that only appears on a seat."""
+    seats_by: dict[str, list] = defaultdict(list)
+    for s in engine.roster.seats:
+        seats_by[s.stratumId].append(s)
+    meta, seen = [], set()
+    for st in engine.snapshot.world.get("strata", []):
+        seen.add(st["id"])
+        meta.append({"stratumId": st["id"], "label": st.get("label") or st.get("name") or st["id"],
+                     "seats": [s.agentId for s in seats_by.get(st["id"], [])],
+                     "providers": sorted({s.provider for s in seats_by.get(st["id"], [])})})
+    for sid, seats in seats_by.items():
+        if sid not in seen:
+            meta.append({"stratumId": sid, "label": sid, "seats": [s.agentId for s in seats],
+                         "providers": sorted({s.provider for s in seats})})
+    return meta
+
+
+def _lineage(claims: dict, c) -> list:
+    """The claim and the earlier versions it revised (newest first)."""
+    out, cur = [c], c
+    while cur.kind == "revision" and cur.targetClaimId in claims:
+        cur = claims[cur.targetClaimId]
+        out.append(cur)
+    return out
+
+
+def _statements(engine, c) -> list[dict]:
+    """Every public statement any seat made about this finding, in deliberation order."""
+    claims = engine.claims
+    seat_info = {s.agentId: s for s in engine.roster.seats}
+    out = []
+
+    def add(agent, stratum, stance, rnd, text, claim_id=None, earlier=False, **extra):
+        seat = seat_info.get(agent)
+        out.append({"agentId": agent, "stratumId": stratum, "provider": seat.provider if seat else None,
+                    "stance": stance, "roundId": rnd, "claimId": claim_id, "text": text,
+                    "onEarlierVersion": earlier, **extra})
+
+    for depth, v in enumerate(_lineage(claims, c)):
+        earlier = depth > 0
+        add(v.agentId, v.stratumId, "for", v.roundId, v.text, v.id, earlier, role="author")
+        for n in v.supportNotes:
+            add(n["agentId"], n["stratumId"], "for", n["roundId"], n["text"], None, earlier, role="support")
+        for n in v.supporters:  # supports recorded before supportNotes existed
+            if not any(x["agentId"] == n for x in v.supportNotes) and n in seat_info:
+                add(n, seat_info[n].stratumId, "for", v.roundId, "", None, earlier, role="support")
+        for x in v.challengedBy:
+            ch = claims[x]
+            if ch.status != "withdrawn":
+                add(ch.agentId, ch.stratumId, "against", ch.roundId, ch.text, ch.id, earlier, role="challenge")
+        for x in v.amendedBy:
+            am = claims[x]
+            if am.status == "active":
+                add(am.agentId, am.stratumId, "amend", am.roundId, am.text, am.id, earlier, role="amendment",
+                    change=am.change, componentId=am.componentId)
+    ids = {v.id for v in _lineage(claims, c)}
+    for m in engine.minority:
+        if m["claimId"] in ids:
+            prior = [s for s in out if s["agentId"] == m["agentId"]]
+            stance = prior[-1]["stance"] if prior else "against"
+            add(m["agentId"], m.get("stratumId") or getattr(seat_info.get(m["agentId"]), "stratumId", "?"),
+                stance, m.get("roundId", "R7"), m["rationale"], None, False, role="minorityOpinion")
+    out.sort(key=lambda s: (ROUND_ORDER.get(s["roundId"], 99), s["onEarlierVersion"] is False))
+    return out
+
+
+def stratum_positions(meta: list[dict], statements: list[dict]) -> list[dict]:
+    """One row per stratum. A seat's stance is its latest statement; a stratum is 'split' when its
+    seats disagree and 'silent' when none of its seats said anything about the finding."""
+    rows = []
+    for st in meta:
+        mine = [s for s in statements if s["stratumId"] == st["stratumId"]]
+        last: dict[str, str] = {}
+        for s in mine:
+            last[s["agentId"]] = s["stance"]
+        stances = set(last.values())
+        if not st["seats"]:
+            stance = "notSeated"
+        elif not stances:
+            stance = "silent"
+        elif len(stances) == 1:
+            stance = stances.pop()
+        else:
+            stance = "split"
+        rows.append({"stratumId": st["stratumId"], "label": st["label"], "stance": stance,
+                     "seatsTotal": len(st["seats"]), "seatsSpoke": len(last),
+                     "seatStances": dict(sorted(last.items())),
+                     "statements": [{k: s[k] for k in ("agentId", "provider", "stance", "role", "roundId",
+                                                       "claimId", "text", "onEarlierVersion") if k in s}
+                                    for s in mine]})
+    return rows
+
+
+def position_spread(rows: list[dict]) -> dict:
+    spread = {k: [] for k in ("for", "against", "amend", "split", "silent", "notSeated", "variesAcrossReplicates")}
+    for r in rows:
+        spread.setdefault(r["stance"], []).append(r["stratumId"])
+    spread = {k: v for k, v in spread.items() if v}
+    spoke = [r for r in rows if r["stance"] not in ("silent", "notSeated")]
+    spread["contested"] = bool(spread.get("against") or spread.get("split"))
+    spread["onlyAuthorStratum"] = len(spoke) == 1 and spoke[0]["stance"] == "for"
+    return spread
+
+
+def strata_perspectives(meta: list[dict], proposals: list[dict], expectations: dict[str, list[dict]],
+                        minority: list[dict]) -> list[dict]:
+    """Per-stratum reading of the whole round: what it expected blind (R1), what it raised, what it
+    backed, contested or wanted changed, and where it stood alone. No synthesis across strata."""
+    out = []
+    for st in meta:
+        sid = st["stratumId"]
+        pos = {k: [] for k in ("for", "against", "amend", "split", "silent", "variesAcrossReplicates")}
+        alone_for, alone_against, authored = [], [], []
+        for p in proposals:
+            row = next((r for r in p.get("stratumPositions", []) if r["stratumId"] == sid), None)
+            if row is None or row["stance"] == "notSeated":
+                continue
+            pos.setdefault(row["stance"], []).append(p["proposalId"])
+            if p["author"]["stratumId"] == sid:
+                authored.append(p["proposalId"])
+            others = [r for r in p["stratumPositions"] if r["stratumId"] != sid]
+            if row["stance"] == "for" and not any(r["stance"] == "for" for r in others):
+                alone_for.append(p["proposalId"])
+            if row["stance"] == "against" and not any(r["stance"] == "against" for r in others):
+                alone_against.append(p["proposalId"])
+        out.append({"stratumId": sid, "label": st["label"], "seats": len(st["seats"]),
+                    "providers": st.get("providers", []),
+                    "blindExpectations": expectations.get(sid, []),
+                    "authored": authored,
+                    "positions": {k: v for k, v in pos.items() if v},
+                    "aloneFor": alone_for, "aloneAgainst": alone_against,
+                    "minorityOpinions": [{"claimId": m["claimId"], "rationale": m["rationale"]}
+                                         for m in minority if m.get("stratumId") == sid]})
+    return out
+
+
+def _blind_expectations(engine) -> dict[str, list[dict]]:
+    out: dict[str, list[dict]] = defaultdict(list)
+    for c in sorted(engine.claims.values(), key=lambda x: x.id):
+        if c.lens == "expectation" and c.status != "withdrawn":
+            out[c.stratumId].append({"agentId": c.agentId, "topic": c.topic or "other", "title": c.title,
+                                     "text": c.text})
+    return dict(out)
+
+
 def build_packet(engine) -> dict:
     """Revision packet from one finished run (engine is a GovernanceEngine)."""
     b: GovernanceBundle = engine.snapshot.governance
     sc = engine.snapshot.scenario
     seat_info = {s.agentId: s for s in engine.roster.seats}
+    meta = strata_meta(engine)
     claims = engine.claims
     findings = [c for c in claims.values()
                 if c.visibility == "public" and c.lens in LENSES and c.kind in ("thesis", "revision")
@@ -282,6 +445,9 @@ def build_packet(engine) -> dict:
             "minorityOpinion": any(m["claimId"] == c.id for m in engine.minority),
             "requiresLegalReview": guard,
             "decision": None})
+        rows = stratum_positions(meta, _statements(engine, c))
+        proposals[-1]["stratumPositions"] = rows
+        proposals[-1]["positionSpread"] = position_spread(rows)
     expectations = engine.expectations()
     matrix = coverage_matrix(b.model, b.taxonomy, expectations)
     seeds = []
@@ -301,11 +467,12 @@ def build_packet(engine) -> dict:
         "runIds": [engine.run_id], "scenarioId": sc["scenarioId"], "asOfDate": sc["asOfDate"],
         "modelId": b.model["modelId"], "modelVersion": b.model["version"], "contextId": b.context["contextId"],
         "councilNature": "synthetic",
-        "notice": ("Propostas de um conselho sintético, a decidir por pessoas. O apoio de assentos sintéticos é "
-                   "procedência do argumento, não voto, e não substitui evidência nem revisão jurídica."),
+        "notice": NOTICE,
+        "strata": [{k: st[k] for k in ("stratumId", "label")} | {"seats": len(st["seats"])} for st in meta],
         "coverageMatrix": matrix, "seedTensions": seeds, "proposals": proposals,
-        "minorityOpinions": [{"claimId": m["claimId"], "agentId": m["agentId"], "rationale": m["rationale"]}
-                             for m in engine.minority],
+        "strataPerspectives": strata_perspectives(meta, proposals, _blind_expectations(engine), engine.minority),
+        "minorityOpinions": [{"claimId": m["claimId"], "agentId": m["agentId"], "stratumId": m.get("stratumId"),
+                              "rationale": m["rationale"]} for m in engine.minority],
     }
 
 
@@ -358,6 +525,10 @@ def merge_packets(packets: list[dict]) -> dict:
                   "sourceClaims": [f"{packets[i - 1]['runIds'][0]}:{p['claimId']}" for i, p in items],
                   "requiresLegalReview": any(p["requiresLegalReview"] for _, p in items),
                   "weakEvidence": all(p["weakEvidence"] for _, p in items)})
+        m["raisedBy"] = sorted({p["author"]["stratumId"] for _, p in items})
+        if any(p.get("stratumPositions") for _, p in items):
+            m["stratumPositions"] = _merge_positions(items)
+            m["positionSpread"] = position_spread(m["stratumPositions"])
         merged.append(m)
     merged.sort(key=lambda m: (-m["replicateCount"], -m["support"]["seats"], m["key"]))
     for i, m in enumerate(merged, 1):
@@ -381,13 +552,62 @@ def merge_packets(packets: list[dict]) -> dict:
             x["findingsByReplicate"].append(s["findings"])
             x["expectationSeatsByReplicate"].append(s.get("expectationSeats", 0))
     first = packets[0]
+    meta = _merged_meta(packets)
+    blind: dict[str, list[dict]] = defaultdict(list)
+    for i, pk in enumerate(packets, 1):
+        for sp in pk.get("strataPerspectives", []):
+            blind[sp["stratumId"]] += [{**e, "replicate": i} for e in sp["blindExpectations"]]
+    minority = [m for p in packets for m in p["minorityOpinions"]]
     return {"packetId": "merge:" + sha256_json([p["packetId"] for p in packets])[:12], "kind": "revisionPacket",
             "merged": True, "status": "pendingHumanReview", "runIds": [r for p in packets for r in p["runIds"]],
             "replicates": n, "scenarioId": first["scenarioId"], "asOfDate": first["asOfDate"],
             "modelId": first["modelId"], "modelVersion": first["modelVersion"], "contextId": first["contextId"],
             "councilNature": "synthetic", "notice": first["notice"],
+            "strata": [{"stratumId": m["stratumId"], "label": m["label"], "seats": len(m["seats"])} for m in meta],
             "coverageMatrix": list(cov.values()), "seedTensions": list(seeds.values()),
-            "proposals": merged, "minorityOpinions": [m for p in packets for m in p["minorityOpinions"]]}
+            "proposals": merged,
+            "strataPerspectives": strata_perspectives(meta, merged, blind, minority) if meta else [],
+            "minorityOpinions": minority}
+
+
+def _merged_meta(packets: list[dict]) -> list[dict]:
+    """Strata of a merge; seat counts are the per-replicate maximum (seats are re-drawn per replicate)."""
+    meta: dict[str, dict] = {}
+    for pk in packets:
+        for st in pk.get("strata", []):
+            m = meta.setdefault(st["stratumId"], {"stratumId": st["stratumId"], "label": st["label"], "n": 0})
+            m["n"] = max(m["n"], st["seats"])
+    return [{"stratumId": k, "label": v["label"], "seats": [None] * v["n"]} for k, v in meta.items()]
+
+
+def _merge_positions(items: list[tuple[int, dict]]) -> list[dict]:
+    """Stance of each stratum on the merged proposal. Within a replicate, several findings can share a
+    key; their seat stances are pooled. Across replicates a stratum keeps a stance only if it held it in
+    every replicate where the proposal appeared; otherwise it is 'variesAcrossReplicates'."""
+    by: dict[str, dict] = {}
+    for i, p in items:
+        for r in p.get("stratumPositions", []):
+            x = by.setdefault(r["stratumId"], {"stratumId": r["stratumId"], "label": r["label"], "seatsTotal": 0,
+                                               "statements": [], "_rep": defaultdict(dict)})
+            x["seatsTotal"] = max(x["seatsTotal"], r["seatsTotal"])
+            x["statements"] += [{**st, "replicate": i} for st in r["statements"]]
+            seats = x["_rep"][i]
+            for agent, stance in r.get("seatStances", {}).items():
+                seats.setdefault(agent, set()).add(stance)
+    rows = []
+    for x in by.values():
+        rep = x.pop("_rep")
+        reps = sorted({i for i, _ in items})
+        by_rep = {}
+        for i in reps:
+            stances = {st for v in rep.get(i, {}).values() for st in v}
+            by_rep[str(i)] = ("notSeated" if not x["seatsTotal"] else "silent" if not stances
+                              else stances.pop() if len(stances) == 1 else "split")
+        vals = set(by_rep.values())
+        x.update({"byReplicate": by_rep, "stance": vals.pop() if len(vals) == 1 else "variesAcrossReplicates",
+                  "seatsSpoke": max((len(rep.get(i, {})) for i in reps), default=0)})
+        rows.append(x)
+    return rows
 
 
 # ---------------------------------------------------------------------- review sheet
@@ -401,7 +621,10 @@ def render_sheet(packet: dict) -> str:
          "- Cada proposta pede uma decisão humana: `accept`, `modify`, `reject` ou `defer`, com justificativa de pelo menos 20 caracteres para as duas primeiras.",
          "- **Réplicas** mostra em quantas execuções a proposta apareceu. Proposta que aparece em uma só pode ser ruído do modelo.",
          "- **Evidência fraca** e **Revisão jurídica** exigem atenção antes de aceitar.",
+         "- O conselho não chega a uma resposta comum. Leia a tabela de estratos de cada proposta: quem defendeu, quem "
+         "contestou, quem pediu ajuste e quem ficou calado. Um estrato calado não concorda; ele não se pronunciou.",
          "- Ninguém altera o modelo além de você: `scse govern apply` só aplica o que estiver decidido no arquivo de decisões.", ""]
+    L += _render_strata(packet)
     gaps = [r for r in packet["coverageMatrix"] if r.get("gap") or r.get("fragile")]
     L += ["## Cobertura de tópicos esperados", ""]
     if gaps:
@@ -427,7 +650,16 @@ def render_sheet(packet: dict) -> str:
             tag = []
             if p.get("replicateCount"):
                 tag.append(f"réplicas {p['replicateCount']}/{p['of']}")
-            tag.append(f"{p['support']['seats']} assento(s) sintético(s)")
+            spread = p.get("positionSpread") or {}
+            if spread:
+                tag.append(" · ".join(f"{STANCE_LABEL[k]}: {len(v)}" for k, v in spread.items()
+                                      if k in STANCE_LABEL and k != "notSeated") + " estrato(s)")
+                if spread.get("contested"):
+                    tag.append("contestada")
+                if spread.get("onlyAuthorStratum"):
+                    tag.append("só o estrato autor se pronunciou")
+            else:
+                tag.append(f"{p['support']['seats']} assento(s) sintético(s)")
             if p["weakEvidence"]:
                 tag.append("evidência fraca")
             if p["requiresLegalReview"]:
@@ -441,13 +673,28 @@ def render_sheet(packet: dict) -> str:
                 target += f" ({p['componentTitle']})"
             L += [f"### {p['proposalId']} · {p['change']} · {target}", "",
                   f"**{p.get('proposedTitle') or p['title']}**", "", p.get("proposedDescription") or p["text"], "",
+                  f"- Levantada por: {', '.join(p.get('raisedBy') or [p['author']['stratumId']])}",
                   f"- Sinais: {'; '.join(tag)}",
-                  f"- Estratos: {', '.join(p.get('strataUnion') or p['support']['strata'])}",
                   f"- Fontes: {', '.join(p['sourceIds']) or 'nenhuma válida'}"
                   + (f" · traços de contexto: {', '.join(p['contextFeatureIds'])}" if p["contextFeatureIds"] else "")
                   + (f" · tensões: {', '.join(p['tensionIds'])}" if p["tensionIds"] else "")]
-            for ch in p["challenges"][:3]:
-                L.append(f"- Contestação ({ch['stratumId']}): {ch['text'][:300]}")
+            if p.get("stratumPositions"):
+                L += ["", "| Estrato | Posição | Assentos | Argumento |", "|---|---|---|---|"]
+                for r in p["stratumPositions"]:
+                    if r["stance"] == "notSeated":
+                        continue
+                    pos = STANCE_LABEL.get(r["stance"], r["stance"])
+                    if r.get("byReplicate"):
+                        pos += " (" + ", ".join(f"r{k}: {STANCE_LABEL.get(v, v)}" for k, v in r["byReplicate"].items()) + ")"
+                    said = [st for st in r["statements"] if st.get("text")]
+                    arg = " / ".join(f"{STANCE_LABEL.get(st['stance'], st['stance'])}: {_cell(st['text'], 220)}"
+                                     + (" (versão anterior)" if st.get("onEarlierVersion") else "")
+                                     for st in said[-2:]) or "-"
+                    L.append(f"| {r['label']} | {pos} | {r['seatsSpoke']}/{r['seatsTotal']} | {arg} |")
+                L.append("")
+            else:
+                for ch in p["challenges"][:3]:
+                    L.append(f"- Contestação ({ch['stratumId']}): {ch['text'][:300]}")
             for br in p["branchAssessments"][:4]:
                 L.append(f"- Sob `{br['branchId']}`: {br['text'][:240]}")
             L += ["", "Decisão: [ ] accept   [ ] modify   [ ] reject   [ ] defer", ""]
@@ -455,6 +702,41 @@ def render_sheet(packet: dict) -> str:
         L += ["## Dissenso registrado", ""]
         L += [f"- {m['claimId']}: {m['rationale'][:300]}" for m in packet["minorityOpinions"]]
     return "\n".join(L) + "\n"
+
+
+def _cell(text: str, n: int) -> str:
+    t = " ".join(text.split()).replace("|", "/")
+    return t if len(t) <= n else t[: n - 1] + "…"
+
+
+def _render_strata(packet: dict) -> list[str]:
+    persp = packet.get("strataPerspectives") or []
+    if not persp:
+        return []
+    L = ["## Cada estrato, sua leitura", "",
+         "Cada estrato aparece com a própria leitura. Não há síntese entre eles: divergência é informação para "
+         "quem decide, não ruído a eliminar.", ""]
+    for sp in persp:
+        if not sp["seats"]:
+            L += [f"### {sp['label']} (`{sp['stratumId']}`)", "", "Sem assento nesta rodada.", ""]
+            continue
+        pos = sp["positions"]
+        topics = sorted({e["topic"] for e in sp["blindExpectations"]})
+        L += [f"### {sp['label']} (`{sp['stratumId']}`)", "",
+              f"- Assentos: {sp['seats']} · modelos: {', '.join(sp['providers']) or '-'}",
+              f"- Esperava às cegas (R1): {', '.join(topics) or 'nada registrado'}",
+              f"- Levantou: {', '.join(sp['authored']) or '-'}",
+              f"- A favor: {', '.join(pos.get('for', [])) or '-'} · contra: {', '.join(pos.get('against', [])) or '-'}"
+              f" · ajuste: {', '.join(pos.get('amend', [])) or '-'} · dividido: {', '.join(pos.get('split', [])) or '-'}",
+              f"- Sem posição em {len(pos.get('silent', []))} proposta(s)"]
+        if sp["aloneFor"]:
+            L.append(f"- Único estrato a favor: {', '.join(sp['aloneFor'])}")
+        if sp["aloneAgainst"]:
+            L.append(f"- Único estrato contra: {', '.join(sp['aloneAgainst'])}")
+        for m in sp["minorityOpinions"][:3]:
+            L.append(f"- Opinião minoritária ({m['claimId']}): {_cell(m['rationale'], 240)}")
+        L.append("")
+    return L
 
 
 def decisions_template(packet: dict, model: dict) -> dict:

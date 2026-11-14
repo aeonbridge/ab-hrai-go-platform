@@ -66,6 +66,31 @@ As tensões iniciais são **sementes**: o conselho confirma, refuta ou reformula
 
 **Matriz de cobertura** (calculada em código): para cada tópico, quantos assentos o esperavam e como o modelo o cobre: `documentedInForce`, `documentedProposedOnly`, `inferredOnly` ou `none`. **Lacuna** = esperado e sem cobertura. **Frágil** = coberto só por projeto de lei ou só por tópicos que são leitura do autor do modelo.
 
+## Sem falso consenso: a posição de cada estrato
+
+O conselho **não delibera uma resposta única**. Uma proposta é levantada por um assento e cada estrato reage a ela, ou não. O pacote de revisão mostra essas reações lado a lado, sem somá-las num veredito.
+
+Cada proposta traz `stratumPositions`, uma linha para cada estrato do *world pack* (os 8, inclusive os que não disseram nada):
+
+| Posição | Quando |
+|---|---|
+| `for` (a favor) | todos os assentos do estrato que se pronunciaram são autores ou apoiadores |
+| `against` (contra) | todos contestaram |
+| `amend` (propõe ajuste) | todos propuseram emenda |
+| `split` (dividido) | os assentos do estrato divergem entre si |
+| `silent` (sem posição) | nenhum assento do estrato se pronunciou. **Não significa concordância** |
+| `notSeated` (sem assento) | o estrato não teve assento nesta execução |
+
+A posição de um assento é a última que ele tomou na rodada. Cada linha guarda os argumentos no texto original (`statements`: autoria, apoio, contestação, emenda, opinião minoritária), com rodada, modelo e a marca `onEarlierVersion` quando o argumento se referia a uma versão anterior da tese, revisada na R4. O apoio agora registra a justificativa de quem apoiou (`supportNotes`), que antes se perdia.
+
+`positionSpread` resume quem está em cada posição, se a proposta foi contestada e se só o estrato autor se pronunciou.
+
+O pacote também traz `strataPerspectives`, a leitura de cada estrato sobre a rodada inteira: o que esperava às cegas na R1, o que levantou, o que apoiou, contestou ou quis ajustar, onde ficou sozinho (`aloneFor`, `aloneAgainst`) e suas opiniões minoritárias. Não há síntese entre estratos.
+
+No merge de réplicas, achados com a mesma chave numa réplica têm as posições somadas por assento. Um estrato só mantém a posição se a teve em todas as réplicas em que a proposta apareceu; senão fica `variesAcrossReplicates`, com a posição de cada réplica em `byReplicate`. Posição instável entre réplicas é sinal de que ela depende do sorteio de modelo e ordem de fala, não do estrato.
+
+A folha de revisão abre com a seção **Cada estrato, sua leitura** e mostra, em cada proposta, uma tabela estrato × posição × argumento.
+
 ## Revisão humana
 
 ```bash
@@ -103,7 +128,7 @@ Cada decisão tem `decision` (`accept`, `modify`, `reject`, `defer` ou `null` pa
 ## Como ler uma proposta
 
 1. **Réplicas.** Proposta presente em 3 de 3 execuções é mais robusta; em 1 de 3 pode ser ruído. É o filtro mais barato que há.
-2. **Estratos e provedores.** Apoio de um só estrato ou de um só provedor sugere viés de perspectiva ou de modelo.
+2. **Tabela de estratos.** Leia quem defendeu, quem contestou, quem pediu ajuste e quem ficou calado. Proposta que só o estrato autor defendeu não teve teste. Estrato `split` merece ler os dois argumentos. Apoio de um só provedor sugere viés de modelo.
 3. **Apoio não é voto.** Contagem de assentos sintéticos mede procedência do argumento. Não substitui evidência.
 4. **Evidência fraca.** Citação fora do pacote foi removida e a tese rebaixada a hipótese.
 5. **Genérica.** Achado Q3 que serviria a qualquer país não é vantagem distintiva.
