@@ -4,8 +4,10 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from pathlib import Path
 
 from .config import ConfigError, ModelConfig, parse_set_option
+from .governance import GovernanceError
 from .world import ScenarioError, load_scenario, validate
 
 
@@ -56,6 +58,61 @@ def cmd_experiment(args) -> int:
                          workers=args.workers)
     print(f"Resumo: {out['outDir']}/experiment-summary.md")
     return 0
+
+
+def _json(path) -> dict:
+    return json.loads(Path(path).read_text(encoding="utf-8"))
+
+
+def _write(path, value) -> None:
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
+    Path(path).write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def cmd_govern(args) -> int:
+    from . import governance as gv
+
+    cmd = args.govern_cmd
+    if cmd == "validate":
+        taxonomy = gv.load_taxonomy(args.taxonomy) if args.taxonomy else None
+        errors = gv.validate_model(_json(args.model), taxonomy)
+        print(("OK   " if not errors else "FAIL ") + args.model)
+        for e in errors:
+            print("     " + e)
+        return 1 if errors else 0
+    if cmd == "sheet":
+        packets = gv.load_packets(args.packet)
+        packet = packets[0] if len(packets) == 1 else gv.merge_packets(packets)
+        out = Path(args.out or (args.packet if Path(args.packet).is_dir() else Path(args.packet).parent))
+        out.mkdir(parents=True, exist_ok=True)
+        (out / "review-sheet.md").write_text(gv.render_sheet(packet), encoding="utf-8")
+        _write(out / "merged-packet.json", packet)
+        _write(out / "decisions.template.json", gv.decisions_template(packet, _json(args.model)))
+        print(f"{len(packet['proposals'])} propostas de {len(packets)} réplica(s) em {out}")
+        print(f"1) leia {out / 'review-sheet.md'}   2) preencha {out / 'decisions.template.json'}   "
+              f"3) scse govern apply --model {args.model} --packet {out / 'merged-packet.json'} --decisions <arquivo> --out <novo-modelo.json>")
+        return 0
+    if cmd == "apply":
+        taxonomy = gv.load_taxonomy(args.taxonomy) if args.taxonomy else None
+        packets = gv.load_packets(args.packet)
+        packet = packets[0] if len(packets) == 1 else gv.merge_packets(packets)
+        new, log = gv.apply_decisions(_json(args.model), packet, _json(args.decisions),
+                                      new_version=args.new_version, taxonomy=taxonomy)
+        _write(args.out, new)
+        _write(str(args.out) + ".changelog.json", log)
+        print(f"{log['fromVersion']} -> {log['toVersion']} por {', '.join(log['reviewers'])}: "
+              f"{len(log['applied'])} aplicada(s), {len(log['notApplied'])} rejeitada(s)/adiada(s), {len(log['pending'])} pendente(s)")
+        return 0
+    if cmd == "compare":
+        a, b = (gv.load_packets(x) for x in (args.a, args.b))
+        a = a[0] if len(a) == 1 else gv.merge_packets(a)
+        b = b[0] if len(b) == 1 else gv.merge_packets(b)
+        print(json.dumps(gv.compare_packets(a, b), ensure_ascii=False, indent=2))
+        return 0
+    if cmd == "diff":
+        print(json.dumps(gv.diff_models(_json(args.a), _json(args.b)), ensure_ascii=False, indent=2))
+        return 0
+    return 2
 
 
 def cmd_models(args) -> int:
@@ -148,6 +205,30 @@ def build_parser() -> argparse.ArgumentParser:
     e.add_argument("--out", default="runs/experiments")
     e.set_defaults(func=cmd_experiment)
 
+    g = sub.add_parser("govern", help="ciclo de revisão humana do modelo de governança (modo governanceReview)")
+    gs = g.add_subparsers(dest="govern_cmd", required=True)
+    gv_ = gs.add_parser("validate", help="valida um modelo de governança")
+    gv_.add_argument("model")
+    gv_.add_argument("--taxonomy")
+    sh = gs.add_parser("sheet", help="gera a folha de revisão e o modelo de decisões a partir de uma execução")
+    sh.add_argument("packet", help="revision-packet.json, merged-packet.json ou diretório da execução (com rep-*)")
+    sh.add_argument("--model", required=True, help="o modelo avaliado (mesma versão do pacote)")
+    sh.add_argument("--out")
+    ap_ = gs.add_parser("apply", help="aplica DECISÕES HUMANAS e grava a próxima versão do modelo")
+    ap_.add_argument("--model", required=True)
+    ap_.add_argument("--packet", required=True)
+    ap_.add_argument("--decisions", required=True)
+    ap_.add_argument("--out", required=True)
+    ap_.add_argument("--new-version")
+    ap_.add_argument("--taxonomy")
+    cp_ = gs.add_parser("compare", help="compara duas execuções: o que persiste, o que sumiu, o que é novo")
+    cp_.add_argument("a")
+    cp_.add_argument("b")
+    df_ = gs.add_parser("diff", help="diferença entre duas versões do modelo")
+    df_.add_argument("a")
+    df_.add_argument("b")
+    g.set_defaults(func=cmd_govern)
+
     m = sub.add_parser("models", help="list | verify | ping")
     m.add_argument("action", choices=["list", "verify", "ping"])
     m.add_argument("--providers")
@@ -160,7 +241,7 @@ def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
         return args.func(args)
-    except (ConfigError, ScenarioError) as exc:
+    except (ConfigError, ScenarioError, GovernanceError) as exc:
         print(f"erro: {exc}", file=sys.stderr)
         return 2
 

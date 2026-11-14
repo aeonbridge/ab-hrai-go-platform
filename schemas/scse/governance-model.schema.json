@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/scse/schemas/governance-model.schema.json",
+  "title": "SCSE Governance Model v1.0",
+  "description": "A versioned, human-editable description of a national AI governance model at a point in time. The council critiques it; only humans change it (see governance.history).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["modelId", "version", "title", "jurisdiction", "effectiveAsOf", "components"],
+  "properties": {
+    "modelId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{2,79}$"},
+    "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "title": {"type": "string", "minLength": 3},
+    "description": {"type": "string"},
+    "jurisdiction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "name"],
+      "properties": {"code": {"type": "string", "pattern": "^[A-Z]{2}$"}, "name": {"type": "string", "minLength": 2}}
+    },
+    "effectiveAsOf": {"type": "string", "format": "date"},
+    "status": {"enum": ["draft", "underReview", "published"]},
+    "objectives": {"type": "array", "items": {"type": "string"}},
+    "assumptions": {"type": "array", "items": {"type": "string"}},
+    "components": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/component"}},
+    "retiredComponents": {"type": "array", "items": {"$ref": "#/$defs/retired"}},
+    "history": {"type": "array", "items": {"$ref": "#/$defs/historyEntry"}}
+  },
+  "$defs": {
+    "component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "title", "description", "topics", "legalStatus"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{1,63}$"},
+        "kind": {"enum": ["principle", "institution", "instrument", "mechanism", "resource", "metric"]},
+        "title": {"type": "string", "minLength": 3},
+        "description": {"type": "string", "minLength": 10},
+        "topics": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+        "topicsBasis": {
+          "enum": ["documented", "inferred"],
+          "description": "documented = the source states that the component covers the topic; inferred = the model author's reading, to be verified."
+        },
+        "legalStatus": {
+          "enum": ["proposed", "enactedNotEffective", "effective", "suspended", "repealed", "superseded", "unknown", "policy"],
+          "description": "policy = administrative policy or plan, not a statute."
+        },
+        "sourceIds": {"type": "array", "items": {"type": "string"}},
+        "verification": {"enum": ["pending", "verified"]},
+        "origin": {"enum": ["documented", "councilProposed", "humanAuthored"]},
+        "owner": {"type": "string"},
+        "notes": {"type": "string"}
+      }
+    },
+    "retired": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["component", "retiredInVersion", "reason"],
+      "properties": {
+        "component": {"$ref": "#/$defs/component"},
+        "retiredInVersion": {"type": "string"},
+        "reason": {"type": "string", "minLength": 10},
+        "proposalId": {"type": "string"}
+      }
+    },
+    "historyEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "date", "reviewers", "changes"],
+      "properties": {
+        "version": {"type": "string"},
+        "fromVersion": {"type": "string"},
+        "date": {"type": "string", "format": "date"},
+        "reviewers": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 2}},
+        "packetId": {"type": "string"},
+        "runIds": {"type": "array", "items": {"type": "string"}},
+        "note": {"type": "string"},
+        "changes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["op", "proposalId", "decision", "rationale"],
+            "properties": {
+              "op": {"enum": ["add", "modify", "remove", "keep", "none"]},
+              "componentId": {"type": ["string", "null"]},
+              "proposalId": {"type": "string"},
+              "decision": {"enum": ["accept", "modify", "reject", "defer"]},
+              "rationale": {"type": "string"},
+              "legalReview": {"type": ["object", "null"]}
+            }
+          }
+        }
+      }
+    }
+  }
+}

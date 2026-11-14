@@ -66,25 +66,36 @@ class WorldSnapshot:
     seat_plan: dict[str, int]
     snapshot_hash: str
     scenario_path: str | None = None
+    governance: object | None = None   # GovernanceBundle in governanceReview mode
 
     @property
     def evidence_ids(self) -> set[str]:
         ids = {e["id"] for e in self.world.get("evidence", [])}
         ids |= {s["id"] for s in self.scenario.get("regulatorySources", [])}
         ids |= {s["id"] for s in self.scenario.get("contextSources", [])}
+        if self.governance is not None:
+            ids |= set(self.governance.citable())
+            ids |= {i["id"] for i in self.world.get("contextIndicators", [])}
         return ids
 
     def evidence(self, eid: str) -> dict | None:
         for e in self.world.get("evidence", []):
             if e["id"] == eid:
                 return e
+        if self.governance is not None:  # before scenario sources: those carry no excerpt
+            hit = self.governance.citable().get(eid)
+            if hit:
+                return hit
+            for i in self.world.get("contextIndicators", []):
+                if i["id"] == eid:
+                    return {"title": i["name"], "excerpt": f"{i['name']} = {i['value']} {i.get('unit', '')}".strip()}
         for s in self.scenario.get("regulatorySources", []) + self.scenario.get("contextSources", []):
             if s["id"] == eid:
                 return s
         return None
 
     def as_document(self) -> dict:
-        return {
+        doc = {
             "@context": {"scse": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#"},
             "@type": "scse:WorldSnapshot",
             "snapshotHash": self.snapshot_hash,
@@ -92,6 +103,11 @@ class WorldSnapshot:
             "world": self.world,
             "seatPlan": self.seat_plan,
         }
+        if self.governance is not None:
+            g = self.governance
+            doc["governance"] = {"model": g.model, "taxonomyId": g.taxonomy["taxonomyId"],
+                                 "contextId": g.context["contextId"], "context": g.context}
+        return doc
 
 
 def _resolve_world(scenario: dict, scenario_path: Path | None) -> dict:
@@ -132,8 +148,22 @@ def prepare(scenario: dict, *, scenario_path: str | Path | None = None,
     target = seats_override or scenario["council"]["targetSeats"]
     seat_plan = allocate_seats(strata, target)
     frozen = {"scenario": scenario, "world": world, "seatPlan": seat_plan}
+    governance = None
+    if scenario["mode"] == "governanceReview":
+        from .governance import GovernanceError, load_bundle
+        try:
+            governance = load_bundle(scenario, path)
+        except GovernanceError as exc:
+            raise ScenarioError(str(exc)) from exc
+        known = {s["id"] for s in strata}
+        for seed in governance.seeds:
+            for sid in seed.get("strata", []):
+                if sid not in known:
+                    raise ScenarioError(f"seedTensions {seed['id']}: unknown stratum {sid!r}")
+        frozen["governance"] = governance.digest()
     return WorldSnapshot(scenario=scenario, world=world, seat_plan=seat_plan,
-                         snapshot_hash=sha256_json(frozen), scenario_path=str(path) if path else None)
+                         snapshot_hash=sha256_json(frozen), scenario_path=str(path) if path else None,
+                         governance=governance)
 
 
 def load_scenario(path: str | Path) -> dict:

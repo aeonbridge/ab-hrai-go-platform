@@ -53,6 +53,15 @@ class Claim:
     invalidSourceIds: list[str] = field(default_factory=list)
     insufficientGrounding: bool = False
     criticVerdict: str | None = None
+    # governanceReview only (None / empty elsewhere)
+    lens: str | None = None
+    topic: str | None = None
+    componentId: str | None = None
+    change: str | None = None
+    title: str | None = None
+    contextFeatureIds: list[str] = field(default_factory=list)
+    tensionIds: list[str] = field(default_factory=list)
+    genericity: str | None = None
 
 
 @dataclass
@@ -260,7 +269,7 @@ class DeliberationEngine:
                     open_questions=[q["text"] for q in self.questions], max_actions=self.max_actions)
 
     def _run_round(self, round_id: str, round_index: int) -> int:
-        self.ledger.emit("round.started", round_id=round_id, name=prompts.ROUND_INSTRUCTIONS[round_id][0])
+        self.ledger.emit("round.started", round_id=round_id, name=self._round_name(round_id))
         seats = self._speaking_order(round_index)
         if round_id == "R7":
             seats = [s for s in seats if self._turn_inputs(s, "R7")["challenges_to_own"]]
@@ -269,16 +278,16 @@ class DeliberationEngine:
             inputs = self._turn_inputs(seat, round_id)
             if round_id in ("R4",) and not inputs["challenges_to_own"]:
                 continue  # nothing to revise; avoids paying for empty turns
-            system = prompts.system_prompt(seat, self.snapshot)
-            user = prompts.user_prompt(round_id, seat, **inputs)
+            system = self._system_prompt(seat, round_id)
+            user = self._user_prompt(round_id, seat, inputs)
             jobs.append((seat, system, user))
+        schema, validator, schema_name = self._turn_schema()
 
         def work(job):
             seat, system, user = job
             provider = self._provider(seat.provider, seat.profile, seat.spec)
             seed = stable_int(self.seed, seat.agentId, round_id)
-            payload, stats = self._call(provider, system, user, prompts.TURN_SCHEMA, "council_turn",
-                                        _TURN_VALIDATOR, seed)
+            payload, stats = self._call(provider, system, user, schema, schema_name, validator, seed)
             return seat, payload, stats
 
         with ThreadPoolExecutor(max_workers=max(1, self.max_workers)) as pool:
@@ -299,7 +308,36 @@ class DeliberationEngine:
                           "selfDeclaredInsufficientGrounding": payload.get("insufficientGrounding", False)})
             self.turn_stats.append(stats)
         self.ledger.emit("round.completed", round_id=round_id, turns=len(jobs), productiveActions=productive)
+        self._after_round(round_id)
         return productive
+
+    # ----------------------------------------------- extension hooks (see GovernanceEngine)
+    def _round_name(self, round_id: str) -> str:
+        return prompts.ROUND_INSTRUCTIONS[round_id][0]
+
+    def _round_actions(self, round_id: str) -> list[str]:
+        return prompts.ROUND_ACTIONS[round_id]
+
+    def _max_actions(self, round_id: str) -> int:
+        return self.max_actions
+
+    def _system_prompt(self, seat, round_id: str) -> str:
+        return prompts.system_prompt(seat, self.snapshot)
+
+    def _user_prompt(self, round_id: str, seat, inputs: dict) -> str:
+        return prompts.user_prompt(round_id, seat, **inputs)
+
+    def _turn_schema(self):
+        return prompts.TURN_SCHEMA, _TURN_VALIDATOR, "council_turn"
+
+    def _extra_validate(self, seat, round_id: str, action: dict, target) -> str | None:
+        return None
+
+    def _decorate_claim(self, claim, action: dict, target) -> None:
+        return None
+
+    def _after_round(self, round_id: str) -> None:
+        return None
 
     # ------------------------------------------------------------ apply rules
     def _reject(self, seat, round_id, action, reason):
@@ -307,11 +345,11 @@ class DeliberationEngine:
                          action=action.get("action"), reason=reason)
 
     def _apply(self, seat: CouncilSeat, round_id: str, payload: dict) -> tuple[list[str], int]:
-        allowed = set(prompts.ROUND_ACTIONS[round_id])
+        allowed = set(self._round_actions(round_id))
         branch_ids = {b["id"] for b in self.snapshot.scenario["simulation"].get("branches", [])}
         known = self.snapshot.evidence_ids
         accepted, rejected = [], 0
-        for action in payload["actions"][: self.max_actions]:
+        for action in payload["actions"][: self._max_actions(round_id)]:
             kind = action["action"]
             target_id = action.get("targetClaimId")
             target = self.claims.get(target_id) if target_id else None
@@ -330,6 +368,8 @@ class DeliberationEngine:
                 reason = f"invalid branchId {action.get('branchId')!r}"
             elif round_id == "R6" and kind != "abstain" and not action.get("branchId"):
                 reason = "R6 actions must declare branchId"
+            if reason is None:
+                reason = self._extra_validate(seat, round_id, action, target)
             if reason:
                 rejected += 1
                 self._reject(seat, round_id, action, reason)
@@ -354,6 +394,7 @@ class DeliberationEngine:
                               visibility="private" if round_id == "R1" else "public",
                               status="draft" if round_id == "R1" else "active")
                 self.claims[claim_id] = claim
+                self._decorate_claim(claim, action, target)
                 if kind == "challenge":
                     target.challengedBy.append(claim_id)
                 elif kind == "proposeAmendment":

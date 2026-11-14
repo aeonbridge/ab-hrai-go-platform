@@ -85,7 +85,11 @@ def run_scenario(scenario_path: str | Path, config: ModelConfig, opts: RunOption
         roster = compose(snapshot, config, providers=providers, assignment=opts.assignment, mode=opts.mode,
                          seed=int(sim["randomSeed"]), replicate=rep, transport=opts.transport)
         run_id = f"{scenario['scenarioId']}-{label}-r{rep + 1}-{sha256_json([snapshot.snapshot_hash, seed, label])[:8]}"
-        engine = DeliberationEngine(snapshot, roster, config, run_id=run_id, seed=seed, dry_run=opts.dry_run,
+        if scenario["mode"] == "governanceReview":
+            from .governance_engine import GovernanceEngine as engine_cls
+        else:
+            engine_cls = DeliberationEngine
+        engine = engine_cls(snapshot, roster, config, run_id=run_id, seed=seed, dry_run=opts.dry_run,
                                     max_workers=opts.workers, critic=opts.critic, synthesize=opts.synthesize,
                                     transport=opts.transport)
         engine.run()
@@ -97,10 +101,23 @@ def run_scenario(scenario_path: str | Path, config: ModelConfig, opts: RunOption
             limitations.append("IDs de modelo não verificados na API: " + ", ".join(unverified))
         results.append(compile_run(engine, base / f"rep-{rep + 1:02d}", extra_limitations=limitations))
     sens = metrics.sensitivity([r["summary"] for r in results])
+    review = None
+    if scenario["mode"] == "governanceReview":
+        from . import governance
+        merged = governance.merge_packets([r["packet"] for r in results])
+        base.mkdir(parents=True, exist_ok=True)
+        (base / "merged-packet.json").write_text(json.dumps(merged, ensure_ascii=False, indent=2), encoding="utf-8")
+        (base / "review-sheet.md").write_text(governance.render_sheet(merged), encoding="utf-8")
+        (base / "decisions.template.json").write_text(json.dumps(
+            governance.decisions_template(merged, snapshot.governance.model), ensure_ascii=False, indent=2), encoding="utf-8")
+        review = {"mergedPacket": str(base / "merged-packet.json"), "reviewSheet": str(base / "review-sheet.md"),
+                  "decisionsTemplate": str(base / "decisions.template.json"), "proposals": len(merged["proposals"])}
     agg = metrics.aggregate_scorecards([r["scorecard"] for r in results])
     out = {"scenarioId": scenario["scenarioId"], "label": label, "outDir": str(base),
            "snapshotHash": snapshot.snapshot_hash, "sensitivity": sens, "providerScorecard": agg,
            "runs": [r["report"]["runId"] for r in results]}
+    if review:
+        out["review"] = review
     base.mkdir(parents=True, exist_ok=True)
     (base / "sensitivity-report.json").write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
     return out

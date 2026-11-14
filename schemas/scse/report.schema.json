@@ -28,7 +28,8 @@
     "mode": {
       "enum": [
         "regulatoryPolicy",
-        "solutionCompliance"
+        "solutionCompliance",
+        "governanceReview"
       ]
     },
     "asOfDate": {
@@ -137,6 +138,9 @@
       "items": {
         "type": "string"
       }
+    },
+    "governanceReview": {
+      "$ref": "#/$defs/governanceReview"
     }
   },
   "$defs": {
@@ -292,6 +296,111 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "governanceReview": {
+      "type": "object",
+      "required": [
+        "modelId",
+        "modelVersion",
+        "contextId",
+        "asOfDate",
+        "lenses",
+        "coverage",
+        "seedTensions",
+        "proposalCount",
+        "packetFile",
+        "status"
+      ],
+      "properties": {
+        "modelId": {
+          "type": "string"
+        },
+        "modelVersion": {
+          "type": "string"
+        },
+        "contextId": {
+          "type": "string"
+        },
+        "asOfDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "status": {
+          "const": "pendingHumanReview"
+        },
+        "lenses": {
+          "type": "object",
+          "properties": {
+            "omission": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "excess": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "advantage": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "coverage": {
+          "type": "object",
+          "required": [
+            "topicsExpected",
+            "gaps",
+            "fragile"
+          ],
+          "properties": {
+            "topicsExpected": {
+              "type": "integer"
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "fragile": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "seedTensions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "findings"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "findings": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "proposalCount": {
+          "type": "integer"
+        },
+        "packetFile": {
+          "type": "string"
         }
       }
     }

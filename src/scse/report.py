@@ -95,6 +95,16 @@ def compile_run(engine, out_dir: Path, *, extra_limitations: list[str] | None = 
             "Submeter tensões e relatório minoritário a especialistas independentes com rubrica publicada.",
             "Testar hipóteses dos ramos contrafactuais com dados e pessoas reais."],
     }
+    packet = None
+    if sc["mode"] == "governanceReview":
+        from . import governance
+        packet = engine.packet()
+        report["governanceReview"] = governance.report_section(packet)
+        report["limitations"] += [
+            "O conselho só propõe: nenhuma mudança no modelo de governança é aplicada sem decisão de pessoas (scse govern apply).",
+            "As expectativas da R1 são geradas por modelos de linguagem; a matriz de cobertura mede concordância entre assentos sintéticos, não necessidade real.",
+            "Traços de contexto (CF-xx) são hipóteses de trabalho ainda por verificar; achados Q3 dependem deles.",
+        ]
     errors = validate(report, "report")
     if errors:
         raise ValueError("report violates report.schema.json:\n  " + "\n  ".join(errors))
@@ -117,6 +127,12 @@ def compile_run(engine, out_dir: Path, *, extra_limitations: list[str] | None = 
         "note": "Seeds não asseguram determinismo de modelos externos.",
     }
     claims_graph = [vars(c) for c in sorted(engine.claims.values(), key=lambda x: x.id)]
+    if packet is not None:
+        g = engine.snapshot.governance
+        manifest["governance"] = {"modelId": g.model["modelId"], "modelVersion": g.model["version"],
+                                  "contextId": g.context["contextId"], "taxonomyId": g.taxonomy["taxonomyId"],
+                                  "taxonomyVersion": g.taxonomy["version"], "lenses": g.lenses,
+                                  "seedTensions": g.seed_ids, "blindFirstRound": True}
 
     def dump(name, value):
         (out_dir / name).write_text(json.dumps(value, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -132,9 +148,14 @@ def compile_run(engine, out_dir: Path, *, extra_limitations: list[str] | None = 
     dump("provider-scorecard.json", scorecard)
     dump("run-summary.json", summary)
     engine.ledger.write(out_dir / "deliberation-events.jsonl")
+    if packet is not None:
+        from . import governance
+        dump("revision-packet.json", packet)
+        dump("coverage-matrix.json", packet["coverageMatrix"])
+        (out_dir / "review-sheet.md").write_text(governance.render_sheet(packet), encoding="utf-8")
     (out_dir / "minority-report.md").write_text(_minority_md(engine, report), encoding="utf-8")
     (out_dir / "report.md").write_text(_report_md(engine, report, summary, scorecard), encoding="utf-8")
-    return {"report": report, "summary": summary, "scorecard": scorecard, "manifest": manifest}
+    return {"report": report, "summary": summary, "scorecard": scorecard, "manifest": manifest, "packet": packet}
 
 
 def _minority_md(engine, report) -> str:
