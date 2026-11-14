@@ -459,7 +459,8 @@ def build_packet(engine) -> dict:
     for s in b.seeds:
         refs = [p for p in proposals if s["id"] in p["tensionIds"]]
         exp = len(exp_by_seed[s["id"]])
-        seeds.append({"id": s["id"], "title": s["title"], "findings": len(refs), "expectationSeats": exp,
+        seeds.append({"id": s["id"], "title": s["title"], "description": s.get("description", ""),
+                      "strata": s.get("strata", []), "findings": len(refs), "expectationSeats": exp,
                       "challengedFindings": sum(1 for p in refs if p["challenges"]),
                       "status": "addressed" if refs else ("expectedOnly" if exp else "unaddressed")})
     return {
@@ -547,7 +548,8 @@ def merge_packets(packets: list[dict]) -> dict:
     seeds: dict[str, dict] = {}
     for pk in packets:
         for s in pk["seedTensions"]:
-            x = seeds.setdefault(s["id"], {"id": s["id"], "title": s["title"], "findingsByReplicate": [],
+            x = seeds.setdefault(s["id"], {"id": s["id"], "title": s["title"], "description": s.get("description", ""),
+                                           "strata": s.get("strata", []), "findingsByReplicate": [],
                                            "expectationSeatsByReplicate": []})
             x["findingsByReplicate"].append(s["findings"])
             x["expectationSeatsByReplicate"].append(s.get("expectationSeats", 0))

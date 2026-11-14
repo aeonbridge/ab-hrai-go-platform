@@ -91,6 +91,17 @@ No merge de réplicas, achados com a mesma chave numa réplica têm as posiçõe
 
 A folha de revisão abre com a seção **Cada estrato, sua leitura** e mostra, em cada proposta, uma tabela estrato × posição × argumento.
 
+### Mural de tensões
+
+`docs/scse/prototipo/mural-de-tensoes.html` lê um `revision-packet.json` ou `merged-packet.json` (botão "Carregar pacote") e organiza as propostas por tensão semeada (T1 a T6), mais um mural "Fora das tensões iniciais" para propostas sem tensão.
+
+- **Galeria:** cada tensão é um post. As reações somam as posições dos estratos sobre as propostas da tensão. Um mapa de calor em miniatura e um resumo acompanham o post.
+- **Mural da tensão:** mapa de calor estrato × proposta (toque na célula para ler o argumento), barras por estrato, visão **Conversa** (cada proposta como post, argumentos como comentários) e visão **Quadro** (colunas a favor, ajuste, dividido, contra e sem posição).
+- **Cards humanos:** quem tem acesso de contribuidor acrescenta um card com posição, proposta e argumento. Os cards ficam no armazenamento compartilhado da página, ligados ao `packetId`.
+- **Facilitador:** sob pedido, um modelo lê posições, argumentos e cards e devolve panorama, leitura por estrato, convergências explícitas (com os estratos que as sustentam), disputas com os dois lados, silêncios e perguntas para quem decide. O prompt proíbe veredito e consenso inventado. O resumo fica salvo e é marcado como desatualizado quando entram cards novos.
+
+O mural não grava decisões. Decisão continua em `scse govern apply`.
+
 ## Revisão humana
 
 ```bash

@@ -1,0 +1,689 @@
+<title>Mural de Tensões</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: a feed of tension posts (gallery) and, per tension, a board with heat map, facilitator and stance columns.
+   Identity follows the Shadow Council tour: chamber ink, brass accent, one colour per stance. */
+:root{
+  --bg:#EEF1F5; --surface:#FFFFFF; --surface-2:#F5F7FA; --line:#D9E0E9; --line-2:#C3CDD9;
+  --fg:#101A2A; --muted:#55657A; --dim:#8593A6; --accent:#A8670F; --accent-ink:#FFFFFF; --accent-soft:#F7E9D2;
+  --for:#16857A; --against:#C8462A; --amend:#2F64C2; --split:#7A55C9; --silent:#9AA6B6;
+  --for-bg:#DDF2EF; --against-bg:#FBE3DC; --amend-bg:#E0E9F9; --split-bg:#ECE4FA; --silent-bg:#EEF1F5;
+  --human:#A8670F; --shadow:0 1px 2px rgba(16,26,42,.06),0 4px 14px rgba(16,26,42,.05);
+  --display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --body:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#070C16; --surface:#0F1A2C; --surface-2:#132137; --line:#22324A; --line-2:#30425E;
+  --fg:#EAF0F7; --muted:#9DACBF; --dim:#6F7F95; --accent:#E8A33D; --accent-ink:#1A1306; --accent-soft:#2A2010;
+  --for:#38C2B4; --against:#FF7A59; --amend:#6EA0FF; --split:#B39BFA; --silent:#6F7F95;
+  --for-bg:#0F2E2C; --against-bg:#3A1A12; --amend-bg:#13264A; --split-bg:#251C42; --silent-bg:#131C2B;
+  --human:#E8A33D; --shadow:none; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#070C16; --surface:#0F1A2C; --surface-2:#132137; --line:#22324A; --line-2:#30425E;
+  --fg:#EAF0F7; --muted:#9DACBF; --dim:#6F7F95; --accent:#E8A33D; --accent-ink:#1A1306; --accent-soft:#2A2010;
+  --for:#38C2B4; --against:#FF7A59; --amend:#6EA0FF; --split:#B39BFA; --silent:#6F7F95;
+  --for-bg:#0F2E2C; --against-bg:#3A1A12; --amend-bg:#13264A; --split-bg:#251C42; --silent-bg:#131C2B;
+  --human:#E8A33D; --shadow:none; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:15px/1.5 var(--body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px;display:grid;gap:20px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(24px,4vw,34px);font-weight:750}
+h2{font-size:clamp(20px,3vw,26px);font-weight:700}
+h3{font-size:17px;font-weight:650}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mono{font-family:var(--mono)}
+.muted{color:var(--muted)}
+.eyebrow{font:500 11.5px/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{border:1px solid var(--line-2);background:var(--surface);border-radius:10px;padding:8px 13px;font-weight:600;font-size:14px}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.link{background:none;border:0;padding:0;color:var(--accent);font-weight:600}
+.tag{display:inline-flex;align-items:center;gap:5px;font:500 11px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--line-2);border-radius:999px;padding:4px 8px;color:var(--muted);white-space:nowrap}
+.tag.example{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+
+/* header */
+header.top{display:grid;gap:10px}
+.top .row.space{justify-content:space-between}
+.source{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-size:13.5px;color:var(--muted)}
+.source label.btn{display:inline-flex;align-items:center}
+.source input[type=file]{position:absolute;width:1px;height:1px;opacity:0}
+.notice{border-left:3px solid var(--accent);padding:8px 12px;background:var(--surface);border-radius:0 10px 10px 0;font-size:14px;max-width:80ch}
+.error{border-left-color:var(--against)}
+
+/* stance chips */
+.st{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:3px 9px 3px 7px;font:500 12.5px/1.3 var(--body);white-space:nowrap;border:1px solid transparent}
+.st b{font:700 12px/1 var(--mono)}
+.st-for{color:var(--for);background:var(--for-bg)}
+.st-against{color:var(--against);background:var(--against-bg)}
+.st-amend{color:var(--amend);background:var(--amend-bg)}
+.st-split{color:var(--split);background:var(--split-bg)}
+.st-silent{color:var(--silent);background:var(--silent-bg);border:1px dashed var(--silent)}
+.st-human{color:var(--human);background:var(--accent-soft)}
+.reactions{display:flex;flex-wrap:wrap;gap:6px}
+.reaction{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px 4px 8px;font:500 13px/1.2 var(--body);border:1px solid transparent}
+.reaction .n{font:600 13px/1 var(--mono)}
+.reaction .who{font-size:12px;opacity:.9}
+
+/* gallery */
+.feed{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:16px}
+.post{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;gap:12px;box-shadow:var(--shadow);min-width:0;align-content:start}
+.post-head{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center}
+.avatar{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font:700 14px/1 var(--mono);background:var(--fg);color:var(--bg)}
+.avatar.other{background:var(--accent);color:var(--accent-ink)}
+.post-head .meta{font-size:12.5px;color:var(--muted)}
+.post h3{font-size:18px}
+.mini{display:grid;gap:2px;grid-auto-flow:column;grid-template-rows:repeat(8,9px);justify-content:start}
+.mini i{display:block;width:12px;height:9px;border-radius:2px}
+.summary{font-size:14px;background:var(--surface-2);border-radius:10px;padding:10px 12px;display:grid;gap:4px}
+.summary .by{font:500 11px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.post-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+.quote{font-size:13.5px;display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:start}
+
+/* board */
+.crumbs{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:14px}
+.board-head{display:grid;gap:12px}
+.panels{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.panels{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;gap:12px;min-width:0}
+.panel h3{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+.scroll-x{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.heat{display:grid;gap:3px;min-width:max-content}
+.heat .lbl{font-size:12.5px;color:var(--muted);padding-right:8px;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.heat .col{font:500 11px/1.1 var(--mono);color:var(--muted);text-align:center;padding:2px 0;border:0;background:none;border-radius:6px}
+.heat .col[aria-pressed="true"]{color:var(--accent);background:var(--accent-soft)}
+.heat .cell{width:42px;height:30px;border-radius:6px;border:0;display:grid;place-items:center;font:700 13px/1 var(--mono);padding:0}
+.heat .cell.sel{outline:2px solid var(--fg);outline-offset:1px}
+.heat .cell.st-silent{border:1px dashed var(--silent)}
+.dot{width:9px;height:9px;border-radius:50%;flex:none}
+.bars{display:grid;gap:7px}
+.bar-row{display:grid;grid-template-columns:118px 1fr 36px;gap:8px;align-items:center;font-size:12.5px}
+.bar-row .name{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar{display:flex;height:14px;border-radius:4px;overflow:hidden;background:var(--silent-bg)}
+.bar i{display:block;height:100%}
+.bar-row .n{font:500 11.5px/1 var(--mono);color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.axis{display:grid;grid-template-columns:118px 1fr 36px;gap:8px;font:500 10.5px/1 var(--mono);color:var(--dim)}
+.axis span:nth-child(2){display:flex;justify-content:space-between}
+.legend{display:flex;flex-wrap:wrap;gap:6px}
+.detail{background:var(--surface-2);border-radius:10px;padding:10px 12px;font-size:14px;display:grid;gap:6px}
+
+.facil{display:grid;gap:10px}
+.facil .sec{display:grid;gap:4px}
+.facil .sec h4{margin:0;font:600 13px/1.3 var(--body);color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.facil ul{margin:0;padding-left:18px;display:grid;gap:4px;font-size:14px}
+.stale{color:var(--against);font-size:12.5px}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.seg{display:inline-flex;border:1px solid var(--line-2);border-radius:10px;overflow:hidden}
+.seg button{border:0;background:transparent;padding:7px 12px;font-weight:600;font-size:13.5px;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line-2);background:var(--surface);border-radius:999px;padding:5px 10px;font:500 12.5px/1.2 var(--mono)}
+.chip[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+
+.columns{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(250px,1fr);gap:12px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x proximity}
+.column{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:10px;display:grid;gap:8px;align-content:start;scroll-snap-align:start;min-width:0}
+.column > header{display:flex;justify-content:space-between;align-items:center;padding:2px 4px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px;display:grid;gap:6px;font-size:14px;min-width:0}
+.card .meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.card.human{border-color:var(--human);border-width:1.5px}
+.card .pid{font:500 11.5px/1 var(--mono);color:var(--muted)}
+.card .del{margin-left:auto;font-size:12px;color:var(--muted);background:none;border:0;padding:0}
+.silent-list{font-size:13px;color:var(--muted);display:grid;gap:4px}
+
+.thread{display:grid;gap:14px}
+.sub{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:10px;min-width:0}
+.sub-head{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12.5px;color:var(--muted)}
+.comments{display:grid;gap:10px;border-top:1px solid var(--line);padding-top:10px}
+.comment{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;font-size:14px}
+.comment .av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:700 10px/1 var(--mono);color:#fff}
+.comment .av.h{background:var(--human);color:var(--accent-ink)}
+.comment .who{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:13px;font-weight:600}
+.comment .who .when{font-weight:400;color:var(--muted);font-size:12px}
+
+form.add{display:grid;gap:10px;background:var(--surface);border:1px dashed var(--accent);border-radius:14px;padding:14px}
+form.add .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:10px}
+form.add label{display:grid;gap:4px;font:500 12px/1.2 var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+form.add select,form.add textarea{border:1px solid var(--line-2);border-radius:8px;background:var(--surface-2);padding:8px 10px;font:15px/1.4 var(--body);text-transform:none;letter-spacing:0}
+form.add textarea{min-height:76px;resize:vertical}
+.empty{font-size:13.5px;color:var(--muted);padding:6px 4px}
+@media (prefers-reduced-motion: no-preference){.post,.card,.sub{transition:border-color .2s}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="row space">
+      <div style="display:grid;gap:4px">
+        <span class="eyebrow">Shadow Council · revisão do modelo de governança</span>
+        <h1>Mural de Tensões</h1>
+      </div>
+      <div class="row" id="dataset-tag"></div>
+    </div>
+    <p class="notice">O conselho sintético não chega a uma resposta comum. Cada tensão reúne as propostas ligadas a ela e a posição de cada estrato sobre cada uma: a favor, contra, ajuste, dividido ou sem posição. Calar não é concordar. Quem decide são pessoas, que podem acrescentar seus próprios cards.</p>
+    <div class="source">
+      <span id="source-label"></span>
+      <label class="btn" for="packet-file">Carregar pacote de revisão (.json)</label>
+      <input type="file" id="packet-file" accept="application/json,.json">
+      <button class="link" id="use-example" hidden>Voltar ao exemplo</button>
+    </div>
+    <div id="load-msg" class="notice error" hidden></div>
+  </header>
+  <main id="view"></main>
+</div>
+
+<script>
+/* ============================================================== strata */
+const STRATA_C = {regulators:"#E39A2D",publicOperators:"#E4572E",business:"#C45BAA",research:"#7C69E6",civilSociety:"#3F85D6",workers:"#25A596",affectedGroups:"#5DB54B",infrastructure:"#8A96A6"};
+const STRATA_SHORT = {regulators:"Reguladores",publicOperators:"Poder público",business:"Empresas",research:"Pesquisa",civilSociety:"Sociedade civil",workers:"Trabalhadores",affectedGroups:"Afetados",infrastructure:"Infraestrutura"};
+const STANCE = {
+  for:{pt:"a favor",g:"✓"}, against:{pt:"contra",g:"✕"}, amend:{pt:"ajuste",g:"±"},
+  split:{pt:"dividido",g:"⇄"}, silent:{pt:"sem posição",g:"·"}, variesAcrossReplicates:{pt:"varia entre réplicas",g:"~"}
+};
+const ORDER = ["for","amend","split","against","silent"];
+const HUMAN_STANCES = ["for","amend","against"];
+const LENS_PT = {omission:"Q1 omissão",excess:"Q2 excesso",advantage:"Q3 vantagem"};
+
+/* ============================================================== example packet
+   Same shape as revision-packet.json (strata, seedTensions, proposals[].stratumPositions).
+   Illustrative content: it did not come from a real run. */
+const EX_STRATA = [["regulators","Reguladores / fiscalização",3],["publicOperators","Poder público operador",2],["business","Empresas / startups",3],["research","Pesquisa interdisciplinar",3],["civilSociety","Sociedade civil e direitos",3],["workers","Trabalhadores / profissões",2],["affectedGroups","Grupos diretamente afetados",2],["infrastructure","Infraestrutura / ambiente",2]];
+const EX_SEEDS = [
+ ["T1","Continuidade do plano × supervisão e avaliação","Se o orçamento pós-2028 encolher, o que se protege primeiro: infraestrutura e pesquisa, ou a capacidade de supervisionar e avaliar?",["research","regulators"]],
+ ["T2","Soberania computacional × custo e energia","Reduzir a dependência de nuvem estrangeira exige capacidade nacional, energia e chips, com custo para quem usa IA hoje.",["infrastructure","business"]],
+ ["T3","Difusão da IA × emprego e desigualdade regional","Adoção rápida e ganho de produtividade de um lado; ocupações expostas e requalificação desigual entre regiões do outro.",["workers","business"]],
+ ["T4","Direitos × custo de conformidade","Avaliação de impacto e transparência algorítmica de um lado; a carga de documentação para PMEs e startups do outro.",["civilSociety","business"]],
+ ["T5","Auditoria × capacidade de fiscalizar","Exigir auditoria em todo sistema público de alto impacto depende de quem consegue fiscalizar e de quantos sistemas já estão em produção.",["regulators","publicOperators"]],
+ ["T6","Eficiência × contestação humana","A triagem automática acelera o atendimento; o cidadão precisa entender e contestar uma negativa.",["publicOperators","affectedGroups"]],
+];
+const K = {reg:"regulators",pub:"publicOperators",bus:"business",res:"research",civ:"civilSociety",wor:"workers",aff:"affectedGroups",inf:"infrastructure"};
+const SC = {f:"for",x:"against",m:"amend",s:"split"};
+// [id, tensions, lens, change, target, targetTitle, author, reps, title, text, {stratum: "code|argument"}]
+const EX_PROPS = [
+ ["M009",["T1"],"omission","add","funding-continuity","Financiamento e continuidade","reg","3/3","Reserva mínima para supervisão e avaliação",
+  "O plano termina em 2028 sem regra sobre o que se protege num corte. Uma fração fixa do orçamento para supervisão e avaliação impede que ela seja a primeira a cair.",
+  {reg:"f|Sem orçamento próprio, a supervisão vira a variável de ajuste de qualquer corte.",pub:"m|Reserva sim, mas com fonte definida. Vincular receita sem fonte só desloca o corte.",bus:"x|Engessar o orçamento tira recursos de infraestrutura que ainda nem chegou às empresas.",res:"f|Avaliar o plano é o que permite saber o que cortar. Cortar a avaliação primeiro é decidir às cegas.",civ:"f|O ramo pbia-funding-cut mostra que, sem reserva, a supervisão cai junto com todo o resto.",inf:"s|Um assento apoia a reserva. Outro teme que ela saia da manutenção do supercomputador."}],
+ ["M010",["T1"],"excess","modify","GM-16","Painel público de acompanhamento do PBIA","res","2/3","Painel do PBIA com metas verificáveis",
+  "O painel acompanha 54 ações, mas os relatos sobre a execução divergem entre fontes. Sem meta e fonte de cada número, ele não serve para avaliar.",
+  {reg:"f|Fiscalizar exige dado com fonte e data. Hoje o painel não oferece isso.",pub:"x|O painel já é público. Exigir verificação de cada número atrasa a publicação.",res:"f|Relatos divergentes sobre a mesma ação mostram que o painel mede atividade, não resultado.",civ:"m|Abrir também os dados brutos em formato aberto, não só o painel."}],
+ ["M011",["T1"],"advantage","keep","GM-17","Infraestrutura nacional de computação","bus","2/3","Num corte, proteger primeiro infraestrutura e pesquisa",
+  "Manter infraestrutura e pesquisa e adiar novas estruturas de supervisão. Sem capacidade instalada, não haverá o que supervisionar.",
+  {reg:"x|Adiar a supervisão quando os sistemas já estão em produção transfere o risco para quem é afetado.",bus:"f|Capacidade instalada leva anos. Estrutura de supervisão se monta mais rápido quando houver o que supervisionar.",res:"s|Um assento defende proteger a pesquisa. Outro lembra que pesquisa sem avaliação perde financiamento na revisão seguinte.",civ:"x|É a mesma lógica que deixou a proteção de dados sem estrutura por anos.",aff:"x|Quem já é atendido por sistemas automáticos não pode esperar a infraestrutura ficar pronta.",inf:"f|Supercomputador parado por falta de manutenção perde o investimento já feito."}],
+ ["M002",["T2"],"omission","add","energy-environment","Energia e meio ambiente","inf","2/3","Energia e água dos data centers",
+  "O modelo investe em computação nacional (GM-17) e não trata consumo de energia e água. A matriz elétrica renovável (CF-02) só vira vantagem se o custo ambiental for medido.",
+  {pub:"s|Um assento apoia medir. Outro teme atrasar o edital do supercomputador.",bus:"x|Métrica ambiental agora encarece o data center nacional e empurra carga para nuvem estrangeira.",res:"f|Sem medir energia e água, a vantagem da matriz renovável é só retórica.",civ:"m|Incluir água e impacto nas comunidades vizinhas aos data centers.",aff:"m|Medir também onde o data center se instala e quem arca com o custo local.",inf:"f|GM-17 investe em computação e não trata consumo de energia e água."}],
+ ["M012",["T2"],"excess","modify","GM-17","Infraestrutura nacional de computação","inf","2/3","Comprar capacidade, não só construir",
+  "Além do supercomputador, compra pública de capacidade em nuvem nacional dá demanda estável a provedores daqui sem esperar a obra.",
+  {pub:"f|Órgãos públicos já compram nuvem. Direcionar a compra é o instrumento mais rápido que existe.",bus:"m|Abrir a compra a provedores de qualquer porte, com regra de portabilidade para não criar novo aprisionamento.",res:"x|Compra dirigida sem métrica de desempenho paga mais caro por serviço pior.",inf:"f|Demanda estável é o que falta para viabilizar data center nacional."}],
+ ["M013",["T2"],"advantage","add","energy-environment","Energia e meio ambiente","bus","3/3","Matriz renovável como critério para atrair data centers",
+  "Usar a matriz elétrica renovável para atrair data centers, com contrapartida de capacidade reservada para uso nacional.",
+  {pub:"f|Atrai investimento sem gasto direto do orçamento.",bus:"f|É uma vantagem que poucos países têm nessa escala.",res:"m|Exigir medição de água e energia por instalação, para a vantagem ser verificável.",civ:"x|Data center perto de bacia já pressionada transfere o custo para a população local.",aff:"x|As comunidades vizinhas não aparecem em nenhum critério da proposta.",inf:"s|Um assento apoia. Outro alerta que a transmissão não chega aonde a energia é gerada."}],
+ ["M014",["T3"],"omission","add","labor-relations","Trabalho","wor","3/3","Requalificação ligada às ocupações expostas",
+  "O modelo forma especialistas e capacita servidores, mas não trata de quem perde ocupação. A requalificação deve partir das ocupações mais expostas em cada região.",
+  {pub:"m|Usar a rede existente de qualificação profissional, sem criar estrutura nova.",bus:"s|Um assento apoia. Outro acha que o mercado reabsorve e que o plano deve focar em adoção.",res:"f|Há dados de exposição ocupacional suficientes para priorizar por região.",civ:"f|Sem isso, o ganho de produtividade fica concentrado e o custo, disperso.",wor:"f|Formar especialista não ajuda o operador de teleatendimento que perde o posto.",aff:"f|Regiões com menos emprego formal sentem primeiro e têm menos proteção."}],
+ ["M008",["T3"],"advantage","add","workforce-skills","Formação e capacitação","bus","1/3","Investir em formação em IA",
+  "Formar mais profissionais de IA.",
+  {bus:"f|Faltam profissionais de IA no mercado.",res:"x|Genérica: serviria a qualquer país e não usa nenhum traço do contexto.",wor:"m|Requalificar quem perde ocupação, não só formar especialistas."}],
+ ["M015",["T3"],"omission","add","regional-inequality","Desigualdade regional","aff","2/3","Critério regional na distribuição do PBIA",
+  "Os recursos do plano não têm critério regional. Sem ele, centros já equipados concentram infraestrutura e formação.",
+  {pub:"f|Universidades fora do eixo Sul-Sudeste não disputam editais nos mesmos termos.",bus:"x|Cota regional sem demanda local espalha recurso onde ele rende menos.",res:"m|Critério regional para formação, mérito para pesquisa de fronteira.",civ:"f|A desigualdade digital é um traço do contexto (CF-11). Ignorá-la amplia a distância.",wor:"f|A requalificação precisa estar onde estão os trabalhadores expostos.",aff:"f|Sem critério, as regiões mais afetadas ficam com a menor parte.",inf:"m|Considerar a conectividade antes de levar computação. Sem rede, o recurso fica ocioso."}],
+ ["M006",["T4"],"excess","modify","GM-03","Lei Geral de Proteção de Dados","civ","2/3","LGPD: a revisão de decisões automatizadas não basta para IA",
+  "O modelo usa a LGPD como base de contestação de decisões de IA. O direito de revisão cobre dados pessoais, não todo uso de IA. Mudar como o modelo descreve uma lei em vigor exige revisão jurídica.",
+  {reg:"m|Corrigir a descrição sem sugerir que a LGPD falha onde a autoridade já atua.",bus:"x|Ampliar a leitura do art. 20 cria insegurança jurídica para quem já cumpre a LGPD.",civ:"f|O direito de revisão cobre dados pessoais, não todo uso de IA.",aff:"f|Decisões sobre benefícios sociais usam IA e ficam sem via clara de contestação."}],
+ ["M016",["T4"],"excess","modify","GM-10","Avaliação de impacto algorítmico (a confirmar no PL)","bus","3/3","Avaliação de impacto proporcional ao porte",
+  "Avaliação de impacto com o mesmo rito para startup e grande empresa trava quem está começando. Propõe níveis por risco e por porte.",
+  {reg:"m|Proporcional ao risco, não ao porte. Sistema pequeno pode causar dano grande.",bus:"f|O custo de documentação pesa mais para quem tem dez pessoas.",res:"f|Rito único gera documento protocolar. Rito proporcional gera avaliação de verdade.",civ:"x|Porte não pode reduzir proteção. O dano à pessoa é o mesmo.",aff:"x|Startups também operam sistemas que decidem crédito e benefício."}],
+ ["M003",["T4"],"omission","add","children-vulnerable","Crianças e vulneráveis","aff","3/3","Proteção de crianças e adolescentes",
+  "Nenhum componente trata de crianças e grupos vulneráveis, mesmo com IA chegando a serviços públicos e plataformas de uso massivo.",
+  {reg:"f|A autoridade de dados já trata dados de crianças. Falta estender a decisões automatizadas.",bus:"m|Salvaguarda por tipo de uso, não proibição geral de IA em produtos para jovens.",civ:"f|IA chega a escolas públicas e plataformas de massa sem salvaguarda específica.",aff:"f|Nenhum componente trata de crianças e grupos vulneráveis."}],
+ ["M017",["T5"],"omission","add","enforcement-capacity","Capacidade de fiscalização","reg","3/3","Capacidade de fiscalizar antes de novas atribuições",
+  "O PL entrega à autoridade de dados a supervisão do sistema de IA. O modelo não prevê pessoal, orçamento nem prazo para isso.",
+  {reg:"f|Atribuição sem estrutura produz fiscalização só no papel.",pub:"f|Os órgãos supervisionados precisam saber quem fiscaliza e com que critério.",bus:"m|Começar pelos setores já regulados, onde existe capacidade técnica.",civ:"f|Direito sem fiscalização vira promessa.",aff:"f|Quem contesta uma decisão precisa de alguém do outro lado."}],
+ ["M018",["T5"],"omission","add","standards-certification","Normas e certificação","bus","2/3","Auditoria por terceiros credenciados",
+  "Auditar todos os sistemas públicos de alto impacto com equipe própria não cabe na capacidade atual. Auditores credenciados ampliam a escala.",
+  {reg:"s|Um assento apoia, com credenciamento rigoroso. Outro teme captura: o auditado paga o auditor.",pub:"f|É a forma de cumprir a exigência sem parar sistemas que já estão em produção.",bus:"f|Cria mercado de auditoria e normas que o país pode exportar.",res:"m|Publicar relatórios e métodos de auditoria, para permitir verificação independente.",civ:"x|Auditoria paga pelo auditado tende a aprovar."}],
+ ["M005",["T5"],"excess","modify","GM-04","PL 2338/2023","reg","3/3","Tratar o PL 2338 como cenário, não como pilar",
+  "Boa parte dos mecanismos depende de um projeto ainda não votado. Se o PL parar em 2027 (ramo pl2338-stalled), essas áreas ficam sem cobertura.",
+  {reg:"f|A maior parte dos mecanismos depende de um projeto ainda não votado.",pub:"f|Sem o PL, o sistema de supervisão não existe. O poder público precisa de um plano B.",bus:"s|Um assento apoia. Outro quer o PL como pilar, para dar previsibilidade ao investimento.",res:"f|O ramo pl2338-stalled mostra quantas áreas ficam descobertas.",civ:"x|Rebaixar o PL a cenário enfraquece a pressão pelos direitos que ele traz.",aff:"x|Os direitos de contestação estão no PL. Tratá-lo como cenário os torna opcionais."}],
+ ["M019",["T6"],"omission","add","rights-redress","Direitos e contestação","aff","3/3","Revisão humana em negativas de benefício",
+  "A triagem automática de benefícios sociais nega pedidos sem explicação compreensível. Toda negativa deve ter motivo legível e revisão por pessoa, com prazo.",
+  {reg:"f|Dá forma operacional ao direito de revisão que já existe.",pub:"s|Um assento apoia. Outro mostra que revisar toda negativa recria a fila que a automação reduziu.",res:"m|Revisão por amostragem, com auditoria dos erros, em vez de revisar todos os casos.",civ:"f|Negativa sem motivo legível impede a contestação.",aff:"f|Quem tem o benefício negado não sabe por quê nem a quem recorrer."}],
+ ["M020",["T6"],"omission","add","transparency","Transparência e registro","civ","2/3","Registro público dos sistemas de decisão automatizada",
+  "Não se sabe quais órgãos usam IA para decidir sobre pessoas. Propõe um registro público com finalidade, órgão responsável e canal de contestação.",
+  {reg:"f|Ajuda a priorizar onde fiscalizar.",pub:"m|Registrar por finalidade, sem expor detalhes que permitam fraudar o sistema.",res:"f|Permite estudar erros e vieses, hoje invisíveis.",civ:"f|Sem saber que o sistema existe, ninguém contesta.",aff:"f|É a primeira informação que falta a quem foi afetado."}],
+ ["M001",[],"omission","add","participation","Participação social","civ","3/3","Participação social na governança de IA",
+  "Nenhum componente trata de consulta pública ou controle democrático. Com a troca de governo em janeiro, um canal permanente de participação reduz o risco de o modelo mudar sem debate.",
+  {reg:"m|Participação sim, com rito e prazo. Consulta aberta sem prazo paralisa a autoridade.",pub:"x|Já existem conselhos e consultas públicas. Um canal novo duplica estrutura e custo.",res:"f|Sem canal de participação, a troca de governo interrompe o monitoramento do plano.",civ:"f|Nenhum componente trata de controle democrático. O novo governo pode redesenhar tudo sem debate.",wor:"f|Quem perde ocupação para a IA precisa de assento onde as prioridades são definidas.",aff:"f|Sem canal próprio, os grupos afetados entram só como dado, nunca como voz."}],
+ ["M007",[],"advantage","add","language-culture","Língua e cultura","res","3/3","Avaliação pública de modelos em português do Brasil",
+  "Um conjunto público de testes em português brasileiro, mantido pela base científica pública, faria do país a referência na avaliação de modelos para a língua.",
+  {pub:"f|Serviço público em português precisa de teste em português antes de contratar modelo.",bus:"m|Abrir os testes a empresas, com governança que evite captura por um laboratório.",res:"f|Depende do idioma e da rede de pesquisa daqui, e não se copia.",civ:"m|Incluir línguas indígenas e falas regionais, não só o português padrão.",aff:"f|Modelos que erram mais com sotaques regionais prejudicam quem já é excluído.",inf:"f|Roda na infraestrutura nacional (GM-17) e dá a ela um uso concreto."}],
+ ["M004",[],"excess","remove","GM-12","Sandbox regulatório (a confirmar no PL)","res","3/3","Retirar o sandbox até confirmar no texto do PL",
+  "GM-12 entrou no modelo sem confirmação nas fontes. Contar com ele infla a cobertura de inovação. Melhor retirar e reintroduzir quando o texto for conferido.",
+  {reg:"f|Componente não confirmado na fonte não pode contar como cobertura.",bus:"x|Retirar o sandbox sinaliza que a inovação saiu da agenda. Melhor marcar como a confirmar.",res:"f|GM-12 entrou sem fonte e infla a cobertura de inovação.",inf:"m|Manter como hipótese explícita, fora da contagem de cobertura, em vez de remover."}],
+];
+function examplePacket(){
+  const seats = Object.fromEntries(EX_STRATA.map(s => [s[0], s[2]]));
+  return {
+    packetId:"exemplo-GOV-BR-001-v0.1.0", example:true, scenarioId:"GOV-BR-001", modelId:"BR-AI-GOVERNANCE", modelVersion:"0.1.0", asOfDate:"2026-11-14",
+    strata: EX_STRATA.map(([stratumId,label,seats]) => ({stratumId,label,seats})),
+    seedTensions: EX_SEEDS.map(([id,title,description,strata]) => ({id,title,description,strata})),
+    proposals: EX_PROPS.map(([proposalId,tensionIds,lens,change,target,targetTitle,author,reps,title,text,pos]) => {
+      const [rc, of] = reps.split("/").map(Number);
+      const comp = /^GM-/.test(target);
+      return {proposalId, tensionIds, lens, change, componentId: comp ? target : null, topic: comp ? null : target,
+        componentTitle: comp ? targetTitle : null, topicLabel: comp ? null : targetTitle, proposedTitle:title, proposedDescription:text,
+        author:{stratumId:K[author]}, replicateCount:rc, of,
+        stratumPositions: EX_STRATA.map(([sid,label,n]) => {
+          const short = Object.keys(K).find(k => K[k] === sid), raw = pos[short];
+          if (!raw) return {stratumId:sid,label,stance:"silent",seatsTotal:n,seatsSpoke:0,statements:[]};
+          const [code, ...rest] = raw.split("|"), stance = SC[code], text = rest.join("|");
+          return {stratumId:sid,label,stance,seatsTotal:n,seatsSpoke: stance === "split" ? 2 : 1,
+            statements:[{stance: stance === "split" ? "for" : stance, role: sid === K[author] ? "author" : "position", text}]};
+        })};
+    })
+  };
+}
+
+/* ============================================================== normalize a packet */
+function normalize(pk){
+  if (!pk || !Array.isArray(pk.proposals)) throw new Error("O arquivo não tem a lista de propostas de um pacote de revisão.");
+  if (!Array.isArray(pk.strata) || !pk.proposals.every(p => Array.isArray(p.stratumPositions)))
+    throw new Error("Este pacote não traz a posição de cada estrato. Gere de novo com a versão do runtime que inclui stratumPositions.");
+  const strata = pk.strata.map(s => ({id:s.stratumId, label:s.label, short:STRATA_SHORT[s.stratumId] || s.label, seats:s.seats}));
+  const proposals = pk.proposals.map(p => {
+    const pos = {};
+    for (const r of p.stratumPositions) {
+      const args = (r.statements || []).filter(st => st.text).map(st => ({stance:st.stance, role:st.role, text:st.text, agentId:st.agentId || null, replicate:st.replicate || null, earlier:!!st.onEarlierVersion}));
+      pos[r.stratumId] = {stance: r.stance === "notSeated" ? "silent" : r.stance, seats: r.seatsTotal ? `${r.seatsSpoke}/${r.seatsTotal}` : "", args, byReplicate: r.byReplicate || null};
+    }
+    for (const s of strata) if (!pos[s.id]) pos[s.id] = {stance:"silent", seats:"", args:[]};
+    return {id:p.proposalId, title:p.proposedTitle || p.title || p.proposalId, text:p.proposedDescription || p.text || "",
+      lens:p.lens, change:p.change, target:p.componentId || p.topic || "", targetTitle:p.componentTitle || p.topicLabel || "",
+      author:(p.author || {}).stratumId, raisedBy:p.raisedBy || [(p.author || {}).stratumId],
+      reps: p.replicateCount ? `${p.replicateCount}/${p.of}` : "", tensionIds:p.tensionIds || [],
+      flags:[p.requiresLegalReview && "revisão jurídica", p.weakEvidence && "evidência fraca", p.genericity === "generic" && "genérica"].filter(Boolean), pos};
+  });
+  const tensions = (pk.seedTensions || []).map(s => ({id:s.id, title:s.title, description:s.description || "", seed:s.strata || [], seeded:true,
+    proposals: proposals.filter(p => p.tensionIds.includes(s.id))}));
+  const loose = proposals.filter(p => !p.tensionIds.length);
+  if (loose.length) tensions.push({id:"outras", title:"Fora das tensões iniciais", description:"Propostas que o conselho levantou sem ligar a nenhuma das tensões semeadas. Podem indicar uma tensão que o cenário não previu.", seed:[], seeded:false, proposals:loose});
+  const label = pk.example ? "Exemplo ilustrativo" : `${pk.modelId || "modelo"} v${pk.modelVersion || "?"} · ${pk.scenarioId || ""}${pk.replicates ? ` · ${pk.replicates} réplicas` : ""}`;
+  return {id: String(pk.packetId || "pacote").replace(/[^A-Za-z0-9_-]/g, "_").slice(0, 80), example:!!pk.example, label, asOf:pk.asOfDate || "", strata, proposals, tensions};
+}
+
+/* ============================================================== state */
+const state = {data:null, cards:[], summaries:{}, names:{}, me:null, canWrite:false, db:null, user:null, sample:null,
+  mode:"conversa", filter:null, cell:null, facilBusy:false, facilErr:"", unsub:[]};
+try { state.mode = localStorage.getItem("mural-mode") || "conversa"; } catch(e) {}
+
+/* ============================================================== helpers */
+const $ = s => document.querySelector(s);
+function esc(s){ return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function chip(st, text){ return `<span class="st st-${st}"><b aria-hidden="true">${STANCE[st].g}</b>${esc(text ?? STANCE[st].pt)}</span>`; }
+function sw(sid){ return `<span class="dot" style="background:${STRATA_C[sid] || "#888"}"></span>`; }
+function shortName(sid){ const s = state.data.strata.find(x => x.id === sid); return s ? s.short : sid; }
+function stanceVar(st){ return `var(--${st === "variesAcrossReplicates" ? "split" : st})`; }
+function stanceBg(st){ return `var(--${st === "variesAcrossReplicates" ? "split" : st}-bg)`; }
+function tensionById(id){ return state.data.tensions.find(t => t.id === id); }
+function humanFor(t){ return state.cards.filter(c => c.tensionId === t.id); }
+function when(iso){ try { return new Date(iso).toLocaleString("pt-BR", {day:"2-digit", month:"short", hour:"2-digit", minute:"2-digit"}); } catch(e) { return ""; } }
+function personName(id){ return (id && state.names[id]) || "Pessoa"; }
+
+function tally(t){
+  const total = {for:0,amend:0,split:0,against:0,silent:0,variesAcrossReplicates:0}, who = {}, byS = {};
+  for (const s of state.data.strata) byS[s.id] = {for:0,amend:0,split:0,against:0,silent:0,variesAcrossReplicates:0};
+  for (const p of t.proposals) for (const s of state.data.strata) {
+    const st = p.pos[s.id].stance; total[st]++; byS[s.id][st]++; (who[st] = who[st] || new Set()).add(s.id);
+  }
+  return {total, who, byS};
+}
+function structural(t){
+  const tl = tally(t), n = t.proposals.length, lines = [];
+  if (!n) return ["Nenhuma proposta do conselho ficou ligada a esta tensão."];
+  const contested = t.proposals.filter(p => Object.values(p.pos).some(x => x.stance === "against" || x.stance === "split"));
+  lines.push(`${n} proposta${n>1?"s":""}; ${contested.length ? `${contested.length} contestada${contested.length>1?"s":""} (${contested.map(p=>p.id).join(", ")})` : "nenhuma contestada"}.`);
+  const silentAll = state.data.strata.filter(s => tl.byS[s.id].silent === n).map(s => s.short);
+  if (silentAll.length) lines.push(`Sem posição em nenhuma proposta: ${silentAll.join(", ")}.`);
+  const opp = state.data.strata.filter(s => tl.byS[s.id].against > 0).map(s => `${s.short} (${tl.byS[s.id].against})`);
+  if (opp.length) lines.push(`Contra ao menos uma proposta: ${opp.join(", ")}.`);
+  const seedSilent = t.seed.filter(sid => tl.byS[sid] && tl.byS[sid].silent === n).map(shortName);
+  if (seedSilent.length) lines.push(`Estrato que semeou a tensão e não se pronunciou: ${seedSilent.join(", ")}.`);
+  return lines;
+}
+
+/* ============================================================== routing */
+function route(){
+  const h = location.hash.replace("#", "");
+  if (h.startsWith("tensao-")) { const t = tensionById(h.slice(7)); if (t) return renderBoard(t); }
+  renderGallery();
+}
+function go(hash){ if (location.hash === "#" + hash) route(); else location.hash = hash; }
+addEventListener("hashchange", () => { state.filter = null; state.cell = null; state.facilErr = ""; route(); window.scrollTo(0, 0); });
+
+/* ============================================================== gallery */
+function reactionsHtml(t){
+  const tl = tally(t), h = humanFor(t);
+  const parts = ORDER.concat(["variesAcrossReplicates"]).filter(st => tl.total[st]).map(st => {
+    const who = [...(tl.who[st] || [])].map(shortName);
+    return `<span class="reaction st-${st === "variesAcrossReplicates" ? "split" : st}" title="${esc(STANCE[st].pt)}: ${esc(who.join(", "))}"><b aria-hidden="true">${STANCE[st].g}</b><span class="n">${tl.total[st]}</span><span class="who">${esc(STANCE[st].pt)}</span></span>`;
+  });
+  if (h.length) parts.push(`<span class="reaction st-human"><b aria-hidden="true">✎</b><span class="n">${h.length}</span><span class="who">card${h.length>1?"s":""} humano${h.length>1?"s":""}</span></span>`);
+  return `<div class="reactions" aria-label="Posições dos estratos somadas sobre as propostas">${parts.join("")}</div>`;
+}
+function miniHeat(t){
+  return `<div class="mini" aria-hidden="true">${t.proposals.map(p => state.data.strata.map(s => { const st = p.pos[s.id].stance;
+    return `<i style="background:${st === "silent" ? "var(--line)" : stanceVar(st)}"></i>`; }).join("")).join("")}</div>`;
+}
+function summaryBlock(t, full){
+  const s = state.summaries[t.id];
+  if (s && s.panorama) return `<div class="summary"><span class="by">Facilitador · ${esc(when(s.generatedAt))}</span><p>${esc(full ? s.panorama : s.panorama.slice(0, 240) + (s.panorama.length > 240 ? "…" : ""))}</p></div>`;
+  return `<div class="summary"><span class="by">Resumo estrutural · calculado das posições</span>${structural(t).slice(0, full ? 9 : 2).map(l => `<p>${esc(l)}</p>`).join("")}</div>`;
+}
+function contrast(t){
+  for (const p of t.proposals) {
+    const f = state.data.strata.find(s => p.pos[s.id].stance === "for" && p.pos[s.id].args.length && s.id !== p.author);
+    const a = state.data.strata.find(s => p.pos[s.id].stance === "against" && p.pos[s.id].args.length);
+    if (f && a) return `<div class="quote">${chip("for", f.short)}<span>${esc(p.pos[f.id].args[0].text)}</span></div><div class="quote">${chip("against", a.short)}<span>${esc(p.pos[a.id].args[0].text)}</span></div>`;
+  }
+  return "";
+}
+function renderGallery(){
+  const d = state.data;
+  $("#view").innerHTML = `<section style="display:grid;gap:14px">
+    <div class="row" style="justify-content:space-between"><h2>Tensões</h2><span class="muted" style="font-size:13.5px">${d.tensions.length} murais · ${d.proposals.length} propostas · ${d.strata.length} estratos</span></div>
+    <div class="feed">${d.tensions.map(t => `<article class="post">
+      <div class="post-head"><div class="avatar ${t.seeded ? "" : "other"}">${esc(t.seeded ? t.id : "+")}</div>
+        <div style="min-width:0"><div class="meta">${t.seeded ? `Tensão inicial · semeada por ${t.seed.map(shortName).join(" e ")}` : "Levantada pelo conselho"} · ${t.proposals.length} proposta${t.proposals.length===1?"":"s"}</div><h3>${esc(t.title)}</h3></div></div>
+      <p>${esc(t.description)}</p>
+      ${t.proposals.length ? miniHeat(t) : ""}
+      ${reactionsHtml(t)}
+      ${summaryBlock(t, false)}
+      ${contrast(t)}
+      <div class="post-foot"><span>${t.proposals.reduce((n,p) => n + Object.values(p.pos).reduce((m,x) => m + x.args.length, 0), 0)} argumentos · ${humanFor(t).length} cards humanos</span><button class="btn primary" data-open="${esc(t.id)}">Abrir mural</button></div>
+    </article>`).join("")}</div></section>`;
+}
+
+/* ============================================================== board */
+function heatHtml(t){
+  const d = state.data, n = t.proposals.length;
+  if (!n) return `<p class="empty">Sem propostas para mapear.</p>`;
+  const cols = `max-content repeat(${n}, 42px)`;
+  let h = `<div class="heat" style="grid-template-columns:${cols}" role="grid" aria-label="Mapa de calor: estratos por proposta"><span></span>`;
+  h += t.proposals.map(p => `<button class="col" data-filter="${esc(p.id)}" aria-pressed="${state.filter === p.id}" title="${esc(p.title)}">${esc(p.id.replace(/^M0*/, "M"))}</button>`).join("");
+  for (const s of d.strata) {
+    h += `<span class="lbl">${sw(s.id)}${esc(s.short)}</span>`;
+    h += t.proposals.map(p => { const x = p.pos[s.id], sel = state.cell && state.cell[0] === s.id && state.cell[1] === p.id;
+      return `<button class="cell st-${x.stance === "variesAcrossReplicates" ? "split" : x.stance}${sel ? " sel" : ""}" data-cell="${s.id}|${esc(p.id)}" aria-label="${esc(s.short)} em ${esc(p.id)}: ${STANCE[x.stance].pt}">${STANCE[x.stance].g}</button>`; }).join("");
+  }
+  return h + `</div>`;
+}
+function barsHtml(t){
+  const tl = tally(t), n = t.proposals.length; if (!n) return "";
+  const order = ["for","amend","split","variesAcrossReplicates","against"];
+  return `<div class="bars">${state.data.strata.map(s => { const b = tl.byS[s.id], spoke = n - b.silent;
+      return `<div class="bar-row"><span class="name">${esc(s.short)}</span><span class="bar" role="img" aria-label="${esc(s.short)}: ${order.filter(k => b[k]).map(k => `${b[k]} ${STANCE[k].pt}`).join(", ") || "sem posição"}">${order.filter(k => b[k]).map(k => `<i style="width:${b[k]/n*100}%;background:${stanceVar(k)}" title="${b[k]} ${STANCE[k].pt}"></i>`).join("")}</span><span class="n">${spoke}/${n}</span></div>`; }).join("")}
+    <div class="axis"><span></span><span><span>0</span><span>${n} propostas</span></span><span></span></div></div>`;
+}
+function cellDetail(t){
+  if (!state.cell) return `<p class="muted" style="font-size:13px">Toque numa célula para ler o argumento do estrato. Toque no número da proposta para filtrar o quadro.</p>`;
+  const [sid, pid] = state.cell, p = t.proposals.find(x => x.id === pid); if (!p) return "";
+  const x = p.pos[sid];
+  return `<div class="detail"><div class="row">${chip(x.stance === "variesAcrossReplicates" ? "split" : x.stance, shortName(sid))}<span class="mono" style="font-size:12px">${esc(p.id)}${x.seats ? ` · ${x.seats} assentos falaram` : ""}</span></div>
+    <strong>${esc(p.title)}</strong>
+    ${x.args.length ? x.args.map(a => `<p>${esc(a.text)}${a.earlier ? ` <span class="muted">(versão anterior)</span>` : ""}</p>`).join("") : `<p class="muted">O estrato não se pronunciou sobre esta proposta.</p>`}
+    ${x.byReplicate ? `<p class="muted mono" style="font-size:12px">${Object.entries(x.byReplicate).map(([k,v]) => `r${k}: ${STANCE[v] ? STANCE[v].pt : v}`).join(" · ")}</p>` : ""}</div>`;
+}
+function facilHtml(t){
+  const s = state.summaries[t.id], cards = humanFor(t).length;
+  const stale = s && s.humanCards !== cards;
+  const canCall = !!state.sample && t.proposals.length > 0;
+  let body;
+  if (s && s.panorama) {
+    const list = (title, items, fmt) => items && items.length ? `<div class="sec"><h4>${title}</h4><ul>${items.map(fmt).join("")}</ul></div>` : "";
+    body = `<p style="font-size:15px">${esc(s.panorama)}</p>
+      ${list("Cada estrato", s.porEstrato, x => `<li><strong>${esc(shortName(x.estrato) || x.estrato)}:</strong> ${esc(x.leitura)}</li>`)}
+      ${list("Onde há convergência explícita", s.convergencias, x => `<li>${esc(x.ponto)} <span class="muted">(${esc((x.estratos || []).map(shortName).join(", "))})</span></li>`)}
+      ${list("Disputas abertas", s.disputas, x => `<li><strong>${esc(x.ponto)}</strong><br>${(x.lados || []).map(l => `${esc((l.estratos || []).map(shortName).join(", "))}: ${esc(l.argumento)}`).join("<br>")}</li>`)}
+      ${list("Silêncios", s.silencios, x => `<li>${esc(x)}</li>`)}
+      ${list("Contribuições humanas", s.contribuicoesHumanas, x => `<li>${esc(x)}</li>`)}
+      ${list("Perguntas para quem decide", s.perguntas, x => `<li>${esc(x)}</li>`)}
+      <p class="muted" style="font-size:12.5px">Gerado em ${esc(when(s.generatedAt))} por pedido de ${esc(personName(s.requestedBy))}, com ${s.humanCards} card(s) humano(s).${stale ? ` <span class="stale">Há ${cards} card(s) agora: peça um novo resumo.</span>` : ""}</p>`;
+  } else {
+    body = `<div class="summary"><span class="by">Resumo estrutural · sem facilitador ainda</span>${structural(t).map(l => `<p>${esc(l)}</p>`).join("")}</div>`;
+  }
+  return `<section class="panel facil" aria-labelledby="facil-h"><h3 id="facil-h">Facilitador<span class="muted" style="font:400 12.5px/1.3 var(--body)">mapeia a discussão, não decide</span></h3>
+    ${body}
+    ${state.facilErr ? `<p class="stale">${esc(state.facilErr)}</p>` : ""}
+    ${canCall ? `<div class="row"><button class="btn primary" id="call-facil" ${state.facilBusy ? "disabled" : ""}>${state.facilBusy ? "Resumindo a discussão…" : s ? "Gerar novo resumo" : "Chamar facilitador"}</button>
+      <span class="muted" style="font-size:12.5px">Lê as posições, os argumentos e os cards humanos desta tensão.</span></div>`
+      : `<p class="muted" style="font-size:13px">${t.proposals.length ? "O facilitador fica disponível quando a página é aberta no claude.ai com acesso ao Claude." : ""}</p>`}
+  </section>`;
+}
+function columnsHtml(t){
+  const props = t.proposals.filter(p => !state.filter || p.id === state.filter);
+  const human = humanFor(t).filter(c => !state.filter || c.proposalId === state.filter || (!c.proposalId && !state.filter));
+  const cols = ["for","amend","split","against"].map(st => {
+    const items = [];
+    for (const p of props) for (const s of state.data.strata) { const x = p.pos[s.id];
+      const eff = x.stance === "variesAcrossReplicates" ? "split" : x.stance;
+      if (eff === st) items.push(`<article class="card"><div class="meta">${sw(s.id)}<strong style="color:var(--fg)">${esc(s.short)}</strong><span class="pid">${esc(p.id)}</span>${x.seats ? `<span>${esc(x.seats)} assentos</span>` : ""}</div>
+        <p>${esc(x.args[0] ? x.args[0].text : "Sem argumento registrado.")}</p>${x.args.length > 1 ? `<p class="muted" style="font-size:12.5px">+${x.args.length - 1} argumento(s) no estrato</p>` : ""}
+        <p class="muted" style="font-size:12.5px">sobre: ${esc(p.title)}</p></article>`); }
+    for (const c of human) if (c.stance === st) items.push(humanCard(c, t));
+    return `<section class="column" aria-label="${STANCE[st].pt}"><header>${chip(st)}<span class="mono muted" style="font-size:12px">${items.length}</span></header>${items.join("") || `<p class="empty">Nenhum card.</p>`}</section>`;
+  });
+  const silent = [];
+  for (const p of props) { const ss = state.data.strata.filter(s => p.pos[s.id].stance === "silent").map(s => s.short); if (ss.length) silent.push(`<p><span class="mono">${esc(p.id)}</span> ${esc(ss.join(", "))}</p>`); }
+  cols.push(`<section class="column" aria-label="sem posição"><header>${chip("silent")}<span class="mono muted" style="font-size:12px">${silent.length}</span></header><div class="silent-list">${silent.join("") || `<p class="empty">Todos os estratos se pronunciaram.</p>`}<p style="font-size:12px">Calar não é concordar. Estes estratos não reagiram à proposta.</p></div></section>`);
+  return `<div class="columns">${cols.join("")}</div>`;
+}
+function humanCard(c, t){
+  const p = c.proposalId && t.proposals.find(x => x.id === c.proposalId);
+  const mine = state.me && c.authorId === state.me;
+  return `<article class="card human"><div class="meta">${chip("human", "humano")}<strong style="color:var(--fg)">${esc(personName(c.authorId))}</strong><span>${esc(when(c.createdAt))}</span>
+      ${mine ? `<button class="del" data-del="${esc(c.id)}" aria-label="Apagar meu card">apagar</button>` : ""}</div>
+    <p>${esc(c.text)}</p><p class="muted" style="font-size:12.5px">${p ? `sobre: ${esc(p.id)} ${esc(p.title)}` : "sobre a tensão como um todo"}</p></article>`;
+}
+function threadHtml(t){
+  const props = t.proposals.filter(p => !state.filter || p.id === state.filter);
+  const loose = humanFor(t).filter(c => !c.proposalId);
+  return `<div class="thread">${props.map(p => {
+    const sp = {}; for (const s of state.data.strata) { const st = p.pos[s.id].stance; (sp[st] = sp[st] || []).push(s.short); }
+    const comments = state.data.strata.filter(s => p.pos[s.id].args.length).map(s => { const x = p.pos[s.id];
+      return x.args.map(a => `<div class="comment"><span class="av" style="background:${STRATA_C[s.id]}">${esc(s.short.slice(0,3).toUpperCase())}</span><div><div class="who">${esc(s.label || s.short)} ${chip(x.stance === "variesAcrossReplicates" ? "split" : x.stance)}${a.role === "author" ? `<span class="tag">autor</span>` : ""}${a.replicate ? `<span class="when">réplica ${a.replicate}</span>` : ""}</div><p>${esc(a.text)}${a.earlier ? ` <span class="muted">(versão anterior)</span>` : ""}</p></div></div>`).join(""); }).join("");
+    const hum = humanFor(t).filter(c => c.proposalId === p.id).map(c => `<div class="comment"><span class="av h">✎</span><div><div class="who">${esc(personName(c.authorId))} ${chip(c.stance)}<span class="tag">humano</span><span class="when">${esc(when(c.createdAt))}</span></div><p>${esc(c.text)}</p></div></div>`).join("");
+    return `<article class="sub" id="p-${esc(p.id)}">
+      <div class="sub-head"><span class="mono">${esc(p.id)}</span><span class="tag">${esc(LENS_PT[p.lens] || p.lens || "")}</span><span class="tag">${esc(p.change || "")}</span>${p.reps ? `<span class="tag">réplicas ${esc(p.reps)}</span>` : ""}${p.flags.map(f => `<span class="tag">${esc(f)}</span>`).join("")}<span>levantada por ${esc(p.raisedBy.map(shortName).join(", "))}</span></div>
+      <h3>${esc(p.title)}</h3><p>${esc(p.text)}</p>
+      ${p.target ? `<p class="muted" style="font-size:13px">${esc(p.target)}${p.targetTitle ? ` · ${esc(p.targetTitle)}` : ""}</p>` : ""}
+      <div class="reactions">${ORDER.concat(["variesAcrossReplicates"]).filter(st => sp[st]).map(st => `<span class="reaction st-${st === "variesAcrossReplicates" ? "split" : st}"><b aria-hidden="true">${STANCE[st].g}</b><span class="n">${sp[st].length}</span><span class="who">${esc(sp[st].join(", "))}</span></span>`).join("")}</div>
+      <div class="comments">${comments}${hum}${state.canWrite ? `<button class="link" data-reply="${esc(p.id)}" style="justify-self:start">Comentar como pessoa</button>` : ""}</div></article>`; }).join("")}
+    ${!state.filter && loose.length ? `<article class="sub"><div class="sub-head">Cards humanos sobre a tensão como um todo</div><div class="comments" style="border:0;padding:0">${loose.map(c => `<div class="comment"><span class="av h">✎</span><div><div class="who">${esc(personName(c.authorId))} ${chip(c.stance)}<span class="when">${esc(when(c.createdAt))}</span></div><p>${esc(c.text)}</p></div></div>`).join("")}</div></article>` : ""}</div>`;
+}
+function addFormHtml(t){
+  if (!state.db) return `<p class="notice">Para acrescentar cards, abra esta página no claude.ai com sua conta. Os cards ficam guardados para todos que abrem o mural.</p>`;
+  if (!state.canWrite) return `<p class="notice">Você pode ler o mural, mas não tem permissão para acrescentar cards. Peça acesso de contribuidor a quem compartilhou a página.</p>`;
+  return `<form class="add" id="add-form"><strong>Acrescentar um card humano</strong>
+    <div class="grid">
+      <label for="add-stance">Posição<select id="add-stance">${HUMAN_STANCES.map(s => `<option value="${s}">${STANCE[s].pt}</option>`).join("")}</select></label>
+      <label for="add-prop">Sobre<select id="add-prop"><option value="">A tensão como um todo</option>${t.proposals.map(p => `<option value="${esc(p.id)}" ${state.filter === p.id ? "selected" : ""}>${esc(p.id)} · ${esc(p.title.slice(0, 60))}</option>`).join("")}</select></label>
+    </div>
+    <label for="add-text">Argumento<textarea id="add-text" maxlength="1200" placeholder="O que você vê que os estratos sintéticos não viram, ou onde discorda."></textarea></label>
+    <div class="row"><button class="btn primary" type="submit" id="add-submit">Publicar card</button><span class="muted" id="add-msg" style="font-size:13px">Seu nome aparece no card. Você pode apagar o seu depois.</span></div></form>`;
+}
+function renderBoard(t){
+  const filt = state.filter && t.proposals.find(p => p.id === state.filter);
+  $("#view").innerHTML = `<section style="display:grid;gap:16px">
+    <nav class="crumbs"><button class="link" data-home>← Todas as tensões</button><span class="muted">/</span><span class="mono">${esc(t.seeded ? t.id : "outras")}</span></nav>
+    <div class="board-head post"><div class="post-head"><div class="avatar ${t.seeded ? "" : "other"}">${esc(t.seeded ? t.id : "+")}</div>
+      <div style="min-width:0"><div class="meta">${t.seeded ? `Tensão inicial · semeada por ${t.seed.map(shortName).join(" e ")}` : "Levantada pelo conselho"}</div><h2>${esc(t.title)}</h2></div></div>
+      <p>${esc(t.description)}</p>${reactionsHtml(t)}</div>
+    <div class="panels">
+      <section class="panel" aria-labelledby="heat-h"><h3 id="heat-h">Mapa de posições<span class="legend">${ORDER.map(s => chip(s)).join("")}</span></h3>
+        <div class="scroll-x">${heatHtml(t)}</div>${cellDetail(t)}
+        <h3 style="margin-top:4px">Cada estrato nesta tensão<span class="muted" style="font:400 12.5px/1.3 var(--body)">propostas em que se pronunciou</span></h3>${barsHtml(t)}</section>
+      ${facilHtml(t)}
+    </div>
+    <div class="toolbar"><div class="seg" role="group" aria-label="Visualização"><button data-mode="conversa" aria-pressed="${state.mode==="conversa"}">Conversa</button><button data-mode="quadro" aria-pressed="${state.mode==="quadro"}">Quadro</button></div>
+      <div class="filters" role="group" aria-label="Filtrar por proposta"><button class="chip" data-filter="" aria-pressed="${!state.filter}">Todas</button>${t.proposals.map(p => `<button class="chip" data-filter="${esc(p.id)}" aria-pressed="${state.filter === p.id}" title="${esc(p.title)}">${esc(p.id)}</button>`).join("")}</div></div>
+    ${filt ? `<p class="muted" style="font-size:13.5px">Mostrando só ${esc(filt.id)}: ${esc(filt.title)}</p>` : ""}
+    ${state.mode === "quadro" ? columnsHtml(t) : threadHtml(t)}
+    ${addFormHtml(t)}
+  </section>`;
+}
+
+/* ============================================================== events */
+document.addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  const t = currentTension();
+  if (b.dataset.open !== undefined) return go("tensao-" + b.dataset.open);
+  if (b.hasAttribute("data-home")) { history.pushState(null, "", location.pathname + location.search); state.filter = null; state.cell = null; return route(); }
+  if (b.dataset.mode) { state.mode = b.dataset.mode; try { localStorage.setItem("mural-mode", state.mode); } catch(err) {} return rerender(); }
+  if (b.dataset.filter !== undefined) { state.filter = state.filter === b.dataset.filter ? null : (b.dataset.filter || null); return rerender(); }
+  if (b.dataset.cell) { const [sid, pid] = b.dataset.cell.split("|"); state.cell = state.cell && state.cell[0] === sid && state.cell[1] === pid ? null : [sid, pid]; return rerender(); }
+  if (b.dataset.reply) { const sel = $("#add-prop"); if (sel) { sel.value = b.dataset.reply; $("#add-text").focus(); $("#add-form").scrollIntoView({behavior:"smooth", block:"center"}); } return; }
+  if (b.dataset.del) return deleteCard(b.dataset.del);
+  if (b.id === "call-facil" && t) return callFacilitator(t);
+  if (b.id === "use-example") return setData(examplePacket());
+});
+document.addEventListener("submit", e => { if (e.target.id === "add-form") { e.preventDefault(); const t = currentTension(); if (t) addCard(t); } });
+function currentTension(){ const h = location.hash.replace("#", ""); return h.startsWith("tensao-") ? tensionById(h.slice(7)) : null; }
+function rerender(){ const y = window.scrollY; const draft = $("#add-text") ? $("#add-text").value : null; route(); if (draft && $("#add-text")) $("#add-text").value = draft; window.scrollTo(0, y); }
+
+$("#packet-file").addEventListener("change", async e => {
+  const f = e.target.files[0]; e.target.value = ""; if (!f) return;
+  const msg = $("#load-msg"); msg.hidden = true;
+  try { setData(JSON.parse(await f.text())); }
+  catch(err) { msg.textContent = `Não foi possível abrir ${f.name}: ${err.message}`; msg.hidden = false; }
+});
+
+/* ============================================================== data + shared store */
+function setData(pk){
+  state.data = normalize(pk);
+  $("#dataset-tag").innerHTML = state.data.example ? `<span class="tag example">Exemplo ilustrativo</span>` : `<span class="tag">Pacote carregado</span>`;
+  $("#source-label").textContent = state.data.example ? "Mostrando propostas de exemplo, não uma execução real." : `Mostrando: ${state.data.label}${state.data.asOf ? ` · data ${state.data.asOf}` : ""}.`;
+  $("#use-example").hidden = state.data.example;
+  $("#load-msg").hidden = true;
+  state.cards = []; state.summaries = {}; state.filter = null; state.cell = null;
+  subscribe();
+  if (currentTension() === null && location.hash.startsWith("#tensao-")) history.replaceState(null, "", location.pathname + location.search);
+  route();
+}
+function subscribe(){
+  state.unsub.forEach(u => { try { u(); } catch(e) {} }); state.unsub = [];
+  if (!state.db) return;
+  const ds = state.data.id;
+  state.unsub.push(state.db.collection("cards").where("datasetId", "==", ds).onSnapshot(snap => {
+    state.cards = snap.docs.map(d => ({id:d.id, ...d.data()})).filter(c => c && typeof c.text === "string" && STANCE[c.stance])
+      .sort((a, b) => String(a.createdAt).localeCompare(String(b.createdAt)));
+    resolveNames(); rerender();
+  }, () => {}));
+  state.unsub.push(state.db.collection("summaries").where("datasetId", "==", ds).onSnapshot(snap => {
+    state.summaries = {}; snap.docs.forEach(d => { const v = d.data(); if (v && v.tensionId && typeof v.panorama === "string") state.summaries[v.tensionId] = v; });
+    resolveNames(); rerender();
+  }, () => {}));
+}
+async function resolveNames(){
+  if (!state.user) return;
+  const ids = [...new Set(state.cards.map(c => c.authorId).concat(Object.values(state.summaries).map(s => s.requestedBy)).filter(Boolean))].filter(id => !state.names[id]);
+  if (!ids.length) return;
+  try { const ps = await state.user.profiles(ids); let changed = false;
+    for (const id of ids) { const n = ps && ps[id] && ps[id].name; if (n) { state.names[id] = n; changed = true; } }
+    if (changed) rerender(); } catch(e) {}
+}
+async function addCard(t){
+  const text = $("#add-text").value.trim(), stance = $("#add-stance").value, proposalId = $("#add-prop").value || null, msg = $("#add-msg"), btn = $("#add-submit");
+  if (text.length < 10) { msg.textContent = "Escreva ao menos uma frase com o argumento."; return; }
+  btn.disabled = true; msg.textContent = "Publicando…";
+  try {
+    await state.db.collection("cards").add({datasetId:state.data.id, tensionId:t.id, proposalId, stance, text:text.slice(0, 1200), authorId:state.me, createdAt:new Date().toISOString()});
+    $("#add-text").value = ""; msg.textContent = "Card publicado.";
+  } catch(err) { msg.textContent = err && err.code === "not_granted" ? "Sem permissão para gravar. Peça acesso de contribuidor." : "Não foi possível publicar agora. Tente de novo em instantes."; }
+  btn.disabled = false;
+}
+async function deleteCard(id){
+  try { await state.db.collection("cards").doc(id).delete(); } catch(e) {}
+}
+
+/* ============================================================== facilitator */
+function facilitatorInput(t){
+  const d = state.data;
+  return {
+    tensao:{id:t.id, titulo:t.title, descricao:t.description, semeadaPor:t.seed},
+    estratos:d.strata.map(s => ({id:s.id, nome:s.label})),
+    propostas:t.proposals.map(p => ({id:p.id, titulo:p.title, texto:p.text, lente:p.lens, mudanca:p.change, alvo:p.target, levantadaPor:p.raisedBy,
+      posicoes:d.strata.map(s => ({estrato:s.id, posicao:p.pos[s.id].stance, argumentos:p.pos[s.id].args.map(a => a.text).slice(0, 4)}))})),
+    cardsHumanos:humanFor(t).map(c => ({posicao:c.stance, sobre:c.proposalId || "tensão", texto:c.text}))
+  };
+}
+const FACIL_PROMPT = `Você é o facilitador de um conselho sintético que examina o modelo de governança de IA do Brasil. Recebe uma tensão, as propostas ligadas a ela, a posição de cada estrato sobre cada proposta (for = a favor, against = contra, amend = propõe ajuste, split = dividido internamente, silent = não se pronunciou, variesAcrossReplicates = muda entre réplicas) com os argumentos, e cards escritos por pessoas.
+
+Seu papel é mapear a discussão para quem vai decidir. Você não decide e não produz resposta do conselho.
+Regras:
+- Não invente consenso. Só registre convergência quando estratos nomeados tomaram explicitamente a mesma posição sobre a mesma proposta; cite quais.
+- Silêncio não é concordância. Liste os estratos calados e o que isso deixa sem teste.
+- Mantenha cada lado de uma disputa com o argumento de quem o defendeu, sem escolher vencedor.
+- Separe o que vem dos estratos sintéticos do que vem dos cards humanos.
+- Use só o que está nos dados. Não acrescente fatos externos.
+- Português do Brasil, frases curtas e diretas.
+
+Responda só com JSON neste formato:
+{"panorama": "2 a 3 frases sobre a forma da divergência, sem veredito",
+ "porEstrato": [{"estrato": "<id do estrato>", "leitura": "1 frase com a posição dele nesta tensão, ou 'não se pronunciou'"}],
+ "convergencias": [{"ponto": "...", "estratos": ["<id>", "..."]}],
+ "disputas": [{"ponto": "...", "lados": [{"estratos": ["<id>"], "argumento": "..."}]}],
+ "silencios": ["..."],
+ "contribuicoesHumanas": ["..."],
+ "perguntas": ["perguntas que quem decide precisa responder"]}
+Inclua todos os estratos em porEstrato. Listas vazias são permitidas.
+
+Dados:
+`;
+function cleanSummary(v){
+  const arr = x => Array.isArray(x) ? x : [], str = x => typeof x === "string" ? x.slice(0, 1500) : "";
+  if (!v || typeof v !== "object" || !str(v.panorama)) throw new Error("resposta sem panorama");
+  return {panorama:str(v.panorama),
+    porEstrato:arr(v.porEstrato).filter(x => x && x.estrato).slice(0, 12).map(x => ({estrato:str(x.estrato), leitura:str(x.leitura)})),
+    convergencias:arr(v.convergencias).slice(0, 10).map(x => ({ponto:str(x && x.ponto), estratos:arr(x && x.estratos).map(str).slice(0, 8)})),
+    disputas:arr(v.disputas).slice(0, 10).map(x => ({ponto:str(x && x.ponto), lados:arr(x && x.lados).slice(0, 4).map(l => ({estratos:arr(l && l.estratos).map(str).slice(0, 8), argumento:str(l && l.argumento)}))})),
+    silencios:arr(v.silencios).map(str).filter(Boolean).slice(0, 10),
+    contribuicoesHumanas:arr(v.contribuicoesHumanas).map(str).filter(Boolean).slice(0, 10),
+    perguntas:arr(v.perguntas).map(str).filter(Boolean).slice(0, 8)};
+}
+async function callFacilitator(t){
+  if (state.facilBusy || !state.sample) return;
+  state.facilBusy = true; state.facilErr = ""; rerender();
+  try {
+    const raw = await state.sample.json(FACIL_PROMPT + JSON.stringify(facilitatorInput(t)), {cache:false});
+    const s = cleanSummary(raw);
+    const doc = {...s, datasetId:state.data.id, tensionId:t.id, generatedAt:new Date().toISOString(), requestedBy:state.me || null, humanCards:humanFor(t).length};
+    state.summaries[t.id] = doc;
+    if (state.db && state.canWrite) { try { await state.db.doc(`summaries/${state.data.id}__${t.id}`).set(doc); } catch(e) { state.facilErr = "O resumo foi gerado, mas não ficou salvo para os demais."; } }
+    else state.facilErr = "Resumo visível só para você: esta conta não grava no mural.";
+  } catch(err) {
+    const c = err && err.code;
+    state.facilErr = c === "not_granted" ? "O acesso ao Claude não foi permitido nesta página." : c === "rate_limited" ? "Muitos pedidos seguidos. Espere um pouco e tente de novo." : "O facilitador não respondeu num formato válido. Tente de novo.";
+    if (c === "not_granted") state.sample = null;
+  }
+  state.facilBusy = false; rerender();
+}
+
+/* ============================================================== boot */
+setData(examplePacket());
+(async () => {
+  if (!window.claude || !claude.use) return;
+  const [db, user, sample] = await Promise.all([claude.use("db"), claude.use("user"), claude.use("sample")].map(p => p.catch(() => null)));
+  state.db = db; state.user = user; state.sample = sample;
+  if (user) { try { state.me = await user.id(); } catch(e) {} try { const c = await user.can("data.write"); state.canWrite = c !== false; } catch(e) { state.canWrite = true; } }
+  else state.canWrite = !!db;
+  subscribe(); route();
+})();
+</script>

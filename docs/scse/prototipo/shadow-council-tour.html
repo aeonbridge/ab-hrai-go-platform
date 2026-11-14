@@ -137,7 +137,7 @@ body:not(.touring) #hud,body:not(.touring) #panel,body:not(.touring) #hint{opaci
 .prop p{font-size:13.5px}
 .st{display:inline-flex;align-items:center;gap:5px;font:500 11.5px/1 var(--mono);border-radius:999px;padding:4px 8px;border:1px solid currentColor;white-space:nowrap}
 .st i{font-style:normal;font-weight:700}
-.st-for{color:#5FD3C6}.st-against{color:#FF9A80}.st-amend{color:#F0B860}.st-split{color:#C2B0FF}.st-silent{color:var(--dim)}
+.st-for{color:#5FD3C6}.st-against{color:#FF9A80}.st-amend{color:#8DB4FF}.st-split{color:#C2B0FF}.st-silent{color:var(--dim)}
 .strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(122px,1fr));gap:4px}
 .strip .cell{display:flex;align-items:center;gap:5px;min-width:0;font:500 11px/1.15 var(--mono);padding:5px 6px;border-radius:7px;border:1px solid currentColor;background:rgba(7,12,22,.35);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .strip .cell i{font-style:normal;font-weight:700}
@@ -157,8 +157,9 @@ details summary{cursor:pointer;font:500 12.5px/1.3 var(--body);color:var(--brass
 .decide button[aria-pressed="true"][data-d="modify"]{background:var(--brass);color:#1A1306;border-color:var(--brass)}
 .decide button[aria-pressed="true"][data-d="reject"]{background:var(--coral);color:#2A0B03;border-color:var(--coral)}
 .decide button[aria-pressed="true"][data-d="defer"]{background:#C9D3E0;color:var(--ink);border-color:#C9D3E0}
-.blockers{border:1px solid rgba(255,122,89,.5);background:rgba(255,122,89,.08);border-radius:12px;padding:10px 12px;font-size:13px;color:#FFD3C6;display:grid;gap:4px}
-.blockers ul{margin:0;padding-left:16px;display:grid;gap:3px}
+.blockers{border:1px solid rgba(255,122,89,.5);background:#2A1712;border-radius:12px;padding:10px 12px;font-size:13px;color:#FFD3C6;display:grid;gap:4px}
+.blockers ul{margin:6px 0 0;padding-left:16px;display:grid;gap:3px}
+.blockers summary{cursor:pointer;font-weight:600}
 .success{border:1px solid rgba(56,194,180,.55);background:rgba(56,194,180,.09);border-radius:12px;padding:12px 14px;display:grid;gap:6px;font-size:13.5px}
 .success .ver{font:700 22px/1 var(--display)}
 .stickybar{position:sticky;bottom:-8px;background:linear-gradient(180deg, rgba(12,21,37,0), rgba(12,21,37,.96) 30%);padding:14px 0 8px;display:grid;gap:8px}
@@ -282,7 +283,7 @@ const PROPS = [
 const STANCE = {
   for:    {pt:"a favor",       g:"✓", c:"#38C2B4"},
   against:{pt:"contra",        g:"✕", c:"#FF7A59"},
-  amend:  {pt:"propõe ajuste", g:"±", c:"#E8A33D"},
+  amend:  {pt:"propõe ajuste", g:"±", c:"#6EA0FF"},
   split:  {pt:"dividido",      g:"⇄", c:"#A78BFA"},
   silent: {pt:"sem posição",   g:"·", c:"#4A5568"},
 };
@@ -444,6 +445,7 @@ function strataHtml(){
      ${r.aloneFor.length ? `<p><b>Único estrato a favor:</b> ${r.aloneFor.map(p => p.id).join(", ")}</p>` : ""}
      ${r.aloneAgainst.length ? `<p><b>Único estrato contra:</b> ${r.aloneAgainst.map(p => p.id).join(", ")}</p>` : ""}</div>
    ${block("for", r.for)}${block("against", r.against)}${block("amend", r.amend)}${block("split", r.split)}
+   <p><a class="btn" href="https://claude.ai/artifact/8QP1JLSsZed2z2f2CS4vSh" target="_blank" rel="noopener">Abrir o mural de tensões ↗</a></p>
    <p class="muted">Sem posição em ${r.silent.length} de ${PROPS.length} propostas${r.silent.length ? ` (${r.silent.map(p => p.id).join(", ")})` : ""}. Calar não é concordar: o estrato não se pronunciou. <span class="tag demo">exemplo</span></p>`;
 }
 function stanceStrip(p){
@@ -462,6 +464,7 @@ function reviewHtml(){
   if (r.applied) return appliedHtml();
   return `<p>Cada proposta foi levantada por um estrato e chega com a posição dos oito: quem defendeu, quem contestou, quem pediu ajuste e quem não se pronunciou. Não há resposta do conselho. Nada muda no modelo até uma pessoa decidir, com nome e justificativa. <span class="tag demo">propostas de exemplo</span></p>
    <div class="legend">${STANCE_ORDER.map(k => stanceChip(k, STANCE[k].pt)).join("")}</div>
+   <p class="muted">Para ver por tensão, com mapa de calor, cards humanos e facilitador: <a href="https://claude.ai/artifact/8QP1JLSsZed2z2f2CS4vSh" target="_blank" rel="noopener" style="color:var(--brass-2)">mural de tensões ↗</a>.</p>
    <p class="muted">“Acender no plenário” pinta cada assento com a posição do seu estrato. Assento apagado: o estrato não se pronunciou.</p>
    <div class="field"><label for="reviewer">Quem decide</label><input id="reviewer" autocomplete="name" placeholder="Seu nome ou o da equipe" value="${esc(r.reviewer)}"></div>
    <div class="row"><button class="btn small" id="fill">Preencher exemplo</button><span class="muted">para apresentar sem digitar</span></div>
@@ -505,7 +508,7 @@ function blockers(){
 function renderBlockers(){
   const b = blockers(), el = $("#blockers"), btn = $("#apply");
   if (!el) return;
-  el.innerHTML = b.length ? `<div class="blockers"><b>Antes de aplicar</b><ul>${b.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>` : "";
+  el.innerHTML = b.length ? `<details class="blockers"><summary>Antes de aplicar: ${b.length} pendência${b.length>1?"s":""}</summary><ul>${b.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></details>` : "";
   btn.disabled = b.length > 0;
 }
 function appliedHtml(){
