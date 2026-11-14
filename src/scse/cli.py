@@ -34,9 +34,10 @@ def cmd_run(args) -> int:
         return 2
     opts = RunOptions(providers=providers, assignment=args.assignment, mode=args.mode, seats=args.seats,
                       replicates=args.replicates, rounds=args.rounds, dry_run=args.dry_run,
-                      critic=args.critic, synthesize=args.synthesize, workers=args.workers, label=args.label)
+                      critic=args.critic, synthesize=args.synthesize, workers=args.workers, label=args.label,
+                      transport=args.transport)
     if not args.dry_run:
-        unverified = config.unverified_models(providers or config.required_providers)
+        unverified = config.unverified_models(providers or config.required_providers, args.transport)
         if unverified:
             print("AVISO: IDs não verificados na API (rode `scse models verify`): " + ", ".join(unverified),
                   file=sys.stderr)
@@ -61,16 +62,24 @@ def cmd_models(args) -> int:
     config = _config(args)
     providers = args.providers.split(",") if args.providers else [
         p for p in config.provider_names() if config.provider(p)["sdk"] != "mock"]
+    transport = args.transport
     if args.action == "list":
-        print(f"config: {config.source}  assignment padrão: {config.assignment}")
+        print(f"config: {config.source}  assignment padrão: {config.assignment}  "
+              f"transporte: {', '.join(sorted({config.transport_for(p, transport) for p in providers}))}")
         for profile, tier in config.data.get("profiles", {}).items():
             row = [f"{profile:22s} -> {tier:9s}"]
             for p in providers:
-                spec = config.model(p, profile)
-                flag = "" if config.provider(p)["models"][tier].get("verified") else "*"
-                row.append(f"{p}={spec.id}{flag}")
+                spec = config.model(p, profile, transport=transport)
+                tier_cfg = config.provider(p)["models"][tier]
+                ok = tier_cfg.get("openrouter_verified") if spec.transport == "openrouter" else tier_cfg.get("verified")
+                row.append(f"{p}={spec.id}{'' if ok else '*'}")
             print("  ".join(row))
-        print("(* = ID não verificado na API do provider)")
+        print("(* = ID não verificado na API)")
+        print("\nDistribuição por estrato (% configurado):")
+        for stratum in config.data.get("strata", {}):
+            entries = config.stratum_mix(stratum)
+            total = sum(e.weight for e in entries)
+            print(f"  {stratum:16s} " + "  ".join(f"{e.key}={100 * e.weight / total:.0f}%" for e in entries))
         return 0
     from .providers import CompletionRequest, ProviderError, build_provider
 
@@ -79,17 +88,18 @@ def cmd_models(args) -> int:
         tiers = config.provider(p)["models"]
         if args.action == "verify":
             try:
-                available = set(build_provider(config.model(p, "smoke")).list_models())
+                available = set(build_provider(config.model(p, "smoke", transport=transport)).list_models())
             except (ProviderError, Exception) as exc:  # noqa: BLE001 - report any SDK/network failure
                 print(f"{p}: ERRO ao listar modelos: {exc}")
                 rc = 1
                 continue
-            for tier, spec in tiers.items():
-                ok = spec["id"] in available
+            for tier in tiers:
+                model_id = config.model(p, "smoke", tier=tier, transport=transport).id
+                ok = model_id in available
                 rc |= not ok
-                print(f"{p}.{tier}: {spec['id']} {'OK' if ok else 'AUSENTE na API'}")
+                print(f"{p}.{tier}: {model_id} {'OK' if ok else 'AUSENTE na API'}")
         elif args.action == "ping":
-            prov = build_provider(config.model(p, "smoke"))
+            prov = build_provider(config.model(p, "smoke", transport=transport))
             schema = {"type": "object", "additionalProperties": False, "required": ["ok"],
                       "properties": {"ok": {"type": "boolean"}}}
             try:
@@ -116,7 +126,8 @@ def build_parser() -> argparse.ArgumentParser:
     r = sub.add_parser("run", help="executa um cenário (réplicas, relatórios)")
     r.add_argument("scenario")
     r.add_argument("--providers", help="lista separada por vírgula (padrão: required_providers)")
-    r.add_argument("--assignment", choices=["rotate", "fixed", "single"])
+    r.add_argument("--assignment", choices=["weighted", "rotate", "fixed", "single"])
+    r.add_argument("--transport", choices=["openrouter", "direct"], help="sobrescreve o transporte de todos os providers")
     r.add_argument("--mode", choices=["stratified", "unstratified", "singleAgent"], default="stratified")
     r.add_argument("--seats", type=int, help="sobrescreve targetSeats (redução de custo)")
     r.add_argument("--replicates", type=int)
@@ -140,6 +151,7 @@ def build_parser() -> argparse.ArgumentParser:
     m = sub.add_parser("models", help="list | verify | ping")
     m.add_argument("action", choices=["list", "verify", "ping"])
     m.add_argument("--providers")
+    m.add_argument("--transport", choices=["openrouter", "direct"])
     m.set_defaults(func=cmd_models)
     return ap
 

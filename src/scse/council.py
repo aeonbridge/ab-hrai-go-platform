@@ -5,7 +5,7 @@ import random
 from collections import Counter
 from dataclasses import asdict, dataclass, field
 
-from .config import ConfigError, ModelConfig
+from .config import ConfigError, MixEntry, ModelConfig, ModelSpec
 from .world import WorldSnapshot
 
 ALL_ACTIONS = ["assertClaim", "support", "challenge", "requestEvidence", "revise", "withdraw",
@@ -40,9 +40,14 @@ class CouncilSeat:
     model: str
     charter: PerspectiveCharter
     rationale: str = ""
+    tier: str = ""
+    transport: str = ""
+    mixKey: str = ""
+    spec: ModelSpec | None = field(default=None, repr=False, compare=False)
 
     def to_dict(self) -> dict:
         d = asdict(self)
+        d.pop("spec", None)
         return d
 
 
@@ -55,33 +60,59 @@ class CouncilRoster:
     coverage: dict
     balance: dict
     unrepresented: list[dict] = field(default_factory=list)
+    mix: dict = field(default_factory=dict)
 
     def to_dict(self) -> dict:
         return {"syntheticCouncil": True, "assignment": self.assignment, "mode": self.mode,
                 "providers": self.providers, "coverage": self.coverage, "balance": self.balance,
-                "unrepresented": self.unrepresented, "seats": [s.to_dict() for s in self.seats]}
+                "mix": self.mix, "unrepresented": self.unrepresented,
+                "seats": [s.to_dict() for s in self.seats]}
 
 
 DISCLOSURE = ("Perspectiva sintética gerada para simulação. Não representa pessoa, órgão ou grupo real "
               "e não mede opinião ou adesão social.")
 
 
-def _provider_for(index: int, stratum: str, providers: list[str], assignment: str,
-                  fixed: dict[str, str], offset: int) -> str:
+ASSIGNMENTS = ("weighted", "rotate", "fixed", "single")
+
+
+def smooth_wrr(entries: list[MixEntry], length: int) -> list[MixEntry]:
+    """Smooth weighted round-robin: any window of k picks is within 1 of k*w_i/W
+    for every entry, so few seats still follow the configured percentages."""
+    total = sum(e.weight for e in entries)
+    current = [0.0] * len(entries)
+    out = []
+    for _ in range(length):
+        for i, e in enumerate(entries):
+            current[i] += e.weight
+        best = max(range(len(entries)), key=lambda i: (current[i], -i))
+        current[best] -= total
+        out.append(entries[best])
+    return out
+
+
+def _mix_for(stratum: str, config: ModelConfig, providers: list[str], assignment: str,
+             fixed: dict[str, str], order: list[str]) -> list[MixEntry]:
     if assignment == "single":
-        return providers[0]
+        return [MixEntry(provider=providers[0], weight=1)]
     if assignment == "fixed":
         if stratum not in fixed:
             raise ConfigError(f"assignment.fixed has no provider for stratum {stratum!r}")
-        return fixed[stratum]
+        return [MixEntry(provider=fixed[stratum], weight=1)]
     if assignment == "rotate":
-        return providers[(index + offset) % len(providers)]
-    raise ConfigError(f"unknown assignment {assignment!r}")
+        entries = [MixEntry(provider=p, weight=1) for p in providers]
+    elif assignment == "weighted":
+        entries = config.stratum_mix(stratum, providers)
+    else:
+        raise ConfigError(f"unknown assignment {assignment!r}; use one of {ASSIGNMENTS}")
+    # Seeded provider order (stable for ties) so equal weights do not always start with the same provider.
+    rank = {p: i for i, p in enumerate(order)}
+    return sorted(entries, key=lambda e: rank.get(e.provider, len(rank)))
 
 
 def compose(snapshot: WorldSnapshot, config: ModelConfig, *, providers: list[str] | None = None,
             assignment: str | None = None, mode: str = "stratified", seed: int = 0,
-            replicate: int = 0) -> CouncilRoster:
+            replicate: int = 0, transport: str | None = None) -> CouncilRoster:
     if mode not in COUNCIL_MODES:
         raise ConfigError(f"council mode must be one of {COUNCIL_MODES}")
     assignment = assignment or config.assignment
@@ -101,6 +132,7 @@ def compose(snapshot: WorldSnapshot, config: ModelConfig, *, providers: list[str
     all_sources = sorted(snapshot.evidence_ids)
 
     seats: list[CouncilSeat] = []
+    mixes: dict[str, list[MixEntry]] = {}
     if mode == "singleAgent":
         plan = [("generalist", 1)]
     else:
@@ -127,18 +159,40 @@ def compose(snapshot: WorldSnapshot, config: ModelConfig, *, providers: list[str
                     constraints=[], blindSpots=[], allowedActions=ALL_ACTIONS, disclosure=DISCLOSURE,
                     conflictOfInterest="não aplicável")
                 profile = "perspective.deep" if mode == "singleAgent" else "perspective.standard"
-            provider = _provider_for(index, stratum_id, order, assignment, fixed, replicate)
-            spec = config.model(provider, profile)
+            mix_stratum = stratum_id if mode == "stratified" else "default"
+            if mix_stratum not in mixes:
+                mixes[mix_stratum] = _mix_for(mix_stratum, config, providers, assignment, fixed, order)
+            entries = mixes[mix_stratum]
+            # Global seat index spreads providers across strata; +replicate shifts the window.
+            entry = smooth_wrr(entries, index + replicate + 1)[-1]
+            spec = config.model(entry.provider, profile, tier=entry.tier, model=entry.model, transport=transport)
             charter.modelVersion = spec.label
             seat_no = f"{stratum_id}-{k + 1:02d}" if mode == "stratified" else f"{mode}-{k + 1:02d}"
             seats.append(CouncilSeat(seatId=f"seat:{seat_no}", agentId=f"agent:{seat_no}",
-                                     stratumId=charter.stratumId, profile=profile, provider=provider,
-                                     model=spec.id, charter=charter,
-                                     rationale=f"quota documentada do estrato; provider via {assignment}"))
+                                     stratumId=charter.stratumId, profile=profile, provider=entry.provider,
+                                     model=spec.id, charter=charter, tier=spec.tier, transport=spec.transport,
+                                     mixKey=entry.key, spec=spec,
+                                     rationale=f"quota documentada do estrato; provider/modelo via {assignment}"))
             index += 1
     return CouncilRoster(seats=seats, assignment=assignment, mode=mode, providers=order,
                          coverage=coverage(snapshot, seats, mode), balance=balance_check(seats),
-                         unrepresented=world.get("unrepresented", []))
+                         unrepresented=world.get("unrepresented", []), mix=mix_report(mixes, seats, mode))
+
+
+def mix_report(mixes: dict[str, list[MixEntry]], seats: list[CouncilSeat], mode: str) -> dict:
+    """Configured share vs. seats realised in this replicate, per stratum."""
+    out = {}
+    for stratum, entries in mixes.items():
+        total = sum(e.weight for e in entries)
+        configured: dict[str, float] = {}
+        for e in entries:
+            configured[e.key] = round(configured.get(e.key, 0) + 100 * e.weight / total, 2)
+        group = [s for s in seats if (s.stratumId if mode == "stratified" else "default") == stratum]
+        realised = Counter(s.mixKey for s in group)
+        out[stratum] = {"configuredPercent": configured, "realisedSeats": dict(realised), "seats": len(group),
+                        "note": ("com poucos assentos a distribuição exata só se realiza no acumulado das réplicas"
+                                 if len(group) < len(entries) else "")}
+    return out
 
 
 def coverage(snapshot: WorldSnapshot, seats: list[CouncilSeat], mode: str) -> dict:

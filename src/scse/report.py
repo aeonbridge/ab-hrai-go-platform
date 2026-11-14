@@ -105,10 +105,13 @@ def compile_run(engine, out_dir: Path, *, extra_limitations: list[str] | None = 
         "runId": engine.run_id, "scenarioId": sc["scenarioId"], "snapshotHash": snap.snapshot_hash,
         "seed": engine.seed, "dryRun": engine.dry_run, "assignment": engine.roster.assignment,
         "councilMode": engine.roster.mode, "providers": engine.roster.providers,
-        "seats": [{"agentId": s.agentId, "provider": s.provider, "model": s.model, "profile": s.profile}
+        "seats": [{"agentId": s.agentId, "stratumId": s.stratumId, "provider": s.provider, "model": s.model,
+                   "tier": s.tier, "transport": s.transport, "profile": s.profile, "mixKey": s.mixKey}
                   for s in engine.roster.seats],
+        "strataMix": engine.roster.mix,
         "modelsServed": sorted(engine.models_used), "configSource": engine.config.source,
-        "unverifiedModelIds": engine.config.unverified_models(engine.roster.providers),
+        "unverifiedModelIds": engine.config.unverified_models(engine.roster.providers, engine.transport),
+        "transport": sorted({s.transport for s in engine.roster.seats}),
         "usage": {k: vars(v) for k, v in engine.usage.items()},
         "ledgerIntact": engine.ledger.verify(), "events": len(engine.ledger.events),
         "note": "Seeds não asseguram determinismo de modelos externos.",

@@ -111,8 +111,13 @@ def test_solution_mode_findings(tmp_path):
 def test_preflight_requires_keys(monkeypatch):
     for env in ("ANTHROPIC_API_KEY", "OPENAI_API_KEY", "XAI_API_KEY", "GEMINI_API_KEY", "GOOGLE_API_KEY"):
         monkeypatch.delenv(env, raising=False)
-    problems = preflight(ModelConfig.load(), ["anthropic", "openai", "xai", "gemini"], dry_run=False)
-    assert len(problems) == 4
+    monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
+    four = ["anthropic", "openai", "xai", "gemini"]
+    problems = preflight(ModelConfig.load(), four, dry_run=False)
+    assert len(problems) == 1 and "OPENROUTER_API_KEY" in problems[0]  # one key for all
+    monkeypatch.setenv("OPENROUTER_API_KEY", "x")
+    assert preflight(ModelConfig.load(), four, dry_run=False) == []
+    assert len(preflight(ModelConfig.load(), four, dry_run=False, transport="direct")) == 4
     assert preflight(ModelConfig.load(), ["anthropic"], dry_run=True) == []
 
 
@@ -138,5 +143,5 @@ def test_experiment_plan_and_dry_run(tmp_path):
         summary = run_experiment(small, dry_run=True, out_root=tmp_path / "out")
     finally:
         os.chdir(cwd)
-    assert "mixed-rotate" in summary["arms"]
+    assert "mixed-weighted" in summary["arms"]
     assert (Path(summary["outDir"]) / "experiment-summary.md").exists()

@@ -47,6 +47,8 @@ def run_experiment(path: str | Path, *, dry_run: bool = False, config_path: str 
                    out_root: str | Path = "runs/experiments", workers: int = 8) -> dict:
     exp = load_experiment(path)
     overrides = [parse_set_option(f"{k}={v}") for k, v in exp.get("overrides", {}).items()]
+    if exp.get("strata"):
+        overrides.append({"strata": exp["strata"]})  # per-experiment stratum mixes
     config = ModelConfig.load(config_path, overrides=overrides)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     root = Path(out_root) / f"{stamp}-{exp['name']}{'-dryrun' if dry_run else ''}"
@@ -59,6 +61,7 @@ def run_experiment(path: str | Path, *, dry_run: bool = False, config_path: str 
                               replicates=exp.get("replicates"), rounds=exp.get("rounds"), dry_run=dry_run,
                               critic=exp.get("critic", False), synthesize=exp.get("synthesize", False),
                               workers=workers, label=arm["id"],
+                              transport=arm.get("transport") or exp.get("transport"),
                               extra_limitations=[f"Braço experimental: {arm.get('description', arm['id'])}"])
             res = run_scenario(sc_path, config, opts, out_root=root / "runs")
             results.append({"scenario": res["scenarioId"], "arm": arm["id"], **res})

@@ -23,6 +23,7 @@ replicates = 3
 rounds = 6
 critic = true        # crítica cruzada: cada tese revisada por provider diferente do autor
 synthesize = false   # descrições determinísticas; ligue para redação por modelo
+transport = "openrouter"   # "direct" usa as APIs de cada provider (4 chaves)
 
 hypotheses = [
   "H1 Formato: todos os providers mantêm schemaValidRate >= 0.95; repairRate alto indica fragilidade de structured output.",
@@ -34,16 +35,25 @@ hypotheses = [
   "H7 Linhas de base: B1 (agente único) e B2 (sem estratos) cobrem menos perspectivas e preservam menos dissenso que o SCSE estratificado.",
 ]
 
-# Sobrescritas de modelo valem só para este experimento (provider.tier = id).
+# Distribuição por estrato só para este experimento (mesmo formato de models.toml).
+# [strata.civilSociety]
+# mix = [
+#   { provider = "anthropic", weight = 40 },
+#   { provider = "xai",       weight = 40 },
+#   { provider = "gemini",    tier = "light", weight = 20 },
+# ]
+
+# Sobrescritas de modelo valem só para este experimento (provider.tier = id;
+# "vendor/modelo" altera o slug do OpenRouter, id simples altera a API direta).
 [overrides]
 # "openai.deep" = "gpt-6.1-terra"
 # "xai.standard" = "grok-4.5"
 
 [[arms]]
-id = "mixed-rotate"
-description = "SCSE: estratificado, providers alternando por assento e por réplica"
+id = "mixed-weighted"
+description = "SCSE: estratificado, provider/modelo por estrato conforme [strata] (padrão: 25% cada)"
 mode = "stratified"
-assignment = "rotate"
+assignment = "weighted"
 
 [[arms]]
 id = "fixed-by-stratum"
@@ -62,6 +72,14 @@ id = "B2-unstratified"
 description = "B2: debate multiagente sem estratificação, providers alternados"
 mode = "unstratified"
 assignment = "rotate"
+
+# Controle opcional da camada intermediária: mesmo braço via APIs diretas.
+# [[arms]]
+# id = "mixed-weighted-direct"
+# description = "Igual a mixed-weighted, mas sem OpenRouter"
+# mode = "stratified"
+# assignment = "weighted"
+# transport = "direct"
 
 [[arms]]
 id = "B1-single-agent"

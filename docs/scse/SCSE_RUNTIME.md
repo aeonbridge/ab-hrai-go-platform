@@ -13,8 +13,32 @@ e Gemini**, e os quatro são obrigatórios na configuração.
 
 ```bash
 pip install -e '.[all,dev]'      # SDKs anthropic, openai, google-genai + pytest
-export ANTHROPIC_API_KEY=... OPENAI_API_KEY=... XAI_API_KEY=... GEMINI_API_KEY=...
+export OPENROUTER_API_KEY=...    # padrão: uma assinatura e uma chave para os 4 providers
+# opcional, só com --transport direct:
+# export ANTHROPIC_API_KEY=... OPENAI_API_KEY=... XAI_API_KEY=... GEMINI_API_KEY=...
 ```
+
+## Transporte: OpenRouter por padrão
+
+Por padrão, todas as chamadas passam pelo OpenRouter (`[defaults] transport = "openrouter"`).
+O nome do provider nas métricas continua sendo a família do modelo (anthropic, openai,
+xai, gemini). Para manter a comparação entre providers limpa, o adaptador:
+
+- fixa o host original de cada modelo (`provider.only`/`order` = `openrouter_upstream`);
+- desliga o fallback entre hosts (`allow_fallbacks = false`);
+- exige hosts que honrem `response_format` e `reasoning` (`require_parameters = true`);
+- traduz o esforço de cada provider para `reasoning.effort`;
+- contabiliza o custo cobrado (`usage.cost`), o que faz `maxCostUsd` valer para todos os providers.
+
+Os adaptadores diretos continuam disponíveis: `--transport direct`,
+`transport = "direct"` num provider ou no braço do experimento. Rodar o mesmo braço
+pelas duas vias mede se a camada intermediária altera o comportamento.
+
+Slugs do OpenRouter confirmados em catálogos de terceiros (não na API):
+`anthropic/claude-opus-5.5`, `openai/gpt-6-sol`, `x-ai/grok-4.7`,
+`google/gemini-4-argon`. Os demais seguem o mesmo padrão, mas são inferidos. Os slugs
+de host `xai` e `google-ai-studio` também não foram verificados. Rode
+`scse models verify` antes da primeira execução real.
 
 ## Uso rápido
 
@@ -56,20 +80,43 @@ documentação oficial do SDK.
 
 ### Como trocar um modelo
 
-1. Editar o `id` no TOML.
-2. Variável de ambiente: `SCSE_MODEL__XAI__DEEP=grok-4.6`.
-3. Linha de comando: `scse run ... --set openai.deep=gpt-6.1-terra` ou
-   `--set gemini.standard.thinking_level=low`.
+1. Editar `openrouter_id` (OpenRouter) ou `id` (API direta) no TOML.
+2. Variável de ambiente: `SCSE_MODEL__XAI__DEEP=x-ai/grok-4.6`.
+3. Linha de comando: `scse run ... --set openai.deep=openai/gpt-6.1-terra` ou
+   `--set gemini.standard.thinking_level=low`. Um valor no formato `fornecedor/modelo`
+   altera o slug do OpenRouter; um id simples altera o id da API direta.
 4. Por experimento: a seção `[overrides]` do arquivo de experimento.
 
 Para mudar quem usa qual tier, edite `[profiles]`. Para mudar o perfil de um
 estrato, edite `profile` no world pack.
 
-## Distribuição de providers entre assentos
+## Distribuição de provider e modelo por estrato
+
+Cada estrato tem uma lista `mix` em `[strata.<id>]` (`models.toml`, ou no arquivo de
+experimento). O padrão é peso igual para os 4 providers em todos os estratos, cada um
+com o modelo do tier do perfil do estrato:
+
+```toml
+[strata.regulators]
+mix = [
+  { provider = "anthropic", tier = "deep",     weight = 15 },   # 15% Opus
+  { provider = "anthropic", tier = "standard", weight = 10 },   # 10% Sonnet
+  { provider = "openai",    model = "openai/gpt-6-sol", weight = 25 },
+  { provider = "xai",       weight = 25 },                      # tier do perfil
+  { provider = "gemini",    weight = 25 },
+]
+```
+
+- `provider` é obrigatório. `tier` ou `model` são opcionais; sem eles vale o tier do perfil do estrato.
+- `weight` é relativo: pesos que somam 100 lêem-se como percentuais. Um estrato ausente usa `[strata.default]`.
+- A alocação é determinística (weighted round-robin suave). Em qualquer janela de assentos, cada entrada fica a no máximo 1 assento da sua cota, e a janela desloca 1 posição por réplica. Com menos assentos do que entradas, os percentuais se realizam no acumulado das réplicas.
+- `--providers a,b` filtra o mix e renormaliza os pesos.
+- O `council-roster.json` e o `run-manifest.json` registram, por estrato, o percentual configurado e os assentos realizados.
 
 | `assignment` | Comportamento | Quando usar |
 |---|---|---|
-| `rotate` (padrão) | Os providers se alternam entre os assentos de cada estrato e giram entre as réplicas | Execução principal: separa o viés do modelo da perspectiva do estrato |
+| `weighted` (padrão) | Distribuição por estrato conforme `[strata]` | Execução principal |
+| `rotate` | Pesos iguais entre os providers selecionados, ignorando `[strata]` | Linha de base de rotação pura |
 | `fixed` | O provider é fixo por estrato (`[assignment.fixed]`) | Só como controle. Viés e perspectiva ficam confundidos |
 | `single` | Todo o conselho num único provider (`--providers xai`) | Ablação: mede o falso consenso de uma família de modelos |
 
@@ -124,7 +171,7 @@ e o runtime não inventa posição.
 
 | Braço | Condição do spec | O que isola |
 |---|---|---|
-| `mixed-rotate` | SCSE | Conselho estratificado e misto (referência) |
+| `mixed-weighted` | SCSE | Conselho estratificado e misto, conforme `[strata]` (referência) |
 | `fixed-by-stratum` | controle | Efeito de fixar provider por estrato |
 | `solo-<provider>` × 4 | ablação | Comportamento e falso consenso de cada família de modelos |
 | `B2-unstratified` | B2 | Debate multiagente sem estratos |
@@ -153,7 +200,8 @@ aplique a rubrica de especialistas da especificação (`ClaimEvidencePrecision`,
 
 ## Limitações conhecidas
 
-- IDs de modelo da OpenAI, xAI e Gemini não verificados nesta sessão (a rede do ambiente bloqueou a documentação oficial).
+- IDs de modelo não verificados nesta sessão: a rede do ambiente bloqueou o OpenRouter e a documentação oficial da OpenAI, xAI e Gemini.
+- O comportamento padrão do OpenRouter para `response_format` sem `require_parameters` e a tradução de `reasoning.effort` por host vêm de fontes secundárias. O adaptador exige os parâmetros justamente por isso.
 - Os adaptadores reais foram testados com clientes simulados (formato da requisição e parsing), não contra as APIs. Rode `scse models ping` antes da primeira execução.
 - O schema do turno usa `anyOf` para campos anuláveis. Se algum provider recusar o schema, use `structured_output = "json_mode"` naquele provider; a validação local continua garantindo o contrato.
 - Sem preço declarado (OpenAI, xAI e Gemini), o custo desses providers sai como desconhecido e só o `tokenBudget` os limita.

@@ -99,7 +99,7 @@ class DeliberationEngine:
     def __init__(self, snapshot: WorldSnapshot, roster: CouncilRoster, config: ModelConfig, *,
                  run_id: str, seed: int, dry_run: bool = False, max_workers: int = 8,
                  max_actions: int = 4, critic: bool = False, synthesize: bool = False,
-                 providers_factory=None):
+                 providers_factory=None, transport: str | None = None):
         self.snapshot = snapshot
         self.roster = roster
         self.config = config
@@ -110,6 +110,7 @@ class DeliberationEngine:
         self.max_actions = max_actions
         self.use_critic = critic
         self.use_synth = synthesize
+        self.transport = transport
         self.ledger = EventLedger(run_id)
         self.claims: dict[str, Claim] = {}
         self.minority: list[dict] = []
@@ -127,9 +128,9 @@ class DeliberationEngine:
         self.models_used: set[str] = set()
 
     # ------------------------------------------------------------------ infra
-    def _provider(self, provider: str, profile: str) -> Provider:
-        spec = self.config.model(provider, profile)
-        key = f"{provider}|{spec.tier}"
+    def _provider(self, provider: str, profile: str, spec=None) -> Provider:
+        spec = spec or self.config.model(provider, profile, transport=self.transport)
+        key = f"{spec.provider}|{spec.transport}|{spec.id}"
         if key not in self._providers:
             self._providers[key] = self._factory(spec)
         return self._providers[key]
@@ -144,8 +145,11 @@ class DeliberationEngine:
         u.input_tokens += result.input_tokens
         u.output_tokens += result.output_tokens
         u.latency_s += result.latency_s
+        reported = (result.extra or {}).get("cost_usd")
         pin, pout = provider.spec.options.get("price_in"), provider.spec.options.get("price_out")
-        if pin is None or pout is None:
+        if reported is not None:
+            u.cost_usd += reported  # OpenRouter returns the billed cost per call
+        elif pin is None or pout is None:
             u.cost_known = provider.spec.sdk == "mock"
         else:
             u.cost_usd += (result.input_tokens * float(pin) + result.output_tokens * float(pout)) / 1e6
@@ -271,7 +275,7 @@ class DeliberationEngine:
 
         def work(job):
             seat, system, user = job
-            provider = self._provider(seat.provider, seat.profile)
+            provider = self._provider(seat.provider, seat.profile, seat.spec)
             seed = stable_int(self.seed, seat.agentId, round_id)
             payload, stats = self._call(provider, system, user, prompts.TURN_SCHEMA, "council_turn",
                                         _TURN_VALIDATOR, seed)

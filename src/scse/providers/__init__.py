@@ -12,6 +12,9 @@ def build_provider(spec: ModelSpec, *, dry_run: bool = False) -> Provider:
 
     if dry_run or spec.sdk == "mock":
         return MockProvider(spec, persona=spec.provider)
+    if spec.sdk == "openrouter":
+        from .openrouter_provider import OpenRouterProvider
+        return OpenRouterProvider(spec)
     if spec.sdk == "anthropic":
         from .anthropic_provider import AnthropicProvider
         return AnthropicProvider(spec)
