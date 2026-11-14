@@ -1,0 +1,80 @@
+{
+  "scenarioId": "BR-PBIA-001",
+  "mode": "regulatoryPolicy",
+  "jurisdiction": {
+    "code": "BR",
+    "name": "Brazil"
+  },
+  "asOfDate": "2026-11-14",
+  "question": "No Brasil fictício, que tensões, lacunas e condições de viabilidade precisam ser enfrentadas para que os objetivos do PBIA se sustentem de 2026 a 2033, considerando o fim do ciclo orçamentário em 2028?",
+  "regulatorySources": [
+    {
+      "id": "PBIA-DOC",
+      "title": "Plano Brasileiro de Inteligência Artificial 2024-2028",
+      "status": "effective",
+      "uri": "https://indico.rnp.br/event/155/contributions/1369/attachments/569/876/Plano_Brasileiro_de_IA.pdf",
+      "kind": "policyDocument"
+    },
+    {
+      "id": "PL2338",
+      "title": "PL 2338/2023",
+      "status": "proposed",
+      "uri": "https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2487262",
+      "kind": "bill"
+    }
+  ],
+  "contextSources": [
+    {
+      "id": "WORLD-BRF",
+      "title": "Brasil fictício (world pack)",
+      "status": "unknown",
+      "uri": "urn:scse:world:brasil-ficticio",
+      "kind": "other"
+    }
+  ],
+  "council": {
+    "strategy": "documentedPerspectiveCoverage",
+    "targetSeats": 20,
+    "requiredReview": true
+  },
+  "simulation": {
+    "rounds": 6,
+    "replicates": 3,
+    "randomSeed": 2033,
+    "tokenBudget": 4000000,
+    "maxCostUsd": 40,
+    "branches": [
+      {
+        "id": "post2028-continuity",
+        "hypothesis": "O financiamento pós-2028 mantém o patamar do ciclo 2024-2028.",
+        "patch": {
+          "IND-POST2028-FUNDING": 1.0
+        },
+        "assumptions": [
+          "Premissa sintética do mundo fictício; não é afirmação sobre o Brasil real."
+        ]
+      },
+      {
+        "id": "post2028-cut-50",
+        "hypothesis": "O financiamento pós-2028 cai para metade do ciclo atual.",
+        "patch": {
+          "IND-POST2028-FUNDING": 0.5
+        },
+        "assumptions": [
+          "Premissa sintética do mundo fictício; não é afirmação sobre o Brasil real.",
+          "Sem fonte alternativa de financiamento."
+        ]
+      },
+      {
+        "id": "post2028-discontinued",
+        "hypothesis": "O plano é descontinuado após 2028 e só ações já contratadas seguem.",
+        "patch": {
+          "IND-POST2028-FUNDING": 0.0
+        },
+        "assumptions": [
+          "Premissa sintética do mundo fictício; não é afirmação sobre o Brasil real."
+        ]
+      }
+    ]
+  }
+}

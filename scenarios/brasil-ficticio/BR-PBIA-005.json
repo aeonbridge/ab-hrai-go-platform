@@ -1,0 +1,87 @@
+{
+  "scenarioId": "BR-PBIA-005",
+  "mode": "solutionCompliance",
+  "jurisdiction": {
+    "code": "BR",
+    "name": "Brazil"
+  },
+  "asOfDate": "2026-11-14",
+  "question": "Que requisitos aplicáveis, lacunas de evidência e objeções devem ser examinados para um assistente fictício de triagem de benefícios sociais operado por órgão público no Brasil fictício?",
+  "regulatorySources": [
+    {
+      "id": "LGPD",
+      "title": "Lei Geral de Proteção de Dados (Lei 13.709/2018)",
+      "status": "effective",
+      "uri": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm",
+      "kind": "law"
+    },
+    {
+      "id": "PL2338",
+      "title": "PL 2338/2023",
+      "status": "proposed",
+      "uri": "https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2487262",
+      "kind": "bill"
+    }
+  ],
+  "contextSources": [
+    {
+      "id": "WORLD-BRF",
+      "title": "Brasil fictício (world pack)",
+      "status": "unknown",
+      "uri": "urn:scse:world:brasil-ficticio",
+      "kind": "other"
+    }
+  ],
+  "solution": {
+    "id": "brf-benefit-triage-01",
+    "title": "Assistente Fictício de Triagem de Benefícios",
+    "summary": "Especificação sintética: sistema que prioriza pedidos de benefício social e sugere indeferimento preliminar com base em cadastro, renda declarada e histórico de pedidos.",
+    "artifactType": "specification",
+    "systemRoles": [
+      "deployer",
+      "operator"
+    ],
+    "dataCategories": [
+      "cadastroSocial",
+      "rendaDeclarada",
+      "historicoDePedidos"
+    ],
+    "decisionAutonomy": "humanApproval",
+    "evidenceIds": []
+  },
+  "council": {
+    "strategy": "documentedPerspectiveCoverage",
+    "targetSeats": 20,
+    "requiredReview": true
+  },
+  "simulation": {
+    "rounds": 6,
+    "replicates": 3,
+    "randomSeed": 2027,
+    "tokenBudget": 4000000,
+    "maxCostUsd": 40,
+    "branches": [
+      {
+        "id": "mandatory-human-review-denials",
+        "hypothesis": "Todo indeferimento sugerido exige revisão humana fundamentada e comunicação de motivo ao cidadão.",
+        "patch": {
+          "humanReviewOnDenial": true
+        },
+        "assumptions": [
+          "Premissa sintética do mundo fictício; não é afirmação sobre o Brasil real."
+        ]
+      },
+      {
+        "id": "automated-denials",
+        "hypothesis": "Indeferimentos de baixo valor passam a ser automáticos, com recurso posterior.",
+        "patch": {
+          "decisionAutonomy": "automated"
+        },
+        "assumptions": [
+          "Premissa sintética do mundo fictício; não é afirmação sobre o Brasil real.",
+          "Cenário de estresse; não é recomendação."
+        ]
+      }
+    ]
+  }
+}
