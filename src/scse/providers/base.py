@@ -44,6 +44,7 @@ class Provider:
 
     def __init__(self, spec: ModelSpec):
         self.spec = spec
+        self.trace_recorder = None
 
     @property
     def name(self) -> str:
@@ -54,6 +55,14 @@ class Provider:
 
     def list_models(self) -> list[str]:  # pragma: no cover - interface
         raise NotImplementedError
+
+    def set_trace_recorder(self, recorder) -> None:
+        """Attach a transport recorder before the first network request."""
+        self.trace_recorder = recorder
+
+    def close(self) -> None:
+        """Release provider resources; stateless providers need no cleanup."""
+        return None
 
     # helpers -------------------------------------------------------------
     def opt(self, key: str, default: Any = None) -> Any:

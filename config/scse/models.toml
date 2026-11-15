@@ -12,9 +12,9 @@
 #   3. Linha de comando:      scse run ... --set openai.deep=gpt-6.1-terra
 #   4. Arquivo de experimento (experiments/scse/*.toml), chave `overrides`.
 #
-# `verified = false` indica que o ID foi levantado em fontes secundárias em
-# 2026-11-14 e NÃO foi confirmado na API do provider. Rode
-# `scse models verify` (requer chaves) antes de qualquer execução real.
+# `verified` confirma o ID na API direta do provider; `openrouter_verified`
+# confirma a presença do slug no catálogo do OpenRouter. Nenhum dos dois
+# confirma que a chave atual tem acesso a chamadas de geração.
 #
 # price_in / price_out (USD por 1M tokens) alimentam o controle maxCostUsd.
 # Sem preço declarado, o custo do provider é reportado como desconhecido e só
@@ -65,6 +65,7 @@ openrouter_upstream = ["anthropic"]
 [providers.anthropic.models.deep]
 id = "claude-opus-5-5"
 openrouter_id = "anthropic/claude-opus-5.5"
+openrouter_verified = true
 effort = "high"
 price_in = 4.0                 # USD / 1M tokens (Anthropic, nov/2026)
 price_out = 20.0                # Opus 5.5 default é medium; explicitamos
@@ -73,7 +74,8 @@ verified = true
 
 [providers.anthropic.models.standard]
 id = "claude-sonnet-5-5"
-openrouter_id = "anthropic/claude-sonnet-5.5"   # slug inferido, não verificado
+openrouter_id = "anthropic/claude-sonnet-5.5"
+openrouter_verified = true
 effort = "medium"
 price_in = 2.0
 price_out = 10.0
@@ -82,7 +84,8 @@ verified = true
 
 [providers.anthropic.models.light]
 id = "claude-haiku-5-5"
-openrouter_id = "anthropic/claude-haiku-5.5"   # slug inferido, não verificado
+openrouter_id = "anthropic/claude-haiku-5.5"
+openrouter_verified = true
 effort = "low"
 price_in = 0.10
 price_out = 0.50
@@ -98,18 +101,21 @@ openrouter_upstream = ["openai"]
 [providers.openai.models.deep]
 id = "gpt-6-sol"
 openrouter_id = "openai/gpt-6-sol"
+openrouter_verified = true
 effort = "high"                # reasoning.effort
 verified = false
 
 [providers.openai.models.standard]
 id = "gpt-6.1-terra"
-openrouter_id = "openai/gpt-6.1-terra"   # slug inferido, não verificado
+openrouter_id = "openai/gpt-6.1-terra"
+openrouter_verified = true
 effort = "medium"
 verified = false
 
 [providers.openai.models.light]
 id = "gpt-6-luna"
-openrouter_id = "openai/gpt-6-luna"   # slug inferido, não verificado
+openrouter_id = "openai/gpt-6-luna"
+openrouter_verified = true
 effort = "low"
 verified = false
 
@@ -124,16 +130,19 @@ openrouter_upstream = ["xai"]  # slug do host não verificado
 [providers.xai.models.deep]
 id = "grok-4.7"
 openrouter_id = "x-ai/grok-4.7"
+openrouter_verified = true
 verified = false
 
 [providers.xai.models.standard]
 id = "grok-4.6"
-openrouter_id = "x-ai/grok-4.6"   # slug inferido, não verificado
+openrouter_id = "x-ai/grok-4.6"
+openrouter_verified = true
 verified = false
 
 [providers.xai.models.light]
 id = "grok-4.5"
-openrouter_id = "x-ai/grok-4.5"   # slug inferido, não verificado
+openrouter_id = "x-ai/grok-4.5"
+openrouter_verified = true
 verified = false
 
 # ------------------------------------------------------------------- Gemini
@@ -146,18 +155,21 @@ openrouter_upstream = ["google-ai-studio"]  # slug do host não verificado
 [providers.gemini.models.deep]
 id = "gemini-4-argon"
 openrouter_id = "google/gemini-4-argon"
+openrouter_verified = true
 thinking_level = "high"
 verified = false
 
 [providers.gemini.models.standard]
 id = "gemini-3.8-flash"
-openrouter_id = "google/gemini-3.8-flash"   # slug inferido, não verificado
+openrouter_id = "google/gemini-3.8-flash"
+openrouter_verified = true
 thinking_level = "medium"
 verified = false
 
 [providers.gemini.models.light]
 id = "gemini-3.5-flash-lite"
-openrouter_id = "google/gemini-3.5-flash-lite"   # slug inferido, não verificado
+openrouter_id = "google/gemini-3.5-flash-lite"
+openrouter_verified = true
 thinking_level = "low"
 verified = false
 

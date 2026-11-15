@@ -34,6 +34,14 @@ def test_scenario_and_model_are_valid():
     assert gv.validate_model(json.loads(MODEL.read_text()), taxonomy) == []
 
 
+def test_context_loader_ignores_hidden_appledouble_json(tmp_path):
+    context = {"contextId": "ctx", "validFrom": "2026-11-14", "facts": [], "features": []}
+    (tmp_path / "2026-11-14.json").write_text(json.dumps(context), encoding="utf-8")
+    (tmp_path / "._2026-11-14.json").write_bytes(b"AppleDouble metadata is not a context snapshot")
+    loaded = gv.load_context(tmp_path, "2026-11-14")
+    assert loaded["contextId"] == "ctx"
+
+
 def test_every_cited_source_resolves():
     snap = prepare(load_scenario(GOV), scenario_path=GOV)
     known = snap.evidence_ids

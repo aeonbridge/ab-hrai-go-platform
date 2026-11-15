@@ -9,8 +9,9 @@ Comparability safeguards (configurable in [openrouter]):
 from __future__ import annotations
 
 import time
+import threading
 
-from .base import CompletionRequest, CompletionResult, Provider
+from .base import CompletionRequest, CompletionResult, Provider, ProviderError
 from .openai_provider import _translate
 
 # Maps per-provider reasoning knobs to OpenRouter's unified ``reasoning.effort``.
@@ -18,11 +19,41 @@ _GEMINI_LEVEL = {"minimal": "minimal", "low": "low", "medium": "medium", "high":
 
 
 class OpenRouterProvider(Provider):
-    def _client(self):
-        import openai
+    def __init__(self, spec):
+        super().__init__(spec)
+        self._client_lock = threading.Lock()
+        self._openai_client = None
+        self._http_client = None
 
-        return openai.OpenAI(api_key=self.api_key(), base_url=self.opt("base_url", "https://openrouter.ai/api/v1"),
-                             timeout=float(self.opt("timeout_seconds", 300)))
+    def _client(self):
+        if self._openai_client is not None:
+            return self._openai_client
+        with self._client_lock:
+            if self._openai_client is not None:
+                return self._openai_client
+            if self.trace_recorder is None:
+                raise ProviderError("OpenRouter network call blocked: full HTTP trace is not configured")
+            import openai
+            import httpx
+
+            timeout = float(self.opt("timeout_seconds", 300))
+            self._http_client = httpx.Client(
+                timeout=timeout,
+                follow_redirects=True,
+                event_hooks=self.trace_recorder.event_hooks,
+            )
+            try:
+                self._openai_client = openai.OpenAI(
+                    api_key=self.api_key(),
+                    base_url=self.opt("base_url", "https://openrouter.ai/api/v1"),
+                    timeout=timeout,
+                    http_client=self._http_client,
+                )
+            except Exception:
+                self._http_client.close()
+                self._http_client = None
+                raise
+            return self._openai_client
 
     def routing(self) -> dict:
         prefs: dict = {"allow_fallbacks": bool(self.opt("allow_fallbacks", False)),
@@ -66,6 +97,8 @@ class OpenRouterProvider(Provider):
         try:
             resp = self._client().chat.completions.create(**self.request_kwargs(req))
         except openai.OpenAIError as exc:
+            if self.trace_recorder is not None:
+                self.trace_recorder.record_sdk_error(exc)
             raise _translate(exc, f"openrouter[{self.name}]") from exc
         latency = time.monotonic() - started
         choice = resp.choices[0]
@@ -87,4 +120,17 @@ class OpenRouterProvider(Provider):
         )
 
     def list_models(self) -> list[str]:
-        return [m.id for m in self._client().models.list()]
+        import openai
+
+        try:
+            return [m.id for m in self._client().models.list()]
+        except openai.OpenAIError as exc:
+            if self.trace_recorder is not None:
+                self.trace_recorder.record_sdk_error(exc)
+            raise _translate(exc, f"openrouter[{self.name}]") from exc
+
+    def close(self) -> None:
+        if self._openai_client is not None:
+            self._openai_client.close()
+            self._openai_client = None
+            self._http_client = None

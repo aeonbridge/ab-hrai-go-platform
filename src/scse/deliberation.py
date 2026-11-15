@@ -109,7 +109,8 @@ class DeliberationEngine:
     def __init__(self, snapshot: WorldSnapshot, roster: CouncilRoster, config: ModelConfig, *,
                  run_id: str, seed: int, dry_run: bool = False, max_workers: int = 8,
                  max_actions: int = 4, critic: bool = False, synthesize: bool = False,
-                 providers_factory=None, transport: str | None = None):
+                 providers_factory=None, transport: str | None = None,
+                 openrouter_trace_path: str | None = None):
         self.snapshot = snapshot
         self.roster = roster
         self.config = config
@@ -135,6 +136,10 @@ class DeliberationEngine:
         self.stopped_reason: str | None = None
         self._factory = providers_factory or (lambda spec: build_provider(spec, dry_run=dry_run))
         self._providers: dict[str, Provider] = {}
+        self.http_trace = None
+        if openrouter_trace_path is not None:
+            from .providers.http_trace import OpenRouterHttpTrace
+            self.http_trace = OpenRouterHttpTrace(openrouter_trace_path)
         self.models_used: set[str] = set()
 
     # ------------------------------------------------------------------ infra
@@ -143,7 +148,21 @@ class DeliberationEngine:
         key = f"{spec.provider}|{spec.transport}|{spec.id}"
         if key not in self._providers:
             self._providers[key] = self._factory(spec)
-        return self._providers[key]
+        instance = self._providers[key]
+        if self.http_trace is not None and spec.sdk == "openrouter":
+            instance.set_trace_recorder(self.http_trace)
+        return instance
+
+    def close(self) -> None:
+        """Close provider clients and fsync the raw HTTP trace."""
+        try:
+            for provider in self._providers.values():
+                close = getattr(provider, "close", None)
+                if callable(close):
+                    close()
+        finally:
+            if self.http_trace is not None:
+                self.http_trace.close()
 
     def _next_id(self, round_id: str) -> str:
         self._counter += 1

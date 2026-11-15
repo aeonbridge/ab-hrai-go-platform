@@ -7,7 +7,7 @@ name = "scse"
 version = "0.1.0"
 description = "Shadow Council Simulation Environment (HRAI-GO): deliberative multi-agent, multi-provider runtime"
 requires-python = ">=3.11"
-dependencies = ["jsonschema>=4.20"]
+dependencies = ["jsonschema>=4.20", "python-dotenv>=1.0"]
 
 [project.optional-dependencies]
 anthropic = ["anthropic>=2.8"]

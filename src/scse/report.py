@@ -126,6 +126,8 @@ def compile_run(engine, out_dir: Path, *, extra_limitations: list[str] | None = 
         "ledgerIntact": engine.ledger.verify(), "events": len(engine.ledger.events),
         "note": "Seeds não asseguram determinismo de modelos externos.",
     }
+    if engine.http_trace is not None:
+        manifest["openRouterHttpTrace"] = engine.http_trace.summary(relative_to=out_dir)
     claims_graph = [vars(c) for c in sorted(engine.claims.values(), key=lambda x: x.id)]
     if packet is not None:
         g = engine.snapshot.governance

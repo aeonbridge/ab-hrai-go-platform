@@ -34,18 +34,18 @@ Os adaptadores diretos continuam disponíveis: `--transport direct`,
 `transport = "direct"` num provider ou no braço do experimento. Rodar o mesmo braço
 pelas duas vias mede se a camada intermediária altera o comportamento.
 
-Slugs do OpenRouter confirmados em catálogos de terceiros (não na API):
-`anthropic/claude-opus-5.5`, `openai/gpt-6-sol`, `x-ai/grok-4.7`,
-`google/gemini-4-argon`. Os demais seguem o mesmo padrão, mas são inferidos. Os slugs
-de host `xai` e `google-ai-studio` também não foram verificados. Rode
-`scse models verify` antes da primeira execução real.
+Os 12 slugs configurados foram encontrados no catálogo da API do OpenRouter em
+2026-11-15. `scse models verify` valida a presença dos IDs no catálogo; não testa
+autenticação nem uma chamada de geração. Os hosts `xai` e `google-ai-studio` ainda
+não foram validados em chamadas reais.
 
 ## Uso rápido
 
 ```bash
 scse validate scenarios/brasil-ficticio/*.json
 scse models list                      # perfil -> tier -> modelo de cada provider
-scse models verify                    # confere os IDs na API de cada provider
+scse models verify                    # confere os IDs no catálogo de cada provider
+scse models ping                      # faz uma chamada curta de geração
 scse run scenarios/brasil-ficticio/BR-PBIA-001.json --dry-run    # offline, provider mock
 scse run scenarios/brasil-ficticio/BR-PBIA-001.json --seats 8 --replicates 1 --critic
 scse experiment experiments/scse/provider-practice.toml --plan   # estima custo
@@ -70,13 +70,13 @@ perfil aponta para um tier, e cada provider declara um modelo por tier em
 
 | Tier | Anthropic | OpenAI | xAI | Gemini |
 |---|---|---|---|---|
-| deep | `claude-opus-5-5` (effort high) | `gpt-6-sol`* (reasoning high) | `grok-4.7`* | `gemini-4-argon`* (thinking high) |
-| standard | `claude-sonnet-5-5` (effort medium) | `gpt-6.1-terra`* | `grok-4.6`* | `gemini-3.8-flash`* |
-| light | `claude-haiku-5-5` | `gpt-6-luna`* | `grok-4.5`* | `gemini-3.5-flash-lite`* |
+| deep | `claude-opus-5-5` (effort high) | `gpt-6-sol` (reasoning high) | `grok-4.7` | `gemini-4-argon` (thinking high) |
+| standard | `claude-sonnet-5-5` (effort medium) | `gpt-6.1-terra` | `grok-4.6` | `gemini-3.8-flash` |
+| light | `claude-haiku-5-5` | `gpt-6-luna` | `grok-4.5` | `gemini-3.5-flash-lite` |
 
-\* ID levantado em fontes secundárias em 2026-11-14 e **não confirmado** na API.
-Rode `scse models verify` antes de uma execução real. Os IDs da Anthropic vêm da
-documentação oficial do SDK.
+Os IDs desta tabela foram encontrados no catálogo do OpenRouter em 2026-11-15.
+Isso não garante acesso de geração pela chave configurada. Os IDs diretos vêm da
+documentação dos respectivos SDKs.
 
 ### Como trocar um modelo
 
@@ -198,9 +198,26 @@ aplique a rubrica de especialistas da especificação (`ClaimEvidencePrecision`,
 `provider-scorecard.json`, `turn-stats.json`, `run-summary.json`. Por cenário:
 `sensitivity-report.json`. Por experimento: `experiment-summary.{json,md}`.
 
+### Registro integral do HTTP OpenRouter
+
+Cada réplica real roteada pelo OpenRouter grava todos os requests e responses em
+`rep-NN/http/openrouter-http.jsonl`. O corpo HTTP completo fica em `bodyBase64`
+(byte a byte) e, quando UTF-8, também em `bodyText`; inclui método, URL, cabeçalhos,
+status, timestamps, hash SHA-256 e IDs para correlacionar cada par. A credencial
+de autenticação e cabeçalhos de chave/cookie são redigidos. O diretório e o arquivo
+recebem permissões restritas (`0700`/`0600`, quando suportadas pelo filesystem), e
+cada evento é sincronizado em disco antes de a chamada prosseguir. Se não for
+possível gravar o request, o cliente bloqueia o envio.
+
+`run-manifest.json` registra o caminho, contagens, SHA-256 e se todos os requests
+tiveram uma resposta HTTP ou erro de transporte associado. Os comandos
+`scse models verify` e `scse models ping` também gravam em
+`runs/openrouter-checks/`. A CLI carrega `.env` da raiz sem substituir variáveis
+já exportadas pelo processo.
+
 ## Limitações conhecidas
 
-- IDs de modelo não verificados nesta sessão: a rede do ambiente bloqueou o OpenRouter e a documentação oficial da OpenAI, xAI e Gemini.
+- Os slugs dos 12 modelos foram localizados no catálogo do OpenRouter; a chave configurada retornou `401 User not found` nas chamadas de geração e precisa ser substituída antes de validar o acesso aos modelos.
 - O comportamento padrão do OpenRouter para `response_format` sem `require_parameters` e a tradução de `reasoning.effort` por host vêm de fontes secundárias. O adaptador exige os parâmetros justamente por isso.
 - Os adaptadores reais foram testados com clientes simulados (formato da requisição e parsing), não contra as APIs. Rode `scse models ping` antes da primeira execução.
 - O schema do turno usa `anyOf` para campos anuláveis. Se algum provider recusar o schema, use `structured_output = "json_mode"` naquele provider; a validação local continua garantindo o contrato.

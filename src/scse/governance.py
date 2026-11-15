@@ -115,7 +115,7 @@ def load_context(path: str | Path, as_of: str, base: Path | None = None) -> dict
     """Context at the round date. A directory holds dated snapshots; the latest with
     validFrom <= asOfDate is used. Fails closed when none applies (no anachronistic context)."""
     p = _resolve(path, base)
-    files = sorted(p.glob("*.json")) if p.is_dir() else [p]
+    files = sorted(f for f in p.glob("*.json") if not f.name.startswith(".")) if p.is_dir() else [p]
     best = None
     for f in files:
         ctx = _check_context(_read(f), str(f))

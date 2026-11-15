@@ -89,17 +89,25 @@ def run_scenario(scenario_path: str | Path, config: ModelConfig, opts: RunOption
             from .governance_engine import GovernanceEngine as engine_cls
         else:
             engine_cls = DeliberationEngine
+        trace_enabled = not opts.dry_run and any(
+            config.provider(p)["sdk"] != "mock" and config.transport_for(p, opts.transport) == "openrouter"
+            for p in providers
+        )
+        trace_path = (base / f"rep-{rep + 1:02d}" / "http" / "openrouter-http.jsonl") if trace_enabled else None
         engine = engine_cls(snapshot, roster, config, run_id=run_id, seed=seed, dry_run=opts.dry_run,
                                     max_workers=opts.workers, critic=opts.critic, synthesize=opts.synthesize,
-                                    transport=opts.transport)
-        engine.run()
+                                    transport=opts.transport, openrouter_trace_path=str(trace_path) if trace_path else None)
         limitations = list(opts.extra_limitations)
-        if opts.dry_run:
-            limitations.append("DRY-RUN: respostas geradas pelo provider mock determinístico; nenhum modelo real foi consultado.")
-        unverified = config.unverified_models(providers, opts.transport)
-        if unverified and not opts.dry_run:
-            limitations.append("IDs de modelo não verificados na API: " + ", ".join(unverified))
-        results.append(compile_run(engine, base / f"rep-{rep + 1:02d}", extra_limitations=limitations))
+        try:
+            engine.run()
+            if opts.dry_run:
+                limitations.append("DRY-RUN: respostas geradas pelo provider mock determinístico; nenhum modelo real foi consultado.")
+            unverified = config.unverified_models(providers, opts.transport)
+            if unverified and not opts.dry_run:
+                limitations.append("IDs de modelo não verificados na API: " + ", ".join(unverified))
+            results.append(compile_run(engine, base / f"rep-{rep + 1:02d}", extra_limitations=limitations))
+        finally:
+            engine.close()
     sens = metrics.sensitivity([r["summary"] for r in results])
     review = None
     if scenario["mode"] == "governanceReview":

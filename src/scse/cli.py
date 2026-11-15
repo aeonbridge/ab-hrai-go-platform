@@ -4,9 +4,10 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
-from .config import ConfigError, ModelConfig, parse_set_option
+from .config import ConfigError, ModelConfig, parse_set_option, REPO_ROOT
 from .governance import GovernanceError
 from .world import ScenarioError, load_scenario, validate
 
@@ -141,31 +142,58 @@ def cmd_models(args) -> int:
     from .providers import CompletionRequest, ProviderError, build_provider
 
     rc = 0
-    for p in providers:
-        tiers = config.provider(p)["models"]
-        if args.action == "verify":
-            try:
-                available = set(build_provider(config.model(p, "smoke", transport=transport)).list_models())
-            except (ProviderError, Exception) as exc:  # noqa: BLE001 - report any SDK/network failure
-                print(f"{p}: ERRO ao listar modelos: {exc}")
-                rc = 1
-                continue
-            for tier in tiers:
-                model_id = config.model(p, "smoke", tier=tier, transport=transport).id
-                ok = model_id in available
-                rc |= not ok
-                print(f"{p}.{tier}: {model_id} {'OK' if ok else 'AUSENTE na API'}")
-        elif args.action == "ping":
-            prov = build_provider(config.model(p, "smoke", transport=transport))
-            schema = {"type": "object", "additionalProperties": False, "required": ["ok"],
-                      "properties": {"ok": {"type": "boolean"}}}
-            try:
-                res = prov.complete(CompletionRequest(system="Responda só JSON.", user='Retorne {"ok": true}.',
-                                                      schema=schema, schema_name="ping", max_output_tokens=2000))
-                print(f"{p}: {res.model_served} -> {res.text[:80]!r} ({res.latency_s:.1f}s)")
-            except ProviderError as exc:
-                print(f"{p}: ERRO {exc}")
-                rc = 1
+    trace = None
+    if args.action in ("verify", "ping") and any(
+        config.provider(p)["sdk"] != "mock" and config.transport_for(p, transport) == "openrouter"
+        for p in providers
+    ):
+        from .providers.http_trace import OpenRouterHttpTrace
+
+        stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ")
+        trace = OpenRouterHttpTrace(Path("runs") / "openrouter-checks" / f"{stamp}-{args.action}" /
+                                    "http" / "openrouter-http.jsonl")
+    instances = []
+    try:
+        for p in providers:
+            tiers = config.provider(p)["models"]
+            if args.action == "verify":
+                try:
+                    prov = build_provider(config.model(p, "smoke", transport=transport))
+                    instances.append(prov)
+                    if trace is not None and prov.spec.sdk == "openrouter":
+                        prov.set_trace_recorder(trace)
+                    available = set(prov.list_models())
+                except (ProviderError, Exception) as exc:  # noqa: BLE001 - report any SDK/network failure
+                    print(f"{p}: ERRO ao listar modelos: {exc}")
+                    rc = 1
+                    continue
+                for tier in tiers:
+                    model_id = config.model(p, "smoke", tier=tier, transport=transport).id
+                    ok = model_id in available
+                    rc |= not ok
+                    print(f"{p}.{tier}: {model_id} {'OK' if ok else 'AUSENTE na API'}")
+            elif args.action == "ping":
+                prov = build_provider(config.model(p, "smoke", transport=transport))
+                instances.append(prov)
+                if trace is not None and prov.spec.sdk == "openrouter":
+                    prov.set_trace_recorder(trace)
+                schema = {"type": "object", "additionalProperties": False, "required": ["ok"],
+                          "properties": {"ok": {"type": "boolean"}}}
+                try:
+                    res = prov.complete(CompletionRequest(system="Responda só JSON.", user='Retorne {"ok": true}.',
+                                                          schema=schema, schema_name="ping", max_output_tokens=2000))
+                    print(f"{p}: {res.model_served} -> {res.text[:80]!r} ({res.latency_s:.1f}s)")
+                except ProviderError as exc:
+                    print(f"{p}: ERRO {exc}")
+                    rc = 1
+    finally:
+        for instance in instances:
+            instance.close()
+        if trace is not None:
+            summary = trace.summary()
+            print(f"Registro HTTP OpenRouter: {summary['path']} "
+                  f"({summary['requestRecords']} requests, {summary['responseRecords']} responses; "
+                  f"fechado={summary['allRequestsAccountedFor']})")
     return rc
 
 
@@ -238,6 +266,9 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> int:
+    from dotenv import load_dotenv
+
+    load_dotenv(REPO_ROOT / ".env", override=False)
     args = build_parser().parse_args(argv)
     try:
         return args.func(args)
