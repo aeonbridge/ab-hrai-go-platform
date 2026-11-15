@@ -1,0 +1,89 @@
+{
+  "scenarioId": "BR-PBIA-004",
+  "mode": "regulatoryPolicy",
+  "jurisdiction": {
+    "code": "BR",
+    "name": "Brazil"
+  },
+  "asOfDate": "2026-11-14",
+  "question": "No Brasil fictício, quais consequências da obrigatoriedade de avaliação de impacto ex-ante e de canal de contestação humana para sistemas de IA em serviços públicos merecem investigação até 2033?",
+  "regulatorySources": [
+    {
+      "id": "PL2338",
+      "title": "PL 2338/2023",
+      "status": "proposed",
+      "uri": "https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2487262",
+      "kind": "bill"
+    },
+    {
+      "id": "LGPD",
+      "title": "Lei Geral de Proteção de Dados (Lei 13.709/2018)",
+      "status": "effective",
+      "uri": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm",
+      "kind": "law"
+    },
+    {
+      "id": "PBIA-DOC",
+      "title": "Plano Brasileiro de Inteligência Artificial 2024-2028",
+      "status": "effective",
+      "uri": "https://indico.rnp.br/event/155/contributions/1369/attachments/569/876/Plano_Brasileiro_de_IA.pdf",
+      "kind": "policyDocument"
+    }
+  ],
+  "contextSources": [
+    {
+      "id": "WORLD-BRF",
+      "title": "Brasil fictício (world pack)",
+      "status": "unknown",
+      "uri": "urn:scse:world:brasil-ficticio",
+      "kind": "other"
+    }
+  ],
+  "council": {
+    "strategy": "documentedPerspectiveCoverage",
+    "targetSeats": 20,
+    "requiredReview": true
+  },
+  "simulation": {
+    "rounds": 6,
+    "replicates": 3,
+    "randomSeed": 2026,
+    "tokenBudget": 4000000,
+    "maxCostUsd": 40,
+    "branches": [
+      {
+        "id": "ex-ante-audit",
+        "hypothesis": "Todo sistema de IA de alto impacto no setor público exige auditoria ex-ante independente.",
+        "patch": {
+          "exAnteAudit": "mandatory",
+          "IND-AI-INSPECTORS": 140
+        },
+        "assumptions": [
+          "Premissa sintética do mundo fictício; não é afirmação sobre o Brasil real.",
+          "Nenhuma proteção de direitos fundamentais é dispensada."
+        ]
+      },
+      {
+        "id": "risk-scaled-documentation",
+        "hypothesis": "Documentação proporcional ao risco, com auditoria só para o nível mais alto.",
+        "patch": {
+          "documentationTier": "scaledByRisk"
+        },
+        "assumptions": [
+          "Premissa sintética do mundo fictício; não é afirmação sobre o Brasil real.",
+          "Nenhuma proteção de direitos fundamentais é dispensada."
+        ]
+      },
+      {
+        "id": "inspectors-tripled",
+        "hypothesis": "A capacidade de fiscalização triplica até 2029.",
+        "patch": {
+          "IND-AI-INSPECTORS": 420
+        },
+        "assumptions": [
+          "Premissa sintética do mundo fictício; não é afirmação sobre o Brasil real."
+        ]
+      }
+    ]
+  }
+}

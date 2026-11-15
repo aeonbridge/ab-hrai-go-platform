@@ -1,0 +1,88 @@
+# Experimento: a prática de cada provider dentro do protocolo SCSE.
+#
+# Rodar:   scse experiment experiments/scse/provider-practice.toml --plan
+#          scse experiment experiments/scse/provider-practice.toml --dry-run
+#          scse experiment experiments/scse/provider-practice.toml          (real; requer as 4 chaves)
+#
+# Custo: comece com `--plan`. seats=8 reduz o conselho de 20 para 8 assentos
+# (quotas reescalonadas, mínimo 1 por estrato). Para a composição completa do
+# spec, remova `seats`.
+
+name = "provider-practice"
+description = "Compara disciplina de formato, fundamentação, contestação, responsividade e auto-preferência de Anthropic, OpenAI, xAI e Gemini no Brasil fictício (PBIA, 2026-2033), contra as linhas de base B1 e B2 da especificação."
+providers = ["anthropic", "openai", "xai", "gemini"]
+scenarios = [
+  "scenarios/brasil-ficticio/BR-PBIA-001.json",
+  "scenarios/brasil-ficticio/BR-PBIA-002.json",
+  "scenarios/brasil-ficticio/BR-PBIA-003.json",
+  "scenarios/brasil-ficticio/BR-PBIA-004.json",
+  "scenarios/brasil-ficticio/BR-PBIA-005.json",
+]
+seats = 8
+replicates = 3
+rounds = 6
+critic = true        # crítica cruzada: cada tese revisada por provider diferente do autor
+synthesize = false   # descrições determinísticas; ligue para redação por modelo
+transport = "openrouter"   # "direct" usa as APIs de cada provider (4 chaves)
+
+hypotheses = [
+  "H1 Formato: todos os providers mantêm schemaValidRate >= 0.95; repairRate alto indica fragilidade de structured output.",
+  "H2 Fundamentação: groundingRate e criticGroundedRate diferem entre providers; invalidCitationRate > 0 indica invenção de fonte.",
+  "H3 Contestação: challengesPerR3Turn distingue providers combativos de complacentes.",
+  "H4 Responsividade: responsivenessRate (revisa/retira quando contestado) mede abertura à evidência.",
+  "H5 Auto-preferência: no braço misto, selfSupportShare acima de baselineShare indica favorecimento da própria família de modelos.",
+  "H6 Falso consenso: conselhos de provider único geram menos tensões e menos dissenso que o conselho misto.",
+  "H7 Linhas de base: B1 (agente único) e B2 (sem estratos) cobrem menos perspectivas e preservam menos dissenso que o SCSE estratificado.",
+]
+
+# Distribuição por estrato só para este experimento (mesmo formato de models.toml).
+# [strata.civilSociety]
+# mix = [
+#   { provider = "anthropic", weight = 40 },
+#   { provider = "xai",       weight = 40 },
+#   { provider = "gemini",    tier = "light", weight = 20 },
+# ]
+
+# Sobrescritas de modelo valem só para este experimento (provider.tier = id;
+# "vendor/modelo" altera o slug do OpenRouter, id simples altera a API direta).
+[overrides]
+# "openai.deep" = "gpt-6.1-terra"
+# "xai.standard" = "grok-4.5"
+
+[[arms]]
+id = "mixed-weighted"
+description = "SCSE: estratificado, provider/modelo por estrato conforme [strata] (padrão: 25% cada)"
+mode = "stratified"
+assignment = "weighted"
+
+[[arms]]
+id = "fixed-by-stratum"
+description = "Estratificado com provider fixo por estrato (controle de confusão viés x perspectiva)"
+mode = "stratified"
+assignment = "fixed"
+
+[[arms]]
+id = "solo"
+description = "Conselho estratificado inteiro num único provider"
+mode = "stratified"
+per_provider = true
+
+[[arms]]
+id = "B2-unstratified"
+description = "B2: debate multiagente sem estratificação, providers alternados"
+mode = "unstratified"
+assignment = "rotate"
+
+# Controle opcional da camada intermediária: mesmo braço via APIs diretas.
+# [[arms]]
+# id = "mixed-weighted-direct"
+# description = "Igual a mixed-weighted, mas sem OpenRouter"
+# mode = "stratified"
+# assignment = "weighted"
+# transport = "direct"
+
+[[arms]]
+id = "B1-single-agent"
+description = "B1: agente único"
+mode = "singleAgent"
+per_provider = true

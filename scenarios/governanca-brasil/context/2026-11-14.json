@@ -1,0 +1,279 @@
+{
+  "contextId": "brasil-2026-11-14",
+  "validFrom": "2026-11-14",
+  "jurisdiction": {
+    "code": "BR",
+    "name": "Brazil"
+  },
+  "label": "Brasil em 14 de novembro de 2026",
+  "disclosure": "Contexto híbrido: fatos documentados em fontes secundárias (verification=pending), traços de contexto ainda por verificar e premissas fictícias marcadas como tais. Os traços CF-xx são hipóteses de trabalho, não achados.",
+  "evidence": [
+    {
+      "id": "EBIA-DOC",
+      "title": "Portaria MCTI 4.979/2021 (altera o anexo da Portaria 4.617/2021, que institui a EBIA)",
+      "uri": "https://ses.sp.bvs.br/wp-content/uploads/2021/07/U_PT-MCTI-GM-4979_130721.pdf",
+      "kind": "regulation",
+      "synthetic": false,
+      "reliability": "medium",
+      "excerpt": "A Portaria MCTI 4.617/2021 instituiu a Estratégia Brasileira de IA; a Portaria 4.979/2021 alterou seu anexo. O documento traz eixos temáticos e ações estratégicas; a contagem de eixos varia entre fontes secundárias (nove eixos e 73 ações)."
+    },
+    {
+      "id": "EBIA-TCU",
+      "title": "TCU: primeira etapa do acompanhamento da Estratégia Brasileira de IA",
+      "uri": "https://portal.tcu.gov.br/data/files/6D/03/8F/FC/857519101C466F09F18818A8/Primeira%20etapa%20do%20acompanhamento%20da%20Estrat%C3%A9gia%20Brasileira%20de%20Intelig%C3%AAncia%20Artificial.pdf",
+      "kind": "other",
+      "synthetic": false,
+      "reliability": "high",
+      "excerpt": "O Tribunal de Contas da União realizou acompanhamento da implementação da EBIA, o que mostra existência de controle externo sobre a política de IA."
+    },
+    {
+      "id": "PBIA-AXES",
+      "title": "Um ano de PBIA: o que está sendo feito? (DPL News)",
+      "uri": "https://dplnews.com/um-ano-de-plano-brasileiro-de-inteligencia-artificial-o-que-esta-sendo-feito/",
+      "kind": "other",
+      "synthetic": false,
+      "reliability": "medium",
+      "excerpt": "O PBIA tem cinco eixos: infraestrutura e desenvolvimento de IA; difusão, formação e capacitação; IA para melhoria do serviço público; IA para inovação empresarial; apoio ao processo regulatório e de governança. Investimento projetado de cerca de R$ 23 bi (orçamento, FNDCT, contrapartidas privadas), sujeito à programação anual. O plano não se interpõe ao marco legal, busca apoiá-lo. A reportagem aponta falta de dados sobre impactos concretos."
+    },
+    {
+      "id": "PL2338-SENADO",
+      "title": "Senado aprova PL da inteligência artificial (Brasil de Fato, 10/12/2024)",
+      "uri": "https://www.brasildefato.com.br/2024/12/10/senado-aprova-pl-da-inteligencia-artificial",
+      "kind": "other",
+      "synthetic": false,
+      "reliability": "medium",
+      "excerpt": "O Senado aprovou em 10/12/2024 o PL 2338/2023, substitutivo do senador Eduardo Gomes. O texto cria o Sistema Nacional de Regulação e Governança de IA, supervisionado pela ANPD; divide os sistemas por níveis de risco, com regime distinto para alto risco e proibição de risco excessivo; trata de direitos autorais, trabalho e segurança. Seguiu para a Câmara."
+    }
+  ],
+  "facts": [
+    {
+      "id": "CTX-01",
+      "title": "Marco legal ainda em tramitação",
+      "text": "Em 14/11/2026 o PL 2338/2023 segue em tramitação na Câmara dos Deputados, com votação adiada mais de uma vez. Outros projetos sobre IA foram apresentados na Câmara em 2026 (relatos citam PL 704/2026 e PL 762/2026). Conferir a ficha oficial.",
+      "basis": "documented",
+      "sourceIds": [
+        "PL2338",
+        "PL2338-SENADO"
+      ],
+      "verification": "pending"
+    },
+    {
+      "id": "CTX-02",
+      "title": "PBIA na metade final do ciclo",
+      "text": "O ciclo orçamentário do PBIA (2024-2028) entra em seus últimos dois anos. Os relatos de execução divergem entre fontes: de 30-35% das ações executadas ou em execução a 56% com entregas.",
+      "basis": "documented",
+      "sourceIds": [
+        "PBIA-AXES",
+        "PBIA-BUDGET"
+      ],
+      "verification": "pending"
+    },
+    {
+      "id": "CTX-03",
+      "title": "Transição de governo",
+      "text": "As eleições gerais de 2026 ocorreram em outubro; o governo e a nova legislatura federais assumem em janeiro de 2027. O resultado e as prioridades do próximo governo não constam do pacote de evidências.",
+      "basis": "calendar",
+      "sourceIds": [],
+      "verification": "pending"
+    },
+    {
+      "id": "CTX-04",
+      "title": "Governança de IA apoiada no PBIA",
+      "text": "Um dos cinco eixos do PBIA apoia o processo regulatório e de governança, e o plano afirma não se interpor ao marco legal. Um grupo interministerial do MCTI monitora a execução com relatório anual.",
+      "basis": "documented",
+      "sourceIds": [
+        "PBIA-AXES",
+        "PBIA-GOV"
+      ],
+      "verification": "pending"
+    },
+    {
+      "id": "CTX-05",
+      "title": "Capacidade de fiscalização (premissa fictícia)",
+      "text": "No mundo simulado, 140 servidores se dedicam à fiscalização de IA e 18% dos órgãos federais têm unidade de governança de IA. São premissas inventadas para a simulação.",
+      "basis": "synthetic",
+      "sourceIds": [
+        "BRF-CTX-GOVCAP",
+        "IND-AI-INSPECTORS"
+      ],
+      "verification": "pending"
+    }
+  ],
+  "features": [
+    {
+      "id": "CF-01",
+      "kind": "asset",
+      "title": "Infraestrutura pública digital de escala nacional",
+      "description": "Pagamentos instantâneos (Pix) e identidade e serviços digitais (gov.br) alcançam grande parte da população e podem servir de base para IA no serviço público.",
+      "basis": "assertion",
+      "sourceIds": [
+        "BRF-CTX-PUBSVC"
+      ],
+      "verification": "pending"
+    },
+    {
+      "id": "CF-02",
+      "kind": "asset",
+      "title": "Matriz elétrica com forte participação renovável",
+      "description": "Eletricidade majoritariamente renovável é relevante para computação intensiva. Limites: gargalos de transmissão e a demanda crescente de data centers.",
+      "basis": "assertion",
+      "sourceIds": [
+        "BRF-POS-INF",
+        "BRF-CTX-COMPUTE"
+      ],
+      "verification": "pending"
+    },
+    {
+      "id": "CF-03",
+      "kind": "asset",
+      "title": "Português do Brasil em escala continental",
+      "description": "Mais de 200 milhões de falantes e baixa representação do português brasileiro em corpora e avaliações dos grandes modelos criam espaço para dados, modelos e avaliações próprios.",
+      "basis": "assertion",
+      "sourceIds": [
+        "PBIA-HPC",
+        "PBIA-DOC"
+      ],
+      "verification": "pending"
+    },
+    {
+      "id": "CF-04",
+      "kind": "asset",
+      "title": "Biodiversidade, Amazônia e bioeconomia",
+      "description": "Ativos de dados biológicos e ambientais de relevância global. Tensões: soberania, repartição de benefícios e direitos de povos e comunidades tradicionais.",
+      "basis": "assertion",
+      "sourceIds": [],
+      "verification": "pending"
+    },
+    {
+      "id": "CF-05",
+      "kind": "asset",
+      "title": "Dados de saúde pública em escala (SUS)",
+      "description": "Base de saúde pública de escala nacional. O texto do PL aprovado no Senado trata o uso de IA na saúde como alto risco, o que une oportunidade e risco.",
+      "basis": "assertion",
+      "sourceIds": [
+        "PL2338-SENADO"
+      ],
+      "verification": "pending"
+    },
+    {
+      "id": "CF-06",
+      "kind": "asset",
+      "title": "Agronegócio e dados de campo e clima",
+      "description": "Setor produtivo de peso global com dados de campo, clima e logística.",
+      "basis": "assertion",
+      "sourceIds": [],
+      "verification": "pending"
+    },
+    {
+      "id": "CF-07",
+      "kind": "asset",
+      "title": "Mercado doméstico amplo e liderança regional",
+      "description": "Demanda interna grande e posição de referência na América Latina para padrões e para modelos adaptados à região.",
+      "basis": "assertion",
+      "sourceIds": [],
+      "verification": "pending"
+    },
+    {
+      "id": "CF-08",
+      "kind": "capability",
+      "title": "Protagonismo diplomático recente",
+      "description": "Presidência do G20 em 2024 e sede da COP30 em Belém em 2025 dão acesso a foros globais onde se definem padrões de IA e de clima.",
+      "basis": "assertion",
+      "sourceIds": [],
+      "verification": "pending"
+    },
+    {
+      "id": "CF-09",
+      "kind": "capability",
+      "title": "Base científica pública",
+      "description": "Universidades e institutos públicos, e o Centro de Transparência Algorítmica da UFMG, apoiado pelo PBIA.",
+      "basis": "assertion",
+      "sourceIds": [
+        "PBIA-DOC"
+      ],
+      "verification": "pending"
+    },
+    {
+      "id": "CF-10",
+      "kind": "capability",
+      "title": "Autoridade de dados já em operação",
+      "description": "A ANPD existe, tem experiência com a LGPD e é designada pelo PL para supervisionar o SIA. A capacidade para IA é a dúvida.",
+      "basis": "documented",
+      "sourceIds": [
+        "LGPD",
+        "PL2338-SENADO",
+        "BRF-CTX-GOVCAP"
+      ],
+      "verification": "pending"
+    },
+    {
+      "id": "CF-11",
+      "kind": "constraint",
+      "title": "Desigualdade regional e digital",
+      "description": "Acesso, infraestrutura e requalificação são desiguais entre regiões, com menor cobertura no Norte e no Nordeste.",
+      "basis": "assertion",
+      "sourceIds": [
+        "BRF-CTX-LABOR"
+      ],
+      "verification": "pending"
+    },
+    {
+      "id": "CF-12",
+      "kind": "constraint",
+      "title": "Dependência de computação e chips estrangeiros",
+      "description": "A maior parte da computação de IA roda em nuvens de controle estrangeiro e depende de aceleradores importados.",
+      "basis": "assertion",
+      "sourceIds": [
+        "BRF-CTX-COMPUTE",
+        "BRF-POS-INF"
+      ],
+      "verification": "pending"
+    },
+    {
+      "id": "CF-13",
+      "kind": "capability",
+      "title": "Controle externo e cultura de contestação",
+      "description": "Tribunal de Contas, Ministério Público e Judiciário atuam sobre políticas públicas e podem tornar a governança de IA justiciável.",
+      "basis": "assertion",
+      "sourceIds": [
+        "EBIA-TCU"
+      ],
+      "verification": "pending"
+    },
+    {
+      "id": "CF-14",
+      "kind": "asset",
+      "title": "Pluralismo linguístico e cultural",
+      "description": "Línguas indígenas, variedades do português e culturas regionais são fonte de dados e de requisitos de inclusão.",
+      "basis": "assertion",
+      "sourceIds": [],
+      "verification": "pending"
+    }
+  ],
+  "unrepresented": [
+    {
+      "perspective": "Povos indígenas e comunidades tradicionais",
+      "reason": "Sem fonte documental no pacote; não simulado para não inventar posição."
+    },
+    {
+      "perspective": "Judiciário, Ministério Público e TCU",
+      "reason": "Sem fonte de posição no pacote; só aparecem como traço de contexto (CF-13)."
+    },
+    {
+      "perspective": "Congresso Nacional",
+      "reason": "O PL está nas mãos do Legislativo, cuja posição não foi documentada no pacote."
+    },
+    {
+      "perspective": "Segurança pública e defesa",
+      "reason": "Sem fonte de posição no pacote."
+    },
+    {
+      "perspective": "Setores regulados (financeiro, saúde, telecomunicações)",
+      "reason": "Sem fonte de posição no pacote."
+    },
+    {
+      "perspective": "Agronegócio",
+      "reason": "Sem fonte de posição no pacote."
+    }
+  ]
+}
