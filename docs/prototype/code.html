@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Cpath fill=%27%23253F73%27 d=%27M4 3h16v18H4z%27/%3E%3C/svg%3E">
+  <title>HRAI-GO · Comparação regulatória</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg-canvas:#FAFAF8; --bg-surface:#FFFFFF; --bg-subtle:#F4F4F1; --bg-muted:#E9E8E3; --bg-inverse:#1C1B19;
+      --text-primary:#1C1B19; --text-secondary:#43413C; --text-tertiary:#57544D; --text-disabled:#8F8B82; --text-inverse:#FFFFFF; --text-link:#253F73; --text-link-hover:#19284A;
+      --border-subtle:#D6D4CC; --border-default:#B8B5AB; --border-control:#6E6A62; --border-strong:#43413C; --border-focus:#2E4E8C;
+      --action-primary:#253F73; --action-primary-hover:#1F335D; --action-primary-press:#19284A; --action-primary-fg:#FFFFFF;
+      --action-secondary-bg:#FFFFFF; --action-secondary-hover:#EEF3FA; --action-secondary-border:#253F73; --action-secondary-fg:#253F73;
+      --action-ghost-hover:#E9E8E3; --action-ghost-fg:#2D2C29; --action-danger:#832721; --action-danger-hover:#6A221D; --action-danger-fg:#FFFFFF;
+      --tone-neutral-fg:#43413C; --tone-neutral-bg:#F4F4F1; --tone-neutral-border:#6E6A62; --tone-neutral-solid:#43413C; --tone-neutral-solid-fg:#FFFFFF;
+      --tone-civic-fg:#253F73; --tone-civic-bg:#EEF3FA; --tone-civic-border:#2E4E8C; --tone-civic-solid:#253F73; --tone-civic-solid-fg:#FFFFFF;
+      --tone-verdant-fg:#1B5636; --tone-verdant-bg:#EDF7F0; --tone-verdant-border:#206B42; --tone-verdant-solid:#1B5636; --tone-verdant-solid-fg:#FFFFFF;
+      --tone-crimson-fg:#832721; --tone-crimson-bg:#FCEFEE; --tone-crimson-border:#A02F27; --tone-crimson-solid:#832721; --tone-crimson-solid-fg:#FFFFFF;
+      --tone-ochre-fg:#6F4C14; --tone-ochre-bg:#FBF5E8; --tone-ochre-border:#8A5F16; --tone-ochre-solid:#6F4C14; --tone-ochre-solid-fg:#FFFFFF;
+      --tone-iris-fg:#4B387C; --tone-iris-bg:#F3F1FB; --tone-iris-border:#5D4699; --tone-iris-solid:#4B387C; --tone-iris-solid-fg:#FFFFFF;
+      --tone-lagoon-fg:#1A5356; --tone-lagoon-bg:#ECF6F6; --tone-lagoon-border:#1E666A; --tone-lagoon-solid:#1A5356; --tone-lagoon-solid-fg:#FFFFFF;
+      --simulation-bg:#F4F4F1; --simulation-line:#D6D4CC; --simulation-fg:#2D2C29;
+      --font-sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --font-serif:"IBM Plex Serif",Georgia,serif; --font-mono:"IBM Plex Mono",ui-monospace,monospace;
+      --size-caption:12px; --size-body-sm:14px; --size-body:16px; --size-legal:18px; --size-h4:18px; --size-h3:20px; --size-h2:24px; --size-h1:30px;
+      --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:20px; --space-6:24px; --space-8:32px; --space-10:40px; --space-12:48px;
+      --radius-control:4px; --radius-card:8px; --radius-full:9999px; --border-hairline:1px; --border-regular:1.5px; --border-strong-width:2px; --border-focus-width:3px;
+      --shadow-sm:0 1px 2px 0 #1C1B1914; --shadow-md:0 4px 12px -2px #1C1B191F; --shadow-lg:0 12px 32px -4px #1C1B1929;
+      --layout-gutter:16px; --focus-offset:2px;
+    }
+    [data-theme="dark"] {
+      color-scheme:dark;
+      --bg-canvas:#121210; --bg-surface:#1C1B19; --bg-subtle:#2D2C29; --bg-muted:#43413C; --bg-inverse:#F4F4F1;
+      --text-primary:#F4F4F1; --text-secondary:#D6D4CC; --text-tertiary:#B8B5AB; --text-disabled:#6E6A62; --text-inverse:#1C1B19; --text-link:#88A5D6; --text-link-hover:#B6C9E7;
+      --border-subtle:#2D2C29; --border-default:#43413C; --border-control:#8F8B82; --border-strong:#B8B5AB; --border-focus:#88A5D6;
+      --action-primary:#88A5D6; --action-primary-hover:#B6C9E7; --action-primary-press:#DAE4F3; --action-primary-fg:#101A31;
+      --action-secondary-bg:#1C1B19; --action-secondary-hover:#101A31; --action-secondary-border:#88A5D6; --action-secondary-fg:#B6C9E7;
+      --action-ghost-hover:#2D2C29; --action-ghost-fg:#E9E8E3; --action-danger:#E5857D; --action-danger-hover:#F0B4AF; --action-danger-fg:#35110E;
+      --tone-neutral-fg:#D6D4CC; --tone-neutral-bg:#2D2C29; --tone-neutral-border:#8F8B82; --tone-neutral-solid:#D6D4CC; --tone-neutral-solid-fg:#121210;
+      --tone-civic-fg:#B6C9E7; --tone-civic-bg:#101A31; --tone-civic-border:#5C80C2; --tone-civic-solid:#88A5D6; --tone-civic-solid-fg:#101A31;
+      --tone-verdant-fg:#A9D8B8; --tone-verdant-bg:#0B2216; --tone-verdant-border:#45A06A; --tone-verdant-solid:#74BD8F; --tone-verdant-solid-fg:#0B2216;
+      --tone-crimson-fg:#F0B4AF; --tone-crimson-bg:#35110E; --tone-crimson-border:#D65A50; --tone-crimson-solid:#E5857D; --tone-crimson-solid-fg:#35110E;
+      --tone-ochre-fg:#EBCE8C; --tone-ochre-bg:#2C1E0A; --tone-ochre-border:#C9922B; --tone-ochre-solid:#DDB053; --tone-ochre-solid-fg:#2C1E0A;
+      --tone-iris-fg:#CBC1EC; --tone-iris-bg:#1F1833; --tone-iris-border:#8B75CE; --tone-iris-solid:#AA9ADE; --tone-iris-solid-fg:#1F1833;
+      --tone-lagoon-fg:#A2D4D4; --tone-lagoon-bg:#0B2224; --tone-lagoon-border:#3F9A9C; --tone-lagoon-solid:#6CB8B9; --tone-lagoon-solid-fg:#0B2224;
+      --simulation-bg:#1C1B19; --simulation-line:#43413C; --simulation-fg:#E9E8E3; --shadow-sm:none; --shadow-md:none; --shadow-lg:none;
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:88px; }
+    body { margin:0; background:var(--bg-canvas); color:var(--text-primary); font:400 var(--size-body)/1.5 var(--font-sans); }
+    a { color:var(--text-link); text-underline-offset:3px; }
+    a:hover { color:var(--text-link-hover); }
+    button { font:inherit; }
+    a:focus-visible, button:focus-visible { outline:var(--border-focus-width) solid var(--border-focus); outline-offset:var(--focus-offset); }
+    .icon-sprite { position:absolute; width:0; height:0; overflow:hidden; }
+    .icon { display:inline-block; width:20px; height:20px; flex:0 0 auto; fill:none; stroke:currentColor; stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round; }
+    .icon-sm { width:16px; height:16px; }
+    .icon-lg { width:24px; height:24px; }
+    .app-shell { min-height:100vh; }
+    .sidebar { position:fixed; inset:0 auto 0 0; z-index:20; display:flex; flex-direction:column; width:280px; padding:24px 16px; background:var(--bg-surface); border-right:var(--border-hairline) solid var(--border-subtle); }
+    .brand { display:flex; align-items:center; gap:12px; min-height:44px; margin:0 8px 32px; color:var(--text-primary); text-decoration:none; }
+    .brand-mark { display:grid; place-items:center; width:36px; height:36px; border:1.5px solid var(--tone-civic-border); border-radius:var(--radius-control); color:var(--tone-civic-fg); }
+    .brand-title { display:block; font-weight:600; font-size:18px; line-height:1.2; }
+    .brand-subtitle { display:block; margin-top:3px; color:var(--text-tertiary); font-size:12px; line-height:1.3; }
+    .nav-heading { margin:0 12px 8px; color:var(--text-tertiary); font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; }
+    .side-nav { display:grid; gap:4px; }
+    .nav-link { display:flex; align-items:center; gap:12px; min-height:44px; padding:8px 12px; border:0; border-left:3px solid transparent; border-radius:var(--radius-control); color:var(--text-secondary); text-decoration:none; font-size:14px; }
+    .nav-link:hover { background:var(--bg-subtle); color:var(--text-primary); }
+    .nav-link[aria-current="location"] { background:var(--tone-civic-bg); color:var(--tone-civic-fg); font-weight:600; border-left-color:var(--tone-civic-border); }
+    .nav-link .icon { width:20px; height:20px; }
+    .sidebar-bottom { margin-top:auto; padding:16px 12px 0; border-top:var(--border-hairline) solid var(--border-subtle); color:var(--text-tertiary); font-size:14px; }
+    .sidebar-bottom strong { display:block; margin:6px 0; color:var(--text-primary); font:500 12px/1.5 var(--font-mono); overflow-wrap:anywhere; }
+    .workspace { min-height:100vh; margin-left:280px; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:64px; padding:8px var(--layout-gutter); background:var(--bg-surface); border-bottom:var(--border-hairline) solid var(--border-subtle); }
+    .breadcrumbs { display:flex; align-items:center; gap:8px; min-width:0; color:var(--text-tertiary); font-size:14px; }
+    .breadcrumbs .current { color:var(--text-primary); font-weight:600; }
+    .topbar-actions { display:flex; align-items:center; gap:8px; }
+    .user-chip { display:flex; align-items:center; gap:8px; color:var(--text-secondary); font-size:14px; }
+    .user-glyph { display:grid; place-items:center; width:32px; height:32px; border:1px solid var(--border-default); border-radius:var(--radius-full); color:var(--text-secondary); font-weight:600; }
+    .icon-button { display:grid; place-items:center; width:40px; height:40px; padding:0; border:var(--border-hairline) solid transparent; border-radius:var(--radius-control); background:transparent; color:var(--text-secondary); cursor:pointer; }
+    .icon-button:hover { background:var(--action-ghost-hover); color:var(--action-ghost-fg); }
+    .theme-icon-dark { display:none; }
+    [data-theme="dark"] .theme-icon-light { display:none; }
+    [data-theme="dark"] .theme-icon-dark { display:block; }
+    .as-of-bar { display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:48px; padding:8px var(--layout-gutter); background:var(--bg-subtle); border-bottom:var(--border-hairline) solid var(--border-subtle); }
+    .as-of-label { display:flex; align-items:center; gap:8px; color:var(--text-secondary); font-size:14px; }
+    .as-of-label strong { color:var(--text-primary); font:500 14px/1.4 var(--font-mono); }
+    .as-of-times { display:flex; flex-wrap:wrap; gap:8px 20px; color:var(--text-secondary); font-size:14px; }
+    .as-of-times code { color:var(--text-primary); font:400 14px/1.4 var(--font-mono); }
+    main { padding:32px var(--layout-gutter) 64px; }
+    .content-grid { display:grid; grid-template-columns:minmax(0,1fr); gap:24px; max-width:1500px; margin:0 auto; }
+    .primary-column { min-width:0; }
+    .page-heading { margin:0 0 24px; }
+    .overline { margin:0 0 8px; color:var(--tone-civic-fg); font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; }
+    h1,h2,h3,h4 { margin:0; color:var(--text-primary); font-family:var(--font-sans); }
+    h1 { max-width:850px; font-size:30px; font-weight:600; line-height:1.2; letter-spacing:-.01em; }
+    h2 { font-size:24px; font-weight:600; line-height:1.35; }
+    h3 { font-size:20px; font-weight:600; line-height:1.35; }
+    h4 { font-size:18px; font-weight:600; line-height:1.35; }
+    .lede { max-width:75ch; margin:10px 0 0; color:var(--text-secondary); font-size:16px; }
+    .section { margin-top:32px; }
+    .section-heading { display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:16px; }
+    .section-heading p { max-width:75ch; margin:6px 0 0; color:var(--text-secondary); font-size:14px; }
+    .section-note { color:var(--text-tertiary); font-size:14px; }
+    .card { min-width:0; background:var(--bg-surface); border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-card); box-shadow:var(--shadow-sm); }
+    .summary-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+    .jurisdiction-card { display:flex; flex-direction:column; gap:16px; padding:20px; }
+    .jurisdiction-head { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
+    .jurisdiction-name { display:flex; align-items:center; gap:10px; min-width:0; }
+    .jurisdiction-mark { display:grid; place-items:center; width:36px; height:36px; flex:0 0 auto; border:1px solid var(--border-default); border-radius:var(--radius-control); background:var(--bg-subtle); color:var(--text-secondary); font:600 12px/1 var(--font-mono); }
+    .jurisdiction-name h3 { font-size:18px; }
+    .jurisdiction-name p { margin:2px 0 0; color:var(--text-tertiary); font-size:14px; }
+    .jurisdiction-copy { margin:0; color:var(--text-secondary); font-size:14px; }
+    .status-list { display:grid; gap:8px; }
+    .status-badge { --state-fg:var(--tone-neutral-fg); --state-bg:var(--tone-neutral-bg); --state-border:var(--tone-neutral-border); --state-stroke:solid; display:inline-flex; align-items:center; gap:6px; max-width:100%; width:max-content; padding:5px 9px; border:var(--border-regular) var(--state-stroke) var(--state-border); border-radius:var(--radius-control); background:var(--state-bg); color:var(--state-fg); font-size:14px; font-weight:500; line-height:1.35; }
+    .status-badge .icon { width:16px; height:16px; }
+    .status-badge--proposal { --state-fg:var(--tone-iris-fg); --state-bg:var(--tone-iris-bg); --state-border:var(--tone-iris-border); --state-stroke:dashed; }
+    .status-badge--in-force { --state-fg:var(--tone-civic-fg); --state-bg:var(--tone-civic-bg); --state-border:var(--tone-civic-border); }
+    .status-badge--applicable { --state-fg:var(--tone-civic-fg); --state-bg:var(--tone-civic-bg); --state-border:var(--tone-civic-border); border-style:double; border-width:3px; padding:4px 8px; }
+    .status-badge--deferred { --state-fg:var(--tone-civic-fg); --state-bg:var(--tone-civic-bg); --state-border:var(--tone-civic-border); }
+    .status-badge--guidance { --state-fg:var(--tone-neutral-fg); --state-bg:var(--tone-neutral-bg); --state-border:var(--tone-neutral-border); border-style:dotted; }
+    .binding-marker { display:inline-flex; align-items:center; gap:5px; color:var(--tone-civic-fg); font-size:14px; }
+    .binding-marker.nonbinding { color:var(--text-secondary); }
+    .source-chip { display:inline-flex; align-items:center; gap:5px; width:max-content; max-width:100%; color:var(--text-link); font-size:14px; font-weight:500; text-decoration:underline; }
+    .source-chip .icon { width:16px; height:16px; }
+    .unit-filter { display:grid; gap:4px; width:min(100%,320px); margin-bottom:12px; }
+    .unit-filter label { color:var(--text-secondary); font-size:14px; }
+    .unit-filter select { width:100%; min-height:40px; padding:8px 34px 8px 12px; border:var(--border-regular) solid var(--border-control); border-radius:var(--radius-control); background:var(--bg-surface); color:var(--text-primary); font:inherit; }
+    .unit-filter select:focus-visible { outline:var(--border-focus-width) solid var(--border-focus); outline-offset:var(--focus-offset); }
+    .timeline { display:grid; gap:0; padding:8px 20px; }
+    .timeline-row { display:grid; grid-template-columns:minmax(110px,180px) minmax(0,1fr); align-items:start; gap:16px; padding:16px 0; border-bottom:var(--border-hairline) solid var(--border-subtle); }
+    .timeline-row:last-child { border-bottom:0; }
+    .timeline-label { color:var(--text-primary); font-size:16px; font-weight:600; }
+    .timeline-items { display:flex; flex-wrap:wrap; gap:8px; }
+    .comparison-list { display:grid; gap:20px; }
+    .comparison-card { padding:20px; }
+    .comparison-title { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding-bottom:16px; border-bottom:var(--border-hairline) solid var(--border-subtle); }
+    .comparison-id { display:block; margin-bottom:5px; color:var(--text-tertiary); font:400 14px/1.4 var(--font-mono); }
+    .comparison-title h3 { font-size:20px; }
+    .metric-pair { display:grid; justify-items:end; gap:5px; min-width:180px; color:var(--text-secondary); font-size:14px; text-align:right; }
+    .metric-pair strong { color:var(--text-primary); font:600 16px/1.4 var(--font-mono); }
+    .comparison-columns { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); align-items:start; gap:12px; padding-top:16px; }
+    .claim-card { display:flex; flex-direction:column; align-items:flex-start; gap:10px; min-width:0; padding:16px; border:var(--border-hairline) solid var(--border-subtle); border-radius:var(--radius-card); background:var(--bg-subtle); }
+    .claim-card h4 { font-size:16px; }
+    .claim-card p { margin:0; color:var(--text-secondary); font:400 18px/1.65 var(--font-serif); max-width:68ch; }
+    .epistemic-tag { --tag-fg:var(--tone-neutral-fg); --tag-bg:var(--tone-neutral-bg); --tag-border:var(--tone-neutral-border); --tag-stroke:solid; display:inline-flex; align-items:center; gap:6px; max-width:100%; padding:4px 8px; border:var(--border-regular) var(--tag-stroke) var(--tag-border); border-radius:var(--radius-control); background:var(--tag-bg); color:var(--tag-fg); font-size:14px; font-weight:500; line-height:1.35; }
+    .epistemic-tag .icon { width:16px; height:16px; }
+    .epistemic-tag--official { --tag-fg:var(--tone-civic-fg); --tag-bg:var(--tone-civic-bg); --tag-border:var(--tone-civic-border); }
+    .epistemic-tag--interpretation { --tag-fg:var(--tone-civic-fg); --tag-bg:var(--tone-civic-bg); --tag-border:var(--tone-civic-border); --tag-stroke:dotted; }
+    .epistemic-tag--evidence { --tag-fg:var(--tone-lagoon-fg); --tag-bg:var(--tone-lagoon-bg); --tag-border:var(--tone-lagoon-border); }
+    .epistemic-tag--proposal { --tag-fg:var(--tone-iris-fg); --tag-bg:var(--tone-iris-bg); --tag-border:var(--tone-iris-border); --tag-stroke:dashed; }
+    .metric-method { color:var(--text-tertiary); font:400 12px/1.4 var(--font-mono); }
+    .claim-sources { display:flex; flex-wrap:wrap; gap:6px 14px; margin:0; padding:0; }
+    .metrics-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); align-items:start; gap:16px; }
+    .metric-card { padding:20px; }
+    .metric-card h3 { display:flex; align-items:center; gap:8px; font-size:18px; }
+    .metric-evidence { display:grid; justify-items:start; gap:4px; margin-top:8px; }
+    .metric-card p { margin:8px 0 16px; color:var(--text-secondary); font-size:14px; }
+    .metric-row { display:flex; justify-content:space-between; gap:12px; padding:9px 0; border-top:var(--border-hairline) solid var(--border-subtle); color:var(--text-secondary); font-size:14px; }
+    .metric-row strong { color:var(--text-primary); font:500 14px/1.4 var(--font-mono); }
+    .confidence { display:flex; align-items:center; gap:8px; margin-top:12px; color:var(--text-secondary); font-size:14px; }
+    .confidence-meter { display:flex; gap:3px; }
+    .confidence-meter span { width:8px; height:12px; border:1px solid var(--tone-neutral-border); border-radius:2px; }
+    .confidence-meter span[aria-checked="true"] { background:var(--tone-neutral-solid); }
+    .method-note { display:flex; align-items:flex-start; gap:10px; margin-top:20px; padding:12px 14px; border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-control); background:var(--bg-subtle); color:var(--text-secondary); font-size:14px; }
+    .method-note strong { display:block; margin-bottom:2px; color:var(--text-primary); font:500 14px/1.4 var(--font-mono); }
+    .evidence-panel { display:none; position:static; padding:18px; border:var(--border-hairline) solid var(--border-default); border-radius:var(--radius-card); background:var(--bg-surface); }
+    .evidence-panel h2 { font-size:20px; }
+    .evidence-panel p { margin:8px 0; color:var(--text-secondary); font-size:14px; }
+    .sources-card { padding:18px; }
+    .source-list { display:grid; gap:8px; margin:12px 0 0; padding:0; list-style:none; }
+    .source-list li { padding:8px 0; border-top:var(--border-hairline) solid var(--border-subtle); scroll-margin-top:84px; color:var(--text-secondary); font-size:14px; }
+    .source-list strong { display:block; color:var(--text-primary); font-weight:600; }
+    .audit-card { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:16px; padding:18px; }
+    .audit-card p { margin:4px 0 0; color:var(--text-secondary); font-size:14px; }
+    .audit-meta { color:var(--text-tertiary); font:400 14px/1.5 var(--font-mono); text-align:right; }
+    .page-footer { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; margin-top:32px; padding-top:16px; border-top:var(--border-hairline) solid var(--border-subtle); color:var(--text-tertiary); font-size:14px; }
+    .mobile-nav { display:none; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    @media (min-width:600px) { :root { --layout-gutter:24px; } }
+    @media (min-width:600px) and (max-width:1239px) {
+      .sidebar { width:72px; align-items:center; padding:20px 8px; }
+      .brand { justify-content:center; margin:0 0 32px; }
+      .brand-copy,.nav-heading,.sidebar-bottom { display:none; }
+      .nav-link .nav-label { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+      .nav-link { justify-content:center; width:48px; padding:8px; }
+      .workspace { margin-left:72px; }
+    }
+    @media (min-width:1240px) { :root { --layout-gutter:32px; } }
+    @media (min-width:1600px) {
+      .content-grid { grid-template-columns:minmax(0,1fr) 360px; align-items:start; }
+      .evidence-panel { display:block; position:sticky; top:80px; max-height:calc(100vh - 96px); overflow:auto; }
+      .summary-grid,.metrics-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    }
+    @media (max-width:904px) {
+      .comparison-columns { grid-template-columns:1fr; }
+      .claim-card p { max-width:68ch; }
+    }
+    @media (min-width:600px) and (max-width:904px) {
+      .summary-grid,.metrics-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .summary-grid .jurisdiction-card:last-child,.metrics-grid .metric-card:last-child { grid-column:1/-1; }
+    }
+    @media (max-width:599px) {
+      html { scroll-padding-top:72px; }
+      .sidebar { display:none; }
+      .workspace { margin-left:0; padding-bottom:76px; }
+      .topbar { min-height:56px; padding:8px 16px; }
+      .icon-button { width:44px; height:44px; }
+      .breadcrumbs { font-size:14px; }
+      .breadcrumbs .breadcrumb-root { display:none; }
+      .user-chip span:last-child { display:none; }
+      .as-of-bar { display:block; padding:10px 16px; }
+      .as-of-label { align-items:flex-start; font-size:14px; }
+      .as-of-times { display:grid; gap:4px; margin:6px 0 0 28px; font-size:14px; }
+      .as-of-times code { font-size:14px; }
+      main { padding:24px 16px 32px; }
+      .summary-grid,.metrics-grid { grid-template-columns:1fr; gap:12px; }
+      .jurisdiction-card,.comparison-card,.metric-card { padding:16px; }
+      .section { margin-top:28px; }
+      .section-heading { align-items:flex-start; flex-direction:column; }
+      .section-heading h2 { font-size:22px; }
+      h1 { font-size:26px; }
+      .comparison-title { flex-direction:column; }
+      .metric-pair { justify-items:start; min-width:0; text-align:left; }
+      .timeline { padding:4px 16px; }
+      .timeline-row { grid-template-columns:1fr; gap:8px; }
+      .audit-card { grid-template-columns:1fr; }
+      .audit-meta { text-align:left; }
+      .mobile-nav { position:fixed; inset:auto 0 0; z-index:30; display:grid; grid-template-columns:repeat(5,1fr); min-height:64px; padding:4px 6px calc(4px + env(safe-area-inset-bottom)); border-top:var(--border-hairline) solid var(--border-default); background:var(--bg-surface); }
+      .mobile-nav a { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; min-width:44px; min-height:48px; border-radius:var(--radius-control); color:var(--text-secondary); font-size:12px; line-height:1.2; text-decoration:none; }
+      .mobile-nav a[aria-current="location"] { background:var(--tone-civic-bg); color:var(--tone-civic-fg); font-weight:600; }
+      .mobile-nav .icon { width:20px; height:20px; }
+      .unit-filter { width:100%; }
+      .unit-filter select { min-height:44px; }
+      .status-badge,.epistemic-tag { line-height:1.4; }
+      .source-chip { min-height:44px; }
+      .page-footer { flex-direction:column; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      *,*::before,*::after { scroll-behavior:auto !important; transition-duration:0.01ms !important; animation-duration:0.01ms !important; animation-iteration-count:1 !important; }
+    }
+    @media print {
+      .sidebar,.topbar-actions,.mobile-nav,.unit-filter { display:none !important; }
+      .workspace { margin:0; }
+      .topbar { padding:8px 0; }
+      main { padding:16px 0; }
+      .card { box-shadow:none; break-inside:avoid; }
+    }
+  </style>
+</head>
+<body>
+  <svg class="icon-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3v18" />
+  <path d="m19 8 3 8a5 5 0 0 1-6 0zV7" />
+  <path d="M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1" />
+  <path d="m5 8 3 8a5 5 0 0 1-6 0zV7" />
+  <path d="M7 21h10" /></symbol>
+    <symbol id="i-file-pen" viewBox="0 0 24 24"><path d="M14.364 13.634a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506l4.013-4.009a1 1 0 0 0-3.004-3.004z" />
+  <path d="M14.487 7.858A1 1 0 0 1 14 7V2" />
+  <path d="M20 19.645V20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l2.516 2.516" />
+  <path d="M8 18h1" /></symbol>
+    <symbol id="i-message-quote" viewBox="0 0 24 24"><path d="M14 14a2 2 0 0 0 2-2V8h-2" />
+  <path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" />
+  <path d="M8 14a2 2 0 0 0 2-2V8H8" /></symbol>
+    <symbol id="i-microscope" viewBox="0 0 24 24"><path d="M6 18h8" />
+  <path d="M3 22h18" />
+  <path d="M14 22a7 7 0 1 0 0-14h-1" />
+  <path d="M9 14h2" />
+  <path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z" />
+  <path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3" /></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+  <path d="M7 11V7a5 5 0 0 1 10 0v4" /></symbol>
+    <symbol id="i-calendar-clock" viewBox="0 0 24 24"><path d="M16 14v2.2l1.6 1" />
+  <path d="M16 2v3" />
+  <path d="M21 7.338V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h2.338" />
+  <path d="M3 9h5.859" />
+  <path d="M8 2v3" />
+  <circle cx="16" cy="16" r="6" /></symbol>
+    <symbol id="i-guidance" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+  <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+  <path d="M10 9H8" />
+  <path d="M16 13H8" />
+  <path d="M16 17H8" /></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14" />
+  <path d="m12 5 7 7-7 7" /></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+  <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5v16" />
+  <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" /></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M5 21v-6" />
+  <path d="M12 21V9" />
+  <path d="M19 21V3" /></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" />
+  <path d="m16 9-5.5 5.5L8 12" /></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6" />
+  <path d="M10 14 21 3" />
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" /></symbol>
+    <symbol id="i-equal-not" viewBox="0 0 24 24"><line x1="5" x2="19" y1="9" y2="9" />
+  <line x1="5" x2="19" y1="15" y2="15" />
+  <line x1="19" x2="5" y1="5" y2="19" /></symbol>
+    <symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 8V4H8" />
+  <rect width="16" height="12" x="4" y="8" rx="2" />
+  <path d="M2 14h2" />
+  <path d="M20 14h2" />
+  <path d="M15 13v2" />
+  <path d="M9 13v2" /></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34" />
+  <circle cx="11" cy="11" r="8" /></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" />
+  <path d="M12 16v-4" />
+  <path d="M12 8h.01" /></symbol>
+  </svg>
+  <div class="app-shell" id="top">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <a class="brand" href="#top" aria-label="HRAI-GO, início">
+        <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="#i-scale"/></svg></span>
+        <span class="brand-copy"><span class="brand-title">HRAI-GO</span><span class="brand-subtitle">Inteligência regulatória</span></span>
+      </a>
+      <p class="nav-heading">Plataforma</p>
+      <nav class="side-nav">
+        <a class="nav-link" href="#overview" aria-label="Visão geral" aria-current="location"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg><span class="nav-label">Visão geral</span></a>
+        <a class="nav-link" href="#comparison" aria-label="NORM · Comparar"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg><span class="nav-label">NORM · Comparar</span></a>
+        <a class="nav-link" href="#timeline" aria-label="Linha do tempo"><svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg><span class="nav-label">Linha do tempo</span></a>
+        <a class="nav-link" href="#metrics" aria-label="Análise"><svg class="icon" aria-hidden="true"><use href="#i-message"/></svg><span class="nav-label">Análise</span></a>
+        <a class="nav-link" href="#review" aria-label="Revisão humana"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span class="nav-label">Revisão humana</span></a>
+      </nav>
+      <div class="sidebar-bottom"><span>Retrato jurídico</span><strong>legal-snapshot-br-2026-11-11</strong><span>Referência: 11/11/2026</span></div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <div class="breadcrumbs"><span class="breadcrumb-root">HRAI-GO</span><span aria-hidden="true">/</span><span class="current">Biblioteca comparativa</span></div>
+        <div class="topbar-actions">
+          <button class="icon-button" id="theme-toggle" type="button" aria-label="Ativar tema escuro" aria-pressed="false">
+            <svg class="icon theme-icon-light" aria-hidden="true"><use href="#i-moon"/></svg>
+            <svg class="icon theme-icon-dark" aria-hidden="true"><use href="#i-sun"/></svg>
+          </button>
+        </div>
+      </header>
+      <section class="as-of-bar" aria-label="Data de referência">
+        <div class="as-of-label"><svg class="icon" aria-hidden="true"><use href="#i-calendar-clock"/></svg><span>Retrato jurídico <strong>BR · 11/11/2026</strong></span></div>
+        <div class="as-of-times"><span>validTime: <code>2026-11-11</code></span><span>recordTime: <code>2026-11-11</code></span><span>Snapshot: <code>BR-2026-11-11</code></span></div>
+      </section>
+      <main>
+        <div class="content-grid">
+          <div class="primary-column">
+            <section class="page-heading" id="overview">
+              <p class="overline">NORM · Biblioteca comparativa</p>
+              <h1>Comparação regulatória por função, efeito e tempo jurídico</h1>
+              <p class="lede">Uma leitura comparável de instrumentos do Brasil, da União Europeia e do Reino Unido. Propostas, normas vigentes e interpretações permanecem identificadas como objetos distintos.</p>
+            </section>
+
+            <section class="section" id="comparison" aria-labelledby="comparison-title">
+              <div class="section-heading"><div><h2 id="comparison-title">Unidades de comparação funcional</h2><p>As afirmações interpretativas apontam para a fonte usada. Projetos de lei aparecem separados das obrigações vigentes.</p></div></div>
+              <div class="unit-filter" hidden><label for="unit-filter">Unidade de comparação</label><select id="unit-filter" aria-controls="comparison-list"><option value="unit-1">Recrutamento e alto risco</option><option value="unit-2">Modelos de propósito geral</option><option value="unit-3">Sandboxes e MPMEs</option><option value="unit-4">Supervisão institucional</option><option value="all">Todas as unidades</option></select></div>
+              <div class="comparison-list" id="comparison-list">
+                <article class="card comparison-card" id="unit-1">
+                  <header class="comparison-title"><div><span class="comparison-id">FRU-001-HR-RECRUIT</span><h3>Governança de sistemas de IA em recrutamento</h3></div><div class="metric-pair"><span>Semelhança funcional</span><strong>88%</strong><span class="epistemic-tag"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>Dados demonstrativos</span><span class="metric-method">Planejado: CosineSim · base a conectar</span><a class="source-chip" href="#src-corpus"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>Ver método e base</a></div></header>
+                  <div class="comparison-columns">
+                    <section class="claim-card" aria-label="Brasil, recrutamento"><h4>Brasil (BR)</h4><span class="epistemic-tag epistemic-tag--proposal"><svg class="icon" aria-hidden="true"><use href="#i-file-pen"/></svg>Proposta normativa</span><div class="claim-sources"><a class="source-chip" href="#src-pl"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>PL 2.338/2023</a></div><p>O PL 2.338/2023 propõe classificar aplicações de alto risco e prever avaliação de impacto e medidas de governança.</p><span class="epistemic-tag epistemic-tag--interpretation"><svg class="icon" aria-hidden="true"><use href="#i-message-quote"/></svg>Interpretação jurídica</span><div class="claim-sources"><a class="source-chip" href="#src-lgpd"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>LGPD · art. 20</a></div><p>A LGPD, art. 20, trata da revisão de decisões tomadas unicamente com base em tratamento automatizado.</p></section>
+                    <section class="claim-card" aria-label="União Europeia, recrutamento"><h4>União Europeia (EU)</h4><span class="epistemic-tag epistemic-tag--interpretation"><svg class="icon" aria-hidden="true"><use href="#i-message-quote"/></svg>Interpretação jurídica</span><div class="claim-sources"><a class="source-chip" href="#src-eu-ai-act"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>AI Act · Anexo III</a></div><p>O AI Act inclui determinados sistemas usados em emprego e recrutamento entre os sistemas de alto risco e prevê deveres relacionados a risco, dados e supervisão humana.</p></section>
+                    <section class="claim-card" aria-label="Reino Unido, recrutamento"><h4>Reino Unido (UK)</h4><span class="epistemic-tag epistemic-tag--interpretation"><svg class="icon" aria-hidden="true"><use href="#i-message-quote"/></svg>Interpretação jurídica</span><div class="claim-sources"><a class="source-chip" href="#src-uk-equality"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>Equality Act · orientação ICO</a></div><p>A aplicação do Equality Act e as orientações da ICO compõem referências para avaliar discriminação e perfilamento em processos de seleção.</p></section>
+                  </div>
+                </article>
+                <article class="card comparison-card" id="unit-2">
+                  <header class="comparison-title"><div><span class="comparison-id">FRU-002-GPAI-FOUNDATION</span><h3>Modelos de propósito geral e direitos autorais</h3></div><div class="metric-pair"><span>Semelhança funcional</span><strong>62%</strong><span class="epistemic-tag"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>Dados demonstrativos</span><span class="metric-method">Planejado: CosineSim · base a conectar</span><a class="source-chip" href="#src-corpus"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>Ver método e base</a></div></header>
+                  <div class="comparison-columns">
+                    <section class="claim-card" aria-label="Brasil, modelos de propósito geral"><h4>Brasil (BR)</h4><span class="epistemic-tag epistemic-tag--proposal"><svg class="icon" aria-hidden="true"><use href="#i-file-pen"/></svg>Proposta normativa</span><div class="claim-sources"><a class="source-chip" href="#src-pl"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>PL 2.338/2023</a></div><p>O substitutivo do PL 2.338/2023 propõe deveres de transparência e documentação para determinados modelos e sistemas de propósito geral.</p></section>
+                    <section class="claim-card" aria-label="União Europeia, modelos de propósito geral"><h4>União Europeia (EU)</h4><span class="epistemic-tag epistemic-tag--interpretation"><svg class="icon" aria-hidden="true"><use href="#i-message-quote"/></svg>Interpretação jurídica</span><div class="claim-sources"><a class="source-chip" href="#src-eu-ai-act"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>AI Act · arts. 51–56</a></div><p>O AI Act distingue deveres para modelos de propósito geral e requisitos adicionais para modelos com risco sistêmico.</p></section>
+                    <section class="claim-card" aria-label="Reino Unido, modelos de propósito geral"><h4>Reino Unido (UK)</h4><span class="epistemic-tag epistemic-tag--interpretation"><svg class="icon" aria-hidden="true"><use href="#i-message-quote"/></svg>Interpretação jurídica</span><div class="claim-sources"><a class="source-chip" href="#src-uk"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>Documentos de orientação</a></div><p>As publicações de segurança e os acordos setoriais descrevem uma abordagem de orientação e colaboração para modelos avançados.</p></section>
+                  </div>
+                </article>
+                <article class="card comparison-card" id="unit-3">
+                  <header class="comparison-title"><div><span class="comparison-id">FRU-003-SANDBOX-SME</span><h3>Ambientes regulatórios experimentais e MPMEs</h3></div><div class="metric-pair"><span>Semelhança funcional</span><strong>92%</strong><span class="epistemic-tag"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>Dados demonstrativos</span><span class="metric-method">Planejado: CosineSim · base a conectar</span><a class="source-chip" href="#src-corpus"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>Ver método e base</a></div></header>
+                  <div class="comparison-columns">
+                    <section class="claim-card" aria-label="Brasil, sandboxes"><h4>Brasil (BR)</h4><span class="epistemic-tag epistemic-tag--proposal"><svg class="icon" aria-hidden="true"><use href="#i-file-pen"/></svg>Proposta normativa</span><div class="claim-sources"><a class="source-chip" href="#src-pl"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>PL 2.338/2023 · arts. 62–65</a></div><p>O PL 2.338/2023 prevê ambientes regulatórios experimentais para testar soluções sob acompanhamento institucional.</p></section>
+                    <section class="claim-card" aria-label="União Europeia, sandboxes"><h4>União Europeia (EU)</h4><span class="epistemic-tag epistemic-tag--interpretation"><svg class="icon" aria-hidden="true"><use href="#i-message-quote"/></svg>Interpretação jurídica</span><div class="claim-sources"><a class="source-chip" href="#src-eu-ai-act"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>AI Act · arts. 57–59</a></div><p>O regulamento prevê sandboxes de IA organizados por autoridades competentes e condições de participação para empresas, incluindo MPMEs.</p></section>
+                    <section class="claim-card" aria-label="Reino Unido, sandboxes"><h4>Reino Unido (UK)</h4><span class="epistemic-tag epistemic-tag--interpretation"><svg class="icon" aria-hidden="true"><use href="#i-message-quote"/></svg>Interpretação jurídica</span><div class="claim-sources"><a class="source-chip" href="#src-uk"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>Fontes setoriais</a></div><p>Iniciativas setoriais de sandbox permitem experimentação regulada, com critérios e supervisão definidos pelos órgãos participantes.</p></section>
+                  </div>
+                </article>
+                <article class="card comparison-card" id="unit-4">
+                  <header class="comparison-title"><div><span class="comparison-id">FRU-004-INSTITUTIONAL-ARCH</span><h3>Autoridades e modelo institucional de supervisão</h3></div><div class="metric-pair"><span>Semelhança funcional</span><strong>75%</strong><span class="epistemic-tag"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>Dados demonstrativos</span><span class="metric-method">Planejado: CosineSim · base a conectar</span><a class="source-chip" href="#src-corpus"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>Ver método e base</a></div></header>
+                  <div class="comparison-columns">
+                    <section class="claim-card" aria-label="Brasil, supervisão"><h4>Brasil (BR)</h4><span class="epistemic-tag epistemic-tag--proposal"><svg class="icon" aria-hidden="true"><use href="#i-file-pen"/></svg>Proposta normativa</span><div class="claim-sources"><a class="source-chip" href="#src-pl"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>PL 2.338/2023</a></div><p>O projeto em tramitação propõe uma estrutura nacional de governança de IA com coordenação central e articulação com reguladores setoriais.</p></section>
+                    <section class="claim-card" aria-label="União Europeia, supervisão"><h4>União Europeia (EU)</h4><span class="epistemic-tag epistemic-tag--interpretation"><svg class="icon" aria-hidden="true"><use href="#i-message-quote"/></svg>Interpretação jurídica</span><div class="claim-sources"><a class="source-chip" href="#src-eu-ai-act"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>AI Act · autoridades</a></div><p>A supervisão combina coordenação europeia e autoridades nacionais, com responsabilidades distribuídas pelo regulamento.</p></section>
+                    <section class="claim-card" aria-label="Reino Unido, supervisão"><h4>Reino Unido (UK)</h4><span class="epistemic-tag epistemic-tag--interpretation"><svg class="icon" aria-hidden="true"><use href="#i-message-quote"/></svg>Interpretação jurídica</span><div class="claim-sources"><a class="source-chip" href="#src-uk"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>Política e orientação</a></div><p>A orientação de governança distribui funções entre reguladores setoriais, sem atribuir a um único órgão a supervisão de todos os usos de IA.</p></section>
+                  </div>
+                </article>
+                <p class="sr-only" id="comparison-status" aria-live="polite"></p>
+              </div>
+            </section>
+
+            <section class="section" aria-labelledby="jurisdictions-title">
+              <div class="section-heading"><div><h2 id="jurisdictions-title">Panorama por jurisdição</h2><p>O estado normativo e a vinculação são apresentados com rótulo, ícone e padrão de borda.</p></div><span class="section-note">Snapshot BR-2026-11-11</span></div>
+              <div class="summary-grid">
+                <article class="card jurisdiction-card">
+                  <div class="jurisdiction-head"><div class="jurisdiction-name"><span class="jurisdiction-mark" aria-hidden="true">BR</span><div><h3>Brasil</h3><p>República Federativa do Brasil</p></div></div></div>
+                  <span class="epistemic-tag epistemic-tag--interpretation"><svg class="icon" aria-hidden="true"><use href="#i-message-quote"/></svg>Interpretação jurídica</span><p class="jurisdiction-copy">Regime híbrido: proposta geral de governança de IA em tramitação e diplomas vigentes aplicáveis.</p>
+                  <div class="status-list">
+                    <span class="status-badge status-badge--proposal"><svg class="icon" aria-hidden="true"><use href="#i-file-pen"/></svg>PL 2.338/2023 · em tramitação</span>
+                    <span class="status-badge status-badge--in-force"><svg class="icon" aria-hidden="true"><use href="#i-scale"/></svg>LGPD · em vigor</span>
+                    <span class="binding-marker"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-lock"/></svg>Vinculante na data · art. 20</span>
+                  </div>
+                  <a class="source-chip" href="#src-lgpd"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>Fontes e proveniência</a>
+                </article>
+                <article class="card jurisdiction-card">
+                  <div class="jurisdiction-head"><div class="jurisdiction-name"><span class="jurisdiction-mark" aria-hidden="true">EU</span><div><h3>União Europeia</h3><p>Espaço jurídico comunitário</p></div></div></div>
+                  <span class="epistemic-tag epistemic-tag--interpretation"><svg class="icon" aria-hidden="true"><use href="#i-message-quote"/></svg>Interpretação jurídica</span><p class="jurisdiction-copy">Regulamento horizontal com aplicação escalonada por grupo de obrigações e marcos temporais.</p>
+                  <div class="status-list">
+                    <span class="status-badge status-badge--in-force"><svg class="icon" aria-hidden="true"><use href="#i-scale"/></svg>EU AI Act · em vigor</span>
+                    <span class="status-badge status-badge--deferred"><svg class="icon" aria-hidden="true"><use href="#i-calendar-clock"/></svg>Em vigor · aplicação diferida</span>
+                    <span class="binding-marker"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-lock"/></svg>Vinculante conforme o marco aplicável</span>
+                  </div>
+                  <a class="source-chip" href="#src-eu-ai-act"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>Fontes e proveniência</a>
+                </article>
+                <article class="card jurisdiction-card">
+                  <div class="jurisdiction-head"><div class="jurisdiction-name"><span class="jurisdiction-mark" aria-hidden="true">UK</span><div><h3>Reino Unido</h3><p>Jurisdição britânica</p></div></div></div>
+                  <span class="epistemic-tag epistemic-tag--interpretation"><svg class="icon" aria-hidden="true"><use href="#i-message-quote"/></svg>Interpretação jurídica</span><p class="jurisdiction-copy">Abordagem distribuída por reguladores setoriais, com orientações e instrumentos de natureza distinta.</p>
+                  <div class="status-list">
+                    <span class="status-badge status-badge--guidance"><svg class="icon" aria-hidden="true"><use href="#i-guidance"/></svg>Orientações setoriais</span>
+                    <span class="binding-marker nonbinding"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-info"/></svg>Orientação · não vinculante</span>
+                  </div>
+                  <a class="source-chip" href="#src-uk"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>Fontes e proveniência</a>
+                </article>
+              </div>
+            </section>
+
+            <section class="section" id="timeline" aria-labelledby="timeline-title">
+              <div class="section-heading"><div><h2 id="timeline-title">Marcos normativos e aplicação</h2><p>Vigência e aplicabilidade são marcos distintos; cada etapa informa seu estado em texto.</p></div></div>
+              <div class="card timeline">
+                <div class="timeline-row"><div class="timeline-label">Brasil · PL 2.338/2023</div><div class="timeline-items"><span class="status-badge status-badge--proposal"><svg class="icon" aria-hidden="true"><use href="#i-message-quote"/></svg>Em tramitação · proposta não vinculante</span><span class="status-badge status-badge--in-force"><svg class="icon" aria-hidden="true"><use href="#i-scale"/></svg>LGPD em vigor · aplicação conforme a lei</span></div></div>
+                <div class="timeline-row"><div class="timeline-label">União Europeia · AI Act</div><div class="timeline-items"><span class="status-badge status-badge--in-force"><svg class="icon" aria-hidden="true"><use href="#i-scale"/></svg>Em vigor desde 2024</span><span class="status-badge status-badge--applicable"><svg class="icon" aria-hidden="true"><use href="#i-calendar-clock"/></svg>Aplicação por etapas · 2025–2027</span></div></div>
+                <div class="timeline-row"><div class="timeline-label">Reino Unido</div><div class="timeline-items"><span class="status-badge status-badge--guidance"><svg class="icon" aria-hidden="true"><use href="#i-guidance"/></svg>Orientação setorial · atualização contínua</span></div></div>
+              </div>
+            </section>
+
+            <section class="section" id="metrics" aria-labelledby="metrics-title">
+              <div class="section-heading"><div><h2 id="metrics-title">Método, evidência e confiança</h2><p>Os valores desta captura são demonstrativos e não vêm de um cálculo conectado; similaridade não mede qualidade regulatória.</p></div></div>
+              <div class="metrics-grid">
+                <article class="card metric-card"><h3><svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg>Distância vetorial normativa</h3><div class="metric-evidence"><span class="epistemic-tag"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>Dados demonstrativos</span><span class="metric-method">Planejado: CosineSim · base a conectar</span><a class="source-chip" href="#src-corpus"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>Ver método e base</a></div><p>A visualização prevê comparar matrizes de requisitos por similaridade de cosseno.</p><div class="metric-row"><span>Brasil ↔ União Europeia</span><strong>0,84</strong></div><div class="metric-row"><span>Brasil ↔ Reino Unido</span><strong>0,59</strong></div><div class="metric-row"><span>União Europeia ↔ Reino Unido</span><strong>0,47</strong></div><p class="section-note">Escala e pesos dependem do corpus; o valor não decide qual política é melhor.</p></article>
+                <article class="card metric-card"><h3><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>Taxonomia SKOS</h3><span class="epistemic-tag epistemic-tag--interpretation"><svg class="icon" aria-hidden="true"><use href="#i-message-quote"/></svg>Interpretação</span><a class="source-chip" href="#src-corpus"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>Base a conectar</a><p>Predicados de alinhamento usados para indexar relações entre requisitos e instrumentos.</p><div class="metric-row"><span>exactMatch</span><strong>Direito à explicação</strong></div><div class="metric-row"><span>closeMatch</span><strong>AIA ↔ FRIA</strong></div><div class="metric-row"><span>broadMatch</span><strong>Função regulatória</strong></div><div class="confidence"><span>Confiança da interpretação: não informada</span></div></article>
+                <article class="card metric-card"><h3><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Registro de revisão</h3><p>Não há revisor humano ou data de revisão registrados neste recorte.</p><div class="metric-row"><span>Unidades no recorte</span><strong>4</strong></div><div class="metric-row"><span>Proveniência</span><strong>Fontes listadas</strong></div><div class="metric-row"><span>Revisão humana</span><strong>Não registrada</strong></div></article>
+              </div>
+            </section>
+
+            <section class="section" id="review" aria-labelledby="review-title">
+              <div class="section-heading"><div><h2 id="review-title">Revisão humana e auditoria</h2><p>A autoria e a revisão são registradas como metadados do material exibido.</p></div></div>
+              <article class="card audit-card"><div><h3>Revisão humana ainda não registrada</h3><p>O protótipo não atribui as interpretações a uma pessoa revisora. Registre identidade, autoridade e data quando a revisão ocorrer.</p></div><div><span class="status-badge status-badge--deferred"><svg class="icon" aria-hidden="true"><use href="#i-calendar-clock"/></svg>Aguardando revisão humana</span></div></article>
+            </section>
+
+            <section class="section" id="sources" aria-labelledby="sources-title">
+              <div class="section-heading"><div><h2 id="sources-title">Fontes e proveniência</h2><p>Os chips em cada afirmação levam ao registro da referência documental usada nesta tela.</p></div></div>
+              <div class="card sources-card">
+                <ul class="source-list">
+                  <li id="src-corpus"><strong>Base comparativa · pendente de conexão</strong>Os percentuais e distâncias desta captura são demonstrativos e estão fixos no HTML. O protótipo não consulta uma base nem executa CosineSim. Conecte o corpus, documente os pesos e vincule cada resultado aos registros antes de apresentar evidência empírica.</li>
+                  <li id="src-pl"><strong>PL 2.338/2023 · substitutivo</strong>Proposta legislativa citada no recorte brasileiro. Estado apresentado como “em tramitação”; não vinculante na data de referência. <a href="https://www25.senado.leg.br/web/atividade/materias/-/materia/157233" target="_blank" rel="noreferrer">Abrir registro oficial do Senado</a>.</li>
+                  <li id="src-lgpd"><strong>Lei nº 13.709/2018 · LGPD, art. 20</strong>Referência normativa brasileira sobre revisão de decisões tomadas unicamente com base em tratamento automatizado. <a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm" target="_blank" rel="noreferrer">Abrir texto no Planalto</a>.</li>
+                  <li id="src-eu-ai-act"><strong>Regulamento (UE) 2024/1689 · AI Act</strong>Referência para classificação de risco, modelos de propósito geral, sandboxes e autoridades competentes. <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng" target="_blank" rel="noreferrer">Abrir texto oficial no EUR-Lex</a>.</li>
+                  <li id="src-uk"><strong>Política e orientações setoriais do Reino Unido</strong>Referências a documentos de política e materiais de reguladores setoriais usados no recorte comparativo. <a href="https://www.gov.uk/government/publications/ai-regulation-a-pro-innovation-approach/white-paper" target="_blank" rel="noreferrer">White Paper · GOV.UK</a> · <a href="https://ico.org.uk/about-the-ico/what-we-do/recruitment-rewired/" target="_blank" rel="noreferrer">ICO · Recruitment Rewired</a>.</li>
+                  <li id="src-uk-equality"><strong>Equality Act 2010 · orientações da ICO</strong>Referências para a leitura de discriminação e perfilamento no contexto de recrutamento. <a href="https://www.legislation.gov.uk/ukpga/2010/15/contents" target="_blank" rel="noreferrer">Equality Act 2010</a>.</li>
+                </ul>
+                <div class="method-note"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><div><strong>Escopo do protótipo</strong>Esta tela organiza referências e interpretações para avaliação humana. Os valores desta captura são demonstrativos, não foram calculados a partir de um corpus e não constituem evidência jurídica ou estatística.</div></div>
+              </div>
+            </section>
+            <footer class="page-footer"><span>HRAI-GO · Plataforma Aberta de Inteligência Regulatória e Governança de IA</span><span>Tokens e semântica: design-system/ · referência do protótipo: 11/11/2026</span></footer>
+          </div>
+          <aside class="evidence-panel" aria-label="Painel de proveniência"><h2>Proveniência</h2><p><strong>Snapshot</strong><br><code>legal-snapshot-br-2026-11-11</code></p><p><strong>Período jurídico</strong><br>validTime e recordTime: 11/11/2026</p><p><strong>Unidades</strong><br>4 funções regulatórias comparadas</p><p><strong>Fontes</strong></p><ul class="source-list"><li>Métricas demonstrativas · base a conectar</li><li>PL 2.338/2023 · proposta</li><li>LGPD · art. 20</li><li>Regulamento (UE) 2024/1689</li><li>Equality Act 2010 · ICO</li></ul><a class="source-chip" href="#sources"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>Ver registros de origem</a></aside>
+        </div>
+      </main>
+    </div>
+    <nav class="mobile-nav" aria-label="Navegação móvel">
+      <a href="#overview" aria-label="Início" aria-current="location"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg><span>Início</span></a>
+      <a href="#comparison" aria-label="Normas"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg><span>Normas</span></a>
+      <a href="#timeline" aria-label="Linha do tempo"><svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg><span>Avaliar</span></a>
+      <a href="#metrics" aria-label="Análise"><svg class="icon" aria-hidden="true"><use href="#i-message"/></svg><span>Debate</span></a>
+      <a href="#review" aria-label="Revisão humana"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Revisão</span></a>
+    </nav>
+  </div>
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const button = document.getElementById('theme-toggle');
+      let saved = null;
+      try { saved = localStorage.getItem('hraigo-theme'); } catch {}
+      const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      const setTheme = theme => {
+        root.dataset.theme = theme;
+        button.setAttribute('aria-pressed', String(theme === 'dark'));
+        button.setAttribute('aria-label', theme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro');
+      };
+      setTheme(saved || preferred);
+      button.addEventListener('click', () => {
+        const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem('hraigo-theme', next); } catch {}
+        setTheme(next);
+      });
+
+      const unitFilter = document.getElementById('unit-filter');
+      const unitFilterShell = document.querySelector('.unit-filter');
+      const comparisonCards = [...document.querySelectorAll('.comparison-card')];
+      const comparisonStatus = document.getElementById('comparison-status');
+      if (unitFilter && unitFilterShell && comparisonCards.length) {
+        const applyUnitFilter = () => {
+          const value = unitFilter.value;
+          comparisonCards.forEach(card => { card.hidden = value !== 'all' && card.id !== value; });
+          comparisonStatus.textContent = value === 'all'
+            ? `Exibindo todas as ${comparisonCards.length} unidades de comparação.`
+            : `Exibindo ${unitFilter.selectedOptions[0].text}.`;
+        };
+        unitFilter.addEventListener('change', applyUnitFilter);
+        applyUnitFilter();
+        unitFilterShell.hidden = false;
+      }
+
+      const sectionLinks = [...document.querySelectorAll('.side-nav a[href^="#"], .mobile-nav a[href^="#"]')];
+      const navSections = [...new Set(sectionLinks.map(link => document.getElementById(link.hash.slice(1))).filter(Boolean))];
+      const updateCurrentLocation = () => {
+        const marker = Math.min(window.innerHeight * 0.28, 240);
+        const sources = document.getElementById('sources');
+        const inSources = sources && sources.getBoundingClientRect().top <= marker;
+        const active = inSources ? null : navSections.filter(section => section.getBoundingClientRect().top <= marker).at(-1);
+        sectionLinks.forEach(link => {
+          if (active && link.hash === `#${active.id}`) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
+        });
+      };
+      window.addEventListener('scroll', updateCurrentLocation, { passive: true });
+      window.addEventListener('resize', updateCurrentLocation);
+      window.addEventListener('hashchange', () => requestAnimationFrame(updateCurrentLocation));
+      requestAnimationFrame(updateCurrentLocation);
+    })();
+  </script>
+</body>
+</html>
