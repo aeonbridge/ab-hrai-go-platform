@@ -1,0 +1,80 @@
+{
+  "scenarioId": "BR-PBIA-003",
+  "mode": "regulatoryPolicy",
+  "jurisdiction": {
+    "code": "BR",
+    "name": "Brazil"
+  },
+  "asOfDate": "2026-11-14",
+  "question": "No Brasil fictício, que mudanças de formação, requalificação e relações de trabalho são necessárias até 2033 para que a difusão de IA prevista no PBIA não amplie desigualdades regionais e ocupacionais?",
+  "regulatorySources": [
+    {
+      "id": "PBIA-DOC",
+      "title": "Plano Brasileiro de Inteligência Artificial 2024-2028",
+      "status": "effective",
+      "uri": "https://indico.rnp.br/event/155/contributions/1369/attachments/569/876/Plano_Brasileiro_de_IA.pdf",
+      "kind": "policyDocument"
+    },
+    {
+      "id": "PL2338",
+      "title": "PL 2338/2023",
+      "status": "proposed",
+      "uri": "https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2487262",
+      "kind": "bill"
+    }
+  ],
+  "contextSources": [
+    {
+      "id": "WORLD-BRF",
+      "title": "Brasil fictício (world pack)",
+      "status": "unknown",
+      "uri": "urn:scse:world:brasil-ficticio",
+      "kind": "other"
+    }
+  ],
+  "council": {
+    "strategy": "documentedPerspectiveCoverage",
+    "targetSeats": 20,
+    "requiredReview": true
+  },
+  "simulation": {
+    "rounds": 6,
+    "replicates": 3,
+    "randomSeed": 2031,
+    "tokenBudget": 4000000,
+    "maxCostUsd": 40,
+    "branches": [
+      {
+        "id": "collective-bargaining",
+        "hypothesis": "A adoção de IA em grandes empregadores passa a exigir negociação coletiva prévia.",
+        "patch": {
+          "aiAdoptionBargaining": "mandatory"
+        },
+        "assumptions": [
+          "Premissa sintética do mundo fictício; não é afirmação sobre o Brasil real."
+        ]
+      },
+      {
+        "id": "double-training-target",
+        "hypothesis": "A meta de formação especializada é dobrada, com cotas regionais para Norte e Nordeste.",
+        "patch": {
+          "trainingTargetMultiplier": 2.0,
+          "regionalQuota": true
+        },
+        "assumptions": [
+          "Premissa sintética do mundo fictício; não é afirmação sobre o Brasil real."
+        ]
+      },
+      {
+        "id": "talent-flight",
+        "hypothesis": "A evasão anual de talentos para o exterior sobe de 9% para 15%.",
+        "patch": {
+          "talentFlightRate": 0.15
+        },
+        "assumptions": [
+          "Premissa sintética do mundo fictício; não é afirmação sobre o Brasil real."
+        ]
+      }
+    ]
+  }
+}

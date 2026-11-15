@@ -1,0 +1,424 @@
+{
+  "modelId": "BR-AI-GOVERNANCE",
+  "version": "0.1.0",
+  "title": "Modelo de governança nacional de IA do Brasil (leitura inicial)",
+  "description": "Leitura do arranjo brasileiro de governança de IA em 14/11/2026: instrumentos em vigor (EBIA, PBIA, LGPD), o marco legal ainda em tramitação (PL 2338) e as instituições envolvidas. Fonte de entrada para o conselho. Montado a partir de fontes secundárias; cada componente está com verification=pending.",
+  "jurisdiction": {
+    "code": "BR",
+    "name": "Brazil"
+  },
+  "effectiveAsOf": "2026-11-14",
+  "status": "draft",
+  "objectives": [
+    "Promover o desenvolvimento e a difusão de IA no Brasil com proteção de direitos fundamentais.",
+    "Reduzir a dependência tecnológica externa.",
+    "Dar segurança jurídica a quem desenvolve e usa IA."
+  ],
+  "assumptions": [
+    "O PL 2338 segue em tramitação e não constitui obrigação vigente.",
+    "O PBIA termina o ciclo orçamentário em 2028 e não substitui o marco legal."
+  ],
+  "components": [
+    {
+      "id": "GM-01",
+      "kind": "instrument",
+      "title": "Estratégia Brasileira de IA (EBIA, 2021)",
+      "description": "Estratégia nacional instituída pela Portaria MCTI nº 4.617/2021 e alterada pela Portaria nº 4.979/2021, com eixos temáticos e ações estratégicas. Serviu de base ao PBIA.",
+      "topics": [
+        "international-alignment",
+        "workforce-skills",
+        "public-sector-use",
+        "security-defense",
+        "oversight-institutions"
+      ],
+      "topicsBasis": "inferred",
+      "legalStatus": "policy",
+      "sourceIds": [
+        "EBIA-DOC",
+        "EBIA-TCU"
+      ],
+      "verification": "pending",
+      "origin": "documented",
+      "notes": "A lista de eixos varia entre fontes (fala-se em nove eixos e 73 ações). Conferir no documento oficial; os tópicos acima são leitura do autor do modelo."
+    },
+    {
+      "id": "GM-02",
+      "kind": "instrument",
+      "title": "Plano Brasileiro de IA (PBIA) 2024-2028",
+      "description": "Plano com cerca de R$ 23 bi no período, de orçamento, FNDCT e contrapartidas privadas, organizado em cinco eixos: infraestrutura e desenvolvimento; difusão, formação e capacitação; IA no serviço público; inovação empresarial; apoio ao processo regulatório e de governança. Não substitui o marco legal.",
+      "topics": [
+        "funding-continuity",
+        "compute-infrastructure",
+        "workforce-skills",
+        "public-sector-use",
+        "sme-competition",
+        "oversight-institutions"
+      ],
+      "topicsBasis": "documented",
+      "legalStatus": "policy",
+      "sourceIds": [
+        "PBIA-DOC",
+        "PBIA-AXES",
+        "PBIA-BUDGET"
+      ],
+      "verification": "pending",
+      "origin": "documented"
+    },
+    {
+      "id": "GM-03",
+      "kind": "instrument",
+      "title": "Lei Geral de Proteção de Dados (Lei 13.709/2018)",
+      "description": "Regime vigente de proteção de dados pessoais, com direitos do titular e revisão de decisões tomadas apenas com base em tratamento automatizado.",
+      "topics": [
+        "data-governance",
+        "rights-redress",
+        "transparency"
+      ],
+      "topicsBasis": "documented",
+      "legalStatus": "effective",
+      "sourceIds": [
+        "LGPD"
+      ],
+      "verification": "pending",
+      "origin": "documented"
+    },
+    {
+      "id": "GM-04",
+      "kind": "instrument",
+      "title": "PL 2338/2023 (marco legal de IA)",
+      "description": "Projeto aprovado no Senado em 10/12/2024 e em tramitação na Câmara. Substitutivo do relator Eduardo Gomes. Não é obrigação vigente.",
+      "topics": [
+        "risk-classification",
+        "rights-redress",
+        "liability",
+        "oversight-institutions",
+        "copyright-ip",
+        "labor-relations",
+        "security-defense"
+      ],
+      "topicsBasis": "documented",
+      "legalStatus": "proposed",
+      "sourceIds": [
+        "PL2338",
+        "PL2338-SENADO"
+      ],
+      "verification": "pending",
+      "origin": "documented"
+    },
+    {
+      "id": "GM-05",
+      "kind": "institution",
+      "title": "Sistema Nacional de Regulação e Governança de IA (SIA), supervisionado pela ANPD",
+      "description": "Sistema de coordenação criado pelo PL 2338, supervisionado pela Autoridade Nacional de Proteção de Dados, com articulação entre autoridades setoriais.",
+      "topics": [
+        "oversight-institutions",
+        "enforcement-capacity"
+      ],
+      "topicsBasis": "documented",
+      "legalStatus": "proposed",
+      "sourceIds": [
+        "PL2338-SENADO"
+      ],
+      "verification": "pending",
+      "origin": "documented"
+    },
+    {
+      "id": "GM-06",
+      "kind": "mechanism",
+      "title": "Classificação por níveis de risco, com proibição de risco excessivo",
+      "description": "O PL divide os sistemas por nível de risco, com regime distinto para alto risco e proibição de usos de risco excessivo, como armas autônomas sem intervenção humana.",
+      "topics": [
+        "risk-classification"
+      ],
+      "topicsBasis": "documented",
+      "legalStatus": "proposed",
+      "sourceIds": [
+        "PL2338-SENADO"
+      ],
+      "verification": "pending",
+      "origin": "documented"
+    },
+    {
+      "id": "GM-07",
+      "kind": "mechanism",
+      "title": "Regime de alto risco, incluindo o uso em saúde",
+      "description": "Obrigações reforçadas para sistemas de alto risco. Segundo a imprensa, o texto aprovado no Senado classifica o uso na saúde como de alto risco.",
+      "topics": [
+        "risk-classification",
+        "rights-redress"
+      ],
+      "topicsBasis": "inferred",
+      "legalStatus": "proposed",
+      "sourceIds": [
+        "PL2338-SENADO"
+      ],
+      "verification": "pending",
+      "origin": "documented",
+      "notes": "Os tópicos além de risk-classification são leitura do autor do modelo; conferir no texto."
+    },
+    {
+      "id": "GM-08",
+      "kind": "mechanism",
+      "title": "Direitos autorais e IA no PL",
+      "description": "O texto trata de direitos autorais entre os temas regulados. O conteúdo exato das regras sobre treinamento de modelos precisa ser conferido no texto.",
+      "topics": [
+        "copyright-ip"
+      ],
+      "topicsBasis": "documented",
+      "legalStatus": "proposed",
+      "sourceIds": [
+        "PL2338-SENADO"
+      ],
+      "verification": "pending",
+      "origin": "documented"
+    },
+    {
+      "id": "GM-09",
+      "kind": "mechanism",
+      "title": "Trabalho e segurança no PL",
+      "description": "O texto cria regras para temas como trabalho e segurança. O alcance exato precisa ser conferido no texto.",
+      "topics": [
+        "labor-relations",
+        "security-defense"
+      ],
+      "topicsBasis": "documented",
+      "legalStatus": "proposed",
+      "sourceIds": [
+        "PL2338-SENADO"
+      ],
+      "verification": "pending",
+      "origin": "documented"
+    },
+    {
+      "id": "GM-10",
+      "kind": "mechanism",
+      "title": "Avaliação de impacto algorítmico e direitos das pessoas afetadas",
+      "description": "Mecanismo esperado em marcos de IA baseados em risco: avaliação de impacto prévia e direitos de explicação e contestação.",
+      "topics": [
+        "impact-assessment",
+        "rights-redress",
+        "transparency"
+      ],
+      "topicsBasis": "inferred",
+      "legalStatus": "proposed",
+      "sourceIds": [
+        "PL2338"
+      ],
+      "verification": "pending",
+      "origin": "documented",
+      "notes": "NÃO confirmado nas fontes consultadas. Conferir no texto do PL antes de tratar como parte do modelo."
+    },
+    {
+      "id": "GM-11",
+      "kind": "mechanism",
+      "title": "Responsabilização civil por danos de sistemas de IA",
+      "description": "Regras de responsabilidade civil ao longo da cadeia de IA.",
+      "topics": [
+        "liability"
+      ],
+      "topicsBasis": "inferred",
+      "legalStatus": "proposed",
+      "sourceIds": [
+        "PL2338"
+      ],
+      "verification": "pending",
+      "origin": "documented",
+      "notes": "NÃO confirmado nas fontes consultadas. Conferir no texto do PL."
+    },
+    {
+      "id": "GM-12",
+      "kind": "mechanism",
+      "title": "Sandbox regulatório e ambiente de testes",
+      "description": "Ambiente experimental supervisionado para inovação em IA.",
+      "topics": [
+        "innovation-sandbox"
+      ],
+      "topicsBasis": "inferred",
+      "legalStatus": "proposed",
+      "sourceIds": [
+        "PL2338"
+      ],
+      "verification": "pending",
+      "origin": "documented",
+      "notes": "NÃO confirmado nas fontes consultadas. Conferir no texto do PL."
+    },
+    {
+      "id": "GM-13",
+      "kind": "institution",
+      "title": "Autoridade Nacional de Proteção de Dados (ANPD)",
+      "description": "Autoridade com mandato vigente em proteção de dados e designada pelo PL para supervisionar o SIA.",
+      "topics": [
+        "data-governance",
+        "rights-redress",
+        "enforcement-capacity"
+      ],
+      "topicsBasis": "documented",
+      "legalStatus": "effective",
+      "sourceIds": [
+        "LGPD",
+        "PL2338-SENADO"
+      ],
+      "verification": "pending",
+      "origin": "documented"
+    },
+    {
+      "id": "GM-14",
+      "kind": "institution",
+      "title": "Reguladores setoriais existentes",
+      "description": "Autoridades de setores regulados que passariam a articular-se ao SIA nas respectivas competências.",
+      "topics": [
+        "oversight-institutions",
+        "enforcement-capacity"
+      ],
+      "topicsBasis": "inferred",
+      "legalStatus": "effective",
+      "sourceIds": [
+        "PL2338-SENADO"
+      ],
+      "verification": "pending",
+      "origin": "documented",
+      "notes": "Quais autoridades e com que competências em IA deve ser detalhado pelos revisores."
+    },
+    {
+      "id": "GM-15",
+      "kind": "institution",
+      "title": "Grupo de trabalho interministerial do PBIA, coordenado pelo MCTI",
+      "description": "Grupo criado em 2025 para monitorar a execução do plano, com relatório anual de acompanhamento.",
+      "topics": [
+        "monitoring-learning",
+        "oversight-institutions"
+      ],
+      "topicsBasis": "documented",
+      "legalStatus": "policy",
+      "sourceIds": [
+        "PBIA-GOV"
+      ],
+      "verification": "pending",
+      "origin": "documented"
+    },
+    {
+      "id": "GM-16",
+      "kind": "metric",
+      "title": "Painel público de acompanhamento do PBIA",
+      "description": "Sistema público de monitoramento da execução das 54 ações do plano. Os relatos sobre o nível de execução divergem entre fontes.",
+      "topics": [
+        "monitoring-learning",
+        "transparency"
+      ],
+      "topicsBasis": "documented",
+      "legalStatus": "policy",
+      "sourceIds": [
+        "PBIA-GOV",
+        "PBIA-AXES"
+      ],
+      "verification": "pending",
+      "origin": "documented"
+    },
+    {
+      "id": "GM-17",
+      "kind": "resource",
+      "title": "Infraestrutura nacional de computação (supercomputador e armazenamento)",
+      "description": "Edital de supercomputador e infraestrutura nacional de processamento e armazenamento de dados.",
+      "topics": [
+        "compute-infrastructure",
+        "data-sovereignty"
+      ],
+      "topicsBasis": "documented",
+      "legalStatus": "policy",
+      "sourceIds": [
+        "PBIA-HPC"
+      ],
+      "verification": "pending",
+      "origin": "documented"
+    },
+    {
+      "id": "GM-18",
+      "kind": "resource",
+      "title": "Modelos de linguagem em português",
+      "description": "Desenvolvimento de modelos de IA em português, na infraestrutura nacional.",
+      "topics": [
+        "language-culture",
+        "compute-infrastructure"
+      ],
+      "topicsBasis": "documented",
+      "legalStatus": "policy",
+      "sourceIds": [
+        "PBIA-HPC",
+        "PBIA-DOC"
+      ],
+      "verification": "pending",
+      "origin": "documented"
+    },
+    {
+      "id": "GM-19",
+      "kind": "resource",
+      "title": "Formação de especialistas e capacitação de servidores",
+      "description": "Metas de formação de profissionais de IA e de capacitação de servidores públicos.",
+      "topics": [
+        "workforce-skills",
+        "public-sector-use"
+      ],
+      "topicsBasis": "documented",
+      "legalStatus": "policy",
+      "sourceIds": [
+        "PBIA-DOC",
+        "PBIA-AXES"
+      ],
+      "verification": "pending",
+      "origin": "documented"
+    },
+    {
+      "id": "GM-20",
+      "kind": "resource",
+      "title": "IA Brasil: IA no serviço público (CPQD, Serpro e Dataprev)",
+      "description": "Iniciativa para aplicar IA em serviços públicos com empresas públicas de tecnologia.",
+      "topics": [
+        "public-sector-use"
+      ],
+      "topicsBasis": "documented",
+      "legalStatus": "policy",
+      "sourceIds": [
+        "PBIA-DOC"
+      ],
+      "verification": "pending",
+      "origin": "documented"
+    },
+    {
+      "id": "GM-21",
+      "kind": "institution",
+      "title": "Centro Nacional de Transparência Algorítmica e IA Confiável (UFMG)",
+      "description": "Centro de pesquisa apoiado pelo PBIA, com R$ 50 milhões previstos em dois anos.",
+      "topics": [
+        "transparency",
+        "open-source-science"
+      ],
+      "topicsBasis": "documented",
+      "legalStatus": "policy",
+      "sourceIds": [
+        "PBIA-DOC"
+      ],
+      "verification": "pending",
+      "origin": "documented"
+    },
+    {
+      "id": "GM-22",
+      "kind": "resource",
+      "title": "Crédito e apoio à inovação empresarial em IA",
+      "description": "Eixo do PBIA de inovação empresarial, com recursos do FNDCT e contrapartidas privadas.",
+      "topics": [
+        "sme-competition",
+        "funding-continuity"
+      ],
+      "topicsBasis": "documented",
+      "legalStatus": "policy",
+      "sourceIds": [
+        "PBIA-AXES",
+        "PBIA-BUDGET"
+      ],
+      "verification": "pending",
+      "origin": "documented"
+    }
+  ],
+  "retiredComponents": [],
+  "history": []
+}

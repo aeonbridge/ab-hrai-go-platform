@@ -1,0 +1,170 @@
+{
+  "scenarioId": "GOV-BR-001",
+  "mode": "governanceReview",
+  "jurisdiction": {
+    "code": "BR",
+    "name": "Brazil"
+  },
+  "asOfDate": "2026-11-14",
+  "question": "Frente ao Brasil em 14 de novembro de 2026, o que o modelo de governança nacional de IA deveria considerar e não considera, o que considera e não deveria, e que especificidades do contexto brasileiro deveriam orientar o desenho para uma vantagem competitiva distintiva?",
+  "regulatorySources": [
+    {
+      "id": "PL2338",
+      "title": "PL 2338/2023",
+      "status": "proposed",
+      "kind": "bill",
+      "uri": "https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2487262"
+    },
+    {
+      "id": "LGPD",
+      "title": "Lei Geral de Proteção de Dados (Lei 13.709/2018)",
+      "status": "effective",
+      "kind": "law",
+      "uri": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm"
+    },
+    {
+      "id": "PBIA-DOC",
+      "title": "Plano Brasileiro de Inteligência Artificial 2024-2028",
+      "status": "effective",
+      "kind": "policyDocument",
+      "uri": "https://indico.rnp.br/event/155/contributions/1369/attachments/569/876/Plano_Brasileiro_de_IA.pdf"
+    },
+    {
+      "id": "EBIA-DOC",
+      "title": "Portaria MCTI 4.979/2021 (EBIA)",
+      "status": "effective",
+      "kind": "regulation",
+      "uri": "https://ses.sp.bvs.br/wp-content/uploads/2021/07/U_PT-MCTI-GM-4979_130721.pdf"
+    }
+  ],
+  "contextSources": [
+    {
+      "id": "WORLD-BRF",
+      "title": "Brasil fictício (world pack: estratos e posições documentadas)",
+      "status": "unknown",
+      "kind": "other",
+      "uri": "urn:scse:world:brasil-ficticio"
+    }
+  ],
+  "governance": {
+    "modelPath": "model/brasil-governanca-v0.json",
+    "contextPath": "context",
+    "taxonomyPath": "taxonomy.json",
+    "lenses": [
+      "omission",
+      "excess",
+      "advantage"
+    ],
+    "seedTensions": [
+      {
+        "id": "T1",
+        "title": "Continuidade do plano × supervisão e avaliação",
+        "description": "Se o orçamento pós-2028 encolher, o que se protege primeiro: infraestrutura e pesquisa, ou a capacidade de supervisionar e avaliar?",
+        "strata": [
+          "research",
+          "regulators"
+        ]
+      },
+      {
+        "id": "T2",
+        "title": "Soberania computacional × custo e energia",
+        "description": "Reduzir a dependência de nuvem estrangeira exige capacidade nacional, energia e chips, com custo para quem usa IA hoje.",
+        "strata": [
+          "infrastructure",
+          "business"
+        ]
+      },
+      {
+        "id": "T3",
+        "title": "Difusão da IA × emprego e desigualdade regional",
+        "description": "Adoção rápida e ganho de produtividade de um lado; ocupações expostas e requalificação desigual entre regiões do outro.",
+        "strata": [
+          "workers",
+          "business"
+        ]
+      },
+      {
+        "id": "T4",
+        "title": "Direitos × custo de conformidade",
+        "description": "Avaliação de impacto e transparência algorítmica de um lado; a carga de documentação para PMEs e startups do outro.",
+        "strata": [
+          "civilSociety",
+          "business"
+        ]
+      },
+      {
+        "id": "T5",
+        "title": "Auditoria × capacidade de fiscalizar",
+        "description": "Exigir auditoria em todo sistema público de alto impacto depende de quem consegue fiscalizar e de quantos sistemas já estão em produção.",
+        "strata": [
+          "regulators",
+          "publicOperators"
+        ]
+      },
+      {
+        "id": "T6",
+        "title": "Eficiência × contestação humana",
+        "description": "A triagem automática acelera o atendimento; o cidadão precisa entender e contestar uma negativa.",
+        "strata": [
+          "publicOperators",
+          "affectedGroups"
+        ]
+      }
+    ]
+  },
+  "council": {
+    "strategy": "documentedPerspectiveCoverage",
+    "targetSeats": 20,
+    "requiredReview": true
+  },
+  "simulation": {
+    "rounds": 6,
+    "replicates": 3,
+    "randomSeed": 2026,
+    "tokenBudget": 8000000,
+    "maxCostUsd": 80,
+    "branches": [
+      {
+        "id": "pl2338-approved",
+        "hypothesis": "A Câmara aprova o PL 2338 sem alterações relevantes ao texto do Senado.",
+        "patch": {
+          "IND-PL2338-STATUS": "enactedNotEffective"
+        },
+        "assumptions": [
+          "Premissa de cenário, não previsão."
+        ]
+      },
+      {
+        "id": "pl2338-stalled",
+        "hypothesis": "O PL 2338 não é votado em 2027 e o Brasil segue sem marco legal geral.",
+        "patch": {
+          "IND-PL2338-STATUS": "proposed"
+        },
+        "assumptions": [
+          "Premissa de cenário, não previsão."
+        ]
+      },
+      {
+        "id": "pbia-funding-cut",
+        "hypothesis": "O financiamento do PBIA cai pela metade a partir de 2027.",
+        "patch": {
+          "IND-POST2028-FUNDING": 0.5
+        },
+        "assumptions": [
+          "Premissa de cenário, não previsão."
+        ]
+      },
+      {
+        "id": "new-government-priorities",
+        "hypothesis": "O governo empossado em 2027 redefine as prioridades e a coordenação institucional da IA.",
+        "patch": {
+          "coordinationChange": true
+        },
+        "assumptions": [
+          "Premissa de cenário, não previsão.",
+          "O resultado da eleição não consta do pacote."
+        ]
+      }
+    ]
+  }
+}

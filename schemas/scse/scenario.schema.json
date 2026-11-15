@@ -23,7 +23,8 @@
     "mode": {
       "enum": [
         "regulatoryPolicy",
-        "solutionCompliance"
+        "solutionCompliance",
+        "governanceReview"
       ]
     },
     "jurisdiction": {
@@ -157,6 +158,9 @@
           }
         }
       }
+    },
+    "governance": {
+      "$ref": "#/$defs/governance"
     }
   },
   "$defs": {
@@ -325,6 +329,80 @@
           }
         }
       }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "modelPath",
+        "contextPath",
+        "taxonomyPath"
+      ],
+      "properties": {
+        "modelPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contextPath": {
+          "type": "string",
+          "minLength": 1,
+          "description": "A snapshot file, or a directory of dated snapshots: the latest validFrom <= asOfDate is used."
+        },
+        "taxonomyPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lenses": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "omission",
+              "excess",
+              "advantage"
+            ]
+          }
+        },
+        "seedTensions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "title",
+              "description"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9._-]{1,32}$"
+              },
+              "title": {
+                "type": "string",
+                "minLength": 3
+              },
+              "description": {
+                "type": "string",
+                "minLength": 10
+              },
+              "strata": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "componentIds": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "allOf": [
@@ -360,6 +438,35 @@
         "not": {
           "required": [
             "solution"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "governanceReview"
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      },
+      "then": {
+        "required": [
+          "governance"
+        ],
+        "not": {
+          "required": [
+            "solution"
+          ]
+        }
+      },
+      "else": {
+        "not": {
+          "required": [
+            "governance"
           ]
         }
       }

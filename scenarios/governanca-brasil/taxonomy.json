@@ -1,0 +1,147 @@
+{
+  "taxonomyId": "gov-topics",
+  "version": "0.1.0",
+  "note": "Taxonomia inicial de áreas de governança de IA, para revisão humana. Tópicos ausentes podem ser sugeridos pelo conselho como 'other'.",
+  "topics": [
+    {
+      "id": "risk-classification",
+      "label": "Classificação de risco",
+      "description": "Níveis de risco dos sistemas de IA, usos proibidos e regimes proporcionais."
+    },
+    {
+      "id": "impact-assessment",
+      "label": "Avaliação de impacto",
+      "description": "Avaliação de impacto algorítmico e sobre direitos, antes e durante o uso."
+    },
+    {
+      "id": "oversight-institutions",
+      "label": "Instituições de supervisão",
+      "description": "Quem coordena, quem decide e como as competências se dividem entre autoridades."
+    },
+    {
+      "id": "enforcement-capacity",
+      "label": "Capacidade de fiscalização",
+      "description": "Pessoal, orçamento, ferramentas e poder sancionatório para fazer cumprir as regras."
+    },
+    {
+      "id": "rights-redress",
+      "label": "Direitos e contestação",
+      "description": "Explicação, revisão humana, contestação acessível e reparação para as pessoas afetadas."
+    },
+    {
+      "id": "liability",
+      "label": "Responsabilização",
+      "description": "Responsabilidade civil e administrativa ao longo da cadeia de IA."
+    },
+    {
+      "id": "transparency",
+      "label": "Transparência e registro",
+      "description": "Documentação, registros públicos e transparência algorítmica."
+    },
+    {
+      "id": "public-sector-use",
+      "label": "IA no setor público",
+      "description": "Uso estatal de IA, compras públicas e responsabilidade administrativa."
+    },
+    {
+      "id": "compute-infrastructure",
+      "label": "Infraestrutura computacional",
+      "description": "Computação, nuvem, armazenamento e redes para IA."
+    },
+    {
+      "id": "energy-environment",
+      "label": "Energia e meio ambiente",
+      "description": "Consumo de energia e água, emissões e impacto ambiental da IA."
+    },
+    {
+      "id": "data-governance",
+      "label": "Governança de dados",
+      "description": "Acesso, qualidade, compartilhamento e proteção de dados para IA."
+    },
+    {
+      "id": "data-sovereignty",
+      "label": "Soberania de dados",
+      "description": "Localização, controle e jurisdição sobre dados e infraestrutura."
+    },
+    {
+      "id": "language-culture",
+      "label": "Língua e cultura",
+      "description": "Português do Brasil, línguas indígenas, diversidade cultural e viés linguístico."
+    },
+    {
+      "id": "workforce-skills",
+      "label": "Formação e capacitação",
+      "description": "Formação de especialistas, requalificação e capacitação de servidores."
+    },
+    {
+      "id": "labor-relations",
+      "label": "Trabalho",
+      "description": "Efeitos no emprego, supervisão humana no trabalho e negociação coletiva."
+    },
+    {
+      "id": "innovation-sandbox",
+      "label": "Inovação e sandbox",
+      "description": "Ambientes experimentais e proporcionalidade para inovar."
+    },
+    {
+      "id": "sme-competition",
+      "label": "Concorrência e pequenas empresas",
+      "description": "Barreiras de entrada, PMEs, startups e dependência de fornecedores."
+    },
+    {
+      "id": "open-source-science",
+      "label": "Ciência e modelos abertos",
+      "description": "Pesquisa, ciência aberta e modelos de código ou pesos abertos."
+    },
+    {
+      "id": "standards-certification",
+      "label": "Normas e certificação",
+      "description": "Normas técnicas, auditoria independente e certificação."
+    },
+    {
+      "id": "international-alignment",
+      "label": "Alinhamento internacional",
+      "description": "Cooperação, interoperabilidade regulatória e posição nos foros globais."
+    },
+    {
+      "id": "security-defense",
+      "label": "Segurança e defesa",
+      "description": "Segurança nacional, cibersegurança e uso militar da IA."
+    },
+    {
+      "id": "info-integrity",
+      "label": "Integridade da informação",
+      "description": "Desinformação, conteúdo sintético e processo eleitoral."
+    },
+    {
+      "id": "copyright-ip",
+      "label": "Direitos autorais",
+      "description": "Direitos autorais, propriedade intelectual e treinamento de modelos."
+    },
+    {
+      "id": "children-vulnerable",
+      "label": "Crianças e vulneráveis",
+      "description": "Proteção de crianças, adolescentes e grupos vulneráveis."
+    },
+    {
+      "id": "regional-inequality",
+      "label": "Desigualdade regional",
+      "description": "Acesso desigual entre regiões, inclusão digital e distribuição de benefícios."
+    },
+    {
+      "id": "participation",
+      "label": "Participação social",
+      "description": "Controle democrático, consulta pública e participação nas decisões."
+    },
+    {
+      "id": "funding-continuity",
+      "label": "Financiamento e continuidade",
+      "description": "Fontes de recurso, plurianualidade e continuidade entre governos."
+    },
+    {
+      "id": "monitoring-learning",
+      "label": "Monitoramento e revisão",
+      "description": "Indicadores, avaliação independente e revisão periódica do próprio modelo."
+    }
+  ]
+}

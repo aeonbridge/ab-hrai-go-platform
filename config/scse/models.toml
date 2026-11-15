@@ -1,0 +1,284 @@
+# SCSE - roteamento de modelos por provider e por perfil.
+#
+# Transporte padrão: OpenRouter (uma assinatura, uma chave: OPENROUTER_API_KEY).
+# Os adaptadores diretos (SDK de cada provider) continuam disponíveis:
+#   [defaults] transport = "direct", `transport = "direct"` num provider, ou
+#   `scse run ... --transport direct`.
+#
+# Como trocar um modelo para simular:
+#   1. Edite o `id` do tier desejado abaixo; ou
+#   2. Variável de ambiente:  SCSE_MODEL__<PROVIDER>__<TIER>=<model-id>
+#        ex.: SCSE_MODEL__XAI__DEEP=grok-4.6
+#   3. Linha de comando:      scse run ... --set openai.deep=gpt-6.1-terra
+#   4. Arquivo de experimento (experiments/scse/*.toml), chave `overrides`.
+#
+# `verified = false` indica que o ID foi levantado em fontes secundárias em
+# 2026-11-14 e NÃO foi confirmado na API do provider. Rode
+# `scse models verify` (requer chaves) antes de qualquer execução real.
+#
+# price_in / price_out (USD por 1M tokens) alimentam o controle maxCostUsd.
+# Sem preço declarado, o custo do provider é reportado como desconhecido e só
+# o tokenBudget é aplicado. Preencha com a tabela vigente de cada provider.
+
+[defaults]
+transport = "openrouter"         # openrouter | direct
+# weighted : cada estrato distribui seus assentos entre provider/modelo
+#            conforme os pesos de [strata.<id>] (padrão: pesos iguais). Padrão.
+# rotate   : pesos iguais entre os providers selecionados, ignorando [strata].
+# fixed    : estrato -> provider fixo (tabela [assignment.fixed]).
+# single   : todo o conselho num único provider (ablação; use --providers).
+assignment = "weighted"
+required_providers = ["anthropic", "openai", "xai", "gemini"]
+max_output_tokens = 8000
+timeout_seconds = 300
+# Repetir uma vez quando o JSON não valida contra o contrato do turno.
+repair_attempts = 1
+
+# Perfil funcional -> tier de modelo. O perfil vem do estrato (world pack)
+# ou do papel no pipeline (critic, synthesizer).
+[profiles]
+"perspective.deep" = "deep"          # reguladores, pesquisa, operador público
+"perspective.standard" = "standard"  # demais estratos
+critic = "standard"                  # crítica cruzada (provider diferente do autor)
+synthesizer = "deep"                 # descrições de tensões e próximas ações
+smoke = "light"                      # `scse models ping`
+
+# --------------------------------------------------------------- OpenRouter
+# API compatível com OpenAI. Para manter a comparação entre providers limpa:
+#   pin_upstream       -> força o host original do modelo (provider.only/order)
+#   allow_fallbacks    -> false: não cai para outro host silenciosamente
+#   require_parameters -> true: só usa host que honra response_format/reasoning
+[openrouter]
+api_key_env = "OPENROUTER_API_KEY"
+base_url = "https://openrouter.ai/api/v1"
+pin_upstream = true
+allow_fallbacks = false
+require_parameters = true
+
+# ---------------------------------------------------------------- Anthropic
+[providers.anthropic]
+sdk = "anthropic"
+api_key_env = "ANTHROPIC_API_KEY"
+structured_output = "schema"   # output_config.format json_schema
+openrouter_upstream = ["anthropic"]
+
+[providers.anthropic.models.deep]
+id = "claude-opus-5-5"
+openrouter_id = "anthropic/claude-opus-5.5"
+effort = "high"
+price_in = 4.0                 # USD / 1M tokens (Anthropic, nov/2026)
+price_out = 20.0                # Opus 5.5 default é medium; explicitamos
+fallbacks = "default"          # fallback server-side em recusa (beta)
+verified = true
+
+[providers.anthropic.models.standard]
+id = "claude-sonnet-5-5"
+openrouter_id = "anthropic/claude-sonnet-5.5"   # slug inferido, não verificado
+effort = "medium"
+price_in = 2.0
+price_out = 10.0
+fallbacks = "default"
+verified = true
+
+[providers.anthropic.models.light]
+id = "claude-haiku-5-5"
+openrouter_id = "anthropic/claude-haiku-5.5"   # slug inferido, não verificado
+effort = "low"
+price_in = 0.10
+price_out = 0.50
+verified = true
+
+# ------------------------------------------------------------------- OpenAI
+[providers.openai]
+sdk = "openai"
+api_key_env = "OPENAI_API_KEY"
+structured_output = "schema"   # Responses API text.format json_schema strict
+openrouter_upstream = ["openai"]
+
+[providers.openai.models.deep]
+id = "gpt-6-sol"
+openrouter_id = "openai/gpt-6-sol"
+effort = "high"                # reasoning.effort
+verified = false
+
+[providers.openai.models.standard]
+id = "gpt-6.1-terra"
+openrouter_id = "openai/gpt-6.1-terra"   # slug inferido, não verificado
+effort = "medium"
+verified = false
+
+[providers.openai.models.light]
+id = "gpt-6-luna"
+openrouter_id = "openai/gpt-6-luna"   # slug inferido, não verificado
+effort = "low"
+verified = false
+
+# ---------------------------------------------------------------------- xAI
+[providers.xai]
+sdk = "xai"                    # SDK openai apontando para a API compatível da xAI
+api_key_env = "XAI_API_KEY"
+base_url = "https://api.x.ai/v1"
+structured_output = "schema"   # chat.completions response_format json_schema
+openrouter_upstream = ["xai"]  # slug do host não verificado
+
+[providers.xai.models.deep]
+id = "grok-4.7"
+openrouter_id = "x-ai/grok-4.7"
+verified = false
+
+[providers.xai.models.standard]
+id = "grok-4.6"
+openrouter_id = "x-ai/grok-4.6"   # slug inferido, não verificado
+verified = false
+
+[providers.xai.models.light]
+id = "grok-4.5"
+openrouter_id = "x-ai/grok-4.5"   # slug inferido, não verificado
+verified = false
+
+# ------------------------------------------------------------------- Gemini
+[providers.gemini]
+sdk = "gemini"
+api_key_env = "GEMINI_API_KEY"   # GOOGLE_API_KEY também é aceito
+structured_output = "schema"     # response_json_schema; use "json_mode" se a API recusar o schema
+openrouter_upstream = ["google-ai-studio"]  # slug do host não verificado
+
+[providers.gemini.models.deep]
+id = "gemini-4-argon"
+openrouter_id = "google/gemini-4-argon"
+thinking_level = "high"
+verified = false
+
+[providers.gemini.models.standard]
+id = "gemini-3.8-flash"
+openrouter_id = "google/gemini-3.8-flash"   # slug inferido, não verificado
+thinking_level = "medium"
+verified = false
+
+[providers.gemini.models.light]
+id = "gemini-3.5-flash-lite"
+openrouter_id = "google/gemini-3.5-flash-lite"   # slug inferido, não verificado
+thinking_level = "low"
+verified = false
+
+# --------------------------------------------------------- Mock (offline)
+# Determinístico, sem rede. Usado nos testes e em `--dry-run`.
+[providers.mock]
+sdk = "mock"
+
+[providers.mock.models.deep]
+id = "mock-deliberator-1"
+verified = true
+
+[providers.mock.models.standard]
+id = "mock-deliberator-1"
+verified = true
+
+[providers.mock.models.light]
+id = "mock-deliberator-1"
+verified = true
+
+# ------------------------------------------------- Distribuição por estrato
+# Cada estrato distribui seus assentos entre entradas {provider, tier|model, weight}.
+#   provider : obrigatório
+#   tier     : deep | standard | light (opcional; padrão = tier do perfil do estrato)
+#   model    : ID explícito (opcional; sobrepõe tier; aceita id direto ou openrouter_id)
+#   weight   : peso relativo (padrão 1). Pesos somando 100 lêem-se como %.
+# Alocação determinística (weighted round-robin suave): em cada estrato, os
+# assentos seguem os pesos; a sequência desloca 1 posição por réplica, então a
+# exposição acumulada converge para os percentuais mesmo com poucos assentos.
+# Estrato ausente usa [strata.default].
+#
+# Exemplo de mistura de modelos dentro do mesmo provider:
+#   [strata.regulators]
+#   mix = [
+#     { provider = "anthropic", tier = "deep",     weight = 15 },
+#     { provider = "anthropic", tier = "standard", weight = 10 },
+#     { provider = "openai",    model = "openai/gpt-6-sol", weight = 25 },
+#     { provider = "xai",       weight = 25 },
+#     { provider = "gemini",    weight = 25 },
+#   ]
+
+[strata.default]
+mix = [
+  { provider = "anthropic", weight = 25 },
+  { provider = "openai",    weight = 25 },
+  { provider = "xai",       weight = 25 },
+  { provider = "gemini",    weight = 25 },
+]
+
+# Usado só com assignment = "fixed". Atenção: fixar provider por estrato
+# confunde viés do modelo com a perspectiva simulada.
+[assignment.fixed]
+regulators = "anthropic"
+publicOperators = "openai"
+business = "xai"
+research = "gemini"
+civilSociety = "anthropic"
+workers = "openai"
+affectedGroups = "gemini"
+infrastructure = "xai"
+
+[strata.regulators]
+mix = [
+  { provider = "anthropic", weight = 25 },
+  { provider = "openai",    weight = 25 },
+  { provider = "xai",       weight = 25 },
+  { provider = "gemini",    weight = 25 },
+]
+
+[strata.publicOperators]
+mix = [
+  { provider = "anthropic", weight = 25 },
+  { provider = "openai",    weight = 25 },
+  { provider = "xai",       weight = 25 },
+  { provider = "gemini",    weight = 25 },
+]
+
+[strata.business]
+mix = [
+  { provider = "anthropic", weight = 25 },
+  { provider = "openai",    weight = 25 },
+  { provider = "xai",       weight = 25 },
+  { provider = "gemini",    weight = 25 },
+]
+
+[strata.research]
+mix = [
+  { provider = "anthropic", weight = 25 },
+  { provider = "openai",    weight = 25 },
+  { provider = "xai",       weight = 25 },
+  { provider = "gemini",    weight = 25 },
+]
+
+[strata.civilSociety]
+mix = [
+  { provider = "anthropic", weight = 25 },
+  { provider = "openai",    weight = 25 },
+  { provider = "xai",       weight = 25 },
+  { provider = "gemini",    weight = 25 },
+]
+
+[strata.workers]
+mix = [
+  { provider = "anthropic", weight = 25 },
+  { provider = "openai",    weight = 25 },
+  { provider = "xai",       weight = 25 },
+  { provider = "gemini",    weight = 25 },
+]
+
+[strata.affectedGroups]
+mix = [
+  { provider = "anthropic", weight = 25 },
+  { provider = "openai",    weight = 25 },
+  { provider = "xai",       weight = 25 },
+  { provider = "gemini",    weight = 25 },
+]
+
+[strata.infrastructure]
+mix = [
+  { provider = "anthropic", weight = 25 },
+  { provider = "openai",    weight = 25 },
+  { provider = "xai",       weight = 25 },
+  { provider = "gemini",    weight = 25 },
+]
