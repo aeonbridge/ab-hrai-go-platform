@@ -2,24 +2,18 @@
    Itens com status "Verificar" vêm de conhecimento prévio e precisam de checagem em fonte primária. */
 window.HRAIGO_CONTEUDO = {
   setores: [["gov","Governo federal"],["reg","Agência reguladora"],["leg","Legislativo"],["est","Estados e municípios"],["aca","Academia"],["soc","Sociedade civil"],["pri","Setor privado"],["out","Outro"]],
-  tensoes: [
-    ["t1","Testar viés com dados sensíveis × minimização de dados",4],
-    ["t2","Auditoria ex-ante obrigatória × viabilidade para pequenas empresas",4],
-    ["t3","Revisão humana efetiva × escala operacional",3],
-    ["t4","Explicação ao cidadão × segredo comercial do modelo",2],
-    ["t5","Prazo curto de vigência × capacidade de fiscalização",2]
-  ],
-  polos: ["Auditoria ex-ante obrigatória", "Viabilidade para pequenas empresas"],
-  /* assentos sintéticos do Conselho das Sombras: código, perspectiva, posição no eixo (-1 a 1) */
-  assentos: [["DD","Direitos digitais",-.7],["TR","Trabalhadores",-.6],["PE","Pequenas empresas",.55],["FI","Fiscalização",.35],["GP","Grandes plataformas",.15],["AA","Auditoria algorítmica",-.25]],
-  /* leitura sintética de adequação ao Brasil em capacidade estatal de fiscalização (-2 a 2) */
-  criterio: "capacidade estatal de fiscalização",
-  modelos: [["ue","UE",-1],["us","EUA",1],["cn","China",-2],["uk","Reino Unido",1],["br","Brasil",0]],
+  /* P3: tensão-semente T5 do modelo, com posições ILUSTRATIVAS dos 8 estratos do Shadow Council (-1 a 1).
+     Numa execução real, as posições vêm do runtime do SCSE. */
+  polos: ["Exigir auditoria dos sistemas de IA", "Usar primeiro a capacidade de fiscalizar que já existe"],
+  posicoesEstratos: {regulators:.45, publicOperators:.3, business:.6, research:-.35, civilSociety:-.7, workers:-.5, affectedGroups:-.65, infrastructure:.1},
+  /* P4 · lente Q1 (Omissão): estratos que esperavam cada área na rodada R1 às cegas (ilustrativo, do protótipo 3D). */
+  esperadoPor: {"energy-environment":["infrastructure"], "standards-certification":["publicOperators","business"], "info-integrity":[],
+    "children-vulnerable":["civilSociety","affectedGroups"], "regional-inequality":["workers","affectedGroups"], "participation":["civilSociety"]},
   movimentos: [["support","Sustentar"],["challenge","Contestar"],["evidence","Pedir evidência"],["amend","Propor alternativa"]],
 
   jurisdicoes: [
     {id:"br",n:"Brasil",modelo:"Risco (PL 2338), investimento (PBIA) e proteção de dados (LGPD)",itens:[
-      {t:"PL 2338/2023 · marco legal da IA",st:["Em tramitação","atencao"],d:"Aprovado no Senado em 10/12/2024. Comissão especial instalada na Câmara em 20/05/2025; em out/2026 aguardava parecer do relator, que anunciou votação para depois das eleições.",rel:"Define o regime de risco que orientaria a fiscalização. Enquanto não é lei, requisitos derivados dele são prospectivos.",f:[["Câmara dos Deputados","https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2487262"]]},
+      {t:"PL 2338/2023 · marco legal da IA",st:["Em tramitação · não vincula","proposta"],d:"Aprovado no Senado em 10/12/2024. Comissão especial instalada na Câmara em 20/05/2025; em out/2026 aguardava parecer do relator, que anunciou votação para depois das eleições.",rel:"Define o regime de risco que orientaria a fiscalização. Enquanto não é lei, requisitos derivados dele são prospectivos.",f:[["Câmara dos Deputados","https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2487262"]]},
       {t:"PBIA 2024–2028 · Plano Brasileiro de IA",st:["Em execução","ok"],d:"Cerca de R$ 23 bi em cinco eixos: infraestrutura (~R$ 5,8 bi), formação (~R$ 1,15 bi), serviços públicos (~R$ 1,76 bi), inovação empresarial (~R$ 13,8 bi) e regulação e governança (~R$ 103 mi). Valores por eixo de apresentações do MCTI citadas por fontes secundárias.",rel:"O Eixo 5 financia o apoio ao processo regulatório e é pequeno diante dos demais.",f:[["MCTI","https://www.gov.br/mcti/pt-br/acompanhe-o-mcti/transformacaodigital/plano-brasileiro-de-inteligencia-artificial"]]},
       {t:"LGPD · art. 20",st:["Em vigor","ok"],d:"Direito de solicitar revisão de decisões tomadas unicamente com base em tratamento automatizado.",rel:"Principal gancho legal vigente para decisões automatizadas.",f:[["Planalto · Lei 13.709/2018","https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm"]]},
       {t:"Sandbox regulatório de IA da ANPD",st:["Piloto","ok"],d:"Primeiro ciclo de testagem iniciado em 18/03/2026, com três participantes; metodologia do CIAAM/USP.",rel:"Experiência concreta de regulação experimental no país.",f:[["ANPD · relatório de monitoramento","https://www.gov.br/anpd/pt-br/assuntos/projetos-acoes-iniciativas/sandbox/relatorio-1-de-monitoramento_ciclo-testagem_albert-franca-josua.pdf/@@display-file/file"]]},

@@ -3,40 +3,43 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>HRAI·GO · Observatório de governança de IA</title>
-<meta name="description" content="Observatório HRAI·GO: participação ao vivo, base de conhecimento e monitoramento de modelos de governança de IA no Brasil e no mundo.">
-<meta name="theme-color" content="#0F1B2D">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230F1B2D'/%3E%3Crect x='4' y='13' width='6' height='6' fill='%23F2F4F8'/%3E%3Crect x='22' y='13' width='6' height='6' fill='%23F2F4F8'/%3E%3Crect x='10' y='15' width='12' height='2' fill='%23F2F4F8'/%3E%3Ccircle cx='19' cy='16' r='4' fill='%23F2B400'/%3E%3C/svg%3E">
-<link rel="preload" href="fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<title>HRAI-GO · Observatório de governança de IA</title>
+<meta name="description" content="HRAI-GO: participação ao vivo, base de conhecimento e monitoramento do modelo brasileiro de governança de IA, com a câmara do Shadow Council.">
+<meta name="theme-color" content="#070C16">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070C16'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23E8A33D' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/bricolage-grotesque-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fontes.css">
+<link rel="stylesheet" href="assets/tokens.css">
 <link rel="stylesheet" href="assets/hraigo.css">
 </head>
 <body>
 <header class="cab gutter">
   <div class="cab-in">
-    <a class="marca" href="#participar" aria-label="HRAI·GO, início">
-      <svg width="46" height="22" viewBox="0 0 46 22" aria-hidden="true"><rect x="0" y="6" width="10" height="10" fill="#F2F4F8"/><rect x="36" y="6" width="10" height="10" fill="#F2F4F8"/><rect x="10" y="10" width="26" height="2" fill="#F2F4F8"/><circle cx="29" cy="11" r="6" fill="#F2B400"/></svg>
-      <b>HRAI·GO</b><span id="sala-rotulo">observatório de governança de IA</span>
+    <a class="marca" href="#participar" aria-label="HRAI-GO, início">
+      <span class="marca-anel" aria-hidden="true"></span><b>HRAI-GO</b><span id="sala-rotulo">observatório</span>
     </a>
     <nav class="menu" aria-label="Seções">
       <a href="#participar" data-v="participar">Participar</a>
       <a href="#ao-vivo" data-v="ao-vivo">Ao vivo</a>
       <a href="#conhecimento" data-v="conhecimento">Conhecimento</a>
       <a href="#monitoramento" data-v="monitoramento">Monitoramento</a>
+      <a class="camara" href="camara/">Câmara 3D</a>
     </nav>
     <div class="estado" id="estado"><i></i><span>iniciando</span></div>
   </div>
 </header>
 
 <main>
-  <section class="vista gutter" id="v-participar"><div class="part" id="part"></div></section>
-  <section class="tela" id="v-ao-vivo" hidden><div class="palco"><aside class="lateral" id="lateral"></aside><div class="blocos" id="blocos"></div></div></section>
+  <section class="vista gutter" id="v-participar"><div class="part vidro" id="part"></div></section>
+  <section class="gutter" id="v-ao-vivo" hidden><div class="palco"><aside class="lateral vidro" id="lateral"></aside><div class="blocos" id="blocos"></div></div></section>
   <section class="vista gutter" id="v-conhecimento" hidden><div class="kb" id="kb"></div></section>
-  <section class="vista gutter" id="v-monitoramento" hidden><div class="mon" id="mon"></div></section>
+  <section class="vista gutter" id="v-monitoramento" hidden><div class="mon vidro" id="mon"></div></section>
 </main>
 
 <script src="config.js"></script>
 <script src="vendor/qrcode.js"></script>
 <script src="vendor/supabase.js"></script>
+<script src="assets/modelo.js"></script>
 <script src="assets/conteudo.js"></script>
 <script src="assets/app.js"></script>
 </body>

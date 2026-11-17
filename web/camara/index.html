@@ -1,0 +1,1172 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070C16">
+<title>HRAI-GO · Câmara do Shadow Council</title>
+<link rel="stylesheet" href="../assets/fontes.css">
+<style>
+/* Layout: a full-screen 3D council chamber; a guided tour panel floats on the left (bottom sheet on phones). Single dark world by design. */
+:root{
+  color-scheme: dark;
+  --ink:#070C16; --chamber:#0C1525; --glass:rgba(12,21,37,.78); --glass-2:rgba(20,32,54,.72);
+  --line:rgba(214,226,240,.14); --line-2:rgba(214,226,240,.26);
+  --fg:#EAF0F7; --muted:#9DACBF; --dim:#6F7F95;
+  --brass:#E8A33D; --brass-2:#F5D49A; --teal:#38C2B4; --violet:#A78BFA; --coral:#FF7A59;
+  --display:'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+  --body:'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+  --mono:'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --r:14px;
+}
+html,body{height:100%}
+body{background:var(--ink);color:var(--fg);font:15px/1.5 var(--body);overflow:hidden;-webkit-font-smoothing:antialiased}
+#gl{position:fixed;inset:0;width:100%;height:100%;display:block;outline:none;touch-action:none;cursor:grab}
+#gl.dragging{cursor:grabbing}
+body.no3d #gl{display:none}
+body.no3d{background:radial-gradient(1200px 700px at 70% 40%, #14223a 0%, var(--ink) 60%)}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+
+/* ---------- splash ---------- */
+#splash{position:fixed;inset:0;z-index:30;display:grid;place-items:center;
+  padding-block:max(24px, env(safe-area-inset-top,0px)) max(24px, env(safe-area-inset-bottom,0px));
+  padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px));
+  background:radial-gradient(ellipse at center, rgba(7,12,22,0) 0%, rgba(7,12,22,.35) 55%, rgba(7,12,22,.9) 100%);
+  transition:opacity .9s ease, visibility .9s}
+#splash.gone{opacity:0;visibility:hidden}
+.splash-inner{display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center;max-width:760px}
+.kicker{font:500 12px/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--brass)}
+.wordmark{font:800 clamp(48px, 11vw, 132px)/.88 var(--display);letter-spacing:-.04em;margin:0;
+  background:linear-gradient(180deg, #fff 0%, #DCE6F2 45%, var(--brass-2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  text-wrap:balance;animation:rise 1.4s cubic-bezier(.2,.8,.2,1) both}
+.splash-lede{font:400 clamp(17px,2.2vw,22px)/1.45 var(--body);color:#DCE4EE;text-shadow:0 1px 14px rgba(7,12,22,.95), 0 0 2px rgba(7,12,22,.9);max-width:34ch;margin:0;text-wrap:balance;animation:rise 1.4s .25s cubic-bezier(.2,.8,.2,1) both}
+.splash-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;animation:rise 1.4s .45s cubic-bezier(.2,.8,.2,1) both}
+.splash-note{font:400 12px/1.5 var(--mono);color:var(--dim);max-width:52ch;animation:rise 1.4s .6s both}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}}
+
+.btn{border:1px solid var(--line-2);background:var(--glass-2);border-radius:999px;padding:10px 18px;cursor:pointer;
+  font:600 14px/1 var(--body);letter-spacing:.01em;transition:background .2s, border-color .2s, transform .15s;display:inline-flex;align-items:center;gap:8px}
+.btn:hover{border-color:var(--brass);background:rgba(232,163,61,.12)}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--brass);border-color:var(--brass);color:#1A1306}
+.btn.primary:hover{background:#F0B556}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn.small{padding:7px 12px;font-size:13px}
+
+/* ---------- HUD ---------- */
+#hud{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding-top:calc(14px + env(safe-area-inset-top,0px));padding-bottom:10px;
+  padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px));
+  pointer-events:none;transition:opacity .6s}
+#hud > *{pointer-events:auto}
+body:not(.touring) #hud,body:not(.touring) #panel,body:not(.touring) #hint{opacity:0;pointer-events:none}
+.brand{display:flex;align-items:center;gap:10px;font:700 15px/1 var(--display);letter-spacing:-.01em;white-space:nowrap}
+.brand-mark{width:22px;height:22px;border-radius:50%;border:2px solid var(--brass);box-shadow:0 0 12px rgba(232,163,61,.6), inset 0 0 6px rgba(232,163,61,.5)}
+.chip{font:500 12px/1 var(--mono);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:rgba(7,12,22,.55);white-space:nowrap}
+.chip b{color:var(--brass-2);font-weight:500}
+#dots{display:flex;gap:6px;align-items:center}
+#dots button{width:9px;height:9px;border-radius:50%;border:0;padding:0;background:rgba(214,226,240,.25);cursor:pointer;transition:all .25s}
+#dots button[aria-current="step"]{width:26px;border-radius:6px;background:var(--brass)}
+#dots button:hover{background:rgba(214,226,240,.6)}
+.hud-right{display:flex;gap:8px;align-items:center}
+#auto[aria-pressed="true"]{border-color:var(--teal);color:var(--teal)}
+
+/* ---------- panel ---------- */
+#panel{position:fixed;z-index:15;left:max(16px, env(safe-area-inset-left,0px));top:calc(64px + env(safe-area-inset-top,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));
+  width:min(440px, calc(100% - 32px));display:flex;flex-direction:column;
+  background:var(--glass);border:1px solid var(--line);border-radius:20px;backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);
+  box-shadow:0 30px 80px rgba(0,0,0,.45);transition:opacity .6s, transform .6s}
+#panel-scroll{overflow-y:auto;padding:24px 24px 8px;display:flex;flex-direction:column;gap:14px;min-height:0;flex:1}
+#panel-scroll.swap{animation:swap .55s cubic-bezier(.2,.8,.2,1)}
+@keyframes swap{from{opacity:0;transform:translateX(-14px)}}
+.eyebrow{font:500 11px/1.2 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--brass)}
+#panel h2{font:700 clamp(24px, 3vw, 30px)/1.08 var(--display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+#panel p{margin:0;color:#CBD5E2;text-wrap:pretty}
+#panel .muted{color:var(--muted);font-size:13px}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 24px 18px;border-top:1px solid var(--line)}
+.nav .count{font:500 12px/1 var(--mono);color:var(--muted)}
+
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:13px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.sw{width:11px;height:11px;border-radius:3px;display:inline-block;flex:none}
+.sw.round{border-radius:50%}
+.sw.hollow{background:transparent!important;border:1.5px dashed #c9d3e0}
+.facts{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.facts li{display:grid;grid-template-columns:86px 1fr;gap:10px;font-size:13.5px;color:#CBD5E2;align-items:baseline}
+.facts li .when{font:500 12px/1.2 var(--mono);color:var(--brass-2)}
+.mono{font-family:var(--mono)}
+.tag{display:inline-flex;align-items:center;gap:6px;font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:5px 9px;border:1px solid var(--line-2);color:var(--muted);white-space:nowrap}
+.tag.q1{color:var(--teal);border-color:rgba(56,194,180,.5)}
+.tag.q2{color:var(--coral);border-color:rgba(255,122,89,.5)}
+.tag.q3{color:var(--brass);border-color:rgba(232,163,61,.5)}
+.tag.warn{color:#FFC7B8;border-color:rgba(255,122,89,.6);background:rgba(255,122,89,.1)}
+.tag.legal{color:#E4D7FF;border-color:rgba(167,139,250,.7);background:rgba(167,139,250,.12)}
+.tag.demo{color:var(--brass-2);border-color:rgba(232,163,61,.5);background:rgba(232,163,61,.08)}
+.detail{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:rgba(7,12,22,.45);display:grid;gap:6px;font-size:13.5px}
+.detail .id{font:500 12px/1 var(--mono);color:var(--brass-2)}
+.detail h4{margin:0;font:600 15px/1.3 var(--body)}
+.detail p{font-size:13.5px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{border:1px solid var(--line-2);background:transparent;border-radius:999px;padding:7px 12px;cursor:pointer;font:500 13px/1 var(--body);color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--ink);border-color:var(--fg)}
+.lenscard{border-radius:14px;padding:14px;border:1px solid var(--line);background:rgba(7,12,22,.45);display:grid;gap:8px}
+.lenscard h3{margin:0;font:700 19px/1.15 var(--display)}
+.req{margin:0;padding-left:18px;color:#CBD5E2;font-size:13.5px;display:grid;gap:4px}
+.rounds{display:grid;gap:6px;list-style:none;margin:0;padding:0}
+.rounds li{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:baseline;padding:7px 10px;border-radius:10px;font-size:13.5px;color:var(--muted);transition:background .3s,color .3s}
+.rounds li b{font:500 12px/1 var(--mono);color:var(--dim)}
+.rounds li.on{background:rgba(232,163,61,.12);color:var(--fg)}
+.rounds li.on b{color:var(--brass)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cols h4{margin:0 0 6px;font:600 13px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.cols ul{margin:0;padding-left:16px;display:grid;gap:5px;font-size:13.5px;color:#CBD5E2}
+@media (max-width: 520px){.cols{grid-template-columns:1fr}}
+
+/* ---------- review ---------- */
+.field{display:grid;gap:5px}
+.field label{font:500 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.field input,.field textarea{width:100%;box-sizing:border-box;background:rgba(7,12,22,.6);border:1px solid var(--line-2);border-radius:10px;padding:9px 11px;font-size:14px;resize:vertical}
+.field textarea{min-height:58px}
+.field .hintline{font:400 11.5px/1.2 var(--mono);color:var(--dim)}
+.field .hintline.ok{color:var(--teal)}
+.prop{border:1px solid var(--line);border-radius:14px;padding:14px;background:rgba(7,12,22,.45);display:grid;gap:9px;transition:border-color .3s}
+.prop.decided-accept{border-color:rgba(56,194,180,.6)}
+.prop.decided-modify{border-color:rgba(232,163,61,.6)}
+.prop.decided-reject{border-color:rgba(255,122,89,.45);opacity:.8}
+.prop.decided-defer{border-style:dashed}
+.prop-head{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.prop h4{margin:0;font:600 15px/1.3 var(--body)}
+.prop p{font-size:13.5px}
+.st{display:inline-flex;align-items:center;gap:5px;font:500 11.5px/1 var(--mono);border-radius:999px;padding:4px 8px;border:1px solid currentColor;white-space:nowrap}
+.st i{font-style:normal;font-weight:700}
+.st-for{color:#5FD3C6}.st-against{color:#FF9A80}.st-amend{color:#8DB4FF}.st-split{color:#C2B0FF}.st-silent{color:var(--dim)}
+.strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(122px,1fr));gap:4px}
+.strip .cell{display:flex;align-items:center;gap:5px;min-width:0;font:500 11px/1.15 var(--mono);padding:5px 6px;border-radius:7px;border:1px solid currentColor;background:rgba(7,12,22,.35);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.strip .cell i{font-style:normal;font-weight:700}
+.strip .cell.st-silent{border-style:dashed;opacity:.75}
+.args{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:7px}
+.args li{display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:start;font-size:13px}
+details summary{cursor:pointer;font:500 12.5px/1.3 var(--body);color:var(--brass-2)}
+.reading h4{margin:0 0 6px}
+.reading ul{margin:0;padding-left:18px;display:grid;gap:6px;font-size:13.5px}
+.reading .quote{color:var(--muted)}
+.strata-seg{flex-wrap:wrap}
+.strata-seg button{display:inline-flex;align-items:center;gap:6px}
+.signals{font:400 12px/1.4 var(--mono);color:var(--muted)}
+.decide{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.decide button{border:1px solid var(--line-2);background:transparent;border-radius:9px;padding:8px 4px;font:600 12.5px/1 var(--body);cursor:pointer;color:var(--muted)}
+.decide button[aria-pressed="true"][data-d="accept"]{background:var(--teal);color:#04201C;border-color:var(--teal)}
+.decide button[aria-pressed="true"][data-d="modify"]{background:var(--brass);color:#1A1306;border-color:var(--brass)}
+.decide button[aria-pressed="true"][data-d="reject"]{background:var(--coral);color:#2A0B03;border-color:var(--coral)}
+.decide button[aria-pressed="true"][data-d="defer"]{background:#C9D3E0;color:var(--ink);border-color:#C9D3E0}
+.blockers{border:1px solid rgba(255,122,89,.5);background:#2A1712;border-radius:12px;padding:10px 12px;font-size:13px;color:#FFD3C6;display:grid;gap:4px}
+.blockers ul{margin:6px 0 0;padding-left:16px;display:grid;gap:3px}
+.blockers summary{cursor:pointer;font-weight:600}
+.success{border:1px solid rgba(56,194,180,.55);background:rgba(56,194,180,.09);border-radius:12px;padding:12px 14px;display:grid;gap:6px;font-size:13.5px}
+.success .ver{font:700 22px/1 var(--display)}
+.stickybar{position:sticky;bottom:-8px;background:linear-gradient(180deg, rgba(12,21,37,0), rgba(12,21,37,.96) 30%);padding:14px 0 8px;display:grid;gap:8px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+
+/* ---------- misc ---------- */
+#tip{position:fixed;z-index:25;pointer-events:none;max-width:280px;background:rgba(7,12,22,.92);border:1px solid var(--line-2);border-radius:10px;padding:9px 11px;font-size:12.5px;line-height:1.4;color:#D9E2EE;opacity:0;transform:translateY(4px);transition:opacity .15s, transform .15s}
+#tip.on{opacity:1;transform:none}
+#tip .id{font:500 11px/1 var(--mono);color:var(--brass-2);display:block;margin-bottom:4px}
+#hint{position:fixed;z-index:14;right:max(16px, env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));font:400 12px/1 var(--mono);color:var(--dim);transition:opacity .6s}
+#no3d-note{display:none}
+body.no3d #no3d-note{display:block}
+
+@media (max-width: 860px){
+  #panel{top:auto;left:max(12px, env(safe-area-inset-left,0px));right:max(12px, env(safe-area-inset-right,0px));width:auto;max-height:54%;border-radius:18px}
+  #panel-scroll{padding:18px 18px 6px}
+  .nav{padding:10px 18px 12px}
+  #hint{display:none}
+  #dots{display:none}
+  .brand span.full{display:none}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
+
+</head>
+<body>
+<canvas id="gl" aria-label="Câmara 3D do conselho: assentos, modelo de governança e tópicos" tabindex="-1"></canvas>
+
+<section id="splash" aria-labelledby="wm">
+  <div class="splash-inner">
+    <div class="kicker">SCSE v2 · protótipo de aplicação</div>
+    <h1 class="wordmark" id="wm">Shadow Council</h1>
+    <p class="splash-lede">Um conselho sintético questiona o modelo brasileiro de governança de IA. Quem decide o que muda é você.</p>
+    <div class="splash-actions">
+      <button class="btn primary" id="start">Começar o tour <span aria-hidden="true">→</span></button>
+      <button class="btn" id="start-auto">Apresentar no automático</button>
+    </div>
+    <p class="splash-note">Protótipo de interface sobre o runtime real (modo governanceReview). Estrutura do modelo, taxonomia e contexto são os do repositório; propostas e números de deliberação são exemplos e estão marcados.</p>
+    <p class="splash-note" id="no3d-note">A visualização 3D não carregou neste navegador. O tour funciona do mesmo jeito.</p>
+  </div>
+</section>
+
+<header id="hud">
+  <div class="brand"><span class="brand-mark" aria-hidden="true"></span>Shadow&nbsp;Council <span class="full chip">Modelo <b id="ver">v0.1.0</b></span></div>
+  <nav id="dots" aria-label="Passos do tour"></nav>
+  <div class="hud-right">
+    <button class="btn small" id="auto" aria-pressed="false" title="Avança sozinho, exceto no passo de decisão">Auto</button>
+    <button class="btn small" id="restart">Recomeçar</button>
+  </div>
+</header>
+
+<aside id="panel" aria-live="polite">
+  <div id="panel-scroll"></div>
+  <div class="nav">
+    <button class="btn small" id="prev">← Voltar</button>
+    <span class="count" id="count"></span>
+    <button class="btn small primary" id="next">Próximo →</button>
+  </div>
+</aside>
+
+<div id="tip" role="status"></div>
+<div id="hint">arraste para girar · role para aproximar · ← → navegam</div>
+
+<script src="../vendor/three/three.min.js"></script>
+<script src="../vendor/three/CopyShader.js"></script>
+<script src="../vendor/three/LuminosityHighPassShader.js"></script>
+<script src="../vendor/three/EffectComposer.js"></script>
+<script src="../vendor/three/RenderPass.js"></script>
+<script src="../vendor/three/ShaderPass.js"></script>
+<script src="../vendor/three/UnrealBloomPass.js"></script>
+<script>
+"use strict";
+/* ======================================================================= data */
+const D = {"components":[{"id":"GM-01","kind":"instrument","title":"Estratégia Brasileira de IA (EBIA, 2021)","status":"policy","basis":"inferred","topics":["international-alignment","workforce-skills","public-sector-use","security-defense","oversight-institutions"],"desc":"Estratégia nacional instituída pela Portaria MCTI nº 4.617/2021 e alterada pela Portaria nº 4.979/2021, com eixos temáticos e ações estratégicas. Serviu de base ao PBIA.","note":"A lista de eixos varia entre fontes (fala-se em nove eixos e 73 ações). Conferir no documento oficial; os tópicos acima são leitura do autor do modelo."},{"id":"GM-02","kind":"instrument","title":"Plano Brasileiro de IA (PBIA) 2024-2028","status":"policy","basis":"documented","topics":["funding-continuity","compute-infrastructure","workforce-skills","public-sector-use","sme-competition","oversight-institutions"],"desc":"Plano com cerca de R$ 23 bi no período, de orçamento, FNDCT e contrapartidas privadas, organizado em cinco eixos: infraestrutura e desenvolvimento; difusão, formação e capacitação; IA no serviço público; inovação empresarial; apoio ao processo regulatório e de governança. Não substitui o marco legal.","note":""},{"id":"GM-03","kind":"instrument","title":"Lei Geral de Proteção de Dados (Lei 13.709/2018)","status":"effective","basis":"documented","topics":["data-governance","rights-redress","transparency"],"desc":"Regime vigente de proteção de dados pessoais, com direitos do titular e revisão de decisões tomadas apenas com base em tratamento automatizado.","note":""},{"id":"GM-04","kind":"instrument","title":"PL 2338/2023 (marco legal de IA)","status":"proposed","basis":"documented","topics":["risk-classification","rights-redress","liability","oversight-institutions","copyright-ip","labor-relations","security-defense"],"desc":"Projeto aprovado no Senado em 10/12/2024 e em tramitação na Câmara. Substitutivo do relator Eduardo Gomes. Não é obrigação vigente.","note":""},{"id":"GM-05","kind":"institution","title":"Sistema Nacional de Regulação e Governança de IA (SIA), supervisionado pela ANPD","status":"proposed","basis":"documented","topics":["oversight-institutions","enforcement-capacity"],"desc":"Sistema de coordenação criado pelo PL 2338, supervisionado pela Autoridade Nacional de Proteção de Dados, com articulação entre autoridades setoriais.","note":""},{"id":"GM-06","kind":"mechanism","title":"Classificação por níveis de risco, com proibição de risco excessivo","status":"proposed","basis":"documented","topics":["risk-classification"],"desc":"O PL divide os sistemas por nível de risco, com regime distinto para alto risco e proibição de usos de risco excessivo, como armas autônomas sem intervenção humana.","note":""},{"id":"GM-07","kind":"mechanism","title":"Regime de alto risco, incluindo o uso em saúde","status":"proposed","basis":"inferred","topics":["risk-classification","rights-redress"],"desc":"Obrigações reforçadas para sistemas de alto risco. Segundo a imprensa, o texto aprovado no Senado classifica o uso na saúde como de alto risco.","note":"Os tópicos além de risk-classification são leitura do autor do modelo; conferir no texto."},{"id":"GM-08","kind":"mechanism","title":"Direitos autorais e IA no PL","status":"proposed","basis":"documented","topics":["copyright-ip"],"desc":"O texto trata de direitos autorais entre os temas regulados. O conteúdo exato das regras sobre treinamento de modelos precisa ser conferido no texto.","note":""},{"id":"GM-09","kind":"mechanism","title":"Trabalho e segurança no PL","status":"proposed","basis":"documented","topics":["labor-relations","security-defense"],"desc":"O texto cria regras para temas como trabalho e segurança. O alcance exato precisa ser conferido no texto.","note":""},{"id":"GM-10","kind":"mechanism","title":"Avaliação de impacto algorítmico e direitos das pessoas afetadas","status":"proposed","basis":"inferred","topics":["impact-assessment","rights-redress","transparency"],"desc":"Mecanismo esperado em marcos de IA baseados em risco: avaliação de impacto prévia e direitos de explicação e contestação.","note":"NÃO confirmado nas fontes consultadas. Conferir no texto do PL antes de tratar como parte do modelo."},{"id":"GM-11","kind":"mechanism","title":"Responsabilização civil por danos de sistemas de IA","status":"proposed","basis":"inferred","topics":["liability"],"desc":"Regras de responsabilidade civil ao longo da cadeia de IA.","note":"NÃO confirmado nas fontes consultadas. Conferir no texto do PL."},{"id":"GM-12","kind":"mechanism","title":"Sandbox regulatório e ambiente de testes","status":"proposed","basis":"inferred","topics":["innovation-sandbox"],"desc":"Ambiente experimental supervisionado para inovação em IA.","note":"NÃO confirmado nas fontes consultadas. Conferir no texto do PL."},{"id":"GM-13","kind":"institution","title":"Autoridade Nacional de Proteção de Dados (ANPD)","status":"effective","basis":"documented","topics":["data-governance","rights-redress","enforcement-capacity"],"desc":"Autoridade com mandato vigente em proteção de dados e designada pelo PL para supervisionar o SIA.","note":""},{"id":"GM-14","kind":"institution","title":"Reguladores setoriais existentes","status":"effective","basis":"inferred","topics":["oversight-institutions","enforcement-capacity"],"desc":"Autoridades de setores regulados que passariam a articular-se ao SIA nas respectivas competências.","note":"Quais autoridades e com que competências em IA deve ser detalhado pelos revisores."},{"id":"GM-15","kind":"institution","title":"Grupo de trabalho interministerial do PBIA, coordenado pelo MCTI","status":"policy","basis":"documented","topics":["monitoring-learning","oversight-institutions"],"desc":"Grupo criado em 2025 para monitorar a execução do plano, com relatório anual de acompanhamento.","note":""},{"id":"GM-16","kind":"metric","title":"Painel público de acompanhamento do PBIA","status":"policy","basis":"documented","topics":["monitoring-learning","transparency"],"desc":"Sistema público de monitoramento da execução das 54 ações do plano. Os relatos sobre o nível de execução divergem entre fontes.","note":""},{"id":"GM-17","kind":"resource","title":"Infraestrutura nacional de computação (supercomputador e armazenamento)","status":"policy","basis":"documented","topics":["compute-infrastructure","data-sovereignty"],"desc":"Edital de supercomputador e infraestrutura nacional de processamento e armazenamento de dados.","note":""},{"id":"GM-18","kind":"resource","title":"Modelos de linguagem em português","status":"policy","basis":"documented","topics":["language-culture","compute-infrastructure"],"desc":"Desenvolvimento de modelos de IA em português, na infraestrutura nacional.","note":""},{"id":"GM-19","kind":"resource","title":"Formação de especialistas e capacitação de servidores","status":"policy","basis":"documented","topics":["workforce-skills","public-sector-use"],"desc":"Metas de formação de profissionais de IA e de capacitação de servidores públicos.","note":""},{"id":"GM-20","kind":"resource","title":"IA Brasil: IA no serviço público (CPQD, Serpro e Dataprev)","status":"policy","basis":"documented","topics":["public-sector-use"],"desc":"Iniciativa para aplicar IA em serviços públicos com empresas públicas de tecnologia.","note":""},{"id":"GM-21","kind":"institution","title":"Centro Nacional de Transparência Algorítmica e IA Confiável (UFMG)","status":"policy","basis":"documented","topics":["transparency","open-source-science"],"desc":"Centro de pesquisa apoiado pelo PBIA, com R$ 50 milhões previstos em dois anos.","note":""},{"id":"GM-22","kind":"resource","title":"Crédito e apoio à inovação empresarial em IA","status":"policy","basis":"documented","topics":["sme-competition","funding-continuity"],"desc":"Eixo do PBIA de inovação empresarial, com recursos do FNDCT e contrapartidas privadas.","note":""}],"topics":[{"id":"risk-classification","label":"Classificação de risco","strength":"proposedOnly","comps":["GM-04","GM-06","GM-07"]},{"id":"impact-assessment","label":"Avaliação de impacto","strength":"inferredOnly","comps":["GM-10"]},{"id":"oversight-institutions","label":"Instituições de supervisão","strength":"inForce","comps":["GM-01","GM-02","GM-04","GM-05","GM-14","GM-15"]},{"id":"enforcement-capacity","label":"Capacidade de fiscalização","strength":"inForce","comps":["GM-05","GM-13","GM-14"]},{"id":"rights-redress","label":"Direitos e contestação","strength":"inForce","comps":["GM-03","GM-04","GM-07","GM-10","GM-13"]},{"id":"liability","label":"Responsabilização","strength":"proposedOnly","comps":["GM-04","GM-11"]},{"id":"transparency","label":"Transparência e registro","strength":"inForce","comps":["GM-03","GM-10","GM-16","GM-21"]},{"id":"public-sector-use","label":"IA no setor público","strength":"inForce","comps":["GM-01","GM-02","GM-19","GM-20"]},{"id":"compute-infrastructure","label":"Infraestrutura computacional","strength":"inForce","comps":["GM-02","GM-17","GM-18"]},{"id":"energy-environment","label":"Energia e meio ambiente","strength":"none","comps":[]},{"id":"data-governance","label":"Governança de dados","strength":"inForce","comps":["GM-03","GM-13"]},{"id":"data-sovereignty","label":"Soberania de dados","strength":"inForce","comps":["GM-17"]},{"id":"language-culture","label":"Língua e cultura","strength":"inForce","comps":["GM-18"]},{"id":"workforce-skills","label":"Formação e capacitação","strength":"inForce","comps":["GM-01","GM-02","GM-19"]},{"id":"labor-relations","label":"Trabalho","strength":"proposedOnly","comps":["GM-04","GM-09"]},{"id":"innovation-sandbox","label":"Inovação e sandbox","strength":"inferredOnly","comps":["GM-12"]},{"id":"sme-competition","label":"Concorrência e pequenas empresas","strength":"inForce","comps":["GM-02","GM-22"]},{"id":"open-source-science","label":"Ciência e modelos abertos","strength":"inForce","comps":["GM-21"]},{"id":"standards-certification","label":"Normas e certificação","strength":"none","comps":[]},{"id":"international-alignment","label":"Alinhamento internacional","strength":"inferredOnly","comps":["GM-01"]},{"id":"security-defense","label":"Segurança e defesa","strength":"proposedOnly","comps":["GM-01","GM-04","GM-09"]},{"id":"info-integrity","label":"Integridade da informação","strength":"none","comps":[]},{"id":"copyright-ip","label":"Direitos autorais","strength":"proposedOnly","comps":["GM-04","GM-08"]},{"id":"children-vulnerable","label":"Crianças e vulneráveis","strength":"none","comps":[]},{"id":"regional-inequality","label":"Desigualdade regional","strength":"none","comps":[]},{"id":"participation","label":"Participação social","strength":"none","comps":[]},{"id":"funding-continuity","label":"Financiamento e continuidade","strength":"inForce","comps":["GM-02","GM-22"]},{"id":"monitoring-learning","label":"Monitoramento e revisão","strength":"inForce","comps":["GM-15","GM-16"]}],"features":[{"id":"CF-01","kind":"asset","title":"Infraestrutura pública digital de escala nacional"},{"id":"CF-02","kind":"asset","title":"Matriz elétrica com forte participação renovável"},{"id":"CF-03","kind":"asset","title":"Português do Brasil em escala continental"},{"id":"CF-04","kind":"asset","title":"Biodiversidade, Amazônia e bioeconomia"},{"id":"CF-05","kind":"asset","title":"Dados de saúde pública em escala (SUS)"},{"id":"CF-06","kind":"asset","title":"Agronegócio e dados de campo e clima"},{"id":"CF-07","kind":"asset","title":"Mercado doméstico amplo e liderança regional"},{"id":"CF-08","kind":"capability","title":"Protagonismo diplomático recente"},{"id":"CF-09","kind":"capability","title":"Base científica pública"},{"id":"CF-10","kind":"capability","title":"Autoridade de dados já em operação"},{"id":"CF-11","kind":"constraint","title":"Desigualdade regional e digital"},{"id":"CF-12","kind":"constraint","title":"Dependência de computação e chips estrangeiros"},{"id":"CF-13","kind":"capability","title":"Controle externo e cultura de contestação"},{"id":"CF-14","kind":"asset","title":"Pluralismo linguístico e cultural"}],"strata":[{"id":"regulators","label":"Reguladores / fiscalização","seats":3},{"id":"publicOperators","label":"Poder público operador","seats":2},{"id":"business","label":"Empresas / startups","seats":3},{"id":"research","label":"Pesquisa interdisciplinar","seats":3},{"id":"civilSociety","label":"Sociedade civil e direitos","seats":3},{"id":"workers","label":"Trabalhadores / profissões","seats":2},{"id":"affectedGroups","label":"Grupos diretamente afetados","seats":2},{"id":"infrastructure","label":"Infraestrutura / ambiente","seats":2}],"seeds":[{"id":"T1","title":"Continuidade do plano × supervisão e avaliação"},{"id":"T2","title":"Soberania computacional × custo e energia"},{"id":"T3","title":"Difusão da IA × emprego e desigualdade regional"},{"id":"T4","title":"Direitos × custo de conformidade"},{"id":"T5","title":"Auditoria × capacidade de fiscalizar"},{"id":"T6","title":"Eficiência × contestação humana"}],"branches":[{"id":"pl2338-approved","h":"A Câmara aprova o PL 2338 sem alterações relevantes ao texto do Senado."},{"id":"pl2338-stalled","h":"O PL 2338 não é votado em 2027 e o Brasil segue sem marco legal geral."},{"id":"pbia-funding-cut","h":"O financiamento do PBIA cai pela metade a partir de 2027."},{"id":"new-government-priorities","h":"O governo empossado em 2027 redefine as prioridades e a coordenação institucional da IA."}],"unrep":["Povos indígenas e comunidades tradicionais","Judiciário, Ministério Público e TCU","Congresso Nacional","Segurança pública e defesa","Setores regulados (financeiro, saúde, telecomunicações)","Agronegócio"]};
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const REDUCE = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const STRATA_C = ["#F0A93B","#E4572E","#C45BAA","#8E7CF0","#4A90E2","#2FB5A8","#7BD36B","#BFC6CF"];
+const STRATA_PT = {regulators:"Reguladores",publicOperators:"Poder público",business:"Empresas",research:"Pesquisa",civilSociety:"Sociedade civil",workers:"Trabalhadores",affectedGroups:"Afetados",infrastructure:"Infraestrutura"};
+const PROV = [{id:"anthropic",name:"Anthropic",c:"#F2B66D"},{id:"openai",name:"OpenAI",c:"#7FD6C2"},{id:"xai",name:"xAI",c:"#E6ECF5"},{id:"gemini",name:"Gemini",c:"#8AA8FF"}];
+const STATUS = {effective:{c:"#38C2B4",pt:"Em vigor"},policy:{c:"#E8A33D",pt:"Política pública"},proposed:{c:"#A78BFA",pt:"Projeto de lei"}};
+const STRENGTH = {inForce:{c:"#38C2B4",pt:"coberto por norma em vigor ou política"},proposedOnly:{c:"#A78BFA",pt:"coberto só por projeto de lei"},inferredOnly:{c:"#8796B0",pt:"coberto só por leitura inferida, a confirmar"},none:{c:"#FF7A59",pt:"sem nenhum componente no modelo"}};
+const KIND_PT = {instrument:"Instrumento",institution:"Instituição",mechanism:"Mecanismo",resource:"Recurso",metric:"Métrica"};
+const LENS = {omission:{q:"Q1",cls:"q1",c:"#38C2B4",name:"Omissão"},excess:{q:"Q2",cls:"q2",c:"#FF7A59",name:"Excesso"},advantage:{q:"Q3",cls:"q3",c:"#E8A33D",name:"Vantagem"}};
+const TOPIC = Object.fromEntries(D.topics.map(t => [t.id, t]));
+const COMP = Object.fromEntries(D.components.map(c => [c.id, c]));
+const GAPS = D.topics.filter(t => t.strength === "none");
+const FRAGILE = D.topics.filter(t => t.strength === "proposedOnly" || t.strength === "inferredOnly");
+const N_PROPOSED = D.components.filter(c => c.status === "proposed").length;
+
+/* Example proposals for the review step. They did not come from a real run.
+   pos: where each of the 8 strata stood on the proposal, in its own words. The council does not
+   deliberate a single answer; the runtime packet carries the same shape (stratumPositions). */
+const PROPS = [
+  {id:"M001",lens:"omission",change:"add",topic:"participation",title:"Participação social na governança de IA",
+   text:"Nenhum componente trata de consulta pública ou controle democrático. Com a troca de governo em janeiro, um canal permanente de participação reduz o risco de o modelo mudar sem debate.",
+   reps:"3/3",raised:"civilSociety",pos:{"regulators": ["amend", "Participação sim, com rito e prazo. Consulta aberta sem prazo paralisa a autoridade."], "publicOperators": ["against", "Já existem conselhos e consultas públicas. Um canal novo duplica estrutura e custo."], "business": ["silent", ""], "research": ["for", "Sem canal de participação, a troca de governo interrompe o monitoramento do plano."], "civilSociety": ["for", "Nenhum componente trata de controle democrático. O novo governo pode redesenhar tudo sem debate."], "workers": ["for", "Quem perde ocupação para a IA precisa de assento onde as prioridades são definidas."], "affectedGroups": ["for", "Sem canal próprio, os grupos afetados entram só como dado, nunca como voz."], "infrastructure": ["silent", ""]}},
+  {id:"M002",lens:"omission",change:"add",topic:"energy-environment",title:"Energia e água dos data centers",
+   text:"O modelo investe em computação nacional (GM-17) e não trata consumo de energia e água. A matriz elétrica renovável (CF-02) só vira vantagem se o custo ambiental for medido.",
+   reps:"2/3",raised:"infrastructure",pos:{"regulators": ["silent", ""], "publicOperators": ["split", "Um assento apoia medir. Outro teme atrasar o edital do supercomputador."], "business": ["against", "Métrica ambiental agora encarece o data center nacional e empurra carga para nuvem estrangeira."], "research": ["for", "Sem medir energia e água, a vantagem da matriz renovável (CF-02) é só retórica."], "civilSociety": ["amend", "Incluir água e impacto nas comunidades vizinhas aos data centers."], "workers": ["silent", ""], "affectedGroups": ["amend", "Medir também onde o data center se instala e quem arca com o custo local."], "infrastructure": ["for", "GM-17 investe em computação e não trata consumo de energia e água."]}},
+  {id:"M003",lens:"omission",change:"add",topic:"children-vulnerable",title:"Proteção de crianças e adolescentes",
+   text:"Nenhum componente trata de crianças e grupos vulneráveis, mesmo com IA chegando a serviços públicos e plataformas de uso massivo.",
+   reps:"3/3",raised:"affectedGroups",pos:{"regulators": ["for", "A autoridade de dados já trata dados de crianças. Falta estender a decisões automatizadas."], "publicOperators": ["silent", ""], "business": ["amend", "Salvaguarda por tipo de uso, não proibição geral de IA em produtos para jovens."], "research": ["silent", ""], "civilSociety": ["for", "IA chega a escolas públicas e plataformas de massa sem salvaguarda específica."], "workers": ["silent", ""], "affectedGroups": ["for", "Nenhum componente trata de crianças e grupos vulneráveis."], "infrastructure": ["silent", ""]}},
+  {id:"M004",lens:"excess",change:"remove",comp:"GM-12",title:"Retirar o sandbox até confirmar no texto do PL",
+   text:"GM-12 entrou no modelo sem confirmação nas fontes. Contar com ele infla a cobertura de inovação. Melhor retirar e reintroduzir quando o texto for conferido.",
+   reps:"3/3",raised:"research",pos:{"regulators": ["for", "Componente não confirmado na fonte não pode contar como cobertura."], "publicOperators": ["silent", ""], "business": ["against", "Retirar o sandbox sinaliza que a inovação saiu da agenda. Melhor marcar como a confirmar."], "research": ["for", "GM-12 entrou sem fonte e infla a cobertura de inovação."], "civilSociety": ["silent", ""], "workers": ["silent", ""], "affectedGroups": ["silent", ""], "infrastructure": ["amend", "Manter como hipótese explícita, fora da contagem de cobertura, em vez de remover."]},flags:["evidência a confirmar"]},
+  {id:"M005",lens:"excess",change:"modify",comp:"GM-04",title:"Tratar o PL 2338 como cenário, não como pilar",
+   text:`${N_PROPOSED} dos ${D.components.length} componentes dependem de um projeto ainda não votado. Se o PL parar em 2027 (ramo pl2338-stalled), essas áreas ficam sem cobertura.`,
+   reps:"3/3",raised:"regulators",pos:{"regulators": ["for", "A maior parte dos mecanismos depende de um projeto ainda não votado."], "publicOperators": ["for", "Sem o PL, o SIA não existe. O poder público precisa de um plano B."], "business": ["split", "Um assento apoia. Outro quer o PL como pilar, para dar previsibilidade ao investimento."], "research": ["for", "O ramo pl2338-stalled mostra quantas áreas ficam descobertas."], "civilSociety": ["against", "Rebaixar o PL a cenário enfraquece a pressão pelos direitos que ele traz."], "workers": ["silent", ""], "affectedGroups": ["against", "Os direitos de contestação estão no PL. Tratá-lo como cenário os torna opcionais."], "infrastructure": ["silent", ""]}},
+  {id:"M006",lens:"excess",change:"modify",comp:"GM-03",legal:true,title:"LGPD: a revisão de decisões automatizadas não basta para IA",
+   text:"O modelo usa a LGPD como base de contestação de decisões de IA. O direito de revisão cobre dados pessoais, não todo uso de IA. Mudar como o modelo descreve uma lei em vigor exige revisão jurídica.",
+   reps:"2/3",raised:"civilSociety",pos:{"regulators": ["amend", "Corrigir a descrição sem sugerir que a LGPD falha onde a autoridade já atua."], "publicOperators": ["silent", ""], "business": ["against", "Ampliar a leitura do art. 20 cria insegurança jurídica para quem já cumpre a LGPD."], "research": ["silent", ""], "civilSociety": ["for", "O direito de revisão cobre dados pessoais, não todo uso de IA."], "workers": ["silent", ""], "affectedGroups": ["for", "Decisões sobre benefícios sociais usam IA e ficam sem via clara de contestação."], "infrastructure": ["silent", ""]},flags:["revisão jurídica"]},
+  {id:"M007",lens:"advantage",change:"add",topic:"language-culture",feats:["CF-03","CF-09"],title:"Avaliação pública de modelos em português do Brasil",
+   text:"Um conjunto público de testes em português brasileiro, mantido pela base científica pública, faria do país a referência na avaliação de modelos para a língua. Isso depende do idioma e da rede de pesquisa daqui, e não se copia.",
+   reps:"3/3",raised:"research",pos:{"regulators": ["silent", ""], "publicOperators": ["for", "Serviço público em português precisa de teste em português antes de contratar modelo."], "business": ["amend", "Abrir os testes a empresas, com governança que evite captura por um laboratório."], "research": ["for", "Depende do idioma e da rede de pesquisa daqui, e não se copia."], "civilSociety": ["amend", "Incluir línguas indígenas e falas regionais, não só o português padrão."], "workers": ["silent", ""], "affectedGroups": ["for", "Modelos que erram mais com sotaques regionais prejudicam quem já é excluído."], "infrastructure": ["for", "Roda na infraestrutura nacional (GM-17) e dá a ela um uso concreto."]}},
+  {id:"M008",lens:"advantage",change:"add",topic:"workforce-skills",feats:["CF-07"],title:"Investir em formação em IA",
+   text:"Formar mais profissionais de IA.",
+   reps:"1/3",raised:"business",pos:{"regulators": ["silent", ""], "publicOperators": ["silent", ""], "business": ["for", "Faltam profissionais de IA no mercado."], "research": ["against", "Genérica: serviria a qualquer país e não usa nenhum traço do contexto."], "civilSociety": ["silent", ""], "workers": ["amend", "Requalificar quem perde ocupação, não só formar especialistas."], "affectedGroups": ["silent", ""], "infrastructure": ["silent", ""]},flags:["genérica: serviria a qualquer país"]},
+];
+const STANCE = {
+  for:    {pt:"a favor",       g:"✓", c:"#38C2B4"},
+  against:{pt:"contra",        g:"✕", c:"#FF7A59"},
+  amend:  {pt:"propõe ajuste", g:"±", c:"#6EA0FF"},
+  split:  {pt:"dividido",      g:"⇄", c:"#A78BFA"},
+  silent: {pt:"sem posição",   g:"·", c:"#4A5568"},
+};
+const STANCE_ORDER = ["for","against","amend","split","silent"];
+/* Illustrative blind (R1) expectations per stratum; also drives the R1 particle flow. */
+const EXPECT = {regulators:["oversight-institutions","enforcement-capacity","impact-assessment"],publicOperators:["public-sector-use","rights-redress","standards-certification"],
+  business:["sme-competition","innovation-sandbox","standards-certification"],research:["open-source-science","monitoring-learning","language-culture"],
+  civilSociety:["participation","transparency","children-vulnerable"],workers:["labor-relations","regional-inequality","workforce-skills"],
+  affectedGroups:["rights-redress","children-vulnerable","regional-inequality"],infrastructure:["energy-environment","compute-infrastructure","data-sovereignty"]};
+function spread(p){ const o = {}; for (const s of D.strata) { const st = p.pos[s.id][0]; (o[st] = o[st] || []).push(s.id); } return o; }
+function stratumReading(sid){
+  const out = {raised:[], for:[], against:[], amend:[], split:[], silent:[], aloneFor:[], aloneAgainst:[]};
+  for (const p of PROPS) {
+    const st = p.pos[sid][0]; out[st].push(p);
+    if (p.raised === sid) out.raised.push(p);
+    const others = D.strata.filter(s => s.id !== sid).map(s => p.pos[s.id][0]);
+    if (st === "for" && !others.includes("for")) out.aloneFor.push(p);
+    if (st === "against" && !others.includes("against")) out.aloneAgainst.push(p);
+  }
+  return out;
+}
+const EXAMPLE_FILL = {
+  reviewer:"Equipe de revisão (exemplo)",
+  d:{M001:{decision:"accept",rationale:"Lacuna estrutural e a troca de governo aumenta o risco de mudança sem debate."},
+     M002:{decision:"accept",rationale:"Investimento em computação sem métrica ambiental é risco reputacional e fiscal."},
+     M003:{decision:"defer",rationale:""},
+     M004:{decision:"accept",rationale:"Componente sem confirmação na fonte não pode sustentar cobertura."},
+     M005:{decision:"modify",rationale:"Concordo com o risco, mas o PL segue relevante como cenário principal.",edited:"Marcar os componentes do PL como dependentes da aprovação e criar indicador de cobertura sem o PL."},
+     M006:{decision:"accept",rationale:"Leitura correta do alcance do art. 20; ajustar a descrição do componente.",legalReviewer:"Assessoria jurídica (exemplo)",legalNote:"Ajuste só na descrição do modelo; a lei não muda."},
+     M007:{decision:"accept",rationale:"Proposta específica do contexto brasileiro e verificável em um ano."},
+     M008:{decision:"reject",rationale:""}}
+};
+
+/* ====================================================================== state */
+const state = { step:-1, auto:false, autoTimer:null, coloring:"strata", lens:"omission", picked:null, version:"0.1.0",
+  stratum:"civilSociety", selProp:null,
+  review:{reviewer:"", d:{}, applied:null} };
+
+/* ====================================================================== steps */
+const STEPS = [
+ {id:"problema", eyebrow:"Passo 1 · O momento", title:"O Brasil em 14 de novembro de 2026", html:() => `
+   <p>O modelo de governança de IA do país foi desenhado antes de três mudanças que ainda estão em curso. É nesse momento que o conselho vai questioná-lo.</p>
+   <ul class="facts">
+     <li><span class="when">2021</span><span>Estratégia Brasileira de IA (EBIA), Portaria MCTI 4.617.</span></li>
+     <li><span class="when">2024</span><span>Plano Brasileiro de IA, cerca de R$ 23 bi até 2028, em cinco eixos.</span></li>
+     <li><span class="when">dez 2024</span><span>Senado aprova o PL 2338 e cria o SIA, supervisionado pela ANPD. O texto segue na Câmara.</span></li>
+     <li><span class="when">out 2026</span><span>Eleições gerais. Novo governo e nova legislatura em janeiro.</span></li>
+     <li><span class="when">2028</span><span>Fim do ciclo orçamentário do PBIA.</span></li>
+   </ul>
+   <p class="muted">Fontes de imprensa e documentos públicos, com verificação pendente no repositório.</p>`},
+ {id:"modelo", eyebrow:"Passo 2 · O objeto", title:`O modelo em exame: ${D.components.length} componentes`, pick:"tower", html:() => `
+   <p>Cada bloco é um componente do arranjo brasileiro de governança de IA. Os andares agrupam o tipo: instrumentos, instituições, mecanismos, recursos e métricas.</p>
+   <div class="legend">
+     <span><i class="sw" style="background:${STATUS.effective.c}"></i>Em vigor (${count("effective")})</span>
+     <span><i class="sw" style="background:${STATUS.policy.c}"></i>Política pública (${count("policy")})</span>
+     <span><i class="sw" style="background:${STATUS.proposed.c}"></i>Projeto de lei (${count("proposed")})</span>
+     <span><i class="sw hollow"></i>Conteúdo a confirmar</span>
+   </div>
+   ${detailBox("Toque ou clique num bloco para ver o componente.")}`},
+ {id:"conselho", eyebrow:"Passo 3 · Quem questiona", title:"20 assentos, 8 estratos, 4 famílias de modelos", pick:"ring", html:() => `
+   <p>Cada assento é uma perspectiva sintética com fontes, interesses e pontos cegos declarados. As famílias de modelos se alternam dentro de cada estrato, para separar viés de modelo de perspectiva.</p>
+   <div class="seg" role="group" aria-label="Colorir assentos por">
+     <button data-col="strata" aria-pressed="${state.coloring==="strata"}">Por estrato</button>
+     <button data-col="provider" aria-pressed="${state.coloring==="provider"}">Por família de modelo</button>
+   </div>
+   <div class="legend" id="seat-legend">${seatLegend()}</div>
+   <p class="muted">O anel tracejado é uma cadeira vazia: ${D.unrep.length} perspectivas sem fonte documental, como povos indígenas e o Judiciário, ficam fora e aparecem no relatório como ausentes.</p>
+   ${detailBox("Toque num assento para ver de onde vem a perspectiva.")}`},
+ {id:"cego", eyebrow:"Passo 4 · Rodada R1, às cegas", title:"Primeiro, o conselho não vê o modelo", html:() => `
+   <p>Cada assento lista o que um modelo nacional deve considerar nesta data, sem acesso ao modelo. O véu sobre a torre é proposital: assim as expectativas não se ancoram no que o modelo já contém.</p>
+   <p>As expectativas viajam até as ${D.topics.length} áreas da taxonomia. Quanto mais assentos esperam uma área, mais ela acende.</p>
+   <p><span class="tag demo">exemplo</span> <span class="muted">Fluxo ilustrativo. Numa execução real, as expectativas vêm dos modelos.</span></p>`},
+ {id:"cobertura", eyebrow:"Passo 5 · Matriz de cobertura", title:"Onde o modelo não chega", pick:"topics", html:() => `
+   <p>O véu cai e o código cruza as áreas esperadas com os componentes que as cobrem. Esta parte é estrutural e vem do modelo real do repositório:</p>
+   <div class="detail"><span class="id">${GAPS.length} áreas sem nenhum componente</span><p>${GAPS.map(t=>esc(t.label)).join(" · ")}</p></div>
+   <div class="detail"><span class="id">${FRAGILE.length} áreas frágeis</span><p>Cobertas só por projeto de lei ou por leitura inferida: ${FRAGILE.map(t=>esc(t.label)).join(" · ")}.</p></div>
+   <div class="legend">
+     <span><i class="sw round" style="background:${STRENGTH.inForce.c}"></i>Em vigor ou política</span>
+     <span><i class="sw round" style="background:${STRENGTH.proposedOnly.c}"></i>Só projeto de lei</span>
+     <span><i class="sw round" style="background:${STRENGTH.inferredOnly.c}"></i>Só inferida</span>
+     <span><i class="sw round" style="background:${STRENGTH.none.c}"></i>Lacuna</span>
+   </div>
+   ${detailBox("Toque numa área para ver quem a cobre.")}`},
+ {id:"lentes", eyebrow:"Passo 6 · Três perguntas", title:"Omissão, excesso, vantagem", html:() => lensHtml()},
+ {id:"deliberacao", eyebrow:"Passo 7 · Deliberação", title:"Contestar, revisar, propor", html:() => `
+   <p>Com o modelo à vista, os achados entram no plenário. Cada arco é uma ação entre assentos de estratos diferentes.</p>
+   <div class="legend">
+     <span><i class="sw" style="background:#FF7A59"></i>Contestação</span>
+     <span><i class="sw" style="background:#38C2B4"></i>Apoio</span>
+     <span><i class="sw" style="background:#E8A33D"></i>Proposta de mudança</span>
+   </div>
+   <ol class="rounds" id="rounds">
+     <li data-r="2"><b>R2</b>Achados nas três lentes, com a matriz à vista</li>
+     <li data-r="3"><b>R3</b>Contestação, apoio e pedidos de evidência</li>
+     <li data-r="4"><b>R4</b>Quem foi contestado mantém, revisa ou retira</li>
+     <li data-r="5"><b>R5</b>Propostas concretas: adicionar, modificar, remover</li>
+     <li data-r="7"><b>R7</b>Dissenso preservado, fontes auditadas, genéricos marcados</li>
+   </ol>
+   <p class="muted">Regras aplicadas em código: achado sem componente, tópico ou traço de contexto exigido pela lente é rejeitado e registrado. <span class="tag demo">arcos de exemplo</span></p>`},
+ {id:"ramos", eyebrow:"Passo 8 · Estresse de contexto", title:"E se o país mudar de novo?", pick:"branches", html:() => `
+   <p>Cada achado é testado contra quatro hipóteses de contexto, empilhadas sobre o estado-base, que não muda.</p>
+   <ul class="facts">${D.branches.map(b=>`<li><span class="when">${esc(b.id.replace("pl2338-","PL ").replace("pbia-funding-cut","PBIA −50%").replace("new-government-priorities","novo governo"))}</span><span>${esc(b.h)}</span></li>`).join("")}</ul>
+   <p class="muted">Proposta que só vale num ramo é frágil. Proposta que sobrevive aos quatro merece atenção primeiro.</p>`},
+ {id:"estratos", eyebrow:"Passo 9 · Sem falso consenso", title:"Cada estrato, sua leitura", html:() => strataHtml()},
+ {id:"revisao", eyebrow:"Passo 10 · Sua decisão", title:"Cada proposta, com a posição de cada estrato. Você decide.", noAuto:true, pick:"seats", html:() => reviewHtml()},
+ {id:"iteracao", eyebrow:"Passo 11 · Próxima rodada", title:"O ciclo recomeça na nova versão", html:() => iterHtml()},
+ {id:"fim", eyebrow:"Fim do tour", title:"O que já existe e o que falta", html:() => `
+   <div class="cols">
+     <div><h4 style="color:var(--teal)">Já existe</h4><ul>
+       <li>Runtime do conselho com 86 testes offline</li>
+       <li>Pacote de revisão com a posição de cada estrato em cada proposta</li>
+       <li>Modo governanceReview com R1 cega e três lentes</li>
+       <li>Modelo v0.1.0, taxonomia de ${D.topics.length} áreas, contexto datado</li>
+       <li>Revisão humana por linha de comando: folha, decisões, nova versão, comparação</li></ul></div>
+     <div><h4 style="color:var(--coral)">Falta</h4><ul>
+       <li>Primeira execução com modelos reais</li>
+       <li>Conferir no texto do PL os componentes inferidos</li>
+       <li>Revisão da taxonomia por especialistas</li>
+       <li>Ouvir as ${D.unrep.length} perspectivas sem fonte</li>
+       <li>Esta interface</li></ul></div>
+   </div>
+   <p>Esta tela é um protótipo da aplicação. Hoje o mesmo ciclo roda por linha de comando: <span class="mono">scse run</span>, <span class="mono">scse govern sheet</span>, <span class="mono">scse govern apply</span>.</p>
+   <div class="row"><button class="btn primary" data-go="0">Rever o tour</button><button class="btn" data-go="9">Voltar à decisão</button></div>`},
+];
+function count(s){ return D.components.filter(c => c.status === s).length; }
+function detailBox(empty){ return `<div class="detail" id="detail"><p class="muted">${esc(empty)}</p></div>`; }
+function seatLegend(){
+  if (state.coloring === "provider") return PROV.map(p => `<span><i class="sw round" style="background:${p.c}"></i>${p.name} · 25%</span>`).join("");
+  return D.strata.map((s,i) => `<span><i class="sw round" style="background:${STRATA_C[i]}"></i>${esc(STRATA_PT[s.id]||s.label)} · ${s.seats}</span>`).join("");
+}
+function lensHtml(){
+  const L = {
+    omission:{h:"Q1 · O que deveria estar sendo considerado e não está",req:["Área da taxonomia, ou nova área com título","Proposta de adicionar, ou de modificar quando a cobertura é parcial","Por que importa nesta data, com fontes"],ex:PROPS[0]},
+    excess:{h:"Q2 · O que está sendo considerado e não deveria",req:["Um componente do modelo","Proposta de remover ou modificar","O risco de manter como está"],ex:PROPS[4]},
+    advantage:{h:"Q3 · Especificidades para uma vantagem distintiva",req:["Um ou mais traços de contexto (CF)","O desenho proposto","Por que outros países não copiam, e o custo"],ex:PROPS[6]},
+  }[state.lens];
+  const k = LENS[state.lens];
+  return `<p>Toda proposta do conselho passa por uma de três lentes. O motor rejeita achado que não traz o que a lente exige.</p>
+   <div class="seg" role="group" aria-label="Lente">
+     ${Object.entries(LENS).map(([id,v]) => `<button data-lens="${id}" aria-pressed="${state.lens===id}">${v.q} ${v.name}</button>`).join("")}
+   </div>
+   <div class="lenscard" style="border-color:${k.c}66">
+     <h3 style="color:${k.c}">${esc(L.h)}</h3>
+     <ul class="req">${L.req.map(r=>`<li>${esc(r)}</li>`).join("")}</ul>
+     <div class="detail"><span class="id">${L.ex.id} · exemplo</span><h4>${esc(L.ex.title)}</h4><p>${esc(L.ex.text)}</p></div>
+   </div>
+   ${state.lens==="advantage" ? `<p class="muted">Os ${D.features.length} traços de contexto orbitam a lente. Um verificador de outro provedor marca o achado genérico, que serviria a qualquer país.</p>` : ""}`;
+}
+function stanceChip(st, text){ const k = STANCE[st]; return `<span class="st st-${st}"><i aria-hidden="true">${k.g}</i>${esc(text)}</span>`; }
+function strataHtml(){
+  const sid = state.stratum, s = D.strata.find(x => x.id === sid), r = stratumReading(sid);
+  const item = (p, why) => `<li><span class="mono">${p.id}</span> ${esc(p.title)}${why ? `<br><span class="quote">“${esc(why)}”</span>` : ""}</li>`;
+  const block = (st, list) => list.length ? `<div class="reading"><h4>${stanceChip(st, `${STANCE[st].pt} · ${list.length}`)}</h4><ul>${list.map(p => item(p, p.pos[sid][1])).join("")}</ul></div>` : "";
+  return `<p>O conselho não vota e não chega a uma resposta comum. Uma proposta nasce num assento e cada estrato reage a ela, ou fica calado. O pacote de revisão guarda essas reações lado a lado, sem somá-las num veredito.</p>
+   <div class="seg strata-seg" role="group" aria-label="Estrato">${D.strata.map((x,i) => `<button data-stratum="${x.id}" aria-pressed="${x.id===sid}"><i class="sw round" style="background:${STRATA_C[i]}"></i>${esc(STRATA_PT[x.id])}</button>`).join("")}</div>
+   <div class="detail"><span class="id">${esc(s.label)} · ${s.seats} assentos</span>
+     <p><b>Esperava às cegas (R1):</b> ${EXPECT[sid].map(t => esc(TOPIC[t] ? TOPIC[t].label : t)).join(" · ")}</p>
+     <p><b>Levantou:</b> ${r.raised.map(p => `${p.id} ${esc(p.title)}`).join(" · ") || "nenhuma proposta"}</p>
+     ${r.aloneFor.length ? `<p><b>Único estrato a favor:</b> ${r.aloneFor.map(p => p.id).join(", ")}</p>` : ""}
+     ${r.aloneAgainst.length ? `<p><b>Único estrato contra:</b> ${r.aloneAgainst.map(p => p.id).join(", ")}</p>` : ""}</div>
+   ${block("for", r.for)}${block("against", r.against)}${block("amend", r.amend)}${block("split", r.split)}
+   <p><a class="btn" href="../#ao-vivo">Abrir a participação ao vivo →</a></p>
+   <p class="muted">Sem posição em ${r.silent.length} de ${PROPS.length} propostas${r.silent.length ? ` (${r.silent.map(p => p.id).join(", ")})` : ""}. Calar não é concordar: o estrato não se pronunciou. <span class="tag demo">exemplo</span></p>`;
+}
+function stanceStrip(p){
+  const sp = spread(p);
+  const summary = STANCE_ORDER.filter(k => sp[k]).map(k => `${STANCE[k].pt} ${sp[k].length}`).join(" · ");
+  const sel = state.selProp === p.id;
+  return `<div class="strip" aria-label="Posição de cada estrato em ${p.id}">${D.strata.map(s => { const [st] = p.pos[s.id];
+      return `<span class="cell st-${st}" title="${esc(STRATA_PT[s.id])}: ${STANCE[st].pt}"><i aria-hidden="true">${STANCE[st].g}</i>${esc(STRATA_PT[s.id])}</span>`; }).join("")}</div>
+    <div class="row"><span class="signals">${summary}</span><button class="btn small" data-sel="${p.id}" aria-pressed="${sel}">${sel ? "Apagar no plenário" : "Acender no plenário"}</button></div>
+    <details${sel ? " open" : ""}><summary>Argumento de cada estrato</summary><ul class="args">${D.strata.map(s => { const [st, why] = p.pos[s.id];
+      return `<li>${stanceChip(st, STRATA_PT[s.id])}<span>${why ? esc(why) : `<span class="muted">não se pronunciou</span>`}</span></li>`; }).join("")}</ul></details>`;
+}
+function propLabel(p){ return p.comp ? `${p.comp} · ${COMP[p.comp].title}` : (TOPIC[p.topic] ? TOPIC[p.topic].label : p.topic); }
+function reviewHtml(){
+  const r = state.review;
+  if (r.applied) return appliedHtml();
+  return `<p>Cada proposta foi levantada por um estrato e chega com a posição dos oito: quem defendeu, quem contestou, quem pediu ajuste e quem não se pronunciou. Não há resposta do conselho. Nada muda no modelo até uma pessoa decidir, com nome e justificativa. <span class="tag demo">propostas de exemplo</span></p>
+   <div class="legend">${STANCE_ORDER.map(k => stanceChip(k, STANCE[k].pt)).join("")}</div>
+   <p class="muted">Para ver por tensão, com mapa de calor, cards humanos e facilitador: <a href="../#ao-vivo" style="color:var(--brass-2)">participação ao vivo →</a>.</p>
+   <p class="muted">“Acender no plenário” pinta cada assento com a posição do seu estrato. Assento apagado: o estrato não se pronunciou.</p>
+   <div class="field"><label for="reviewer">Quem decide</label><input id="reviewer" autocomplete="name" placeholder="Seu nome ou o da equipe" value="${esc(r.reviewer)}"></div>
+   <div class="row"><button class="btn small" id="fill">Preencher exemplo</button><span class="muted">para apresentar sem digitar</span></div>
+   ${PROPS.map(propHtml).join("")}
+   <div class="stickybar"><div id="blockers"></div><button class="btn primary" id="apply">Aplicar ao modelo v${state.version}</button></div>`;
+}
+function propHtml(p){
+  const d = state.review.d[p.id] || {};
+  const L = LENS[p.lens];
+  const needsWhy = d.decision === "accept" || d.decision === "modify";
+  const why = (d.rationale||"").trim().length;
+  return `<article class="prop ${d.decision ? "decided-"+d.decision : ""}" data-id="${p.id}">
+    <div class="prop-head"><span class="tag ${L.cls}">${L.q} ${L.name}</span><span class="tag">${p.change}</span><span class="mono" style="font-size:12px;color:var(--muted)">${p.id}</span>
+      ${(p.flags||[]).map(f=>`<span class="tag ${f.startsWith("revisão")?"legal":"warn"}">${esc(f)}</span>`).join("")}</div>
+    <h4>${esc(p.title)}</h4>
+    <p>${esc(p.text)}</p>
+    <div class="signals">${esc(propLabel(p))}${p.feats?` · ${p.feats.join(", ")}`:""}<br>réplicas ${p.reps} · levantada por ${esc(STRATA_PT[p.raised])}</div>
+    ${stanceStrip(p)}
+    <div class="decide" role="group" aria-label="Decisão para ${p.id}">
+      ${[["accept","Aceitar"],["modify","Modificar"],["reject","Rejeitar"],["defer","Adiar"]].map(([v,t])=>`<button data-d="${v}" aria-pressed="${d.decision===v}">${t}</button>`).join("")}
+    </div>
+    ${needsWhy ? `<div class="field"><label for="why-${p.id}">Justificativa</label><textarea id="why-${p.id}" data-f="rationale">${esc(d.rationale||"")}</textarea><span class="hintline ${why>=20?"ok":""}">${why}/20 caracteres no mínimo</span></div>` : ""}
+    ${d.decision === "modify" ? `<div class="field"><label for="ed-${p.id}">O que muda</label><textarea id="ed-${p.id}" data-f="edited">${esc(d.edited||"")}</textarea></div>` : ""}
+    ${p.legal && needsWhy ? `<div class="field"><label for="lr-${p.id}">Revisão jurídica: responsável</label><input id="lr-${p.id}" data-f="legalReviewer" value="${esc(d.legalReviewer||"")}"></div>
+      <div class="field"><label for="ln-${p.id}">Nota jurídica</label><input id="ln-${p.id}" data-f="legalNote" value="${esc(d.legalNote||"")}"></div>` : ""}
+  </article>`;
+}
+function blockers(){
+  const r = state.review, out = [];
+  if (!r.reviewer.trim()) out.push("Informe quem decide.");
+  if (!PROPS.some(p => (r.d[p.id]||{}).decision)) out.push("Decida pelo menos uma proposta.");
+  for (const p of PROPS) {
+    const d = r.d[p.id] || {};
+    if (d.decision !== "accept" && d.decision !== "modify") continue;
+    if ((d.rationale||"").trim().length < 20) out.push(`${p.id}: justificativa com 20 ou mais caracteres.`);
+    if (d.decision === "modify" && !(d.edited||"").trim()) out.push(`${p.id}: descreva o que muda.`);
+    if (p.legal && !((d.legalReviewer||"").trim() && (d.legalNote||"").trim())) out.push(`${p.id}: componente em vigor exige revisão jurídica registrada.`);
+  }
+  return out;
+}
+function renderBlockers(){
+  const b = blockers(), el = $("#blockers"), btn = $("#apply");
+  if (!el) return;
+  el.innerHTML = b.length ? `<details class="blockers"><summary>Antes de aplicar: ${b.length} pendência${b.length>1?"s":""}</summary><ul>${b.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></details>` : "";
+  btn.disabled = b.length > 0;
+}
+function appliedHtml(){
+  const a = state.review.applied;
+  return `<div class="success"><span class="eyebrow" style="color:var(--teal)">Nova versão gravada</span>
+     <span class="ver">v${a.from} → v${a.to}</span>
+     <p>Por ${esc(a.reviewer)} em 14/11/2026. ${a.applied.length} mudança(s) aplicada(s), ${a.rejected} rejeitada(s), ${a.deferred} adiada(s), ${a.pending} sem decisão.</p></div>
+   <ul class="facts">${a.applied.map(x=>`<li><span class="when">${x.op}</span><span>${esc(x.label)}</span></li>`).join("")}</ul>
+   <p class="muted">Na torre: blocos novos entram no topo com a cor das propostas do conselho; o bloco retirado vai para a prateleira, sem ser apagado; os modificados ganham contorno de autoria humana. Tudo entra no histórico do modelo.</p>
+   <div class="row"><button class="btn primary" data-go="10">Ver a próxima rodada →</button><button class="btn" id="undo">Refazer a decisão</button></div>`;
+}
+function iterHtml(){
+  const a = state.review.applied;
+  if (!a) return `<p>A versão seguinte só existe depois de uma decisão humana. Volte ao passo anterior e decida, ou siga para ver como o ciclo continua.</p>
+     <p>A cada volta da espiral: nova rodada sobre a versão revisada, comparação com a anterior e nova decisão.</p>
+     <div class="row"><button class="btn primary" data-go="9">← Decidir agora</button></div>`;
+  const closed = a.addedTopics.filter(t => GAPS.some(g => g.id === t)).map(t => TOPIC[t].label);
+  const open = GAPS.filter(g => !a.addedTopics.includes(g.id)).map(g => g.label);
+  return `<p>Nova rodada sobre a v${a.to}. A comparação mostra o que persiste, o que deixou de aparecer e o que é novo. <span class="tag demo">exemplo</span></p>
+   <div class="cols">
+     <div><h4 style="color:var(--teal)">Lacunas fechadas</h4><ul>${closed.map(x=>`<li>${esc(x)}</li>`).join("") || "<li>nenhuma</li>"}</ul></div>
+     <div><h4 style="color:var(--coral)">Lacunas que persistem</h4><ul>${open.map(x=>`<li>${esc(x)}</li>`).join("") || "<li>nenhuma</li>"}</ul></div>
+   </div>
+   <p class="muted">"Deixou de aparecer" quer dizer que o conselho parou de levantar o ponto, não que o problema acabou. Por isso cada volta tem réplicas e uma pessoa decide de novo.</p>`;
+}
+
+/* ========================================================================= UI */
+const panel = $("#panel-scroll");
+function renderPanel(){
+  const s = STEPS[state.step];
+  panel.classList.remove("swap"); void panel.offsetWidth; panel.classList.add("swap");
+  panel.innerHTML = `<div class="eyebrow">${esc(s.eyebrow)}</div><h2>${esc(s.title)}</h2>${s.html()}`;
+  panel.scrollTop = 0;
+  $("#count").textContent = `${state.step+1} / ${STEPS.length}`;
+  $("#prev").disabled = state.step === 0;
+  $("#next").textContent = state.step === STEPS.length-1 ? "Recomeçar ↺" : "Próximo →";
+  [...$("#dots").children].forEach((b,i) => b.setAttribute("aria-current", i===state.step ? "step" : "false"));
+  if (s.id === "revisao") renderBlockers();
+  if (state.picked && s.pick) showDetail(state.picked);
+}
+function go(i){
+  i = (i + STEPS.length) % STEPS.length;
+  const changed = i !== state.step;
+  state.step = i; state.picked = null; if (changed) state.selProp = null;
+  renderPanel();
+  if (changed) { scene3d.enter(STEPS[i].id); if (STEPS[i].id === "estratos") scene3d.focusStratum(state.stratum); try { history.replaceState(null, "", "#" + STEPS[i].id); } catch(e){} }
+  scheduleAuto();
+}
+function next(){ go(state.step + 1); }
+function prev(){ if (state.step > 0) go(state.step - 1); }
+function scheduleAuto(){
+  clearTimeout(state.autoTimer);
+  if (!state.auto) return;
+  const s = STEPS[state.step];
+  if (s.noAuto && !state.review.applied) { fillExample(); }
+  state.autoTimer = setTimeout(() => {
+    if (STEPS[state.step].id === "revisao" && !state.review.applied) applyReview();
+    setTimeout(next, STEPS[state.step].id === "revisao" ? 3500 : 0);
+  }, s.noAuto ? 6000 : 11000);
+}
+function setAuto(on){ state.auto = on; $("#auto").setAttribute("aria-pressed", String(on)); scheduleAuto(); }
+
+STEPS.forEach((s,i) => { const b = document.createElement("button"); b.title = s.eyebrow; b.setAttribute("aria-label", s.eyebrow); b.onclick = () => go(i); $("#dots").appendChild(b); });
+$("#next").onclick = () => state.step === STEPS.length-1 ? go(0) : next();
+$("#prev").onclick = prev;
+$("#auto").onclick = () => setAuto(!state.auto);
+$("#restart").onclick = () => { resetReview(); setAuto(false); showSplash(); };
+document.addEventListener("keydown", e => {
+  if (/INPUT|TEXTAREA/.test(document.activeElement.tagName)) return;
+  if (!document.body.classList.contains("touring")) { if (e.key === "Enter" || e.key === " " || e.key === "ArrowRight") { e.preventDefault(); begin(false); } return; }
+  if (e.key === "ArrowRight" || e.key === "PageDown") { e.preventDefault(); next(); }
+  if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); prev(); }
+});
+
+panel.addEventListener("click", e => {
+  const t = e.target.closest("button"); if (!t) return;
+  if (t.dataset.go !== undefined) { if (t.dataset.go === "0") resetTourOnly(); go(+t.dataset.go); return; }
+  if (t.dataset.col) { state.coloring = t.dataset.col; scene3d.recolorSeats(); renderPanel(); return; }
+  if (t.dataset.lens) { state.lens = t.dataset.lens; scene3d.setLens(state.lens); renderPanel(); return; }
+  if (t.dataset.stratum) { state.stratum = t.dataset.stratum; scene3d.focusStratum(state.stratum); renderPanel(); return; }
+  if (t.dataset.sel) { state.selProp = state.selProp === t.dataset.sel ? null : t.dataset.sel;
+    scene3d.stances(state.selProp ? PROPS.find(p => p.id === state.selProp).pos : null);
+    const y = panel.scrollTop; renderPanel(); panel.scrollTop = y; return; }
+  if (t.id === "fill") { fillExample(); return; }
+  if (t.id === "apply") { applyReview(); return; }
+  if (t.id === "undo") { resetReview(); renderPanel(); return; }
+  if (t.dataset.d) {
+    const id = t.closest(".prop").dataset.id, d = state.review.d[id] || (state.review.d[id] = {});
+    d.decision = d.decision === t.dataset.d ? null : t.dataset.d;
+    const y = panel.scrollTop; renderPanel(); panel.scrollTop = y;
+    const field = panel.querySelector(`#why-${id}`); if (field && !field.value) field.focus({preventScroll:true});
+  }
+});
+panel.addEventListener("input", e => {
+  const t = e.target;
+  if (t.id === "reviewer") { state.review.reviewer = t.value; renderBlockers(); return; }
+  if (t.dataset.f) {
+    const id = t.closest(".prop").dataset.id, d = state.review.d[id] || (state.review.d[id] = {});
+    d[t.dataset.f] = t.value;
+    if (t.dataset.f === "rationale") { const h = t.nextElementSibling, n = t.value.trim().length; h.textContent = `${n}/20 caracteres no mínimo`; h.classList.toggle("ok", n >= 20); }
+    renderBlockers();
+  }
+});
+function fillExample(){
+  state.review.reviewer = EXAMPLE_FILL.reviewer;
+  state.review.d = JSON.parse(JSON.stringify(EXAMPLE_FILL.d));
+  if (STEPS[state.step].id === "revisao") renderPanel();
+}
+function applyReview(){
+  if (blockers().length) { renderBlockers(); return; }
+  const r = state.review, from = state.version, to = "0.2.0";
+  const applied = [], addedTopics = [];
+  let rejected = 0, deferred = 0, pending = 0, next = D.components.length + 1;
+  for (const p of PROPS) {
+    const d = r.d[p.id] || {};
+    if (!d.decision) { pending++; continue; }
+    if (d.decision === "reject") { rejected++; continue; }
+    if (d.decision === "defer") { deferred++; continue; }
+    if (p.change === "add") { const id = "GM-" + (next++); applied.push({op:"add", id, label:`${id} ${p.title}`, from:p}); addedTopics.push(p.topic); }
+    else if (p.change === "remove") applied.push({op:"remove", id:p.comp, label:`${p.comp} retirado: ${COMP[p.comp].title}`});
+    else applied.push({op:"modify", id:p.comp, label:`${p.comp} modificado: ${p.title}`});
+  }
+  r.applied = {from, to, reviewer:r.reviewer.trim(), applied, addedTopics, rejected, deferred, pending};
+  state.version = to; $("#ver").textContent = "v" + to;
+  scene3d.applyChanges(r.applied);
+  if (STEPS[state.step].id === "revisao") renderPanel();
+}
+function resetReview(){
+  state.review = {reviewer:"", d:{}, applied:null};
+  state.version = "0.1.0"; $("#ver").textContent = "v0.1.0";
+  scene3d.resetChanges();
+}
+function resetTourOnly(){ state.lens = "omission"; state.coloring = "strata"; scene3d.recolorSeats(); scene3d.setLens("omission"); }
+
+/* detail box for picked 3D objects */
+function describe(u){
+  if (u.kind === "component") { const c = COMP[u.id] || u.c; const st = STATUS[c.status] || STATUS.policy;
+    return {id:`${c.id} · ${KIND_PT[c.kind]||"Componente"} · ${st.pt}`, h:c.title, p:c.desc + (c.basis === "inferred" && c.note ? ` ${c.note}` : ""),
+      extra:`Áreas: ${c.topics.map(t=>TOPIC[t]?TOPIC[t].label:t).join(", ")}${c.basis==="inferred"?" (leitura inferida)":""}`}; }
+  if (u.kind === "seat") { const s = D.strata[u.k];
+    if (state.selProp) { const p = PROPS.find(x => x.id === state.selProp), [st, why] = p.pos[s.id];
+      return {id:`${p.id} · ${STANCE[st].pt}`, h:STRATA_PT[s.id] || s.label, p:why || "O estrato não se pronunciou sobre esta proposta.", extra:"Posição de exemplo."}; }
+    return {id:`Assento ${u.i+1} · ${PROV[u.p].name}`, h:STRATA_PT[s.id] || s.label, p:`Perspectiva sintética do estrato "${s.label}". Não representa pessoa ou órgão real.`, extra:`Família de modelo nesta réplica: ${PROV[u.p].name}. Na próxima réplica, outra.`}; }
+  if (u.kind === "ghost") return {id:"Cadeira vazia", h:"Perspectivas sem fonte", p:D.unrep.join(" · "), extra:"Não são simuladas para não inventar posição. Precisam ser ouvidas."};
+  if (u.kind === "topic") { const t = TOPIC[u.id];
+    return {id:`${t.id} · ${STRENGTH[t.strength].pt}`, h:t.label, p:t.comps.length ? `Componentes: ${t.comps.map(c=>`${c} ${COMP[c].title}`).join("; ")}.` : "Nenhum componente do modelo v0.1.0 trata desta área.", extra:""}; }
+  if (u.kind === "branch") return {id:`Ramo ${u.id}`, h:"Hipótese de contexto", p:u.h, extra:"Premissa de cenário, não previsão."};
+  if (u.kind === "new") return {id:`${u.id} · proposta do conselho, aceita por pessoa`, h:u.title, p:"Adicionado na v0.2.0. Ainda não adotado em norma.", extra:""};
+  return null;
+}
+function showDetail(u){
+  state.picked = u;
+  const el = $("#detail"), d = describe(u); if (!el || !d) return;
+  el.innerHTML = `<span class="id">${esc(d.id)}</span><h4>${esc(d.h)}</h4><p>${esc(d.p)}</p>${d.extra?`<p class="muted">${esc(d.extra)}</p>`:""}`;
+}
+const tip = $("#tip");
+function showTip(u, x, y){
+  if (!u) { tip.classList.remove("on"); return; }
+  const d = describe(u); if (!d) return;
+  tip.innerHTML = `<span class="id">${esc(d.id)}</span>${esc(d.h)}`;
+  const w = 290; tip.style.left = Math.min(x + 14, innerWidth - w) + "px"; tip.style.top = Math.min(y + 14, innerHeight - 80) + "px";
+  tip.classList.add("on");
+}
+
+/* ===================================================================== 3D scene */
+const scene3d = (() => {
+  const api = { enter(){}, recolorSeats(){}, setLens(){}, applyChanges(){}, resetChanges(){}, splash(){}, stances(){}, focusStratum(){} };
+  if (!window.THREE) { document.body.classList.add("no3d"); return api; }
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({canvas: $("#gl"), antialias: true, powerPreference: "high-performance"});
+  } catch (e) { document.body.classList.add("no3d"); return api; }
+  const T = THREE;
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.75));
+  renderer.outputEncoding = T.sRGBEncoding;
+  renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = .95;
+  const scene = new T.Scene();
+  scene.background = new T.Color(0x070C16);
+  scene.fog = new T.FogExp2(0x070C16, 0.016);
+  const camera = new T.PerspectiveCamera(48, 1, 0.1, 500);
+  let composer = null, bloom = null;
+  if (T.EffectComposer && T.RenderPass && T.UnrealBloomPass) {
+    try {
+      composer = new T.EffectComposer(renderer);
+      composer.addPass(new T.RenderPass(scene, camera));
+      bloom = new T.UnrealBloomPass(new T.Vector2(512, 512), 0.62, 0.42, 0.6);
+      composer.addPass(bloom);
+    } catch (e) { composer = null; }
+  }
+
+  scene.add(new T.AmbientLight(0x8fa3c4, 0.55));
+  const key = new T.DirectionalLight(0xffffff, 0.9); key.position.set(6, 14, 8); scene.add(key);
+  const brassLight = new T.PointLight(0xE8A33D, 2.2, 22, 2); brassLight.position.set(0, 6.5, 0); scene.add(brassLight);
+  const tealLight = new T.PointLight(0x38C2B4, 1.2, 30, 2); tealLight.position.set(-8, 3, -6); scene.add(tealLight);
+
+  /* ---- helpers ---- */
+  const G = {};
+  function group(name, parent){ const g = new T.Group(); g.name = name; g.userData.fade = 0; g.userData.target = 0; g.visible = false; (parent||scene).add(g); G[name] = g; return g; }
+  function mat(opts){ return new T.MeshStandardMaterial(Object.assign({transparent:true, roughness:.38, metalness:.15}, opts)); }
+  function basic(opts){ return new T.MeshBasicMaterial(Object.assign({transparent:true}, opts)); }
+  function lineMat(color, opacity, additive){ return new T.LineBasicMaterial({color, transparent:true, opacity, depthWrite:false, blending: additive ? T.AdditiveBlending : T.NormalBlending}); }
+  function circle(r, y, n, color, opacity){ const pts = []; for (let i = 0; i <= n; i++){ const a = i/n*Math.PI*2; pts.push(new T.Vector3(Math.cos(a)*r, y, Math.sin(a)*r)); }
+    return new T.Line(new T.BufferGeometry().setFromPoints(pts), lineMat(color, opacity)); }
+  const FONTS_READY = (document.fonts && document.fonts.ready) ? Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 1500))]) : Promise.resolve();
+  const labels = [];
+  function label(text, opt){
+    opt = Object.assign({size:.5, color:"#EAF0F7", bg:"rgba(7,12,22,.72)", font:"500 44px 'IBM Plex Sans', sans-serif", pad:22, border:null}, opt||{});
+    const cv = document.createElement("canvas"), g = cv.getContext("2d");
+    const spr = new T.Sprite(new T.SpriteMaterial({transparent:true, depthWrite:false, depthTest:false}));
+    spr.renderOrder = 10;
+    const draw = () => {
+      g.font = opt.font; const w = Math.ceil(g.measureText(text).width) + opt.pad*2, h = 76;
+      cv.width = w; cv.height = h; g.font = opt.font;
+      if (opt.bg) { g.fillStyle = opt.bg; const r = 18; g.beginPath(); g.moveTo(r,0); g.lineTo(w-r,0); g.quadraticCurveTo(w,0,w,r); g.lineTo(w,h-r); g.quadraticCurveTo(w,h,w-r,h); g.lineTo(r,h); g.quadraticCurveTo(0,h,0,h-r); g.lineTo(0,r); g.quadraticCurveTo(0,0,r,0); g.fill();
+        if (opt.border) { g.strokeStyle = opt.border; g.lineWidth = 3; g.stroke(); } }
+      g.fillStyle = opt.color; g.textBaseline = "middle"; g.fillText(text, opt.pad, h/2 + 2);
+      const tex = new T.CanvasTexture(cv); tex.encoding = T.sRGBEncoding; tex.anisotropy = 4;
+      if (spr.material.map) spr.material.map.dispose();
+      spr.material.map = tex; spr.material.needsUpdate = true;
+      spr.scale.set(opt.size * w / h, opt.size, 1);
+    };
+    draw(); FONTS_READY.then(draw);
+    labels.push(spr);
+    return spr;
+  }
+  function applyFade(g){
+    const f = g.userData.fade; g.visible = f > 0.004;
+    g.traverse(o => { if (o.userData.noFade) return; const m = o.material; if (!m) return;
+      (Array.isArray(m) ? m : [m]).forEach(mm => { if (mm.userData.base === undefined) mm.userData.base = mm.opacity; mm.opacity = mm.userData.base * f; }); });
+  }
+  function setBase(m, v){ m.userData.base = v; }
+
+  /* ---- dust & floor ---- */
+  const dust = group("dust"); {
+    const n = 1400, pos = new Float32Array(n*3);
+    for (let i = 0; i < n; i++){ const r = 18 + Math.random()*70, a = Math.random()*Math.PI*2, y = (Math.random()-.3)*40; pos[i*3] = Math.cos(a)*r; pos[i*3+1] = y; pos[i*3+2] = Math.sin(a)*r; }
+    const geo = new T.BufferGeometry(); geo.setAttribute("position", new T.BufferAttribute(pos, 3));
+    dust.add(new T.Points(geo, new T.PointsMaterial({color:0x9fb3d1, size:.16, transparent:true, opacity:.55, depthWrite:false, blending:T.AdditiveBlending})));
+  }
+  const floor = group("floor"); {
+    const cv = document.createElement("canvas"); cv.width = cv.height = 512; const g = cv.getContext("2d");
+    const gr = g.createRadialGradient(256,256,10,256,256,256); gr.addColorStop(0,"rgba(56,90,140,.32)"); gr.addColorStop(.45,"rgba(22,40,70,.24)"); gr.addColorStop(1,"rgba(7,12,22,0)");
+    g.fillStyle = gr; g.fillRect(0,0,512,512);
+    const tex = new T.CanvasTexture(cv);
+    const disc = new T.Mesh(new T.CircleGeometry(15, 96), basic({map:tex, depthWrite:false}));
+    disc.rotation.x = -Math.PI/2; disc.position.y = -0.62; floor.add(disc);
+    floor.add(circle(6, -0.6, 160, 0xE8A33D, .45));
+    floor.add(circle(3.1, -0.6, 120, 0xBFD0E6, .18));
+    floor.add(circle(10.5, -0.6, 200, 0xBFD0E6, .12));
+    floor.add(circle(13.2, -0.6, 220, 0xBFD0E6, .08));
+    const ticks = []; for (let i = 0; i < 120; i++){ const a = i/120*Math.PI*2, r0 = i%10===0 ? 12.4 : 12.8; ticks.push(new T.Vector3(Math.cos(a)*r0,-.6,Math.sin(a)*r0), new T.Vector3(Math.cos(a)*13.2,-.6,Math.sin(a)*13.2)); }
+    floor.add(new T.LineSegments(new T.BufferGeometry().setFromPoints(ticks), lineMat(0xBFD0E6, .22)));
+  }
+
+  /* ---- council ring ---- */
+  const ring = group("ring");
+  const seats = []; {
+    const sp = 0.2123, ga = 0.467; let a = -Math.PI/2, idx = 0;
+    const R = 6;
+    D.strata.forEach((s, k) => {
+      const aStart = a;
+      for (let j = 0; j < s.seats; j++){
+        const x = Math.cos(a)*R, z = Math.sin(a)*R, p = idx % 4;
+        const m = mat({color:STRATA_C[k], emissive:STRATA_C[k], emissiveIntensity:.16});
+        const sph = new T.Mesh(new T.SphereGeometry(.34, 32, 24), m); sph.position.set(x, .25, z);
+        sph.userData.pick = {kind:"seat", k, i:idx, p};
+        const stem = new T.Mesh(new T.CylinderGeometry(.03,.03,.85,8), basic({color:0xBFD0E6, opacity:.25})); stem.position.set(x, -.18, z);
+        const base = new T.Mesh(new T.CircleGeometry(.42, 32), basic({color:STRATA_C[k], opacity:.22, depthWrite:false})); base.rotation.x = -Math.PI/2; base.position.set(x, -.59, z);
+        ring.add(sph, stem, base);
+        seats.push({mesh:sph, base, k, p, a, pos:new T.Vector3(x, .25, z)});
+        a += sp; idx++;
+      }
+      // stratum arc on the floor
+      const a0 = aStart - .09, a1 = a - sp + .09, pts = [];
+      for (let i = 0; i <= 24; i++){ const t = a0 + (a1-a0)*i/24; pts.push(new T.Vector3(Math.cos(t)*7.1, -.58, Math.sin(t)*7.1)); }
+      ring.add(new T.Line(new T.BufferGeometry().setFromPoints(pts), lineMat(STRATA_C[k], .9)));
+      a -= sp; a += ga;
+    });
+    const gh = a - ga/2;
+    const ghost = new T.Mesh(new T.SphereGeometry(.34, 18, 12), basic({color:0xEAF0F7, wireframe:true, opacity:.4}));
+    ghost.position.set(Math.cos(gh)*6, .25, Math.sin(gh)*6); ghost.userData.pick = {kind:"ghost"};
+    ring.add(ghost); api._ghost = ghost;
+  }
+  api.recolorSeats = () => { calmBloom(false); seats.forEach(s => {
+    const c = new T.Color(state.coloring === "provider" ? PROV[s.p].c : STRATA_C[s.k]);
+    s.mesh.material.color.copy(c); s.mesh.material.emissive.copy(c); s.base.material.color.copy(c);
+    s.mesh.material.emissiveIntensity = .16; s.target = 1; s.lit = false;
+    s.base.material.userData.base = .22; s.base.material.opacity = .22 * (G.ring ? G.ring.userData.fade : 1);
+  }); };
+  // Bloom washes saturated seat colours to white; tone it down while seats carry meaning by colour.
+  function calmBloom(on){ if (typeof bloom !== "undefined" && bloom) bloom.strength = on ? .18 : .62; }
+  function paintSeat(s, hex, lit){ const c = new T.Color(hex);
+    s.mesh.material.color.copy(c); s.mesh.material.emissive.copy(c); s.base.material.color.copy(c);
+    s.lit = lit; s.mesh.material.emissiveIntensity = lit ? .22 : .02;
+    s.base.material.userData.base = lit ? .6 : .08; s.base.material.opacity = s.base.material.userData.base * G.ring.userData.fade; }
+  // Light seats by where their stratum stood on one proposal (no blending into a single colour).
+  api.stances = pos => {
+    if (!pos) { api.recolorSeats(); return; }
+    calmBloom(true);
+    seats.forEach(s => { const st = pos[D.strata[s.k].id][0]; paintSeat(s, STANCE[st].c, st !== "silent"); s.target = s.lit ? 1.25 : .75; });
+  };
+  api.focusStratum = sid => { calmBloom(true);
+    seats.forEach(s => { const on = D.strata[s.k].id === sid; paintSeat(s, on ? STRATA_C[s.k] : "#2A3344", on); s.target = on ? 1.35 : .8; }); };
+
+  /* ---- governance model tower ---- */
+  const tower = group("tower");
+  const KINDS = ["instrument","institution","mechanism","resource","metric"];
+  const boxes = {};
+  const spine = new T.Mesh(new T.CylinderGeometry(.06,.06,5.6,12), mat({color:0xE8A33D, emissive:0xE8A33D, emissiveIntensity:1.2}));
+  spine.position.y = 2.2; tower.add(spine);
+  KINDS.forEach((kind, f) => {
+    const list = D.components.filter(c => c.kind === kind), n = list.length, r = n === 1 ? 0 : .55 + n*.17, y = .15 + f*1.02;
+    const plate = new T.Mesh(new T.RingGeometry(Math.max(.2, r-.45), r+.55, 64), basic({color:0xBFD0E6, opacity:.06, side:T.DoubleSide, depthWrite:false}));
+    plate.rotation.x = -Math.PI/2; plate.position.y = y - .34; tower.add(plate);
+    const kl = label(KIND_PT[kind].toUpperCase(), {size:.26, color:"#9DACBF", bg:null, font:"500 40px 'IBM Plex Mono', monospace"});
+    kl.position.set(r + 1.25, y, 0); tower.add(kl);
+    list.forEach((c, i) => {
+      const a = i/n*Math.PI*2 + f*.55, st = STATUS[c.status] || STATUS.policy, inferred = c.basis === "inferred";
+      const m = mat({color:st.c, emissive:st.c, emissiveIntensity: inferred ? .08 : .2, opacity: inferred ? .3 : .95});
+      const geo = new T.BoxGeometry(.52,.52,.52);
+      const box = new T.Mesh(geo, m); box.position.set(Math.cos(a)*r, y, Math.sin(a)*r); box.rotation.y = -a;
+      const edges = new T.LineSegments(new T.EdgesGeometry(geo), lineMat(inferred ? 0xFFFFFF : st.c, inferred ? .9 : .55));
+      box.add(edges);
+      box.userData.pick = {kind:"component", id:c.id};
+      const lb = label(c.id, {size:.22, color:"#EAF0F7", bg:"rgba(7,12,22,.6)", font:"500 40px 'IBM Plex Mono', monospace"});
+      lb.position.set(0, .48, 0); box.add(lb);
+      tower.add(box);
+      boxes[c.id] = {box, edges, home: box.position.clone(), st, inferred, m};
+    });
+  });
+  const veil = group("veil"); {
+    const s = new T.Mesh(new T.SphereGeometry(3.2, 48, 32), basic({color:0x0A1322, opacity:.86, depthWrite:false}));
+    s.position.y = 2.2; veil.add(s);
+    const w = new T.Mesh(new T.IcosahedronGeometry(3.3, 2), basic({color:0x38C2B4, wireframe:true, opacity:.28}));
+    w.position.y = 2.2; veil.add(w); veil.userData.spin = w;
+    const vl = label("modelo oculto na R1", {size:.38, color:"#CFF5EF", bg:"rgba(7,12,22,.75)", border:"rgba(56,194,180,.6)"});
+    vl.position.set(0, 5.9, 0); veil.add(vl);
+  }
+
+  /* ---- taxonomy orbit + coverage links ---- */
+  const topics = group("topics"), links = group("links");
+  const topicNodes = {};
+  D.topics.forEach((t, i) => {
+    const a = i/D.topics.length*Math.PI*2 + .1, r = 10.6, y = 1.1 + Math.sin(i*1.7)*.45;
+    const col = STRENGTH[t.strength].c;
+    const m = mat({color:col, emissive:col, emissiveIntensity: t.strength === "none" ? 1.1 : .45});
+    const node = new T.Mesh(new T.OctahedronGeometry(t.strength === "none" ? .3 : .22, 0), m);
+    node.position.set(Math.cos(a)*r, y, Math.sin(a)*r); node.userData.pick = {kind:"topic", id:t.id};
+    const lb = label(t.label, {size:.3, color: t.strength === "none" ? "#FFD3C6" : "#D7E1EE", bg:"rgba(7,12,22,.62)", font:"500 40px 'IBM Plex Sans', sans-serif"});
+    lb.position.set(Math.cos(a)*(r+.2), y + .62, Math.sin(a)*(r+.2));
+    topics.add(node, lb);
+    topicNodes[t.id] = {node, m, a, base: node.position.clone(), heat: 0, gap: t.strength === "none"};
+    t.comps.forEach(cid => {
+      const b = boxes[cid]; if (!b) return;
+      const p0 = node.position.clone(), p1 = b.home.clone(), mid = p0.clone().lerp(p1, .5); mid.y += 2.2;
+      const pts = new T.QuadraticBezierCurve3(p0, mid, p1).getPoints(28);
+      links.add(new T.Line(new T.BufferGeometry().setFromPoints(pts), lineMat(STRENGTH[t.strength].c, .38, true)));
+    });
+  });
+
+  /* ---- blind-round expectation flow (illustrative) ---- */
+  const flow = group("flow");
+  const flows = [];
+  seats.forEach((s, i) => { const prefs = EXPECT[D.strata[s.k].id] || []; prefs.forEach((tid, j) => { if (topicNodes[tid]) flows.push({s, t:topicNodes[tid], ph:(i*.137 + j*.33)%1, k:s.k}); }); });
+  const flowGeo = new T.BufferGeometry(); const flowPos = new Float32Array(flows.length*3*4), flowCol = new Float32Array(flows.length*3*4);
+  flows.forEach((f, i) => { const c = new T.Color(STRATA_C[f.k]); for (let q = 0; q < 4; q++){ const o = (i*4+q)*3; flowCol[o]=c.r*(1-q*.2); flowCol[o+1]=c.g*(1-q*.2); flowCol[o+2]=c.b*(1-q*.2); } f.t.heat++; });
+  flowGeo.setAttribute("position", new T.BufferAttribute(flowPos, 3)); flowGeo.setAttribute("color", new T.BufferAttribute(flowCol, 3));
+  flow.add(new T.Points(flowGeo, new T.PointsMaterial({size:.24, vertexColors:true, transparent:true, opacity:.95, depthWrite:false, blending:T.AdditiveBlending})));
+  const tmpV = new T.Vector3();
+  function bez(a, b, lift, u, out){ const mx = (a.x+b.x)/2, my = Math.max(a.y,b.y) + lift, mz = (a.z+b.z)/2, v = 1-u;
+    out.set(v*v*a.x + 2*v*u*mx + u*u*b.x, v*v*a.y + 2*v*u*my + u*u*b.y, v*v*a.z + 2*v*u*mz + u*u*b.z); return out; }
+
+  /* ---- deliberation arcs (illustrative) ---- */
+  const arcs = group("arcs");
+  const arcList = []; {
+    let seed = 7; const rnd = () => (seed = seed*16807 % 2147483647) / 2147483647;
+    const kinds = [["#FF7A59",14],["#38C2B4",7],["#E8A33D",6]];
+    let n = 0;
+    kinds.forEach(([col, count], ki) => { for (let c = 0; c < count; c++){
+      const a = seats[Math.floor(rnd()*seats.length)]; let b = seats[Math.floor(rnd()*seats.length)];
+      while (b.k === a.k) b = seats[Math.floor(rnd()*seats.length)];
+      const end = ki === 2 ? new T.Vector3(0, 5, 0) : b.pos;
+      const lift = ki === 2 ? 1.2 : 2.2 + rnd()*2;
+      const pts = []; for (let i = 0; i <= 48; i++) pts.push(bez(a.pos, end, lift, i/48, new T.Vector3()));
+      const geo = new T.BufferGeometry().setFromPoints(pts); geo.setDrawRange(0, 0);
+      const line = new T.Line(geo, lineMat(col, .95, true)); line.userData.noFade = true;
+      arcs.add(line); arcList.push({line, start: (n++ * .42) % 10.5, kind: ki});
+    }});
+  }
+
+  /* ---- lenses ---- */
+  const lenses = group("lenses"); const lensObjs = {};
+  [["omission",-3.6,5.6,2],["excess",0,6.2,2.6],["advantage",3.6,5.6,2]].forEach(([id,x,y,z]) => {
+    const L = LENS[id], g = new T.Group(); g.position.set(x, y, z);
+    const torus = new T.Mesh(new T.TorusGeometry(1.15, .085, 24, 120), mat({color:L.c, emissive:L.c, emissiveIntensity:1.4, metalness:.6, roughness:.25}));
+    const glass = new T.Mesh(new T.CircleGeometry(1.1, 64), basic({color:L.c, opacity:.1, side:T.DoubleSide, depthWrite:false, blending:T.AdditiveBlending}));
+    const lb = label(`${L.q} · ${L.name}`, {size:.42, color:"#fff", bg:"rgba(7,12,22,.7)", border:L.c}); lb.position.y = -1.65;
+    g.add(torus, glass, lb); lenses.add(g); lensObjs[id] = {g, torus, home:new T.Vector3(x,y,z)};
+  });
+  const chips = new T.Group(); lenses.add(chips);
+  const chipList = D.features.map((f, i) => { const s = label(`${f.id} ${f.title}`, {size:.24, color:"#FBE7C6", bg:"rgba(30,22,8,.75)", border:"rgba(232,163,61,.55)", font:"500 38px 'IBM Plex Sans', sans-serif"}); s.userData.noFade = true; s.material.opacity = 0; chips.add(s); return {s, ph:i/D.features.length*Math.PI*2, tilt:(i%3-1)*.35}; });
+  api.setLens = id => { state.lens = id; };
+
+  /* ---- context branches ---- */
+  const branches = group("branches"); const branchLayers = [];
+  D.branches.forEach((b, i) => {
+    const y = 2.4 + i*1.5, g = new T.Group();
+    const fill = new T.Mesh(new T.RingGeometry(5.7, 6.3, 96), basic({color:[0xA78BFA,0x38C2B4,0xFF7A59,0xE8A33D][i], opacity:.16, side:T.DoubleSide, depthWrite:false, blending:T.AdditiveBlending}));
+    fill.rotation.x = -Math.PI/2; g.add(fill);
+    g.add(circle(6, 0, 160, [0xA78BFA,0x38C2B4,0xFF7A59,0xE8A33D][i], .7));
+    const pts = seats.map(s => new T.Vector3(s.pos.x, 0, s.pos.z));
+    g.add(new T.Points(new T.BufferGeometry().setFromPoints(pts), new T.PointsMaterial({color:0xEAF0F7, size:.2, transparent:true, opacity:.8, depthWrite:false})));
+    const lb = label(b.id, {size:.34, color:"#fff", bg:"rgba(7,12,22,.72)", font:"500 40px 'IBM Plex Mono', monospace"}); lb.position.set(6.9, .2, 0); g.add(lb);
+    g.position.y = y; fill.userData.pick = {kind:"branch", id:b.id, h:b.h};
+    branches.add(g); branchLayers.push({g, y});
+  });
+
+  /* ---- timeline (step 1) ---- */
+  const timeline = group("timeline"); {
+    const X = -40, pts = [];
+    for (let i = 0; i <= 60; i++){ const t = i/60; pts.push(new T.Vector3(X - 15 + t*30, Math.sin(t*Math.PI*2)*.35, Math.cos(t*Math.PI*1.4)*.8)); }
+    const curve = new T.CatmullRomCurve3(pts);
+    timeline.add(new T.Mesh(new T.TubeGeometry(curve, 240, .06, 10, false), mat({color:0xBFD0E6, emissive:0x5a7aa8, emissiveIntensity:.6, opacity:.85})));
+    const ev = [[.04,"2021","EBIA"],[.22,"2024","PBIA"],[.36,"dez 2024","PL 2338 no Senado"],[.62,"out 2026","Eleições"],[.7,"14 nov 2026","Rodada do conselho"],[.86,"2028","Fim do PBIA"],[.98,"2033","Horizonte"]];
+    ev.forEach(([u, when, what], i) => {
+      const p = curve.getPoint(u), now = what.startsWith("Rodada"), col = now ? 0xE8A33D : 0x8AA8FF;
+      const s = new T.Mesh(new T.SphereGeometry(now ? .32 : .18, 24, 16), mat({color:col, emissive:col, emissiveIntensity: now ? 2.2 : .9}));
+      s.position.copy(p); timeline.add(s); if (now) api._now = s;
+      const up = i % 2 ? -1 : 1, h = now ? 3 : 2.1;
+      const st = new T.Line(new T.BufferGeometry().setFromPoints([p, p.clone().add(new T.Vector3(0, up*h, 0))]), lineMat(col, .5));
+      timeline.add(st);
+      const lb = label(`${when} · ${what}`, {size: now ? .82 : .62, color: now ? "#1A1306" : "#EAF0F7", bg: now ? "rgba(232,163,61,.95)" : "rgba(7,12,22,.75)", border: now ? null : "rgba(138,168,255,.45)"});
+      lb.position.copy(p).add(new T.Vector3(0, up*(h+.3), 0)); timeline.add(lb);
+    });
+  }
+
+  /* ---- version spiral (step 10) ---- */
+  const spiral = group("spiral"); const versionNodes = []; {
+    const C = new T.Vector3(0, 15, 0), pts = [];
+    for (let i = 0; i <= 200; i++){ const t = i/200, a = t*Math.PI*2*2.6; pts.push(new T.Vector3(Math.cos(a)*3.4, t*11, Math.sin(a)*3.4).add(C)); }
+    const curve = new T.CatmullRomCurve3(pts);
+    spiral.add(new T.Mesh(new T.TubeGeometry(curve, 400, .05, 8, false), mat({color:0xE8A33D, emissive:0xE8A33D, emissiveIntensity:.8, opacity:.75})));
+    [["v0.1.0",.08],["v0.2.0",.4],["v0.3.0",.7],["v0.4.0",.95]].forEach(([v, u], i) => {
+      const p = curve.getPoint(u);
+      const m = mat({color: i === 0 ? 0x38C2B4 : 0x8796B0, emissive: i === 0 ? 0x38C2B4 : 0x333d4f, emissiveIntensity: i === 0 ? 1.2 : .3, opacity: i < 2 ? .95 : .4});
+      const n = new T.Mesh(new T.IcosahedronGeometry(i === 0 ? .48 : .4, 1), m); n.position.copy(p); spiral.add(n);
+      const lb = label(i === 0 ? `${v} · rodada 1` : i === 1 ? `${v} · aguardando decisão` : `${v}`, {size:.42, color:"#EAF0F7", bg:"rgba(7,12,22,.72)"});
+      lb.position.copy(p).add(new T.Vector3(0, .95, 0)); spiral.add(lb);
+      versionNodes.push({n, m, lb, v});
+    });
+  }
+
+  /* ---- splash swarm ---- */
+  const swarm = group("swarm"); const SW = 2600; const swStart = new Float32Array(SW*3), swTarget = new Float32Array(SW*3), swPos = new Float32Array(SW*3);
+  for (let i = 0; i < SW; i++){
+    const r = 22 + Math.random()*30, a = Math.random()*Math.PI*2, b = Math.acos(2*Math.random()-1);
+    swStart[i*3] = r*Math.sin(b)*Math.cos(a); swStart[i*3+1] = r*Math.cos(b); swStart[i*3+2] = r*Math.sin(b)*Math.sin(a);
+    const u = Math.random()*Math.PI*2, v = Math.random()*Math.PI*2, R = i % 5 === 0 ? 3 : 6, tube = i % 5 === 0 ? .25 : .45;
+    swTarget[i*3] = (R + tube*Math.cos(v))*Math.cos(u); swTarget[i*3+1] = tube*Math.sin(v) + (i % 5 === 0 ? 2.4 : .2); swTarget[i*3+2] = (R + tube*Math.cos(v))*Math.sin(u);
+  }
+  const swGeo = new T.BufferGeometry(); swGeo.setAttribute("position", new T.BufferAttribute(swPos, 3));
+  const swCol = new Float32Array(SW*3); for (let i = 0; i < SW; i++){ const c = new T.Color(i % 5 === 0 ? "#E8A33D" : STRATA_C[i % 8]); swCol[i*3]=c.r; swCol[i*3+1]=c.g; swCol[i*3+2]=c.b; }
+  swGeo.setAttribute("color", new T.BufferAttribute(swCol, 3));
+  swarm.add(new T.Points(swGeo, new T.PointsMaterial({size:.1, vertexColors:true, transparent:true, opacity:.95, depthWrite:false, blending:T.AdditiveBlending})));
+  let swarmT0 = 0, swarmLeaving = false;
+
+  /* ---- review results in 3D ---- */
+  const added = group("added", tower); added.userData.fade = 1; added.userData.target = 1; added.visible = true;
+  const tweens = [];
+  function tween(dur, fn, delay){ tweens.push({t0: clock() + (delay||0), dur: REDUCE ? 1 : dur, fn}); }
+  const ease = t => t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2;
+  api.applyChanges = res => {
+    let ni = 0;
+    res.applied.forEach((ch, idx) => {
+      if (ch.op === "add") {
+        const a = ni++ / 6 * Math.PI*2, target = new T.Vector3(Math.cos(a)*1.25, 5.35, Math.sin(a)*1.25);
+        const m = mat({color:0xF5D49A, emissive:0xE8A33D, emissiveIntensity:1.2});
+        const box = new T.Mesh(new T.BoxGeometry(.56,.56,.56), m); box.userData.pick = {kind:"new", id:ch.id, title:ch.from.title};
+        const lb = label(ch.id, {size:.24, color:"#1A1306", bg:"rgba(245,212,154,.95)", font:"600 40px 'IBM Plex Mono', monospace"}); lb.position.y = .5; box.add(lb);
+        const src = seats.find(s => D.strata[s.k].id === ch.from.raised) || seats[0];
+        const from = src.pos.clone(); box.position.copy(from); added.add(box);
+        tween(1.8, t => { const e = ease(t); bez(from, target, 4, e, box.position); box.rotation.y = e*Math.PI*2; }, idx*.35);
+      } else if (ch.op === "remove") {
+        const b = boxes[ch.id]; if (!b) return;
+        const from = b.home.clone(), target = new T.Vector3(-8.4, -.25, 4.2);
+        tween(2, t => { const e = ease(t); bez(from, target, 3, e, b.box.position); b.m.opacity = .95 - .7*e; b.m.userData.base = b.m.opacity; b.box.rotation.z = e*.5; }, idx*.35);
+      } else {
+        const b = boxes[ch.id]; if (!b) return;
+        b.modified = true; b.edges.material.color.set(0xF5D49A); b.edges.material.userData.base = 1;
+        tween(1.6, t => { b.m.emissiveIntensity = .2 + Math.sin(t*Math.PI)*2.2 + t*.5; b.box.scale.setScalar(1 + Math.sin(t*Math.PI)*.35); }, idx*.35);
+      }
+    });
+    const vn = versionNodes[1]; vn.m.color.set(0x38C2B4); vn.m.emissive.set(0x38C2B4); vn.m.emissiveIntensity = 1.4; vn.m.userData.base = .95;
+    versionNodes[0].m.emissiveIntensity = .5;
+    replaceLabel(vn, `${vn.v} · você decidiu aqui`);
+  };
+  function replaceLabel(vn, text){ const p = vn.lb.position.clone(); spiral.remove(vn.lb); vn.lb = label(text, {size:.42, color:"#04201C", bg:"rgba(56,194,180,.95)"}); vn.lb.position.copy(p); spiral.add(vn.lb); applyFade(spiral); }
+  api.resetChanges = () => {
+    while (added.children.length) added.remove(added.children[0]);
+    Object.values(boxes).forEach(b => { b.modified = false; b.box.position.copy(b.home); b.box.rotation.z = 0; b.box.scale.setScalar(1); b.m.opacity = b.inferred ? .28 : .95; b.m.userData.base = b.inferred ? .28 : .95; b.m.emissiveIntensity = b.inferred ? .08 : .2;
+      b.edges.material.color.set(b.inferred ? 0xFFFFFF : b.st.c); });
+    const vn = versionNodes[1]; vn.m.color.set(0x8796B0); vn.m.emissive.set(0x333d4f); vn.m.emissiveIntensity = .3;
+    versionNodes[0].m.emissiveIntensity = 1.2;
+    replaceLabel(vn, `${vn.v} · aguardando decisão`);
+    tweens.length = 0;
+  };
+
+  /* ---- step scenes ---- */
+  const V = (x,y,z) => new T.Vector3(x,y,z);
+  const SCENES = {
+    splash:     {cam:V(0,9,30),  look:V(0,-3,0), show:{swarm:1, dust:1}},
+    problema:   {cam:V(-39,4.6,22), look:V(-39,.6,0), show:{timeline:1, dust:1}},
+    modelo:     {cam:V(6.4,5.2,8.4), look:V(0,2.4,0), show:{tower:1, floor:1, dust:1, ring:.25}},
+    conselho:   {cam:V(0,10.5,15.5), look:V(0,.4,0), show:{ring:1, floor:1, tower:.35, dust:1}},
+    cego:       {cam:V(0,15,19.5), look:V(0,1.2,0), show:{ring:1, floor:1, tower:.18, veil:1, topics:1, flow:1, dust:1}},
+    cobertura:  {cam:V(0,18,17.5), look:V(0,1.2,0), show:{ring:.55, floor:1, tower:1, topics:1, links:1, dust:1}},
+    lentes:     {cam:V(0,7.4,16.5), look:V(0,4.6,1.5), show:{ring:.5, floor:1, tower:.55, topics:.35, lenses:1, dust:1}},
+    deliberacao:{cam:V(11,9.5,12.5), look:V(0,1.6,0), show:{ring:1, floor:1, tower:.8, arcs:1, dust:1}},
+    ramos:      {cam:V(14,9,13), look:V(0,4.4,0), show:{ring:1, floor:1, tower:.45, branches:1, dust:1}},
+    estratos:   {cam:V(0,11,14.5), look:V(0,.6,0), show:{ring:1, floor:1, tower:.3, dust:1}},
+    revisao:    {cam:V(3.5,9.5,12.5), look:V(0,2,0), show:{ring:1, floor:1, tower:1, dust:1}},
+    iteracao:   {cam:V(12,22,13.5), look:V(0,20.5,0), show:{spiral:1, floor:.6, tower:.6, ring:.4, dust:1}},
+    fim:        {cam:V(0,24,38), look:V(0,7,0), show:{ring:1, floor:1, tower:1, spiral:1, topics:.6, dust:1}},
+  };
+  let current = "splash";
+  const camPos = SCENES.splash.cam.clone(), camLook = SCENES.splash.look.clone();
+  const orbit = {yaw:0, pitch:0, zoom:1, drift:0};
+  api.enter = id => {
+    current = id; const sc = SCENES[id] || SCENES.modelo;
+    api.recolorSeats();
+    Object.values(boxes).forEach(b => { if (!b.modified) b.m.emissiveIntensity = b.inferred ? .08 : .2; });
+    Object.keys(G).forEach(k => { if (k !== "added") G[k].userData.target = sc.show[k] || 0; });
+    orbit.yaw = 0; orbit.pitch = 0; orbit.zoom = 1; orbit.drift = 0;
+    if (id !== "splash" && !swarmLeaving && G.swarm.userData.fade > 0) { swarmLeaving = true; }
+    if (id === "splash") { swarmLeaving = false; swarmT0 = clock(); }
+    if (REDUCE) { camPos.copy(sc.cam); camLook.copy(sc.look); }
+    resize();
+  };
+  api.splash = () => api.enter("splash");
+
+  /* ---- interaction ---- */
+  const canvas = renderer.domElement, ray = new T.Raycaster(), ndc = new T.Vector2();
+  let drag = null, hover = null;
+  canvas.addEventListener("pointerdown", e => { drag = {x:e.clientX, y:e.clientY, moved:0}; canvas.setPointerCapture(e.pointerId); canvas.classList.add("dragging"); });
+  canvas.addEventListener("pointermove", e => {
+    if (drag) { const dx = e.clientX - drag.x, dy = e.clientY - drag.y; drag.moved += Math.abs(dx) + Math.abs(dy); drag.x = e.clientX; drag.y = e.clientY;
+      orbit.yaw -= dx*.005; orbit.pitch = Math.max(-.6, Math.min(.5, orbit.pitch + dy*.003)); showTip(null); return; }
+    if (e.pointerType === "mouse") { const u = pick(e); hover = u; showTip(u, e.clientX, e.clientY); canvas.style.cursor = u ? "pointer" : ""; }
+  });
+  canvas.addEventListener("pointerup", e => { canvas.classList.remove("dragging"); const d = drag; drag = null; if (d && d.moved < 6) { const u = pick(e); if (u) showDetail(u); } });
+  canvas.addEventListener("pointerleave", () => showTip(null));
+  canvas.addEventListener("wheel", e => { e.preventDefault(); orbit.zoom = Math.max(.55, Math.min(1.6, orbit.zoom * (1 + Math.sign(e.deltaY)*.08))); }, {passive:false});
+  canvas.addEventListener("dblclick", () => { orbit.yaw = 0; orbit.pitch = 0; orbit.zoom = 1; });
+  function pick(e){
+    const s = STEPS[state.step]; if (!s || !s.pick || !document.body.classList.contains("touring")) return null;
+    const pool = []; const want = {tower:["tower","added"], ring:["ring"], topics:["topics"], branches:["branches"], seats:["ring","tower","added"]}[s.pick] || [];
+    want.forEach(k => G[k] && G[k].visible && G[k].traverse(o => { if (o.userData.pick && o.isMesh) pool.push(o); }));
+    const r = canvas.getBoundingClientRect(); ndc.set((e.clientX - r.left)/r.width*2 - 1, -((e.clientY - r.top)/r.height)*2 + 1);
+    ray.setFromCamera(ndc, camera); const hit = ray.intersectObjects(pool, false)[0];
+    return hit ? hit.object.userData.pick : null;
+  }
+
+  /* ---- resize with view offset so the focus sits beside the panel ---- */
+  function resize(){
+    const w = innerWidth, h = innerHeight; renderer.setSize(w, h, false); camera.aspect = w/h;
+    const wide = w > 860, pw = wide ? Math.min(440, w - 32) + 16 : 0;
+    if (current === "splash") camera.clearViewOffset();
+    else if (wide) camera.setViewOffset(w, h, -pw/2, 0, w, h);
+    else camera.setViewOffset(w, h, 0, h*.2, w, h);
+    camera.updateProjectionMatrix();
+    if (composer) { composer.setSize(w, h); bloom.resolution.set(w, h); }
+  }
+  addEventListener("resize", resize);
+
+  /* ---- loop ---- */
+  const t0 = performance.now(); function clock(){ return (performance.now() - t0)/1000; }
+  let last = clock();
+  const sph = new T.Spherical(), off = new T.Vector3(), tgt = new T.Vector3();
+  function frame(){
+    const t = clock(), dt = Math.min(.05, t - last); last = t;
+    const sc = SCENES[current] || SCENES.modelo;
+    // fades
+    Object.keys(G).forEach(k => { const g = G[k]; if (k === "added") return; const d = g.userData.target - g.userData.fade;
+      if (Math.abs(d) > .002) { g.userData.fade += d * Math.min(1, dt*(REDUCE ? 60 : 3.2)); applyFade(g); } else if (g.userData.fade !== g.userData.target) { g.userData.fade = g.userData.target; applyFade(g); } });
+    // camera
+    if (!drag && !REDUCE && current !== "problema" && current !== "splash") orbit.drift += dt*.035;
+    off.copy(sc.cam).sub(sc.look); sph.setFromVector3(off);
+    sph.theta += orbit.yaw + orbit.drift; sph.phi = Math.max(.15, Math.min(Math.PI/2 - .02, sph.phi + orbit.pitch)); sph.radius *= orbit.zoom * (camera.aspect < 1 ? 1.6 : camera.aspect < 1.3 ? 1.2 : 1);
+    tgt.setFromSpherical(sph).add(sc.look);
+    const k = REDUCE ? 1 : Math.min(1, dt*2.2);
+    camPos.lerp(tgt, k); camLook.lerp(sc.look, k);
+    camera.position.copy(camPos); camera.lookAt(camLook);
+    // splash swarm
+    if (G.swarm.visible) {
+      const p = Math.min(1, (t - swarmT0)/3.2), e = 1 - Math.pow(1 - p, 3);
+      for (let i = 0; i < SW; i++){ const o = i*3, w = swarmLeaving ? 1 : e;
+        swPos[o] = swStart[o] + (swTarget[o] - swStart[o])*w; swPos[o+1] = swStart[o+1] + (swTarget[o+1] - swStart[o+1])*w + Math.sin(t*1.3 + i)*.05; swPos[o+2] = swStart[o+2] + (swTarget[o+2] - swStart[o+2])*w; }
+      if (swarmLeaving) { G.swarm.scale.multiplyScalar(1 + dt*.9); }
+      else { G.swarm.scale.setScalar(1); }
+      G.swarm.rotation.y += dt*.25; swGeo.attributes.position.needsUpdate = true;
+    }
+    // ambient motion
+    if (G.ring.visible) seats.forEach((s, i) => { const want = (s.target || 1) * (s.lit && !REDUCE ? 1 + Math.sin(t*3 + i*.7)*.06 : 1);
+      s.mesh.scale.setScalar(s.mesh.scale.x + (want - s.mesh.scale.x)*Math.min(1, dt*5)); });
+    if (G.tower.visible) { spine.material.emissiveIntensity = 1 + Math.sin(t*2)*.3; }
+    if (G.veil.visible) G.veil.userData.spin.rotation.y += dt*.2;
+    if (G.topics.visible) Object.values(topicNodes).forEach((n, i) => { n.node.rotation.y += dt*.8;
+      const blind = current === "cego";
+      if (blind) { const h = Math.min(1, n.heat/5); n.m.emissiveIntensity = .2 + h*1.6*(.75 + .25*Math.sin(t*3 + i)); n.m.color.set("#EAF0F7"); n.m.emissive.set("#EAF0F7"); }
+      else { const c = STRENGTH[D.topics[i].strength].c; n.m.color.set(c); n.m.emissive.set(c); n.m.emissiveIntensity = n.gap ? 1 + Math.sin(t*3.2)*.7 : .3; } });
+    if (G.flow.visible) { flows.forEach((f, i) => { for (let q = 0; q < 4; q++){ const u = ((t*.22 + f.ph) - q*.012) % 1; bez(f.s.pos, f.t.node.position, 3.2, u < 0 ? u + 1 : u, tmpV); const o = (i*4+q)*3; flowPos[o]=tmpV.x; flowPos[o+1]=tmpV.y; flowPos[o+2]=tmpV.z; } }); flowGeo.attributes.position.needsUpdate = true; }
+    if (G.arcs.visible) { const loop = 12, tt = t % loop, f = G.arcs.userData.fade;
+      arcList.forEach(a => { const k = (tt - a.start)/1.4; const n = Math.max(0, Math.min(49, Math.floor(k*49))); a.line.geometry.setDrawRange(0, n);
+        a.line.material.opacity = f * (k < 0 ? 0 : tt > loop - .8 ? (loop - tt)/.8 : .9); });
+      const r = [2,2,3,3,3,4,4,5,5,7,7,7][Math.floor(tt)]; document.querySelectorAll("#rounds li").forEach(li => li.classList.toggle("on", +li.dataset.r === r)); }
+    if (G.lenses.visible) { Object.entries(lensObjs).forEach(([id, o]) => { const sel = id === state.lens; o.torus.rotation.y += dt*(sel ? 1.2 : .35); o.torus.rotation.x = Math.sin(t*.6)*.25;
+        const s = o.g.scale.x + ((sel ? 1.12 : .86) - o.g.scale.x)*Math.min(1, dt*4); o.g.scale.setScalar(s);
+        o.g.position.lerp(tmpV.copy(o.home).add(new T.Vector3(0, sel ? .25 : 0, sel ? .8 : 0)), Math.min(1, dt*3)); });
+      const show = state.lens === "advantage", c = lensObjs.advantage.g.position;
+      chipList.forEach((ch, i) => { const a = ch.ph + t*.25; ch.s.position.set(c.x + Math.cos(a)*2.8, c.y + Math.sin(a*1.3 + ch.tilt)*1.3, c.z + Math.sin(a)*2.8);
+        ch.s.material.opacity += ((show ? G.lenses.userData.fade : 0) - ch.s.material.opacity)*Math.min(1, dt*4); });
+    }
+    if (G.branches.visible) branchLayers.forEach((l, i) => { l.g.position.y = l.y + Math.sin(t*.8 + i)*.12; l.g.rotation.y += dt*.05*(i%2 ? -1 : 1); });
+    if (G.timeline.visible && api._now) api._now.scale.setScalar(1 + Math.sin(t*3)*.18);
+    if (G.spiral.visible) { G.spiral.rotation.y += dt*.12; versionNodes.forEach(v => v.n.rotation.y += dt*.6); }
+    // tweens
+    for (let i = tweens.length - 1; i >= 0; i--){ const tw = tweens[i], p = (t - tw.t0)/tw.dur; if (p < 0) continue; tw.fn(Math.min(1, p)); if (p >= 1) tweens.splice(i, 1); }
+    // highlight Q-related objects on the lens step
+    if (current === "lentes") Object.entries(boxes).forEach(([id, b]) => { if (b.modified) return; const hot = state.lens === "excess" && (id === "GM-12" || id === "GM-04" || id === "GM-03"); b.m.emissiveIntensity = hot ? 1 + Math.sin(t*4)*.6 : (b.inferred ? .08 : .2); });
+    if (composer) composer.render(); else renderer.render(scene, camera);
+    requestAnimationFrame(frame);
+  }
+  api.enter("splash"); swarmT0 = 0;
+  requestAnimationFrame(frame);
+  return api;
+})();
+
+/* ====================================================================== boot */
+function showSplash(){
+  document.body.classList.remove("touring"); $("#splash").classList.remove("gone");
+  state.step = -1; scene3d.enter("splash"); try { history.replaceState(null, "", location.pathname + location.search); } catch(e){}
+  setTimeout(() => $("#start").focus({preventScroll:true}), 50);
+}
+function begin(auto, at){
+  document.body.classList.add("touring"); $("#splash").classList.add("gone");
+  go(at || 0); setAuto(!!auto);
+}
+$("#start").onclick = () => begin(false);
+$("#start-auto").onclick = () => begin(true);
+const initial = STEPS.findIndex(s => "#" + s.id === location.hash);
+if (initial >= 0) begin(false, initial);
+else showSplash();
+addEventListener("hashchange", () => { const i = STEPS.findIndex(s => "#" + s.id === location.hash); if (i >= 0 && i !== state.step) begin(false, i); });
+</script>
+</body>
+</html>

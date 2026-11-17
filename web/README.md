@@ -1,12 +1,17 @@
-# HRAI·GO · Observatório (site estático)
+# HRAI-GO · Observatório (site estático)
 
 Site independente: participação ao vivo por QR code, telão com agregados, base de conhecimento e monitoramento.
-Sem CDN de terceiros (bibliotecas e fontes ficam em `vendor/` e `fonts/`; licenças em `vendor/LICENCAS.md`).
+Sem CDN de terceiros (bibliotecas, three.js r128 e fontes ficam em `vendor/` e `fonts/`; licenças em `vendor/LICENCAS.md`).
+
+Visual: tema `camara` do design system v2 (`design-system/docs/07-camara.md`). `assets/tokens.css` é **gerado**:
+`python3 design-system/scripts/export_css.py camara web/assets/tokens.css`. Dados do modelo brasileiro em
+`assets/modelo.js` (os mesmos do protótipo 3D); conteúdo editável em `assets/conteudo.js`.
 
 ## Rotas
 - `#participar`: fluxo de 5 passos no celular (anônimo).
 - `#ao-vivo`: telão para projeção (QR code, contagem, agregados, simulação de reserva).
-- `#conhecimento` e `#monitoramento`: acesso individual.
+- `#conhecimento` (começa pelo modelo brasileiro: 22 componentes e cobertura das 28 áreas) e `#monitoramento`: acesso individual.
+- `camara/`: tour 3D do Shadow Council, com alternativa sem WebGL.
 A sala vem do parâmetro `?sala=`; o QR code já inclui a sala.
 
 ## Publicar
