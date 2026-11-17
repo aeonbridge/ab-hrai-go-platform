@@ -173,7 +173,7 @@ textarea#paste{width:100%;min-height:110px;background:var(--bg);border:1px solid
 
 <div class="app">
   <header class="top">
-    <div><h1>Cascata Regulatória</h1><div class="sub">HRAI-GO · ontologia regulatória v1.0.0 instanciada · SWRL executando no navegador</div></div>
+    <div><h1>Cascata Regulatória</h1><div class="sub">HRAI-GO · ontologia regulatória v1.1.0 instanciada · SWRL executando no navegador</div></div>
     <div class="stats" id="stats"></div>
   </header>
 
@@ -187,7 +187,7 @@ textarea#paste{width:100%;min-height:110px;background:var(--bg);border:1px solid
       </defs>
       <g id="vp"><g id="edges"></g><g id="plbls"></g><g id="nodes"></g></g>
     </svg>
-    <div class="hero" id="hero"><h2>Injete um evento. <em>Veja a regra disparar.</em></h2><p>Cada nó é um indivíduo da ontologia regulatória HRAI-GO. Linhas douradas são triplas inferidas pelas 18 regras SWRL do repositório, executadas aqui. Nada é publicado sem a sua revisão.</p></div>
+    <div class="hero" id="hero"><h2>Injete um evento. <em>Veja a regra disparar.</em></h2><p>Cada nó é um indivíduo da ontologia regulatória HRAI-GO. Linhas douradas são triplas inferidas pelas regras SWRL do repositório, executadas aqui. Nada é publicado sem a sua revisão.</p></div>
     <div class="fams" aria-label="Famílias de classes">
       <span><i style="background:var(--f-norm)"></i>Normativo</span>
       <span><i style="background:var(--f-ctx)"></i>Contexto nacional</span>
@@ -216,7 +216,7 @@ const ONTO = __ONTO__;
 const SWRL_TEXT = __SWRL__;
 const NS="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#";
 const EXNS="https://github.com/aeonbridge/ab-hrai-go-platform/abox/demo#";
-const CAVEAT={R01:"Origem jurisdicional, não exigibilidade.",R02:"Origem de proveniência, não aplicabilidade vinculante.",R03:"Liga um instrumento de política registrado à sua jurisdição.",R04:"Associa o indicador ao contexto nacional.",R05:"Contestação explícita, não declaração de falsidade.",R06:"A tensão contém uma afirmação contestada.",R07:"A posição atribuída a um stakeholder entra na deliberação.",R08:"A alternativa foi examinada com indicadores de contexto.",R09:"Metadado de revisão, não publicação automática.",R10:"Mudança potencial em dispositivo; aguarda diff exato.",R11:"Propaga impacto potencial, não juízo jurídico.",R12:"Marca dependências para reavaliação.",R13:"Marca a aplicação como potencialmente impactada, sem afirmar descumprimento.",R14:"Associação potencial de controle, não prova de atendimento.",R15:"Proveniência da fonte de uma mudança.",R16:"Liga a tensão a um contexto nacional explícito.",R17:"Anexar evidência não verifica a verdade da afirmação.",R18:"Limiar investigativo explícito, não violação legal automática."};
+const CAVEAT={R01:"Origem jurisdicional, não exigibilidade.",R02:"Origem de proveniência, não aplicabilidade vinculante.",R03:"Liga um instrumento de política registrado à sua jurisdição.",R04:"Associa o indicador ao contexto nacional.",R05:"Contestação explícita, não declaração de falsidade.",R06:"A tensão contém uma afirmação contestada.",R07:"A posição atribuída a um stakeholder entra na deliberação.",R08:"A alternativa foi examinada com indicadores de contexto.",R09:"Metadado de revisão, não publicação automática.",R10:"Mudança potencial em dispositivo; aguarda diff exato.",R11:"Propaga impacto potencial, não juízo jurídico.",R12:"Marca dependências para reavaliação.",R13:"Marca a aplicação como potencialmente impactada, sem afirmar descumprimento.",R14:"Associação potencial de controle, não prova de atendimento.",R15:"Proveniência da fonte de uma mudança.",R16:"Liga a tensão a um contexto nacional explícito.",R17:"Anexar evidência não verifica a verdade da afirmação.",R18:"Limiar investigativo explícito, não violação legal automática.",R19:"Sinal investigativo de execução, não prova de fracasso da política.",R20:"Registra que a avaliação de impacto existe; não muda status de conformidade.",R21:"A origem sintética passa para a posição; não é a visão de um ator real.",R22:"Dispositivo de proposta; sem força vinculante.",R23:"Requisito derivado de proposta; prospectivo, não vinculante."};
 
 /* ============ parser SWRL ============ */
 function parseSWRL(txt){
@@ -259,7 +259,12 @@ function has(id,cls){return T.has(key(id,"a",cls))}
 function matchBody(atoms,i,bind,prem,out){
   if(i===atoms.length){out.push({bind:{...bind},prem:[...prem]});return}
   const a=atoms[i];
-  if(a.k==="b"){const v=a.args.map(x=>bind[x]);if(a.fn==="greaterThan"&&v.every(isLit)&&litV(v[0])>litV(v[1]))matchBody(atoms,i+1,bind,prem,out);return}
+  if(a.k==="b"){const v=a.args.map(x=>bind[x]);
+    if(a.fn==="divide"){if(v[1]==null||v[2]==null||!isLit(v[1])||!isLit(v[2])||litV(v[2])===0)return;const r=litV(v[1])/litV(v[2]);
+      if(v[0]==null){bind[a.args[0]]=lit(+r.toFixed(6));matchBody(atoms,i+1,bind,prem,out);delete bind[a.args[0]]}else if(Math.abs(litV(v[0])-r)<1e-9)matchBody(atoms,i+1,bind,prem,out);return}
+    if(!v.every(x=>x!=null&&isLit(x)))return;
+    const ok=a.fn==="greaterThan"?litV(v[0])>litV(v[1]):a.fn==="lessThan"?litV(v[0])<litV(v[1]):a.fn==="equal"?v[0]===v[1]:false;
+    if(ok)matchBody(atoms,i+1,bind,prem,out);return}
   if(a.k==="c"){
     if(bind[a.v]!=null){const k=key(bind[a.v],"a",a.cls);if(T.has(k)){prem.push(k);matchBody(atoms,i+1,bind,prem,out);prem.pop()}return}
     for(const t of byP.get("a")||[]){if(t.o!==a.cls)continue;bind[a.v]=t.s;prem.push(key(t.s,"a",t.o));matchBody(atoms,i+1,bind,prem,out);prem.pop();delete bind[a.v]}
@@ -297,8 +302,8 @@ function base(){
   N("lgpdV","LGPD · texto compilado",["LegalInstrumentVersion"]);add("lgpd","hasVersion","lgpdV");add("lgpdV","versionOfInstrument","lgpd");
   N("lgpdArt20","LGPD art. 20 · revisão de decisão automatizada",["LegalProvision"]);add("lgpdV","versionContainsProvision","lgpdArt20");add("lgpdArt20","provisionOfVersion","lgpdV");
   N("pl2338","PL 2338/2023",["LegislativeProposal"],"Proposta legislativa: não é norma aprovada nem em vigor. Origem jurisdicional não implica exigibilidade.");add("pl2338","instrumentInJurisdiction","BR");add("pl2338","proposalInJurisdiction","BR");
-  N("stProp","Status: em tramitação",["LegalStatus"]);add("pl2338","hasLegalStatus","stProp");
-  N("plV","PL 2338 · texto aprovado no Senado (10/12/2024)",["LegalInstrumentVersion"]);add("pl2338","hasVersion","plV");add("plV","versionOfInstrument","pl2338");
+  N("stProp","Status: em tramitação",["LegalStatus"]);
+  N("plV","PL 2338 · texto aprovado no Senado (10/12/2024)",["LegalInstrumentVersion"]);add("pl2338","hasVersion","plV");add("plV","versionOfInstrument","pl2338");add("plV","hasLegalStatus","stProp");
   N("plRisco","PL 2338 · classificação de alto risco",["LegalProvision"]);add("plV","versionContainsProvision","plRisco");add("plRisco","provisionOfVersion","plV");
   N("plAIA","PL 2338 · avaliação de impacto algorítmico",["LegalProvision"]);add("plV","versionContainsProvision","plAIA");add("plAIA","provisionOfVersion","plV");
   N("aiAct","AI Act · Reg. (UE) 2024/1689",["EnactedLegalInstrument"]);add("aiAct","instrumentInJurisdiction","EU");
@@ -312,20 +317,21 @@ function base(){
   N("modBR","Modelo brasileiro · PL 2338 + PBIA",["RegulatoryModel"]);add("modBR","adoptedByJurisdiction","BR");add("BR","hasRegulatoryModel","modBR");
   N("modEU","Modelo europeu · risco horizontal",["RegulatoryModel"]);add("modEU","adoptedByJurisdiction","EU");
   N("modUS","Modelo americano · setorial e preempção",["RegulatoryModel"]);add("modUS","adoptedByJurisdiction","US");
-  N("pbia","PBIA 2024–2028",["PolicyInstrument"],"Plano Brasileiro de Inteligência Artificial: cerca de R$ 23 bi em cinco eixos (valores por eixo de fontes secundárias).");add("modBR","usesPolicyInstrument","pbia");
-  N("pbiaE5","PBIA · Eixo 5 regulação e governança",["PolicyInstrument"]);add("modBR","usesPolicyInstrument","pbiaE5");
-  N("pbiaE1","PBIA · Eixo 1 infraestrutura",["PolicyInstrument"]);add("modBR","usesPolicyInstrument","pbiaE1");
+  N("pbia","PBIA 2024–2028",["PublicPolicyPlan"],"Plano Brasileiro de Inteligência Artificial: cerca de R$ 23 bi em cinco eixos (valores por eixo de fontes secundárias).");add("modBR","usesPolicyInstrument","pbia");
+  N("pbiaE5","PBIA · Eixo 5 regulação e governança",["PolicyPlanAxis"]);add("pbia","planHasAxis","pbiaE5");add("modBR","usesPolicyInstrument","pbiaE5");
+  N("pbiaE1","PBIA · Eixo 1 infraestrutura",["PolicyPlanAxis"]);add("pbia","planHasAxis","pbiaE1");add("modBR","usesPolicyInstrument","pbiaE1");
   N("euSand","Sandboxes regulatórios (UE)",["PolicyInstrument"]);add("modEU","usesPolicyInstrument","euSand");
   N("usEO","EO 14365 (EUA)",["PolicyInstrument"]);add("modUS","usesPolicyInstrument","usEO");
   N("objDir","Proteção de direitos",["PolicyObjective"]);N("objInov","Inovação e competitividade",["PolicyObjective"]);N("objSob","Soberania tecnológica",["PolicyObjective"]);N("objCap","Capacidade estatal",["PolicyObjective"]);
-  add("pbia","pursuesObjective","objInov");add("pbiaE1","pursuesObjective","objSob");add("pbiaE5","pursuesObjective","objCap");
+  add("pbia","instrumentPursuesObjective","objInov");add("pbiaE1","instrumentPursuesObjective","objSob");add("pbiaE5","instrumentPursuesObjective","objCap");
+  N("allocE5","Dotação do Eixo 5 · cerca de R$ 103 mi (fonte secundária)",["BudgetAllocation"],"Valor por eixo citado por fontes secundárias a partir de apresentações do MCTI; confirmar no documento oficial.");add("pbiaE5","instrumentHasAllocation","allocE5");add("allocE5","allocatedAmount",lit(103000000));add("allocE5","allocationCurrency","lit:BRL");add("allocE5","executionAlertRatio",lit(0.5));
   N("tenAud","Auditoria ex-ante × viabilidade para PMEs",["RegulatoryTension"]);add("tenAud","tensionInJurisdiction","BR");add("tenAud","tensionInvolvesObjective","objDir");add("tenAud","tensionInvolvesObjective","objInov");
   N("clCusto","“Auditoria ex-ante inviabiliza PMEs”",["PolicyClaim"]);N("clDano","“Sem auditoria prévia, o dano só aparece depois”",["PolicyClaim"]);
   add("tenAud","hasPolicyClaim","clCusto");add("tenAud","hasPolicyClaim","clDano");
   N("evCusto","Estudo de custo de auditoria (não calibrado para o Brasil)",["Evidence"]);add("clCusto","claimSupportedByEvidence","evCusto");
   N("gapInf","Lacuna: trabalho informal fora do alcance do alto risco",["RegulatoryGap"]);add("gapInf","gapInJurisdiction","BR");add("gapInf","gapConcernsObjective","objDir");
-  N("stkTrab","Perspectiva sintética: trabalhadores",["Stakeholder"],"Assento do conselho sintético (SCSE). Não representa pessoa ou organização real.");
-  N("stkPME","Perspectiva sintética: pequenas empresas",["Stakeholder"],"Assento do conselho sintético (SCSE). Não representa pessoa ou organização real.");
+  N("stkTrab","Perspectiva sintética: trabalhadores",["SyntheticStakeholderPerspective"],"Assento do conselho sintético (SCSE). Não representa pessoa ou organização real.");
+  N("stkPME","Perspectiva sintética: pequenas empresas",["SyntheticStakeholderPerspective"],"Assento do conselho sintético (SCSE). Não representa pessoa ou organização real.");
   N("posTrab","Posição: auditoria obrigatória",["StakeholderPosition"]);add("posTrab","positionExpressedBy","stkTrab");add("posTrab","positionSupportsClaim","clDano");
   N("posPME","Posição: escalonar por porte",["StakeholderPosition"]);add("posPME","positionExpressedBy","stkPME");add("posPME","positionSupportsClaim","clCusto");
   N("delib","Deliberação SCSE · rodada R5",["Deliberation"]);add("delib","deliberatesOnTension","tenAud");add("delib","deliberationIncludesPosition","posTrab");add("delib","deliberationIncludesPosition","posPME");
@@ -354,6 +360,12 @@ const EVENTS=[
  {id:"e4",k:"del",kl:"deliberação",t:"Perspectiva de trabalhadores contesta o argumento de custo",d:"Nova afirmação contrária na tensão",
   nodes:[["clContra","“Escalonar por porte ignora a gravidade do impacto”",["PolicyClaim"]]],
   tr:[["clCusto","challengedByClaim","clContra"],["posTrab","positionChallengesClaim","clCusto"]],agent:false},
+ {id:"e6",k:"cfg",kl:"execução · valor fictício",t:"Registro de execução do Eixo 5",d:"R$ 20 mi desembolsados (fictício) contra alerta de 50%",
+  nodes:[["execE5","Execução do Eixo 5 · desembolsado (valor fictício)",["ExecutionRecord"]]],
+  tr:[["allocE5","allocationExecutionRecord","execE5"],["execE5","executedAmount",lit(20000000)],["execE5","executionCurrency","lit:BRL"],["execE5","executionKind","lit:disbursed"]],agent:false},
+ {id:"e7",k:"del",kl:"revisão humana",t:"Revisor fecha o impacto do Omnibus",d:"Requer o evento do Omnibus publicado",needs:"e1",
+  nodes:[["cia1","Avaliação de impacto · Omnibus × triagem",["ChangeImpactAssessment"]],["outReassess","Resultado: reavaliação necessária",["ImpactReviewOutcome"]]],
+  tr:[["cia1","impactEvaluationForChange","evOmni"],["cia1","impactEvaluationConcernsAssessment","assess"],["cia1","impactEvaluationHasOutcome","outReassess"],["cia1","impactEvaluationBy","you"]],agent:false},
  {id:"e5",k:"ag",kl:"extração por agente",t:"Colar um texto e deixar o agente extrair",d:"Vocabulário restrito à TBox; você revisa",paste:true}
 ];
 
@@ -374,11 +386,11 @@ const el=(tag,a={},...kids)=>{const n=document.createElement(tag);for(const[k,v]
 const put=(n,...k)=>n.append(...k.flat().filter(x=>x!=null&&x!==false));
 const sleep=ms=>new Promise(r=>setTimeout(r,matchMedia("(prefers-reduced-motion: reduce)").matches?Math.min(ms,60):ms));
 const FAM={};
-[["norm",["LegalInstrument","LegislativeProposal","EnactedLegalInstrument","LegalInstrumentVersion","LegalProvision","NormativeRequirement","ObligationRequirement","PermissionRequirement","ProhibitionRequirement","LegalStatus","ActorRole","LegalException","ApplicabilityCondition","LegalInterpretation","ValidityDetermination"]],
+[["norm",["LegalInstrument","LegislativeProposal","EnactedLegalInstrument","LegalInstrumentVersion","LegalProvision","NormativeRequirement","ObligationRequirement","PermissionRequirement","ProhibitionRequirement","LegalStatus","ActorRole","LegalException","ApplicabilityCondition","LegalInterpretation","ValidityDetermination","ProposedProvision","ProspectiveRequirement"]],
  ["ctx",["Jurisdiction","NationalContext","ContextIndicator","ContextDimension","ThresholdExceededIndicator"]],
- ["pol",["RegulatoryModel","PolicyInstrument","PolicyObjective","RegulatoryTension","RegulatoryGap","PolicyClaim","PolicyAlternative","Stakeholder","StakeholderPosition","Deliberation","PolicyImpactAssessment","Evidence"]],
+ ["pol",["RegulatoryModel","PolicyInstrument","PolicyObjective","RegulatoryTension","RegulatoryGap","PolicyClaim","PolicyAlternative","Stakeholder","StakeholderPosition","Deliberation","PolicyImpactAssessment","Evidence","PublicPolicyPlan","PolicyPlanAxis","BudgetAllocation","ExecutionRecord","ExecutionBelowAlertRatioRecord","SyntheticStakeholderPerspective","IdentifiedStakeholder","SyntheticStakeholderPosition"]],
  ["app",["AIApplication","GovernanceControl","ComplianceAssessment","ApplicationSpecification","ComplianceStatus"]],
- ["pipe",["MonitoringAgent","LegalSource","SourceSnapshot","RegulatoryChangeEvent","ExtractionBatch","CandidateAssertion","ReviewDecision","ApprovalDecision","ReviewActor","KnowledgeGraphRelease","OntologyRelease","ReviewedAndApprovedCandidate","ChangeImpactAssessment","OntologyChangeProposal"]]
+ ["pipe",["MonitoringAgent","LegalSource","SourceSnapshot","RegulatoryChangeEvent","ExtractionBatch","CandidateAssertion","ReviewDecision","ApprovalDecision","ReviewActor","KnowledgeGraphRelease","OntologyRelease","ReviewedAndApprovedCandidate","ChangeImpactAssessment","OntologyChangeProposal","ImpactReviewOutcome"]]
 ].forEach(([f,cs])=>cs.forEach(c=>FAM[c]=f));
 const FCOL={norm:"var(--f-norm)",ctx:"var(--f-ctx)",pol:"var(--f-pol)",app:"var(--f-app)",pipe:"var(--f-pipe)"};
 function famOf(id){const ts=typesOf(id).filter(t=>!t.inf);for(const t of ts)if(FAM[t.o])return FAM[t.o];for(const t of typesOf(id))if(FAM[t.o])return FAM[t.o];return"pol"}
@@ -387,6 +399,12 @@ const lbl=id=>NODES.get(id)?.label||id;
 const visRel=()=>S.viewRel??REL;
 function visibleTriples(){const r=visRel();return[...T.values()].filter(t=>t.rel<=r)}
 function inferredTypes(id){return typesOf(id).filter(t=>t.inf&&t.inf.rule!=="TBox"&&t.rel<=visRel())}
+function openImpacts(id){const r=visRel(),vt=[...T.values()].filter(t=>t.rel<=r);
+  const done=new Set(vt.filter(t=>t.p==="assessmentImpactEvaluatedFor").map(t=>t.s+"|"+t.o));
+  const needs=vt.filter(t=>t.p==="assessmentNeedsReviewDueTo"&&!done.has(t.s+"|"+t.o));
+  if(has(id,"ComplianceAssessment"))return needs.filter(t=>t.s===id);
+  if(has(id,"AIApplication")){const as=new Set(vt.filter(t=>t.p==="assessesApplication"&&t.o===id).map(t=>t.s));return needs.filter(t=>as.has(t.s))}
+  return[]}
 function nodeLive(id){const n=NODES.get(id);return n&&n.rel<=visRel()}
 
 /* ============ grafo: física própria ============ */
@@ -436,7 +454,7 @@ function styleNode(n,g){
   const it=n.ghost?[]:inferredTypes(n.id);
   g.querySelector(".ring").setAttribute("r",it.length?r+4.5:0);
   g.querySelector(".halo").style.stroke=FCOL[fam];
-  const imp=!n.ghost&&[...T.values()].some(t=>t.rel<=visRel()&&t.s===n.id&&(t.p==="applicationPotentiallyImpactedBy"||t.p==="assessmentNeedsReviewDueTo"));
+  const imp=!n.ghost&&openImpacts(n.id).length>0;
   g.querySelector(".imp").setAttribute("r",imp?r+8:0);
   g.classList.toggle("impacted",imp);g.classList.toggle("cand",!!n.ghost);g.classList.toggle("sel",S.sel===n.id);
   const t=g.querySelector(".lbl");t.textContent=n.label.length>38?n.label.slice(0,36)+"…":n.label;t.setAttribute("y",r);t.setAttribute("dy","1.1em");
@@ -505,8 +523,8 @@ function renderStats(){
 }
 function renderDock(){
   const e=$("#events");e.replaceChildren();
-  for(const ev of EVENTS)e.append(el("button",{class:"ev"+(S.used.has(ev.id)?" used":""),disabled:S.busy||!!S.batch||S.viewRel!=null||(S.used.has(ev.id)&&!ev.paste),onclick:()=>startEvent(ev)},
-    el("span",{class:"k "+ev.k},ev.kl),el("b",{},ev.t),el("small",{},S.used.has(ev.id)&&!ev.paste?"já publicado":ev.d)));
+  for(const ev of EVENTS)e.append(el("button",{class:"ev"+(S.used.has(ev.id)?" used":""),disabled:S.busy||!!S.batch||S.viewRel!=null||(S.used.has(ev.id)&&!ev.paste)||(ev.needs&&!S.used.has(ev.needs)),onclick:()=>startEvent(ev)},
+    el("span",{class:"k "+ev.k},ev.kl),el("b",{},ev.t),el("small",{},S.used.has(ev.id)&&!ev.paste?"já publicado":ev.needs&&!S.used.has(ev.needs)?"publique antes o Omnibus":ev.d)));
   const r=$("#rels");r.replaceChildren(...RELS.map((x,i)=>el("button",{class:"rel","aria-pressed":String((S.viewRel??REL)===i),disabled:S.busy||!!S.batch,onclick:()=>{S.viewRel=i===REL?null:i;S.fresh.clear();S.freshNodes.clear();rebuild();renderAll()}},"v"+x.v+" · "+x.label)));
 }
 function log(rule,text){const L=$("#log");const d=el("div",{},el("b",{},rule+" "),text,el("span",{}," · "+(CAVEAT[rule]||"")));L.append(d);while(L.children.length>(innerWidth<860?2:3))L.firstChild.remove();setTimeout(()=>d.remove(),9000)}
@@ -527,13 +545,14 @@ function introView(i){
   const byRule={};for(const t of visibleTriples())if(t.inf&&t.inf.rule!=="TBox")byRule[t.inf.rule]=(byRule[t.inf.rule]||0)+1;
   put(i,tabsFor("intro"),
     el("h3",{},"A ontologia raciocinando ao vivo"),
-    el("p",{class:"muted",style:"margin:0"},"A ABox ao lado instancia a ontologia regulatória geral da HRAI-GO com PBIA, PL 2338, LGPD, AI Act, um contexto nacional, uma tensão deliberada pelo conselho sintético e uma aplicação fictícia. As 18 regras SWRL do repositório são lidas do próprio arquivo e executadas por um motor de encadeamento progressivo neste navegador."),
+    el("p",{class:"muted",style:"margin:0"},"A ABox ao lado instancia a ontologia regulatória geral da HRAI-GO com PBIA, PL 2338, LGPD, AI Act, um contexto nacional, uma tensão deliberada pelo conselho sintético e uma aplicação fictícia. As "+RULES.length+" regras SWRL do repositório (v1.1.0) são lidas do próprio arquivo e executadas por um motor de encadeamento progressivo neste navegador."),
     el("div",{class:"box"},el("b",{},"Experimente"),
       el("ol",{style:"margin:0;padding-left:18px",class:"small"},
         el("li",{},"Injete “Omnibus da UE” na doca abaixo."),
         el("li",{},"Revise o lote candidato e aprove."),
         el("li",{},"Veja R09, depois R15, R10, R11, R12 e R13 dispararem em cascata."),
         el("li",{},"Clique na aplicação pulsando e pergunte “por quê?” em cada tripla dourada."),
+        el("li",{},"Depois, use \u201cRevisor fecha o impacto do Omnibus\u201d: R20 registra a avaliação e o halo da aplicação se apaga."),
         el("li",{},"Volte no tempo pelas releases e compare."))),
     el("div",{},el("div",{class:"eyebrow",style:"margin-bottom:6px"},"Regras SWRL carregadas"),
       el("div",{class:"chips"},RULES.map(r=>el("span",{class:"chip"+(byRule[r.id]?" inf":""),title:r.name+" · "+CAVEAT[r.id]},r.id+(byRule[r.id]?" ×"+byRule[r.id]:""))))),
@@ -566,7 +585,14 @@ function epiNote(id){
   if(has(id,"AIApplication")&&[...T.values()].some(t=>t.s===id&&t.p==="applicationPotentiallyImpactedBy"&&t.rel<=visRel()))msgs.push("Potencialmente impactada: requer reavaliação externa, não indica descumprimento.");
   if(has(id,"ThresholdExceededIndicator"))msgs.push("Limiar investigativo configurado por analista, não limite legal.");
   if(has(id,"EvidencedPolicyClaim"))msgs.push("Ter evidência anexada não torna a afirmação verdadeira.");
-  if(has(id,"Stakeholder"))msgs.push("Perspectiva sintética: não fala por grupo real.");
+  if(has(id,"SyntheticStakeholderPerspective"))msgs.push("Perspectiva sintética (classe da v1.1.0): não fala por grupo real.");
+  if(has(id,"SyntheticStakeholderPosition"))msgs.push("Posição de origem sintética (R21): não é a visão de um ator real.");
+  if(has(id,"ProposedProvision"))msgs.push("Dispositivo de proposta (R22): sem força vinculante.");
+  if(has(id,"ProspectiveRequirement"))msgs.push("Requisito prospectivo (R23): não vinculante hoje.");
+  if(has(id,"ExecutionBelowAlertRatioRecord"))msgs.push("Execução abaixo da razão de alerta (R19): sinal para investigar período e estágio, não prova de fracasso.");
+  if(has(id,"BudgetAllocation"))msgs.push("Valor declarado, não execução.");
+  if(has(id,"ComplianceAssessment")||has(id,"AIApplication")){const o=openImpacts(id);const all=[...T.values()].filter(t=>t.rel<=visRel()&&t.s===id&&(t.p==="assessmentNeedsReviewDueTo"||t.p==="applicationPotentiallyImpactedBy")).length;
+    if(all)msgs.push(o.length?`Impactos em aberto: ${o.length}. A lista vem de uma consulta de mundo fechado (SPARQL FILTER NOT EXISTS), não de uma regra SWRL.`:"Todos os impactos sinalizados têm avaliação registrada (R20). O status de conformidade continua sem alteração.")}
   return msgs.length?el("div",{class:"box",style:"gap:4px"},msgs.map(m=>el("div",{class:"caveat"},m))):null;
 }
 function proofView(i,k){
@@ -601,7 +627,7 @@ function turtleView(i){
   const newN=[...NODES.values()].filter(n=>n.rel===r);
   for(const n of newN)lines.push(`ex:${n.id} rdfs:label "${n.label.replace(/"/g,"'")}"@pt-BR .`);
   if(newN.length)lines.push("");
-  for(const t of vt){const o=t.p==="a"?"hrai:"+t.o:isLit(t.o)?`"${t.o.slice(4)}"^^xsd:decimal`:"ex:"+t.o;const p=t.p==="a"?"a":"hrai:"+t.p;
+  for(const t of vt){const o=t.p==="a"?"hrai:"+t.o:isLit(t.o)?(isNaN(litV(t.o))?`"${t.o.slice(4)}"`:`"${t.o.slice(4)}"^^xsd:decimal`):"ex:"+t.o;const p=t.p==="a"?"a":"hrai:"+t.p;
     lines.push((t.inf?"":"")+`ex:${t.s} ${p} ${o} .`+(t.inf?`  # inferido · ${t.inf.rule}`:""))}
   const pre=el("pre",{class:"ttl"});pre.innerHTML=lines.map(l=>esc(l).replace(/(# inferido · R\d+)/,'<span class="c">$1</span>')).join("\n");
   const txt=lines.join("\n");
