@@ -46,7 +46,7 @@
   \item o que foi omitido e deveria ser considerado;
   \item como um Shadow Council pode apoiar decisões coletivas humanas.
 \end{itemize}
-A mudança central é tratar o raciocínio como um conjunto de \emph{perguntas de competência} explícitas, cada uma ligada a uma regra ou consulta, a dados com fonte e a uma tela da plataforma. As teses da análise comparativa anexada entram no grafo como \emph{afirmações}, não como fatos. Aplicamos isso às 12 teses do documento anexo, contra o corpus do repositório: 3 são contestadas pelo próprio corpus, 7 têm evidência anexada e 2 não têm evidência nenhuma.
+Inclui também a eliminação do cadastro paralelo que hoje alimenta a câmara: os 22 componentes e mais seis conjuntos editados à mão (seção~\ref{sec:fonteunica}). A mudança central é tratar o raciocínio como um conjunto de \emph{perguntas de competência} explícitas, cada uma ligada a uma regra ou consulta, a dados com fonte e a uma tela da plataforma. As teses da análise comparativa anexada entram no grafo como \emph{afirmações}, não como fatos. Aplicamos isso às 12 teses do documento anexo, contra o corpus do repositório: 3 são contestadas pelo próprio corpus, 7 têm evidência anexada e 2 não têm evidência nenhuma.
 \end{abstract}
 
 \tableofcontents
@@ -100,7 +100,7 @@ Recomendação: classificar por \emph{dimensões} (seção~\ref{sec:dimensoes}),
   \item \textbf{Ontologia sem uso em produto} (RT-ONT-01). Só existe instância para o Brasil, e só do PBIA. Os modelos da UE, do Reino Unido e dos EUA estão no corpus, mas não no grafo, o que torna impossível qualquer comparação \emph{pela ontologia}.
   \item \textbf{Versão errada do PL no corpus.} O texto do PL 2338 é o inicial, de 2023. O substitutivo aprovado pelo Senado em 10/12/2024 não está no repositório. Pela imprensa, até agosto de 2026 o projeto seguia em comissão especial na Câmara, sem data de votação. Toda comparação BR $\times$ AI Act feita sobre o texto de 2023 pode estar desatualizada.
   \item \textbf{Análise comparativa anexada fora do repositório.} O PDF ``Análise Comparativa e Diretrizes Estratégicas\ldots'' não está no repositório. As teses dele foram registradas a partir do resumo fornecido (anexo~\ref{ap:afirmacoes}).
-  \item \textbf{Câmara ao vivo sem ligação com a ontologia.} Dos 22 componentes exibidos, só 10 têm correspondente na instância (RT-ONT-01, seção~5.5).
+  \item \textbf{Câmara ao vivo alimentada por um cadastro paralelo.} Os 22 componentes exibidos vêm de \texttt{web/assets/modelo.js}, sem ligação com a ontologia. Só 10 têm correspondente na instância (RT-ONT-01, seção~5.5). O cadastro paralelo vai além dos componentes; ver a seção~\ref{sec:fonteunica}.
 \end{itemize}
 
 %=====================================================================
@@ -286,6 +286,40 @@ Ele não vota, não recomenda alternativa e não produz ``síntese do conselho''
 \end{itemize}
 
 %=====================================================================
+\section{Fonte única: eliminar o cadastro paralelo da câmara}\label{sec:fonteunica}
+
+Tudo o que a câmara, a apresentação e o painel exibem vem de \texttt{web/assets/modelo.js}, editado à mão. Esse é o gap que tornou falsa a frase ``cada peça é um indivíduo da ontologia''. O inventário abaixo, levantado no próprio arquivo, mostra que o problema não se limita aos 22 componentes.
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{l r L L}
+\toprule
+Conjunto em \texttt{modelo.js} & qtd. & Situação no grafo & Destino\\
+\midrule
+Componentes GM-01 a GM-22 & 22 & 5 exatos, 5 próximos, 12 ausentes (RT-ONT-01, A1) & indivíduos da instância BR, com IRI\\
+Áreas da taxonomia (cúpula) & 28 & não existem & esquema \texttt{GovernanceFunction} (RF-05)\\
+Traços de contexto CF-01 a CF-14 & 14 & não existem; \texttt{ContextDimension} e indicadores sem ligação & \texttt{ContextIndicator} com fonte e ano-base\\
+Estratos e assentos do conselho & 8 / 20 & não existem como perspectivas & \texttt{Synthetic}\-\texttt{Stakeholder}\-\texttt{Perspective} ancorada em \texttt{Evidence}\\
+Tensões-semente T1 a T6 & 6 & \textbf{divergem}: a instância do PBIA tem outras 5 tensões, sem correspondência & reconciliar num único conjunto de \texttt{RegulatoryTension}\\
+Cenários de futuro (ramos) & 4 & não existem & \texttt{RegulatoryChangeEvent} hipotéticos, na pasta de cenários\\
+Grupos sem fonte (cadeiras vazias) & 6 & não existem & perspectivas declaradas sem evidência\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Como fechar o gap dos 12 componentes ausentes}
+Gerar \texttt{modelo.js} a partir do grafo não basta, porque o grafo não tem o que falta. Cada ausência tem um caminho próprio:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{GM-05 a GM-12, mecanismos do PL.} Extrair os dispositivos do substitutivo do Senado (RF-01) como \texttt{LegalProvision} de proposta. As regras R22 e R23 os mantêm como proposta. O componente da câmara passa a ser o agrupamento desses dispositivos por função.
+  \item \textbf{GM-01 (EBIA), GM-13 (ANPD), GM-14 (reguladores setoriais) e GM-16 (painel do PBIA).} Exigem fontes novas no corpus: a portaria da EBIA, a lei e o regimento da ANPD, a lista de reguladores e a página do painel. Sem fonte, não entram.
+  \item \textbf{Os 5 componentes ``próximos''.} São decididos na revisão: viram correspondência exata, com novo indivíduo, ou ficam explicitamente como agregação de vários indivíduos.
+\end{itemize}
+
+\subsection{Regra de transição}
+Enquanto um elemento exibido não tiver IRI no grafo, ele continua na câmara, mas marcado como \emph{sem lastro na ontologia}, com selo visível na ficha. Nada é escondido e nada passa por verificado. A apresentação só usa a frase ``cada peça é um indivíduo da ontologia'' quando o contador de elementos sem lastro chegar a zero.
+
+\nota{\textbf{Critério de aceite verificável no CI.} O build da plataforma gera \texttt{modelo.js} do grafo e publica um contador de elementos sem IRI por conjunto. O CI falha se surgir elemento novo editado à mão fora do grafo, ou se o contador subir em relação ao \texttt{main}.}
+
+%=====================================================================
 \section{Especificação de implementação}
 
 \subsection{Requisitos}
@@ -305,6 +339,10 @@ RF-08 & Consultas SPARQL para PC1 a PC8 versionadas no repositório, com teste d
 RF-09 & Build gera os dados da plataforma a partir do grafo: modelo da câmara, comparador, fichas com ``por quê?''. & \texttt{modelo.js} deixa de ser editado à mão.\\
 RF-10 & Mesa da plataforma grava reações como posições sobre afirmações; registro de decisão e de revisão de posição. & Uma sessão gera um relatório com as métricas da seção 5.4.\\
 RF-11 & Afirmações de documentos de análise entram como \texttt{PolicyClaim}, nunca como fato. & Anexo~\ref{ap:afirmacoes} gerado pelo script, com status.\\
+RF-12 & Cada elemento exibido na câmara (os sete conjuntos da seção~\ref{sec:fonteunica}) tem IRI no grafo ou fica marcado como ``sem lastro'' na ficha. & Contador de elementos sem IRI publicado no build; nunca sobe.\\
+RF-13 & Reconciliar as tensões-semente T1 a T6 da câmara com as tensões da instância do PBIA num único conjunto. & Uma só lista de \texttt{RegulatoryTension}; câmara e mural leem dela.\\
+RF-14 & Fechar os 12 componentes ausentes pelos caminhos da seção~\ref{sec:fonteunica}: dispositivos do PL e fontes novas para EBIA, ANPD, reguladores e painel. & Alinhamento A1 com zero ausências, ou ausências com fonte pendente registrada.\\
+RF-15 & Trocar o texto do slide ``cada peça é um indivíduo da ontologia'' até o RF-12 chegar a zero. & Slide diz o que é verdade em cada versão publicada.\\
 RNF-01 & IRIs resolvíveis (w3id.org ou GitHub Pages) para TBox, instâncias e afirmações. & Abrir um IRI no navegador mostra o recurso.\\
 RNF-02 & Raciocínio em menos de 5\,s no CI para o grafo completo. & Medido no CI.\\
 \bottomrule
@@ -317,10 +355,10 @@ RNF-02 & Raciocínio em menos de 5\,s no CI para o grafo completo. & Medido no C
 \toprule
 Fase & Entregas & Estimativa\\
 \midrule
-F0 & Corrigir o slide da apresentação; RF-01; RF-02; RF-11 (já iniciado neste documento). & 1 semana\\
+F0 & RF-15 (slide); RF-01; RF-02; RF-11 (já iniciado); selo ``sem lastro'' na ficha da câmara (início do RF-12). & 1 semana\\
 F1 & RF-03 e RF-05: TBox v1.2.0, esquemas de dimensões e funções, testes. & 2 a 3 semanas\\
 F2 & RF-04 e RF-06: instâncias UE, Reino Unido e EUA, e correspondências BR $\leftrightarrow$ UE com revisão. & 3 a 5 semanas\\
-F3 & RF-07, RF-08 e RF-09: indicadores, consultas, build da plataforma a partir do grafo. & 2 a 3 semanas\\
+F3 & RF-07, RF-08, RF-09, RF-12 a RF-14: indicadores, consultas, build da plataforma a partir do grafo, reconciliação das tensões e fechamento dos componentes ausentes. & 3 a 5 semanas\\
 F4 & RF-10: protocolo do SC integrado à Mesa e ao relatório de deliberação. & 2 semanas\\
 \bottomrule
 \end{tabularx}
