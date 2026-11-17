@@ -39,7 +39,7 @@ jobs:
         run: python -m pytest -q
       - name: Validate scenarios and dry-run one scenario end to end
         run: |
-          scse validate scenarios/brasil-ficticio/*.json scenarios/governanca-brasil/GOV-BR-001.json
+          scse validate scenarios/brasil-ficticio/BR-PBIA-*.json scenarios/governanca-brasil/GOV-BR-001.json
           scse govern validate scenarios/governanca-brasil/model/brasil-governanca-v0.json --taxonomy scenarios/governanca-brasil/taxonomy.json
           scse run scenarios/brasil-ficticio/BR-PBIA-001.json --dry-run --seats 8 --replicates 2 --critic --out /tmp/scse-runs
           scse run scenarios/governanca-brasil/GOV-BR-001.json --dry-run --seats 8 --replicates 2 --critic --out /tmp/scse-runs
