@@ -1,0 +1,98 @@
+# =============================================================================
+# Afirmações A1 — teses do documento "Análise Comparativa e Diretrizes Estratégicas para a
+# Governança e Plano de Inteligência Artificial no Brasil" tratadas como hrai:PolicyClaim.
+#
+# Princípio: uma tese de análise NÃO é fato. Entra como afirmação, ligada às evidências do corpus
+# (docs/ai-regulations) que a sustentam e às contra-afirmações que a contestam. O raciocinador marca
+# depois quais estão contestadas (R05/R06) e quais têm evidência anexada (R17). Evidência anexada
+# não prova verdade; contestação não prova falsidade.
+#
+# O PDF da análise não está no repositório: as teses vêm do resumo fornecido pelo usuário (2026-11-17).
+# Afirmações sem evidência no corpus ficam sem claimSupportedByEvidence: são hipóteses a testar.
+# =============================================================================
+@prefix a1:   <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/claims/a1#> .
+@prefix pbia: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#> .
+@prefix hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+# ---------- fontes do corpus (hash SHA-256 dos PDFs em docs/ai-regulations) ----------
+a1:Fonte_Analise a hrai:LegalSource ; rdfs:label "Análise Comparativa e Diretrizes Estratégicas (documento de análise, não oficial; PDF fora do repositório)"@pt .
+a1:Snap_PL2338_2023 a hrai:SourceSnapshot ; rdfs:label "PL 2338/2023, texto inicial (Senado, 03/05/2023)"@pt ;
+    hrai:snapshotSHA256 "63bdf787e71c505c64a1c275000ff16b360ea3ceb280ab5072daef8ea50dcf9a" ; rdfs:comment "docs/ai-regulations/br/DOC-SF238339076816-20230503.pdf. Não é o substitutivo aprovado pelo Senado em 10/12/2024."@pt .
+a1:Snap_AIAct a hrai:SourceSnapshot ; rdfs:label "Regulamento (UE) 2024/1689 (AI Act), Jornal Oficial L"@pt ;
+    hrai:snapshotSHA256 "bba630444b3278e881066774002a1d7824308934f49ccfa203e65be43692f55e" .
+
+a1:Ev_PL_Art33PU a hrai:Evidence ; rdfs:label "PL 2338/2023 (2023), art. 33, parágrafo único: condições diferenciadas para ME/EPP (LC 123/2006) e startups (LC 182/2021)"@pt ; prov:wasDerivedFrom a1:Snap_PL2338_2023 .
+a1:Ev_PL_Arts38a41 a hrai:Evidence ; rdfs:label "PL 2338/2023 (2023), arts. 38 a 41: sandbox regulatório"@pt ; prov:wasDerivedFrom a1:Snap_PL2338_2023 .
+a1:Ev_PL_Art14 a hrai:Evidence ; rdfs:label "PL 2338/2023 (2023), art. 14: vedação de sistemas de risco excessivo"@pt ; prov:wasDerivedFrom a1:Snap_PL2338_2023 .
+a1:Ev_PL_Arts13a18 a hrai:Evidence ; rdfs:label "PL 2338/2023 (2023), arts. 13 a 18: avaliação preliminar e classificação de risco ex ante"@pt ; prov:wasDerivedFrom a1:Snap_PL2338_2023 .
+a1:Ev_PL_Vieses a hrai:Evidence ; rdfs:label "PL 2338/2023 (2023), art. 5º, V e art. 12: direito à não discriminação e à correção de vieses; art. 21, III: no uso estatal de alto risco, dados testados contra vieses discriminatórios"@pt ; prov:wasDerivedFrom a1:Snap_PL2338_2023 .
+a1:Ev_PL_Art32 a hrai:Evidence ; rdfs:label "PL 2338/2023 (2023), art. 32: estrutura limitada a uma autoridade competente designada pelo Executivo; não há instância técnico-científica independente"@pt ; prov:wasDerivedFrom a1:Snap_PL2338_2023 .
+a1:Ev_AIAct_Art68 a hrai:Evidence ; rdfs:label "AI Act, art. 68: painel científico de peritos independentes (independência de fornecedores, representação de gênero e geográfica)"@pt ; prov:wasDerivedFrom a1:Snap_AIAct .
+a1:Ev_AIAct_Art62 a hrai:Evidence ; rdfs:label "AI Act, art. 62: medidas para PME e startups (acesso prioritário a sandboxes, canais dedicados)"@pt ; prov:wasDerivedFrom a1:Snap_AIAct .
+a1:Ev_PBIA_Tab2 a hrai:Evidence ; rdfs:label "PBIA, Tabela 2: Eixo 5 R$ 103,25 milhões de R$ 23,03 bilhões (0,45%)"@pt ; prov:wasDerivedFrom pbia:Snapshot_PBIA_VN8 .
+a1:Ev_PBIA_Energia a hrai:Evidence ; rdfs:label "PBIA, p. ~36: renováveis na matriz elétrica 89,2% em 2023 (cita EPE, 2024)"@pt ; prov:wasDerivedFrom pbia:Snapshot_PBIA_VN8 ; rdfs:comment "Dado de 2023. Fonte externa (BEN 2025) indica 88,2% para 2024: citar sempre com o ano."@pt .
+a1:Ev_PBIA_SUS a hrai:Evidence ; rdfs:label "PBIA, Seção 1: SUS como um dos maiores sistemas públicos de saúde, com grande volume de dados"@pt ; prov:wasDerivedFrom pbia:Snapshot_PBIA_VN8 .
+a1:Ev_PBIA_Acao09 a hrai:Evidence ; rdfs:label "PBIA, Ação 9: IA baseada em dados nacionais (LLM em português)"@pt ; prov:wasDerivedFrom pbia:Snapshot_PBIA_VN8 .
+a1:Ev_PBIA_Acao27 a hrai:Evidence ; rdfs:label "PBIA, Ação 27: Nuvem Soberana, R$ 1 bilhão (Serpro e Dataprev)"@pt ; prov:wasDerivedFrom pbia:Snapshot_PBIA_VN8 .
+a1:Ev_PBIA_SantosDumont a hrai:Evidence ; rdfs:label "PBIA: meta de atualização do supercomputador Santos Dumont (LNCC)"@pt ; prov:wasDerivedFrom pbia:Snapshot_PBIA_VN8 .
+
+# fonte secundária (revisada por pares) sobre o texto aprovado pelo Senado em 10/12/2024
+a1:Fonte_Alanoca2025 a hrai:LegalSource ;
+    rdfs:label "Alanoca, Gur-Arieh, Zick e Klyman (2025). Comparing Apples to Oranges: A Taxonomy for Navigating the Global Landscape of AI Regulation. FAccT '25. doi:10.1145/3715275.3732059"@pt ;
+    rdfs:comment "Fonte secundária: descreve o substitutivo do Senado (dez/2024), que não está no corpus. Confirmar no texto primário (RF-01)."@pt .
+a1:Ev_Alanoca_SIA a hrai:Evidence ;
+    rdfs:label "Alanoca et al. (2025), seção 6.6: o SIA, coordenado pela ANPD, integra o Conselho Permanente de Cooperação Regulatória (CRIA) e o Comitê de Especialistas e Cientistas de IA (CECIA)"@pt ;
+    prov:wasDerivedFrom a1:Fonte_Alanoca2025 .
+a1:K04 a hrai:PolicyClaim ;
+    rdfs:label "O texto aprovado pelo Senado em dez/2024 cria um comitê de especialistas e cientistas (CECIA) dentro do SIA; a comparação com o painel do AI Act depende de independência e mandato, não de existência"@pt ;
+    hrai:claimSupportedByEvidence a1:Ev_Alanoca_SIA .
+
+# ---------- tensão que organiza a discussão ----------
+a1:Tensao_TransposicaoAIAct a hrai:RegulatoryTension ;
+    rdfs:label "Transpor o modelo de risco do AI Act × adequar ao contexto e à capacidade brasileiros"@pt ;
+    hrai:tensionInJurisdiction pbia:Brazil ;
+    hrai:hasPolicyClaim a1:C01 , a1:C02 , a1:C03 , a1:C04 , a1:C05 , a1:C06 , a1:C07 .
+a1:Tensao_AtivosDados a hrai:RegulatoryTension ;
+    rdfs:label "Dados públicos em escala como ativo × dados sensíveis como exposição de risco"@pt ;
+    hrai:tensionInJurisdiction pbia:Brazil ;
+    hrai:hasPolicyClaim a1:C09 , a1:K09 .
+
+# ---------- teses da análise (C) e contra-afirmações do corpus (K) ----------
+a1:C01 a hrai:PolicyClaim ; rdfs:label "A transposição rígida da classificação de risco ex ante impõe barreiras proibitivas a startups e MPMEs"@pt ;
+    prov:wasDerivedFrom a1:Fonte_Analise ; hrai:challengedByClaim a1:K01 .
+a1:K01 a hrai:PolicyClaim ; rdfs:label "O texto de 2023 já prevê condições diferenciadas para ME/EPP e startups e sandbox; o efeito sobre a entrada é empírico e não está medido no corpus"@pt ;
+    hrai:claimSupportedByEvidence a1:Ev_PL_Art33PU , a1:Ev_PL_Arts38a41 , a1:Ev_PL_Arts13a18 .
+a1:C02 a hrai:PolicyClaim ; rdfs:label "O custo de conformidade (relatórios e auditorias) excede o que as empresas locais conseguem absorver"@pt ;
+    prov:wasDerivedFrom a1:Fonte_Analise ; rdfs:comment "Sem evidência no corpus. Hipótese a testar: exige estimativa de custo (a análise de impacto do Reino Unido traz um método reaproveitável)."@pt .
+a1:C03 a hrai:PolicyClaim ; rdfs:label "Diante da escassez de profissionais STEM, a burocracia desvia talento técnico para compliance"@pt ;
+    prov:wasDerivedFrom a1:Fonte_Analise ; rdfs:comment "Sem evidência no corpus: o PBIA não quantifica escassez STEM. Exige indicador (ContextIndicator) com fonte."@pt .
+a1:C04 a hrai:PolicyClaim ; rdfs:label "O Brasil não prevê instância consultiva técnica independente equivalente ao painel científico do AI Act"@pt ;
+    prov:wasDerivedFrom a1:Fonte_Analise ; hrai:claimSupportedByEvidence a1:Ev_AIAct_Art68 , a1:Ev_PL_Art32 ; hrai:challengedByClaim a1:K04 ;
+    rdfs:comment "Válida só para o texto de 2023. Segundo Alanoca et al. (2025), o substitutivo do Senado cria o CECIA: incorporar o texto primário (RF-01)."@pt .
+a1:C05 a hrai:PolicyClaim ; rdfs:label "O Brasil carece de salvaguardas rígidas contra vieses em serviços públicos e no uso estatal de dados"@pt ;
+    prov:wasDerivedFrom a1:Fonte_Analise ; hrai:challengedByClaim a1:K05 .
+a1:K05 a hrai:PolicyClaim ; rdfs:label "O PL prevê direito à não discriminação e à correção de vieses e exige, no uso estatal de alto risco, dados testados contra vieses; a lacuna real é que nada disso está em vigor"@pt ;
+    hrai:claimSupportedByEvidence a1:Ev_PL_Vieses .
+a1:C06 a hrai:PolicyClaim ; rdfs:label "O marco brasileiro deve evitar proibições rígidas e priorizar sandboxes regulatórios"@pt ;
+    prov:wasDerivedFrom a1:Fonte_Analise ; hrai:challengedByClaim a1:K06 .
+a1:K06 a hrai:PolicyClaim ; rdfs:label "Proibição de risco excessivo e sandbox coexistem no PL e no AI Act; escolher entre eles é decisão normativa, não constatação"@pt ;
+    hrai:claimSupportedByEvidence a1:Ev_PL_Art14 , a1:Ev_PL_Arts38a41 , a1:Ev_AIAct_Art62 .
+a1:C07 a hrai:PolicyClaim ; rdfs:label "O PBIA destina cerca de 0,4% do orçamento ao suporte regulatório e de governança, com risco de estrangulamento institucional"@pt ;
+    prov:wasDerivedFrom a1:Fonte_Analise ; hrai:claimSupportedByEvidence a1:Ev_PBIA_Tab2 ;
+    rdfs:comment "Percentual confirmado (0,45%). O 'risco de estrangulamento' é inferência: depende de quanto a supervisão custaria, o que o corpus não estima."@pt .
+a1:C08 a hrai:PolicyClaim ; rdfs:label "A matriz elétrica 89,2% renovável dá vantagem para data centers verdes"@pt ;
+    prov:wasDerivedFrom a1:Fonte_Analise ; hrai:claimSupportedByEvidence a1:Ev_PBIA_Energia .
+pbia:Tension_ComputeExpansionVsEnergyWater hrai:hasPolicyClaim a1:C08 .
+a1:C09 a hrai:PolicyClaim ; rdfs:label "SUS e CadÚnico são repositórios de dados sem paralelo para treinar modelos"@pt ;
+    prov:wasDerivedFrom a1:Fonte_Analise ; hrai:claimSupportedByEvidence a1:Ev_PBIA_SUS ;
+    rdfs:comment "Evidência cobre só o SUS. CadÚnico e 'sem paralelo global' não aparecem no corpus."@pt .
+a1:K09 a hrai:PolicyClaim ; rdfs:label "Os mesmos dados são dados pessoais sensíveis de populações vulneráveis: usá-los para treinar modelos é exposição de risco que exige salvaguardas antes do ganho"@pt .
+a1:C10 a hrai:PolicyClaim ; rdfs:label "LLMs em português e em línguas originárias protegem a soberania linguística e cultural"@pt ;
+    prov:wasDerivedFrom a1:Fonte_Analise ; hrai:claimSupportedByEvidence a1:Ev_PBIA_Acao09 ;
+    rdfs:comment "O PBIA prevê LLM em português; línguas originárias não aparecem no corpus."@pt .
+a1:C11 a hrai:PolicyClaim ; rdfs:label "A Nuvem Soberana gerida por Serpro e Dataprev protege dados sensíveis frente a infraestrutura estrangeira"@pt ;
+    prov:wasDerivedFrom a1:Fonte_Analise ; hrai:claimSupportedByEvidence a1:Ev_PBIA_Acao27 .
+a1:C12 a hrai:PolicyClaim ; rdfs:label "A expansão do supercomputador Santos Dumont sustenta a capacidade soberana de computação"@pt ;
+    prov:wasDerivedFrom a1:Fonte_Analise ; hrai:claimSupportedByEvidence a1:Ev_PBIA_SantosDumont .
