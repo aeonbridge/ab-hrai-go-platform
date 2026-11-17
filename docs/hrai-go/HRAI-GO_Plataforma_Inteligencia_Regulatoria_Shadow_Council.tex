@@ -1,122 +1,125 @@
-% HRAI-GO Platform | Documento pedagogico de arquitetura e governanca
-% Fonte editavel. Compilacao: xelatex (duas passagens).
-\documentclass[11pt,a4paper,oneside]{article}
-\usepackage[brazil]{babel}
-\usepackage{fontspec}
-\setmainfont{Noto Serif}
-\setsansfont{Noto Sans}
-\setmonofont[Scale=.83]{DejaVu Sans Mono}
-\usepackage{geometry}
-\geometry{left=24mm,right=23mm,top=24mm,bottom=23mm,headheight=15pt}
-\usepackage{microtype}
-\usepackage{setspace}
-\setstretch{1.13}
-\usepackage{enumitem}
-\setlist[itemize]{leftmargin=16pt,itemsep=3pt,topsep=4pt}
-\setlist[enumerate]{leftmargin=18pt,itemsep=3pt,topsep=4pt}
-\usepackage[table]{xcolor}
-\definecolor{ink}{HTML}{152739}
-\definecolor{muted}{HTML}{526579}
-\definecolor{blue}{HTML}{1664A4}
-\definecolor{teal}{HTML}{00877B}
-\definecolor{pale}{HTML}{EAF3F7}
-\definecolor{light}{HTML}{F4F7FA}
-\definecolor{amber}{HTML}{9F6200}
-\usepackage{titlesec}
-\titleformat{\section}{\Large\bfseries\sffamily\color{ink}}{\thesection}{.8em}{}
-\titleformat{\subsection}{\large\bfseries\sffamily\color{blue}}{\thesubsection}{.7em}{}
-\titleformat{\subsubsection}{\normalsize\bfseries\sffamily\color{ink}}{\thesubsubsection}{.7em}{}
-\titlespacing*{\section}{0pt}{17pt}{9pt}
-\titlespacing*{\subsection}{0pt}{12pt}{5pt}
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[L]{\sffamily\footnotesize\color{muted} HRAI-GO | Plataforma de Inteligência Regulatória}
-\fancyhead[R]{\sffamily\footnotesize\color{muted} Documento pedagógico}
-\fancyfoot[L]{\sffamily\footnotesize\color{muted} Proposta conceitual \textbullet\ 11 nov. 2026}
-\fancyfoot[R]{\sffamily\footnotesize\color{muted}\thepage}
-\renewcommand{\headrulewidth}{0.35pt}
-\renewcommand{\footrulewidth}{0pt}
-\usepackage{tabularx,longtable,booktabs,array,multirow}
-\renewcommand{\arraystretch}{1.22}
-\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
-\usepackage[most]{tcolorbox}
-\newtcolorbox{keybox}[1][]{colback=pale,colframe=blue!55!white,boxrule=.7pt,arc=2mm,left=11pt,right=11pt,top=9pt,bottom=9pt,#1}
-\newtcolorbox{notebox}[1][]{colback=light,colframe=teal!65!white,boxrule=.55pt,arc=2mm,left=10pt,right=10pt,top=8pt,bottom=8pt,#1}
-\newtcolorbox{warnbox}[1][]{colback=orange!5,colframe=amber!65,boxrule=.65pt,arc=2mm,left=10pt,right=10pt,top=8pt,bottom=8pt,#1}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning,calc,fit,shapes.geometric,matrix}
-\usepackage{float}
-\usepackage{caption}
-\captionsetup{font=small,labelfont=bf}
+% HRAI-GO Platform | Documento conceitual de arquitetura e governança (DC-PLAT-01).
+% Padrão: ABNT NBR 10719:2015 (docs/PADRAO_RELATORIOS.md), classe abnTeX2 + pacote hraigo-abnt.
+% Compilação: scripts/build-relatorios.sh docs/hrai-go/HRAI-GO_Plataforma_Inteligencia_Regulatoria_Shadow_Council.tex
+\documentclass[12pt,a4paper,oneside,english,brazil]{abntex2}
+\usepackage{hraigo-abnt}
 \usepackage{listings}
 \usepackage{seqsplit}
-\usepackage{graphicx}
-\lstdefinestyle{code}{basicstyle=\ttfamily\footnotesize,columns=fullflexible,breaklines=true,breakatwhitespace=false,keepspaces=true,showstringspaces=false,frame=single,framesep=7pt,rulecolor=\color{blue!30},backgroundcolor=\color{light},aboveskip=8pt,belowskip=8pt,upquote=true}
+\usepackage{amsmath}
+
+% ------------------------------------------------------------ Ajustes locais (o pacote não os define)
+\setlist[itemize]{leftmargin=16pt,itemsep=3pt,topsep=4pt}
+\setlist[enumerate]{leftmargin=18pt,itemsep=3pt,topsep=4pt}
+\renewcommand{\arraystretch}{1.22}
+% Code listings: sober frame in the house palette, single spacing.
+\lstdefinestyle{code}{basicstyle=\ttfamily\footnotesize\SingleSpacing,columns=fullflexible,breaklines=true,breakatwhitespace=false,keepspaces=true,showstringspaces=false,frame=single,framesep=7pt,rulecolor=\color{cinza!45},backgroundcolor=\color{cinza!6},aboveskip=8pt,belowskip=8pt,upquote=true}
 \lstset{style=code}
-\usepackage{hyperref}
-\hypersetup{unicode=true,colorlinks=true,linkcolor=blue,urlcolor=teal,citecolor=blue,pdfauthor={HRAI-GO},pdftitle={HRAI-GO: Human-centred Regulatory AI, Governance Observatory},pdfsubject={Plataforma de inteligencia regulatoria humano-IA e Shadow Council}}
-\usepackage{bookmark}
-\usepackage{csquotes}
-\usepackage{amssymb,amsmath}
-\usepackage{needspace}
-\newcommand{\term}[1]{{\ttfamily\small\seqsplit{#1}}}
+% \term{...}: canonical identifier (class, property, agent) in monospace, breakable at any character.
+\newcommand{\term}[1]{{\mdseries\ttfamily\small\seqsplit{#1}}}
+% \eng{...}: English expression or title kept in the original language.
 \newcommand{\eng}[1]{\textit{#1}}
+% Paragraph labels that classify the status of a statement.
 \newcommand{\nsource}{\textbf{Fonte:} }
 \newcommand{\nproposal}{\textbf{Proposta:} }
 \newcommand{\nexample}{\textbf{Exemplo fictício:} }
-\newcommand{\tinytag}[1]{{\sffamily\footnotesize\color{teal}\textbf{#1}}}
+% \tinytag{...}: small inline label in the house accent colour.
+\newcommand{\tinytag}[1]{{\footnotesize\textbf{#1}}}
+
+\hypersetup{pdftitle={HRAI-GO: Human-centred Regulatory AI, Governance Observatory},pdfsubject={Plataforma de inteligência regulatória humano-IA e Shadow Council}}
+
+% ------------------------------------------------------------ Identificação (NBR 10719, 4.2.1.1.1)
+\titulo{Plataforma Aberta de Inteligência Regulatória e Governança de IA}
+\subtitulo{ontologias, agentes contínuos, avaliação de conformidade, comparação internacional e \textit{Shadow Council}}
+\tipotrabalho{Documento conceitual}
+\codigo{DC-PLAT-01}
+\versao{0.4}
+\data{2026}
+\palavraschave{Inteligência regulatória. Governança de inteligência artificial. Ontologia. Avaliação de conformidade. Sistemas multiagentes. Shadow Council.}
+
 \begin{document}
-\begin{titlepage}
-\thispagestyle{empty}
-\vspace*{12mm}
-{\sffamily\bfseries\color{teal}\Large HRAI-GO / CONCEPT SERIES\par}
-\vspace{2mm}
-{\sffamily\color{muted}\large Human-centred Regulatory AI, Governance Observatory\par}
-\vspace{12mm}
-{\sffamily\bfseries\color{ink}\fontsize{29}{34}\selectfont Plataforma Aberta de\\Inteligência Regulatória\\e Governança de IA\par}
-\vspace{9mm}
-{\sffamily\fontsize{18}{23}\selectfont\color{blue} Ontologias, agentes contínuos, avaliação de conformidade, comparação internacional e \textit{Shadow Council}\par}
-\vspace{16mm}
-\begin{tikzpicture}[x=1cm,y=1cm,>=Latex]
-\fill[blue!7,rounded corners=7pt] (0,0) rectangle (15.4,5.9);
-\node[draw=blue!70,fill=white,rounded corners=5pt,minimum width=5.3cm,minimum height=.95cm,font=\sffamily\bfseries\large,text=ink] (kg) at (7.7,.85) {Canonical Knowledge Graph};
-\node[draw=teal!70,fill=white,rounded corners=4pt,minimum width=6.6cm,minimum height=.9cm,font=\sffamily\bfseries,text=ink] (agents) at (7.7,4.9) {Multi-Agent Orchestration};
-\node[draw=blue!60,fill=white,rounded corners=3pt,minimum width=3.3cm,minimum height=1.15cm,align=center,font=\sffamily\small\bfseries] (c) at (2.55,3.05) {Compliance\\Intelligence};
-\node[draw=blue!60,fill=white,rounded corners=3pt,minimum width=3.3cm,minimum height=1.15cm,align=center,font=\sffamily\small\bfseries] (p) at (7.7,3.05) {Policy\\Intelligence};
-\node[draw=blue!60,fill=white,rounded corners=3pt,minimum width=3.3cm,minimum height=1.15cm,align=center,font=\sffamily\small\bfseries] (s) at (12.85,3.05) {Shadow Council\\Deliberation};
-\draw[->,very thick,teal!75] (agents.south) -- (p.north);
-\draw[->,thick,blue!75] (kg.north -| c) -- (c.south);
-\draw[->,thick,blue!75] (kg.north) -- (p.south);
-\draw[->,thick,blue!75] (kg.north -| s) -- (s.south);
-\draw[<->,thin,dashed,gray] (c.east) -- (p.west);
-\draw[<->,thin,dashed,gray] (p.east) -- (s.west);
-\end{tikzpicture}
-\vfill
-{\sffamily\bfseries\color{ink} Documento pedagógico de consolidação e especificação conceitual\par}
-\vspace{3mm}
-{\sffamily\color{muted} Versão 0.3 | 17 de novembro de 2026 | Português brasileiro\par}
-\vspace{4mm}
-\begin{minipage}{.94\textwidth}
-\small\color{muted} Conteúdo: síntese dos três estudos fornecidos, arquitetura proposta e funcionalidade nova \textit{Shadow Council}. Exemplos fictícios, regras ilustrativas e propostas de engenharia são identificados como tais. Este material não substitui interpretação jurídica oficial nem comprova representatividade social.
-\end{minipage}
-\end{titlepage}
+\selectlanguage{brazil}
 
-\pagenumbering{roman}
-\tableofcontents
-\clearpage
-\pagenumbering{arabic}
+% ============================================================ ELEMENTOS PRÉ-TEXTUAIS
+\pretextual
+\imprimirfolhaderostorelatorio
 
-\section{Resumo executivo: o que estamos construindo?}
-\begin{keybox}
-\textbf{Ideia central.} O HRAI-GO deixa de ser apenas uma ontologia de sistemas de IA de alto risco e evolui para uma \textbf{infraestrutura aberta, multinacional e multiagente de inteligência regulatória}. Ela integra duas tarefas diferentes: avaliar uma aplicação frente às normas aplicáveis e avaliar criticamente a própria adequação da regulação às necessidades de uma sociedade. Uma terceira capacidade, o \textit{Shadow Council}, experimenta deliberações representativas de perspectivas documentadas dos diferentes stakeholders, sem fingir que agentes sintéticos são pessoas reais ou mandatos democráticos.
-\end{keybox}
+\begin{resumorelatorio}
+Este documento conceitual consolida e especifica a plataforma HRAI-GO (Human-centred Regulatory AI, Governance Observatory), uma plataforma de inteligência regulatória humano--IA. O HRAI-GO deixa de ser apenas uma ontologia de sistemas de inteligência artificial (IA) de alto risco e evolui para uma infraestrutura aberta, multinacional e multiagente de inteligência regulatória. Ela integra duas tarefas diferentes: avaliar uma aplicação frente às normas aplicáveis e avaliar criticamente a própria adequação da regulação às necessidades de uma sociedade. Uma terceira capacidade, o \textit{Shadow Council}, experimenta deliberações representativas de perspectivas documentadas dos diferentes stakeholders, sem fingir que agentes sintéticos são pessoas reais ou mandatos democráticos. A plataforma organiza-se em quatro componentes: NORM (inteligência normativa), VERIFY (conformidade de aplicações), DEBATE (inteligência de políticas e Shadow Council) e FORESIGHT (alternativas de política). Os resultados esperados são uma biblioteca comparativa dinâmica entre legislações, políticas e modelos regulatórios de países diferentes; uma ontologia OWL 2 canônica, instanciada continuamente por fatos com proveniência e temporalidade; um motor de compliance que combine raciocínio ontológico, regras normativas e validação de evidências; uma rede aberta de agentes de reguladores, especialistas, empresas, sociedade civil e grupos diretamente afetados; um Shadow Council que represente a diversidade de posições documentadas e teste estruturas de debate, incluindo o registro explícito de dissenso; e um observatório de tensões e lacunas regulatórias, com investigações reprodutíveis e propostas contextualizadas. O documento adota uma separação epistemológica obrigatória entre texto jurídico oficial, interpretação jurídica, evidência empírica, hipótese de agente, posição de stakeholder e proposta normativa: nenhum desses objetos deve ser silenciosamente convertido em outro.
+\end{resumorelatorio}
+
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+
+\begin{siglas}
+  \item[ABox] Assertional Box
+  \item[API] Application Programming Interface
+  \item[GDPR] General Data Protection Regulation
+  \item[HRAI-GO] Human-centred Regulatory AI, Governance Observatory
+  \item[IA] Inteligência artificial
+  \item[JSON] JavaScript Object Notation
+  \item[LGPD] Lei Geral de Proteção de Dados Pessoais
+  \item[MPMEs] Micro, pequenas e médias empresas
+  \item[MVP] Minimum Viable Product (produto mínimo viável)
+  \item[OASIS] Organization for the Advancement of Structured Information Standards
+  \item[OWL] Web Ontology Language
+  \item[PBIA] Plano Brasileiro de Inteligência Artificial
+  \item[PL] Projeto de Lei
+  \item[PROV-O] PROV Ontology
+  \item[RDF] Resource Description Framework
+  \item[RQ] Research Question (questão de pesquisa)
+  \item[SHACL] Shapes Constraint Language
+  \item[SPARQL] SPARQL Protocol and RDF Query Language
+  \item[SWRL] Semantic Web Rule Language
+  \item[TBox] Terminological Box
+  \item[UE] União Europeia
+  \item[UK] United Kingdom (Reino Unido)
+  \item[URI] Uniform Resource Identifier
+  \item[W3C] World Wide Web Consortium
+\end{siglas}
+
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+% ============================================================ ELEMENTOS TEXTUAIS
+\textual
+
+\chapter{Introdução: o que estamos construindo?}
+\destaque{\textbf{Ideia central.} O HRAI-GO (Human-centred Regulatory AI, Governance Observatory) deixa de ser apenas uma ontologia de sistemas de inteligência artificial (IA) de alto risco e evolui para uma \textbf{infraestrutura aberta, multinacional e multiagente de inteligência regulatória}. Ela integra duas tarefas diferentes: avaliar uma aplicação frente às normas aplicáveis e avaliar criticamente a própria adequação da regulação às necessidades de uma sociedade. Uma terceira capacidade, o \textit{Shadow Council}, experimenta deliberações representativas de perspectivas documentadas dos diferentes stakeholders, sem fingir que agentes sintéticos são pessoas reais ou mandatos democráticos.}
 
 \textbf{Nome.} HRAI-GO significa \textit{Human-centred Regulatory AI, Governance Observatory}: uma plataforma de inteligência regulatória humano--IA. A sigla nasceu como \textit{High-Risk AI}, sentido que permanece apenas nos namespaces técnicos das ontologias (\texttt{hrai-*.owl}).
 
-\subsection{As quatro capacidades da plataforma}
-\begin{center}
-\begin{tabularx}{\textwidth}{@{}p{.245\textwidth}Y@{}}
+\textbf{Escopo deste documento.} Este é um documento pedagógico de consolidação e especificação conceitual. Seu conteúdo é a síntese dos três estudos fornecidos, a arquitetura proposta e a funcionalidade nova \textit{Shadow Council}. Exemplos fictícios, regras ilustrativas e propostas de engenharia são identificados como tais. Este material não substitui interpretação jurídica oficial nem comprova representatividade social.
+
+A Figura~\ref{fig:visao-geral} apresenta a visão geral da plataforma: um grafo de conhecimento canônico sustenta as frentes de inteligência de conformidade, de políticas e de deliberação do Shadow Council, coordenadas por uma orquestração multiagente.
+
+\begin{figure}[htbp]
+\caption{Visão geral da plataforma HRAI-GO}\label{fig:visao-geral}
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm,>=Latex]
+\fill[cinza!7,rounded corners=7pt] (0,0) rectangle (15.4,5.9);
+\node[draw=tinta!70,fill=white,rounded corners=5pt,minimum width=5.3cm,minimum height=.95cm,font=\sffamily\bfseries\large,text=tinta] (kg) at (7.7,.85) {Canonical Knowledge Graph};
+\node[draw=lagoa!70,fill=white,rounded corners=4pt,minimum width=6.6cm,minimum height=.9cm,font=\sffamily\bfseries,text=tinta] (agents) at (7.7,4.9) {Multi-Agent Orchestration};
+\node[draw=tinta!60,fill=white,rounded corners=3pt,minimum width=3.3cm,minimum height=1.15cm,align=center,font=\sffamily\small\bfseries] (c) at (2.55,3.05) {Compliance\\Intelligence};
+\node[draw=tinta!60,fill=white,rounded corners=3pt,minimum width=3.3cm,minimum height=1.15cm,align=center,font=\sffamily\small\bfseries] (p) at (7.7,3.05) {Policy\\Intelligence};
+\node[draw=tinta!60,fill=white,rounded corners=3pt,minimum width=3.3cm,minimum height=1.15cm,align=center,font=\sffamily\small\bfseries] (s) at (12.85,3.05) {Shadow Council\\Deliberation};
+\draw[->,very thick,lagoa!75] (agents.south) -- (p.north);
+\draw[->,thick,tinta!75] (kg.north -| c) -- (c.south);
+\draw[->,thick,tinta!75] (kg.north) -- (p.south);
+\draw[->,thick,tinta!75] (kg.north -| s) -- (s.south);
+\draw[<->,thin,dashed,gray] (c.east) -- (p.west);
+\draw[<->,thin,dashed,gray] (p.east) -- (s.west);
+\end{tikzpicture}
+\fonte{Elaborado pelos autores (2026).}
+\end{figure}
+
+\section{As quatro capacidades da plataforma}
+A Tabela~\ref{tab:capacidades} relaciona cada componente à pergunta que ele responde.
+\begin{table}[htbp]
+\caption{Componentes da plataforma e a pergunta que cada um responde}\label{tab:capacidades}
+\centering
+\begin{tabularx}{\textwidth}{@{}p{.245\textwidth}L@{}}
 \toprule
 \textbf{Componente} & \textbf{Pergunta que responde}\\\midrule
 \term{NORM} (Normative Intelligence) & O que foi proposto, aprovado, entrou em vigor, é aplicável, foi alterado ou revogado em cada jurisdição?\\
@@ -125,33 +128,34 @@
 \term{FORESIGHT} (Policy Alternatives) & Que cenários e efeitos condicionais das alternativas regulatórias podem ser investigados e testados?\\
 \bottomrule
 \end{tabularx}
-\end{center}
+\fonte{Elaborado pelos autores (2026).}
+\end{table}
 
-\subsection{Os resultados esperados}
+\section{Os resultados esperados}
 \begin{itemize}
 \item Uma \textbf{biblioteca comparativa dinâmica} entre legislações, políticas e modelos regulatórios de países diferentes, incluindo equivalência conceitual e diferenças jurídicas.
-\item Uma \textbf{ontologia OWL 2} canônica, instanciada continuamente por fatos com proveniência e temporalidade.
+\item Uma \textbf{ontologia OWL 2} (Web Ontology Language) canônica, instanciada continuamente por fatos com proveniência e temporalidade.
 \item Um \textbf{motor de compliance} que combine raciocínio ontológico, regras normativas e validação de evidências.
 \item Uma \textbf{rede aberta de agentes} de reguladores, especialistas, empresas, sociedade civil e grupos diretamente afetados.
 \item Um \textbf{Shadow Council} que represente a diversidade de posições documentadas e teste estruturas de debate, incluindo o registro explícito de dissenso.
 \item Um \textbf{observatório de tensões e lacunas} regulatórias, com investigações reprodutíveis e propostas contextualizadas.
 \end{itemize}
 
-\begin{warnbox}
-\textbf{Separação epistemológica obrigatória.} (1) Texto jurídico oficial, (2) interpretação jurídica, (3) evidência empírica, (4) hipótese de agente, (5) posição de stakeholder e (6) proposta normativa são objetos diferentes. Nenhum dos seis deve ser silenciosamente convertido em outro.
-\end{warnbox}
+\alerta{\textbf{Separação epistemológica obrigatória.} (1) Texto jurídico oficial, (2) interpretação jurídica, (3) evidência empírica, (4) hipótese de agente, (5) posição de stakeholder e (6) proposta normativa são objetos diferentes. Nenhum dos seis deve ser silenciosamente convertido em outro.}
 
-\section{Origem das ideias, limites das fontes e método de leitura}
-\subsection{O que vem dos materiais fornecidos}
+\chapter{Origem das ideias, limites das fontes e método de leitura}
+\section{O que vem dos materiais fornecidos}
 A proposta toma como base três documentos anexados pelo solicitante:\par
 \begin{enumerate}
-\item \eng{Guia de Conformidade e Governança para Sistemas de Inteligência Artificial de Alto Risco (HRAI)}: classificação de risco, governança de dados, supervisão humana, auditoria, evidências, mecanismos de controle e monitoramento contínuo \cite{guia}.
-\item \eng{Análise Comparativa e Diretrizes Estratégicas para a Governança e Plano de Inteligência Artificial no Brasil}: dilemas de importação de modelos regulatórios, capacidades nacionais, soberania, inclusão, custos e orçamento de governança \cite{comparativo}.
-\item \eng{Brainstorming: tipos de artefatos técnicos que não fiquem datados}: matriz dinâmica de riscos, padrões de interoperabilidade, repositório colaborativo de vieses, compras públicas e telemetria de soberania \cite{brainstorm}.
+\item \eng{Guia de Conformidade e Governança para Sistemas de Inteligência Artificial de Alto Risco (HRAI)}: classificação de risco, governança de dados, supervisão humana, auditoria, evidências, mecanismos de controle e monitoramento contínuo. É fonte de temas e conceitos de compliance, não de prova de vigência de normas \cite{estudo-guia-hrai}.
+\item \eng{Análise Comparativa e Diretrizes Estratégicas para a Governança e Plano de Inteligência Artificial no Brasil}: dilemas de importação de modelos regulatórios, capacidades nacionais, soberania, inclusão, custos e orçamento de governança. É fonte de hipóteses estratégicas para investigação \cite{estudo-comparativo}.
+\item \eng{Brainstorming: tipos de artefatos técnicos que não fiquem datados}: matriz dinâmica de riscos, padrões de interoperabilidade, repositório colaborativo de vieses, compras públicas e telemetria de soberania. É fonte de propostas de artefatos permanentes \cite{estudo-brainstorm}.
 \end{enumerate}
 As fontes oferecem o \textbf{problema, os temas e hipóteses de análise}, não uma ontologia já especificada, uma amostra representativa real, evidência causal de que determinada política funciona ou uma validação da plataforma. Os nomes canônicos, mecanismos algorítmicos, regras e protocolos seguintes são \textbf{propostas de modelagem}.
 
-\subsection{O que os estudos não demonstram}
+Como referências complementares, o OECD AI Policy Observatory serve ao mapeamento de políticas e indicadores \cite{oecd-ai}, e a AI Readiness Assessment Methodology da UNESCO serve de referência para avaliação nacional multidimensional \cite{unesco-ram}.
+
+\section{O que os estudos não demonstram}
 \begin{itemize}
 \item As caracterizações gerais de países são pontos de partida analíticos. Não substituem exame de normas, setores, entes subnacionais e períodos de vigência.
 \item A proporção de recursos de um eixo orçamentário não demonstra, por si, falta de capacidade fiscalizatória. Exige comparação com gastos executados, pessoal, competências e demanda.
@@ -159,23 +163,26 @@ As fontes oferecem o \textbf{problema, os temas e hipóteses de análise}, não 
 \item Afirmações como ``um método de alinhamento resolve explicabilidade jurídica'' devem ser tratadas como hipóteses contestáveis, não como propriedades garantidas da tecnologia.
 \end{itemize}
 
-\subsection{Cuidado com o tempo jurídico}
-A legislação deve ser consultada em fonte oficial e sob uma data explícita. O \textbf{PL 2338/2023}, por exemplo, é tratado neste documento como \term{LegislativeProposal}, não como lei em vigor: a ficha da Câmara consultada para esta versão o registra em tramitação, aguardando parecer na comissão especial \cite{camara}. Para o EU AI Act, diferentes regras possuem datas distintas de aplicação, como explicita o calendário oficial europeu \cite{eutimeline}. Essas observações são um \textbf{retrato documentado em 11/11/2026}, não um estado imutável.
+\section{Cuidado com o tempo jurídico}
+A legislação deve ser consultada em fonte oficial e sob uma data explícita. O \textbf{Projeto de Lei (PL) 2338/2023}, por exemplo, é tratado neste documento como \term{LegislativeProposal}, não como lei em vigor: a ficha da Câmara consultada para esta versão o registra em tramitação, aguardando parecer na comissão especial \cite{camara-pl2338}. Para o EU AI Act, o regulamento europeu de IA, diferentes regras possuem datas distintas de aplicação, como explicita o calendário oficial europeu \cite{ec-aiact-timeline}. Essas observações são um \textbf{retrato documentado em 11/11/2026}, não um estado imutável.
 
-\section{Um modelo pedagógico: três tipos de conhecimento}
+\chapter{Um modelo pedagógico: três tipos de conhecimento}
 Imagine que a plataforma avalie um sistema fictício de triagem automatizada de currículos no Brasil.
 \begin{enumerate}
-\item \textbf{Conhecimento jurídico:} a LGPD impõe regras específicas para tratamento de dados pessoais, sob condições e exceções que precisam ser formalmente identificadas. Um projeto de lei sobre IA, por outro lado, é uma proposta e não uma obrigação vigente.
+\item \textbf{Conhecimento jurídico:} a Lei Geral de Proteção de Dados Pessoais (LGPD) impõe regras específicas para tratamento de dados pessoais, sob condições e exceções que precisam ser formalmente identificadas. Um projeto de lei sobre IA, por outro lado, é uma proposta e não uma obrigação vigente.
 \item \textbf{Conhecimento técnico:} o produto usa dados pessoais, produz ranqueamento e tem ou não mecanismos documentados de revisão humana, testes de vieses e registro de decisões.
 \item \textbf{Conhecimento político-regulatório:} pode existir tensão entre custos antecipados de compliance e acessibilidade de pequenas empresas, sem que isso dispense as obrigações efetivamente vigentes.
 \end{enumerate}
 A plataforma conecta esses fatos, mas não os confunde. A mesma avaliação de conformidade pode ser \textbf{juridicamente válida} sob determinada norma e, ainda assim, originar uma discussão pública sobre se a norma deveria ser aperfeiçoada.
 
-\section{Arquitetura geral e fluxos contínuos}
-\begin{figure}[H]
+\chapter{Arquitetura geral e fluxos contínuos}
+A Figura~\ref{fig:arquitetura} mostra a arquitetura lógica proposta, das fontes às interfaces de uso.
+
+\begin{figure}[htbp]
+\caption{Arquitetura lógica proposta}\label{fig:arquitetura}
 \centering
 \resizebox{\linewidth}{!}{%
-\begin{tikzpicture}[node distance=6mm and 7mm,>=Latex, every node/.style={font=\sffamily\footnotesize},box/.style={draw=blue!65,rounded corners=3pt,fill=light,minimum height=9mm,align=center,inner sep=5pt},core/.style={draw=teal!80,rounded corners=3pt,fill=teal!9,minimum height=9mm,align=center,inner sep=6pt}]
+\begin{tikzpicture}[node distance=6mm and 7mm,>=Latex, every node/.style={font=\sffamily\footnotesize},box/.style={draw=tinta!65,rounded corners=3pt,fill=cinza!8,minimum height=9mm,align=center,inner sep=5pt},core/.style={draw=lagoa!80,rounded corners=3pt,fill=lagoa!9,minimum height=9mm,align=center,inner sep=6pt}]
 \node[box,text width=12.0cm] (sources) {Official legal sources \quad | \quad Economic and social indicators \quad | \quad Research \quad | \quad Audits and incidents};
 \node[core,text width=12.0cm,below=of sources] (ingest) {Versioned source ingestion, extraction, verification, provenance and review};
 \node[core,text width=12.0cm,below=of ingest] (kg) {Canonical Ontologies + Temporal Regulatory Knowledge Graph + National Profiles};
@@ -183,33 +190,43 @@ A plataforma conecta esses fatos, mas não os confunde. A mesma avaliação de c
 \node[box,text width=3.42cm,right=5mm of verify] (debate) {DEBATE\\Gaps and Shadow Council};
 \node[box,text width=3.42cm,right=5mm of debate] (forecast) {FORESIGHT\\Alternatives and scenarios};
 \node[core,text width=12.0cm,below=15mm of debate] (users) {Open APIs \quad | \quad Regulatory dashboards \quad | \quad Stakeholder contributions \quad | \quad Audit trails};
-\draw[->,thick,teal] (sources)--(ingest);
-\draw[->,thick,teal] (ingest)--(kg);
-\foreach \n in {verify,debate,forecast} {\draw[->,thick,blue] (kg.south) -- (\n.north); \draw[->,thick,blue] (\n.south)--(users.north);}
+\draw[->,thick,lagoa] (sources)--(ingest);
+\draw[->,thick,lagoa] (ingest)--(kg);
+\foreach \n in {verify,debate,forecast} {\draw[->,thick,tinta] (kg.south) -- (\n.north); \draw[->,thick,tinta] (\n.south)--(users.north);}
 \draw[->,dashed,gray] (users.west) to[out=195,in=185,looseness=1.17] (ingest.west);
 \end{tikzpicture}%
 }
-\caption{Arquitetura lógica proposta. As setas representam dependências de informação, não integrações já implementadas.}
+\fonte{Elaborado pelos autores (2026).}
+\nota{As setas representam dependências de informação, não integrações já implementadas.}
 \end{figure}
 
-\subsection{Seis camadas operacionais}
+\section{Seis camadas operacionais}
+A Tabela~\ref{tab:camadas} descreve a função de cada camada operacional.
 \begin{longtable}{@{}p{.29\textwidth}p{.65\textwidth}@{}}
+\caption{Seis camadas operacionais da plataforma}\label{tab:camadas}\\
+\toprule\textbf{Camada} & \textbf{Função}\\\midrule\endfirsthead
+\multicolumn{2}{@{}l}{\small (continuação)}\\
 \toprule\textbf{Camada} & \textbf{Função}\\\midrule\endhead
 \term{Source Intelligence} & Coleta periódica e por evento, versionamento de páginas, documentos e metadados oficiais.\\
 \term{Knowledge Engineering} & Extrai candidatos a fatos, alinha termos, valida semântica e publica instâncias aceitas.\\
-\term{Reasoning and Validation} & OWL 2, SWRL, SHACL, SPARQL e regras legais com exceções e hierarquia.\\
+\term{Reasoning and Validation} & OWL 2, Semantic Web Rule Language (SWRL), Shapes Constraint Language (SHACL), SPARQL Protocol and RDF Query Language (SPARQL, em que RDF é o Resource Description Framework) e regras legais com exceções e hierarquia.\\
 \term{Analytical Intelligence} & Avaliações de aplicações, comparações internacionais, indicadores contextuais e lacunas.\\
 \term{Deliberative Intelligence} & Agentes de stakeholders, Shadow Council, revisão de argumentos, contradições e dissenso.\\
-\term{Open Governance} & APIs, registros de identidade, permissões, auditoria, revisão humana e publicação pública diferenciada.\\
+\term{Open Governance} & Interfaces de programação de aplicações (Application Programming Interfaces, APIs), registros de identidade, permissões, auditoria, revisão humana e publicação pública diferenciada.\\
 \bottomrule
 \end{longtable}
+\fonte{Elaborado pelos autores (2026).}
 
-\section{Modelo de conhecimento canônico: OWL, dados e versões}
-\subsection{Separar TBox e ABox}
-\textbf{TBox} descreve conceitos, axiomas e propriedades: o significado de \term{LegalProvision}, \term{AISystem} ou \term{StakeholderPosition}. \textbf{ABox} contém indivíduos: uma disposição legal identificada, uma instituição, uma avaliação e suas evidências. A publicação de nova norma normalmente atualiza a ABox. Uma nova classe conceitual passa por revisão e versionamento da TBox.
+\chapter{Modelo de conhecimento canônico: OWL, dados e versões}
+\section{Separar TBox e ABox}
+\textbf{TBox} (Terminological Box) descreve conceitos, axiomas e propriedades: o significado de \term{LegalProvision}, \term{AISystem} ou \term{StakeholderPosition}. \textbf{ABox} (Assertional Box) contém indivíduos: uma disposição legal identificada, uma instituição, uma avaliação e suas evidências. A publicação de nova norma normalmente atualiza a ABox. Uma nova classe conceitual passa por revisão e versionamento da TBox.
 
-\subsection{Módulos canônicos propostos}
+\section{Módulos canônicos propostos}
+A Tabela~\ref{tab:modulos} lista os módulos canônicos propostos e a cobertura de cada um.
 \begin{longtable}{@{}p{.39\textwidth}p{.55\textwidth}@{}}
+\caption{Módulos canônicos propostos da ontologia}\label{tab:modulos}\\
+\toprule\textbf{Arquivo} & \textbf{Cobertura}\\\midrule\endfirsthead
+\multicolumn{2}{@{}l}{\small (continuação)}\\
 \toprule\textbf{Arquivo} & \textbf{Cobertura}\\\midrule\endhead
 \term{hrai-core.owl} & Entidades nucleares, organizações, aplicações, jurisdições, datas e identidade.\\
 \term{hrai-regulatory.owl} & Instrumentos, dispositivos, status legislativo, exceções, normas e obrigações.\\
@@ -224,9 +241,14 @@ A plataforma conecta esses fatos, mas não os confunde. A mesma avaliação de c
 \term{hrai-provenance.owl} & Agentes de criação, fontes, revisões e linhagem de evidências.\\
 \bottomrule
 \end{longtable}
+\fonte{Elaborado pelos autores (2026).}
 
-\subsection{Principais classes e propriedades novas}
-\begin{tabularx}{\textwidth}{@{}p{.37\textwidth}Y@{}}
+\section{Principais classes e propriedades novas}
+A Tabela~\ref{tab:classes} resume as principais classes novas.
+\begin{table}[htbp]
+\caption{Principais classes novas e sua interpretação}\label{tab:classes}
+\centering
+\begin{tabularx}{\textwidth}{@{}p{.37\textwidth}L@{}}
 \toprule\textbf{Classe} & \textbf{Interpretação}\\\midrule
 \term{Jurisdiction} & Ordenamento territorial ou supranacional.\\
 \term{LegalInstrument} / \term{LegislativeProposal} & Norma jurídica / proposição legislativa (distintas).\\
@@ -240,8 +262,10 @@ A plataforma conecta esses fatos, mas não os confunde. A mesma avaliação de c
 \term{EvidenceRecord} / \term{Assessment} & Registro verificável / avaliação reprodutível.\\
 \bottomrule
 \end{tabularx}
+\fonte{Elaborado pelos autores (2026).}
+\end{table}
 
-\subsection{Relações centrais em inglês}
+\section{Relações centrais em inglês}
 \begin{lstlisting}
 applicableIn(juridicalObject, jurisdiction)
 expressesRequirement(legalProvision, normativeRequirement)
@@ -257,7 +281,7 @@ usesLegalSnapshot(assessment, legalSnapshot)
 \end{lstlisting}
 \textbf{Cuidado semântico:} \term{representsPerspective} descreve simulação de uma posição documentada; não significa \term{legallyRepresents}. Representação institucional verdadeira exige autorização verificável.
 
-\subsection{Pequena formalização OWL em Turtle}
+\section{Pequena formalização OWL em Turtle}
 \begin{lstlisting}
 @prefix hrai: <https://example.org/hrai-go#> .
 @prefix owl:  <http://www.w3.org/2002/07/owl#> .
@@ -279,10 +303,10 @@ hrai:representsPerspective a owl:ObjectProperty ;
   rdfs:domain hrai:PerspectiveAgent ;
   rdfs:range hrai:StakeholderStratum .
 \end{lstlisting}
-\noindent\textit{Nota:} os URIs com \term{example.org} são identificadores ilustrativos. Na implementação, usar domínios institucionais persistentes e políticas explícitas de versionamento de vocabulário.
+\noindent\textit{Nota:} os identificadores uniformes de recurso (Uniform Resource Identifiers, URIs) com \term{example.org} são identificadores ilustrativos. Na implementação, usar domínios institucionais persistentes e políticas explícitas de versionamento de vocabulário.
 
-\section{Atualização contínua das normas e avaliações}
-\subsection{Pipeline normativo}
+\chapter{Atualização contínua das normas e avaliações}
+\section{Pipeline normativo}
 \begin{enumerate}
 \item \textbf{Monitoramento:} fontes oficiais por jurisdição, órgão, assunto e instrumento.
 \item \textbf{Detecção:} nova publicação, alteração textual, tramitação, eficácia, suspensão, revogação ou retificação.
@@ -292,7 +316,7 @@ hrai:representsPerspective a owl:ObjectProperty ;
 \item \textbf{Propagação:} reavaliar só aplicações e análises dependentes de fatos que mudaram.
 \end{enumerate}
 
-\subsection{Temporalidade e estado normativo}
+\section{Temporalidade e estado normativo}
 Cada objeto regulatório requer, no mínimo, a identificação do documento-fonte, da jurisdição, da versão, do status jurídico e dos intervalos de aplicabilidade. Modelar o tempo sob duas perspectivas:\par
 \begin{description}[leftmargin=0pt,style=nextline]
 \item[\term{validTime}] Quando o fato ou requisito valia juridicamente para a aplicação.
@@ -300,21 +324,19 @@ Cada objeto regulatório requer, no mínimo, a identificação do documento-font
 \end{description}
 Assim, a pergunta ``o que se sabia em uma auditoria de junho?'' difere de ``quais regras eram aplicáveis em junho?''.
 
-\subsection{Estados controlados}
+\section{Estados controlados}
 \begin{lstlisting}
 Proposed | UnderDeliberation | Approved |
 Enacted | InForce | Applicable | Suspended |
 Repealed | Superseded | Uncertain
 \end{lstlisting}
-\begin{warnbox}
-\textbf{Não misturar:} \term{InForce} e \term{Applicable} não são sinônimos. Uma norma pode estar em vigor e conter obrigações com aplicação diferida. Uma proposição legislativa aprovada em apenas uma casa não equivale a uma lei promulgada.
-\end{warnbox}
+\alerta{\textbf{Não misturar:} \term{InForce} e \term{Applicable} não são sinônimos. Uma norma pode estar em vigor e conter obrigações com aplicação diferida. Uma proposição legislativa aprovada em apenas uma casa não equivale a uma lei promulgada.}
 
-\section{Motor VERIFY: avaliação contínua de aplicações}
-\subsection{O dossiê técnico de uma aplicação}
+\chapter{Motor VERIFY: avaliação contínua de aplicações}
+\section{O dossiê técnico de uma aplicação}
 Um \term{ApplicationDossier} documentaria finalidade, contexto, operadores, destinatários, fluxos de dados, autonomia decisória, modelos, impactos e controles com evidências versionadas. A plataforma não deve exigir exposição pública do dossiê completo, pois pode conter dados pessoais ou segredos comerciais.
 
-\subsection{Quatro perguntas sequenciais}
+\section{Quatro perguntas sequenciais}
 \begin{enumerate}
 \item \textbf{Applicability:} qual jurisdição e quais requisitos são aplicáveis na data e para aquele uso?
 \item \textbf{Evidence:} quais registros, avaliações, testes e medidas estão disponíveis?
@@ -322,8 +344,12 @@ Um \term{ApplicationDossier} documentaria finalidade, contexto, operadores, dest
 \item \textbf{Change impact:} o que mudou na lei, no produto ou no ambiente desde a última avaliação?
 \end{enumerate}
 
-\subsection{Estado de uma obrigação por aplicação}
-\begin{tabularx}{\textwidth}{@{}p{.27\textwidth}Y@{}}
+\section{Estado de uma obrigação por aplicação}
+A Tabela~\ref{tab:estados-obrigacao} define os valores possíveis do estado de uma obrigação.
+\begin{table}[htbp]
+\caption{Estados de uma obrigação por aplicação}\label{tab:estados-obrigacao}
+\centering
+\begin{tabularx}{\textwidth}{@{}p{.27\textwidth}L@{}}
 \toprule\textbf{Valor} & \textbf{Significado}\\\midrule
 \term{Satisfied} & Atendimento demonstrado para o critério e escopo avaliados.\\
 \term{NotSatisfied} & Descumprimento demonstrado com base em evidências suficientes.\\
@@ -333,9 +359,15 @@ Um \term{ApplicationDossier} documentaria finalidade, contexto, operadores, dest
 \term{PendingReview} & Resultado automatizado ainda não validado conforme a política de revisão.\\
 \bottomrule
 \end{tabularx}
+\fonte{Elaborado pelos autores (2026).}
+\end{table}
 
-\subsection{OWL, SWRL, SHACL e regras jurídicas}
-\begin{tabularx}{\textwidth}{@{}p{.22\textwidth}Y@{}}
+\section{OWL, SWRL, SHACL e regras jurídicas}
+A Tabela~\ref{tab:mecanismos} indica o emprego correto de cada mecanismo, inclusive da PROV Ontology (PROV-O).
+\begin{table}[htbp]
+\caption{Mecanismos formais e seu emprego correto}\label{tab:mecanismos}
+\centering
+\begin{tabularx}{\textwidth}{@{}p{.22\textwidth}L@{}}
 \toprule\textbf{Mecanismo} & \textbf{Emprego correto}\\\midrule
 OWL 2 & Estrutura conceitual, relações ontológicas e inferências descritivas.\\
 SWRL & Regras monotônicas positivas: inferir relações a partir de fatos conhecidos.\\
@@ -345,9 +377,11 @@ LegalRuleML ou motor normativo equivalente & Regras com precedência, exceções
 PROV-O & Origem dos fatos e transformações, com trilha auditável.\\
 \bottomrule
 \end{tabularx}
-Padrões relevantes incluem SHACL e PROV-O, publicados pelo W3C, e LegalRuleML, publicado pela OASIS \cite{shacl,prov,legalruleml}.
+\fonte{Elaborado pelos autores (2026).}
+\end{table}
+Padrões relevantes incluem SHACL e PROV-O, publicados pelo World Wide Web Consortium (W3C), e LegalRuleML, publicado pela Organization for the Advancement of Structured Information Standards (OASIS) \cite{w3c-shacl,w3c-provo,oasis-legalruleml}.
 
-\subsection{Exemplo didático SWRL: obrigação candidata}
+\section{Exemplo didático SWRL: obrigação candidata}
 \begin{lstlisting}
 hrai:AISystem(?system) ^
 hrai:hasRiskClassification(?system, hrai:HighRisk)
@@ -357,7 +391,7 @@ hrai:subjectToRequirement(
 \end{lstlisting}
 \textbf{Interpretação:} sob um perfil normativo \emph{explicitamente validado}, uma classificação \term{HighRisk} implica uma obrigação de gestão de riscos. Na prática, a aplicabilidade jurídica deve ser previamente filtrada por jurisdição, texto, data, exclusões e papéis. A regra isolada não certifica conformidade.
 
-\subsection{Exemplo SHACL: evidência obrigatória no dossiê}
+\section{Exemplo SHACL: evidência obrigatória no dossiê}
 \begin{lstlisting}
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix hrai: <https://example.org/hrai-go#> .
@@ -375,12 +409,16 @@ hrai:AssessmentShape a sh:NodeShape ;
 \end{lstlisting}
 O SHACL verifica a presença de campos no grafo: não verifica se o \term{LegalSnapshot} escolhido corresponde à interpretação jurídica correta.
 
-\section{Motor DEBATE: avaliação crítica da regulação}
-\subsection{A questão epistemológica}
+\chapter{Motor DEBATE: avaliação crítica da regulação}
+\section{A questão epistemológica}
 A lei é uma fonte normativa, mas também é objeto de investigação. A plataforma deve perguntar se as escolhas regulatórias são aderentes às necessidades, capacidades e prioridades do país sem converter perspectivas políticas em fatos jurídicos.
 
-\subsection{Taxonomia de tensões}
+\section{Taxonomia de tensões}
+A Tabela~\ref{tab:tensoes} apresenta a taxonomia de tensões e a questão de análise de cada classe.
 \begin{longtable}{@{}p{.4\textwidth}p{.52\textwidth}@{}}
+\caption{Taxonomia de tensões regulatórias}\label{tab:tensoes}\\
+\toprule\textbf{Classe canônica} & \textbf{Questão de análise}\\\midrule\endfirsthead
+\multicolumn{2}{@{}l}{\small (continuação)}\\
 \toprule\textbf{Classe canônica} & \textbf{Questão de análise}\\\midrule\endhead
 \term{ProtectionInnovationTension} & Proteção de direitos versus custos de experimentação e entrada.\\
 \term{SovereigntyOpennessTension} & Autonomia nacional versus circulação internacional de dados, tecnologia e conhecimento.\\
@@ -394,8 +432,9 @@ A lei é uma fonte normativa, mas também é objeto de investigação. A platafo
 \term{ImplementationFeasibilityTension} & Viabilidade prática de cumprir e fiscalizar uma política.\\
 \bottomrule
 \end{longtable}
+\fonte{Elaborado pelos autores (2026).}
 
-\subsection{Ciclo de uma controvérsia}
+\section{Ciclo de uma controvérsia}
 \begin{enumerate}
 \item \term{Detect}: identificar uma potencial tensão apoiada em fontes.
 \item \term{Substantiate}: exigir indicadores, textos normativos, métodos e evidências contraditórias.
@@ -406,48 +445,55 @@ A lei é uma fonte normativa, mas também é objeto de investigação. A platafo
 \item \term{Observe}: acompanhar desdobramentos empíricos e normativos.
 \end{enumerate}
 
-\subsection{Exemplo brasileiro: custo de compliance para pequenas empresas}
-\nsource O estudo comparativo sustenta a investigação de tensões entre exigências prévias de alto custo, acesso de pequenas empresas e preservação de direitos fundamentais \cite{comparativo}.\par
+\section{Exemplo brasileiro: custo de compliance para pequenas empresas}
+\nsource O estudo comparativo sustenta a investigação de tensões entre exigências prévias de alto custo, acesso de pequenas empresas e preservação de direitos fundamentais \cite{estudo-comparativo}.\par
 \nproposal Um \term{PolicyClaim} questiona se obrigações podem ser graduadas por risco, escala e contexto de uso; outro sustenta que controles básicos contra danos graves não devem variar com porte econômico. Ambos devem apresentar evidência e método, e nenhuma posição se torna ``correta'' apenas por maioria.
 
-\section{Biblioteca comparativa dinâmica por jurisdição}
-\subsection{Comparar funções, não rótulos nacionais}
+\chapter{Biblioteca comparativa dinâmica por jurisdição}
+\section{Comparar funções, não rótulos nacionais}
 Em vez de concluir genericamente que ``a Europa é rígida'' ou ``os EUA são permissivos'', comparar disposições normativas concretas em contextos datados. Um país pode ter regras muito distintas para IA em recrutamento, crédito, saúde, conteúdo sintético ou proteção de dados.
 
+A Tabela~\ref{tab:jurisdicoes} indica, por jurisdição, a porta de entrada normativa e as dimensões comparáveis.
 \begin{longtable}{@{}p{.22\textwidth}p{.29\textwidth}p{.41\textwidth}@{}}
+\caption{Jurisdições, portas de entrada e dimensões comparáveis}\label{tab:jurisdicoes}\\
+\toprule\textbf{Jurisdição} & \textbf{Porta de entrada} & \textbf{Dimensões comparáveis}\\\midrule\endfirsthead
+\multicolumn{3}{@{}l}{\small (continuação)}\\
 \toprule\textbf{Jurisdição} & \textbf{Porta de entrada} & \textbf{Dimensões comparáveis}\\\midrule\endhead
-União Europeia & EU AI Act, GDPR e normas setoriais & Classificações, papéis, obrigações, calendários de aplicação, fiscalização.\\
-Brasil & LGPD, normas setoriais, PBIA e propostas legislativas & Setores e competências, proteção de dados, riscos distributivos, capacidade institucional.\\
+União Europeia (UE) & EU AI Act, General Data Protection Regulation (GDPR) e normas setoriais & Classificações, papéis, obrigações, calendários de aplicação, fiscalização.\\
+Brasil & LGPD, normas setoriais, Plano Brasileiro de Inteligência Artificial (PBIA) e propostas legislativas & Setores e competências, proteção de dados, riscos distributivos, capacidade institucional.\\
 Reino Unido & Política e autoridades setoriais & Responsabilidade institucional, orientação, fiscalização por setor.\\
 Estados Unidos & Instrumentos federais, estaduais e setoriais & Fragmentação territorial, supervisão setorial e deveres aplicáveis.\\
 China & Instrumentos relativos a serviços e sistemas específicos & Requisitos por categoria de serviço, segurança e mecanismos de controle.\\
 Índia & Política de IA, infraestrutura digital e instrumentos setoriais & Desenvolvimento, inclusão, governança de dados e aplicação prática.\\
 \bottomrule
 \end{longtable}
-\subsection{Unidade de comparação}
+\fonte{Elaborado pelos autores (2026).}
+\section{Unidade de comparação}
 Para cada \term{NormativeRequirement}, a biblioteca preservaria \term{jurisdiction}, \term{effectiveInterval}, \term{regulatedActors}, \term{scope}, \term{exceptions}, \term{enforcement}, \term{source} e \term{confidenceOfInterpretation}.\par
 A plataforma distinguiria \textbf{equivalência semântica}, \textbf{semelhança funcional} e \textbf{equivalência jurídica}: conceitos parecidos não produzem automaticamente deveres idênticos.
 
-\section{Shadow Council: um conselho deliberativo sintético e plural}
-\begin{keybox}
-\textbf{Definição.} O \term{ShadowCouncil} é um laboratório de deliberação composto por agentes de IA configurados para \textbf{examinar perspectivas de stakeholders com apoio em posições e evidências documentadas}. Seu objetivo é ampliar a cobertura de argumentos, antecipar questões negligenciadas e testar alternativas. Ele \textbf{não} equivale a consulta pública real, amostragem de opinião, mandato institucional ou votação democrática.
-\end{keybox}
+\chapter{Shadow Council: um conselho deliberativo sintético e plural}
+\destaque{\textbf{Definição.} O \term{ShadowCouncil} é um laboratório de deliberação composto por agentes de IA configurados para \textbf{examinar perspectivas de stakeholders com apoio em posições e evidências documentadas}. Seu objetivo é ampliar a cobertura de argumentos, antecipar questões negligenciadas e testar alternativas. Ele \textbf{não} equivale a consulta pública real, amostragem de opinião, mandato institucional ou votação democrática.}
 
-\subsection{O que significa ``amostra representativa'' aqui?}
+\section{O que significa ``amostra representativa'' aqui?}
 Há duas noções que precisam permanecer separadas:\par
 \begin{description}[leftmargin=0pt,style=nextline]
 \item[\term{PerspectiveCoverage}] Cobertura de \emph{perspectivas documentadas} relevantes para um tema, por estrato, interesse, papel e contexto. Pode ser estimada e auditada sem pessoas participantes.
 \item[\term{PopulationRepresentativeness}] Representatividade estatística de uma população ou de organizações reais. Exige \emph{sampling frame}, procedimento amostral válido, dados e, quando envolver indivíduos, salvaguardas éticas e legais. \textbf{Não é produzida por criar muitos agentes sintéticos.}
 \end{description}
-\nproposal O MVP terá \term{PerspectiveCoverage} como objetivo explícito. Reivindicações de representatividade populacional só poderão ser feitas em estudos com amostras humanas efetivamente recrutadas e metodologicamente avaliadas.
+\nproposal O produto mínimo viável (Minimum Viable Product, MVP) terá \term{PerspectiveCoverage} como objetivo explícito. Reivindicações de representatividade populacional só poderão ser feitas em estudos com amostras humanas efetivamente recrutadas e metodologicamente avaliadas.
 
-\subsection{Mapeamento inicial de stakeholders}
+\section{Mapeamento inicial de stakeholders}
 O conjunto de estratos varia por política e jurisdição. Exemplo para uma sessão brasileira sobre regulação de IA:\par
+A Tabela~\ref{tab:stakeholders} detalha os estratos, as perspectivas a considerar e as fontes documentais.
 \begin{longtable}{@{}p{.25\textwidth}p{.42\textwidth}p{.23\textwidth}@{}}
+\caption{Mapeamento inicial de stakeholders para uma sessão brasileira}\label{tab:stakeholders}\\
+\toprule\textbf{Estrato} & \textbf{Perspectivas a considerar} & \textbf{Fontes documentais}\\\midrule\endfirsthead
+\multicolumn{3}{@{}l}{\small (continuação)}\\
 \toprule\textbf{Estrato} & \textbf{Perspectivas a considerar} & \textbf{Fontes documentais}\\\midrule\endhead
 Reguladores e fiscalização & Exequibilidade, competência, inspeção, responsabilização e recursos & Normas, consultas, relatórios e manifestações oficiais\\
 Poder público operador & Contratação, serviço público, responsabilidade administrativa e infraestrutura & Planos, auditorias, contratos e documentos técnicos\\
-Setor produtivo & Grandes empresas, MPMEs, startups, integradores e desenvolvedores & Consultas, associações e estudos de custo\\
+Setor produtivo & Grandes empresas, micro, pequenas e médias empresas (MPMEs), startups, integradores e desenvolvedores & Consultas, associações e estudos de custo\\
 Pesquisa e especialistas & Direito, computação, ciências sociais, economia, ética e políticas públicas & Trabalhos acadêmicos e pareceres públicos\\
 Sociedade civil e direitos & Defesa do consumidor, privacidade, pessoas com deficiência, direitos digitais & Consultas públicas e manifestações publicadas\\
 Trabalhadores e profissões & Impactos no emprego, autonomia, supervisão e organização do trabalho & Estudos setoriais e posições de entidades\\
@@ -455,9 +501,10 @@ Grupos diretamente afetados & Usuários de serviços, beneficiários, candidatos
 Infraestrutura e ecossistema & Energia, computação, dados, cadeia de suprimentos e sustentabilidade & Estudos técnicos, indicadores e dados públicos\\
 \bottomrule
 \end{longtable}
+\fonte{Elaborado pelos autores (2026).}
 Estratos não são homogêneos. Por exemplo, empresas pequenas e grandes podem divergir; um órgão regulador e um prestador público podem ter interesses diferentes; e a sociedade civil não se reduz a uma posição única.
 
-\subsection{Estratificação multidimensional}
+\section{Estratificação multidimensional}
 O conselho deverá considerar pelo menos quatro eixos ao definir cobertura:\par
 \begin{itemize}
 \item \textbf{Institutional Role:} quem regula, desenvolve, fiscaliza, opera ou é afetado.
@@ -467,10 +514,13 @@ O conselho deverá considerar pelo menos quatro eixos ao definir cobertura:\par
 \end{itemize}
 Outros eixos (porte, setor, acessibilidade, condições culturais, vínculos econômicos) só devem ser adicionados se forem pertinentes e sustentados por fontes. Dados pessoais sensíveis não devem ser inferidos de indivíduos reais para fabricar perfis.
 
-\subsection{Exemplo de composição de uma sessão (não amostra populacional)}
+\section{Exemplo de composição de uma sessão (não amostra populacional)}
 \nexample Para discutir a proporcionalidade da conformidade na regulação brasileira, uma sessão pode usar 20 assentos documentais:\par
-\begin{center}
-\begin{tabularx}{\textwidth}{@{}Y r p{.29\textwidth}@{}}
+A Tabela~\ref{tab:composicao} mostra essa composição ilustrativa.
+\begin{table}[htbp]
+\caption{Exemplo de composição de uma sessão com 20 assentos documentais}\label{tab:composicao}
+\centering
+\begin{tabularx}{\textwidth}{@{}L r p{.29\textwidth}@{}}
 \toprule\textbf{Estrato} & \textbf{Assentos} & \textbf{Justificativa de cobertura}\\\midrule
 Regulação e fiscalização & 3 & Diferentes competências institucionais\\
 Poder público operador & 2 & Órgãos implantadores e compradores\\
@@ -482,10 +532,11 @@ Grupos afetados & 2 & Exposição concreta à decisão de IA\\
 Infraestrutura e sustentabilidade & 2 & Dependência tecnológica e ambiental\\\midrule
 \textbf{Total} & \textbf{20} & \textbf{Quotas ilustrativas, não proporcionais}\\\bottomrule
 \end{tabularx}
-\end{center}
+\fonte{Elaborado pelos autores (2026).}
+\end{table}
 Não são 20 pessoas. São 20 \term{CouncilSeat} cujas posições podem ser simuladas mediante fontes documentadas. O número não implica peso político, autoridade nem equivalência populacional. Os estratos e quotas devem ser recalculados por tema e auditados quanto à cobertura.
 
-\subsection{Como selecionar e configurar os agentes}
+\section{Como selecionar e configurar os agentes}
 \begin{enumerate}
 \item Definir \term{CouncilQuestion} e jurisdição, escopo temporal e impacto esperado.
 \item Construir \term{StakeholderMap}: quem é afetado, quem implementa, quem regula e quem pode contestar.
@@ -496,23 +547,25 @@ Não são 20 pessoas. São 20 \term{CouncilSeat} cujas posições podem ser simu
 \item Revisar identidade e autorização para quaisquer agentes que aleguem falar oficialmente em nome de uma instituição.
 \end{enumerate}
 
-\begin{warnbox}
-\textbf{Proibição metodológica.} Um agente não deve alegar ser uma pessoa real, um regulador investido de poder público, um paciente, um trabalhador ou o representante eleito de um grupo sem autorização. A voz simulada deve aparecer como \textit{synthetic perspective}, com fonte e limitação declaradas.
-\end{warnbox}
+\alerta{\textbf{Proibição metodológica.} Um agente não deve alegar ser uma pessoa real, um regulador investido de poder público, um paciente, um trabalhador ou o representante eleito de um grupo sem autorização. A voz simulada deve aparecer como \textit{synthetic perspective}, com fonte e limitação declaradas.}
 
-\subsection{Protocolo deliberativo em seis rodadas}
-\begin{figure}[H]
+\section{Protocolo deliberativo em seis rodadas}
+A Figura~\ref{fig:rodadas} apresenta as rodadas propostas para uma sessão do Shadow Council.
+
+\begin{figure}[htbp]
+\caption{Rodadas propostas para uma sessão do Shadow Council}\label{fig:rodadas}
 \centering
-\begin{tikzpicture}[x=1cm,y=1cm,>=Latex,every node/.style={font=\sffamily\scriptsize},st/.style={draw=blue!65,rounded corners=3pt,fill=light,text width=3.05cm,align=center,minimum height=1.1cm}]
+\begin{tikzpicture}[x=1cm,y=1cm,>=Latex,every node/.style={font=\sffamily\scriptsize},st/.style={draw=tinta!65,rounded corners=3pt,fill=cinza!8,text width=3.05cm,align=center,minimum height=1.1cm}]
 \node[st] (a) at (1.6,3.0) {0. Evidence brief\\and question framing};
 \node[st] (b) at (5.5,3.0) {1. Independent\\initial positions};
 \node[st] (c) at (9.4,3.0) {2. Cross-examination\\and counterarguments};
 \node[st] (d) at (9.4,.7) {3. Structured revision\\and uncertainties};
 \node[st] (e) at (5.5,.7) {4. Minority report\\and alternative scenarios};
 \node[st] (f) at (1.6,.7) {5. Synthesis, audit\\and human review};
-\draw[->,thick,teal] (a)--(b);\draw[->,thick,teal] (b)--(c);\draw[->,thick,teal] (c)--(d);\draw[->,thick,teal] (d)--(e);\draw[->,thick,teal] (e)--(f);
+\draw[->,thick,lagoa] (a)--(b);\draw[->,thick,lagoa] (b)--(c);\draw[->,thick,lagoa] (c)--(d);\draw[->,thick,lagoa] (d)--(e);\draw[->,thick,lagoa] (e)--(f);
 \end{tikzpicture}
-\caption{Rodadas propostas para uma sessão do Shadow Council; todas as contribuições permanecem rastreáveis.}
+\fonte{Elaborado pelos autores (2026).}
+\nota{Todas as contribuições permanecem rastreáveis.}
 \end{figure}
 \textbf{Rodada 0 --- Evidence brief:} apresentar o mesmo dossiê factual a todos, com links, fontes e limites.\par
 \textbf{Rodada 1 --- Independent positions:} produzir análise inicial isolada para limitar contaminação e ancoragem entre agentes.\par
@@ -522,7 +575,7 @@ Não são 20 pessoas. São 20 \term{CouncilSeat} cujas posições podem ser simu
 \textbf{Rodada 5 --- Synthesis and human review:} publicação de síntese, matriz de divergências, evidências e recomendações condicionais.\par
 A \term{CouncilSession} deve registrar participantes, versões de modelo, parâmetros, sementes quando disponíveis, documentos, turnos, intervenções do moderador e eventuais conflitos de interesse.
 
-\subsection{Decisão, votação e legitimidade}
+\section{Decisão, votação e legitimidade}
 \begin{itemize}
 \item O council pode agregar \textbf{grau de suporte argumentativo} e \textbf{cobertura}, mas não declarar que 12 agentes sintéticos contra 8 representam a vontade social.
 \item Direitos fundamentais não devem ser convertidos em custo compensável numa votação automática.
@@ -531,11 +584,15 @@ A \term{CouncilSession} deve registrar participantes, versões de modelo, parâm
 \item Uma consulta pública com pessoas reais constitui \textbf{outro procedimento}, que pode alimentar e validar a plataforma, mas não pode ser substituída por ela.
 \end{itemize}
 
-\subsection{Controles de diversidade, dependência e viés de modelos}
+\section{Controles de diversidade, dependência e viés de modelos}
 Instanciar vinte agentes usando o mesmo modelo e o mesmo corpus pode produzir \textbf{falsa diversidade}. Recomenda-se comparar famílias de modelos quando viável, diversificar corpora legitimamente, isolar as primeiras respostas, aplicar agentes de contestação e medir estabilidade sob variação de prompts e composição. A diversidade dos modelos não garante independência epistemológica: fontes comuns, dados de treinamento compartilhados e arquiteturas parecidas continuam sendo fatores de correlação.
 
-\subsection{Métricas de qualidade do Shadow Council}
+\section{Métricas de qualidade do Shadow Council}
+A Tabela~\ref{tab:metricas} define as métricas de qualidade do Shadow Council.
 \begin{longtable}{@{}p{.33\textwidth}p{.59\textwidth}@{}}
+\caption{Métricas de qualidade do Shadow Council}\label{tab:metricas}\\
+\toprule\textbf{Métrica} & \textbf{O que mede}\\\midrule\endfirsthead
+\multicolumn{2}{@{}l}{\small (continuação)}\\
 \toprule\textbf{Métrica} & \textbf{O que mede}\\\midrule\endhead
 \term{StratumCoverage} & Proporção dos estratos pertinentes com ao menos uma posição documentalmente sustentada.\\
 \term{ViewpointCoverage} & Diversidade de teses pertinentes cobertas em cada estrato.\\
@@ -548,9 +605,10 @@ Instanciar vinte agentes usando o mesmo modelo e o mesmo corpus pode produzir \t
 \term{ConflictOfInterestDisclosure} & Completude de declarações de vínculos e interesses.\\
 \bottomrule
 \end{longtable}
+\fonte{Elaborado pelos autores (2026).}
 
-\section{Formalização do Shadow Council na ontologia}
-\subsection{Entidades e relações mínimas}
+\chapter{Formalização do Shadow Council na ontologia}
+\section{Entidades e relações mínimas}
 \begin{lstlisting}
 ShadowCouncilSession
   hasQuestion -> CouncilQuestion
@@ -570,7 +628,7 @@ PerspectiveAgent
   generates -> DeliberationContribution
 \end{lstlisting}
 
-\subsection{Exemplo sintético em Turtle}
+\section{Exemplo sintético em Turtle}
 \begin{lstlisting}
 @prefix hrai: <https://example.org/hrai-go#> .
 @prefix ex:   <https://example.org/demo#> .
@@ -590,7 +648,7 @@ ex:SyntheticSMEPerspective a hrai:PerspectiveAgent ;
 \end{lstlisting}
 \nexample Os indivíduos acima não representam uma empresa ou posição reais. Para uma execução, seria necessário conectar \term{SMECharterV1} a documentos públicos identificados e registrar eventuais limitações de cobertura.
 
-\subsection{Regras inferenciais ilustrativas}
+\section{Regras inferenciais ilustrativas}
 Uma regra SWRL pode detectar uma \textit{condição operacional de revisão}, desde que haja um indivíduo de alerta previamente definido. Não é apropriado inferir que uma opinião de um stakeholder é verdadeira por corresponder à posição simulada.
 \begin{lstlisting}
 hrai:CouncilSeat(?seat) ^
@@ -601,8 +659,12 @@ hrai:requiresSyntheticDisclosure(?seat, true)
 \end{lstlisting}
 A verificação de que uma \term{CouncilSession} possui assentos documentados e identificados é mais adequadamente implementada por SHACL, pois exige \emph{completude} sob a hipótese de mundo fechado do grafo validado.
 
-\section{Agentes especializados e governança de contribuições}
+\chapter{Agentes especializados e governança de contribuições}
+A Tabela~\ref{tab:agentes} atribui a cada agente especializado sua responsabilidade.
 \begin{longtable}{@{}p{.43\textwidth}p{.49\textwidth}@{}}
+\caption{Agentes especializados e suas responsabilidades}\label{tab:agentes}\\
+\toprule\textbf{Agente} & \textbf{Responsabilidade}\\\midrule\endfirsthead
+\multicolumn{2}{@{}l}{\small (continuação)}\\
 \toprule\textbf{Agente} & \textbf{Responsabilidade}\\\midrule\endhead
 \term{LegalSourceMonitorAgent} & Monitorar alterações regulatórias e respectivas fontes.\\
 \term{NormativeExtractionAgent} & Extrair requisitos candidatos e suas condições.\\
@@ -618,8 +680,9 @@ A verificação de que uma \term{CouncilSession} possui assentos documentados e 
 \term{ProvenanceAuditAgent} & Preservar linhagem de fontes, regras, modelos e revisões.\\
 \bottomrule
 \end{longtable}
+\fonte{Elaborado pelos autores (2026).}
 
-\subsection{Modelo aberto com níveis de autoridade}
+\section{Modelo aberto com níveis de autoridade}
 \begin{enumerate}
 \item \term{PublicContributor}: pode propor e comentar alegações, mas não alterar fatos validados.
 \item \term{VerifiedStakeholder}: identidade institucional verificada; publica posições próprias sob autorização.
@@ -630,17 +693,17 @@ A verificação de que uma \term{CouncilSession} possui assentos documentados e 
 \end{enumerate}
 Em todos os casos, proteger contra injeção de prompt em fontes recebidas, adulteração de evidências, agentes que se façam passar por autoridades e exposição de dossiês empresariais ou dados pessoais.
 
-\section{Cenário integrado: análise de uma aplicação e uma tensão brasileira}
-\subsection{Pergunta A: o sistema está conforme?}
+\chapter{Cenário integrado: análise de uma aplicação e uma tensão brasileira}
+\section{Pergunta A: o sistema está conforme?}
 \nexample Uma organização usa \term{RecruitmentScreeningAI} para ranquear candidatos. O agente \term{VERIFY} identifica dados pessoais e o contexto de recrutamento, consulta o retrato legal em data determinada, produz obrigações candidatas e solicita evidências de revisão, transparência, finalidade e segurança. Onde não há prova suficiente, registra \term{InsufficientEvidence}; não presume ilicitude nem conformidade.
 
-\subsection{Pergunta B: a regulação precisa ser revista?}
+\section{Pergunta B: a regulação precisa ser revista?}
 O \term{DEBATE} detecta possível \term{ProtectionInnovationTension} em pequenas empresas. O \term{NationalContextAgent} reúne indicadores com período e fonte. O \term{ComparativeRegulationAgent} busca políticas funcionalmente parecidas na UE e no Reino Unido. O \term{ShadowCouncilOrchestrator} cria um conselho com posições documentadas de trabalhadores, empresas, direitos digitais, reguladores, especialistas e candidatos a vagas. O relatório inclui objeções e divergências.
 
-\subsection{Pergunta C: qual alternativa merece teste?}
+\section{Pergunta C: qual alternativa merece teste?}
 O \term{FORESIGHT} compara, por exemplo: (i) exigências prévias uniformes; (ii) controles graduados por exposição a risco; (iii) experimentação supervisionada sob condições especiais. As hipóteses devem explicitar custos administrativos, danos potenciais, capacidade de fiscalização e distribuição dos impactos. A comparação não atribui automaticamente uma nota de ``melhor regulação''.
 
-\subsection{Artefatos produzidos no mesmo ciclo}
+\section{Artefatos produzidos no mesmo ciclo}
 \begin{itemize}
 \item \term{ComplianceAssessment}: avaliação da aplicação, fontes e lacunas probatórias.
 \item \term{RegulatoryTensionCase}: questão de política pública e evidências conflitantes.
@@ -649,8 +712,8 @@ O \term{FORESIGHT} compara, por exemplo: (i) exigências prévias uniformes; (ii
 \item \term{PolicyAlternativeAssessment}: cenários e hipóteses testáveis.
 \end{itemize}
 
-\section{Esquema de saída canônico (exemplo JSON)}
-O objeto abaixo serve apenas para ilustrar a estrutura compartilhada de uma sessão. Não é um \eng{JSON Schema} normativo completo.
+\chapter{Esquema de saída canônico (exemplo em JavaScript Object Notation)}
+O objeto abaixo serve apenas para ilustrar a estrutura compartilhada de uma sessão. O exemplo usa JavaScript Object Notation (JSON). Não é um \eng{JSON Schema} normativo completo.
 \begin{lstlisting}
 {
   "sessionId": "council-br-001",
@@ -682,9 +745,13 @@ O objeto abaixo serve apenas para ilustrar a estrutura compartilhada de uma sess
 }
 \end{lstlisting}
 
-\section{Validação científica e critérios de qualidade}
-\subsection{Questões de pesquisa}
-\begin{tabularx}{\textwidth}{@{}p{.13\textwidth}Y@{}}
+\chapter{Validação científica e critérios de qualidade}
+\section{Questões de pesquisa}
+A Tabela~\ref{tab:rq} enuncia as questões de pesquisa (Research Questions, RQ).
+\begin{table}[htbp]
+\caption{Questões de pesquisa}\label{tab:rq}
+\centering
+\begin{tabularx}{\textwidth}{@{}p{.13\textwidth}L@{}}
 \toprule\textbf{RQ} & \textbf{Pergunta}\\\midrule
 RQ1 & A atualização contínua melhora a precisão e a tempestividade das avaliações de conformidade?\\
 RQ2 & A estrutura ontológica facilita comparações regulatórias reproduzíveis entre países?\\
@@ -694,11 +761,13 @@ RQ5 & Deliberação estruturada e auditoria de proveniência reduzem alegações
 RQ6 & O contexto socioeconômico altera materialmente a escolha entre alternativas regulatórias?\\
 \bottomrule
 \end{tabularx}
+\fonte{Elaborado pelos autores (2026).}
+\end{table}
 
-\subsection{Desenho experimental inicial}
+\section{Desenho experimental inicial}
 Comparar três condições em casos brasileiros previamente selecionados: \textbf{(A)} análise por agente único; \textbf{(B)} múltiplos agentes sem estratificação; \textbf{(C)} Shadow Council estratificado, com fontes verificadas, debate e auditoria. Uma banca humana multidisciplinar, independente dos resultados automatizados, define rubricas e examina argumentos. Registrar cobertura de teses, precisão de fontes, falsos positivos de lacunas, retenção de dissenso e custo. Repetir com diferentes composições, prompts e famílias de modelos.
 
-\subsection{Critérios mínimos para aceite}
+\section{Critérios mínimos para aceite}
 \begin{itemize}
 \item Todos os resultados jurídicos publicados possuem dispositivo, versão e status normativo vinculados.
 \item Nenhuma proposição pendente é apresentada como obrigação legal vigente.
@@ -708,22 +777,31 @@ Comparar três condições em casos brasileiros previamente selecionados: \textb
 \item Avaliações de compliance são reproduzíveis a partir de versões das regras, entradas e evidências.
 \end{itemize}
 
-\section{Roadmap incremental de implementação}
+\chapter{Roadmap incremental de implementação}
+A Tabela~\ref{tab:roadmap} apresenta as fases, as entregas e o critério de saída de cada uma.
 \begin{longtable}{@{}p{.2\textwidth}p{.47\textwidth}p{.25\textwidth}@{}}
+\caption{Roadmap incremental de implementação}\label{tab:roadmap}\\
+\toprule\textbf{Fase} & \textbf{Entregas} & \textbf{Critério de saída}\\\midrule\endfirsthead
+\multicolumn{3}{@{}l}{\small (continuação)}\\
 \toprule\textbf{Fase} & \textbf{Entregas} & \textbf{Critério de saída}\\\midrule\endhead
 MVP 1 --- NORM & Ontologia modular, fontes oficiais brasileiras, histórico legislativo, versões e proveniência. & Mudanças rastreáveis e reprocessamento determinístico.\\
 MVP 2 --- VERIFY & Dossiê de aplicação, regras de incidência, SHACL e avaliações versionadas. & Casos avaliados com revisão jurídica e trilha probatória.\\
-MVP 3 --- DEBATE & Tensões, claims, contra-argumentos, atores externos e biblioteca BR/UE/UK. & Relatórios comparativos contestáveis e auditáveis.\\
+MVP 3 --- DEBATE & Tensões, claims, contra-argumentos, atores externos e biblioteca Brasil, UE e Reino Unido (United Kingdom, UK). & Relatórios comparativos contestáveis e auditáveis.\\
 MVP 4 --- SHADOW COUNCIL & Estratos, frames documentais, assentos sintéticos, rodadas e relatórios de minoria. & Melhor cobertura verificada contra baseline; nenhum falso mandato de representação.\\
 MVP 5 --- FORESIGHT & Alternativas, cenários, indicadores e acompanhamento posterior. & Hipóteses reprodutíveis e incerteza publicada.\\
 \bottomrule
 \end{longtable}
+\fonte{Elaborado pelos autores (2026).}
 
-\subsection{Tecnologia: decisões reversíveis}
+\section{Tecnologia: decisões reversíveis}
 Uma implementação possível inclui repositório RDF ou grafo semântico, buscas textuais e vetoriais sobre textos normativos, filas de eventos, mecanismos de inferência e APIs. A escolha entre triplestore, banco relacional com suporte RDF, grafo de propriedades ou combinação deve ser determinada por testes de escala, versionamento, SPARQL, proveniência, licença e custo operacional. A ontologia é estável conceitualmente; o fornecedor de banco não precisa ser.
 
-\section{Riscos e salvaguardas de governança}
+\chapter{Riscos e salvaguardas de governança}
+A Tabela~\ref{tab:riscos} associa cada risco à salvaguarda proposta.
 \begin{longtable}{@{}p{.31\textwidth}p{.59\textwidth}@{}}
+\caption{Riscos e salvaguardas de governança}\label{tab:riscos}\\
+\toprule\textbf{Risco} & \textbf{Salvaguarda proposta}\\\midrule\endfirsthead
+\multicolumn{2}{@{}l}{\small (continuação)}\\
 \toprule\textbf{Risco} & \textbf{Salvaguarda proposta}\\\midrule\endhead
 Alucinação regulatória & Fonte oficial obrigatória, status temporal, revisão por criticidade e linguagem de incerteza.\\
 Representatividade artificial & Distinguir cobertura documental de amostragem real; impedir simulação de identidade não autorizada.\\
@@ -735,19 +813,27 @@ Obsolescência das regras & Monitoramento da fonte oficial, eventos, snapshots e
 Simulação causal infundada & Hipóteses explícitas, limites de validade, intervalos e avaliação empírica antes de inferir efeitos.\\
 \bottomrule
 \end{longtable}
+\fonte{Elaborado pelos autores (2026).}
 
-\section{Síntese e posicionamento}
+\chapter{Considerações finais: síntese e posicionamento}
 O HRAI-GO pode ser conceituado como uma \textbf{plataforma aberta de inteligência regulatória baseada em conhecimento}, com agentes especializados e participação estruturada dos stakeholders. A ontologia organiza fatos, requisitos e controvérsias; os mecanismos normativos examinam aplicações; a biblioteca internacional contextualiza alternativas; e o Shadow Council amplia a cobertura argumentativa para preparar deliberações humanas informadas.
 
 Seu valor singular não está em automatizar o debate democrático ou declarar a ``melhor'' política. Está em produzir \textbf{rastreabilidade, comparabilidade, capacidade de contestação, memória institucional e hipóteses públicas verificáveis} em um processo contínuo. A distinção entre regulação vigente, evidências observadas e sugestões normativas é a condição fundamental para essa proposta fazer sentido.
 
-\begin{notebox}
-\textbf{Princípio de projeto.} \emph{Evidence before inference; inference before recommendation; recommendation before human decision.} Em português: primeiro a evidência, depois a inferência, depois a recomendação e, por fim, a decisão humana competente.
-\end{notebox}
+\destaque{\textbf{Princípio de projeto.} \emph{Evidence before inference; inference before recommendation; recommendation before human decision.} Em português: primeiro a evidência, depois a inferência, depois a recomendação e, por fim, a decisão humana competente.}
 
-\appendix
-\section{Glossário bilíngue seletivo}
+% ============================================================ ELEMENTOS PÓS-TEXTUAIS
+\postextual
+\bibliography{referencias}
+
+\begin{apendicesenv}
+\partapendices
+\chapter{Glossário bilíngue seletivo}
+A Tabela~\ref{tab:glossario} reúne os termos canônicos e sua explicação.
 \begin{longtable}{@{}p{.4\textwidth}p{.52\textwidth}@{}}
+\caption{Glossário bilíngue seletivo}\label{tab:glossario}\\
+\toprule\textbf{Termo canônico} & \textbf{Explicação}\\\midrule\endfirsthead
+\multicolumn{2}{@{}l}{\small (continuação)}\\
 \toprule\textbf{Termo canônico} & \textbf{Explicação}\\\midrule\endhead
 \term{RegulatoryIntelligence} & Inteligência sobre normas, instituições, mudanças e efeitos regulatórios.\\
 \term{LegalSnapshot} & Recorte datado e versionado do quadro jurídico conhecido.\\
@@ -763,8 +849,9 @@ Seu valor singular não está em automatizar o debate democrático ou declarar a
 \term{BitemporalModel} & Representação separada de tempo de validade e tempo de registro.\\
 \bottomrule
 \end{longtable}
+\fonte{Elaborado pelos autores (2026).}
 
-\section{Questões de competência para testar a ontologia}
+\chapter{Questões de competência para testar a ontologia}
 \begin{enumerate}
 \item Quais obrigações são aplicáveis ao \term{AISystem X} no Brasil em uma data indicada?
 \item Que dispositivos mudaram entre dois \term{LegalSnapshot}?
@@ -777,18 +864,6 @@ Seu valor singular não está em automatizar o debate democrático ou declarar a
 \item Quanto os resultados mudam ao alterar os critérios de composição do council?
 \item Quais alternativas regulatórias permanecem inconclusivas por falta de dados?
 \end{enumerate}
+\end{apendicesenv}
 
-\section{Referências e rastreabilidade}
-\begin{thebibliography}{20}
-\bibitem{guia} \textit{Guia de Conformidade e Governança para Sistemas de Inteligência Artificial de Alto Risco (HRAI)}. Estudo fornecido pelo solicitante, 23 p. Fonte de temas e conceitos de compliance; não usado como prova de vigência de normas.
-\bibitem{comparativo} \textit{Análise Comparativa e Diretrizes Estratégicas para a Governança e Plano de Inteligência Artificial no Brasil: Alinhamento com o AI Act, Modelos Internacionais e Especificidades Nacionais}. Estudo fornecido pelo solicitante, 16 p. Fonte de hipóteses estratégicas para investigação.
-\bibitem{brainstorm} \textit{Brainstorming: tipos de artefatos técnicos que não fiquem datados}. Material fornecido pelo solicitante, 2 p. Fonte de propostas de artefatos permanentes.
-\bibitem{camara} Câmara dos Deputados. \textit{PL 2338/2023: ficha de tramitação}. \url{https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2487262}. Consultado em 11 nov. 2026.
-\bibitem{eutimeline} European Commission. \textit{Timeline for the Implementation of the EU AI Act}. \url{https://ai-act-service-desk.ec.europa.eu/en/ai-act/eu-ai-act-implementation-timeline}. Consultado em 11 nov. 2026.
-\bibitem{shacl} W3C. \textit{Shapes Constraint Language (SHACL)}. \url{https://www.w3.org/TR/shacl/}. Recomendação técnica.
-\bibitem{prov} W3C. \textit{PROV-O: The PROV Ontology}. \url{https://www.w3.org/TR/prov-o/}. Recomendação técnica.
-\bibitem{legalruleml} OASIS. \textit{LegalRuleML Core Specification Version 1.0}. \url{https://docs.oasis-open.org/legalruleml/legalruleml-core-spec/v1.0/}. Especificação técnica.
-\bibitem{oecd} OECD. \textit{OECD AI Policy Observatory}. \url{https://oecd.ai/}. Fonte para mapeamento de políticas e indicadores.
-\bibitem{unesco} UNESCO. \textit{AI Readiness Assessment Methodology}. \url{https://www.unesco.org/ethics-ai/en/ram}. Referência para avaliação nacional multidimensional.
-\end{thebibliography}
 \end{document}

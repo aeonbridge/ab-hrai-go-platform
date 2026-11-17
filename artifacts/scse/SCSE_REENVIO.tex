@@ -1,169 +1,181 @@
-% SCSE / HRAI-GO | Especificacao independente
-% Compilar: xelatex -interaction=nonstopmode -halt-on-error SCSE_Shadow_Council_Simulation_Spec.tex (2x)
-\documentclass[10.5pt,a4paper,oneside]{article}
-\usepackage[brazil]{babel}
-\usepackage{fontspec}
-\setmainfont{Noto Serif}
-\setsansfont{Noto Sans}
-\setmonofont[Scale=.80]{DejaVu Sans Mono}
-\usepackage{geometry}
-\geometry{left=22mm,right=22mm,top=23mm,bottom=22mm,headheight=16pt}
-\usepackage{microtype}
-\usepackage{setspace}
-\setstretch{1.12}
-\usepackage[table]{xcolor}
-\definecolor{ink}{HTML}{15283A}
-\definecolor{navy}{HTML}{143D62}
-\definecolor{teal}{HTML}{007D75}
-\definecolor{muted}{HTML}{526579}
-\definecolor{pale}{HTML}{EDF4F7}
-\definecolor{light}{HTML}{F7F9FB}
-\definecolor{gold}{HTML}{AE6800}
-\usepackage{titlesec}
-\titleformat{\section}{\Large\bfseries\sffamily\color{navy}}{\thesection}{0.7em}{}
-\titleformat{\subsection}{\large\bfseries\sffamily\color{ink}}{\thesubsection}{0.65em}{}
-\titleformat{\subsubsection}{\normalsize\bfseries\sffamily\color{teal}}{\thesubsubsection}{0.55em}{}
-\titlespacing*{\section}{0pt}{16pt}{8pt}
-\titlespacing*{\subsection}{0pt}{11pt}{5pt}
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[L]{\sffamily\footnotesize\color{muted} HRAI-GO / SCSE}
-\fancyhead[R]{\sffamily\footnotesize\color{muted} Especificação de ambiente simulado}
-\fancyfoot[L]{\sffamily\footnotesize\color{muted} Proposta de engenharia | 11 nov. 2026}
-\fancyfoot[R]{\sffamily\footnotesize\color{muted}\thepage}
-\renewcommand{\headrulewidth}{.3pt}
-\usepackage{tabularx,longtable,booktabs,array}
-\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+% SCSE / HRAI-GO | Especificação técnica ESP-SCSE-01 (ABNT NBR 10719:2015)
+% Compilação: scripts/build-relatorios.sh docs/scse/SCSE_Shadow_Council_Simulation_Spec.tex
+% (XeLaTeX + BibTeX via latexmk). Regras: docs/PADRAO_RELATORIOS.md
+\documentclass[12pt,a4paper,oneside,english,brazil]{abntex2}
+\usepackage{hraigo-abnt}
+
+% ------------------------------------------------------------ Pacotes e macros próprios deste documento
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{seqsplit,needspace}
 \renewcommand{\arraystretch}{1.22}
-\usepackage{enumitem}
+\setlength{\LTcapwidth}{\textwidth}  % longtable captions as wide as the text
 \setlist[itemize]{leftmargin=16pt,topsep=3pt,itemsep=2pt}
 \setlist[enumerate]{leftmargin=19pt,topsep=3pt,itemsep=2pt}
-\usepackage[most]{tcolorbox}
-\newtcolorbox{infobox}[1][]{colback=pale,colframe=navy!55,boxrule=.6pt,arc=2mm,left=10pt,right=10pt,top=8pt,bottom=8pt,#1}
-\newtcolorbox{warningbox}[1][]{colback=orange!5,colframe=gold!65,boxrule=.6pt,arc=2mm,left=10pt,right=10pt,top=8pt,bottom=8pt,#1}
-\newtcolorbox{plainbox}[1][]{colback=light,colframe=black!14,boxrule=.5pt,arc=2mm,left=10pt,right=10pt,top=7pt,bottom=7pt,#1}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning,calc,fit,shapes,shapes.geometric}
-\usepackage{graphicx,caption}
-\usepackage{listings}
-\lstdefinestyle{code}{basicstyle=\ttfamily\scriptsize,columns=fullflexible,breaklines=true,breakatwhitespace=false,keepspaces=true,showstringspaces=false,frame=single,rulecolor=\color{navy!23},backgroundcolor=\color{light},framesep=7pt,aboveskip=8pt,belowskip=8pt,upquote=true}
+% Code listings: single spacing, house palette.
+\lstdefinestyle{code}{basicstyle=\ttfamily\scriptsize\SingleSpacing,columns=fullflexible,breaklines=true,breakatwhitespace=false,keepspaces=true,showstringspaces=false,frame=single,rulecolor=\color{tinta!23},backgroundcolor=\color{cinza!6},framesep=7pt,aboveskip=8pt,belowskip=8pt,upquote=true}
 \lstset{style=code}
-\usepackage{amssymb,amsmath}
-\usepackage{seqsplit,needspace}
-\usepackage{hyperref}
-\hypersetup{unicode=true,colorlinks=true,urlcolor=teal,linkcolor=navy,pdfauthor={HRAI-GO},pdftitle={SCSE: Especificacao independente de ambiente simulado para Shadow Council}}
-\usepackage{bookmark}
+% \term{...}: canonical identifier in monospace, breakable at any character.
 \newcommand{\term}[1]{{\ttfamily\small\seqsplit{#1}}}
+% \mvp: bold acronym of the minimum viable product.
 \newcommand{\mvp}{\textbf{MVP}}
+
+% ------------------------------------------------------------ Identificação (NBR 10719, 4.2.1.1.1)
+\titulo{Shadow Council Simulation Environment}
+\subtitulo{ambiente deliberativo multiagente inspirado no conceito do MiroFish, para avaliar regulações e soluções perante regimes jurídicos específicos}
+\codigo{ESP-SCSE-01}
+\tipotrabalho{Especificação técnica}
+\versao{1.1}
+\data{2026}
+\palavraschave{Shadow Council. Simulação multiagente. Inteligência regulatória. Conformidade regulatória. Proveniência de evidências.}
+\hypersetup{pdftitle={SCSE: Shadow Council Simulation Environment},pdfsubject={Especificação técnica ESP-SCSE-01 do HRAI-GO}}
+
 \begin{document}
-\begin{titlepage}
-\thispagestyle{empty}
-\vspace*{13mm}
-{\sffamily\bfseries\color{teal}\Large HRAI-GO / INDEPENDENT MODULE SPECIFICATION\par}
-\vspace{14mm}
-{\sffamily\bfseries\color{ink}\fontsize{30}{37}\selectfont Shadow Council\\Simulation Environment\par}
-\vspace{9mm}
-{\sffamily\fontsize{17}{23}\selectfont\color{navy} Ambiente deliberativo multiagente inspirado no conceito do MiroFish, para avaliar regulações e soluções perante regimes jurídicos específicos\par}
-\vspace{17mm}
+\selectlanguage{brazil}
+
+% ============================================================ ELEMENTOS PRÉ-TEXTUAIS
+\pretextual
+\imprimirfolhaderostorelatorio
+
+\begin{resumorelatorio}
+Esta especificação técnica descreve o Shadow Council Simulation Environment (SCSE), módulo independente do
+HRAI-GO (Human-centred Regulatory AI, Governance Observatory). O SCSE é um ambiente computacional isolado que,
+diante de uma semente de realidade (regulação, proposta normativa, briefing ou especificação), constrói um
+estado de mundo versionado, seleciona perspectivas sintéticas documentadas, executa um processo de
+contestação multiagente e emite relatórios reproduzíveis, com evidências, divergências e limitações. A
+questão de produto é identificar que obrigações, riscos, lacunas, tensões e perguntas críticas emergem quando
+uma regulação ou solução é examinada por um conselho deliberativo sintético contextualizado por uma
+jurisdição. O documento separa a análise de adequação de política da verificação de conformidade legal e
+especifica a composição estratificada do conselho, o modelo canônico de estado, o protocolo deliberativo, o
+motor jurídico, os contratos de dados, a interface de programação, os requisitos verificáveis, o método de
+avaliação e a ordem de implementação. Ficam fora de escopo a certificação jurídica automática, a consulta
+pública substitutiva, a previsão estatística da opinião social, agentes que assumam a identidade de pessoas
+reais e simulações que alterem sistemas reais. O documento utiliza apenas interfaces contratuais com o
+HRAI-GO e com catálogos externos, e distingue exemplos sintéticos e requisitos propostos de informações sobre
+ferramentas e normas existentes. O conselho sintético não substitui pessoas, consultas públicas ou parecer
+jurídico. Trata-se de especificação arquitetural e funcional, não de uma implementação executada.
+\end{resumorelatorio}
+
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+% ============================================================ ELEMENTOS TEXTUAIS
+\textual
+
+\chapter{Introdução: visão geral e limite do módulo}
+\noindent\textit{Nome da plataforma.} HRAI-GO significa \textit{Human-centred Regulatory AI, Governance Observatory} (plataforma de inteligência regulatória humano--IA); ver \texttt{docs/NOMENCLATURA.md}.
+
+Este documento é a especificação funcional, semântica, multiagente e operacional de um módulo independente
+do HRAI-GO (Human-centred Regulatory AI, Governance Observatory). O texto está em português do Brasil; os
+identificadores canônicos ficam em inglês.
+
+\destaque{Documento independente: utiliza apenas interfaces contratuais com o HRAI-GO e com catálogos externos. Exemplos sintéticos e requisitos propostos são distinguidos de informações sobre ferramentas e normas existentes. O conselho sintético não substitui pessoas, consultas públicas ou parecer jurídico.}
+
+\destaque{\textbf{Definição.} \term{ShadowCouncilSimulationEnvironment} (\term{SCSE}) é um ambiente computacional isolado que, diante de uma \emph{semente de realidade} (regulação, proposta normativa, briefing ou especificação), constrói um estado de mundo versionado, seleciona perspectivas sintéticas documentadas, executa um processo de contestação multiagente e emite relatórios reproduzíveis, com evidências, divergências e limitações.}
+
+\noindent\textbf{Questão de produto:} Que obrigações, riscos, lacunas, tensões e perguntas críticas emergem quando uma regulação ou solução é examinada por um conselho deliberativo sintético contextualizado por uma jurisdição?
+
+A Figura~\ref{fig:fluxo} resume o fluxo do SCSE, das sementes de realidade aos relatórios com opiniões minoritárias.
+
+\begin{figure}[htb]
+\caption{Fluxo geral do SCSE: das sementes de realidade ao relatório com opiniões minoritárias}\label{fig:fluxo}
+\centering
 \begin{tikzpicture}[x=1cm,y=1cm,>=Latex]
-\fill[navy!5,rounded corners=7pt] (0,0) rectangle (15.8,5.9);
-\tikzset{source/.style={draw=navy!65,fill=white,rounded corners=4pt,minimum width=6.5cm,minimum height=.95cm,align=center,font=\sffamily\bfseries\small},chamber/.style={draw=teal!75,fill=white,rounded corners=4pt,minimum width=6.5cm,minimum height=1cm,align=center,font=\sffamily\bfseries\small}}
+\fill[tinta!5,rounded corners=7pt] (0,0) rectangle (15.8,5.9);
+\tikzset{source/.style={draw=tinta!65,fill=white,rounded corners=4pt,minimum width=6.5cm,minimum height=.95cm,align=center,font=\sffamily\bfseries\small},chamber/.style={draw=lagoa!75,fill=white,rounded corners=4pt,minimum width=6.5cm,minimum height=1cm,align=center,font=\sffamily\bfseries\small}}
 \node[source] (i) at (7.9,5.1) {Reality Seeds + Regulatory Snapshot};
 \node[source] (w) at (7.9,3.7) {World Graph + Stakeholder Sampling Frame};
 \node[chamber] (p) at (3.9,2.18) {Policy Deliberation Chamber};
 \node[chamber] (c) at (11.9,2.18) {Solution Compliance Chamber};
 \node[source] (o) at (7.9,.63) {Evidence-Aware Report + Minority Opinions};
-\draw[->,thick,navy!65] (i)--(w);
-\draw[->,thick,navy!65] (w.south)--(p.north);
-\draw[->,thick,navy!65] (w.south)--(c.north);
-\draw[->,thick,teal!80] (p.south)--(o.north);
-\draw[->,thick,teal!80] (c.south)--(o.north);
+\draw[->,thick,tinta!65] (i)--(w);
+\draw[->,thick,tinta!65] (w.south)--(p.north);
+\draw[->,thick,tinta!65] (w.south)--(c.north);
+\draw[->,thick,lagoa!80] (p.south)--(o.north);
+\draw[->,thick,lagoa!80] (c.south)--(o.north);
 \end{tikzpicture}
-\vfill
-{\sffamily\bfseries\color{ink} Especificacao funcional, semantica, multiagente e operacional\par}
-\vspace{3mm}
-{\sffamily\color{muted} Versao proposta 1.0 | 11 de novembro de 2026 | pt-BR (identificadores canonicos em ingles)\par}
-\vspace{8mm}
-\begin{minipage}{.96\textwidth}
-\small\color{muted}Documento independente: utiliza apenas interfaces contratuais com a HRAI-GO e com cat\'alogos externos. Exemplos sint\'eticos e requisitos propostos s\~ao distinguidos de informa\c c\~oes sobre ferramentas e normas existentes. O conselho sint\'etico n\~ao substitui pessoas, consultas p\'ublicas ou parecer jur\'idico.
-\end{minipage}
-\end{titlepage}
-\pagenumbering{roman}
-\begingroup\small\linespread{.88}\selectfont\tableofcontents\endgroup
-\clearpage
-\pagenumbering{arabic}
+\fonte{Elaborado pelos autores (2026).}
+\end{figure}
 
-\section{Visão geral e limite do módulo}
-\noindent\textit{Nome da plataforma.} HRAI-GO significa \textit{Human-centred Regulatory AI, Governance Observatory} (plataforma de inteligência regulatória humano--IA); ver \texttt{docs/NOMENCLATURA.md}.
-
-\begin{infobox}
-\textbf{Definicao.} \term{ShadowCouncilSimulationEnvironment} (\term{SCSE}) \`e um ambiente computacional isolado que, diante de uma \emph{semente de realidade} (regula\c c\~ao, proposta normativa, briefing ou especifica\c c\~ao), constr\'oi um estado de mundo versionado, seleciona perspectivas sint\'eticas documentadas, executa um processo de contesta\c c\~ao multiagente e emite relat\'orios reproduz\'iveis, com evid\^encias, diverg\^encias e limita\c c\~oes.
-\end{infobox}
-\textbf{Questao de produto:} Que obriga\c c\~oes, riscos, lacunas, tens\~oes e perguntas cr\'iticas emergem quando uma regula\c c\~ao ou solu\c c\~ao \`e examinada por um conselho deliberativo sint\'etico contextualizado por uma jurisdi\c c\~ao?
-
-\subsection{Objetivos observáveis}
+\section{Objetivos observáveis}
 \begin{enumerate}
-\item Aceitar um \term{RegulatoryContext} ou um \term{SolutionArtifact} (briefing, spec, arquitetura), com pa\'is e data de refer\^encia.
-\item Separar an\'alise de \emph{adequacao de politica} de \emph{verificacao de conformidade legal}.
-\item Compor um \term{ShadowCouncil} estratificado por interesses, pap\'eis e perspectivas documentadas.
-\item Produzir argumenta\c c\~ao contradit\'oria, testes de hip\'oteses, relat\'orios minorit\'arios e trilhas de evid\^encia.
-\item Permitir simular contrafactuais com altera\c c\~oes controladas (\term{ScenarioIntervention}) e comparar execu\c c\~oes.
-\item Preservar \term{RunManifest}, estado inicial, semente, vers\~oes de modelos, documentos, prompts, eventos e resultados.
+\item Aceitar um \term{RegulatoryContext} ou um \term{SolutionArtifact} (briefing, spec, arquitetura), com país e data de referência.
+\item Separar análise de \emph{adequação de política} de \emph{verificação de conformidade legal}.
+\item Compor um \term{ShadowCouncil} estratificado por interesses, papéis e perspectivas documentadas.
+\item Produzir argumentação contraditória, testes de hipóteses, relatórios minoritários e trilhas de evidência.
+\item Permitir simular contrafactuais com alterações controladas (\term{ScenarioIntervention}) e comparar execuções.
+\item Preservar \term{RunManifest}, estado inicial, semente, versões de modelos, documentos, prompts, eventos e resultados.
 \end{enumerate}
-\subsection{Fora de escopo (na versão inicial)}
+\section{Fora de escopo (na versão inicial)}
 \begin{itemize}
-\item Certifica\c c\~ao jur\'idica autom\'atica, consulta p\'ublica substitutiva ou previs\~ao estat\'istica da opini\~ao social.
-\item Agentes que assumam identidade ou mandato de autoridades ou pessoas reais sem autoriza\c c\~ao.
-\item Simula\c c\~ao que altere sistemas reais, publique textos em redes sociais ou execute mudan\c cas em produ\c c\~ao.
-\item Conclus\~ao quantitativa de causalidade regulat\'oria sem modelo empiricamente calibrado.
+\item Certificação jurídica automática, consulta pública substitutiva ou previsão estatística da opinião social.
+\item Agentes que assumam identidade ou mandato de autoridades ou pessoas reais sem autorização.
+\item Simulação que altere sistemas reais, publique textos em redes sociais ou execute mudanças em produção.
+\item Conclusão quantitativa de causalidade regulatória sem modelo empiricamente calibrado.
 \end{itemize}
 
-\section{O que reaproveitar do conceito MiroFish}
-A documenta\c c\~ao do \href{https://github.com/666ghj/MiroFish}{projeto original MiroFish} apresenta cinco passos: \emph{graph building}, \emph{environment setup}, \emph{simulation}, \emph{report generation} e \emph{deep interaction}. Seu simulador social usa o \href{https://github.com/camel-ai/oasis}{OASIS}, desenvolvido pela CAMEL-AI. O SCSE considera essa refer\^encia arquitetural, sem afirmar que a base existente j\'a implemente racioc\'inio jur\'idico.
+\chapter{O que reaproveitar do conceito MiroFish}
+A documentação do \href{https://github.com/666ghj/MiroFish}{projeto original MiroFish} \cite{mirofish} apresenta cinco passos: \emph{graph building}, \emph{environment setup}, \emph{simulation}, \emph{report generation} e \emph{deep interaction}. Seu simulador social usa o \href{https://github.com/camel-ai/oasis}{OASIS}, desenvolvido pela CAMEL-AI \cite{camel-oasis}. O SCSE considera essa referência arquitetural, sem afirmar que a base existente já implemente raciocínio jurídico. A Tabela~\ref{tab:mirofish} mostra como cada conceito original é adaptado.
 
-\begin{center}
-\begin{tabularx}{\textwidth}{@{}p{.23\textwidth}Y Y@{}}
-\toprule\textbf{Conceito original} & \textbf{Adapta\c c\~ao SCSE} & \textbf{Crit\'erio}\\\midrule
-Reality seeds & \term{EvidenceBundle} + textos jur\'idicos + especifica\c c\~ao & Proveni\^encia e estado temporal obrigat\'orios\\
-Knowledge graph & \term{WorldSnapshot} com normas, stakeholders, aplica\c c\~ao e argumentos & Ontologia can\^onica + dados de sess\~ao\\
-Personas e mem\'oria & \term{PerspectiveAgent} + \term{PerspectiveCharter} + mem\'oria isolada & Cobertura documental, n\~ao imita\c c\~ao humana\\
-Intera\c c\~oes sociais & \term{DeliberationChamber} com obje\c c\~ao, prova, emenda e revis\~ao & Rodadas estruturadas e audit\'aveis\\
-Relat\'orio e chat & \term{CouncilReport} + rastreio de achados + interrogat\'orio de agentes & Sem falsa infer\^encia de voto popular\\\bottomrule
+\begin{table}[!htb]
+\caption{Adaptação dos conceitos do MiroFish no SCSE}\label{tab:mirofish}
+\centering
+\begin{tabularx}{\textwidth}{@{}p{.23\textwidth}L L@{}}
+\toprule\textbf{Conceito original} & \textbf{Adaptação SCSE} & \textbf{Critério}\\\midrule
+Reality seeds & \term{EvidenceBundle} + textos jurídicos + especificação & Proveniência e estado temporal obrigatórios\\
+Knowledge graph & \term{WorldSnapshot} com normas, stakeholders, aplicação e argumentos & Ontologia canônica + dados de sessão\\
+Personas e memória & \term{PerspectiveAgent} + \term{PerspectiveCharter} + memória isolada & Cobertura documental, não imitação humana\\
+Interações sociais & \term{DeliberationChamber} com objeção, prova, emenda e revisão & Rodadas estruturadas e auditáveis\\
+Relatório e chat & \term{CouncilReport} + rastreio de achados + interrogatório de agentes & Sem falsa inferência de voto popular\\\bottomrule
 \end{tabularx}
-\end{center}
-\textbf{Decisao de implementacao.} \mvp: construir motor deliberativo pr\'oprio que exponha \term{SimulationBackendAdapter}; o OASIS pode ser um \emph{adapter} para experimentos de difus\~ao e intera\c c\~ao, mas n\~ao ser\'a depend\^encia obrigat\'oria para conformidade. Se reutilizar c\'odigo MiroFish, respeitar sua licen\c ca AGPL-3.0 e analisar obriga\c c\~oes de distribui\c c\~ao; a inspira\c c\~ao conceitual n\~ao exige incorporar c\'odigo.
+\fonte{Elaborado pelos autores (2026), com base em \citeonline{mirofish}.}
+\end{table}
 
-\section{Modos de simulação e contrato semântico}
-\subsection{Mode A: Regulatory Policy Simulation}
-\textbf{Entrada:} na\c c\~ao, data, vers\~ao de norma ou proposta, objetivos de pol\'itica, fontes de contexto nacional, pergunta deliberativa e desenho amostral.\\
-\textbf{Pergunta-tipo:} ``Quais grupos, objetivos e capacidades institucionais seriam afetados por um regime brasileiro de avalia\c c\~ao de impacto de IA?''\\
-\textbf{Sa\'ida:} \term{RegulatoryTension}, \term{RegulatoryGapCandidate}, argumentos a favor/contra, \term{PolicyAlternative}, condi\c c\~oes de viabilidade e evid\^encias faltantes.\\
-\textbf{Regra epistemica:} opini\~oes dos agentes n\~ao implicam validade jur\'idica ou legitimidade democr\'atica.
+\noindent\textbf{Decisão de implementação.} Para o produto mínimo viável (\mvp, \textit{minimum viable product}): construir motor deliberativo próprio que exponha \term{SimulationBackendAdapter}; o OASIS pode ser um \emph{adapter} para experimentos de difusão e interação, mas não será dependência obrigatória para conformidade. Se reutilizar código MiroFish, respeitar sua licença GNU Affero General Public License (AGPL) versão 3.0 e analisar obrigações de distribuição; a inspiração conceitual não exige incorporar código.
 
-\subsection{Mode B: Solution Compliance Simulation}
-\textbf{Entrada:} briefing/spec de solu\c c\~ao, pa\'is e setor, data, marco regulat\'orio selecionado ou pacote aplic\'avel, arquitetura, fluxos de dados, atores, opera\c c\~oes, riscos e evid\^encias dispon\'iveis.\\
-\textbf{Pergunta-tipo:} ``O que falta demonstrar para que um sistema de triagem de candidatos esteja conforme com as exig\^encias aplic\'aveis no Brasil?''\\
-\textbf{Sa\'ida:} \term{ApplicabilityMatrix}, \term{ComplianceFinding}, \term{EvidenceGap}, requisitos em aberto, quest\~oes jur\'idicas, remedia\c c\~oes propostas e argumentos dos stakeholders.\\
-\textbf{Regra epistemica:} \term{LegalAssessmentEngine} determina aplicabilidade e estado probat\'orio; \term{CouncilSimulationEngine} sugere obje\c c\~oes e alternativas sem sobrescrever os achados verific\'aveis.
+\chapter{Modos de simulação e contrato semântico}
+\section{Mode A: Regulatory Policy Simulation}
+\noindent\textbf{Entrada:} nação, data, versão de norma ou proposta, objetivos de política, fontes de contexto nacional, pergunta deliberativa e desenho amostral.\\
+\textbf{Pergunta-tipo:} ``Quais grupos, objetivos e capacidades institucionais seriam afetados por um regime brasileiro de avaliação de impacto de IA?''\\
+\textbf{Saída:} \term{RegulatoryTension}, \term{RegulatoryGapCandidate}, argumentos a favor/contra, \term{PolicyAlternative}, condições de viabilidade e evidências faltantes.\\
+\textbf{Regra epistêmica:} opiniões dos agentes não implicam validade jurídica ou legitimidade democrática.
 
-\subsection{Tabela de diferenças obrigatórias}
-\begin{center}
-\begin{tabularx}{\textwidth}{@{}p{.25\textwidth}YY@{}}
+\section{Mode B: Solution Compliance Simulation}
+\noindent\textbf{Entrada:} briefing/spec de solução, país e setor, data, marco regulatório selecionado ou pacote aplicável, arquitetura, fluxos de dados, atores, operações, riscos e evidências disponíveis.\\
+\textbf{Pergunta-tipo:} ``O que falta demonstrar para que um sistema de triagem de candidatos esteja conforme com as exigências aplicáveis no Brasil?''\\
+\textbf{Saída:} \term{ApplicabilityMatrix}, \term{ComplianceFinding}, \term{EvidenceGap}, requisitos em aberto, questões jurídicas, remediações propostas e argumentos dos stakeholders.\\
+\textbf{Regra epistêmica:} \term{LegalAssessmentEngine} determina aplicabilidade e estado probatório; \term{CouncilSimulationEngine} sugere objeções e alternativas sem sobrescrever os achados verificáveis.
+
+\section{Tabela de diferenças obrigatórias}
+A Tabela~\ref{tab:modos} resume as diferenças obrigatórias entre os dois modos.
+
+\begin{table}[!htb]
+\caption{Diferenças obrigatórias entre o modo de política e o modo de solução}\label{tab:modos}
+\centering
+\begin{tabularx}{\textwidth}{@{}p{.25\textwidth}LL@{}}
 \toprule & \textbf{Policy mode} & \textbf{Solution mode}\\\midrule
-Objeto & qualidade da pol\'itica & aplica\c c\~ao/projeto de IA\\
-Refer\^encia & contexto nacional + proposta/norma & norma vigente na data + objeto t\'ecnico\\
-Resultado & delibera\c c\~ao, tens\~oes e alternativas & matriz normativa + avalia\c c\~ao de evid\^encia\\
+Objeto & qualidade da política & aplicação/projeto de IA\\
+Referência & contexto nacional + proposta/norma & norma vigente na data + objeto técnico\\
+Resultado & deliberação, tensões e alternativas & matriz normativa + avaliação de evidência\\
 Conselho & contrasta efeitos sociais/institucionais & contesta pressupostos de conformidade e impacto\\
 Estado final & \term{PolicyScenarioReport} & \term{SolutionComplianceReport}\\\bottomrule
 \end{tabularx}
-\end{center}
+\fonte{Elaborado pelos autores (2026).}
+\end{table}
 
-\section{Arquitetura de referência independente}
-\begin{figure}[ht]
+\chapter{Arquitetura de referência independente}
+A Figura~\ref{fig:arquitetura} apresenta a arquitetura proposta.
+
+\begin{figure}[htb]
+\caption{Arquitetura proposta. Os mecanismos jurídico e deliberativo compartilham evidências, mas possuem saídas e autoridade distintas}\label{fig:arquitetura}
 \centering
 \begin{tikzpicture}[x=1cm,y=1cm,>=Latex]
-\tikzset{b/.style={draw=navy!68,fill=light,rounded corners=2pt,minimum height=.9cm,text width=4cm,align=center,font=\sffamily\footnotesize},wide/.style={draw=teal!65,fill=pale,rounded corners=3pt,minimum height=.84cm,text width=13.7cm,align=center,font=\sffamily\footnotesize\bfseries}}
+\tikzset{b/.style={draw=tinta!68,fill=cinza!6,rounded corners=2pt,minimum height=.9cm,text width=4cm,align=center,font=\sffamily\footnotesize},wide/.style={draw=lagoa!65,fill=lagoa!8,rounded corners=3pt,minimum height=.84cm,text width=13.7cm,align=center,font=\sffamily\footnotesize\bfseries}}
 \node[wide] (ui) at (7.5,8.7) {SCSE Studio / API / CLI / External Agent Gateway};
 \node[b] (ing) at (2.4,7) {Ingestion + Citation Resolver};
 \node[b] (kg) at (7.5,7) {World Builder + Graph Snapshot};
@@ -174,59 +186,69 @@ Estado final & \term{PolicyScenarioReport} & \term{SolutionComplianceReport}\\\b
 \node[b] (verify) at (12.6,3.95) {Evidence / Critic / Safety};
 \node[wide] (reports) at (7.5,2.35) {Reports + Dissent + Sensitivity + Provenance};
 \node[wide] (stores) at (7.5,.8) {Object Store | Graph Store | Event Store | Vector Index};
-\draw[->,thick,navy!70] (ui)--(kg);
-\draw[->,thick,navy!70] (ing.south)--(orch.north -| ing);
-\draw[->,thick,navy!70] (kg)--(orch);
-\draw[->,thick,navy!70] (sampling.south)--(orch.north -| sampling);
-\draw[->,thick,navy!70] (orch.south)--(sim.north);
-\draw[->,thick,navy!70] (orch.south -| legal)--(legal.north);
-\draw[->,thick,navy!70] (orch.south -| verify)--(verify.north);
-\draw[->,thick,teal] (sim.south)--(reports.north);
-\draw[->,thick,teal] (legal.south)--(reports.north -| legal);
-\draw[->,thick,teal] (verify.south)--(reports.north -| verify);
-\draw[<->,thick,teal] (reports)--(stores);
+\draw[->,thick,tinta!70] (ui)--(kg);
+\draw[->,thick,tinta!70] (ing.south)--(orch.north -| ing);
+\draw[->,thick,tinta!70] (kg)--(orch);
+\draw[->,thick,tinta!70] (sampling.south)--(orch.north -| sampling);
+\draw[->,thick,tinta!70] (orch.south)--(sim.north);
+\draw[->,thick,tinta!70] (orch.south -| legal)--(legal.north);
+\draw[->,thick,tinta!70] (orch.south -| verify)--(verify.north);
+\draw[->,thick,lagoa] (sim.south)--(reports.north);
+\draw[->,thick,lagoa] (legal.south)--(reports.north -| legal);
+\draw[->,thick,lagoa] (verify.south)--(reports.north -| verify);
+\draw[<->,thick,lagoa] (reports)--(stores);
 \end{tikzpicture}
-\caption{Arquitetura proposta. Os mecanismos jur\'idico e deliberativo compartilham evid\^encias, mas possuem sa\'idas e autoridade distintas.}
+\fonte{Elaborado pelos autores (2026).}
 \end{figure}
 
-\subsection{Componentes e isolamento}
-\begin{longtable}{@{}p{.34\textwidth}p{.58\textwidth}@{}}
-\toprule\textbf{Componente} & \textbf{Contrato e responsabilidade}\\\midrule\endhead
-\term{SeedIngestionService} & Normalizar PDF, MD, TXT, JSON, links oficiais e specs; preservar trecho, hash, URI e estrutura do documento.\\
-\term{LegalSnapshotResolver} & Resolver \term{validTime}/\term{transactionTime}, jurisdi\c c\~ao, status de vig\^encia, hierarquia e vers\~ao; falha fechada para fonte essencial n\~ao verificada.\\
-\term{WorldModelBuilder} & Gerar \term{WorldSnapshot} congelado a partir de normas, contexto nacional e entidade avaliada, com entidades tipadas e claims rastre\'aveis.\\
-\term{CouncilComposer} & Definir estratos, cobertura, fontes, assentos, agentes e limites de atua\c c\~ao.\\
-\term{SimulationOrchestrator} & Gerir rounds, seeds, branches, interven\c c\~oes, custos, checkpoints e reexecu\c c\~oes.\\
-\term{LegalAssessmentEngine} & Determinar obriga\c c\~oes aplic\'aveis e produzir achados sob status controlados, usando regras formais e valida\c c\~ao.\\
-\term{DeliberationEngine} & Coordenar discuss\~ao, obje\c c\~oes, revis\~ao, negocia\c c\~ao, dissenso e an\'alise contrafactual.\\
-\term{EvidenceVerifier} & Verificar cita\c c\~oes, cobertura dos trechos, validade temporal e contradi\c c\~oes materiais.\\
-\term{ReportCompiler} & Gerar JSON, MD e PDF com trilhas de proveni\^encia e indicadores de incerteza.\\
-\term{ExternalAgentGateway} & Receber agentes de terceiros por capacidades e permiss\~oes, com isolamento de seguran\c ca.\\\bottomrule
-\end{longtable}
+\section{Componentes e isolamento}
+A Tabela~\ref{tab:componentes} lista os componentes, com o contrato e a responsabilidade de cada um.
 
-\section{Modelo canônico de estado e ontologia}
-\subsection{Entidades essenciais}
+\begin{longtable}{@{}p{.34\textwidth}p{.58\textwidth}@{}}
+\caption{Componentes do SCSE, contratos e responsabilidades}\label{tab:componentes}\\
+\toprule\textbf{Componente} & \textbf{Contrato e responsabilidade}\\\midrule\endfirsthead
+\toprule\textbf{Componente} & \textbf{Contrato e responsabilidade}\\\midrule\endhead
+\term{SeedIngestionService} & Normalizar PDF, Markdown (MD), TXT, JavaScript Object Notation (JSON), links oficiais e specs; preservar trecho, hash, identificador uniforme de recurso (URI) e estrutura do documento.\\
+\term{LegalSnapshotResolver} & Resolver \term{validTime}/\term{transactionTime}, jurisdição, status de vigência, hierarquia e versão; falha fechada para fonte essencial não verificada.\\
+\term{WorldModelBuilder} & Gerar \term{WorldSnapshot} congelado a partir de normas, contexto nacional e entidade avaliada, com entidades tipadas e claims rastreáveis.\\
+\term{CouncilComposer} & Definir estratos, cobertura, fontes, assentos, agentes e limites de atuação.\\
+\term{SimulationOrchestrator} & Gerir rounds, seeds, branches, intervenções, custos, checkpoints e reexecuções.\\
+\term{LegalAssessmentEngine} & Determinar obrigações aplicáveis e produzir achados sob status controlados, usando regras formais e validação.\\
+\term{DeliberationEngine} & Coordenar discussão, objeções, revisão, negociação, dissenso e análise contrafactual.\\
+\term{EvidenceVerifier} & Verificar citações, cobertura dos trechos, validade temporal e contradições materiais.\\
+\term{ReportCompiler} & Gerar JSON, MD e PDF com trilhas de proveniência e indicadores de incerteza.\\
+\term{ExternalAgentGateway} & Receber agentes de terceiros por capacidades e permissões, com isolamento de segurança.\\\bottomrule
+\end{longtable}
+\fonte{Elaborado pelos autores (2026).}
+
+\chapter{Modelo canônico de estado e ontologia}
+\section{Entidades essenciais}
+A Tabela~\ref{tab:entidades} define a semântica das entidades essenciais do modelo.
+
 \begin{longtable}{@{}p{.37\textwidth}p{.55\textwidth}@{}}
-\toprule\textbf{Classe} & \textbf{Semantica}\\\midrule\endhead
-\term{SimulationProject} & Experimento, pergunta, propriet\'ario, escopo e controle de acesso.\\
-\term{ScenarioDefinition} & Modo, jurisdi\c c\~ao, as-of-date, objetivos e hip\'oteses.\\
+\caption{Entidades essenciais do modelo canônico de estado}\label{tab:entidades}\\
+\toprule\textbf{Classe} & \textbf{Semântica}\\\midrule\endfirsthead
+\toprule\textbf{Classe} & \textbf{Semântica}\\\midrule\endhead
+\term{SimulationProject} & Experimento, pergunta, proprietário, escopo e controle de acesso.\\
+\term{ScenarioDefinition} & Modo, jurisdição, as-of-date, objetivos e hipóteses.\\
 \term{RegulatorySnapshot} & Pacote normativo em estado juridicamente contextualizado.\\
 \term{NationalContextSnapshot} & Recorte temporal de indicadores institucionais e sociais.\\
-\term{SolutionArtifact} & Briefing, especifica\c c\~ao, arquitetura ou ficha da aplica\c c\~ao.\\
-\term{EvidenceRecord} & Unidade cit\'avel com fonte, trecho, data, hash, tipo e confiabilidade.\\
-\term{StakeholderStratum} & Conjunto de perspectivas relevante \`a quest\~ao.\\
-\term{CouncilSeat} & Assento sint\'etico alocado a um estrato com justificativa.\\
-\term{PerspectiveAgent} & Agente com \term{PerspectiveCharter}, permiss\~oes, mem\'oria e fontes.\\
-\term{DeliberationRound} & Etapa formal com a\c c\~oes permitidas e condi\c c\~oes de avan\c co.\\
-\term{ArgumentClaim} & Afirma\c c\~ao pass\'ivel de sustenta\c c\~ao ou contesta\c c\~ao.\\
-\term{PolicyTension} & Rela\c c\~ao argumentada entre objetivos em potencial conflito.\\
-\term{ComplianceFinding} & Resultado de norma e evid\^encia por requisito.\\
-\term{ScenarioBranch} & Deriva\c c\~ao controlada de um cen\'ario com interven\c c\~ao expl\'icita.\\
-\term{SimulationRun} & Execu\c c\~ao individual e manifesto congelado.\\
-\term{CouncilReport} & Sa\'idas integradas, limites, cita\c c\~oes e dissenso.\\\bottomrule
+\term{SolutionArtifact} & Briefing, especificação, arquitetura ou ficha da aplicação.\\
+\term{EvidenceRecord} & Unidade citável com fonte, trecho, data, hash, tipo e confiabilidade.\\
+\term{StakeholderStratum} & Conjunto de perspectivas relevante à questão.\\
+\term{CouncilSeat} & Assento sintético alocado a um estrato com justificativa.\\
+\term{PerspectiveAgent} & Agente com \term{PerspectiveCharter}, permissões, memória e fontes.\\
+\term{DeliberationRound} & Etapa formal com ações permitidas e condições de avanço.\\
+\term{ArgumentClaim} & Afirmação passível de sustentação ou contestação.\\
+\term{PolicyTension} & Relação argumentada entre objetivos em potencial conflito.\\
+\term{ComplianceFinding} & Resultado de norma e evidência por requisito.\\
+\term{ScenarioBranch} & Derivação controlada de um cenário com intervenção explícita.\\
+\term{SimulationRun} & Execução individual e manifesto congelado.\\
+\term{CouncilReport} & Saídas integradas, limites, citações e dissenso.\\\bottomrule
 \end{longtable}
+\fonte{Elaborado pelos autores (2026).}
 
-\subsection{Estrutura semântica exemplificativa}
+\section{Estrutura semântica exemplificativa}
 \begin{lstlisting}
 SimulationProject -> hasScenario -> ScenarioDefinition
 ScenarioDefinition -> usesRegulation -> RegulatorySnapshot
@@ -246,112 +268,127 @@ ComplianceFinding -> supportedBy -> EvidenceRecord
 CouncilReport -> hasMinorityOpinion -> MinorityOpinion
 \end{lstlisting}
 
-\subsection{Estado jurídico e temporalidade}
-O \term{RegulatorySnapshot} deve reter, por provis\~ao, no m\'inimo: \term{jurisdictionCode}, \term{sourceUri}, \term{legalStatus}, \term{validFrom}, \term{validUntil}, \term{recordedAt}, \term{versionHash}, \term{extractionConfidence}, \term{reviewState} e \term{exceptions}. Valores permitidos para \term{legalStatus}: \term{proposed}, \term{enactedNotEffective}, \term{effective}, \term{suspended}, \term{repealed}, \term{superseded}, \term{unknown}.
+\section{Estado jurídico e temporalidade}
+O \term{RegulatorySnapshot} deve reter, por provisão, no mínimo: \term{jurisdictionCode}, \term{sourceUri}, \term{legalStatus}, \term{validFrom}, \term{validUntil}, \term{recordedAt}, \term{versionHash}, \term{extractionConfidence}, \term{reviewState} e \term{exceptions}. Valores permitidos para \term{legalStatus}: \term{proposed}, \term{enactedNotEffective}, \term{effective}, \term{suspended}, \term{repealed}, \term{superseded}, \term{unknown}.
 
-\begin{warningbox}
-Um projeto legislativo n\~ao pode ser convertido em obriga\c c\~ao vigente. Exemplo de verifica\c c\~ao de fonte: na data da especifica\c c\~ao, o \href{https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2487262}{PL 2338/2023} aparece como proposi\c c\~ao em tramita\c c\~ao na C\^amara. A plataforma deve consultar o estado oficial em cada execu\c c\~ao, em vez de manter um valor permanente fixado.
-\end{warningbox}
+\alerta{Um projeto legislativo não pode ser convertido em obrigação vigente. Exemplo de verificação de fonte: na data da especificação, o \href{https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2487262}{Projeto de Lei (PL) 2338/2023} aparece como proposição em tramitação na Câmara \cite{camara-pl2338}. A plataforma deve consultar o estado oficial em cada execução, em vez de manter um valor permanente fixado.}
 
-\section{Composição e representatividade do Shadow Council}
-\subsection{Universo amostral e estratos}
-O MVP usa \term{PerspectiveCoverage} com \term{SamplingFrame} de publica\c c\~oes, consultas, estudos, observa\c c\~oes e manifesta\c c\~oes documentadas. N\~ao usa amostra estat\'istica de seres humanos. \term{CouncilSeat} representa um \emph{recorte de perspectiva} e n\~ao uma pessoa real.
-\begin{center}
-\begin{tabularx}{\textwidth}{@{}Y r Y@{}}
+\chapter{Composição e representatividade do Shadow Council}
+\section{Universo amostral e estratos}
+O MVP usa \term{PerspectiveCoverage} com \term{SamplingFrame} de publicações, consultas, estudos, observações e manifestações documentadas. Não usa amostra estatística de seres humanos. \term{CouncilSeat} representa um \emph{recorte de perspectiva} e não uma pessoa real. A Tabela~\ref{tab:estratos} traz uma distribuição ilustrativa de assentos para o Brasil.
+
+\begin{table}[!htb]
+\caption{Estratos ilustrativos do Shadow Council para o Brasil}\label{tab:estratos}
+\centering
+\begin{tabularx}{\textwidth}{@{}L r L@{}}
 \toprule\textbf{Estrato ilustrativo (Brasil)} & \textbf{Assentos} & \textbf{Contraste documentado}\\\midrule
-Reguladores / fiscalizacao & 3 & exigibilidade, recursos, poderes e independ\^encia\\
-Poder publico operador & 2 & servi\c co, compras e responsabilidade administrativa\\
-Empresas / startups & 3 & portes, fornecedores, integra\c c\~ao e concorr\^encia\\
-Pesquisa interdisciplinar & 3 & direito, computa\c c\~ao, economia e ci\^encias sociais\\
+Reguladores / fiscalização & 3 & exigibilidade, recursos, poderes e independência\\
+Poder público operador & 2 & serviço, compras e responsabilidade administrativa\\
+Empresas / startups & 3 & portes, fornecedores, integração e concorrência\\
+Pesquisa interdisciplinar & 3 & direito, computação, economia e ciências sociais\\
 Sociedade civil e direitos & 3 & direitos digitais, consumidor e acessibilidade\\
-Trabalhadores / profiss\~oes & 2 & rela\c c\~oes de trabalho, supervis\~ao e autonomia\\
-Grupos diretamente afetados & 2 & risco vivenciado e acesso a contesta\c c\~ao\\
+Trabalhadores / profissões & 2 & relações de trabalho, supervisão e autonomia\\
+Grupos diretamente afetados & 2 & risco vivenciado e acesso a contestação\\
 Infraestrutura / ambiente & 2 & energia, dados, soberania e externalidades\\\midrule
-\textbf{Total sint\'etico} & \textbf{20} & cotas explorat\'orias, nunca pesos populacionais\\\bottomrule
+\textbf{Total sintético} & \textbf{20} & cotas exploratórias, nunca pesos populacionais\\\bottomrule
 \end{tabularx}
-\end{center}
-\subsection{Algoritmo de composi\c c\~ao}
+\fonte{Elaborado pelos autores (2026). Exemplo sintético.}
+\end{table}
+
+\section{Algoritmo de composição}
 \begin{enumerate}
 \item Construir \term{StakeholderMap}: afetados, operadores, reguladores, titulares de direitos, financiadores e peritos.
-\item Definir \term{CoverageDimensions}: papel institucional, exposi\c c\~ao ao impacto, porte, territ\'orio e diversidade de teses.
-\item Extrair \term{DocumentedPerspective} de cada estrato; exigir pelo menos uma fonte verific\'avel por posi\c c\~ao substantiva.
+\item Definir \term{CoverageDimensions}: papel institucional, exposição ao impacto, porte, território e diversidade de teses.
+\item Extrair \term{DocumentedPerspective} de cada estrato; exigir pelo menos uma fonte verificável por posição substantiva.
 \item Marcar \term{Unrepresented} para perspectiva sem lastro, sem inventar o que o grupo pensa.
-\item Alocar \term{CouncilSeat}, declarando a estrat\'egia de quotas, fontes e lacunas.
-\item Gerar \term{PerspectiveCharter} e auditar contradi\c c\~oes e conflitos de interesse.
-\item Executar \term{BalanceCheck} para identificar cobertura pobre ou domina\c c\~ao de um \`unico estrato/modelo.
+\item Alocar \term{CouncilSeat}, declarando a estratégia de quotas, fontes e lacunas.
+\item Gerar \term{PerspectiveCharter} e auditar contradições e conflitos de interesse.
+\item Executar \term{BalanceCheck} para identificar cobertura pobre ou dominação de um único estrato/modelo.
 \end{enumerate}
-Um indicador descritivo poss\'ivel \`e \(C = \frac{\text{perspectivas documentadas cobertas}}{\text{perspectivas documentadas consideradas relevantes}}\). O denominador deve ser publicado e justificado. Isso \textbf{n\~ao mede} representatividade demogr\'afica nem ades\~ao social.
+Um indicador descritivo possível é \(C = \frac{\text{perspectivas documentadas cobertas}}{\text{perspectivas documentadas consideradas relevantes}}\). O denominador deve ser publicado e justificado. Isso \textbf{não mede} representatividade demográfica nem adesão social.
 
-\subsection{Persona, limita\c c\~oes e fontes}
-Cada \term{PerspectiveCharter} conter\'a: \term{role}, \term{documentedPositions}, \term{sourceIds}, \term{interests}, \term{constraints}, \term{blindSpots}, \term{allowedActions}, \term{disclosure}, \term{modelVersion}, \term{conflictOfInterest}. O agente deve sinalizar \term{insufficientGrounding} quando uma tese extrapolar as fontes.
+\section{Persona, limitações e fontes}
+Cada \term{PerspectiveCharter} conterá: \term{role}, \term{documentedPositions}, \term{sourceIds}, \term{interests}, \term{constraints}, \term{blindSpots}, \term{allowedActions}, \term{disclosure}, \term{modelVersion}, \term{conflictOfInterest}. O agente deve sinalizar \term{insufficientGrounding} quando uma tese extrapolar as fontes.
 
-\section{Mecânica do mundo simulado}
-\subsection{Estado inicial e memórias}
-O \term{WorldSnapshot} congela regras, documentos, contexto, atores e depend\^encias. Cada agente possui:\par
+\chapter{Mecânica do mundo simulado}
+\section{Estado inicial e memórias}
+O \term{WorldSnapshot} congela regras, documentos, contexto, atores e dependências. Cada agente possui:\par
 \begin{itemize}
-\item \term{ReferenceMemory}: posi\c c\~oes documentadas e base normativa, \emph{read-only} na execu\c c\~ao.
-\item \term{WorkingMemory}: objetivos e hip\'oteses da rodada corrente, descart\'avel.
-\item \term{EpisodicMemory}: interven\c c\~oes, obje\c c\~oes e revis\~oes com origem.
+\item \term{ReferenceMemory}: posições documentadas e base normativa, \emph{read-only} na execução.
+\item \term{WorkingMemory}: objetivos e hipóteses da rodada corrente, descartável.
+\item \term{EpisodicMemory}: intervenções, objeções e revisões com origem.
 \item \term{ClaimMemory}: grafo de argumentos aceitos, contestados, retirados e condicionais.
 \end{itemize}
-Mem\'orias privadas de sess\~oes distintas s\~ao isoladas. Conhecimentos publicados entre sess\~oes passam por aprova\c c\~ao e revis\~ao de fonte.
+Memórias privadas de sessões distintas são isoladas. Conhecimentos publicados entre sessões passam por aprovação e revisão de fonte.
 
-\subsection{Protocolo deliberativo (estado de máquina)}
+\section{Protocolo deliberativo (estado de máquina)}
+A Tabela~\ref{tab:protocolo} descreve as etapas do protocolo deliberativo.
+
 \begin{longtable}{@{}p{.14\textwidth}p{.3\textwidth}p{.46\textwidth}@{}}
-\toprule\textbf{Etapa} & \textbf{Nome} & \textbf{Transicao / saida}\\\midrule\endhead
+\caption{Etapas do protocolo deliberativo}\label{tab:protocolo}\\
+\toprule\textbf{Etapa} & \textbf{Nome} & \textbf{Transição / saída}\\\midrule\endfirsthead
+\toprule\textbf{Etapa} & \textbf{Nome} & \textbf{Transição / saída}\\\midrule\endhead
 R0 & \term{Prepare} & Normaliza sementes, congela fonte e verifica lacunas.\\
-R1 & \term{IndependentReview} & Cada agente produz posi\c c\~ao isolada, sem ler os demais.\\
+R1 & \term{IndependentReview} & Cada agente produz posição isolada, sem ler os demais.\\
 R2 & \term{OpeningStatements} & Publica teses fundamentadas, ressalvas e perguntas.\\
-R3 & \term{CrossExamination} & Questiona afirma\c c\~oes, requer evid\^encias e aponta conflitos.\\
-R4 & \term{EvidenceRevision} & Agentes mant\^em, revisam ou retiram claims com justificativa.\\
-R5 & \term{Negotiation} & Prop\~oem medidas, salvaguardas, exce\c c\~oes e alternativas.\\
-R6 & \term{CounterfactualBranches} & Testam altera\c c\~oes controladas sem modificar o estado-base.\\
-R7 & \term{MinorityAndAudit} & Preserva dissenso, verifica fontes e documenta limita\c c\~oes.\\
-R8 & \term{Publish} & Compila sa\'idas separadas para conformidade e pol\'itica.\\\bottomrule
+R3 & \term{CrossExamination} & Questiona afirmações, requer evidências e aponta conflitos.\\
+R4 & \term{EvidenceRevision} & Agentes mantêm, revisam ou retiram claims com justificativa.\\
+R5 & \term{Negotiation} & Propõem medidas, salvaguardas, exceções e alternativas.\\
+R6 & \term{CounterfactualBranches} & Testam alterações controladas sem modificar o estado-base.\\
+R7 & \term{MinorityAndAudit} & Preserva dissenso, verifica fontes e documenta limitações.\\
+R8 & \term{Publish} & Compila saídas separadas para conformidade e política.\\\bottomrule
 \end{longtable}
-\textbf{Interpretacao do parametro rounds:} a configuracao de seis rounds corresponde a R1--R6; R0, R7 e R8 sao etapas de preparacao, auditoria e publicacao fora dessa contagem.\par
-\textbf{A\c c\~oes permitidas:} \term{assertClaim}, \term{support}, \term{challenge}, \term{requestEvidence}, \term{revise}, \term{withdraw}, \term{proposeAmendment}, \term{declareUncertainty}, \term{submitMinorityOpinion}, \term{abstain}. Cada a\c c\~ao possui \term{actorId}, \term{timestamp}, \term{sourceIds} e \term{roundId}.
+\fonte{Elaborado pelos autores (2026).}
 
-\subsection{Intervenções e ramos contrafactuais}
-Exemplo: na hip\'otese de uma nova regra, o usu\'ario altera \term{complianceCostMultiplier}, \term{inspectionCapacity} ou o texto de uma salvaguarda. A interven\c c\~ao cria \term{ScenarioBranch} com \term{parentRunId}, \term{patch}, \term{hypothesis} e \term{assumptions}; o estado-base permanece imut\'avel.
-Resultados s\~ao \emph{efeitos simulados sob suposi\c c\~oes}, n\~ao previs\~oes do mercado ou da sociedade. A plataforma deve mostrar de que fatores o resultado depende.
+\noindent\textbf{Interpretação do parâmetro rounds:} a configuração de seis rounds corresponde a R1--R6; R0, R7 e R8 são etapas de preparação, auditoria e publicação fora dessa contagem.\par
+\noindent\textbf{Ações permitidas:} \term{assertClaim}, \term{support}, \term{challenge}, \term{requestEvidence}, \term{revise}, \term{withdraw}, \term{proposeAmendment}, \term{declareUncertainty}, \term{submitMinorityOpinion}, \term{abstain}. Cada ação possui \term{actorId}, \term{timestamp}, \term{sourceIds} e \term{roundId}.
 
-\subsection{Isolamento e repetibilidade}
+\section{Intervenções e ramos contrafactuais}
+Exemplo: na hipótese de uma nova regra, o usuário altera \term{complianceCostMultiplier}, \term{inspectionCapacity} ou o texto de uma salvaguarda. A intervenção cria \term{ScenarioBranch} com \term{parentRunId}, \term{patch}, \term{hypothesis} e \term{assumptions}; o estado-base permanece imutável.
+Resultados são \emph{efeitos simulados sob suposições}, não previsões do mercado ou da sociedade. A plataforma deve mostrar de que fatores o resultado depende.
+
+\section{Isolamento e repetibilidade}
 \begin{itemize}
-\item Executar \term{N>=3} repeti\c c\~oes em testes explorat\'orios, com \term{randomSeed} e manifesto por execu\c c\~ao (par\^ametro proposto, n\~ao requisito de fornecedor).
-\item Registrar vers\~ao e par\^ametros dos modelos; arquivar prompts, turnos e respostas para \emph{replay}.
-\item Declarar que seeds n\~ao asseguram determinismo completo em modelos externos ou chamadas distribu\'idas.
-\item Aplicar limites de custo, timeout, m\'aximo de turnos, budget de tokens e condi\c c\~oes de parada por aus\^encia de novos argumentos.
-\item Jamais reinterpretar conversa gerada como dado observado de usu\'arios reais.
+\item Executar \term{N>=3} repetições em testes exploratórios, com \term{randomSeed} e manifesto por execução (parâmetro proposto, não requisito de fornecedor).
+\item Registrar versão e parâmetros dos modelos; arquivar prompts, turnos e respostas para \emph{replay}.
+\item Declarar que seeds não asseguram determinismo completo em modelos externos ou chamadas distribuídas.
+\item Aplicar limites de custo, timeout, máximo de turnos, budget de tokens e condições de parada por ausência de novos argumentos.
+\item Jamais reinterpretar conversa gerada como dado observado de usuários reais.
 \end{itemize}
 
-\section{Motor jur\'idico separado do conselho}
-\subsection{Pipeline de conformidade}
+\chapter{Motor jurídico separado do conselho}
+\section{Pipeline de conformidade}
 \begin{enumerate}
-\item \term{ScopeResolution}: determinar jurisdi\c c\~ao, papel do provedor/operador, setor, sujeitos afetados e data.
-\item \term{ProvisionApplicability}: vincular dispositivos, condi\c c\~oes, exce\c c\~oes e efic\'acia temporal.
-\item \term{RequirementDecomposition}: transformar obriga\c c\~oes em controles e testes declarativos com origem.
-\item \term{EvidenceMapping}: correlacionar especifica\c c\~ao e artefatos com cada requisito.
-\item \term{DeterministicChecks}: OWL, SHACL e regras execut\'aveis produzem achados limitados ao que os dados provam.
-\item \term{DisputedInterpretation}: encaminhar ambiguidades e conflitos a parecer/revis\~ao.
-\item \term{CouncilChallenge}: conselho examina premissas e consequ\^encias, sem mudar status jur\'idico sozinho.
+\item \term{ScopeResolution}: determinar jurisdição, papel do provedor/operador, setor, sujeitos afetados e data.
+\item \term{ProvisionApplicability}: vincular dispositivos, condições, exceções e eficácia temporal.
+\item \term{RequirementDecomposition}: transformar obrigações em controles e testes declarativos com origem.
+\item \term{EvidenceMapping}: correlacionar especificação e artefatos com cada requisito.
+\item \term{DeterministicChecks}: Web Ontology Language (OWL), Shapes Constraint Language (SHACL) \cite{w3c-shacl} e regras executáveis produzem achados limitados ao que os dados provam.
+\item \term{DisputedInterpretation}: encaminhar ambiguidades e conflitos a parecer/revisão.
+\item \term{CouncilChallenge}: conselho examina premissas e consequências, sem mudar status jurídico sozinho.
 \end{enumerate}
-\subsection{Estados fechados de ComplianceFinding}
-\begin{center}
-\begin{tabularx}{\textwidth}{@{}p{.34\textwidth}Y@{}}
-\toprule\textbf{Status} & \textbf{Significado}\\\midrule
-\term{compliantEvidenced} & Evid\^encia suficiente foi examinada para o controle delimitado (n\~ao certifica\c c\~ao total).\\
-\term{noncompliantEvidenced} & Contrariedade material constatada e fundamentada no requisito.\\
-\term{insufficientEvidence} & N\~ao h\'a base para concluir conformidade ou n\~ao conformidade.\\
-\term{notApplicable} & Regra n\~ao incide conforme condi\c c\~oes e fontes verificadas.\\
-\term{requiresLegalReview} & Ambiguidade, conflito ou exce\c c\~ao exige interpreta\c c\~ao humana.\\
-\term{futureObligation} & Dispositivo aprovado, mas ainda n\~ao exig\'ivel na data avaliada.\\
-\term{proposalOnly} & Instrumento em discuss\~ao, usado apenas como cen\'ario prospectivo.\\\bottomrule
-\end{tabularx}
-\end{center}
-A aus\^encia de um documento n\~ao prova viola\c c\~ao; \term{noncompliantEvidenced} exige prova positiva do conflito entre fato e obriga\c c\~ao, com aplicabilidade confirmada.
+\section{Estados fechados de ComplianceFinding}
+A Tabela~\ref{tab:estados} define o vocabulário fechado de estados de \term{ComplianceFinding}.
 
-\subsection{Exemplo de regra semântica (ilustrativa)}
+\begin{table}[!htb]
+\caption{Estados fechados de ComplianceFinding}\label{tab:estados}
+\centering
+\begin{tabularx}{\textwidth}{@{}p{.34\textwidth}L@{}}
+\toprule\textbf{Status} & \textbf{Significado}\\\midrule
+\term{compliantEvidenced} & Evidência suficiente foi examinada para o controle delimitado (não certificação total).\\
+\term{noncompliantEvidenced} & Contrariedade material constatada e fundamentada no requisito.\\
+\term{insufficientEvidence} & Não há base para concluir conformidade ou não conformidade.\\
+\term{notApplicable} & Regra não incide conforme condições e fontes verificadas.\\
+\term{requiresLegalReview} & Ambiguidade, conflito ou exceção exige interpretação humana.\\
+\term{futureObligation} & Dispositivo aprovado, mas ainda não exigível na data avaliada.\\
+\term{proposalOnly} & Instrumento em discussão, usado apenas como cenário prospectivo.\\\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelos autores (2026).}
+\end{table}
+
+A ausência de um documento não prova violação; \term{noncompliantEvidenced} exige prova positiva do conflito entre fato e obrigação, com aplicabilidade confirmada.
+
+\section{Exemplo de regra semântica (ilustrativa)}
 \begin{lstlisting}
 # Precondition: Requirement and Assessment exist in validated KG.
 # This indicates review of evidence, not a legal finding.
@@ -360,29 +397,34 @@ hrai:hasApplicableRequirement(?assessment, ?requirement) ^
 hrai:hasUnverifiedEvidence(?requirement, true)
   -> hrai:requiresEvidenceReview(?assessment, true)
 \end{lstlisting}
-Para viola\c c\~oes por aus\^encia de propriedade (fechamento do mundo), preferir SHACL; para derroga\c c\~ao, prioridades e exce\c c\~oes jur\'idicas, usar \term{NormativeRuleEngine} com pol\'itica de resolu\c c\~ao expl\'icita, n\~ao infer\^encias SWRL isoladas.
+Para violações por ausência de propriedade (fechamento do mundo), preferir SHACL; para derrogação, prioridades e exceções jurídicas, usar \term{NormativeRuleEngine} com política de resolução explícita, não inferências Semantic Web Rule Language (SWRL) isoladas.
 
-\section{Entradas e contratos de dados}
-\subsection{Estrutura do ScenarioRequest}
-O arquivo \term{scenario.schema.json} inclu\'ido no pacote \`e o contrato verific\'avel \term{JSON Schema 2020-12}. Os campos fundamentais s\~ao:
-\begin{center}
-\begin{tabularx}{\textwidth}{@{}p{.36\textwidth}Y@{}}
-\toprule\textbf{Campo canonico} & \textbf{Uso}\\\midrule
-\term{scenarioId} & Identificador est\'avel do cen\'ario.\\
+\chapter{Entradas e contratos de dados}
+\section{Estrutura do ScenarioRequest}
+O arquivo \term{scenario.schema.json} incluído no pacote é o contrato verificável \term{JSON Schema 2020-12}. Os campos fundamentais estão na Tabela~\ref{tab:campos}.
+
+\begin{table}[!htb]
+\caption{Campos fundamentais do ScenarioRequest}\label{tab:campos}
+\centering
+\begin{tabularx}{\textwidth}{@{}p{.36\textwidth}L@{}}
+\toprule\textbf{Campo canônico} & \textbf{Uso}\\\midrule
+\term{scenarioId} & Identificador estável do cenário.\\
 \term{mode} & \term{regulatoryPolicy} ou \term{solutionCompliance}.\\
-\term{jurisdiction} & C\'odigo de pa\'is ISO 3166-1 alpha-2 e nome leg\'ivel.\\
+\term{jurisdiction} & Código de país ISO 3166-1 alpha-2 e nome legível.\\
 \term{asOfDate} & Data que determina os requisitos temporais.\\
-\term{question} & Pergunta e objetivo anal\'itico.\\
-\term{regulatorySources} & Refer\^encias normativas, status e vers\~oes.\\
-\term{contextSources} & Indicadores e relat\'orios da na\c c\~ao.\\
-\term{solution} & Objeto t\'ecnico a analisar no modo de solu\c c\~ao.\\
-\term{council} & Estratos, quotas e par\^ametros da sele\c c\~ao.\\
-\term{simulation} & Rodadas, repeti\c c\~oes, seed e branch interventions.\\\bottomrule
+\term{question} & Pergunta e objetivo analítico.\\
+\term{regulatorySources} & Referências normativas, status e versões.\\
+\term{contextSources} & Indicadores e relatórios da nação.\\
+\term{solution} & Objeto técnico a analisar no modo de solução.\\
+\term{council} & Estratos, quotas e parâmetros da seleção.\\
+\term{simulation} & Rodadas, repetições, seed e branch interventions.\\\bottomrule
 \end{tabularx}
-\end{center}
-\textbf{Gate de valida\c c\~ao:} no modo \term{solutionCompliance}, \term{solution} e ao menos uma fonte normativa s\~ao obrigat\'orios; se for imposs\'ivel verificar a fonte ou sua vig\^encia, a execu\c c\~ao pode continuar como explora\c c\~ao, mas o relat\'orio n\~ao pode declarar conclus\~ao jur\'idica.
+\fonte{Elaborado pelos autores (2026).}
+\end{table}
 
-\subsection{Exemplo mínimo: política regulatória}
+\noindent\textbf{Gate de validação:} no modo \term{solutionCompliance}, \term{solution} e ao menos uma fonte normativa são obrigatórios; se for impossível verificar a fonte ou sua vigência, a execução pode continuar como exploração, mas o relatório não pode declarar conclusão jurídica.
+
+\section{Exemplo mínimo: política regulatória}
 \begin{lstlisting}
 {
   "scenarioId": "BR-POLICY-001",
@@ -401,7 +443,7 @@ O arquivo \term{scenario.schema.json} inclu\'ido no pacote \`e o contrato verifi
                  "randomSeed": 42}
 }
 \end{lstlisting}
-\subsection{Exemplo mínimo: solução e conformidade}
+\section{Exemplo mínimo: solução e conformidade}
 \begin{lstlisting}
 {
   "scenarioId": "BR-SOLUTION-001",
@@ -423,140 +465,171 @@ O arquivo \term{scenario.schema.json} inclu\'ido no pacote \`e o contrato verifi
                  "randomSeed": 17}
 }
 \end{lstlisting}
-Os exemplos s\~ao sint\'eticos. O estado e conte\'udo de requisitos legais n\~ao s\~ao determinados apenas pelo t\'itulo do documento; devem ser extra\'idos e conferidos.
+Os exemplos são sintéticos. O estado e conteúdo de requisitos legais não são determinados apenas pelo título do documento; devem ser extraídos e conferidos.
 
-\section{Saídas, trilha e relatórios}
-Cada rodada emite \term{DeliberationEvent} com \term{eventId}, \term{agentId}, \term{roundId}, \term{action}, \term{claimId}, \term{evidenceIds}, \term{timestamp}, \term{contentHash}. Relat\'orios usam o contrato \term{report.schema.json}.
+\chapter{Saídas, trilha e relatórios}
+Cada rodada emite \term{DeliberationEvent} com \term{eventId}, \term{agentId}, \term{roundId}, \term{action}, \term{claimId}, \term{evidenceIds}, \term{timestamp}, \term{contentHash}. Relatórios usam o contrato \term{report.schema.json}. A Tabela~\ref{tab:artefatos} lista os artefatos emitidos por execução.
+
 \begin{longtable}{@{}p{.35\textwidth}p{.55\textwidth}@{}}
-\toprule\textbf{Artefato} & \textbf{Conteudo}\\\midrule\endhead
-\term{run-manifest.json} & Vers\~oes, sementes, par\^ametros, hashes, origem e custo de simula\c c\~ao.\\
-\term{world-snapshot.jsonld} & Grafo sem\^antico congelado, entidades, claims, fontes.\\
-\term{council-roster.json} & Assentos, estratos, fonte das perspectivas e lacunas de representa\c c\~ao.\\
-\term{deliberation-events.jsonl} & Todas as a\c c\~oes, turnos, revis\~oes e interven\c c\~oes.\\
-\term{compliance-matrix.json} & Aplicabilidade e status por requisito, com fonte e evid\^encia.\\
-\term{tensions.json} & Tens\~oes, argumentos, contrargumentos, evid\^encias e condi\c c\~oes.\\
-\term{minority-report.md} & Posi\c c\~oes minorit\'arias fundamentadas e n\~ao resolvidas.\\
-\term{sensitivity-report.json} & Varia\c c\~ao de resultados por modelos, composi\c c\~ao e seeds.\\
-\term{final-report.pdf} & Parecer de simula\c c\~ao, delimitando fatos, hip\'oteses e limita\c c\~oes.\\\bottomrule
+\caption{Artefatos emitidos por execução}\label{tab:artefatos}\\
+\toprule\textbf{Artefato} & \textbf{Conteúdo}\\\midrule\endfirsthead
+\toprule\textbf{Artefato} & \textbf{Conteúdo}\\\midrule\endhead
+\term{run-manifest.json} & Versões, sementes, parâmetros, hashes, origem e custo de simulação.\\
+\term{world-snapshot.jsonld} & Grafo semântico congelado, entidades, claims, fontes.\\
+\term{council-roster.json} & Assentos, estratos, fonte das perspectivas e lacunas de representação.\\
+\term{deliberation-events.jsonl} & Todas as ações, turnos, revisões e intervenções.\\
+\term{compliance-matrix.json} & Aplicabilidade e status por requisito, com fonte e evidência.\\
+\term{tensions.json} & Tensões, argumentos, contrargumentos, evidências e condições.\\
+\term{minority-report.md} & Posições minoritárias fundamentadas e não resolvidas.\\
+\term{sensitivity-report.json} & Variação de resultados por modelos, composição e seeds.\\
+\term{final-report.pdf} & Parecer de simulação, delimitando fatos, hipóteses e limitações.\\\bottomrule
 \end{longtable}
-\textbf{Destaque de sa\'ida:} um sum\'ario \term{CouncilSupport} (ex.: 12/20 agentes sint\'eticos defendem uma tese) pode ser exibido somente como contagem da execu\c c\~ao. \textbf{Nunca} como percentual de cidad\~aos, eleitores ou stakeholders reais.
+\fonte{Elaborado pelos autores (2026).}
 
-\section{API e eventos de execução}
-\begin{center}
-\begin{tabularx}{\textwidth}{@{}p{.42\textwidth}p{.49\textwidth}@{}}
+\noindent\textbf{Destaque de saída:} um sumário \term{CouncilSupport} (ex.: 12/20 agentes sintéticos defendem uma tese) pode ser exibido somente como contagem da execução. \textbf{Nunca} como percentual de cidadãos, eleitores ou stakeholders reais.
+
+\chapter{API e eventos de execução}
+A Tabela~\ref{tab:api} lista os endpoints propostos da interface de programação de aplicações (API, \textit{Application Programming Interface}), no estilo Representational State Transfer (REST).
+
+\begin{table}[!htb]
+\caption{Endpoints REST propostos e seu comportamento}\label{tab:api}
+\centering
+\begin{tabularx}{\textwidth}{@{}p{.42\textwidth}L@{}}
 \toprule\textbf{Endpoint REST (proposta)} & \textbf{Comportamento}\\\midrule
-\term{POST /v1/scenarios} & Criar cen\'ario e validar contrato.\\
+\term{POST /v1/scenarios} & Criar cenário e validar contrato.\\
 \term{POST /v1/scenarios/:id/ingest} & Ingerir e verificar fontes e briefings.\\
-\term{POST /v1/scenarios/:id/preview} & Mostrar contexto, escopo e lacunas antes da execu\c c\~ao.\\
+\term{POST /v1/scenarios/:id/preview} & Mostrar contexto, escopo e lacunas antes da execução.\\
 \term{POST /v1/scenarios/:id/council} & Construir e auditar conselho.\\
-\term{POST /v1/scenarios/:id/runs} & Iniciar execu\c c\~ao com manifesto imut\'avel.\\
+\term{POST /v1/scenarios/:id/runs} & Iniciar execução com manifesto imutável.\\
 \term{GET /v1/runs/:id/events} & Consultar stream de eventos com cursor.\\
 \term{POST /v1/runs/:id/branches} & Criar contrafactual derivado sem alterar original.\\
 \term{GET /v1/runs/:id/findings} & Obter achados e matrizes.\\
-\term{GET /v1/runs/:id/reports} & Obter vers\~oes JSON/MD/PDF.\\
-\term{POST /v1/runs/:id/stop} & Interromper a execu\c c\~ao com auditoria.\\\bottomrule
+\term{GET /v1/runs/:id/reports} & Obter versões JSON/MD/PDF.\\
+\term{POST /v1/runs/:id/stop} & Interromper a execução com auditoria.\\\bottomrule
 \end{tabularx}
-\end{center}
-A fila de eventos pode usar \term{scenario.ingested}, \term{snapshot.frozen}, \term{council.prepared}, \term{round.started}, \term{claim.challenged}, \term{round.completed}, \term{run.completed}, \term{report.published}. Executores devem tratar idempot\^encia, reentrega, paralelismo e ordena\c c\~ao por \term{runId}.
+\fonte{Elaborado pelos autores (2026).}
+\end{table}
 
-\section{Interface de usuário (SCSE Studio)}
-A interface precisa permitir: (1) sele\c c\~ao do modo; (2) upload de documentos e escolha de jurisdi\c c\~ao/data; (3) pr\'e-visualiza\c c\~ao do \term{RegulatorySnapshot}; (4) matriz de assentos e fontes por estrato; (5) linha do tempo das rodadas; (6) grafo de argumentos com apoios/contesta\c c\~oes; (7) \emph{compare branches}; (8) inspe\c c\~ao de cada \term{ComplianceFinding}; (9) exporta\c c\~ao; (10) questionamento de agentes com rastreio do contexto.
-\begin{infobox}
-\textbf{Princ\'ipio de UX.} Toda resposta deve distinguir visualmente \term{VerifiedLegalFact}, \term{EvidenceBasedFinding}, \term{SyntheticPerspective}, \term{Hypothesis} e \term{Unknown}. Uma interface que misture essas categorias perderia justamente a integridade que o produto pretende oferecer.
-\end{infobox}
+A fila de eventos pode usar \term{scenario.ingested}, \term{snapshot.frozen}, \term{council.prepared}, \term{round.started}, \term{claim.challenged}, \term{round.completed}, \term{run.completed}, \term{report.published}. Executores devem tratar idempotência, reentrega, paralelismo e ordenação por \term{runId}.
 
-\section{Segurança, direitos e governança}
+\chapter{Interface de usuário (SCSE Studio)}
+A interface precisa permitir: (1) seleção do modo; (2) upload de documentos e escolha de jurisdição/data; (3) pré-visualização do \term{RegulatorySnapshot}; (4) matriz de assentos e fontes por estrato; (5) linha do tempo das rodadas; (6) grafo de argumentos com apoios/contestações; (7) \emph{compare branches}; (8) inspeção de cada \term{ComplianceFinding}; (9) exportação; (10) questionamento de agentes com rastreio do contexto.
+
+\destaque{\textbf{Princípio de experiência do usuário (UX).} Toda resposta deve distinguir visualmente \term{VerifiedLegalFact}, \term{EvidenceBasedFinding}, \term{SyntheticPerspective}, \term{Hypothesis} e \term{Unknown}. Uma interface que misture essas categorias perderia justamente a integridade que o produto pretende oferecer.}
+
+\chapter{Segurança, direitos e governança}
 \begin{itemize}
-\item \textbf{Acesso:} multi-tenant, escopos \term{project:read}, \term{run:execute}, \term{source:review}, \term{agent:register}, \term{report:publish}; RBAC/ABAC por tipo de evid\^encia.
-\item \textbf{Dados:} cifragem, reten\c c\~ao por classe, mascaramento de informa\c c\~oes pessoais e isolamento de fontes privadas; proibir publica\c c\~ao inadvertida de dossi\^es.
-\item \textbf{Prompt injection:} tratar textos externos como dados n\~ao confi\'aveis; ferramentas permitidas por agente e pol\'itica de execu\c c\~ao.
-\item \textbf{Conflito de interesse:} registrar patroc\'inio, afilia\c c\~oes autorizadas e potenciais depend\^encias de fornecedor.
-\item \textbf{Supervisao humana:} interpreta\c c\~oes jur\'idicas materiais, publica\c c\~ao oficial e interven\c c\~oes normativas exigem valida\c c\~ao humana.
-\item \textbf{Nao impersonation:} agentes n\~ao se passar\~ao por pessoas, grupos ou reguladores reais; perspectivas sint\'eticas ser\~ao rotuladas como tal.
-\item \textbf{Auditoria:} logs encadeados por hash, controle de vers\~oes e rastreio de interven\c c\~oes do orquestrador.
+\item \textbf{Acesso:} multi-tenant, escopos \term{project:read}, \term{run:execute}, \term{source:review}, \term{agent:register}, \term{report:publish}; controle de acesso baseado em papéis e em atributos (RBAC/ABAC, \textit{role-based} e \textit{attribute-based access control}) por tipo de evidência.
+\item \textbf{Dados:} cifragem, retenção por classe, mascaramento de informações pessoais e isolamento de fontes privadas; proibir publicação inadvertida de dossiês.
+\item \textbf{Prompt injection:} tratar textos externos como dados não confiáveis; ferramentas permitidas por agente e política de execução.
+\item \textbf{Conflito de interesse:} registrar patrocínio, afiliações autorizadas e potenciais dependências de fornecedor.
+\item \textbf{Supervisão humana:} interpretações jurídicas materiais, publicação oficial e intervenções normativas exigem validação humana.
+\item \textbf{Não impersonation:} agentes não se passarão por pessoas, grupos ou reguladores reais; perspectivas sintéticas serão rotuladas como tal.
+\item \textbf{Auditoria:} logs encadeados por hash, controle de versões e rastreio de intervenções do orquestrador.
 \end{itemize}
 
-\section{Requisitos verificáveis e aceite}
+\chapter{Requisitos verificáveis e aceite}
+A Tabela~\ref{tab:requisitos} lista os requisitos funcionais, seus critérios de aceite e prioridades.
+
 \begin{longtable}{@{}p{.11\textwidth}p{.69\textwidth}p{.1\textwidth}@{}}
-\toprule\textbf{ID} & \textbf{Criterio de aceite} & \textbf{Prior.}\\\midrule\endhead
+\caption{Requisitos funcionais e critérios de aceite}\label{tab:requisitos}\\
+\toprule\textbf{ID} & \textbf{Critério de aceite} & \textbf{Prior.}\\\midrule\endfirsthead
+\toprule\textbf{ID} & \textbf{Critério de aceite} & \textbf{Prior.}\\\midrule\endhead
 FR-01 & Receber os dois modos com JSON Schema e relatar erros por campo. & P0\\
-FR-02 & Resolver fonte, jurisdi\c c\~ao, vers\~ao, status e data antes de liberar achados jur\'idicos. & P0\\
+FR-02 & Resolver fonte, jurisdição, versão, status e data antes de liberar achados jurídicos. & P0\\
 FR-03 & Congelar \term{WorldSnapshot} e manifesto identificados por hash. & P0\\
 FR-04 & Produzir \term{CouncilRoster} por estratos, fontes e lacunas de cobertura. & P0\\
-FR-05 & Executar pelo menos seis etapas com eventos audit\'aveis de discuss\~ao e revis\~ao. & P0\\
-FR-06 & Preservar opini\~oes minorit\'arias n\~ao resolvidas no relat\'orio. & P0\\
-FR-07 & Emitir estados de conformidade apenas do vocabul\'ario controlado. & P0\\
+FR-05 & Executar pelo menos seis etapas com eventos auditáveis de discussão e revisão. & P0\\
+FR-06 & Preservar opiniões minoritárias não resolvidas no relatório. & P0\\
+FR-07 & Emitir estados de conformidade apenas do vocabulário controlado. & P0\\
 FR-08 & Marcar normas \term{proposed} como \term{proposalOnly}. & P0\\
-FR-09 & Gerar matrix de achados por requisito, fontes e evid\^encias associadas. & P0\\
-FR-10 & Gerar relat\'orio com declara\c c\~ao de natureza sint\'etica e limita\c c\~oes. & P0\\
-FR-11 & Suportar \term{ScenarioBranch} com diffs e estado-base imut\'avel. & P1\\
-FR-12 & Reexecutar cen\'ario em N r\'eplicas e medir sensibilidade. & P1\\
-FR-13 & Permitir comparar dois regimes normativos sem afirmar equival\^encia jur\'idica autom\'atica. & P1\\
-FR-14 & Integrar agentes externos por manifesto de capacidades e permiss\~oes. & P1\\
+FR-09 & Gerar matriz de achados por requisito, fontes e evidências associadas. & P0\\
+FR-10 & Gerar relatório com declaração de natureza sintética e limitações. & P0\\
+FR-11 & Suportar \term{ScenarioBranch} com diffs e estado-base imutável. & P1\\
+FR-12 & Reexecutar cenário em N réplicas e medir sensibilidade. & P1\\
+FR-13 & Permitir comparar dois regimes normativos sem afirmar equivalência jurídica automática. & P1\\
+FR-14 & Integrar agentes externos por manifesto de capacidades e permissões. & P1\\
 FR-15 & Exportar \term{json}, \term{md}, \term{pdf} e logs de evento. & P0\\
-FR-16 & Reportar \term{unknown} quando n\~ao houver fonte ou documento necess\'ario. & P0\\\bottomrule
+FR-16 & Reportar \term{unknown} quando não houver fonte ou documento necessário. & P0\\\bottomrule
 \end{longtable}
+\fonte{Elaborado pelos autores (2026).}
 
-\section{Avalia\c c\~ao experimental e qualidade}
-\subsection{Metodologia proposta}
-Testar tr\^es condi\c c\~oes sobre casos de refer\^encia previamente auditados: \textbf{B1} agente \`unico, \textbf{B2} debate de agentes sem estratifica\c c\~ao e \textbf{SCSE} conselho estratificado e rastre\'avel. Especialistas independentes devem construir previamente rubricas e um conjunto de achados verific\'aveis, mantidos cegos para os modelos quando poss\'ivel.
-\begin{center}
-\begin{tabularx}{\textwidth}{@{}p{.33\textwidth}Y@{}}
-\toprule\textbf{Metrica} & \textbf{Operacionalizacao}\\\midrule
+\chapter{Avaliação experimental e qualidade}
+\section{Metodologia proposta}
+Testar três condições sobre casos de referência previamente auditados: \textbf{B1} agente único, \textbf{B2} debate de agentes sem estratificação e \textbf{SCSE} conselho estratificado e rastreável. Especialistas independentes devem construir previamente rubricas e um conjunto de achados verificáveis, mantidos cegos para os modelos quando possível. A Tabela~\ref{tab:metricas} define as métricas e sua operacionalização.
+
+\begin{table}[!htb]
+\caption{Métricas de avaliação e operacionalização}\label{tab:metricas}
+\centering
+\begin{tabularx}{\textwidth}{@{}p{.33\textwidth}L@{}}
+\toprule\textbf{Métrica} & \textbf{Operacionalização}\\\midrule
 \term{ClaimEvidencePrecision} & Claims relevantes corretamente sustentados / claims auditados.\\
-\term{RelevantGapRecall} & Lacunas de refer\^encia detectadas / lacunas de refer\^encia.\\
-\term{FalseLegalFindingRate} & Achados jur\'idicos falsos ou injustificados / achados emitidos.\\
+\term{RelevantGapRecall} & Lacunas de referência detectadas / lacunas de referência.\\
+\term{FalseLegalFindingRate} & Achados jurídicos falsos ou injustificados / achados emitidos.\\
 \term{PerspectiveCoverage} & Cobertura dos eixos/estratos do frame documentado.\\
-\term{DissentRetention} & Teses minorit\'arias relevantes preservadas / teses minorit\'arias identificadas.\\
-\term{RunSensitivity} & Dispers\~ao entre repeti\c c\~oes, prompts, modelos e ordem de falas.\\
-\term{ExpertUtilityScore} & Utilidade do relat\'orio julgada por especialistas com rubrica publicada.\\
+\term{DissentRetention} & Teses minoritárias relevantes preservadas / teses minoritárias identificadas.\\
+\term{RunSensitivity} & Dispersão entre repetições, prompts, modelos e ordem de falas.\\
+\term{ExpertUtilityScore} & Utilidade do relatório julgada por especialistas com rubrica publicada.\\
 \term{CostPerValidatedFinding} & Custo total / achados validados independentemente.\\\bottomrule
 \end{tabularx}
-\end{center}
-\subsection{Limites científicos}
-O conselho n\~ao estima distribui\c c\~ao real de prefer\^encias; modelos compartilham vieses, corpora e pressupostos, podendo produzir falso consenso. Escores de apoio dentro da simula\c c\~ao s\~ao apenas resultados internos. Para inferir comportamento real \`e necess\'aria valida\c c\~ao com pessoas e m\'etodos emp\'iricos adequados.
+\fonte{Elaborado pelos autores (2026).}
+\end{table}
 
-\section{MVP e ordem de implementação}
+\section{Limites científicos}
+O conselho não estima distribuição real de preferências; modelos compartilham vieses, corpora e pressupostos, podendo produzir falso consenso. Escores de apoio dentro da simulação são apenas resultados internos. Para inferir comportamento real é necessária validação com pessoas e métodos empíricos adequados.
+
+\chapter{MVP e ordem de implementação}
+A Tabela~\ref{tab:fases} apresenta as fases de implementação, suas entregas e gates.
+
 \begin{longtable}{@{}p{.16\textwidth}p{.38\textwidth}p{.35\textwidth}@{}}
+\caption{Fases do MVP, entregas e gates}\label{tab:fases}\\
+\toprule\textbf{Fase} & \textbf{Entrega} & \textbf{Gate}\\\midrule\endfirsthead
 \toprule\textbf{Fase} & \textbf{Entrega} & \textbf{Gate}\\\midrule\endhead
-M0 & Schemas, modos, armazenamento, ingest\~ao, versionamento e snapshots. & Fontes e timestamps audit\'aveis.\\
-M1 & Conselho de 20 assentos documentais, personas, 6 rounds, logs, relat\'orio minorit\'ario. & Cobertura e integridade avaliadas por revis\~ao humana.\\
-M2 & Motor de matriz de conformidade, SHACL, estados e explica\c c\~oes por requisito. & Nenhum achado deriva apenas de voto sint\'etico.\\
-M3 & Branches, multi-run, sensibilidade, agentes externos e interface visual. & Reprodu\c c\~ao e isolamento entre projetos demonstrados.\\\bottomrule
+M0 & Schemas, modos, armazenamento, ingestão, versionamento e snapshots. & Fontes e timestamps auditáveis.\\
+M1 & Conselho de 20 assentos documentais, personas, 6 rounds, logs, relatório minoritário. & Cobertura e integridade avaliadas por revisão humana.\\
+M2 & Motor de matriz de conformidade, SHACL, estados e explicações por requisito. & Nenhum achado deriva apenas de voto sintético.\\
+M3 & Branches, multi-run, sensibilidade, agentes externos e interface visual. & Reprodução e isolamento entre projetos demonstrados.\\\bottomrule
 \end{longtable}
-\textbf{MVP de ponta a ponta:} carregar fonte legislativa brasileira em \term{proposed}, dossi\^e de solu\c c\~ao fict\'icia e normas efetivas selecionadas; compor conselho; rodar debate; emitir matriz de requisitos com estado \term{insufficientEvidence}/\term{proposalOnly}, obje\c c\~oes, relat\'orio de minoria, fontes e manifesto.
+\fonte{Elaborado pelos autores (2026).}
 
-\section{Cenários pedagogicos de ponta a ponta}
-\subsection{Cenário 1: revisão de política no Brasil}
-\textbf{Seed:} texto de proposta regulat\'oria, seu status oficial, PBIA, fontes econ\^omicas e documentos p\'ublicos de stakeholders. \textbf{Pergunta:} ``Quais consequ\^encias da obrigatoriedade de auditoria ex-ante merecem investiga\c c\~ao?'' Agentes de direitos digitais e trabalhadores podem contestar uma redu\c c\~ao de salvaguardas; representantes sint\'eticos de pequenas empresas podem questionar custos; peritos em fiscaliza\c c\~ao discutem capacidade institucional. A sa\'ida \`e uma matriz de tens\~oes fundamentadas, sem afirmar que a maioria dos brasileiros apoia algum regime.
+\noindent\textbf{MVP de ponta a ponta:} carregar fonte legislativa brasileira em \term{proposed}, dossiê de solução fictícia e normas efetivas selecionadas; compor conselho; rodar debate; emitir matriz de requisitos com estado \term{insufficientEvidence}/\term{proposalOnly}, objeções, relatório de minoria, fontes e manifesto.
 
-\subsection{Cenário 2: briefing de recrutamento automatizado}
-\textbf{Seed:} \term{RecruitmentScreeningAssistant} (fict\'icio), com dados de candidatos, triagem e explica\c c\~oes ainda n\~ao documentadas; marco de prote\c c\~ao de dados brasileiro selecionado e datado. \textbf{Pergunta:} ``Que evid\^encias s\~ao necess\'arias e quais riscos devem ser analisados?'' O motor legal identifica requisitos candidatos e demanda valida\c c\~ao de aplicabilidade; o conselho investiga riscos de vi\'es, explicabilidade, direitos dos titulares, efeitos trabalhistas e viabilidade de mitiga\c c\~ao. O relat\'orio n\~ao declarar\'a viola\c c\~ao se apenas faltar documenta\c c\~ao.
+\chapter{Cenários pedagógicos de ponta a ponta}
+\section{Cenário 1: revisão de política no Brasil}
+\textbf{Seed:} texto de proposta regulatória, seu status oficial, Plano Brasileiro de Inteligência Artificial (PBIA) \cite{pbia2025}, fontes econômicas e documentos públicos de stakeholders. \textbf{Pergunta:} ``Quais consequências da obrigatoriedade de auditoria ex-ante merecem investigação?'' Agentes de direitos digitais e trabalhadores podem contestar uma redução de salvaguardas; representantes sintéticos de pequenas empresas podem questionar custos; peritos em fiscalização discutem capacidade institucional. A saída é uma matriz de tensões fundamentadas, sem afirmar que a maioria dos brasileiros apoia algum regime.
 
-\subsection{O que deve ser entregue numa execução}
+\section{Cenário 2: briefing de recrutamento automatizado}
+\textbf{Seed:} \term{RecruitmentScreeningAssistant} (fictício), com dados de candidatos, triagem e explicações ainda não documentadas; marco de proteção de dados brasileiro selecionado e datado \cite{lgpd2018}. \textbf{Pergunta:} ``Que evidências são necessárias e quais riscos devem ser analisados?'' O motor legal identifica requisitos candidatos e demanda validação de aplicabilidade; o conselho investiga riscos de viés, explicabilidade, direitos dos titulares, efeitos trabalhistas e viabilidade de mitigação. O relatório não declarará violação se apenas faltar documentação.
+
+\section{O que deve ser entregue numa execução}
 \begin{enumerate}
-\item \term{ScopeStatement}: modo, norma, pa\'is, data e quest\~ao.
+\item \term{ScopeStatement}: modo, norma, país, data e questão.
 \item \term{SourceInventory}: fontes verificadas, insuficientes e propostas.
 \item \term{CouncilRoster}: estratos, fontes e lacunas.
-\item \term{ArgumentGraph}: teses, obje\c c\~oes e revis\~oes com cita\c c\~oes.
-\item \term{ComplianceMatrix} (somente modo de solu\c c\~ao).
-\item \term{PolicyTensionMatrix} (modo regulat\'orio e quando pertinente ao modo de solu\c c\~ao).
+\item \term{ArgumentGraph}: teses, objeções e revisões com citações.
+\item \term{ComplianceMatrix} (somente modo de solução).
+\item \term{PolicyTensionMatrix} (modo regulatório e quando pertinente ao modo de solução).
 \item \term{MinorityReport}, \term{Unknowns}, \term{Recommendations} condicionais.
-\item \term{RunManifest} e disponibilidade de inspe\c c\~ao por evento.
+\item \term{RunManifest} e disponibilidade de inspeção por evento.
 \end{enumerate}
 
-\section{Bibliografia e referências de implementação}
+\chapter{Considerações finais}
+\destaque{\textbf{Status desta entrega:} especificação arquitetural e funcional, não uma implementação executada. Os JSON Schemas e exemplos anexados são contratos de engenharia propostos. Toda conclusão legal dependerá de fontes oficiais atualizadas, de uma regra aplicável e da evidência concreta do caso.}
+
+\section{Fontes e referências de implementação}
 \begin{enumerate}
-\item \textbf{Fonte tecnica:} MiroFish, reposit\'orio original, \url{https://github.com/666ghj/MiroFish}, consultado em 11 nov. 2026. Fluxo de graph building, personas, simula\c c\~ao, relat\'orios e deep interaction.
-\item \textbf{Fonte tecnica:} OASIS (CAMEL-AI), \url{https://github.com/camel-ai/oasis}. Motor aberto de simula\c c\~ao social; consulta em 11 nov. 2026.
-\item \textbf{Fonte oficial:} C\^amara dos Deputados, tramita\c c\~ao do PL 2338/2023, \url{https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2487262}.
-\item \textbf{Fonte normativa de exemplo:} Lei Geral de Prote\c c\~ao de Dados Pessoais, Lei 13.709/2018, \url{https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm}.
-\item \textbf{Documento de refer\^encia fornecido:} \emph{Guia de Conformidade e Governan\c ca para Sistemas de Intelig\^encia Artificial de Alto Risco (HRAI)}.
-\item \textbf{Documento de refer\^encia fornecido:} \emph{An\'alise Comparativa e Diretrizes Estrat\'egicas para a Governan\c ca e Plano de Intelig\^encia Artificial no Brasil}.
-\item \textbf{Documento de refer\^encia fornecido:} \emph{Brainstorming de Artefatos T\'ecnicos Atemporais para Governan\c ca de IA}.
-\item \textbf{Alinhamento interno:} \emph{HRAI-GO --- Plataforma Aberta de Intelig\^encia Regulat\'oria e Governan\c ca de IA}, documento pedag\'ogico e especifica\c c\~ao preliminar do Shadow Council, 11 nov. 2026.
+\item \textbf{Fonte técnica:} MiroFish, repositório original \cite{mirofish}. Fluxo de graph building, personas, simulação, relatórios e deep interaction.
+\item \textbf{Fonte técnica:} OASIS, da CAMEL-AI \cite{camel-oasis}. Motor aberto de simulação social.
+\item \textbf{Fonte oficial:} Câmara dos Deputados, tramitação do PL 2338/2023 \cite{camara-pl2338}.
+\item \textbf{Fonte normativa de exemplo:} Lei Geral de Proteção de Dados Pessoais (LGPD), Lei 13.709/2018 \cite{lgpd2018}.
+\item \textbf{Documento de referência fornecido:} \emph{Guia de Conformidade e Governança para Sistemas de Inteligência Artificial de Alto Risco (HRAI)} \cite{estudo-guia-hrai}.
+\item \textbf{Documento de referência fornecido:} \emph{Análise Comparativa e Diretrizes Estratégicas para a Governança e Plano de Inteligência Artificial no Brasil} \cite{estudo-comparativo}.
+\item \textbf{Documento de referência fornecido:} \emph{Brainstorming de Artefatos Técnicos Atemporais para Governança de IA} \cite{estudo-brainstorm}.
+\item \textbf{Alinhamento interno:} \emph{HRAI-GO --- Plataforma Aberta de Inteligência Regulatória e Governança de IA}, documento pedagógico e especificação preliminar do Shadow Council, 11 nov. 2026 (DC-PLAT-01, \texttt{docs/hrai-go/}).
 \end{enumerate}
-\begin{infobox}
-\textbf{Status desta entrega:} especifica\c c\~ao arquitetural e funcional, n\~ao uma implementa\c c\~ao executada. Os JSON Schemas e exemplos anexados s\~ao contratos de engenharia propostos. Toda conclus\~ao legal depender\'a de fontes oficiais atualizadas, de uma regra aplic\'avel e da evid\^encia concreta do caso.
-\end{infobox}
+
+% ============================================================ ELEMENTOS PÓS-TEXTUAIS
+\postextual
+\bibliography{referencias,refs-local}
+
 \end{document}

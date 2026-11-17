@@ -10,3 +10,14 @@ runs/
 .superpowers/brainstorm/*/state/server-info
 .superpowers/brainstorm/*/state/server-instance-id
 .superpowers/brainstorm/*/state/server.pid
+
+# PDFs of these sources are published in artifacts/ by scripts/build-artifacts.sh
+docs/hrai-go/*.pdf
+docs/scse/*.pdf
+docs/latex/*.pdf
+# LaTeX auxiliary files (latexmk)
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.xdv

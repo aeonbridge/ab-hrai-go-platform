@@ -1,0 +1,103 @@
+% Modelo de relatório técnico HRAI-GO (ABNT NBR 10719:2015).
+% Copie este arquivo para docs/relatorios/<tema>/relatorio.tex e preencha os campos marcados.
+% Compilação: scripts/build-relatorios.sh <arquivo.tex>   (XeLaTeX + BibTeX via latexmk)
+% Regras: docs/PADRAO_RELATORIOS.md
+\documentclass[12pt,a4paper,oneside,english,brazil]{abntex2}
+\usepackage{hraigo-abnt}
+
+% ------------------------------------------------------------ Identificação (NBR 10719, 4.2.1.1.1)
+\titulo{Título do relatório}
+\subtitulo{subtítulo, se houver}
+\codigo{RT-XXX-00}                       % código na série HRAI-GO (ver PADRAO_RELATORIOS.md)
+\versao{1.0}
+\data{2026}                               % ano de publicação (algarismos arábicos)
+% \autor{...} \qualificacao{...} \contato{...} % padrão: Jefferson Wellington da Cunha, Doutorando
+% \patrocinador{...}                       % padrão: AeonBridge Co. (https://aeonbridge.com/)
+% \semagradecimentospatrocinio             % omite os Agradecimentos com as bases do patrocínio
+% \local{Cidade}                           % padrão: Brasil
+% \classificacao{Ostensivo (público)}      % padrão
+% \equipe{Nome -- função \\ Nome -- função} % opcional: imprime o verso da folha de rosto
+\palavraschave{Governança de IA. Inteligência regulatória. Ontologia.}
+
+\begin{document}
+\selectlanguage{brazil}
+
+% ============================================================ ELEMENTOS PRÉ-TEXTUAIS
+\pretextual
+\imprimirfolhaderostorelatorio            % obrigatório
+
+\begin{resumorelatorio}                   % obrigatório (NBR 6028): objetivo, método, resultados, conclusões
+Texto do resumo em parágrafo único, com 150 a 500 palavras, na terceira pessoa e na voz ativa.
+Ele indica o objetivo, o método, os resultados e as conclusões do relatório.
+\end{resumorelatorio}
+
+% Listas opcionais: use quando houver mais de poucas ilustrações, tabelas ou siglas.
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+
+\begin{siglas}
+  \item[ABNT] Associação Brasileira de Normas Técnicas
+  \item[HRAI-GO] Human-centred Regulatory AI, Governance Observatory
+\end{siglas}
+
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*                          % obrigatório
+\cleardoublepage
+
+% ============================================================ ELEMENTOS TEXTUAIS
+\textual
+
+\chapter{Introdução}
+Apresente o objetivo, o escopo e a justificativa do relatório. Cite as fontes no sistema
+autor-data \cite{nbr10719} ou com o autor no texto, conforme \citeonline{pbia2025}.
+
+\chapter{Desenvolvimento}
+\section{Método}
+Descreva o método de forma que outra equipe possa reproduzi-lo.
+
+\section{Resultados}
+\begin{table}[htb]
+  \caption{Título da tabela, acima dela}\label{tab:exemplo}
+  \centering
+  \begin{tabular}{lr}
+    \toprule
+    Item & Valor\\
+    \midrule
+    Exemplo & 1\\
+    \bottomrule
+  \end{tabular}
+  \fonte{Elaborado pelos autores (2026).}
+\end{table}
+
+A Tabela~\ref{tab:exemplo} mostra o formato de tabela: legenda acima, fonte abaixo, sem linhas verticais.
+
+\begin{figure}[htb]
+  \caption{Título da figura, acima dela}\label{fig:exemplo}
+  \centering
+  \begin{tikzpicture}
+    \node[draw=lagoa,rounded corners,minimum width=4cm,minimum height=1cm] {Exemplo};
+  \end{tikzpicture}
+  \fonte{Elaborado pelos autores (2026).}
+\end{figure}
+
+\chapter{Considerações finais}
+Retome os objetivos e apresente as conclusões e as recomendações.
+
+% ============================================================ ELEMENTOS PÓS-TEXTUAIS
+\postextual
+\bibliography{referencias}                 % obrigatório
+
+\begin{apendicesenv}                       % opcional: material elaborado pelos autores
+\partapendices
+\chapter{Exemplo de apêndice}
+Conteúdo complementar elaborado pelos autores.
+\end{apendicesenv}
+
+% Anexos (opcional): material não elaborado pelos autores, em \begin{anexosenv}...\end{anexosenv}
+
+\imprimirformularioidentificacao[Resumo do relatório para o formulário.]  % opcional, último elemento
+\end{document}

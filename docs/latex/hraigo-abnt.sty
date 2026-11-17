@@ -1,0 +1,306 @@
+% hraigo-abnt.sty
+% House style of HRAI-GO technical reports, layered on the abnTeX2 class.
+% Norm: ABNT NBR 10719:2015 (relatório técnico e/ou científico), with
+% NBR 6023 (referências), NBR 10520 (citações), NBR 6024 (numeração progressiva),
+% NBR 6027 (sumário), NBR 6028 (resumo) as implemented by abnTeX2.
+% Rules and rationale: docs/PADRAO_RELATORIOS.md. Template: docs/latex/modelo-relatorio-tecnico.tex.
+%
+% Usage (preamble):
+%   \documentclass[12pt,a4paper,oneside,english,brazil]{abntex2}
+%   \usepackage{hraigo-abnt}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hraigo-abnt}[2026/11/17 v1.0 HRAI-GO technical reports (ABNT NBR 10719:2015)]
+
+\@ifclassloaded{abntex2}{}{%
+  \PackageError{hraigo-abnt}{Use \string\documentclass{abntex2}}{HRAI-GO reports must use the abnTeX2 class.}}
+
+% ------------------------------------------------------------------ Engine and fonts
+% Standard engine is XeLaTeX (Unicode source). pdfLaTeX is supported as fallback.
+% Text font: Times-like (TeX Gyre Termes), 12 pt, as customary in ABNT documents.
+\RequirePackage{iftex}
+\ifPDFTeX
+  \RequirePackage[T1]{fontenc}
+  \RequirePackage[utf8]{inputenc}
+  \RequirePackage{lmodern}
+  \RequirePackage{tgtermes}
+  \RequirePackage{tgheros}
+\else
+  \RequirePackage{fontspec}
+  \setmainfont{texgyretermes}[Extension=.otf,UprightFont=*-regular,BoldFont=*-bold,
+    ItalicFont=*-italic,BoldItalicFont=*-bolditalic]
+  \setsansfont{texgyreheros}[Extension=.otf,UprightFont=*-regular,BoldFont=*-bold,
+    ItalicFont=*-italic,BoldItalicFont=*-bolditalic]
+  \setmonofont{lmmono10}[Extension=.otf,UprightFont=*-regular,ItalicFont=lmmono10-italic,
+    BoldFont=lmmonolt10-bold,BoldItalicFont=lmmonolt10-boldoblique,Scale=0.95]
+\fi
+\RequirePackage{etoolbox}
+\RequirePackage{microtype}
+\RequirePackage{indentfirst}   % NBR: first paragraph of each section is indented too
+
+% ------------------------------------------------------------------ Common packages
+\RequirePackage{graphicx}
+\RequirePackage{xcolor}
+\RequirePackage{booktabs,longtable,tabularx,array,multirow}
+\RequirePackage{enumitem}
+\RequirePackage{amssymb}
+\RequirePackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric,fit,backgrounds,calc}
+\RequirePackage[alf]{abntex2cite}   % author-date citations (NBR 10520)
+
+% ------------------------------------------------------------------ Layout (NBR 10719, 5.1-5.2)
+% A4; margins: top and left 3 cm, bottom and right 2 cm; 1.5 line spacing;
+% paragraph indent 1.25 cm. abnTeX2 already sets these; restated here so the standard is explicit.
+\setlrmarginsandblock{3cm}{2cm}{*}
+\setulmarginsandblock{3cm}{2cm}{*}
+\checkandfixthelayout
+\OnehalfSpacing
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+\emergencystretch=3em
+\frenchspacing
+
+% Numbering depth up to five levels (NBR 6024) and their presence in the summary.
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{2}
+
+% Headings (NBR 6024 + NBR 10719, 5.2): same family and size as the text (12 pt), left-aligned,
+% indicator separated from the title by one space; gradual emphasis by typographic resources:
+%   1 SEÇÃO PRIMÁRIA (bold, uppercase)      1.1 SEÇÃO SECUNDÁRIA (regular, uppercase)
+%   1.1.1 Seção terciária (bold)            1.1.1.1 Seção quaternária (regular)
+%   1.1.1.1.1 Seção quinária (italic)
+% Unnumbered titles (listas, sumário, resumo, referências, apêndices, anexos): centered, bold, uppercase.
+\renewcommand{\ABNTEXchapterfont}{\rmfamily\bfseries}
+\renewcommand{\ABNTEXchapterfontsize}{\normalsize}
+\renewcommand{\ABNTEXpartfont}{\rmfamily\bfseries}
+\renewcommand{\ABNTEXpartfontsize}{\normalsize}
+\renewcommand{\ABNTEXsectionfont}{\rmfamily\mdseries}
+\renewcommand{\ABNTEXsectionfontsize}{\normalsize}
+\renewcommand{\ABNTEXsubsectionfont}{\rmfamily\bfseries}
+\renewcommand{\ABNTEXsubsectionfontsize}{\normalsize}
+\renewcommand{\ABNTEXsubsubsectionfont}{\rmfamily\mdseries}
+\renewcommand{\ABNTEXsubsubsectionfontsize}{\normalsize}
+\renewcommand{\ABNTEXsubsubsubsectionfont}{\rmfamily\itshape}
+\renewcommand{\ABNTEXsubsubsubsectionfontsize}{\normalsize}
+\setboolean{ABNTEXupperchapter}{true}
+\setboolean{ABNTEXuppersection}{true}
+\setboolean{ABNTEXuppersubsection}{false}
+\setboolean{ABNTEXuppersubsubsection}{false}
+\setboolean{ABNTEXuppersubsubsubsection}{false}
+% One blank line (1.5 spacing) after a primary title; one before and after subsection titles.
+\setlength{\afterchapskip}{\baselineskip}
+\setbeforesecskip{\baselineskip}\setaftersecskip{\baselineskip}
+\setbeforesubsecskip{\baselineskip}\setaftersubsecskip{\baselineskip}
+\setbeforesubsubsecskip{\baselineskip}\setaftersubsubsecskip{\baselineskip}
+% Running head: page number only, size 10, top right (NBR 10719, 5.4). No chapter title in the header.
+\makeoddhead{abntheadings}{}{}{\ABNTEXfontereduzida\thepage}
+\makeevenhead{abntheadings}{\ABNTEXfontereduzida\thepage}{}{}
+\makeheadrule{abntheadings}{\textwidth}{0pt}
+% Summary (NBR 6027): entries mirror the typography of the headings they list.
+% Secondary sections appear in uppercase in the summary, as in the text.
+\let\hraigo@addcontentsline\addcontentsline
+\renewcommand{\addcontentsline}[3]{%
+  \ifstrequal{#1}{toc}{\ifstrequal{#2}{section}%
+    {\hraigo@addcontentsline{#1}{#2}{\texorpdfstring{\MakeTextUppercase{#3}}{#3}}}%
+    {\hraigo@addcontentsline{#1}{#2}{#3}}}{\hraigo@addcontentsline{#1}{#2}{#3}}}
+\renewcommand{\cftchapterfont}{\bfseries\hyphenpenalty=10000}\renewcommand{\cftchapterpagefont}{\bfseries}
+\renewcommand{\cftsectionfont}{\normalfont\hyphenpenalty=10000}\renewcommand{\cftsectionpagefont}{\normalfont}
+\renewcommand{\cftsubsectionfont}{\bfseries\hyphenpenalty=10000}\renewcommand{\cftsubsectionpagefont}{\bfseries}
+\renewcommand{\cftsubsubsectionfont}{\normalfont}\renewcommand{\cftsubsubsectionpagefont}{\normalfont}
+\renewcommand{\cftparagraphfont}{\itshape}\renewcommand{\cftparagraphpagefont}{\itshape}
+% Headings: no hyphenation, ragged right (avoids "ontolo-gia" in headings).
+\newcommand{\hraigonohyphen}{\raggedright\hyphenpenalty=10000\exhyphenpenalty=10000}
+\AtBeginDocument{%
+  \renewcommand{\chaptitlefont}{\ABNTEXchapterfont\ABNTEXchapterfontsize\hraigonohyphen}%
+  \setsecheadstyle{\ABNTEXsectionfont\ABNTEXsectionfontsize\hraigonohyphen\ABNTEXsectionupperifneeded}%
+  \setsubsecheadstyle{\ABNTEXsubsectionfont\ABNTEXsubsectionfontsize\hraigonohyphen\ABNTEXsubsectionupperifneeded}%
+  \setsubsubsecheadstyle{\ABNTEXsubsubsectionfont\ABNTEXsubsubsectionfontsize\hraigonohyphen\ABNTEXsubsubsectionupperifneeded}%
+  \setsubsubsubsecheadstyle{\ABNTEXsubsubsubsectionfont\ABNTEXsubsubsubsectionfontsize\hraigonohyphen\ABNTEXsubsubsubsectionupperifneeded}}
+% Long tables: caption as wide as the text block (default would be 4in).
+\setlength{\LTcapwidth}{\textwidth}
+% \paragraph is the 5th numbered level in abnTeX2; never use it as a run-in heading (NBR 6024 forbids skipped levels).
+
+% House style for code listings (single spacing, gray frame).
+\RequirePackage{listings}
+\lstdefinestyle{hraigo}{basicstyle=\ttfamily\footnotesize\SingleSpacing,breaklines=true,columns=fullflexible,
+  frame=single,rulecolor=\color{cinza!40},backgroundcolor=\color{cinza!5},xleftmargin=4pt,xrightmargin=4pt,
+  keepspaces=true,showstringspaces=false}
+
+% ------------------------------------------------------------------ Palette (sober, prints in grayscale)
+\definecolor{latao}{HTML}{B9802A}
+\definecolor{tinta}{HTML}{0B1220}
+\definecolor{lagoa}{HTML}{1F8A80}
+\definecolor{coral}{HTML}{C9533A}
+\definecolor{cinza}{HTML}{5B6676}
+\definecolor{violeta}{HTML}{7B61D1}
+
+% ------------------------------------------------------------------ Hyperlinks and PDF metadata
+\hypersetup{hidelinks,bookmarksdepth=4,pdfcreator={LaTeX with abnTeX2 and hraigo-abnt},pdfauthor={Jefferson Wellington da Cunha}}
+
+% ------------------------------------------------------------------ Identification fields (NBR 10719, 4.2.1.1.1)
+% Beyond abnTeX2's \titulo, \autor, \local, \data, \instituicao, \tipotrabalho:
+\providecommand{\imprimircodigo}{}
+\providecommand{\imprimirsubtitulo}{}
+\providecommand{\imprimirprojeto}{}
+\providecommand{\imprimirclassificacao}{}
+\providecommand{\imprimirversao}{}
+\providecommand{\imprimirvolume}{}
+\providecommand{\imprimirequipe}{}
+\providecommand{\imprimirpalavraschave}{}
+\providecommand{\imprimirendereco}{}
+% \codigo{RT-ONT-01}: identification code of the report in the HRAI-GO series.
+\newcommand{\codigo}[1]{\renewcommand{\imprimircodigo}{#1}}
+% \subtitulo{...}: subtitle; printed after the title, preceded by a colon.
+\newcommand{\subtitulo}[1]{\renewcommand{\imprimirsubtitulo}{#1}}
+% \projeto{...}: project/program the report belongs to (defaults to the platform name).
+\newcommand{\projeto}[1]{\renewcommand{\imprimirprojeto}{#1}}
+% \classificacao{...}: security classification (e.g., Ostensivo / público).
+\newcommand{\classificacao}[1]{\renewcommand{\imprimirclassificacao}{#1}}
+% \versao{...}: document version, printed on the title page.
+\newcommand{\versao}[1]{\renewcommand{\imprimirversao}{#1}}
+% \volume{...}: volume number, only for multi-volume reports.
+\newcommand{\volume}[1]{\renewcommand{\imprimirvolume}{#1}}
+% \equipe{...}: technical team, printed on the back of the title page (optional element).
+\newcommand{\equipe}[1]{\renewcommand{\imprimirequipe}{#1}}
+% \palavraschave{a. b. c.}: keywords, separated and ended by full stops (NBR 6028).
+\newcommand{\palavraschave}[1]{\renewcommand{\imprimirpalavraschave}{#1}}
+% \localexecutora{...}: address of the executing institution (identification form).
+\newcommand{\localexecutora}[1]{\renewcommand{\imprimirendereco}{#1}}
+
+\providecommand{\imprimirqualificacao}{}
+\providecommand{\imprimircontato}{}
+\providecommand{\imprimirpatrocinador}{}
+% \qualificacao{...}: title or role of the author (NBR 10719 allows it to show authority).
+\newcommand{\qualificacao}[1]{\renewcommand{\imprimirqualificacao}{#1}}
+% \contato{...}: author's e-mail addresses.
+\newcommand{\contato}[1]{\renewcommand{\imprimircontato}{#1}}
+% \patrocinador{...}: sponsoring organization of the project (with link to its site).
+\newcommand{\patrocinador}[1]{\renewcommand{\imprimirpatrocinador}{#1}}
+
+% Platform defaults; reports override only what differs.
+% Authorship: the work belongs to the doctoral candidate; AeonBridge Co. sponsors the project.
+\newcommand{\nomeplataforma}{HRAI-GO: Human-centred Regulatory AI, Governance Observatory}
+\instituicao{HRAI-GO: Human-centred Regulatory AI, Governance Observatory}
+\autor{Jefferson Wellington da Cunha}
+\qualificacao{Doutorando}
+\contato{jc@aeonbridge.com \textbar\ jefferson.cunha@ufpe.br}
+\patrocinador{\href{https://aeonbridge.com/}{AeonBridge Co.}}
+\local{Brasil}
+\tipotrabalho{Relatório técnico}
+\projeto{HRAI-GO: Human-centred Regulatory AI, Governance Observatory}
+\classificacao{Ostensivo (público)}
+
+% ------------------------------------------------------------------ Title page per NBR 10719 (4.2.1.1.1)
+% Order: responsible body; project title; report title; subtitle; volume; code;
+% security classification; author; place; year.
+\newcommand{\imprimirfolhaderostorelatorio}{%
+  \begin{titlingpage}
+    \begin{center}
+      % NBR 10719 title page: all 12 pt, centered, 1.5 spacing; only the title in bold.
+      \normalsize\rmfamily\OnehalfSpacing
+      \MakeTextUppercase{\imprimirinstituicao}\par
+      \ifdefempty{\imprimirpatrocinador}{}{Patrocínio: \imprimirpatrocinador\par}
+      \vfill
+      \imprimirautor\par
+      \ifdefempty{\imprimirqualificacao}{}{\imprimirqualificacao\par}
+      \ifdefempty{\imprimircontato}{}{\imprimircontato\par}
+      \vfill
+      {\bfseries\imprimirtitulo\ifdefempty{\imprimirsubtitulo}{}{:}}%
+        \ifdefempty{\imprimirsubtitulo}{}{ \imprimirsubtitulo}\par
+      \vspace{\baselineskip}
+      \ifdefempty{\imprimirvolume}{}{Volume \imprimirvolume\par}
+      \imprimirtipotrabalho\ \imprimircodigo\par
+      \ifdefempty{\imprimirversao}{}{Versão \imprimirversao\par}
+      Classificação de segurança: \imprimirclassificacao\par
+      \vfill
+      \imprimirlocal\par
+      \imprimirdata\par
+    \end{center}
+  \end{titlingpage}%
+  \ifdefempty{\imprimirequipe}{}{
+    \begin{titlingpage}
+      \vspace*{\fill}
+      \noindent\textbf{Equipe técnica}\par\medskip
+      \noindent\imprimirequipe
+    \end{titlingpage}}%
+  \imprimirpatrocinio}
+
+% ------------------------------------------------------------------ Agradecimentos: bases do patrocínio
+% NBR 10719, 4.2.1.3: "agradecimentos" is the optional pre-textual element, placed after the title page and
+% before the abstract, where support received is acknowledged. Here it states the bases of the sponsorship.
+% \imprimirpatrocinio is printed automatically by \imprimirfolhaderostorelatorio.
+% \semagradecimentospatrocinio suppresses it; \renewcommand{\textopatrocinio}{...} replaces the text.
+\newif\ifhraigo@patrocinio \hraigo@patrociniotrue
+\newcommand{\semagradecimentospatrocinio}{\hraigo@patrociniofalse}
+\newcommand{\textopatrocinio}{%
+  Este trabalho é de autoria do doutorando Jefferson Wellington da Cunha e tem o patrocínio da
+  \href{https://aeonbridge.com/}{AeonBridge Co.} (\url{https://aeonbridge.com/}). O patrocínio não confere
+  autoria nem direito de decisão sobre o conteúdo, as conclusões ou as recomendações deste documento. Ele se
+  apoia em três bases:
+  \begin{alineas}
+    \item \textbf{recursos humanos qualificados}: profissionais que apoiam o desenvolvimento da plataforma, a
+      engenharia de ontologias e de software e a condução das sessões de deliberação;
+    \item \textbf{recursos financeiros}: custeio do desenvolvimento e da operação do projeto, inclusive o
+      acesso aos modelos de linguagem usados pela plataforma;
+    \item \textbf{infraestrutura}: ambiente de computação, repositório, publicação do observatório e serviços
+      de dados da sessão ao vivo, além dos modelos de linguagem usados na elaboração e na execução do
+      \textit{Shadow Council}.
+  \end{alineas}
+  \par Os modelos que compõem o \textit{Shadow Council} estão configurados em
+  \texttt{config/scse/models.toml} e são acessados pelo OpenRouter, com o provedor original fixado. Cada
+  estrato distribui seus assentos entre quatro provedores e cada provedor tem três níveis:
+  \begin{alineas}
+    \item Anthropic: Claude Opus~5.5, Claude Sonnet~5.5 e Claude Haiku~5.5;
+    \item OpenAI: GPT-6 Sol, GPT-6.1 Terra e GPT-6 Luna;
+    \item xAI: Grok~4.7, Grok~4.6 e Grok~4.5;
+    \item Google: Gemini~4 Argon, Gemini~3.8 Flash e Gemini~3.5 Flash Lite.
+  \end{alineas}
+  \par Na elaboração da plataforma e dos documentos foi usado o assistente Claude Code (Anthropic), com o modelo
+  Claude Opus~5.5, sob revisão do autor. Os modelos ampliam o que é considerado, mas não decidem: toda
+  conclusão publicada passa por revisão humana.}
+\newcommand{\imprimirpatrocinio}{%
+  \ifhraigo@patrocinio
+    \begin{agradecimentos}
+      \textopatrocinio
+    \end{agradecimentos}
+  \fi}
+
+% ------------------------------------------------------------------ Resumo (NBR 6028) with keywords
+% \begin{resumorelatorio} ... \end{resumorelatorio}: abstract in Portuguese followed by \palavraschave.
+\newenvironment{resumorelatorio}{\begin{resumo}}{%
+  \par\vspace{\onelineskip}\noindent\textbf{Palavras-chave}: \imprimirpalavraschave\end{resumo}}
+
+% ------------------------------------------------------------------ Identification form (NBR 10719, Annex A)
+% Optional last post-textual element. Fill fields through the identification macros above.
+\newcommand{\imprimirformularioidentificacao}[1][]{%
+  \chapter*[Formulário de identificação]{Formulário de identificação}
+  \addcontentsline{toc}{chapter}{Formulário de identificação}
+  \noindent\small
+  \begin{tabularx}{\textwidth}{|X|p{5cm}|}
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Dados do relatório técnico e/ou científico}}\\\hline
+    Título e subtítulo: \imprimirtitulo\ifdefempty{\imprimirsubtitulo}{}{: \imprimirsubtitulo}
+      & Classificação de segurança: \imprimirclassificacao\\\hline
+    Tipo de relatório: \imprimirtipotrabalho & Data: \imprimirdata\\\hline
+    Título do projeto/programa/plano: \imprimirprojeto & N.º: \imprimircodigo\\\hline
+    \multicolumn{2}{|p{\dimexpr\textwidth-2\tabcolsep}|}{Autor: \imprimirautor\ifdefempty{\imprimirqualificacao}{}{, \imprimirqualificacao}\ifdefempty{\imprimircontato}{}{ (\imprimircontato)}}\\\hline
+    \multicolumn{2}{|p{\dimexpr\textwidth-2\tabcolsep}|}{Instituição patrocinadora: \imprimirpatrocinador}\\\hline
+    \multicolumn{2}{|p{\dimexpr\textwidth-2\tabcolsep}|}{Resumo: #1}\\\hline
+    \multicolumn{2}{|p{\dimexpr\textwidth-2\tabcolsep}|}{Palavras-chave: \imprimirpalavraschave}\\\hline
+    \multicolumn{2}{|p{\dimexpr\textwidth-2\tabcolsep}|}{Edição: \imprimirversao\hfill N.º de páginas: \pageref*{LastPage}\hfill Volume: \ifdefempty{\imprimirvolume}{único}{\imprimirvolume}}\\\hline
+    \multicolumn{2}{|p{\dimexpr\textwidth-2\tabcolsep}|}{Distribuidor: \imprimirpatrocinador}\\\hline
+  \end{tabularx}\normalsize}
+\RequirePackage{lastpage}
+
+% ------------------------------------------------------------------ Shared editorial macros
+% \destaque{...}: highlighted reading note (thin gray frame, black text: NBR text is black). Do not use \nota: in abnTeX2 it is the "Nota:" line under floats.
+\newcommand{\destaque}[1]{\par\smallskip\noindent\fcolorbox{cinza}{white}{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\small\SingleSpacing #1}}\par\smallskip}
+% \alerta{...}: warning note (thicker black frame, black text).
+\newcommand{\alerta}[1]{\par\smallskip\noindent{\setlength{\fboxrule}{1pt}\fcolorbox{black}{white}{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\small\SingleSpacing\textbf{Atenção.} #1}}}\par\smallskip}
+% L column: ragged-right X column for tabularx.
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+% Tables and figures: single spacing inside floats; legend above, source below (\fonte{...}).
+\AtBeginEnvironment{tabularx}{\SingleSpacing}
+\AtBeginEnvironment{tabular}{\SingleSpacing}
+\AtBeginEnvironment{longtable}{\SingleSpacing}
+
+\endinput

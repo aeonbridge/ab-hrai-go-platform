@@ -39,8 +39,7 @@ def main():
              "contestada_por": contra, "nota": str(g.value(s, RDFS.comment) or "")}
         dados.append(d)
         obs = "; ".join([c["afirmacao"] for c in contra] + ([d["nota"]] if d["nota"] else []))
-        cor = {"contestada": "coral", "com evidência": "lagoa", "sem evidência no corpus": "cinza"}[status]
-        linhas.append(f"{d['id']} & {tex(d['tese'])} & \\textcolor{{{cor}}}{{\\textbf{{{tex(status)}}}}} & {tex(obs) or '--'} \\\\")
+        linhas.append(f"{d['id']} & {tex(d['tese'])} & \\textbf{{{tex(status)}}} & {tex(obs) or '--'} \\\\")
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "tabelas").mkdir(exist_ok=True)
     (OUT / "tabelas/afirmacoes.tex").write_text("\n".join(linhas) + "\n", encoding="utf-8")

@@ -7,9 +7,17 @@
 
 Repositório de artefatos da plataforma de inteligência regulatória HRAI-GO e do **Shadow Council Simulation Environment (SCSE)**.
 
+## Autoria e patrocínio
+
+- **Autor:** Jefferson Wellington da Cunha, doutorando. Contato: jc@aeonbridge.com | jefferson.cunha@ufpe.br.
+- **Patrocinador do projeto:** [AeonBridge Co.](https://aeonbridge.com/). O patrocínio cobre recursos humanos qualificados, recursos financeiros e infraestrutura, incluindo os modelos de linguagem usados na elaboração e na execução do Shadow Council (`config/scse/models.toml`). As bases do patrocínio estão na seção Agradecimentos de cada relatório.
+
+O trabalho, incluindo relatórios, especificações, ontologias e código, é do doutorando. A [AeonBridge Co.](https://aeonbridge.com/) patrocina o projeto.
+
 ## Estrutura
 
 - `docs/NOMENCLATURA.md`: nome oficial da plataforma e regras de uso.
+- `docs/PADRAO_RELATORIOS.md`: padrão ABNT NBR 10719:2015 dos relatórios técnicos (modelo e pacote em `docs/latex/`).
 - `docs/hrai-go/`: documento pedagógico da plataforma, em LaTeX.
 - `docs/scse/`: especificação pedagógica do ambiente de simulação, em LaTeX.
 - `ontologies/scse/`: serializações equivalentes Turtle (.ttl) e RDF/XML (.owl), incluindo regras SWRL.

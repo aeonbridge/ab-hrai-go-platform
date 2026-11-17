@@ -7,6 +7,7 @@ name = "scse"
 version = "0.1.0"
 description = "Shadow Council Simulation Environment of HRAI-GO (Human-centred Regulatory AI, Governance Observatory): deliberative multi-agent, multi-provider runtime"
 requires-python = ">=3.11"
+authors = [{ name = "Jefferson Wellington da Cunha", email = "jefferson.cunha@ufpe.br" }]
 dependencies = ["jsonschema>=4.20", "python-dotenv>=1.0"]
 
 [project.optional-dependencies]

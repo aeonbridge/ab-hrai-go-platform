@@ -3,15 +3,16 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 mkdir -p artifacts/hrai-go artifacts/scse artifacts/previews/scse
+# Shared ABNT NBR 10719 house style and bibliography (docs/PADRAO_RELATORIOS.md).
+export TEXINPUTS="$PWD/docs/latex//:${TEXINPUTS:-}"
+export BIBINPUTS="$PWD/docs/latex//:${BIBINPUTS:-}"
 latex_run() {
   local source="$1" destination="$2"
-  for pass in 1 2; do
-    xelatex -interaction=nonstopmode -halt-on-error -file-line-error \
-      -output-directory="$destination" "$source" >/tmp/hrai-tex-build.log 2>&1 || {
-        tail -n 100 /tmp/hrai-tex-build.log >&2
-        return 1
-      }
-  done
+  latexmk -xelatex -bibtex -interaction=nonstopmode -halt-on-error -file-line-error \
+    -outdir="$destination" "$source" >/tmp/hrai-tex-build.log 2>&1 || {
+      tail -n 100 /tmp/hrai-tex-build.log >&2
+      return 1
+    }
 }
 latex_run docs/hrai-go/HRAI-GO_Plataforma_Inteligencia_Regulatoria_Shadow_Council.tex artifacts/hrai-go
 latex_run docs/scse/SCSE_Shadow_Council_Simulation_Spec.tex artifacts/scse
@@ -23,10 +24,13 @@ python3 - <<'PY'
 from pathlib import Path
 from zipfile import ZipFile, ZIP_DEFLATED
 root = Path.cwd()
+# Style and bibliography needed to recompile any packaged .tex source.
+LATEX_SUPPORT = [('docs/latex/hraigo-abnt.sty', 'hraigo-abnt.sty'), ('docs/latex/referencias.bib', 'referencias.bib')]
 plans = {
     'artifacts/hrai-go/HRAI-GO_Documento_Pedagogico_Completo.zip': [
         ('docs/hrai-go/HRAI-GO_Plataforma_Inteligencia_Regulatoria_Shadow_Council.tex', 'HRAI-GO_Plataforma_Inteligencia_Regulatoria_Shadow_Council.tex'),
         ('artifacts/hrai-go/HRAI-GO_Plataforma_Inteligencia_Regulatoria_Shadow_Council.pdf', 'HRAI-GO_Plataforma_Inteligencia_Regulatoria_Shadow_Council.pdf'),
+        *LATEX_SUPPORT,
     ],
     'artifacts/scse/SCSE_Ontology_TTL_OWL.zip': [
         ('ontologies/scse/SCSE_Shadow_Council_Ontology.ttl', 'SCSE_Shadow_Council_Ontology.ttl'),
@@ -35,6 +39,7 @@ plans = {
     'artifacts/scse/SCSE_Shadow_Council_Especificacao_Completa.zip': [
         ('artifacts/scse/SCSE_Shadow_Council_Simulation_Spec.pdf', 'SCSE_Shadow_Council_Simulation_Spec.pdf'),
         ('docs/scse/SCSE_Shadow_Council_Simulation_Spec.tex', 'SCSE_Shadow_Council_Simulation_Spec.tex'),
+        *LATEX_SUPPORT,
         ('docs/scse/SCSE_README.md', 'SCSE_README.md'),
         *[(f'schemas/scse/{f}', f) for f in ('scenario.schema.json','report.schema.json')],
         *[(f'examples/scse/{f}', f) for f in ('example_policy_request.json','example_solution_request.json','example_solution_report.json')],
@@ -42,6 +47,7 @@ plans = {
     'artifacts/scse/SCSE_REENVIO_COMPLETO.zip': [
         ('artifacts/scse/SCSE_REENVIO.pdf', 'SCSE_REENVIO.pdf'),
         ('artifacts/scse/SCSE_REENVIO.tex', 'SCSE_REENVIO.tex'),
+        *LATEX_SUPPORT,
         ('assets/scse/SCSE_Capa_Diagrama.svg', 'SCSE_Capa_Diagrama.svg'),
         ('docs/scse/SCSE_README.md', 'SCSE_README.md'),
         *[(f'schemas/scse/{f}', f) for f in ('scenario.schema.json','report.schema.json')],

@@ -1,91 +1,133 @@
-\documentclass[11pt,a4paper]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[brazil]{babel}
-\usepackage{lmodern}
-\usepackage{microtype}
-\usepackage[margin=2.3cm]{geometry}
-\usepackage{booktabs,longtable,tabularx,array}
-\usepackage{xcolor}
-\usepackage{tikz}
-\usetikzlibrary{positioning,arrows.meta}
-\usepackage{enumitem}
-\usepackage{caption}
-\usepackage{fancyhdr}
-\usepackage[hidelinks]{hyperref}
-\emergencystretch=3em
+% ESP-ONT-02: especificação técnica HRAI-GO (ABNT NBR 10719:2015).
+% Compilação: scripts/build-relatorios.sh docs/especificacoes/ESP-ONT-02/especificacao.tex
+% Regras: docs/PADRAO_RELATORIOS.md. Tabela do apêndice A gerada por scripts/ontologia/afirmacoes.py.
+\documentclass[12pt,a4paper,oneside,english,brazil]{abntex2}
+\usepackage{hraigo-abnt}
 
-\definecolor{latao}{HTML}{B9802A}
-\definecolor{tinta}{HTML}{0B1220}
-\definecolor{lagoa}{HTML}{1F8A80}
-\definecolor{coral}{HTML}{C9533A}
-\definecolor{cinza}{HTML}{5B6676}
-
-\pagestyle{fancy}\fancyhf{}
-\lhead{\small\color{cinza}HRAI-GO · Especificação ESP-ONT-02}
-\rhead{\small\color{cinza}\thepage}
-\renewcommand{\headrulewidth}{0.3pt}
-\newcommand{\nota}[1]{\par\smallskip\noindent\fcolorbox{latao}{latao!6}{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\small #1}}\par\smallskip}
-\newcommand{\alerta}[1]{\par\smallskip\noindent\fcolorbox{coral}{coral!6}{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\small #1}}\par\smallskip}
-\newcolumntype{L}{>{\raggedright\arraybackslash}X}
-
-\title{\textbf{Uso prático da ontologia HRAI-GO na análise comparada de modelos de governança de IA e na deliberação humana com o Shadow Council}\\[4pt]
-\large Documentação do trabalho realizado e especificação de ajuste do método}
-\author{Plataforma HRAI-GO · Aeonbridge}
-\date{Especificação ESP-ONT-02 · 17 de novembro de 2026 · complementa o RT-ONT-01}
+% ------------------------------------------------------------ Identificação (NBR 10719, 4.2.1.1.1)
+\titulo{Uso prático da ontologia HRAI-GO na análise comparada de modelos de governança de IA e na deliberação humana com o Shadow Council}
+\subtitulo{documentação do trabalho realizado e especificação de ajuste do método}
+\codigo{ESP-ONT-02}
+\versao{17 nov. 2026}
+\data{2026}
+\tipotrabalho{Especificação técnica}
+\palavraschave{Governança de IA. Ontologia regulatória. Análise comparada. Perguntas de competência. Shadow Council.}
 
 \begin{document}
-\maketitle
-\thispagestyle{empty}
+\selectlanguage{brazil}
 
-\begin{abstract}
-\noindent O relatório RT-ONT-01 mostrou que a ontologia regulatória HRAI-GO, embora consistente e testada, hoje não é usada por nenhum produto. Este documento faz duas coisas. Primeiro, documenta o trabalho feito: o corpus de modelos de governança (Brasil, União Europeia, Reino Unido e Estados Unidos), o agrupamento por epistemologia regulatória, a ontologia base e a situação atual. Segundo, especifica o ajuste do método para que a ontologia passe a responder, de forma verificável, às perguntas que motivaram o projeto:
-\begin{itemize}[leftmargin=*]
-  \item em que o Brasil se distingue dos demais modelos;
-  \item o que foi incorporado do AI Act e não deveria ter sido;
-  \item o que foi omitido e deveria ser considerado;
-  \item como um Shadow Council pode apoiar decisões coletivas humanas.
-\end{itemize}
-A camada comparativa usa a taxonomia de regulação de IA de Alanoca et al.\ (FAccT 2025), com as definições originais e sete extensões declaradas. Inclui também a eliminação do cadastro paralelo que hoje alimenta a câmara: os 22 componentes e mais seis conjuntos editados à mão (seção~\ref{sec:fonteunica}). A mudança central é tratar o raciocínio como um conjunto de \emph{perguntas de competência} explícitas, cada uma ligada a uma regra ou consulta, a dados com fonte e a uma tela da plataforma. As teses da análise comparativa anexada entram no grafo como \emph{afirmações}, não como fatos. Aplicamos isso às 12 teses do documento anexo, contra o corpus do repositório: 4 são contestadas (3 pelo próprio corpus e 1 por um estudo revisado por pares sobre o texto atual do PL), 6 têm evidência anexada e 2 não têm evidência nenhuma.
-\end{abstract}
+% ============================================================ ELEMENTOS PRÉ-TEXTUAIS
+\pretextual
+\imprimirfolhaderostorelatorio
 
-\tableofcontents
-\newpage
+\begin{resumorelatorio}
+O relatório RT-ONT-01 mostrou que a ontologia regulatória do HRAI-GO (Human-centred Regulatory AI, Governance Observatory), embora consistente e testada, hoje não é usada por nenhum produto. Este documento faz duas coisas. Primeiro, documenta o trabalho feito: o corpus de modelos de governança (Brasil, União Europeia, Reino Unido e Estados Unidos), o agrupamento por epistemologia regulatória, a ontologia base e a situação atual. Segundo, especifica o ajuste do método para que a ontologia passe a responder, de forma verificável, às três perguntas norteadoras do projeto. A primeira, que ancora as demais, é quais especificidades do Brasil em relação às demais jurisdições analisadas devem nortear um modelo de governança de IA com foco estratégico para o Brasil como nação, e não apenas uma proposta regulatória baseada em princípios e valores afins. As outras duas, respondidas à luz dela, são o que está sendo considerado e não deveria e o que não está sendo considerado e deveria. O Shadow Council é o meio de apoiar a decisão coletiva humana sobre essas respostas, que a própria plataforma entrega de forma inicial ao fim do \emph{bootstrap}. A camada comparativa usa a taxonomia de regulação de IA de Alanoca et al.\ (FAccT 2025), com as definições originais e sete extensões declaradas. Inclui também a eliminação do cadastro paralelo que hoje alimenta a câmara: os 22 componentes e mais seis conjuntos editados à mão (capítulo~\ref{sec:fonteunica}). A mudança central é tratar o raciocínio como um conjunto de \emph{perguntas de competência} explícitas, cada uma ligada a uma regra ou consulta, a dados com fonte e a uma tela da plataforma. As teses da análise comparativa anexada entram no grafo como \emph{afirmações}, não como fatos. Aplicamos isso às 12 teses do documento anexo, contra o corpus do repositório: 4 são contestadas (3 pelo próprio corpus e 1 por um estudo revisado por pares sobre o texto atual do PL), 6 têm evidência anexada e 2 não têm evidência nenhuma.
+\end{resumorelatorio}
+
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+
+\begin{siglas}
+  \item[ANPD] Autoridade Nacional de Proteção de Dados
+  \item[BEN] Balanço Energético Nacional
+  \item[CadÚnico] Cadastro Único para Programas Sociais
+  \item[CECIA] Comitê de Especialistas e Cientistas de IA
+  \item[CGEE] Centro de Gestão e Estudos Estratégicos
+  \item[CI] Integração contínua (\emph{continuous integration})
+  \item[EBIA] Estratégia Brasileira de Inteligência Artificial
+  \item[EO] \emph{Executive Order}
+  \item[EUA] Estados Unidos da América
+  \item[FAccT] ACM Conference on Fairness, Accountability, and Transparency
+  \item[GPAI] \emph{General-purpose AI} (IA de propósito geral)
+  \item[HRAI-GO] Human-centred Regulatory AI, Governance Observatory
+  \item[IRI] \emph{Internationalized Resource Identifier}
+  \item[LAI] Lei de Acesso à Informação
+  \item[LGPD] Lei Geral de Proteção de Dados Pessoais
+  \item[LLM] \emph{Large language model} (modelo de linguagem de grande escala)
+  \item[MCTI] Ministério da Ciência, Tecnologia e Inovação
+  \item[ME/EPP] Microempresa e empresa de pequeno porte
+  \item[NIST] National Institute of Standards and Technology
+  \item[PBIA] Plano Brasileiro de Inteligência Artificial
+  \item[PC] Pergunta de competência
+  \item[PL] Projeto de lei
+  \item[PME] Pequenas e médias empresas
+  \item[RF] Requisito funcional
+  \item[RMF] \emph{Risk Management Framework}
+  \item[RNF] Requisito não funcional
+  \item[SC] Shadow Council
+  \item[SCSE] Shadow Council Simulation Environment
+  \item[SIA] Sistema Nacional de Regulação e Governança de IA
+  \item[SKOS] \emph{Simple Knowledge Organization System}
+  \item[SPARQL] \emph{SPARQL Protocol and RDF Query Language}
+  \item[STEM] Ciência, tecnologia, engenharia e matemática
+  \item[SUS] Sistema Único de Saúde
+  \item[SWRL] \emph{Semantic Web Rule Language}
+  \item[TBox] \emph{Terminological box} (camada de classes e propriedades da ontologia)
+  \item[UE] União Europeia
+\end{siglas}
+
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+% ============================================================ ELEMENTOS TEXTUAIS
+\textual
 
 %=====================================================================
-\section{O que foi feito}
+\chapter{Introdução}\label{cap:intro}
 
-\subsection{Corpus de modelos de governança}
-Os documentos estão em \texttt{docs/ai-regulations/} e foram lidos e indexados para este trabalho:
+O relatório RT-ONT-01 mostrou que a ontologia regulatória do HRAI-GO (Human-centred Regulatory AI, Governance Observatory), embora consistente e testada, hoje não é usada por nenhum produto. Esta especificação complementa o RT-ONT-01 e tem dois objetivos. O primeiro é documentar o trabalho feito: o corpus de modelos de governança do Brasil, da União Europeia (UE), do Reino Unido e dos Estados Unidos da América (EUA), o agrupamento por epistemologia regulatória, a ontologia base e a situação atual. O segundo é especificar o ajuste do método para que a ontologia passe a responder, de forma verificável, às três perguntas norteadoras do projeto, as mesmas do RT-VIS-03:
+\begin{description}[style=nextline,leftmargin=12mm,labelindent=0pt]
+  \item[QN1] Quais são as especificidades do Brasil em relação às demais jurisdições analisadas que devem nortear um modelo de governança de IA com foco estratégico para o Brasil como nação, e não apenas uma proposta regulatória baseada em princípios e valores afins?
+  \item[QN2] O que está sendo considerado e não deveria?
+  \item[QN3] O que não está sendo considerado e deveria?
+\end{description}
 
-\begin{center}\small
+A QN1 define o ângulo epistemológico, e a QN2 e a QN3 estão subordinadas a ela. ``Considerado'' e ``omitido'' só têm sentido diante de um critério. Sem a QN1, o critério passa a ser, por omissão, o AI Act, e a análise se reduz à aderência a princípios compartilhados. Com a QN1, o critério são as especificidades do Brasil: contexto nacional, capacidades instaladas, exposições a risco e objetivos estratégicos de desenvolvimento. Por isso esta especificação exige que todo item da QN2 e da QN3 cite a especificidade da QN1 em que se apoia (RF-18).
+
+O Shadow Council não é uma quarta pergunta: é o meio pelo qual pessoas deliberam sobre as respostas, com perspectivas sintéticas que ampliam o que é considerado sem decidir (capítulo~\ref{sec:sc}). O critério de conclusão do \emph{bootstrap} é a plataforma, usada sobre o próprio corpus, publicar uma resposta inicial às três perguntas.
+
+
+O documento está organizado assim. O capítulo~\ref{cap:feito} documenta o corpus, o agrupamento e a situação atual. O capítulo~\ref{cap:base} descreve a ontologia base e o que falta para a comparação ser possível. O capítulo~\ref{cap:pc} ajusta o método com perguntas de competência, e o capítulo~\ref{cap:braiact} aplica o método à comparação entre o Brasil e o AI Act. O capítulo~\ref{sec:sc} trata do Shadow Council e da interação humana, o capítulo~\ref{sec:alanoca} da taxonomia de base e suas extensões, e o capítulo~\ref{sec:fonteunica} da eliminação do cadastro paralelo da câmara. O capítulo~\ref{cap:impl} reúne a especificação de implementação. O apêndice~\ref{ap:afirmacoes} traz as teses da análise comparativa anexada, classificadas pelo grafo, e o apêndice~\ref{ap:repro} traz os comandos de reprodução.
+
+%=====================================================================
+\chapter{O que foi feito}\label{cap:feito}
+
+\section{Corpus de modelos de governança}
+Os documentos estão em \texttt{docs/ai-regulations/} e foram lidos e indexados para este trabalho. A Tabela~\ref{tab:corpus} os relaciona por jurisdição.
+
+\begin{table}[htbp]
+\caption{Corpus de modelos de governança}\label{tab:corpus}
+\centering\small
 \begin{tabularx}{\linewidth}{l L r l}
 \toprule
 Jurisdição & Documento & págs. & Natureza\\
 \midrule
-Brasil & Plano Brasileiro de IA 2024--2028 (MCTI/CGEE, VN 8) & 108 & plano de política\\
-Brasil & PL 2338/2023, texto inicial (Senado, 03/05/2023) & 31 & proposta legislativa\\
-UE & Regulamento (UE) 2024/1689, AI Act (Jornal Oficial L) & 144 & lei vigente\\
-UE & AI Act Service Desk; AI hub ecosystem; strategy & 16 & material de apoio\\
-Reino Unido & \emph{A pro-innovation approach to AI regulation} (white paper) & 93 & política, não estatutária\\
-Reino Unido & \emph{AI regulation impact assessment} & 84 & análise de impacto\\
-EUA & NIST AI 100-1, AI Risk Management Framework 1.0 & 48 & guia voluntário\\
+Brasil & Plano Brasileiro de Inteligência Artificial (PBIA) 2024--2028 (Ministério da Ciência, Tecnologia e Inovação, MCTI, e Centro de Gestão e Estudos Estratégicos, CGEE; VN 8) \cite{pbia2025} & 108 & plano de política\\
+Brasil & Projeto de Lei (PL) 2338/2023, texto inicial (Senado, 03/05/2023) \cite{pl2338-2023} & 31 & proposta legislativa\\
+UE & Regulamento (UE) 2024/1689, AI Act (Jornal Oficial L) \cite{aiact2024} & 144 & lei vigente\\
+UE & AI Act Service Desk; AI hub ecosystem; strategy \cite{ec-aiact-sip,aiod,ec-ai-continent} & 16 & material de apoio\\
+Reino Unido & \emph{A pro-innovation approach to AI regulation} (white paper) \cite{uk-proinnovation2023} & 93 & política, não estatutária\\
+Reino Unido & \emph{AI regulation impact assessment} \cite{uk-impact2023} & 84 & análise de impacto\\
+EUA & National Institute of Standards and Technology (NIST) AI 100-1, AI Risk Management Framework (RMF) 1.0 \cite{nist-ai-rmf2023} & 48 & guia voluntário\\
 \bottomrule
 \end{tabularx}
-\end{center}
+\fonte{Elaborado pelos autores (2026).}
+\end{table}
 
-\subsection{Agrupamento por epistemologia regulatória}
+\section{Agrupamento por epistemologia regulatória}
 Cada modelo parte de uma tese diferente sobre o que é o problema e quem deve resolvê-lo. O corpus sustenta a leitura a seguir; as citações são dos próprios documentos.
 
 \begin{description}[leftmargin=*, style=nextline]
   \item[União Europeia: direitos fundamentais via regulação horizontal de produto, por risco \emph{ex ante}.]
-  Lei vigente e transversal, com quatro faixas de risco: proibições (art.~5), alto risco (art.~6 e anexo~III), transparência (art.~50) e modelos de propósito geral. Exige avaliação de conformidade antes do mercado e cria órgãos próprios, como o AI Office, o Board e o painel científico (art.~68). Compensa o custo com sandboxes e medidas para PME (arts.~57 e~62).
+  Lei vigente e transversal \cite{aiact2024}, com quatro faixas de risco: proibições (art.~5), alto risco (art.~6 e anexo~III), transparência (art.~50) e modelos de propósito geral. Exige avaliação de conformidade antes do mercado e cria órgãos próprios, como o AI Office, o Board e o painel científico (art.~68). Compensa o custo com sandboxes e medidas para pequenas e médias empresas (PME) (arts.~57 e~62).
   \item[Reino Unido: pró-inovação, por princípios, contextual.]
-  São cinco princípios (\emph{safety, security and robustness}; \emph{transparency and explainability}; \emph{fairness}; \emph{accountability and governance}; \emph{contestability and redress}). O governo afirma: ``\emph{We will not put these principles on a statutory footing initially}''. A aplicação fica com os reguladores setoriais existentes, apoiados por funções centrais, e a análise de impacto quantifica custos e benefícios.
+  São cinco princípios (\emph{safety, security and robustness}; \emph{transparency and explainability}; \emph{fairness}; \emph{accountability and governance}; \emph{contestability and redress}). O governo afirma: ``\emph{We will not put these principles on a statutory footing initially}'' \cite{uk-proinnovation2023}. A aplicação fica com os reguladores setoriais existentes, apoiados por funções centrais, e a análise de impacto quantifica custos e benefícios \cite{uk-impact2023}.
   \item[Estados Unidos (no corpus): gestão voluntária de risco organizacional.]
-  O NIST AI RMF se declara ``\emph{voluntary, rights-preserving, non-sector-specific, and use-case agnostic}''. Ele organiza o trabalho em quatro funções: \emph{govern, map, measure, manage}.
+  O NIST AI RMF se declara ``\emph{voluntary, rights-preserving, non-sector-specific, and use-case agnostic}'' \cite{nist-ai-rmf2023}. Ele organiza o trabalho em quatro funções: \emph{govern, map, measure, manage}.
   \item[Brasil: modelo híbrido, desenvolvimentista no plano e de direitos na proposta.]
-  O PBIA (``IA para o Bem de Todos'') é um plano de soberania, inclusão e reindustrialização, com R\$~23,03~bi. O PL 2338 tem lógica de direitos e risco \emph{ex ante} próxima à europeia. As duas peças não estão acopladas: o eixo do PBIA que apoia a regulação e a governança recebe R\$~103,25~mi, ou 0,45\% do plano.
+  O PBIA (``IA para o Bem de Todos'') é um plano de soberania, inclusão e reindustrialização, com R\$~23,03~bi \cite{pbia2025}. O PL 2338 tem lógica de direitos e risco \emph{ex ante} próxima à europeia \cite{pl2338-2023}. As duas peças não estão acopladas: o eixo do PBIA que apoia a regulação e a governança recebe R\$~103,25~mi, ou 0,45\% do plano.
 \end{description}
 
 \alerta{\textbf{Ponto a corrigir no agrupamento.} Agrupar ``China e EUA'' como modelos ``de desenvolvimento'' esconde uma diferença essencial.
@@ -93,21 +135,21 @@ Cada modelo parte de uma tese diferente sobre o que é o problema e quem deve re
   \item Nos EUA, a política federal é de mercado e baixa regulação. O corpus só tem o NIST RMF, que é voluntário. A política federal atual e as leis estaduais, como a do Colorado, ficaram de fora.
   \item Na China, é desenvolvimento dirigido pelo Estado, com regras específicas por tipo de serviço (recomendação algorítmica, síntese profunda, IA generativa) e registro de algoritmos. Nenhum documento chinês está no corpus.
 \end{itemize}
-Recomendação: classificar pelos critérios da taxonomia de base, estendida (seção~\ref{sec:alanoca}), não por um rótulo único. Ou se inclui a China no corpus, ou ela sai da comparação. Sem fonte, ela não pode aparecer no grafo.}
+Recomendação: classificar pelos critérios da taxonomia de base, estendida (capítulo~\ref{sec:alanoca}), não por um rótulo único. Ou se inclui a China no corpus, ou ela sai da comparação. Sem fonte, ela não pode aparecer no grafo.}
 
-\subsection{Situação atual}
+\section{Situação atual}
 \begin{itemize}[leftmargin=*]
   \item \textbf{Ontologia sem uso em produto} (RT-ONT-01). Só existe instância para o Brasil, e só do PBIA. Os modelos da UE, do Reino Unido e dos EUA estão no corpus, mas não no grafo, o que torna impossível qualquer comparação \emph{pela ontologia}.
-  \item \textbf{Versão errada do PL no corpus.} O texto do PL 2338 é o inicial, de 2023. O substitutivo aprovado pelo Senado em 10/12/2024 não está no repositório. Pela imprensa, até agosto de 2026 o projeto seguia em comissão especial na Câmara, sem data de votação. Toda comparação BR $\times$ AI Act feita sobre o texto de 2023 pode estar desatualizada.
-  \item \textbf{Análise comparativa anexada fora do repositório.} O PDF ``Análise Comparativa e Diretrizes Estratégicas\ldots'' não está no repositório. As teses dele foram registradas a partir do resumo fornecido (anexo~\ref{ap:afirmacoes}).
-  \item \textbf{Câmara ao vivo alimentada por um cadastro paralelo.} Os 22 componentes exibidos vêm de \texttt{web/assets/modelo.js}, sem ligação com a ontologia. Só 10 têm correspondente na instância (RT-ONT-01, seção~5.5). O cadastro paralelo vai além dos componentes; ver a seção~\ref{sec:fonteunica}.
+  \item \textbf{Versão do PL no corpus (atualizado em 17/11/2026).} Até esta data, o corpus só tinha o texto inicial de 2023. O texto aprovado pelo Senado em 10/12/2024 \cite{pl2338-2024}, com 80 artigos, foi incorporado em \texttt{docs/ai-regulations/br/} a partir do inteiro teor publicado pela Câmara (SHA-256 \texttt{82e26405\ldots 892c8ca}). Ele é o texto vigente da proposição: segundo a ficha de tramitação \cite{camara-pl2338}, consultada em 17/11/2026, o projeto aguarda parecer do relator, deputado Aguinaldo Ribeiro, na Comissão Especial, sem substitutivo apresentado. Comparações BR $\times$ AI Act feitas sobre o texto de 2023 precisam ser refeitas sobre este texto (RF-01).
+  \item \textbf{Análise comparativa anexada fora do repositório.} O PDF ``Análise Comparativa e Diretrizes Estratégicas\ldots'' \cite{estudo-comparativo} não está no repositório. As teses dele foram registradas a partir do resumo fornecido (apêndice~\ref{ap:afirmacoes}).
+  \item \textbf{Câmara ao vivo alimentada por um cadastro paralelo.} Os 22 componentes exibidos vêm de \texttt{web/assets/modelo.js}, sem ligação com a ontologia. Só 10 têm correspondente na instância (RT-ONT-01, seção~5.5). O cadastro paralelo vai além dos componentes; ver o capítulo~\ref{sec:fonteunica}.
 \end{itemize}
 
 %=====================================================================
-\section{Ontologia base}
+\chapter{Ontologia base}\label{cap:base}
 
-\subsection{O que ela já oferece}
-A ontologia geral v1.1.0 tem 66 classes, 98 propriedades de objeto, 43 de dados e 23 regras SWRL seguras. Ela foi desenhada para ser multinacional: jurisdição, instrumento, versão, dispositivo, requisito, contexto nacional, indicador, tensão, lacuna, afirmação, alternativa, stakeholder, posição e deliberação são classes gerais, não brasileiras.
+\section{O que ela já oferece}
+A ontologia geral v1.1.0 tem 66 classes, 98 propriedades de objeto, 43 de dados e 23 regras \emph{Semantic Web Rule Language} (SWRL) seguras. Ela foi desenhada para ser multinacional: jurisdição, instrumento, versão, dispositivo, requisito, contexto nacional, indicador, tensão, lacuna, afirmação, alternativa, stakeholder, posição e deliberação são classes gerais, não brasileiras.
 
 Para comparar modelos, ela já tem:
 \begin{itemize}[leftmargin=*]
@@ -117,46 +159,54 @@ Para comparar modelos, ela já tem:
   \item perspectivas sintéticas disjuntas de stakeholders identificados.
 \end{itemize}
 
-\subsection{O que falta para a comparação ser possível}\label{sec:faltas}
+\section{O que falta para a comparação ser possível}\label{sec:faltas}
 \begin{enumerate}[leftmargin=*]
-  \item \textbf{Critérios de desenho regulatório.} Não há como dizer, com evidência, que um modelo é estatutário ou voluntário, \emph{ex ante} ou \emph{ex post}, com agência nova ou com reguladores existentes, que sanções prevê ou se regula a tecnologia ou a aplicação. A seção~\ref{sec:alanoca} resolve isso com a taxonomia de Alanoca et al.\ (2025), estendida.
+  \item \textbf{Critérios de desenho regulatório.} Não há como dizer, com evidência, que um modelo é estatutário ou voluntário, \emph{ex ante} ou \emph{ex post}, com agência nova ou com reguladores existentes, que sanções prevê ou se regula a tecnologia ou a aplicação. O capítulo~\ref{sec:alanoca} resolve isso com a taxonomia de \citeonline{alanoca2025}, estendida.
   \item \textbf{Funções de governança comuns.} As 28 áreas da taxonomia da câmara (classificação de risco, avaliação de impacto, supervisão, contestação\ldots) não existem na ontologia. Sem um vocabulário comum de funções, não há eixo para comparar dispositivos de jurisdições diferentes.
   \item \textbf{Correspondência entre dispositivos.} Não há como registrar que o art.~X do PL corresponde, adapta ou diverge do art.~Y do AI Act. É isso que responde ``o que o Brasil incorporou''.
   \item \textbf{Capacidade pressuposta.} Um requisito pressupõe capacidades (auditores, orçamento de fiscalização, profissionais), mas a ontologia não liga o requisito à capacidade nem a capacidade ao indicador do contexto. É isso que responde ``incorporou e não deveria'', na forma objetiva de um requisito sem capacidade instalada.
-  \item \textbf{Exposição de risco do contexto.} Ativos como SUS e CadÚnico são também exposições. Falta ligar indicadores de exposição às funções que deveriam cobri-los. É isso que responde ``omitiu e deveria''.
+  \item \textbf{Exposição de risco do contexto.} Ativos como o Sistema Único de Saúde (SUS) e o Cadastro Único para Programas Sociais (CadÚnico) são também exposições. Falta ligar indicadores de exposição às funções que deveriam cobri-los. É isso que responde ``omitiu e deveria''.
   \item \textbf{Tipos de relação entre afirmações.} Hoje só existe \texttt{challengedByClaim}. Contradizer, qualificar e complementar são coisas diferentes: no anexo, ``SUS é ativo'' e ``SUS é exposição de risco'' não se contradizem, e a ontologia não tem como dizer isso.
   \item \textbf{Registro de decisão humana.} Há deliberação e posição, mas não há a decisão final com a justificativa que cita afirmações, nem o registro de mudança de posição depois da discussão.
 \end{enumerate}
 
 %=====================================================================
-\section{Ajuste do método: perguntas de competência}
+\chapter{Ajuste do método: perguntas de competência}\label{cap:pc}
 
-O RT-ONT-01 descreveu o \emph{como} (camadas, revisão, raciocínio, propagação). O que faltou foi o \emph{para quê}. A especificação passa a ser guiada por perguntas de competência (PC). Cada uma tem um mecanismo (regra ou consulta), os dados de que precisa e a tela onde aparece. Uma PC sem tela é trabalho que ninguém vê; uma tela sem PC é afirmação sem lastro.
+O RT-ONT-01 descreveu o \emph{como} (camadas, revisão, raciocínio, propagação). O que faltou foi o \emph{para quê}. A especificação passa a ser guiada por perguntas de competência (PC). Cada uma tem um mecanismo (regra ou consulta), os dados de que precisa e a tela onde aparece. Uma PC sem tela é trabalho que ninguém vê; uma tela sem PC é afirmação sem lastro. Cada PC serve a uma pergunta norteadora, e a PC9 operacionaliza a QN1. A Tabela~\ref{tab:pcs} lista as nove PC; as consultas usam \emph{SPARQL Protocol and RDF Query Language} (SPARQL).
 
-\begin{center}\small
+\begin{table}[htbp]
+\caption{Perguntas de competência, mecanismos e telas}\label{tab:pcs}
+\centering\small
 \begin{tabularx}{\linewidth}{l L L L}
 \toprule
 PC & Pergunta & Mecanismo & Onde aparece\\
 \midrule
-PC1 & Que funções de governança cada modelo cobre, e com que força jurídica (vigente, proposta, plano, voluntária)? & R24 + consulta de matriz & Comparador: matriz jurisdição $\times$ função\\
-PC2 & Que dispositivos do Brasil correspondem, adaptam ou divergem do AI Act? & correspondências + R26 & Comparador: lado a lado por função\\
-PC3 & O que o Brasil incorporou que pressupõe capacidade que o contexto não tem? & R25 (indicador abaixo do limiar) & Câmara: anel ``incorporado sem capacidade''\\
-PC4 & O que o contexto brasileiro expõe a risco e nenhum instrumento cobre? & SPARQL sob avaliação de cobertura fechada & Câmara: lacunas de exposição\\
-PC5 & Como cada modelo se classifica nos critérios da taxonomia de base estendida, e com que evidência? & codificações com evidência + R28 & Ficha do modelo; comparador\\
-PC6 & Que afirmações sustentam cada recomendação, quem as contesta e com que evidência? & R05, R06, R17 (já existem) & Mural de tensões; ficha\\
+PC9 (QN1) & Que especificidades do Brasil frente às demais jurisdições (contexto nacional, capacidades, exposições e objetivos estratégicos) devem orientar o modelo de governança, e com que evidência? & consulta sobre \texttt{NationalSpecificity} + PC1, PC5 e indicadores (RF-07, RF-18) & Comparador: ``o que é próprio do Brasil''; relatório das perguntas norteadoras\\
+PC1 (QN1) & Que funções de governança cada modelo cobre, e com que força jurídica (vigente, proposta, plano, voluntária)? & R24 + consulta de matriz & Comparador: matriz jurisdição $\times$ função\\
+PC2 (QN2) & Que dispositivos do Brasil correspondem, adaptam ou divergem do AI Act, e qual especificidade explica ou contraria cada divergência? & correspondências + R26 & Comparador: lado a lado por função\\
+PC3 (QN2) & O que o Brasil incorporou que pressupõe capacidade que o contexto não tem? & R25 (indicador abaixo do limiar) & Câmara: anel ``incorporado sem capacidade''\\
+PC4 (QN3) & O que o contexto brasileiro expõe a risco e nenhum instrumento cobre? & SPARQL sob avaliação de cobertura fechada & Câmara: lacunas de exposição\\
+PC5 (QN1) & Como cada modelo se classifica nos critérios da taxonomia de base estendida, e com que evidência? & codificações com evidência + R28 & Ficha do modelo; comparador\\
+PC6 (QN2/3) & Que afirmações sustentam cada recomendação, quem as contesta e com que evidência? & R05, R06, R17 (já existem) & Mural de tensões; ficha\\
 PC7 & Quando um texto muda, o que é reaberto? & R10 a R13 (já existem) & Monitoramento\\
 PC8 & Numa deliberação, que posições humanas e sintéticas apoiam ou contestam cada alternativa, e o que mudou depois da discussão? & R21, R29, R30 & Mesa da sala; relatório de deliberação\\
 \bottomrule
 \end{tabularx}
-\end{center}
+\fonte{Elaborado pelos autores (2026).}
+\end{table}
 
-\subsection{Extensões da TBox (v1.2.0, aditivas)}\label{sec:dimensoes}
-\begin{center}\small
+\section{Extensões da TBox (v1.2.0, aditivas)}\label{sec:dimensoes}
+A \emph{terminological box} (TBox), camada de classes e propriedades da ontologia, recebe as extensões da Tabela~\ref{tab:tbox}.
+
+\begin{table}[htbp]
+\caption{Extensões da TBox v1.2.0}\label{tab:tbox}
+\centering\small
 \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{50mm} L}
 \toprule
 Elemento & Definição e regra de uso\\
 \midrule
-\texttt{RegulatoryDesignCriterion}\newline(esquema SKOS) & As 12 categorias e os 25 critérios de Alanoca et al.\ (2025), com as definições do paper, mais as extensões E1 a E7 da seção~\ref{sec:alanoca}.\\
+\texttt{RegulatoryDesignCriterion}\newline(esquema \emph{Simple Knowledge Organization System}, SKOS) & As 12 categorias e os 25 critérios de \citeonline{alanoca2025}, com as definições do paper, mais as extensões E1 a E7 do capítulo~\ref{sec:alanoca}.\\
 \texttt{CriterionCoding}\newline(n-ária) & Versão do instrumento, critério, valor numa escala definida, dispositivo que justifica, codificador e decisão de revisão (extensões E4 e E5).\\
 \texttt{SubstantiveArea}\newline(esquema SKOS) & Extensão E3: as 28 áreas da câmara mais IA generativa e modelos de propósito geral, mapeadas às funções do NIST (\emph{govern, map, measure, manage}), aos capítulos do AI Act e aos critérios da taxonomia onde houver relação.\\
 \texttt{provisionAddressesFunction} & Liga dispositivo, princípio ou ação de plano a uma área substantiva.\\
@@ -166,12 +216,13 @@ Elemento & Definição e regra de uso\\
 \texttt{RiskExposureIndicator}\newline$\sqsubseteq$ \texttt{ContextIndicator}\newline\texttt{exposureConcernsFunction} & Exposição do contexto (por exemplo, volume de dados sensíveis em uso estatal) ligada à função que deveria cobri-la.\\
 \texttt{CoverageAssessment} & Declaração explícita de mundo fechado: ``para a jurisdição J, no snapshot S, o corpus foi varrido para a função F''. Só sob ela a ausência vira lacuna.\\
 \texttt{claimQualifies}\newline\texttt{claimComplements} & Ao lado de \texttt{challengedByClaim}: qualificar e complementar não são contestar.\\
-\texttt{DecisionRecord}, \texttt{decisionSelects}, \texttt{decisionCitesClaim}, \texttt{positionRevisedAs} & \textbf{No módulo SCSE} (seção~\ref{sec:modulos}), não no núcleo: decisão humana com justificativa rastreável e registro de mudança de posição.\\
+\texttt{DecisionRecord}, \texttt{decisionSelects}, \texttt{decisionCitesClaim}, \texttt{positionRevisedAs} & \textbf{No módulo Shadow Council Simulation Environment (SCSE)} (seção~\ref{sec:modulos}), não no núcleo: decisão humana com justificativa rastreável e registro de mudança de posição.\\
 \bottomrule
 \end{tabularx}
-\end{center}
+\fonte{Elaborado pelos autores (2026).}
+\end{table}
 
-\subsection{Regras novas (R24 a R30), todas de sinalização}
+\section{Regras novas (R24 a R30), todas de sinalização}
 \begin{description}[leftmargin=*, style=nextline]
   \item[R24 FunctionCoverage] Dispositivo de versão de instrumento da jurisdição J que trata a função F $\Rightarrow$ \texttt{jurisdictionAddressesFunction(J,F)}. A força jurídica vem da classe do instrumento: cobertura por proposta é distinta de cobertura vigente.
   \item[R25 CapacityShortfall] Valor do indicador abaixo do limiar inferior $\Rightarrow$ \texttt{CapacityShortfallIndicator}. Requisito que pressupõe essa capacidade $\Rightarrow$ \texttt{requirementHasCapacityRisk}. Isso é sinal para investigar, não juízo de inviabilidade.
@@ -179,10 +230,10 @@ Elemento & Definição e regra de uso\\
   \item[R27] Não existe como regra, porque SWRL não tem negação. ``Exposição sem cobertura'' é uma consulta SPARQL válida só dentro de um \texttt{CoverageAssessment}. A interface deve mostrar o escopo da avaliação junto com a lacuna.
   \item[R28 DesignProfile] Combinações de valores codificados com evidência $\Rightarrow$ perfil derivado (por exemplo: lei horizontal + \emph{ex ante} alto + camada de aplicação $\Rightarrow$ ``regulação horizontal por risco''). O perfil é rótulo de leitura; os critérios continuam visíveis.
   \item[R29 SyntheticSupport] Posição sintética que apoia ou contesta uma afirmação $\Rightarrow$ a afirmação recebe \texttt{hasSyntheticSupport} ou \texttt{hasSyntheticChallenge}, nunca apoio humano.
-  \item[R30 DivergentAlternative] Alternativa com apoio e contestação vindos de estratos diferentes $\Rightarrow$ \texttt{DivergentAlternative}, para a deliberação mostrar onde está o desacordo real.
+  \item[R30 DivergentAlternative] Alternativa com apoio e contestação vindos de estratos diferentes $\Rightarrow$ \texttt{Divergent\allowbreak Alternative}, para a deliberação mostrar onde está o desacordo real.
 \end{description}
 
-\nota{\textbf{Invariantes que continuam valendo} e que o teste da TBox deve estender às regras novas:
+\destaque{\textbf{Invariantes que continuam valendo} e que o teste da TBox deve estender às regras novas:
 \begin{itemize}[leftmargin=*]
   \item nenhuma regra afirma status jurídico, conformidade, publicação ou decisão;
   \item toda conclusão carrega a cadeia até a fonte;
@@ -190,30 +241,31 @@ Elemento & Definição e regra de uso\\
 \end{itemize}}
 
 %=====================================================================
-\section{Brasil $\times$ AI Act: como responder com a ontologia}
+\chapter{Brasil \texorpdfstring{$\times$}{x} AI Act: como responder com a ontologia}\label{cap:braiact}
 
-\subsection{As três perguntas e seus mecanismos}
+\section{As três perguntas e seus mecanismos}
+As perguntas são respondidas nesta ordem, porque a QN2 e a QN3 usam as especificidades que a QN1 identifica como critério.
 \begin{description}[leftmargin=*, style=nextline]
-  \item[Especificidades do Brasil frente às demais localidades (PC1, PC5).]
-  A resposta é o perfil de cada modelo nas quatro dimensões, com evidência, e a matriz de funções cobertas por força jurídica. O que só o Brasil tem aparece como linha da matriz com cobertura brasileira e sem par: por exemplo, plano de soberania computacional com orçamento, nuvem de governo e LLM em português. O que só os outros têm aparece como lacuna brasileira.
-  \item[O que foi considerado e não deveria (PC2 + PC3).]
-  Primeiro, PC2 identifica o que foi \emph{transposto} do AI Act (correspondência equivalente ou adaptada). Em seguida, PC3 cruza os requisitos transpostos com as capacidades que eles pressupõem e com os indicadores do contexto. O resultado não é ``não deveria'', mas ``transposto sem capacidade instalada, segundo o indicador I da fonte S''. A decisão de retirar ou adaptar continua sendo humana (seção~\ref{sec:sc}).
-  \item[O que não foi considerado e deveria (PC4 + PC2).]
-  Exposições do contexto sem função que as cubra (PC4), mais funções que o AI Act cobre e o Brasil não (PC2 com tipo ausente). As duas listas só valem dentro de um \texttt{CoverageAssessment}, com o escopo e o snapshot explícitos.
+  \item[QN1. Especificidades do Brasil que devem orientar um modelo de governança estratégico (PC9, PC1, PC5).]
+  A pergunta vai além da regulação: um modelo de governança com foco estratégico inclui planos, investimento, capacidade do Estado e objetivos de soberania e desenvolvimento. Por isso as extensões E2 (objetivo primário) e E6 (capacidade de implementação) entram na resposta ao lado dos critérios regulatórios. Cada especificidade é registrada como \texttt{NationalSpecificity}, com evidência (dispositivo, indicador com fonte e ano-base, ou objetivo do PBIA) e comparação com as demais jurisdições (RF-18). A resposta é o perfil de cada modelo nas quatro dimensões, com evidência, e a matriz de funções cobertas por força jurídica. O que só o Brasil tem aparece como linha da matriz com cobertura brasileira e sem par: por exemplo, plano de soberania computacional com orçamento, nuvem de governo e modelo de linguagem de grande escala (LLM, \emph{large language model}) em português. O que só os outros têm aparece como lacuna brasileira.
+  \item[QN2. O que foi considerado e não deveria, à luz da QN1 (PC2 + PC3).]
+  Primeiro, PC2 identifica o que foi \emph{transposto} do AI Act (correspondência equivalente ou adaptada). Em seguida, PC3 cruza os requisitos transpostos com as capacidades que eles pressupõem e com os indicadores do contexto. O resultado não é ``não deveria'', mas ``transposto sem capacidade instalada, segundo o indicador I da fonte S''. Cada item cita a especificidade da QN1 que contraria ou ignora; uma divergência do AI Act, sozinha, não é achado. A decisão de retirar ou adaptar continua sendo humana (capítulo~\ref{sec:sc}).
+  \item[QN3. O que não foi considerado e deveria, à luz da QN1 (PC4 + PC2).]
+  Exposições do contexto sem função que as cubra (PC4), mais funções que o AI Act cobre e o Brasil não (PC2 com tipo ausente). As duas listas só valem dentro de um \texttt{CoverageAssessment}, com o escopo e o snapshot explícitos. Uma função que o AI Act cobre e o Brasil não só entra na QN3 se uma especificidade da QN1 a exigir.
 \end{description}
 
-\subsection{Aplicação às teses da análise comparativa anexada}
-As 12 teses do documento anexo entraram no grafo como \texttt{PolicyClaim}\footnote{Arquivo \texttt{ontologies/regulatory/afirmacoes/}\allowbreak\texttt{A1\_analise\_comparativa\_BR\_AIAct.ttl}.}, ligadas às evidências do corpus e às contra-afirmações que o próprio corpus sustenta. O raciocinador do RT-ONT-01 classificou cada uma; a tabela completa está no anexo~\ref{ap:afirmacoes}, gerada automaticamente. Resumo:
+\section{Aplicação às teses da análise comparativa anexada}\label{sec:teses}
+As 12 teses do documento anexo \cite{estudo-comparativo} entraram no grafo como \texttt{PolicyClaim}\footnote{Arquivo \texttt{ontologies/regulatory/afirmacoes/}\allowbreak\texttt{A1\_analise\_comparativa\_BR\_AIAct.ttl}.}, ligadas às evidências do corpus e às contra-afirmações que o próprio corpus sustenta. O raciocinador do RT-ONT-01 classificou cada uma; a tabela completa está no apêndice~\ref{ap:afirmacoes} (Tabela~\ref{tab:afirmacoes}), gerada automaticamente. Resumo:
 
 \begin{itemize}[leftmargin=*]
-  \item \textcolor{coral}{\textbf{4 contestadas}}:
+  \item \textbf{4 contestadas}:
   \begin{itemize}
-    \item \textbf{C01, barreiras a startups.} O texto de 2023 já prevê condições diferenciadas para ME/EPP e startups (art.~33, parágrafo único) e sandbox (arts.~38 a~41). O efeito sobre a entrada é empírico e não está medido.
+    \item \textbf{C01, barreiras a startups.} O texto de 2023 já prevê condições diferenciadas para microempresas e empresas de pequeno porte (ME/EPP) e startups (art.~33, parágrafo único) e sandbox (arts.~38 a~41) \cite{pl2338-2023}. O efeito sobre a entrada é empírico e não está medido.
     \item \textbf{C05, ``carece de salvaguardas contra vieses''.} O PL prevê direito à não discriminação e à correção de vieses (art.~5º, V e art.~12) e dados testados contra vieses no uso estatal de alto risco (art.~21, III). A lacuna real é outra: nada disso está em vigor.
     \item \textbf{C06, ``evitar proibições rígidas''.} Proibição de risco excessivo e sandbox coexistem no PL e no AI Act. Escolher entre os dois é decisão normativa, não constatação.
-    \item \textbf{C04, ``sem instância técnica independente''.} Vale para o texto de 2023. Segundo Alanoca et al.~(2025), o substitutivo do Senado cria o Comitê de Especialistas e Cientistas de IA (CECIA) dentro do SIA. A questão passa a ser a independência e o mandato do comitê, não a existência dele. A evidência é secundária e precisa ser confirmada no texto primário (RF-01).
+    \item \textbf{C04, ``sem instância técnica independente''.} Vale para o texto de 2023. O texto aprovado pelo Senado cria o Comitê de Especialistas e Cientistas de Inteligência Artificial (Cecia) dentro do Sistema Nacional de Regulação e Governança de IA (SIA) (art.~45, IV, e art.~54) \cite{pl2338-2024}, como já indicava \citeonline{alanoca2025}. A evidência agora é primária. A questão passa a ser a independência e o mandato do comitê, não a existência dele.
   \end{itemize}
-  \item \textcolor{lagoa}{\textbf{6 com evidência anexada}}:
+  \item \textbf{6 com evidência anexada}:
   \begin{itemize}
     \item C07, 0,45\% do orçamento do PBIA;
     \item C08, 89,2\% de renováveis, dado de 2023;
@@ -222,22 +274,22 @@ As 12 teses do documento anexo entraram no grafo como \texttt{PolicyClaim}\footn
     \item C11, Nuvem Soberana;
     \item C12, supercomputador Santos Dumont.
   \end{itemize}
-  \item \textcolor{cinza}{\textbf{2 sem evidência no corpus}}: C02, custo de conformidade, e C03, escassez de STEM. São hipóteses. Para entrar na discussão como fato, precisam de indicador com fonte.
+  \item \textbf{2 sem evidência no corpus}: C02, custo de conformidade, e C03, escassez de profissionais de ciência, tecnologia, engenharia e matemática (STEM). São hipóteses. Para entrar na discussão como fato, precisam de indicador com fonte.
 \end{itemize}
 
 \alerta{\textbf{O que isso significa para a narrativa do evento.} Quatro das teses mais fortes do anexo, justamente as que respondem ``o que o Brasil incorporou e não deveria'' e ``o que omitiu'', estão contestadas ou sem evidência no corpus. Elas podem estar certas, mas, do jeito que estão, não se sustentam diante de quem conhece o texto do PL. O método proposto não descarta essas teses: ele as coloca na mesa com a contra-evidência, que é exatamente o que um público de governo vai fazer.}
 
-\subsection{Observações sobre os ativos brasileiros do anexo}
+\section{Observações sobre os ativos brasileiros do anexo}
 \begin{itemize}[leftmargin=*]
   \item \textbf{Dados do SUS e do CadÚnico.} São ativo e, ao mesmo tempo, exposição de risco: dados sensíveis de populações vulneráveis. No grafo, entram como dois \texttt{ContextIndicator} (ativo e \texttt{RiskExposureIndicator}) ligados à mesma tensão, com \texttt{claimComplements}. Tratá-los só como ativo, como faz o anexo, contradiz a própria preocupação do anexo com vieses no uso estatal (C05).
-  \item \textbf{Matriz elétrica.} O dado de 89,2\% é de 2023. Fonte externa ao corpus (BEN 2025) indica 88,2\% para 2024. O indicador deve carregar o ano-base, e a câmara deve exibi-lo.
+  \item \textbf{Matriz elétrica.} O dado de 89,2\% é de 2023. Fonte externa ao corpus (Balanço Energético Nacional, BEN 2025) indica 88,2\% para 2024. O indicador deve carregar o ano-base, e a câmara deve exibi-lo.
   \item \textbf{Assimetria de financiamento (0,45\%).} Ela é o melhor exemplo para PC3: requisitos do PL que exigem fiscalização $\to$ capacidade ``orçamento de supervisão'' $\to$ indicador ``Eixo 5 / total''. O que falta é o limiar, ou seja, quanto custaria supervisionar. Sem esse dado, o ``risco de estrangulamento'' (C07) continua sendo inferência.
 \end{itemize}
 
 %=====================================================================
-\section{Shadow Council e interação humana}\label{sec:sc}
+\chapter{Shadow Council e interação humana}\label{sec:sc}
 
-\subsection{Papel: ampliar o que é considerado, não decidir}
+\section{Papel: ampliar o que é considerado, não decidir}
 O Shadow Council (SC) é um conjunto de perspectivas sintéticas por estrato, cada uma ancorada em documentos, com pontos cegos declarados e cadeiras vazias onde não há fonte. Num processo decisório coletivo humano, seu valor está em três coisas:
 \begin{enumerate}[leftmargin=*]
   \item trazer para a mesa estratos ausentes da sala: grupos afetados, trabalhadores, infraestrutura;
@@ -246,8 +298,12 @@ O Shadow Council (SC) é um conjunto de perspectivas sintéticas por estrato, ca
 \end{enumerate}
 Ele não vota, não recomenda alternativa e não produz ``síntese do conselho'' como se fosse opinião coletiva.
 
-\subsection{Protocolo de deliberação (cinco rodadas)}
-\begin{center}
+\section{Protocolo de deliberação (cinco rodadas)}
+A Figura~\ref{fig:protocolo} mostra as cinco rodadas; as caixas em latão são as etapas humanas.
+
+\begin{figure}[htbp]
+\caption{Protocolo de deliberação em cinco rodadas}\label{fig:protocolo}
+\centering
 \begin{tikzpicture}[node distance=4mm, every node/.style={font=\footnotesize},
   caixa/.style={draw=tinta!70, rounded corners=3pt, align=center, text width=27mm, minimum height=14mm},
   humano/.style={caixa, draw=latao, fill=latao!10}, seta/.style={-{Stealth[length=2mm]}, thick, color=tinta!70}]
@@ -258,7 +314,8 @@ Ele não vota, não recomenda alternativa e não produz ``síntese do conselho''
 \node[humano, below=6mm of r2] (r4) {\textbf{4 · Decisão}\\registro humano com justificativa que cita afirmações};
 \draw[seta] (r0)--(r1); \draw[seta] (r1)--(r2); \draw[seta] (r2)--(r3); \draw[seta] (r3.south) |- (r4.east);
 \end{tikzpicture}
-\end{center}
+\fonte{Elaborado pelos autores (2026).}
+\end{figure}
 
 \begin{description}[leftmargin=*, style=nextline]
   \item[Rodada 0, enquadramento.] A pergunta da sessão é uma \texttt{RegulatoryTension} do grafo, com suas afirmações e evidências (PC6). A própria tela mostra o que está contestado e o que não tem evidência.
@@ -268,7 +325,7 @@ Ele não vota, não recomenda alternativa e não produz ``síntese do conselho''
   \item[Rodada 4, decisão.] Um \texttt{DecisionRecord} humano escolhe uma alternativa, cita as afirmações em que se apoia e registra as divergências que permanecem (R30). O registro volta ao grafo como candidato, sujeito à revisão de M2.
 \end{description}
 
-\subsection{Salvaguardas}
+\section{Salvaguardas}
 \begin{itemize}[leftmargin=*]
   \item \textbf{Sintético nunca passa por humano.} A disjunção na TBox e a regra R21 garantem isso no grafo. Na interface, cor e rótulo distintos, sempre.
   \item \textbf{Sem agregação de votos sintéticos.} Contar ``12 de 20 assentos apoiam'' sugere maioria onde só há construção de perspectivas. O que se mostra é a divergência por estrato.
@@ -277,22 +334,22 @@ Ele não vota, não recomenda alternativa e não produz ``síntese do conselho''
   \item \textbf{Bajulação.} As perspectivas são geradas a partir das fontes do estrato, não da pergunta do usuário, e são avaliadas pelo cruzamento com as evidências citadas.
 \end{itemize}
 
-\subsection{Como medir se ajudou}
+\section{Como medir se ajudou}\label{sec:medir}
 \begin{itemize}[leftmargin=*]
   \item \textbf{Amplitude:} número de afirmações distintas consideradas na decisão, com e sem SC.
-  \item \textbf{Ancoragem em evidência:} fração das afirmações citadas na decisão que têm \texttt{EvidencedPolicyClaim}.
+  \item \textbf{Ancoragem em evidência:} fração das afirmações citadas na decisão que têm \texttt{Evidenced\allowbreak Policy\allowbreak Claim}.
   \item \textbf{Revisão de posição:} quantas posições mudaram entre as rodadas 1 e 3, e em direção a quê.
   \item \textbf{Divergência preservada:} quantas alternativas terminam como \texttt{DivergentAlternative} registradas na decisão, em vez de apagadas.
 \end{itemize}
 
 %=====================================================================
-\section{Taxonomia de base: Alanoca et al.\ (FAccT 2025) e extensões}\label{sec:alanoca}
+\chapter{Taxonomia de base: Alanoca et al.\ (FAccT 2025) e extensões}\label{sec:alanoca}
 
-\nota{\textbf{Declaração de método.} Para a camada comparativa da ontologia, utilizamos, onde possível, a taxonomia de regulação de IA de Alanoca, Gur-Arieh, Zick e Klyman, \emph{Comparing Apples to Oranges: A Taxonomy for Navigating the Global Landscape of AI Regulation} (FAccT~'25, doi:10.1145/3715275.3732059). Os motivos estão na seção~\ref{sec:porque}. Os 25 critérios foram adotados com as definições originais (seção~\ref{sec:onde}). Para construir a ontologia proposta, foi necessário estender a taxonomia em sete pontos (E1 a E7), a fim de comportar os casos da seção~\ref{sec:extensoes}: instrumentos não vinculantes, objetivo do modelo, cobertura substantiva, codificação com evidência, versões, capacidade de implementação e participação na implementação.}
+\destaque{\textbf{Declaração de método.} Para a camada comparativa da ontologia, utilizamos, onde possível, a taxonomia de regulação de IA de Alanoca, Gur-Arieh, Zick e Klyman, \emph{Comparing Apples to Oranges: A Taxonomy for Navigating the Global Landscape of AI Regulation} (ACM Conference on Fairness, Accountability, and Transparency, FAccT~'25, doi:10.1145/3715275.3732059) \cite{alanoca2025}. Os motivos estão na seção~\ref{sec:porque}. Os 25 critérios foram adotados com as definições originais (seção~\ref{sec:onde}). Para construir a ontologia proposta, foi necessário estender a taxonomia em sete pontos (E1 a E7), a fim de comportar os casos da seção~\ref{sec:extensoes}: instrumentos não vinculantes, objetivo do modelo, cobertura substantiva, codificação com evidência, versões, capacidade de implementação e participação na implementação.}
 
-\noindent A taxonomia é uma classificação; a ontologia vai além dela. Por isso, usar a taxonomia não substitui nenhuma parte do núcleo regulatório (instrumentos, versões, dispositivos, proveniência, regras). Ela ocupa uma camada específica: o vocabulário com que um instrumento é \emph{classificado} para comparação.
+A taxonomia é uma classificação; a ontologia vai além dela. Por isso, usar a taxonomia não substitui nenhuma parte do núcleo regulatório (instrumentos, versões, dispositivos, proveniência, regras). Ela ocupa uma camada específica: o vocabulário com que um instrumento é \emph{classificado} para comparação.
 
-\subsection{Por que esta taxonomia}\label{sec:porque}
+\section{Por que esta taxonomia}\label{sec:porque}
 \begin{enumerate}[leftmargin=*]
   \item \textbf{Mesmo objetivo.} O paper constrói a taxonomia para comparar regulações de IA entre jurisdições, que é exatamente a função da camada comparativa.
   \item \textbf{Critérios de construção compatíveis com a ontologia.} Os autores escolheram elementos presentes em todos os documentos analisados, mensuráveis ``sem excesso de discricionariedade'' e refinados por consulta a especialistas (seção~5 do paper). Mensurabilidade é condição para codificar com evidência.
@@ -301,77 +358,92 @@ Ele não vota, não recomenda alternativa e não produz ``síntese do conselho''
   \item \textbf{Vocabulário comum.} Usar uma taxonomia publicada torna a comparação legível para quem já conhece a literatura e evita um cadastro próprio paralelo.
 \end{enumerate}
 
-\subsection{Onde foi utilizada}\label{sec:onde}
-As 12 categorias e os 25 critérios entram como conceitos do esquema \texttt{RegulatoryDesignCriterion}, com as definições do paper. A tabela mostra cada critério e o estado atual da plataforma frente a ele, ou seja, o trabalho de implementação, não uma divergência de taxonomias.
+\section{Onde foi utilizada}\label{sec:onde}
+As 12 categorias e os 25 critérios entram como conceitos do esquema \texttt{Regulatory\allowbreak Design\allowbreak Criterion}, com as definições do paper. A Tabela~\ref{tab:criterios} mostra cada critério e o estado atual da plataforma frente a ele, ou seja, o trabalho de implementação, não uma divergência de taxonomias.
 
-\begin{center}\footnotesize
-\begin{longtable}{>{\raggedright\arraybackslash}p{30mm} >{\raggedright\arraybackslash}p{34mm} l >{\raggedright\arraybackslash}p{60mm}}
+{\footnotesize
+\begin{longtable}{>{\raggedright\arraybackslash}p{30mm} >{\raggedright\arraybackslash}p{34mm} l >{\raggedright\arraybackslash}p{58mm}}
+\caption{Critérios da taxonomia de base e estado atual da plataforma}\label{tab:criterios}\\
+\toprule
+Categoria (paper) & Critério (paper) & Hoje & O que já existe na plataforma\\
+\midrule\endfirsthead
+\multicolumn{4}{l}{(continuação)}\\
 \toprule
 Categoria (paper) & Critério (paper) & Hoje & O que já existe na plataforma\\
 \midrule\endhead
-Status & adoção como lei & \textcolor{lagoa}{representado} & \texttt{EnactedLegalInstrument} / \texttt{LegislativeProposal}\\
-Novelty & lei nova ou adaptada & \textcolor{coral}{a implementar} & --\\
-Maturidade digital & ecossistema legal digital & \textcolor{latao}{parcial} & \texttt{NationalContext} e normas citadas (LGPD, LAI), sem escala\\
-Scope & aplica-se a IA generativa/GPAI & \textcolor{coral}{a implementar} & --\\
-Reach & indústria & \textcolor{latao}{parcial} & \texttt{ActorRole}, sem codificação por instrumento\\
- & governo & \textcolor{latao}{parcial} & área ``IA no setor público''\\
- & indivíduos & \textcolor{coral}{a implementar} & --\\
-Enforcement & relatórios contínuos & \textcolor{latao}{parcial} & área ``transparência e registro''\\
- & auditoria de terceiros & \textcolor{latao}{parcial} & área ``avaliação de impacto''; \texttt{ComplianceAssessment}\\
- & agência existente ou nova & \textcolor{latao}{parcial} & área ``instituições de supervisão''\\
- & responsabilização & \textcolor{lagoa}{representado} & área ``responsabilização''\\
- & sandbox & \textcolor{lagoa}{representado} & área ``inovação e sandbox''\\
-Sanções & penais & \textcolor{coral}{a implementar} & --\\
- & multas & \textcolor{coral}{a implementar} & --\\
- & injunções & \textcolor{coral}{a implementar} & --\\
-Operacionalização & definição de padrões & \textcolor{lagoa}{representado} & área ``normas e certificação''\\
- & auditoria & \textcolor{latao}{parcial} & área ``avaliação de impacto''\\
- & expertise técnica & \textcolor{coral}{a implementar} & -- (relevante para a tese C04)\\
-Cooperação internacional & alinhamento a marcos globais & \textcolor{lagoa}{representado} & área ``alinhamento internacional''\\
-Consulta & sociedade civil & \textcolor{latao}{parcial} & área ``participação social''\\
- & setor privado & \textcolor{latao}{parcial} & \texttt{Stakeholder}\\
-Abordagem & \emph{ex ante} & \textcolor{latao}{parcial} & área ``classificação de risco''\\
- & \emph{ex post} & \textcolor{latao}{parcial} & áreas ``direitos e contestação'' e ``responsabilização''\\
-Camada & tecnologia & \textcolor{coral}{a implementar} & --\\
- & aplicação & \textcolor{latao}{parcial} & classificação por uso, implícita\\
-\bottomrule
-\end{longtable}
-\end{center}
+\bottomrule\endlastfoot
+Status & adoção como lei & representado & \texttt{EnactedLegalInstrument} / \texttt{LegislativeProposal}\\
+Novelty & lei nova ou adaptada & a implementar & --\\
+Maturidade digital & ecossistema legal digital & parcial & \texttt{NationalContext} e normas citadas (Lei Geral de Proteção de Dados Pessoais, LGPD; Lei de Acesso à Informação, LAI), sem escala\\
+Scope & aplica-se a IA generativa/GPAI (\emph{general-purpose AI}) & a implementar & --\\
+Reach & indústria & parcial & \texttt{ActorRole}, sem codificação por instrumento\\
+ & governo & parcial & área ``IA no setor público''\\
+ & indivíduos & a implementar & --\\
+Enforcement & relatórios contínuos & parcial & área ``transparência e registro''\\
+ & auditoria de terceiros & parcial & área ``avaliação de impacto''; \texttt{ComplianceAssessment}\\
+ & agência existente ou nova & parcial & área ``instituições de supervisão''\\
+ & responsabilização & representado & área ``responsabilização''\\
+ & sandbox & representado & área ``inovação e sandbox''\\
+Sanções & penais & a implementar & --\\
+ & multas & a implementar & --\\
+ & injunções & a implementar & --\\
+Operacionalização & definição de padrões & representado & área ``normas e certificação''\\
+ & auditoria & parcial & área ``avaliação de impacto''\\
+ & expertise técnica & a implementar & -- (relevante para a tese C04)\\
+Cooperação internacional & alinhamento a marcos globais & representado & área ``alinhamento internacional''\\
+Consulta & sociedade civil & parcial & área ``participação social''\\
+ & setor privado & parcial & \texttt{Stakeholder}\\
+Abordagem & \emph{ex ante} & parcial & área ``classificação de risco''\\
+ & \emph{ex post} & parcial & áreas ``direitos e contestação'' e ``responsabilização''\\
+Camada & tecnologia & a implementar & --\\
+ & aplicação & parcial & classificação por uso, implícita\\
+\end{longtable}}
+\fonte{Elaborado pelos autores (2026), com categorias e critérios de \citeonline{alanoca2025}.}
+
 \noindent Situação: 5 critérios já representados, 12 parcialmente e 8 a implementar. Na ontologia v1.2.0, todos passam a ser codificados por \texttt{CriterionCoding}.
 
-\subsection{Extensões necessárias e os casos que as motivam}\label{sec:extensoes}
-\begin{center}\small
-\begin{longtable}{>{\raggedright\arraybackslash}p{9mm} >{\raggedright\arraybackslash}p{50mm} >{\raggedright\arraybackslash}p{90mm}}
+\section{Extensões necessárias e os casos que as motivam}\label{sec:extensoes}
+A Tabela~\ref{tab:extensoes} descreve as sete extensões e o caso que motiva cada uma.
+
+{\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{9mm} >{\raggedright\arraybackslash}p{48mm} >{\raggedright\arraybackslash}p{87mm}}
+\caption{Extensões da taxonomia e casos que as motivam}\label{tab:extensoes}\\
+\toprule
+Id & Extensão & Caso que a taxonomia original não comporta\\
+\midrule\endfirsthead
+\multicolumn{3}{l}{(continuação)}\\
 \toprule
 Id & Extensão & Caso que a taxonomia original não comporta\\
 \midrule\endhead
+\bottomrule\endlastfoot
 E1 & \textbf{Forma jurídica}, que amplia ``Status'' para instrumentos não vinculantes: plano, princípios não estatutários, guia voluntário. & O paper trata só de direito vinculante, por escolha declarada (seção~4.2). O corpus inclui o PBIA (plano), o white paper do Reino Unido (``\emph{will not put these principles on a statutory footing initially}'') e o NIST AI RMF (``\emph{voluntary}''), que precisam ser comparados.\\
 E2 & \textbf{Objetivo primário}: direitos, inovação, desenvolvimento e soberania, segurança. & O caráter desenvolvimentista do Brasil (PBIA, ``IA para o Bem de Todos'', R\$~23,03~bi) não aparece em nenhum critério de desenho, e é o que mais distingue o modelo brasileiro.\\
 E3 & \textbf{Cobertura substantiva}: as 28 áreas da câmara mais uma área de IA generativa e modelos de propósito geral, mapeadas aos critérios quando houver relação. & As lacunas da cúpula (energia e meio ambiente, crianças e vulneráveis, desigualdade regional, participação social) dizem \emph{o que} o modelo deixa de cobrir. Os critérios do paper dizem \emph{como} ele regula.\\
 E4 & \textbf{Codificação com escala e evidência}: cada valor numa escala definida e ligado ao dispositivo que o justifica. & O paper registra valores descritivos (por exemplo, ``\emph{High level of ex ante requirements}'' para o Brasil, Tabela~10). Comparação lado a lado, regras e consultas exigem valores discretos e rastreáveis.\\
-E5 & \textbf{Versão}: a codificação pertence a uma versão do instrumento, não ao instrumento. & PL~2338 em duas versões (texto de 2023 no corpus e substitutivo do Senado de 2024, usado pelo paper); EO~14110 revogado (nota~3 do paper). Mudou o texto, muda a codificação, e a regra R10 reabre o que dependia dela.\\
+E5 & \textbf{Versão}: a codificação pertence a uma versão do instrumento, não ao instrumento. & PL~2338 em duas versões, ambas no corpus: o texto de 2023 e o texto aprovado pelo Senado em 2024 \cite{pl2338-2024}, usado pelo paper; \emph{Executive Order} (EO)~14110 revogado (nota~3 do paper). Mudou o texto, muda a codificação, e a regra R10 reabre o que dependia dela.\\
 E6 & \textbf{Capacidade de implementação}: orçamento e pessoal de supervisão. & O próprio paper aponta orçamento de implementação como dado necessário e de difícil obtenção (seção~5.2). No Brasil, o Eixo~5 do PBIA tem 0,45\% do plano (tese C07), dado que entra pela PC3.\\
-E7 & \textbf{Participação na implementação}, além da consulta no processo legislativo. & O paper identifica a participação na implementação e na padronização como ponto fraco (seção~6.7). A plataforma registra deliberação e posições ao vivo (seção~\ref{sec:sc}), modeladas no módulo SCSE e ligadas ao instrumento.\\
-\bottomrule
-\end{longtable}
-\end{center}
+E7 & \textbf{Participação na implementação}, além da consulta no processo legislativo. & O paper identifica a participação na implementação e na padronização como ponto fraco (seção~6.7). A plataforma registra deliberação e posições ao vivo (capítulo~\ref{sec:sc}), modeladas no módulo SCSE e ligadas ao instrumento.\\
+\end{longtable}}
+\fonte{Elaborado pelos autores (2026).}
 
-\subsection{Concordância com as codificações dos autores}\label{sec:concordancia}
+\section{Concordância com as codificações dos autores}\label{sec:concordancia}
 Para o Brasil e a UE, as codificações publicadas no paper (tabelas~3, 4, 9 e~10) são registradas ao lado das nossas, com a fonte. Cada divergência vira item de revisão, resolvido contra o texto primário, e a taxa de concordância por critério é publicada.
 
 Um exemplo já identificado: para ``expertise técnica'', a tabela do Brasil registra ``\emph{no new center of expertise}'', enquanto a seção~6.6 do paper descreve o Comitê de Especialistas e Cientistas de IA (CECIA) dentro do SIA. A codificação do projeto depende do texto do Senado (RF-01).
 
 %=====================================================================
-\section{Fonte única e módulos: eliminar o cadastro paralelo da câmara}\label{sec:fonteunica}
+\chapter{Fonte única e módulos: eliminar o cadastro paralelo da câmara}\label{sec:fonteunica}
 
-Tudo o que a câmara, a apresentação e o painel exibem vem de \texttt{web/assets/modelo.js}, editado à mão. Esse é o gap que tornou falsa a frase ``cada peça é um indivíduo da ontologia''. O inventário abaixo, levantado no próprio arquivo, mostra que o problema não se limita aos 22 componentes.
+Tudo o que a câmara, a apresentação e o painel exibem vem de \texttt{web/assets/modelo.js}, editado à mão. Esse é o gap que tornou falsa a frase ``cada peça é um indivíduo da ontologia''. O inventário da Tabela~\ref{tab:inventario}, levantado no próprio arquivo, mostra que o problema não se limita aos 22 componentes.
 
-\begin{center}\small
+\begin{table}[htbp]
+\caption{Conjuntos editados à mão em \texttt{modelo.js} e seu destino}\label{tab:inventario}
+\centering\small
 \begin{tabularx}{\linewidth}{l r L L}
 \toprule
 Conjunto em \texttt{modelo.js} & qtd. & Situação no grafo & Destino\\
 \midrule
-Componentes GM-01 a GM-22 & 22 & 5 exatos, 5 próximos, 12 ausentes (RT-ONT-01, A1) & indivíduos da instância BR, com IRI\\
+Componentes GM-01 a GM-22 & 22 & 5 exatos, 5 próximos, 12 ausentes (RT-ONT-01, A1) & indivíduos da instância BR, com IRI (\emph{Internationalized Resource Identifier})\\
 Áreas da taxonomia (cúpula) & 28 & não existem & módulo comparativo: \texttt{SubstantiveArea} (E3, RF-05)\\
 Traços de contexto CF-01 a CF-14 & 14 & não existem; \texttt{ContextDimension} e indicadores sem ligação & núcleo: \texttt{ContextIndicator} com fonte e ano-base\\
 Estratos e assentos do conselho & 8 / 20 & não existem & SCSE: \texttt{StakeholderStratum}, \texttt{CouncilSeat}, \texttt{DocumentedPerspective}\\
@@ -380,20 +452,27 @@ Cenários de futuro (ramos) & 4 & não existem & SCSE: \texttt{ScenarioBranch}\\
 Grupos sem fonte (cadeiras vazias) & 6 & não existem & SCSE: \texttt{CouncilSeat} sem perspectiva documentada\\
 \bottomrule
 \end{tabularx}
-\end{center}
+\fonte{Elaborado pelos autores (2026).}
+\end{table}
 
-\subsection{Onde cada elemento mora: três módulos}\label{sec:modulos}
-\begin{center}\small
+\section{Onde cada elemento mora: três módulos}\label{sec:modulos}
+A Tabela~\ref{tab:modulos} define a responsabilidade e o estado atual de cada módulo.
+
+\begin{table}[htbp]
+\caption{Módulos da ontologia}\label{tab:modulos}
+\centering\small
 \begin{tabularx}{\linewidth}{l L L}
 \toprule
 Módulo & Responsabilidade & Estado atual\\
 \midrule
 Núcleo regulatório (HRAI-GO) & jurisdições, instrumentos, versões, dispositivos, requisitos, status, contexto, proveniência, eventos de mudança, afirmações e evidências & existe (v1.1.0)\\
-Comparativo & taxonomia de base (Alanoca et al.) com as extensões E1 a E7; codificações e correspondências entre dispositivos & a construir (RF-16)\\
+Comparativo & taxonomia de base \cite{alanoca2025} com as extensões E1 a E7; codificações e correspondências entre dispositivos & a construir (RF-16)\\
 SCSE & tensões de deliberação, conselho, estratos, assentos, rodadas, posições, cenários, decisões & existe, mas redeclara classes do núcleo num namespace \texttt{example.org} (RF-17)\\
 \bottomrule
 \end{tabularx}
-\end{center}
+\fonte{Elaborado pelos autores (2026).}
+\end{table}
+
 \noindent Hoje há sobreposição nos dois sentidos:
 \begin{itemize}[leftmargin=*]
   \item a SCSE redeclara \texttt{LegalProvision}, \texttt{NormativeRequirement}, \texttt{LegalStatus}, \texttt{Jurisdiction} e \texttt{ComplianceAssessment} sem importar o núcleo;
@@ -401,53 +480,65 @@ SCSE & tensões de deliberação, conselho, estratos, assentos, rodadas, posiç�
 \end{itemize}
 A fonte única não exige uma ontologia só. Exige que cada elemento exibido tenha IRI no módulo certo, com ligações explícitas entre os módulos.
 
-\subsection{Como fechar o gap dos 12 componentes ausentes}
+\section{Como fechar o gap dos 12 componentes ausentes}
 Gerar \texttt{modelo.js} a partir do grafo não basta, porque o grafo não tem o que falta. Cada ausência tem um caminho próprio:
 \begin{itemize}[leftmargin=*]
   \item \textbf{GM-05 a GM-12, mecanismos do PL.} Extrair os dispositivos do substitutivo do Senado (RF-01) como \texttt{LegalProvision} de proposta. As regras R22 e R23 os mantêm como proposta. O componente da câmara passa a ser o agrupamento desses dispositivos por função.
-  \item \textbf{GM-01 (EBIA), GM-13 (ANPD), GM-14 (reguladores setoriais) e GM-16 (painel do PBIA).} Exigem fontes novas no corpus: a portaria da EBIA, a lei e o regimento da ANPD, a lista de reguladores e a página do painel. Sem fonte, não entram.
+  \item \textbf{GM-01 (Estratégia Brasileira de Inteligência Artificial, EBIA), GM-13 (Autoridade Nacional de Proteção de Dados, ANPD), GM-14 (reguladores setoriais) e GM-16 (painel do PBIA).} Exigem fontes novas no corpus: a portaria da EBIA, a lei e o regimento da ANPD, a lista de reguladores e a página do painel. Sem fonte, não entram.
   \item \textbf{Os 5 componentes ``próximos''.} São decididos na revisão: viram correspondência exata, com novo indivíduo, ou ficam explicitamente como agregação de vários indivíduos.
 \end{itemize}
 
-\subsection{Regra de transição}
+\section{Regra de transição}
 Enquanto um elemento exibido não tiver IRI no grafo, ele continua na câmara, mas marcado como \emph{sem lastro na ontologia}, com selo visível na ficha. Nada é escondido e nada passa por verificado. A apresentação só usa a frase ``cada peça é um indivíduo da ontologia'' quando o contador de elementos sem lastro chegar a zero.
 
-\nota{\textbf{Critério de aceite verificável no CI.} O build da plataforma gera \texttt{modelo.js} do grafo e publica um contador de elementos sem IRI por conjunto. O CI falha se surgir elemento novo editado à mão fora do grafo, ou se o contador subir em relação ao \texttt{main}.}
+\destaque{\textbf{Critério de aceite verificável na integração contínua (CI).} O build da plataforma gera \texttt{modelo.js} do grafo e publica um contador de elementos sem IRI por conjunto. O CI falha se surgir elemento novo editado à mão fora do grafo, ou se o contador subir em relação ao \texttt{main}.}
 
 %=====================================================================
-\section{Especificação de implementação}
+\chapter{Especificação de implementação}\label{cap:impl}
 
-\subsection{Requisitos}
-\begin{center}\small
-\begin{longtable}{l p{78mm} p{62mm}}
+\section{Requisitos}\label{sec:requisitos}
+A Tabela~\ref{tab:requisitos} reúne os requisitos funcionais (RF) e não funcionais (RNF), cada um com seu critério de aceite.
+
+{\small
+\begin{longtable}{l >{\raggedright\arraybackslash}p{76mm} >{\raggedright\arraybackslash}p{58mm}}
+\caption{Requisitos e critérios de aceite}\label{tab:requisitos}\\
+\toprule
+Id & Requisito & Critério de aceite\\
+\midrule\endfirsthead
+\multicolumn{3}{l}{(continuação)}\\
 \toprule
 Id & Requisito & Critério de aceite\\
 \midrule\endhead
+\bottomrule\endlastfoot
 RF-01 & Incorporar ao corpus o substitutivo do PL 2338 aprovado pelo Senado (10/12/2024) e manter o texto de 2023 como versão anterior. & As duas versões são \texttt{LegalInstrumentVersion} do mesmo PL; um \texttt{RegulatoryChangeEvent} entre elas dispara R10 a R13.\\
 RF-02 & Decidir sobre a China: incluir fontes primárias ou retirar da comparação. & Nenhuma jurisdição é exibida sem pelo menos um \texttt{SourceSnapshot} com hash.\\
 RF-03 & TBox v1.2.0 com as extensões da seção~\ref{sec:dimensoes} e as regras R24 a R30. & Testes de TBox estendidos; invariantes de segurança valem para as regras novas.\\
-RF-04 & Instâncias candidatas da UE (AI Act: arts.~5, 6, 9 a~15, 26, 27, 50, 57 a~62, 68, 99), do Reino Unido (cinco princípios e arranjo institucional) e dos EUA (funções do NIST RMF), com proveniência por artigo ou seção. & Cada dispositivo tem \texttt{prov:wasDerivedFrom} até o snapshot; todo o conteúdo é \texttt{CandidateAssertion} até a revisão.\\
+RF-04 & Instâncias candidatas da UE (AI Act: arts.~5, 6, 9 a~15, 26, 27, 50, 57 a~62, 68, 99), do Reino Unido (cinco princípios e arranjo institucional) e dos EUA (funções do NIST RMF), com proveniência por artigo ou seção. & Cada dispositivo tem \texttt{prov:wasDerivedFrom} \cite{w3c-provo} até o snapshot; todo o conteúdo é \texttt{CandidateAssertion} até a revisão.\\
 RF-05 & Esquema \texttt{SubstantiveArea} (extensão E3) a partir das 28 áreas da câmara, com área de IA generativa/GPAI e mapeamento para NIST, AI Act e critérios da taxonomia. & As áreas da cúpula da câmara vêm do esquema, não de \texttt{modelo.js}.\\
 RF-06 & Correspondências BR $\leftrightarrow$ UE por função, com tipo, evidência e revisão humana. & PC2 responde para as funções com cobertura nas duas jurisdições.\\
 RF-07 & Indicadores de capacidade e de exposição com fonte e ano-base, incluindo orçamento de supervisão, profissionais e dados sensíveis em uso estatal. & PC3 e PC4 retornam resultado ou ``sem indicador'', nunca vazio silencioso.\\
-RF-08 & Consultas SPARQL para PC1 a PC8 versionadas no repositório, com teste de regressão sobre os dados. & CI falha se uma PC deixar de responder.\\
+RF-08 & Consultas SPARQL para PC1 a PC9 versionadas no repositório, com teste de regressão sobre os dados. & CI falha se uma PC deixar de responder.\\
 RF-09 & Build gera os dados da plataforma a partir do grafo: modelo da câmara, comparador, fichas com ``por quê?''. & \texttt{modelo.js} deixa de ser editado à mão.\\
-RF-10 & Mesa da plataforma grava reações como posições sobre afirmações; registro de decisão e de revisão de posição. & Uma sessão gera um relatório com as métricas da seção 5.4.\\
-RF-11 & Afirmações de documentos de análise entram como \texttt{PolicyClaim}, nunca como fato. & Anexo~\ref{ap:afirmacoes} gerado pelo script, com status.\\
-RF-12 & Cada elemento exibido na câmara (os sete conjuntos da seção~\ref{sec:fonteunica}) tem IRI no grafo ou fica marcado como ``sem lastro'' na ficha. & Contador de elementos sem IRI publicado no build; nunca sobe.\\
+RF-10 & Mesa da plataforma grava reações como posições sobre afirmações; registro de decisão e de revisão de posição. & Uma sessão gera um relatório com as métricas da seção~\ref{sec:medir}.\\
+RF-11 & Afirmações de documentos de análise entram como \texttt{PolicyClaim}, nunca como fato. & Apêndice~\ref{ap:afirmacoes} gerado pelo script, com status.\\
+RF-12 & Cada elemento exibido na câmara (os sete conjuntos do capítulo~\ref{sec:fonteunica}) tem IRI no grafo ou fica marcado como ``sem lastro'' na ficha. & Contador de elementos sem IRI publicado no build; nunca sobe.\\
 RF-13 & Modelar tensões-semente, estratos, assentos e cenários no módulo SCSE, com ligação explícita às afirmações e dispositivos do núcleo. As tensões extraídas do PBIA permanecem no núcleo, como o que a fonte afirma. & Câmara e mural leem tensões da SCSE; cada semente aponta para as afirmações em que se apoia.\\
-RF-14 & Fechar os 12 componentes ausentes pelos caminhos da seção~\ref{sec:fonteunica}: dispositivos do PL e fontes novas para EBIA, ANPD, reguladores e painel. & Alinhamento A1 com zero ausências, ou ausências com fonte pendente registrada.\\
-RF-16 & Módulo comparativo: taxonomia de Alanoca et al.\ (2025) formalizada com as definições originais e as extensões E1 a E7; \texttt{CriterionCoding} com escala e evidência; codificações dos autores registradas ao lado das nossas. & PC1 e PC5 respondem para UE e Brasil; cada valor com dispositivo de origem; concordância com os autores publicada por critério.\\
+RF-14 & Fechar os 12 componentes ausentes pelos caminhos do capítulo~\ref{sec:fonteunica}: dispositivos do PL e fontes novas para EBIA, ANPD, reguladores e painel. & Alinhamento A1 com zero ausências, ou ausências com fonte pendente registrada.\\
+RF-16 & Módulo comparativo: taxonomia de \citeonline{alanoca2025} formalizada com as definições originais e as extensões E1 a E7; \texttt{CriterionCoding} com escala e evidência; codificações dos autores registradas ao lado das nossas. & PC1 e PC5 respondem para UE e Brasil; cada valor com dispositivo de origem; concordância com os autores publicada por critério.\\
 RF-17 & Separar núcleo e SCSE: a SCSE importa o núcleo em vez de redeclarar classes regulatórias; as classes de deliberação migram para a SCSE, com equivalência declarada para compatibilidade. & Nenhuma classe declarada nos dois módulos; testes dos dois módulos passam.\\
+RF-18 & Perguntas norteadoras: classe \texttt{NationalSpecificity} no núcleo (proposta), com evidência obrigatória, e ligação \texttt{groundedInSpecificity} de cada item da QN2 e da QN3 à especificidade da QN1 em que se apoia. Ao fim do \emph{bootstrap}, o build gera o relatório das perguntas norteadoras, com seções QN1, QN2 e QN3 nesta ordem, cada item com estado (com evidência, contestado, sem evidência no corpus) e marcado como resposta inicial. & PC9 responde; itens QN2/QN3 sem especificidade = 0; itens publicados só com \texttt{ReviewDecision} humana; relatório gerado no CI.\\
 RF-15 & Trocar o texto do slide ``cada peça é um indivíduo da ontologia'' até o RF-12 chegar a zero. & Slide diz o que é verdade em cada versão publicada.\\
 RNF-01 & IRIs resolvíveis (w3id.org ou GitHub Pages) para TBox, instâncias e afirmações. & Abrir um IRI no navegador mostra o recurso.\\
 RNF-02 & Raciocínio em menos de 5\,s no CI para o grafo completo. & Medido no CI.\\
-\bottomrule
-\end{longtable}
-\end{center}
+\end{longtable}}
+\fonte{Elaborado pelos autores (2026).}
 
-\subsection{Fases sugeridas}
-\begin{center}\small
+\section{Fases sugeridas}
+A Tabela~\ref{tab:fases} agrupa os requisitos em fases, com estimativa de duração.
+
+\begin{table}[htbp]
+\caption{Fases sugeridas e estimativas}\label{tab:fases}
+\centering\small
 \begin{tabularx}{\linewidth}{l L l}
 \toprule
 Fase & Entregas & Estimativa\\
@@ -457,12 +548,15 @@ F1 & RF-03, RF-05, RF-16 (formalização) e RF-17: TBox v1.2.0, módulo comparat
 F2 & RF-04, RF-06 e RF-16 (codificação): instâncias UE, Reino Unido e EUA, correspondências BR $\leftrightarrow$ UE e codificações pela taxonomia, com revisão e concordância com os autores. & 3 a 5 semanas\\
 F3 & RF-07, RF-08, RF-09, RF-12 a RF-14: indicadores, consultas, build da plataforma a partir do grafo, tensões na SCSE e fechamento dos componentes ausentes. & 3 a 5 semanas\\
 F4 & RF-10: protocolo do SC integrado à Mesa e ao relatório de deliberação. & 2 semanas\\
+F5 & RF-18: \emph{bootstrap} --- a plataforma responde de forma inicial às QN1, QN2 e QN3 sobre o próprio corpus; as respostas vão à deliberação. & 1 a 2 semanas\\
 \bottomrule
 \end{tabularx}
-\end{center}
+\fonte{Elaborado pelos autores (2026).}
+\end{table}
+
 \noindent As estimativas são de ordem de grandeza. O gargalo real é a revisão humana das extrações (F2), que depende de quem revisa, não de código.
 
-\subsection{O que já existe e pode ser reaproveitado}
+\section{O que já existe e pode ser reaproveitado}
 \begin{itemize}[leftmargin=*]
   \item \texttt{scripts/ontologia/raciocinar.py}: motor de regras com justificativa (RT-ONT-01).
   \item \texttt{scripts/ontologia/afirmacoes.py}: classificação de afirmações (este documento).
@@ -471,32 +565,56 @@ F4 & RF-10: protocolo do SC integrado à Mesa e ao relatório de deliberação. 
 \end{itemize}
 
 %=====================================================================
-\appendix
-\section{Teses da análise comparativa anexada, classificadas pelo grafo}\label{ap:afirmacoes}
-\noindent Tabela gerada por \texttt{scripts/ontologia/afirmacoes.py}. ``Contestada'' significa que há contra-afirmação explícita sustentada pelo corpus; não significa falsa. ``Com evidência'' significa evidência anexada; não significa verdadeira.
+\chapter{Considerações finais}\label{cap:final}
 
-\begin{center}\footnotesize
-\begin{longtable}{l p{52mm} p{22mm} p{66mm}}
+A mudança central desta especificação é tratar o raciocínio como um conjunto de perguntas de competência explícitas, cada uma ligada a uma regra ou consulta, a dados com fonte e a uma tela da plataforma (capítulo~\ref{cap:pc}). Uma PC sem tela é trabalho que ninguém vê; uma tela sem PC é afirmação sem lastro.
+
+Aplicado às 12 teses da análise comparativa anexada, o método classificou 4 como contestadas, 6 com evidência anexada e 2 sem evidência no corpus (seção~\ref{sec:teses} e apêndice~\ref{ap:afirmacoes}). O método não descarta essas teses: ele as coloca na mesa com a contra-evidência.
+
+A camada comparativa adota a taxonomia de \citeonline{alanoca2025} com as definições originais e sete extensões declaradas (capítulo~\ref{sec:alanoca}). A fonte única não exige uma ontologia só; exige que cada elemento exibido tenha IRI no módulo certo, com ligações explícitas entre os módulos (capítulo~\ref{sec:fonteunica}). O Shadow Council amplia o que é considerado, mas não decide: a decisão de retirar ou adaptar continua sendo humana (capítulo~\ref{sec:sc}).
+
+As estimativas das fases são de ordem de grandeza, e o gargalo real é a revisão humana das extrações (F2). A informação externa ao corpus usada neste documento precisa ser incorporada como fonte antes de uso público (apêndice~\ref{ap:repro}).
+
+% ============================================================ ELEMENTOS PÓS-TEXTUAIS
+\postextual
+\bibliography{referencias}
+
+\begin{apendicesenv}
+\partapendices
+
+\chapter{Teses da análise comparativa anexada, classificadas pelo grafo}\label{ap:afirmacoes}
+\noindent A Tabela~\ref{tab:afirmacoes} foi gerada por \texttt{scripts/ontologia/afirmacoes.py}. ``Contestada'' significa que há contra-afirmação explícita sustentada pelo corpus; não significa falsa. ``Com evidência'' significa evidência anexada; não significa verdadeira.
+
+{\footnotesize
+\begin{longtable}{l >{\raggedright\arraybackslash}p{50mm} >{\raggedright\arraybackslash}p{22mm} >{\raggedright\arraybackslash}p{64mm}}
+\caption{Teses da análise comparativa, classificadas pelo grafo}\label{tab:afirmacoes}\\
+\toprule
+Id & Tese & Status & Contra-afirmação ou observação\\
+\midrule\endfirsthead
+\multicolumn{4}{l}{(continuação)}\\
 \toprule
 Id & Tese & Status & Contra-afirmação ou observação\\
 \midrule\endhead
+\bottomrule\endlastfoot
 \csname @@input\endcsname tabelas/afirmacoes.tex
-\bottomrule
-\end{longtable}
-\end{center}
+\end{longtable}}
+\fonte{Elaborado pelos autores (2026), a partir de \citeonline{estudo-comparativo} e do corpus do repositório.}
 
-\section{Reprodutibilidade}
+\chapter{Reprodutibilidade}\label{ap:repro}
+{\footnotesize
 \begin{verbatim}
-python3 scripts/ontologia/afirmacoes.py     # classifica as teses e gera o anexo A
+python3 scripts/ontologia/afirmacoes.py     # classifica as teses e gera o apêndice A
 python3 scripts/ontologia/experimentos.py   # experimentos do RT-ONT-01
-cd docs/especificacoes/ESP-ONT-02
-pdflatex especificacao.tex && pdflatex especificacao.tex
+scripts/build-relatorios.sh docs/especificacoes/ESP-ONT-02/especificacao.tex
 \end{verbatim}
+}
 \noindent Informação externa ao corpus usada neste documento, a incorporar como fonte antes de uso público:
 \begin{itemize}[leftmargin=*]
   \item aprovação do PL 2338 pelo Senado em 10/12/2024;
   \item tramitação na Câmara em comissão especial, segundo a imprensa, até agosto de 2026;
   \item BEN 2025 com 88,2\% de renováveis na matriz elétrica em 2024.
 \end{itemize}
+
+\end{apendicesenv}
 
 \end{document}
