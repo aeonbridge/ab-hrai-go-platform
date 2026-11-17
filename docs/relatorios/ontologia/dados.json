@@ -1,0 +1,562 @@
+{
+  "E0": {
+    "triplas_declaradas": 2614,
+    "triplas_inferidas": 79,
+    "inferidas_por_regra_swrl": {
+      "R03_PolicyMechanismCountry": 20,
+      "R04_IndicatorJurisdiction": 16,
+      "R05_ContestedClaim": 1,
+      "R06_ContestedTension": 1,
+      "R07_DeliberationStakeholder": 3,
+      "R08_IndicatorAssessedAlternative": 1,
+      "R15_ChangeSource": 1,
+      "R16_TensionNationalContext": 5,
+      "R17_EvidenceAttachedClaim": 8
+    },
+    "inferidas_por_fechamento": {
+      "rdfs:subClassOf": 7,
+      "owl:inverseOf": 16
+    },
+    "regras_carregadas": 23,
+    "regras_sem_disparo": [
+      "R01_ProvisionJurisdictionOrigin",
+      "R02_RequirementJurisdictionOrigin",
+      "R09_ApprovedCandidate",
+      "R10_VersionChangeProvisionCandidates",
+      "R11_ProvisionChangeRequirementCandidates",
+      "R12_RequirementChangeAssessmentReview",
+      "R13_ApplicationReviewImpact",
+      "R14_ControlRequirementCandidate",
+      "R18_UpperIndicatorThreshold",
+      "R19_ExecutionBelowAlertRatio",
+      "R20_ImpactEvaluated",
+      "R21_SyntheticPosition",
+      "R22_ProposedProvision",
+      "R23_ProspectiveRequirement"
+    ],
+    "rodadas": 2,
+    "segundos": 0.1
+  },
+  "E1": {
+    "triplas_declaradas": 2666,
+    "triplas_inferidas": 105,
+    "inferidas_por_regra_swrl": {
+      "R01_ProvisionJurisdictionOrigin": 2,
+      "R02_RequirementJurisdictionOrigin": 2,
+      "R03_PolicyMechanismCountry": 20,
+      "R04_IndicatorJurisdiction": 16,
+      "R05_ContestedClaim": 1,
+      "R06_ContestedTension": 1,
+      "R07_DeliberationStakeholder": 4,
+      "R08_IndicatorAssessedAlternative": 1,
+      "R09_ApprovedCandidate": 1,
+      "R10_VersionChangeProvisionCandidates": 2,
+      "R11_ProvisionChangeRequirementCandidates": 2,
+      "R12_RequirementChangeAssessmentReview": 1,
+      "R13_ApplicationReviewImpact": 1,
+      "R14_ControlRequirementCandidate": 1,
+      "R15_ChangeSource": 2,
+      "R16_TensionNationalContext": 5,
+      "R17_EvidenceAttachedClaim": 8,
+      "R21_SyntheticPosition": 1,
+      "R22_ProposedProvision": 2,
+      "R23_ProspectiveRequirement": 2
+    },
+    "inferidas_por_fechamento": {
+      "rdfs:subClassOf": 9,
+      "owl:inverseOf": 21
+    },
+    "regras_carregadas": 23,
+    "regras_sem_disparo": [
+      "R18_UpperIndicatorThreshold",
+      "R19_ExecutionBelowAlertRatio",
+      "R20_ImpactEvaluated"
+    ],
+    "rodadas": 2,
+    "segundos": 0.1
+  },
+  "V1_E1": {
+    "R01_ProvisionJurisdictionOrigin": {
+      "cabecas_pelo_sparql": 2,
+      "faltando_no_grafo": 0
+    },
+    "R02_RequirementJurisdictionOrigin": {
+      "cabecas_pelo_sparql": 2,
+      "faltando_no_grafo": 0
+    },
+    "R03_PolicyMechanismCountry": {
+      "cabecas_pelo_sparql": 20,
+      "faltando_no_grafo": 0
+    },
+    "R04_IndicatorJurisdiction": {
+      "cabecas_pelo_sparql": 16,
+      "faltando_no_grafo": 0
+    },
+    "R05_ContestedClaim": {
+      "cabecas_pelo_sparql": 1,
+      "faltando_no_grafo": 0
+    },
+    "R06_ContestedTension": {
+      "cabecas_pelo_sparql": 1,
+      "faltando_no_grafo": 0
+    },
+    "R07_DeliberationStakeholder": {
+      "cabecas_pelo_sparql": 5,
+      "faltando_no_grafo": 0
+    },
+    "R08_IndicatorAssessedAlternative": {
+      "cabecas_pelo_sparql": 1,
+      "faltando_no_grafo": 0
+    },
+    "R09_ApprovedCandidate": {
+      "cabecas_pelo_sparql": 1,
+      "faltando_no_grafo": 0
+    },
+    "R10_VersionChangeProvisionCandidates": {
+      "cabecas_pelo_sparql": 2,
+      "faltando_no_grafo": 0
+    },
+    "R11_ProvisionChangeRequirementCandidates": {
+      "cabecas_pelo_sparql": 2,
+      "faltando_no_grafo": 0
+    },
+    "R12_RequirementChangeAssessmentReview": {
+      "cabecas_pelo_sparql": 1,
+      "faltando_no_grafo": 0
+    },
+    "R13_ApplicationReviewImpact": {
+      "cabecas_pelo_sparql": 1,
+      "faltando_no_grafo": 0
+    },
+    "R14_ControlRequirementCandidate": {
+      "cabecas_pelo_sparql": 1,
+      "faltando_no_grafo": 0
+    },
+    "R15_ChangeSource": {
+      "cabecas_pelo_sparql": 2,
+      "faltando_no_grafo": 0
+    },
+    "R16_TensionNationalContext": {
+      "cabecas_pelo_sparql": 5,
+      "faltando_no_grafo": 0
+    },
+    "R17_EvidenceAttachedClaim": {
+      "cabecas_pelo_sparql": 8,
+      "faltando_no_grafo": 0
+    },
+    "R18_UpperIndicatorThreshold": "não verificável por SPARQL simples (builtin)",
+    "R19_ExecutionBelowAlertRatio": "não verificável por SPARQL simples (builtin)",
+    "R20_ImpactEvaluated": {
+      "cabecas_pelo_sparql": 0,
+      "faltando_no_grafo": 0
+    },
+    "R21_SyntheticPosition": {
+      "cabecas_pelo_sparql": 1,
+      "faltando_no_grafo": 0
+    },
+    "R22_ProposedProvision": {
+      "cabecas_pelo_sparql": 2,
+      "faltando_no_grafo": 0
+    },
+    "R23_ProspectiveRequirement": {
+      "cabecas_pelo_sparql": 2,
+      "faltando_no_grafo": 0
+    }
+  },
+  "V2_E1": {
+    "inferencias_proibidas": 0,
+    "requisitos_prospectivos_com_status_juridico": 0
+  },
+  "V2_E0": {
+    "inferencias_proibidas": 0,
+    "requisitos_prospectivos_com_status_juridico": 0
+  },
+  "A1": [
+    {
+      "gm": "GM-01",
+      "rotulo": "Estratégia Brasileira de IA (EBIA, 2021)",
+      "tipo": "ausente",
+      "alvos": [],
+      "inferencias_swrl_sobre_alvos": 0,
+      "regras": [],
+      "nota": "Sem alinhamento: a EBIA não está instanciada no grafo do PBIA."
+    },
+    {
+      "gm": "GM-02",
+      "rotulo": "Plano Brasileiro de IA (PBIA) 2024-2028",
+      "tipo": "exato",
+      "alvos": [
+        "pbia:PBIA_Plan"
+      ],
+      "inferencias_swrl_sobre_alvos": 1,
+      "regras": [
+        "R03_PolicyMechanismCountry"
+      ],
+      "nota": ""
+    },
+    {
+      "gm": "GM-03",
+      "rotulo": "Lei Geral de Proteção de Dados (Lei 13.709/2018)",
+      "tipo": "exato",
+      "alvos": [
+        "pbia:Law_13709_2018_LGPD"
+      ],
+      "inferencias_swrl_sobre_alvos": 0,
+      "regras": [],
+      "nota": ""
+    },
+    {
+      "gm": "GM-04",
+      "rotulo": "PL 2338/2023 (marco legal de IA)",
+      "tipo": "exato",
+      "alvos": [
+        "pbia:PL_2338_2023"
+      ],
+      "inferencias_swrl_sobre_alvos": 0,
+      "regras": [],
+      "nota": ""
+    },
+    {
+      "gm": "GM-05",
+      "rotulo": "Sistema Nacional de Regulação e Governança de IA (SIA)",
+      "tipo": "ausente",
+      "alvos": [],
+      "inferencias_swrl_sobre_alvos": 0,
+      "regras": [],
+      "nota": "Sem alinhamento: o SIA é criado pelo PL, cujos dispositivos não foram extraídos."
+    },
+    {
+      "gm": "GM-06",
+      "rotulo": "Classificação por níveis de risco",
+      "tipo": "ausente",
+      "alvos": [],
+      "inferencias_swrl_sobre_alvos": 0,
+      "regras": [],
+      "nota": "Sem alinhamento: mecanismo do PL; dispositivos não extraídos."
+    },
+    {
+      "gm": "GM-07",
+      "rotulo": "Regime de alto risco, incluindo o uso em saúde",
+      "tipo": "ausente",
+      "alvos": [],
+      "inferencias_swrl_sobre_alvos": 0,
+      "regras": [],
+      "nota": "Sem alinhamento: mecanismo do PL; dispositivos não extraídos."
+    },
+    {
+      "gm": "GM-08",
+      "rotulo": "Direitos autorais e IA no PL",
+      "tipo": "ausente",
+      "alvos": [],
+      "inferencias_swrl_sobre_alvos": 0,
+      "regras": [],
+      "nota": "Sem alinhamento: mecanismo do PL; dispositivos não extraídos."
+    },
+    {
+      "gm": "GM-09",
+      "rotulo": "Trabalho e segurança no PL",
+      "tipo": "ausente",
+      "alvos": [],
+      "inferencias_swrl_sobre_alvos": 0,
+      "regras": [],
+      "nota": "Sem alinhamento: mecanismo do PL; dispositivos não extraídos."
+    },
+    {
+      "gm": "GM-10",
+      "rotulo": "Avaliação de impacto algorítmico e direitos das pessoas afetadas",
+      "tipo": "ausente",
+      "alvos": [],
+      "inferencias_swrl_sobre_alvos": 0,
+      "regras": [],
+      "nota": "Sem alinhamento: mecanismo esperado no PL, não confirmado; dispositivos não extraídos."
+    },
+    {
+      "gm": "GM-11",
+      "rotulo": "Responsabilização civil por danos de sistemas de IA",
+      "tipo": "ausente",
+      "alvos": [],
+      "inferencias_swrl_sobre_alvos": 0,
+      "regras": [],
+      "nota": "Sem alinhamento: mecanismo esperado no PL, não confirmado; dispositivos não extraídos."
+    },
+    {
+      "gm": "GM-12",
+      "rotulo": "Sandbox regulatório e ambiente de testes",
+      "tipo": "ausente",
+      "alvos": [],
+      "inferencias_swrl_sobre_alvos": 0,
+      "regras": [],
+      "nota": "Sem alinhamento: mecanismo esperado no PL, não confirmado; dispositivos não extraídos."
+    },
+    {
+      "gm": "GM-13",
+      "rotulo": "Autoridade Nacional de Proteção de Dados (ANPD)",
+      "tipo": "ausente",
+      "alvos": [],
+      "inferencias_swrl_sobre_alvos": 0,
+      "regras": [],
+      "nota": "Sem alinhamento: a ANPD não aparece como stakeholder na instância do PBIA."
+    },
+    {
+      "gm": "GM-14",
+      "rotulo": "Reguladores setoriais existentes",
+      "tipo": "ausente",
+      "alvos": [],
+      "inferencias_swrl_sobre_alvos": 0,
+      "regras": [],
+      "nota": "Sem alinhamento: categoria genérica, sem indivíduo correspondente."
+    },
+    {
+      "gm": "GM-15",
+      "rotulo": "Grupo de trabalho interministerial do PBIA, coordenado pelo MCTI",
+      "tipo": "próximo",
+      "alvos": [
+        "pbia:PBIA_GovernanceByCITDigital"
+      ],
+      "inferencias_swrl_sobre_alvos": 1,
+      "regras": [
+        "R03_PolicyMechanismCountry"
+      ],
+      "nota": "Próximo: a instância registra a governança do plano pelo CIT Digital, não o GT de 2025."
+    },
+    {
+      "gm": "GM-16",
+      "rotulo": "Painel público de acompanhamento do PBIA",
+      "tipo": "ausente",
+      "alvos": [],
+      "inferencias_swrl_sobre_alvos": 0,
+      "regras": [],
+      "nota": "Sem alinhamento: o painel de execução não está instanciado (o Obia, Ação 52, é outro objeto)."
+    },
+    {
+      "gm": "GM-17",
+      "rotulo": "Infraestrutura nacional de computação",
+      "tipo": "próximo",
+      "alvos": [
+        "pbia:Action01_AISupercomputer",
+        "pbia:Action27_SovereignCloud"
+      ],
+      "inferencias_swrl_sobre_alvos": 2,
+      "regras": [
+        "R03_PolicyMechanismCountry"
+      ],
+      "nota": "Próximo: o componente agrega supercomputador e armazenamento; a instância tem as ações separadas."
+    },
+    {
+      "gm": "GM-18",
+      "rotulo": "Modelos de linguagem em português",
+      "tipo": "exato",
+      "alvos": [
+        "pbia:Action09_PortugueseLLM"
+      ],
+      "inferencias_swrl_sobre_alvos": 1,
+      "regras": [
+        "R03_PolicyMechanismCountry"
+      ],
+      "nota": ""
+    },
+    {
+      "gm": "GM-19",
+      "rotulo": "Formação de especialistas e capacitação de servidores",
+      "tipo": "próximo",
+      "alvos": [
+        "pbia:PBIA_Axis2_DiffusionTraining"
+      ],
+      "inferencias_swrl_sobre_alvos": 1,
+      "regras": [
+        "R03_PolicyMechanismCountry"
+      ],
+      "nota": "Próximo: o componente é parte do Eixo 2."
+    },
+    {
+      "gm": "GM-20",
+      "rotulo": "IA Brasil: IA no serviço público",
+      "tipo": "próximo",
+      "alvos": [
+        "pbia:PBIA_Axis3_PublicServices"
+      ],
+      "inferencias_swrl_sobre_alvos": 1,
+      "regras": [
+        "R03_PolicyMechanismCountry"
+      ],
+      "nota": "Próximo: a iniciativa está dentro do Eixo 3."
+    },
+    {
+      "gm": "GM-21",
+      "rotulo": "Centro Nacional de Transparência Algorítmica e IA Confiável",
+      "tipo": "exato",
+      "alvos": [
+        "pbia:Action51_AlgorithmicTransparencyCentre"
+      ],
+      "inferencias_swrl_sobre_alvos": 1,
+      "regras": [
+        "R03_PolicyMechanismCountry"
+      ],
+      "nota": ""
+    },
+    {
+      "gm": "GM-22",
+      "rotulo": "Crédito e apoio à inovação empresarial em IA",
+      "tipo": "próximo",
+      "alvos": [
+        "pbia:PBIA_Axis4_BusinessInnovation"
+      ],
+      "inferencias_swrl_sobre_alvos": 1,
+      "regras": [
+        "R03_PolicyMechanismCountry"
+      ],
+      "nota": "Próximo: o componente é parte do Eixo 4."
+    }
+  ],
+  "E1_cadeia": [
+    [
+      0,
+      "pbia:App_BBProvaDeVida hrai:applicationPotentiallyImpactedBy e1:Mudanca_TextoCamara",
+      "R13_ApplicationReviewImpact"
+    ],
+    [
+      1,
+      "e1:Avaliacao_ProvaDeVida hrai:assessmentNeedsReviewDueTo e1:Mudanca_TextoCamara",
+      "R12_RequirementChangeAssessmentReview"
+    ],
+    [
+      2,
+      "e1:Mudanca_TextoCamara hrai:changePotentiallyAffectsRequirement e1:Req_AvaliacaoImpactoAltoRisco",
+      "R11_ProvisionChangeRequirementCandidates"
+    ],
+    [
+      3,
+      "e1:Mudanca_TextoCamara hrai:changePotentiallyAffectsProvision e1:Disp_AvaliacaoImpacto",
+      "R10_VersionChangeProvisionCandidates"
+    ],
+    [
+      4,
+      "e1:Versao_TextoCamara hrai:versionContainsProvision e1:Disp_AvaliacaoImpacto",
+      "owl:inverseOf"
+    ],
+    [
+      5,
+      "e1:Disp_AvaliacaoImpacto hrai:provisionOfVersion e1:Versao_TextoCamara",
+      "declarada"
+    ]
+  ],
+  "E1_inferencias_cenario": [
+    [
+      "R01_ProvisionJurisdictionOrigin",
+      "e1:Disp_AvaliacaoPreliminar",
+      "hrai:provisionInJurisdiction",
+      "pbia:Brazil"
+    ],
+    [
+      "R01_ProvisionJurisdictionOrigin",
+      "e1:Disp_AvaliacaoImpacto",
+      "hrai:provisionInJurisdiction",
+      "pbia:Brazil"
+    ],
+    [
+      "R02_RequirementJurisdictionOrigin",
+      "e1:Req_RegistroAvaliacaoPreliminar",
+      "hrai:hasJurisdictionalOrigin",
+      "pbia:Brazil"
+    ],
+    [
+      "R02_RequirementJurisdictionOrigin",
+      "e1:Req_AvaliacaoImpactoAltoRisco",
+      "hrai:hasJurisdictionalOrigin",
+      "pbia:Brazil"
+    ],
+    [
+      "R07_DeliberationStakeholder",
+      "pbia:Delib_PBIAElaboration2024",
+      "hrai:deliberationIncludesStakeholder",
+      "e1:Assento_Reguladores1"
+    ],
+    [
+      "R09_ApprovedCandidate",
+      "e1:Candidato_TextoCamara",
+      "rdf:type",
+      "hrai:ReviewedAndApprovedCandidate"
+    ],
+    [
+      "R10_VersionChangeProvisionCandidates",
+      "e1:Mudanca_TextoCamara",
+      "hrai:changePotentiallyAffectsProvision",
+      "e1:Disp_AvaliacaoPreliminar"
+    ],
+    [
+      "R10_VersionChangeProvisionCandidates",
+      "e1:Mudanca_TextoCamara",
+      "hrai:changePotentiallyAffectsProvision",
+      "e1:Disp_AvaliacaoImpacto"
+    ],
+    [
+      "R11_ProvisionChangeRequirementCandidates",
+      "e1:Mudanca_TextoCamara",
+      "hrai:changePotentiallyAffectsRequirement",
+      "e1:Req_RegistroAvaliacaoPreliminar"
+    ],
+    [
+      "R11_ProvisionChangeRequirementCandidates",
+      "e1:Mudanca_TextoCamara",
+      "hrai:changePotentiallyAffectsRequirement",
+      "e1:Req_AvaliacaoImpactoAltoRisco"
+    ],
+    [
+      "R12_RequirementChangeAssessmentReview",
+      "e1:Avaliacao_ProvaDeVida",
+      "hrai:assessmentNeedsReviewDueTo",
+      "e1:Mudanca_TextoCamara"
+    ],
+    [
+      "R13_ApplicationReviewImpact",
+      "pbia:App_BBProvaDeVida",
+      "hrai:applicationPotentiallyImpactedBy",
+      "e1:Mudanca_TextoCamara"
+    ],
+    [
+      "R14_ControlRequirementCandidate",
+      "e1:Ctrl_AvaliacaoRiscoDocumentada",
+      "hrai:controlPotentiallyAddressesRequirement",
+      "e1:Req_RegistroAvaliacaoPreliminar"
+    ],
+    [
+      "R15_ChangeSource",
+      "e1:Mudanca_TextoCamara",
+      "hrai:changeHasSource",
+      "e1:Fonte_PortalCamara"
+    ],
+    [
+      "R21_SyntheticPosition",
+      "e1:Posicao_Reguladores1",
+      "rdf:type",
+      "hrai:SyntheticStakeholderPosition"
+    ],
+    [
+      "R22_ProposedProvision",
+      "e1:Disp_AvaliacaoPreliminar",
+      "rdf:type",
+      "hrai:ProposedProvision"
+    ],
+    [
+      "R22_ProposedProvision",
+      "e1:Disp_AvaliacaoImpacto",
+      "rdf:type",
+      "hrai:ProposedProvision"
+    ],
+    [
+      "R23_ProspectiveRequirement",
+      "e1:Req_RegistroAvaliacaoPreliminar",
+      "rdf:type",
+      "hrai:ProspectiveRequirement"
+    ],
+    [
+      "R23_ProspectiveRequirement",
+      "e1:Req_AvaliacaoImpactoAltoRisco",
+      "rdf:type",
+      "hrai:ProspectiveRequirement"
+    ]
+  ],
+  "E1_requisitos_sem_controle": [
+    "e1:Req_AvaliacaoImpactoAltoRisco"
+  ]
+}

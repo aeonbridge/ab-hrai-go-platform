@@ -78,6 +78,7 @@ body:not(.tudo) #falas{display:none}
 @media (max-width:1200px){#etapa{width:min(560px,calc(100% - 44px));top:auto;bottom:150px}}
 #semgl{display:none;position:fixed;inset:0;place-items:center;text-align:center;padding:24px}
 body.semgl #semgl{display:grid} body.semgl #gl{display:none}
+#gl{touch-action:none}
 @media (max-width:1200px){#leitura{width:320px}#falas{width:min(560px,calc(100% - 680px))}}
 @media (max-width:900px){#leitura,#legenda{display:none}#falas{width:calc(100% - 44px);left:22px;transform:none}#entrar{width:220px}.n-grande{font-size:72px}}
 /* ---------- modo participante: o celular de quem entrou pelo QR (docs/07-camara.md §7.8) ---------- */
@@ -522,7 +523,7 @@ const CAMS = {
 };
 let camModo = "camara", girar = !REDUZ, ang = 0;
 const camPos = CAMS.camara.pos.clone(), camAlvo = CAMS.camara.alvo.clone();
-function modo(m) { camModo = m; document.querySelectorAll("[data-cam]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.cam === m))); }
+function modo(m) { if (camModo !== m && typeof fecharFicha === "function") fecharFicha(); camModo = m; document.querySelectorAll("[data-cam]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.cam === m))); }
 document.querySelectorAll("[data-cam]").forEach(b => b.onclick = () => modo(b.dataset.cam));
 const CAMADAS = [
   PARTICIPANTE ? { n: "Você", t: "Você está na câmara", d: "Cada luz no anel externo é uma pessoa da sala, no arco do seu setor. A sua está entre elas.", g: [], cam: "sala" }
@@ -538,6 +539,7 @@ const navC = $("#camadasNav");
 CAMADAS.forEach((c, i) => { const b = document.createElement("button"); b.textContent = c.n; b.onclick = () => camada(i); navC.appendChild(b); });
 function camada(i) {
   i = Math.max(0, Math.min(CAMADAS.length - 1, i)); camadaAtual = i; const c = CAMADAS[i];
+  if (typeof fecharFicha === "function") fecharFicha();   /* a ficha descreve um objeto da camada anterior: não pode ficar presa na tela */
   GERIDOS.forEach(g => g.userData.alvo = c.g.includes(g) ? 1 : 0);
   document.body.className = document.body.className.replace(/\bc\d\b|\btudo\b/g, "").trim() + " c" + i + (i === CAMADAS.length - 1 ? " tudo" : "");
   document.querySelectorAll("[data-camada]").forEach(e => e.classList.toggle("oculto", +e.dataset.camada > i && i < CAMADAS.length - 1));
@@ -757,6 +759,17 @@ $("#gl").addEventListener("click", ev => {
 $("#abaMesa").addEventListener("click", e => { const q = e.target.closest(".quem"); if (q && q.dataset.pid) abrirFicha({ pessoa: q.dataset.pid }); });
 L.on(() => { if (fichaAtual && fichaAtual.pessoa) { clearTimeout(abrirFicha.t); abrirFicha.t = setTimeout(() => fichaAtual && abrirFicha(fichaAtual), 200); } });
 
+/* ---------- zoom com limite: roda do mouse ou pinça, entre ZOOM_MIN e ZOOM_MAX da distância de cada enquadramento ---------- */
+const ZOOM_MIN = .55, ZOOM_MAX = 1.6;
+let zoom = 1;
+const ajustaZoom = f => { zoom = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, zoom * f)); };
+$("#gl").addEventListener("wheel", e => { e.preventDefault(); ajustaZoom(Math.exp(e.deltaY * .0012)); }, { passive: false });
+{ let d0 = 0, z0 = 1; const dist = t => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+  $("#gl").addEventListener("touchstart", e => { if (e.touches.length === 2) { d0 = dist(e.touches); z0 = zoom; } }, { passive: true });
+  $("#gl").addEventListener("touchmove", e => { if (e.touches.length === 2 && d0) { e.preventDefault(); zoom = z0; ajustaZoom(d0 / dist(e.touches)); } }, { passive: false });
+  $("#gl").addEventListener("touchend", e => { if (e.touches.length < 2) d0 = 0; }, { passive: true }); }
+addEventListener("keydown", e => { if (digitando(e)) return; if (e.key === "+" || e.key === "=") ajustaZoom(1 / 1.15); if (e.key === "-" || e.key === "_") ajustaZoom(1.15); if (e.key === "0") zoom = 1; });
+
 /* ---------- laço ---------- */
 const v = new THREE.Vector3(), ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 function quadro(now) {
@@ -765,6 +778,7 @@ function quadro(now) {
   if (girar) ang += .0012;
   const base = CAMS[camModo];
   const rot = new THREE.Vector3(base.pos.x * Math.cos(ang) - base.pos.z * Math.sin(ang), base.pos.y, base.pos.x * Math.sin(ang) + base.pos.z * Math.cos(ang));
+  rot.sub(base.alvo).multiplyScalar(zoom).add(base.alvo);
   camPos.lerp(rot, .03); camAlvo.lerp(base.alvo, .04); camera.position.copy(camPos); camera.lookAt(camAlvo);
   for (const g of GERIDOS) { const u = g.userData; u.k += (u.alvo - u.k) * .045; g.visible = u.k > .01; const e = u.k < .999 ? 1 - Math.pow(1 - u.k, 3) : 1; g.scale.setScalar(Math.max(.001, e)); }
   torre.rotation.y = t * .08;
