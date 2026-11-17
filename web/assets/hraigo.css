@@ -37,7 +37,7 @@ a{color:var(--latao-claro)}
 .marca span{font:500 11px/1 var(--font-mono);color:var(--txt-3);border:1px solid var(--linha);border-radius:999px;padding:5px 9px}
 .menu{display:flex;gap:4px;overflow-x:auto;max-width:100%}
 .menu a{color:var(--txt-2);text-decoration:none;font-weight:500;font-size:14.5px;padding:8px 13px;border-radius:999px;white-space:nowrap;border:1px solid transparent}
-.menu a:hover{border-color:var(--linha)}
+@media (hover:hover){.menu a:hover{border-color:var(--linha)}}
 .menu a[aria-current="page"]{color:var(--latao-fg);background:var(--latao)}
 .menu a.camara{border-color:var(--latao);color:var(--latao-claro)}
 .estado{font:500 12px/1 var(--font-mono);color:var(--txt-3);display:flex;gap:7px;align-items:center;border:1px solid var(--linha);border-radius:999px;padding:6px 10px}
@@ -51,9 +51,9 @@ main{max-width:1560px;margin:0 auto}
 
 /* controles */
 .bt{border:1px solid var(--color-border-control);background:var(--vidro-forte);color:var(--txt);border-radius:999px;padding:11px 20px;font-weight:600;font-size:15px;display:inline-flex;align-items:center;gap:8px;text-decoration:none;transition:border-color .2s,background .2s}
-.bt:hover{border-color:var(--latao)}
+@media (hover:hover){.bt:hover{border-color:var(--latao)}}
 .bt.ipe{background:var(--latao);border-color:var(--latao);color:var(--latao-fg)}
-.bt.ipe:hover{background:var(--color-action-primary-bgHover)}
+@media (hover:hover){.bt.ipe:hover{background:var(--color-action-primary-bgHover)}}
 .bt.leve{border-color:transparent;background:transparent;color:var(--txt-2);padding-inline:8px}
 .bt:disabled{opacity:.4;cursor:not-allowed}
 .selo{font:500 11px/1 var(--font-mono);letter-spacing:.04em;padding:5px 9px;border-radius:999px;border:1px solid var(--linha-forte);color:var(--txt-2);white-space:nowrap;display:inline-flex;gap:6px;align-items:center}
@@ -78,7 +78,7 @@ main{max-width:1560px;margin:0 auto}
 .apoio{color:var(--txt-2);margin:0 0 20px;max-width:60ch}
 .opcoes{display:flex;flex-direction:column;gap:8px}
 .opcao{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:12px;align-items:center;text-align:left;background:var(--color-bg-surface);border:1px solid var(--linha);border-radius:var(--r);padding:14px 16px;font-size:16px;transition:border-color .2s,background .2s}
-.opcao:hover{border-color:var(--linha-forte)}
+@media (hover:hover){.opcao:hover{border-color:var(--linha-forte)}}
 .opcao .marca-op{width:20px;height:20px;border-radius:50%;border:2px solid var(--linha-forte)}
 .opcao[aria-pressed="true"]{border-color:var(--latao);background:rgba(232,163,61,.10)}
 .opcao[aria-pressed="true"] .marca-op{border-color:var(--latao);background:var(--latao);box-shadow:inset 0 0 0 3px var(--sup)}
@@ -193,4 +193,4 @@ textarea{width:100%;min-height:120px;border:1px solid var(--color-border-control
 /* identidade do participante no fim da participação */
 .eu-id{display:flex;align-items:center;gap:12px;font:500 14px/1.3 var(--font-mono);color:var(--color-text-secondary);margin-bottom:14px}
 .eu-id b{color:var(--color-text-primary);font-weight:600}
-.eu-av{width:56px;height:56px;border-radius:12px;image-rendering:pixelated;border:1px solid rgba(214,226,240,.2)}
+.eu-av{width:56px;height:56px;border-radius:12px;image-rendering:pixelated;background:#E9EFF7;border:2px solid #F5D49A}

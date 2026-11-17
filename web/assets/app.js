@@ -108,7 +108,9 @@ function simular(n) {
   }
   agendar();
 }
-let raf = 0; function agendar() { cancelAnimationFrame(raf); raf = requestAnimationFrame(render); }
+/* atualizações vindas da sala não redesenham o formulário de participação: refazer o DOM entre o toque e a soltura
+   faz o iPhone perder o toque ("Próximo" exigindo dois toques). O formulário só redesenha com ações da própria pessoa. */
+let raf = 0; function agendar() { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => render(false)); }
 function linkParticipar() { if (EV.linkPublico && EV.sala === SALA) return EV.linkPublico; const u = new URL(location.href); u.searchParams.set("sala", SALA); u.hash = "participar"; return u.toString(); }
 
 /* ---------- participar ---------- */
@@ -148,7 +150,7 @@ function renderParticipar() {
         el("button", { class: "bt ipe", onclick: async () => { const t = ta.value.trim(); if (t.length > 2) await registrar("q4", { mv, tx: t.slice(0, 280) }); S.passo = 5; render(); } }, "Enviar")));
   } else {
     put(p, el("div", { class: "progresso" }, Array.from({ length: TOTAL }, () => el("i", { class: "on" }))),
-      el("div", { class: "fim" }, el("div", { class: "eu-id" }, window.PixelAvatar ? el("img", { class: "eu-av", src: PixelAvatar.url(S.pid, 4), alt: "" }) : null, el("span", {}, "Você é ", el("b", {}, apelido(S.pid, S.setor)))),
+      el("div", { class: "fim" }, el("div", { class: "eu-id" }, window.PixelAvatar ? el("img", { class: "eu-av", src: PixelAvatar.url(S.pid, 4, "#E9EFF7"), alt: "" }) : null, el("span", {}, "Você é ", el("b", {}, apelido(S.pid, S.setor)))),
         el("h1", { class: "pergunta" }, "Sua luz entrou na câmara."),
         el("p", { class: "apoio" }, "Olhe o telão: você está no anel externo, no arco de " + ((C.setores.find(s => s[0] === S.setor) || ["", "outros"])[1]) + ". Cada escolha sua viajou até a tensão e a lacuna que você marcou."),
         el("p", { class: "apoio" }, "Você pode mudar suas respostas até o fim da sessão; vale a última. Enquanto isso, explore a base de conhecimento e o monitoramento.")),
@@ -278,8 +280,8 @@ function rota() {
   document.querySelectorAll(".menu a").forEach(a => a.setAttribute("aria-current", a.dataset.v === S.vista ? "page" : "false"));
   render();
 }
-function render() {
-  if (S.vista === "participar") { const a = document.activeElement; if (!(a && a.id === "q4t")) renderParticipar(); }
+function render(participacao = true) {
+  if (S.vista === "participar" && participacao) { const a = document.activeElement; if (!(a && a.id === "q4t")) renderParticipar(); }
   if (S.vista === "ao-vivo") { renderLateral(); renderBlocos(); }
   if (S.vista === "conhecimento" && !$("#kb").childElementCount) renderKB();
   if (S.vista === "monitoramento" && !$("#mon").childElementCount) renderMon();

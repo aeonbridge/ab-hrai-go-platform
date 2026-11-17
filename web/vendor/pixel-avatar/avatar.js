@@ -24,12 +24,12 @@ function desenhar(ctx, d, px, fundo) {
     }
   }
 }
-function canvas(id, px = 4, fundo = "#1C2B45") {
+function canvas(id, px = 4, fundo = "#E9EFF7") {
   const c = document.createElement("canvas"); c.width = c.height = 24 * px;
   desenhar(c.getContext("2d"), dna(id), px, fundo); return c;
 }
 const cache = new Map();
-function url(id, px = 4, fundo = "#1C2B45") {
+function url(id, px = 4, fundo = "#E9EFF7") {
   const k = id + "|" + px + "|" + fundo; if (!cache.has(k)) cache.set(k, canvas(id, px, fundo).toDataURL("image/png"));
   return cache.get(k);
 }
