@@ -80,6 +80,26 @@ body:not(.tudo) #falas{display:none}
 body.semgl #semgl{display:grid} body.semgl #gl{display:none}
 @media (max-width:1200px){#leitura{width:320px}#falas{width:min(560px,calc(100% - 680px))}}
 @media (max-width:900px){#leitura,#legenda{display:none}#falas{width:calc(100% - 44px);left:22px;transform:none}#entrar{width:220px}.n-grande{font-size:72px}}
+/* modo espectador: celular de quem já entrou; sem controles de apresentador */
+#mini,#passoMini{display:none}
+body.espectador #salaChip,body.espectador #topo a.chip,body.espectador #entrar,body.espectador #camadasNav,body.espectador #girar,body.espectador #simular,body.espectador #cheia,body.espectador .soTudo,body.espectador #comandos .sep,body.espectador #leitura,body.espectador #legenda{display:none!important}
+body.espectador #mini{display:inline-flex}
+body.espectador #topo{padding:calc(10px + env(safe-area-inset-top,0px)) 12px 10px;gap:8px}
+body.espectador .marca{font-size:15px;gap:8px}
+body.espectador #estado span{max-width:96px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+body.espectador #comandos{left:12px;right:12px;transform:none;bottom:calc(12px + env(safe-area-inset-bottom,0px));padding:6px;flex-wrap:nowrap;justify-content:space-between;align-items:center;gap:8px}
+body.espectador #comandos button{padding:11px 16px;font-size:15px}
+body.espectador #passoMini{display:block;flex:1;text-align:center;font:500 12px/1.2 var(--font-mono);color:var(--color-text-secondary)}
+body.espectador #avancarC{white-space:nowrap}
+body.espectador #etapa,body.espectador.c0 #etapa{left:12px;right:12px;width:auto;transform:none;top:auto;bottom:calc(78px + env(safe-area-inset-bottom,0px));padding:12px 14px;text-align:left}
+body.espectador #etapa h1{font-size:19px;margin:4px 0}
+body.espectador #etapa p{font-size:14px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+body.espectador #falas{left:12px;right:12px;width:auto;transform:none;bottom:calc(78px + env(safe-area-inset-bottom,0px))}
+body.espectador .fala:nth-child(n+2){display:none}
+body.espectador .fala p{font-size:14.5px}
+body.espectador #chegada,body.espectador.c0 #chegada,body.espectador.tudo #chegada{top:calc(58px + env(safe-area-inset-top,0px))}
+body.espectador .toast{font-size:12.5px;padding:7px 12px}
+body.espectador .rotulo3d{font-size:11px;padding:3px 7px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -89,6 +109,7 @@ body.semgl #semgl{display:grid} body.semgl #gl{display:none}
   <div class="marca"><span class="anel" aria-hidden="true"></span>HRAI-GO <span class="chip" id="salaChip">câmara ao vivo</span></div>
   <span class="chip" id="estado"><i></i><span>iniciando</span></span>
   <a class="chip" href="../#conhecimento" style="text-decoration:none">base de conhecimento</a>
+  <span class="chip" id="mini"><b id="totalMini">0</b>&nbsp;na câmara</span>
 </header>
 <aside id="entrar" class="vidro" aria-label="Entrar na câmara">
   <div class="eyebrow">Entre na câmara</div>
@@ -116,6 +137,7 @@ body.semgl #semgl{display:grid} body.semgl #gl{display:none}
 <nav id="comandos" class="vidro" aria-label="Comandos do apresentador">
   <button id="voltarC" aria-label="Camada anterior">←</button>
   <div id="camadasNav" role="group" aria-label="Camadas"></div>
+  <span id="passoMini" aria-live="polite"></span>
   <button id="avancarC" class="prim">Próxima camada →</button>
   <span class="sep"></span>
   <span class="soTudo"><button data-cam="camara" aria-pressed="true">1 · Câmara</button>
@@ -174,7 +196,11 @@ renderer.setSize(innerWidth, innerHeight);
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(COR.tinta);
 scene.fog = new THREE.FogExp2(COR.tinta, 0.016);
+const ESPECTADOR = matchMedia("(max-width: 900px)").matches;
+if (ESPECTADOR) document.body.classList.add("espectador");
 const camera = new THREE.PerspectiveCamera(48, innerWidth / innerHeight, 0.1, 400);
+const ajustarFov = () => { camera.fov = camera.aspect < .8 ? 72 : camera.aspect < 1.2 ? 58 : 48; camera.updateProjectionMatrix(); };
+ajustarFov(); addEventListener("resize", ajustarFov);
 const composer = new THREE.EffectComposer(renderer);
 composer.addPass(new THREE.RenderPass(scene, camera));
 const bloom = new THREE.UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.95, 0.55, 0.12);
@@ -314,7 +340,7 @@ function rastro(de, para, cor, dur) { for (let i = 0; i < 4; i++) feixe(de, para
 /* ---------- contagem e painéis ---------- */
 const votosT = {}, votosL = {}, falas = [];
 let simulados = 0;
-function atualizarTotal() { $("#total").textContent = pessoas.size; $("#totalRot").textContent = "pessoas na câmara" + (simulados ? ` · ${simulados} simuladas` : ""); }
+function atualizarTotal() { $("#total").textContent = pessoas.size; $("#totalMini").textContent = pessoas.size; $("#totalRot").textContent = "pessoas na câmara" + (simulados ? ` · ${simulados} simuladas` : ""); }
 function barras(alvo, linhas, cor) {
   const max = Math.max(1, ...linhas.map(l => l[1]));
   $(alvo).innerHTML = linhas.map(([rot, n, extra]) => `<div class="barra"><div class="r"><span>${esc(rot)}${extra || ""}</span><b>${n}</b></div><div class="t"><i style="width:${n / max * 100}%;background:${cor}"></i></div></div>`).join("");
@@ -379,7 +405,8 @@ const camPos = CAMS.camara.pos.clone(), camAlvo = CAMS.camara.alvo.clone();
 function modo(m) { camModo = m; document.querySelectorAll("[data-cam]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.cam === m))); }
 document.querySelectorAll("[data-cam]").forEach(b => b.onclick = () => modo(b.dataset.cam));
 const CAMADAS = [
-  { n: "Entrada", t: "Entre na câmara", d: "Aponte a câmera para o QR code. Cada pessoa vira uma luz no anel externo, no arco do seu setor. Sem nome, sem cadastro.", g: [], cam: "sala" },
+  ESPECTADOR ? { n: "Você", t: "Você está na câmara", d: "Cada luz no anel externo é uma pessoa da sala, no arco do seu setor. A sua está entre elas.", g: [], cam: "sala" }
+    : { n: "Entrada", t: "Entre na câmara", d: "Aponte a câmera para o QR code. Cada pessoa vira uma luz no anel externo, no arco do seu setor. Sem nome, sem cadastro.", g: [], cam: "sala" },
   { n: "Modelo", t: "O modelo brasileiro em exame", d: M.components.length + " peças empilhadas por tipo. A cor é a força jurídica: em vigor, política pública e projeto de lei, vazado porque não vincula.", g: [torre], cam: "modelo" },
   { n: "Conselho", t: "O conselho das sombras", d: "20 perspectivas sintéticas em 8 estratos. As cadeiras vazias são grupos sem fonte documental: o sistema não inventa o que pensariam.", g: [torre, gAss, gVaz], cam: "camara" },
   { n: "Lacunas", t: "O que falta no modelo", d: "A cúpula reúne as " + M.topics.length + " áreas da taxonomia. Os anéis coral são as " + LACUNAS.length + " áreas sem nenhum componente e crescem com os votos da sala.", g: [torre, gAss, gVaz, gCup, gLac], cam: "lacunas" },
@@ -396,7 +423,8 @@ function camada(i) {
   document.querySelectorAll("[data-camada]").forEach(e => e.classList.toggle("oculto", +e.dataset.camada > i && i < CAMADAS.length - 1));
   $("#etapaN").textContent = "Camada " + (i + 1) + " de " + CAMADAS.length; $("#etapaT").textContent = c.t; $("#etapaD").textContent = c.d;
   navC.querySelectorAll("button").forEach((b, k) => b.setAttribute("aria-current", k === i ? "step" : "false"));
-  $("#voltarC").disabled = i === 0; $("#avancarC").textContent = i === CAMADAS.length - 1 ? "Recomeçar" : "Próxima camada →";
+  $("#voltarC").disabled = i === 0; $("#avancarC").textContent = i === CAMADAS.length - 1 ? "Recomeçar" : (ESPECTADOR ? "Próxima →" : "Próxima camada →");
+  $("#passoMini").textContent = (i + 1) + "/" + CAMADAS.length + " · " + c.n;
   modo(c.cam);
 }
 $("#voltarC").onclick = () => camada(camadaAtual - 1);

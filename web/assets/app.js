@@ -149,6 +149,7 @@ function renderParticipar() {
       el("div", { class: "fim" }, el("h1", { class: "pergunta" }, "Sua luz entrou na câmara."),
         el("p", { class: "apoio" }, "Olhe o telão: você está no anel externo, no arco de " + ((C.setores.find(s => s[0] === S.setor) || ["", "outros"])[1]) + ". Cada escolha sua viajou até a tensão e a lacuna que você marcou."),
         el("p", { class: "apoio" }, "Você pode mudar suas respostas até o fim da sessão; vale a última. Enquanto isso, explore a base de conhecimento e o monitoramento.")),
+      el("a", { class: "bt ipe", href: "ao-vivo/?sala=" + encodeURIComponent(SALA), style: "margin-top:8px;justify-content:center" }, "Ver a câmara no celular →"),
       el("div", { class: "acoes" }, el("a", { class: "bt", href: "#conhecimento" }, "Conhecimento"), el("a", { class: "bt", href: "#monitoramento" }, "Monitoramento")),
       el("button", { class: "bt leve", style: "margin-top:16px", onclick: () => { S.passo = 0; render(); } }, "Revisar respostas"));
   }
