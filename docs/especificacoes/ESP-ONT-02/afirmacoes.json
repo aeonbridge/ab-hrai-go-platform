@@ -1,0 +1,138 @@
+[
+  {
+    "id": "C01",
+    "tese": "A transposição rígida da classificação de risco ex ante impõe barreiras proibitivas a startups e MPMEs",
+    "status": "contestada",
+    "evidencias": [],
+    "contestada_por": [
+      {
+        "afirmacao": "O texto de 2023 já prevê condições diferenciadas para ME/EPP e startups e sandbox; o efeito sobre a entrada é empírico e não está medido no corpus",
+        "evidencias": [
+          "PL 2338/2023 (2023), art. 33, parágrafo único: condições diferenciadas para ME/EPP (LC 123/2006) e startups (LC 182/2021)",
+          "PL 2338/2023 (2023), arts. 38 a 41: sandbox regulatório",
+          "PL 2338/2023 (2023), arts. 13 a 18: avaliação preliminar e classificação de risco ex ante"
+        ]
+      }
+    ],
+    "nota": ""
+  },
+  {
+    "id": "C02",
+    "tese": "O custo de conformidade (relatórios e auditorias) excede o que as empresas locais conseguem absorver",
+    "status": "sem evidência no corpus",
+    "evidencias": [],
+    "contestada_por": [],
+    "nota": "Sem evidência no corpus. Hipótese a testar: exige estimativa de custo (a análise de impacto do Reino Unido traz um método reaproveitável)."
+  },
+  {
+    "id": "C03",
+    "tese": "Diante da escassez de profissionais STEM, a burocracia desvia talento técnico para compliance",
+    "status": "sem evidência no corpus",
+    "evidencias": [],
+    "contestada_por": [],
+    "nota": "Sem evidência no corpus: o PBIA não quantifica escassez STEM. Exige indicador (ContextIndicator) com fonte."
+  },
+  {
+    "id": "C04",
+    "tese": "O Brasil não prevê instância consultiva técnica independente equivalente ao painel científico do AI Act",
+    "status": "com evidência",
+    "evidencias": [
+      "AI Act, art. 68: painel científico de peritos independentes (independência de fornecedores, representação de gênero e geográfica)",
+      "PL 2338/2023 (2023), art. 32: estrutura limitada a uma autoridade competente designada pelo Executivo; não há instância técnico-científica independente"
+    ],
+    "contestada_por": [],
+    "nota": "Válida para o texto de 2023 do corpus. O substitutivo do Senado (dez/2024) precisa ser incorporado ao corpus antes de afirmar para o texto atual."
+  },
+  {
+    "id": "C05",
+    "tese": "O Brasil carece de salvaguardas rígidas contra vieses em serviços públicos e no uso estatal de dados",
+    "status": "contestada",
+    "evidencias": [],
+    "contestada_por": [
+      {
+        "afirmacao": "O PL prevê direito à não discriminação e à correção de vieses e exige, no uso estatal de alto risco, dados testados contra vieses; a lacuna real é que nada disso está em vigor",
+        "evidencias": [
+          "PL 2338/2023 (2023), art. 5º, V e art. 12: direito à não discriminação e à correção de vieses; art. 21, III: no uso estatal de alto risco, dados testados contra vieses discriminatórios"
+        ]
+      }
+    ],
+    "nota": ""
+  },
+  {
+    "id": "C06",
+    "tese": "O marco brasileiro deve evitar proibições rígidas e priorizar sandboxes regulatórios",
+    "status": "contestada",
+    "evidencias": [],
+    "contestada_por": [
+      {
+        "afirmacao": "Proibição de risco excessivo e sandbox coexistem no PL e no AI Act; escolher entre eles é decisão normativa, não constatação",
+        "evidencias": [
+          "PL 2338/2023 (2023), art. 14: vedação de sistemas de risco excessivo",
+          "PL 2338/2023 (2023), arts. 38 a 41: sandbox regulatório",
+          "AI Act, art. 62: medidas para PME e startups (acesso prioritário a sandboxes, canais dedicados)"
+        ]
+      }
+    ],
+    "nota": ""
+  },
+  {
+    "id": "C07",
+    "tese": "O PBIA destina cerca de 0,4% do orçamento ao suporte regulatório e de governança, com risco de estrangulamento institucional",
+    "status": "com evidência",
+    "evidencias": [
+      "PBIA, Tabela 2: Eixo 5 R$ 103,25 milhões de R$ 23,03 bilhões (0,45%)"
+    ],
+    "contestada_por": [],
+    "nota": "Percentual confirmado (0,45%). O 'risco de estrangulamento' é inferência: depende de quanto a supervisão custaria, o que o corpus não estima."
+  },
+  {
+    "id": "C08",
+    "tese": "A matriz elétrica 89,2% renovável dá vantagem para data centers verdes",
+    "status": "com evidência",
+    "evidencias": [
+      "PBIA, p. ~36: renováveis na matriz elétrica 89,2% em 2023 (cita EPE, 2024)"
+    ],
+    "contestada_por": [],
+    "nota": ""
+  },
+  {
+    "id": "C09",
+    "tese": "SUS e CadÚnico são repositórios de dados sem paralelo para treinar modelos",
+    "status": "com evidência",
+    "evidencias": [
+      "PBIA, Seção 1: SUS como um dos maiores sistemas públicos de saúde, com grande volume de dados"
+    ],
+    "contestada_por": [],
+    "nota": "Evidência cobre só o SUS. CadÚnico e 'sem paralelo global' não aparecem no corpus."
+  },
+  {
+    "id": "C10",
+    "tese": "LLMs em português e em línguas originárias protegem a soberania linguística e cultural",
+    "status": "com evidência",
+    "evidencias": [
+      "PBIA, Ação 9: IA baseada em dados nacionais (LLM em português)"
+    ],
+    "contestada_por": [],
+    "nota": "O PBIA prevê LLM em português; línguas originárias não aparecem no corpus."
+  },
+  {
+    "id": "C11",
+    "tese": "A Nuvem Soberana gerida por Serpro e Dataprev protege dados sensíveis frente a infraestrutura estrangeira",
+    "status": "com evidência",
+    "evidencias": [
+      "PBIA, Ação 27: Nuvem Soberana, R$ 1 bilhão (Serpro e Dataprev)"
+    ],
+    "contestada_por": [],
+    "nota": ""
+  },
+  {
+    "id": "C12",
+    "tese": "A expansão do supercomputador Santos Dumont sustenta a capacidade soberana de computação",
+    "status": "com evidência",
+    "evidencias": [
+      "PBIA: meta de atualização do supercomputador Santos Dumont (LNCC)"
+    ],
+    "contestada_por": [],
+    "nota": ""
+  }
+]

@@ -1,0 +1,367 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=2.3cm]{geometry}
+\usepackage{booktabs,longtable,tabularx,array}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\emergencystretch=3em
+
+\definecolor{latao}{HTML}{B9802A}
+\definecolor{tinta}{HTML}{0B1220}
+\definecolor{lagoa}{HTML}{1F8A80}
+\definecolor{coral}{HTML}{C9533A}
+\definecolor{cinza}{HTML}{5B6676}
+
+\pagestyle{fancy}\fancyhf{}
+\lhead{\small\color{cinza}HRAI-GO · Especificação ESP-ONT-02}
+\rhead{\small\color{cinza}\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\newcommand{\nota}[1]{\par\smallskip\noindent\fcolorbox{latao}{latao!6}{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\small #1}}\par\smallskip}
+\newcommand{\alerta}[1]{\par\smallskip\noindent\fcolorbox{coral}{coral!6}{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\small #1}}\par\smallskip}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+
+\title{\textbf{Uso prático da ontologia HRAI-GO na análise comparada de modelos de governança de IA e na deliberação humana com o Shadow Council}\\[4pt]
+\large Documentação do trabalho realizado e especificação de ajuste do método}
+\author{Plataforma HRAI-GO · Aeonbridge}
+\date{Especificação ESP-ONT-02 · 17 de novembro de 2026 · complementa o RT-ONT-01}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+\noindent O relatório RT-ONT-01 mostrou que a ontologia regulatória HRAI-GO, embora consistente e testada, hoje não é usada por nenhum produto. Este documento faz duas coisas. Primeiro, documenta o trabalho feito: o corpus de modelos de governança (Brasil, União Europeia, Reino Unido e Estados Unidos), o agrupamento por epistemologia regulatória, a ontologia base e a situação atual. Segundo, especifica o ajuste do método para que a ontologia passe a responder, de forma verificável, às perguntas que motivaram o projeto:
+\begin{itemize}[leftmargin=*]
+  \item em que o Brasil se distingue dos demais modelos;
+  \item o que foi incorporado do AI Act e não deveria ter sido;
+  \item o que foi omitido e deveria ser considerado;
+  \item como um Shadow Council pode apoiar decisões coletivas humanas.
+\end{itemize}
+A mudança central é tratar o raciocínio como um conjunto de \emph{perguntas de competência} explícitas, cada uma ligada a uma regra ou consulta, a dados com fonte e a uma tela da plataforma. As teses da análise comparativa anexada entram no grafo como \emph{afirmações}, não como fatos. Aplicamos isso às 12 teses do documento anexo, contra o corpus do repositório: 3 são contestadas pelo próprio corpus, 7 têm evidência anexada e 2 não têm evidência nenhuma.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+%=====================================================================
+\section{O que foi feito}
+
+\subsection{Corpus de modelos de governança}
+Os documentos estão em \texttt{docs/ai-regulations/} e foram lidos e indexados para este trabalho:
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{l L r l}
+\toprule
+Jurisdição & Documento & págs. & Natureza\\
+\midrule
+Brasil & Plano Brasileiro de IA 2024--2028 (MCTI/CGEE, VN 8) & 108 & plano de política\\
+Brasil & PL 2338/2023, texto inicial (Senado, 03/05/2023) & 31 & proposta legislativa\\
+UE & Regulamento (UE) 2024/1689, AI Act (Jornal Oficial L) & 144 & lei vigente\\
+UE & AI Act Service Desk; AI hub ecosystem; strategy & 16 & material de apoio\\
+Reino Unido & \emph{A pro-innovation approach to AI regulation} (white paper) & 93 & política, não estatutária\\
+Reino Unido & \emph{AI regulation impact assessment} & 84 & análise de impacto\\
+EUA & NIST AI 100-1, AI Risk Management Framework 1.0 & 48 & guia voluntário\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Agrupamento por epistemologia regulatória}
+Cada modelo parte de uma tese diferente sobre o que é o problema e quem deve resolvê-lo. O corpus sustenta a leitura a seguir; as citações são dos próprios documentos.
+
+\begin{description}[leftmargin=*, style=nextline]
+  \item[União Europeia: direitos fundamentais via regulação horizontal de produto, por risco \emph{ex ante}.]
+  Lei vigente e transversal, com quatro faixas de risco: proibições (art.~5), alto risco (art.~6 e anexo~III), transparência (art.~50) e modelos de propósito geral. Exige avaliação de conformidade antes do mercado e cria órgãos próprios, como o AI Office, o Board e o painel científico (art.~68). Compensa o custo com sandboxes e medidas para PME (arts.~57 e~62).
+  \item[Reino Unido: pró-inovação, por princípios, contextual.]
+  São cinco princípios (\emph{safety, security and robustness}; \emph{transparency and explainability}; \emph{fairness}; \emph{accountability and governance}; \emph{contestability and redress}). O governo afirma: ``\emph{We will not put these principles on a statutory footing initially}''. A aplicação fica com os reguladores setoriais existentes, apoiados por funções centrais, e a análise de impacto quantifica custos e benefícios.
+  \item[Estados Unidos (no corpus): gestão voluntária de risco organizacional.]
+  O NIST AI RMF se declara ``\emph{voluntary, rights-preserving, non-sector-specific, and use-case agnostic}''. Ele organiza o trabalho em quatro funções: \emph{govern, map, measure, manage}.
+  \item[Brasil: modelo híbrido, desenvolvimentista no plano e de direitos na proposta.]
+  O PBIA (``IA para o Bem de Todos'') é um plano de soberania, inclusão e reindustrialização, com R\$~23,03~bi. O PL 2338 tem lógica de direitos e risco \emph{ex ante} próxima à europeia. As duas peças não estão acopladas: o eixo do PBIA que apoia a regulação e a governança recebe R\$~103,25~mi, ou 0,45\% do plano.
+\end{description}
+
+\alerta{\textbf{Ponto a corrigir no agrupamento.} Agrupar ``China e EUA'' como modelos ``de desenvolvimento'' esconde uma diferença essencial.
+\begin{itemize}[leftmargin=*]
+  \item Nos EUA, a política federal é de mercado e baixa regulação. O corpus só tem o NIST RMF, que é voluntário. A política federal atual e as leis estaduais, como a do Colorado, ficaram de fora.
+  \item Na China, é desenvolvimento dirigido pelo Estado, com regras específicas por tipo de serviço (recomendação algorítmica, síntese profunda, IA generativa) e registro de algoritmos. Nenhum documento chinês está no corpus.
+\end{itemize}
+Recomendação: classificar por \emph{dimensões} (seção~\ref{sec:dimensoes}), não por um rótulo único. Ou se inclui a China no corpus, ou ela sai da comparação. Sem fonte, ela não pode aparecer no grafo.}
+
+\subsection{Situação atual}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Ontologia sem uso em produto} (RT-ONT-01). Só existe instância para o Brasil, e só do PBIA. Os modelos da UE, do Reino Unido e dos EUA estão no corpus, mas não no grafo, o que torna impossível qualquer comparação \emph{pela ontologia}.
+  \item \textbf{Versão errada do PL no corpus.} O texto do PL 2338 é o inicial, de 2023. O substitutivo aprovado pelo Senado em 10/12/2024 não está no repositório. Pela imprensa, até agosto de 2026 o projeto seguia em comissão especial na Câmara, sem data de votação. Toda comparação BR $\times$ AI Act feita sobre o texto de 2023 pode estar desatualizada.
+  \item \textbf{Análise comparativa anexada fora do repositório.} O PDF ``Análise Comparativa e Diretrizes Estratégicas\ldots'' não está no repositório. As teses dele foram registradas a partir do resumo fornecido (anexo~\ref{ap:afirmacoes}).
+  \item \textbf{Câmara ao vivo sem ligação com a ontologia.} Dos 22 componentes exibidos, só 10 têm correspondente na instância (RT-ONT-01, seção~5.5).
+\end{itemize}
+
+%=====================================================================
+\section{Ontologia base}
+
+\subsection{O que ela já oferece}
+A ontologia geral v1.1.0 tem 66 classes, 98 propriedades de objeto, 43 de dados e 23 regras SWRL seguras. Ela foi desenhada para ser multinacional: jurisdição, instrumento, versão, dispositivo, requisito, contexto nacional, indicador, tensão, lacuna, afirmação, alternativa, stakeholder, posição e deliberação são classes gerais, não brasileiras.
+
+Para comparar modelos, ela já tem:
+\begin{itemize}[leftmargin=*]
+  \item o \texttt{RegulatoryModel} adotado por uma \texttt{Jurisdiction};
+  \item a separação entre norma vigente, proposta e plano;
+  \item afirmações com evidência e contestação;
+  \item perspectivas sintéticas disjuntas de stakeholders identificados.
+\end{itemize}
+
+\subsection{O que falta para a comparação ser possível}\label{sec:faltas}
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Dimensões epistemológicas.} Não há como dizer, com evidência, que um modelo é estatutário ou voluntário, por risco \emph{ex ante} ou por contexto de uso, com autoridade central ou com reguladores existentes.
+  \item \textbf{Funções de governança comuns.} As 28 áreas da taxonomia da câmara (classificação de risco, avaliação de impacto, supervisão, contestação\ldots) não existem na ontologia. Sem um vocabulário comum de funções, não há eixo para comparar dispositivos de jurisdições diferentes.
+  \item \textbf{Correspondência entre dispositivos.} Não há como registrar que o art.~X do PL corresponde, adapta ou diverge do art.~Y do AI Act. É isso que responde ``o que o Brasil incorporou''.
+  \item \textbf{Capacidade pressuposta.} Um requisito pressupõe capacidades (auditores, orçamento de fiscalização, profissionais), mas a ontologia não liga o requisito à capacidade nem a capacidade ao indicador do contexto. É isso que responde ``incorporou e não deveria'', na forma objetiva de um requisito sem capacidade instalada.
+  \item \textbf{Exposição de risco do contexto.} Ativos como SUS e CadÚnico são também exposições. Falta ligar indicadores de exposição às funções que deveriam cobri-los. É isso que responde ``omitiu e deveria''.
+  \item \textbf{Tipos de relação entre afirmações.} Hoje só existe \texttt{challengedByClaim}. Contradizer, qualificar e complementar são coisas diferentes: no anexo, ``SUS é ativo'' e ``SUS é exposição de risco'' não se contradizem, e a ontologia não tem como dizer isso.
+  \item \textbf{Registro de decisão humana.} Há deliberação e posição, mas não há a decisão final com a justificativa que cita afirmações, nem o registro de mudança de posição depois da discussão.
+\end{enumerate}
+
+%=====================================================================
+\section{Ajuste do método: perguntas de competência}
+
+O RT-ONT-01 descreveu o \emph{como} (camadas, revisão, raciocínio, propagação). O que faltou foi o \emph{para quê}. A especificação passa a ser guiada por perguntas de competência (PC). Cada uma tem um mecanismo (regra ou consulta), os dados de que precisa e a tela onde aparece. Uma PC sem tela é trabalho que ninguém vê; uma tela sem PC é afirmação sem lastro.
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{l L L L}
+\toprule
+PC & Pergunta & Mecanismo & Onde aparece\\
+\midrule
+PC1 & Que funções de governança cada modelo cobre, e com que força jurídica (vigente, proposta, plano, voluntária)? & R24 + consulta de matriz & Comparador: matriz jurisdição $\times$ função\\
+PC2 & Que dispositivos do Brasil correspondem, adaptam ou divergem do AI Act? & correspondências + R26 & Comparador: lado a lado por função\\
+PC3 & O que o Brasil incorporou que pressupõe capacidade que o contexto não tem? & R25 (indicador abaixo do limiar) & Câmara: anel ``incorporado sem capacidade''\\
+PC4 & O que o contexto brasileiro expõe a risco e nenhum instrumento cobre? & SPARQL sob avaliação de cobertura fechada & Câmara: lacunas de exposição\\
+PC5 & A que família epistemológica pertence cada modelo, e com que evidência? & R28 sobre dimensões com evidência & Ficha do modelo\\
+PC6 & Que afirmações sustentam cada recomendação, quem as contesta e com que evidência? & R05, R06, R17 (já existem) & Mural de tensões; ficha\\
+PC7 & Quando um texto muda, o que é reaberto? & R10 a R13 (já existem) & Monitoramento\\
+PC8 & Numa deliberação, que posições humanas e sintéticas apoiam ou contestam cada alternativa, e o que mudou depois da discussão? & R21, R29, R30 & Mesa da sala; relatório de deliberação\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Extensões da TBox (v1.2.0, aditivas)}\label{sec:dimensoes}
+\begin{center}\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{50mm} L}
+\toprule
+Elemento & Definição e regra de uso\\
+\midrule
+\texttt{ApproachDimension} (esquema SKOS) & Quatro dimensões: \emph{forma jurídica} (lei horizontal, lei setorial, princípios não estatutários, guia voluntário, plano); \emph{lógica de risco} (classificação \emph{ex ante}, contexto de uso, resultado, autoavaliação); \emph{desenho institucional} (autoridade central, reguladores existentes, rede); \emph{objetivo primário} (direitos, inovação, desenvolvimento e soberania, segurança).\\
+\texttt{modelHasCharacteristic}\newline\texttt{characteristicEvidence} & Um modelo só recebe uma característica com evidência (dispositivo ou trecho) e com fonte.\\
+\texttt{GovernanceFunction} (esquema SKOS) & As 28 áreas da taxonomia da câmara, com mapeamento para as quatro funções do NIST (\emph{govern, map, measure, manage}) e para os capítulos do AI Act.\\
+\texttt{provisionAddressesFunction} & Liga dispositivo, princípio ou ação de plano a uma função.\\
+\texttt{ProvisionCorrespondence}\newline(n-ária) & Dispositivo de origem, dispositivo de destino, tipo (\emph{equivalente}, \emph{adaptado}, \emph{parcial}, \emph{divergente}), evidência, analista e decisão de revisão.\\
+\texttt{CapacityRequirement}\newline\texttt{requirementAssumesCapacity}\newline\texttt{capacityMeasuredBy} & Liga um requisito à capacidade que ele pressupõe e esta a um \texttt{ContextIndicator} com fonte.\\
+\texttt{hasLowerAlertThreshold}\newline\texttt{CapacityShortfallIndicator} & Espelha o limiar superior (R18) para capacidades insuficientes.\\
+\texttt{RiskExposureIndicator}\newline$\sqsubseteq$ \texttt{ContextIndicator}\newline\texttt{exposureConcernsFunction} & Exposição do contexto (por exemplo, volume de dados sensíveis em uso estatal) ligada à função que deveria cobri-la.\\
+\texttt{CoverageAssessment} & Declaração explícita de mundo fechado: ``para a jurisdição J, no snapshot S, o corpus foi varrido para a função F''. Só sob ela a ausência vira lacuna.\\
+\texttt{claimQualifies}\newline\texttt{claimComplements} & Ao lado de \texttt{challengedByClaim}: qualificar e complementar não são contestar.\\
+\texttt{DecisionRecord}\newline\texttt{decisionSelects}\newline\texttt{decisionCitesClaim}\newline\texttt{positionRevisedAs} & Decisão humana com justificativa rastreável e registro de mudança de posição.\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Regras novas (R24 a R30), todas de sinalização}
+\begin{description}[leftmargin=*, style=nextline]
+  \item[R24 FunctionCoverage] Dispositivo de versão de instrumento da jurisdição J que trata a função F $\Rightarrow$ \texttt{jurisdictionAddressesFunction(J,F)}. A força jurídica vem da classe do instrumento: cobertura por proposta é distinta de cobertura vigente.
+  \item[R25 CapacityShortfall] Valor do indicador abaixo do limiar inferior $\Rightarrow$ \texttt{CapacityShortfallIndicator}. Requisito que pressupõe essa capacidade $\Rightarrow$ \texttt{requirementHasCapacityRisk}. Isso é sinal para investigar, não juízo de inviabilidade.
+  \item[R26 Transposition] Correspondência do tipo equivalente ou adaptado, com origem em outra jurisdição e revisão aprovada $\Rightarrow$ \texttt{provisionTransposedFrom}.
+  \item[R27] Não existe como regra, porque SWRL não tem negação. ``Exposição sem cobertura'' é uma consulta SPARQL válida só dentro de um \texttt{CoverageAssessment}. A interface deve mostrar o escopo da avaliação junto com a lacuna.
+  \item[R28 ApproachFamily] Combinações de características com evidência $\Rightarrow$ membro de família (por exemplo: lei horizontal + risco \emph{ex ante} $\Rightarrow$ ``regulação horizontal por risco''). A família é rótulo derivado; as dimensões continuam visíveis.
+  \item[R29 SyntheticSupport] Posição sintética que apoia ou contesta uma afirmação $\Rightarrow$ a afirmação recebe \texttt{hasSyntheticSupport} ou \texttt{hasSyntheticChallenge}, nunca apoio humano.
+  \item[R30 DivergentAlternative] Alternativa com apoio e contestação vindos de estratos diferentes $\Rightarrow$ \texttt{DivergentAlternative}, para a deliberação mostrar onde está o desacordo real.
+\end{description}
+
+\nota{\textbf{Invariantes que continuam valendo} e que o teste da TBox deve estender às regras novas:
+\begin{itemize}[leftmargin=*]
+  \item nenhuma regra afirma status jurídico, conformidade, publicação ou decisão;
+  \item toda conclusão carrega a cadeia até a fonte;
+  \item cenários e afirmações nunca se misturam com instâncias de fonte.
+\end{itemize}}
+
+%=====================================================================
+\section{Brasil $\times$ AI Act: como responder com a ontologia}
+
+\subsection{As três perguntas e seus mecanismos}
+\begin{description}[leftmargin=*, style=nextline]
+  \item[Especificidades do Brasil frente às demais localidades (PC1, PC5).]
+  A resposta é o perfil de cada modelo nas quatro dimensões, com evidência, e a matriz de funções cobertas por força jurídica. O que só o Brasil tem aparece como linha da matriz com cobertura brasileira e sem par: por exemplo, plano de soberania computacional com orçamento, nuvem de governo e LLM em português. O que só os outros têm aparece como lacuna brasileira.
+  \item[O que foi considerado e não deveria (PC2 + PC3).]
+  Primeiro, PC2 identifica o que foi \emph{transposto} do AI Act (correspondência equivalente ou adaptada). Em seguida, PC3 cruza os requisitos transpostos com as capacidades que eles pressupõem e com os indicadores do contexto. O resultado não é ``não deveria'', mas ``transposto sem capacidade instalada, segundo o indicador I da fonte S''. A decisão de retirar ou adaptar continua sendo humana (seção~\ref{sec:sc}).
+  \item[O que não foi considerado e deveria (PC4 + PC2).]
+  Exposições do contexto sem função que as cubra (PC4), mais funções que o AI Act cobre e o Brasil não (PC2 com tipo ausente). As duas listas só valem dentro de um \texttt{CoverageAssessment}, com o escopo e o snapshot explícitos.
+\end{description}
+
+\subsection{Aplicação às teses da análise comparativa anexada}
+As 12 teses do documento anexo entraram no grafo como \texttt{PolicyClaim}\footnote{Arquivo \texttt{ontologies/regulatory/afirmacoes/}\allowbreak\texttt{A1\_analise\_comparativa\_BR\_AIAct.ttl}.}, ligadas às evidências do corpus e às contra-afirmações que o próprio corpus sustenta. O raciocinador do RT-ONT-01 classificou cada uma; a tabela completa está no anexo~\ref{ap:afirmacoes}, gerada automaticamente. Resumo:
+
+\begin{itemize}[leftmargin=*]
+  \item \textcolor{coral}{\textbf{3 contestadas}}:
+  \begin{itemize}
+    \item \textbf{C01, barreiras a startups.} O texto de 2023 já prevê condições diferenciadas para ME/EPP e startups (art.~33, parágrafo único) e sandbox (arts.~38 a~41). O efeito sobre a entrada é empírico e não está medido.
+    \item \textbf{C05, ``carece de salvaguardas contra vieses''.} O PL prevê direito à não discriminação e à correção de vieses (art.~5º, V e art.~12) e dados testados contra vieses no uso estatal de alto risco (art.~21, III). A lacuna real é outra: nada disso está em vigor.
+    \item \textbf{C06, ``evitar proibições rígidas''.} Proibição de risco excessivo e sandbox coexistem no PL e no AI Act. Escolher entre os dois é decisão normativa, não constatação.
+  \end{itemize}
+  \item \textcolor{lagoa}{\textbf{7 com evidência anexada}}:
+  \begin{itemize}
+    \item C04, sem instância técnica independente, válida para o texto de 2023;
+    \item C07, 0,45\% do orçamento do PBIA;
+    \item C08, 89,2\% de renováveis, dado de 2023;
+    \item C09, SUS como grande base de dados (CadÚnico não aparece no corpus);
+    \item C10, LLM em português (línguas originárias não aparecem no corpus);
+    \item C11, Nuvem Soberana;
+    \item C12, supercomputador Santos Dumont.
+  \end{itemize}
+  \item \textcolor{cinza}{\textbf{2 sem evidência no corpus}}: C02, custo de conformidade, e C03, escassez de STEM. São hipóteses. Para entrar na discussão como fato, precisam de indicador com fonte.
+\end{itemize}
+
+\alerta{\textbf{O que isso significa para a narrativa do evento.} Três das teses mais fortes do anexo, justamente as que respondem ``o que o Brasil incorporou e não deveria'' e ``o que omitiu'', estão contestadas ou sem evidência no corpus. Elas podem estar certas, mas, do jeito que estão, não se sustentam diante de quem conhece o texto do PL. O método proposto não descarta essas teses: ele as coloca na mesa com a contra-evidência, que é exatamente o que um público de governo vai fazer.}
+
+\subsection{Observações sobre os ativos brasileiros do anexo}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Dados do SUS e do CadÚnico.} São ativo e, ao mesmo tempo, exposição de risco: dados sensíveis de populações vulneráveis. No grafo, entram como dois \texttt{ContextIndicator} (ativo e \texttt{RiskExposureIndicator}) ligados à mesma tensão, com \texttt{claimComplements}. Tratá-los só como ativo, como faz o anexo, contradiz a própria preocupação do anexo com vieses no uso estatal (C05).
+  \item \textbf{Matriz elétrica.} O dado de 89,2\% é de 2023. Fonte externa ao corpus (BEN 2025) indica 88,2\% para 2024. O indicador deve carregar o ano-base, e a câmara deve exibi-lo.
+  \item \textbf{Assimetria de financiamento (0,45\%).} Ela é o melhor exemplo para PC3: requisitos do PL que exigem fiscalização $\to$ capacidade ``orçamento de supervisão'' $\to$ indicador ``Eixo 5 / total''. O que falta é o limiar, ou seja, quanto custaria supervisionar. Sem esse dado, o ``risco de estrangulamento'' (C07) continua sendo inferência.
+\end{itemize}
+
+%=====================================================================
+\section{Shadow Council e interação humana}\label{sec:sc}
+
+\subsection{Papel: ampliar o que é considerado, não decidir}
+O Shadow Council (SC) é um conjunto de perspectivas sintéticas por estrato, cada uma ancorada em documentos, com pontos cegos declarados e cadeiras vazias onde não há fonte. Num processo decisório coletivo humano, seu valor está em três coisas:
+\begin{enumerate}[leftmargin=*]
+  \item trazer para a mesa estratos ausentes da sala: grupos afetados, trabalhadores, infraestrutura;
+  \item obrigar cada afirmação a mostrar evidência e contra-evidência;
+  \item tornar visível onde está o desacordo real entre estratos, em vez de produzir consenso aparente.
+\end{enumerate}
+Ele não vota, não recomenda alternativa e não produz ``síntese do conselho'' como se fosse opinião coletiva.
+
+\subsection{Protocolo de deliberação (cinco rodadas)}
+\begin{center}
+\begin{tikzpicture}[node distance=4mm, every node/.style={font=\footnotesize},
+  caixa/.style={draw=tinta!70, rounded corners=3pt, align=center, text width=27mm, minimum height=14mm},
+  humano/.style={caixa, draw=latao, fill=latao!10}, seta/.style={-{Stealth[length=2mm]}, thick, color=tinta!70}]
+\node[caixa] (r0) {\textbf{0 · Enquadramento}\\tensão, afirmações e evidências vindas do grafo};
+\node[humano, right=of r0] (r1) {\textbf{1 · Posição cega}\\humanos se posicionam antes de ver o SC};
+\node[caixa, right=of r1] (r2) {\textbf{2 · Revelação}\\SC mostra posições por estrato, com fontes e cadeiras vazias};
+\node[humano, right=of r2] (r3) {\textbf{3 · Revisão}\\humanos apoiam, contestam, pedem fonte e podem mudar de posição};
+\node[humano, below=6mm of r2] (r4) {\textbf{4 · Decisão}\\registro humano com justificativa que cita afirmações};
+\draw[seta] (r0)--(r1); \draw[seta] (r1)--(r2); \draw[seta] (r2)--(r3); \draw[seta] (r3.south) |- (r4.east);
+\end{tikzpicture}
+\end{center}
+
+\begin{description}[leftmargin=*, style=nextline]
+  \item[Rodada 0, enquadramento.] A pergunta da sessão é uma \texttt{RegulatoryTension} do grafo, com suas afirmações e evidências (PC6). A própria tela mostra o que está contestado e o que não tem evidência.
+  \item[Rodada 1, posição cega.] Cada pessoa registra uma posição sobre as alternativas \emph{antes} de ver o SC, o que evita ancoragem no texto da máquina. Na plataforma, isso já existe como a etapa ``Minhas escolhas'' do celular.
+  \item[Rodada 2, revelação.] O SC mostra as posições por estrato, cada uma com as afirmações que apoia ou contesta e as fontes. Em destaque, mostra os estratos que nenhum humano da sala representa e as cadeiras vazias.
+  \item[Rodada 3, revisão.] Humanos reagem: na Mesa da plataforma, apoio vira \texttt{positionSupportsClaim}, contestação vira \texttt{positionChallengesClaim} e ``falta fonte'' vira um pedido de evidência. Quem muda de posição gera \texttt{positionRevisedAs}, o que permite medir se o SC alterou alguma coisa.
+  \item[Rodada 4, decisão.] Um \texttt{DecisionRecord} humano escolhe uma alternativa, cita as afirmações em que se apoia e registra as divergências que permanecem (R30). O registro volta ao grafo como candidato, sujeito à revisão de M2.
+\end{description}
+
+\subsection{Salvaguardas}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Sintético nunca passa por humano.} A disjunção na TBox e a regra R21 garantem isso no grafo. Na interface, cor e rótulo distintos, sempre.
+  \item \textbf{Sem agregação de votos sintéticos.} Contar ``12 de 20 assentos apoiam'' sugere maioria onde só há construção de perspectivas. O que se mostra é a divergência por estrato.
+  \item \textbf{Viés de automação e ancoragem.} A posição cega vem antes do SC. O relatório da sessão compara a distribuição das posições antes e depois.
+  \item \textbf{Cadeiras vazias à vista.} A ausência de fonte para um grupo é informação: o SC não inventa o que povos indígenas ou o Judiciário pensariam.
+  \item \textbf{Bajulação.} As perspectivas são geradas a partir das fontes do estrato, não da pergunta do usuário, e são avaliadas pelo cruzamento com as evidências citadas.
+\end{itemize}
+
+\subsection{Como medir se ajudou}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Amplitude:} número de afirmações distintas consideradas na decisão, com e sem SC.
+  \item \textbf{Ancoragem em evidência:} fração das afirmações citadas na decisão que têm \texttt{EvidencedPolicyClaim}.
+  \item \textbf{Revisão de posição:} quantas posições mudaram entre as rodadas 1 e 3, e em direção a quê.
+  \item \textbf{Divergência preservada:} quantas alternativas terminam como \texttt{DivergentAlternative} registradas na decisão, em vez de apagadas.
+\end{itemize}
+
+%=====================================================================
+\section{Especificação de implementação}
+
+\subsection{Requisitos}
+\begin{center}\small
+\begin{longtable}{l p{78mm} p{62mm}}
+\toprule
+Id & Requisito & Critério de aceite\\
+\midrule\endhead
+RF-01 & Incorporar ao corpus o substitutivo do PL 2338 aprovado pelo Senado (10/12/2024) e manter o texto de 2023 como versão anterior. & As duas versões são \texttt{LegalInstrumentVersion} do mesmo PL; um \texttt{RegulatoryChangeEvent} entre elas dispara R10 a R13.\\
+RF-02 & Decidir sobre a China: incluir fontes primárias ou retirar da comparação. & Nenhuma jurisdição é exibida sem pelo menos um \texttt{SourceSnapshot} com hash.\\
+RF-03 & TBox v1.2.0 com as extensões da seção~\ref{sec:dimensoes} e as regras R24 a R30. & Testes de TBox estendidos; invariantes de segurança valem para as regras novas.\\
+RF-04 & Instâncias candidatas da UE (AI Act: arts.~5, 6, 9 a~15, 26, 27, 50, 57 a~62, 68, 99), do Reino Unido (cinco princípios e arranjo institucional) e dos EUA (funções do NIST RMF), com proveniência por artigo ou seção. & Cada dispositivo tem \texttt{prov:wasDerivedFrom} até o snapshot; todo o conteúdo é \texttt{CandidateAssertion} até a revisão.\\
+RF-05 & Esquema \texttt{GovernanceFunction} a partir das 28 áreas da câmara, com mapeamento para NIST e AI Act. & As 28 áreas da cúpula da câmara vêm do esquema, não de \texttt{modelo.js}.\\
+RF-06 & Correspondências BR $\leftrightarrow$ UE por função, com tipo, evidência e revisão humana. & PC2 responde para as funções com cobertura nas duas jurisdições.\\
+RF-07 & Indicadores de capacidade e de exposição com fonte e ano-base, incluindo orçamento de supervisão, profissionais e dados sensíveis em uso estatal. & PC3 e PC4 retornam resultado ou ``sem indicador'', nunca vazio silencioso.\\
+RF-08 & Consultas SPARQL para PC1 a PC8 versionadas no repositório, com teste de regressão sobre os dados. & CI falha se uma PC deixar de responder.\\
+RF-09 & Build gera os dados da plataforma a partir do grafo: modelo da câmara, comparador, fichas com ``por quê?''. & \texttt{modelo.js} deixa de ser editado à mão.\\
+RF-10 & Mesa da plataforma grava reações como posições sobre afirmações; registro de decisão e de revisão de posição. & Uma sessão gera um relatório com as métricas da seção 5.4.\\
+RF-11 & Afirmações de documentos de análise entram como \texttt{PolicyClaim}, nunca como fato. & Anexo~\ref{ap:afirmacoes} gerado pelo script, com status.\\
+RNF-01 & IRIs resolvíveis (w3id.org ou GitHub Pages) para TBox, instâncias e afirmações. & Abrir um IRI no navegador mostra o recurso.\\
+RNF-02 & Raciocínio em menos de 5\,s no CI para o grafo completo. & Medido no CI.\\
+\bottomrule
+\end{longtable}
+\end{center}
+
+\subsection{Fases sugeridas}
+\begin{center}\small
+\begin{tabularx}{\linewidth}{l L l}
+\toprule
+Fase & Entregas & Estimativa\\
+\midrule
+F0 & Corrigir o slide da apresentação; RF-01; RF-02; RF-11 (já iniciado neste documento). & 1 semana\\
+F1 & RF-03 e RF-05: TBox v1.2.0, esquemas de dimensões e funções, testes. & 2 a 3 semanas\\
+F2 & RF-04 e RF-06: instâncias UE, Reino Unido e EUA, e correspondências BR $\leftrightarrow$ UE com revisão. & 3 a 5 semanas\\
+F3 & RF-07, RF-08 e RF-09: indicadores, consultas, build da plataforma a partir do grafo. & 2 a 3 semanas\\
+F4 & RF-10: protocolo do SC integrado à Mesa e ao relatório de deliberação. & 2 semanas\\
+\bottomrule
+\end{tabularx}
+\end{center}
+\noindent As estimativas são de ordem de grandeza. O gargalo real é a revisão humana das extrações (F2), que depende de quem revisa, não de código.
+
+\subsection{O que já existe e pode ser reaproveitado}
+\begin{itemize}[leftmargin=*]
+  \item \texttt{scripts/ontologia/raciocinar.py}: motor de regras com justificativa (RT-ONT-01).
+  \item \texttt{scripts/ontologia/afirmacoes.py}: classificação de afirmações (este documento).
+  \item \texttt{ontologies/regulatory/afirmacoes/A1\_\ldots ttl}: as 12 teses do anexo com evidências.
+  \item Câmara ao vivo: fichas por elemento, Mesa com reações e etapa ``Minhas escolhas''. São a interface das rodadas 1 e 3 do protocolo.
+\end{itemize}
+
+%=====================================================================
+\appendix
+\section{Teses da análise comparativa anexada, classificadas pelo grafo}\label{ap:afirmacoes}
+\noindent Tabela gerada por \texttt{scripts/ontologia/afirmacoes.py}. ``Contestada'' significa que há contra-afirmação explícita sustentada pelo corpus; não significa falsa. ``Com evidência'' significa evidência anexada; não significa verdadeira.
+
+\begin{center}\footnotesize
+\begin{longtable}{l p{52mm} p{22mm} p{66mm}}
+\toprule
+Id & Tese & Status & Contra-afirmação ou observação\\
+\midrule\endhead
+\csname @@input\endcsname tabelas/afirmacoes.tex
+\bottomrule
+\end{longtable}
+\end{center}
+
+\section{Reprodutibilidade}
+\begin{verbatim}
+python3 scripts/ontologia/afirmacoes.py     # classifica as teses e gera o anexo A
+python3 scripts/ontologia/experimentos.py   # experimentos do RT-ONT-01
+cd docs/especificacoes/ESP-ONT-02
+pdflatex especificacao.tex && pdflatex especificacao.tex
+\end{verbatim}
+\noindent Informação externa ao corpus usada neste documento, a incorporar como fonte antes de uso público:
+\begin{itemize}[leftmargin=*]
+  \item aprovação do PL 2338 pelo Senado em 10/12/2024;
+  \item tramitação na Câmara em comissão especial, segundo a imprensa, até agosto de 2026;
+  \item BEN 2025 com 88,2\% de renováveis na matriz elétrica em 2024.
+\end{itemize}
+
+\end{document}
