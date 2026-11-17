@@ -1,5 +1,7 @@
 # SCSE - Shadow Council Simulation Environment (HRAI-GO)
 
+Módulo do **HRAI-GO (Human-centred Regulatory AI, Governance Observatory)**; ver `docs/NOMENCLATURA.md`.
+
 Especificacao independente (v1.0) de ambiente de simulacao deliberativa multiagente inspirado no fluxo conceitual do MiroFish. **Nao e uma implementacao** de um simulador e nao emite parecer juridico.
 
 ## Artefatos

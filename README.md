@@ -1,9 +1,15 @@
 # HRAI-GO Platform
 
+**HRAI-GO: Human-centred Regulatory AI, Governance Observatory**
+*Plataforma de inteligência regulatória humano–IA*
+
+> Nota de nomenclatura: a sigla nasceu como *High-Risk AI* (ontologia de sistemas de IA de alto risco). Os namespaces técnicos `hrai-*.owl` mantêm o nome legado; a marca adota o significado acima. Regras completas em [`docs/NOMENCLATURA.md`](docs/NOMENCLATURA.md).
+
 Repositório de artefatos da plataforma de inteligência regulatória HRAI-GO e do **Shadow Council Simulation Environment (SCSE)**.
 
 ## Estrutura
 
+- `docs/NOMENCLATURA.md`: nome oficial da plataforma e regras de uso.
 - `docs/hrai-go/`: documento pedagógico da plataforma, em LaTeX.
 - `docs/scse/`: especificação pedagógica do ambiente de simulação, em LaTeX.
 - `ontologies/scse/`: serializações equivalentes Turtle (.ttl) e RDF/XML (.owl), incluindo regras SWRL.

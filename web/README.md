@@ -1,5 +1,7 @@
 # HRAI-GO · Observatório (site estático)
 
+HRAI-GO = **Human-centred Regulatory AI, Governance Observatory** (ver `docs/NOMENCLATURA.md`).
+
 Site independente: participação ao vivo por QR code, telão com agregados, base de conhecimento e monitoramento.
 Sem CDN de terceiros (bibliotecas, three.js r128 e fontes ficam em `vendor/` e `fonts/`; licenças em `vendor/LICENCAS.md`).
 

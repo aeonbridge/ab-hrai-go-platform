@@ -1,5 +1,7 @@
 # HRAI-GO — General Regulatory Intelligence Ontology
 
+Parte do **HRAI-GO (Human-centred Regulatory AI, Governance Observatory)**. O prefixo `hrai:` e os nomes de arquivo `HRAI_GO_*` são identificadores legados (a sigla nasceu como *High-Risk AI*, significado aposentado); ver `docs/NOMENCLATURA.md`.
+
 **Versão:** 1.1.0 (proposta; anterior: 1.0.0) · **Idioma dos identificadores:** inglês · **Explicações:** pt-BR
 
 ## Objetivo

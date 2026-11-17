@@ -1,7 +1,7 @@
 # HRAI-GO Design System
 
-Design system da **Plataforma Aberta de Inteligência Regulatória e Governança de IA
-(HRAI-GO)**, para web e mobile. **DS v2 (17/11/2026):** a referência de experiência passa a ser a câmara 3D do Shadow
+Design system do **HRAI-GO (Human-centred Regulatory AI, Governance Observatory)**, plataforma de inteligência regulatória
+humano–IA (ver `docs/NOMENCLATURA.md`), para web e mobile. **DS v2 (17/11/2026):** a referência de experiência passa a ser a câmara 3D do Shadow
 Council (`docs/07-camara.md`). O tema `camara` é o padrão; os temas claro e escuro
 institucionais continuam para documentos e leitura jurídica. A camada semântica de domínio
 não mudou.
@@ -90,8 +90,8 @@ contornos têm 4,1:1 ou mais. Os 86 ícones foram conferidos contra o lucide-rea
 
 ## Em aberto
 
-- Nome e marca (logotipo, símbolo). O sistema usa o nome HRAI-GO e não inclui identidade
-  gráfica.
+- Marca (logotipo, símbolo). O nome está fechado: HRAI-GO (Human-centred Regulatory AI, Governance Observatory), ver
+  `docs/NOMENCLATURA.md`. Falta só a identidade gráfica.
 - Quais estratos e eixos de estratificação (spec §10.3) são parametrizáveis por sessão.
   Isso afeta a `CoverageMatrix`.
 - Biblioteca de gráficos e grafo por plataforma (decisão de implementação).
