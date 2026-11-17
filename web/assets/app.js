@@ -124,7 +124,7 @@ function renderParticipar() {
   const topo = (n, rot, perg, apoio) => [el("div", { class: "progresso", "aria-label": `passo ${n} de ${TOTAL}` }, Array.from({ length: TOTAL }, (_, i) => el("i", { class: i < n ? "on" : "" }))),
     el("div", { class: "eyebrow rotulo" }, `Passo ${n} de ${TOTAL} · ${rot}`), el("h1", { class: "pergunta" }, perg), apoio ? el("p", { class: "apoio" }, apoio) : null];
   if (st === 0) {
-    put(p, ...topo(1, "anônimo · nenhum nome é coletado", "De onde você olha para a governança de IA?", "O setor serve só para mostrar no telão a diversidade de perspectivas na sala."),
+    put(p, ...topo(1, "anônimo · seu nome só aparece se você quiser", "De onde você olha para a governança de IA?", "O setor serve só para mostrar no telão a diversidade de perspectivas na sala."),
       el("div", { class: "opcoes" }, C.setores.map(([k, l]) => el("button", { class: "opcao", "aria-pressed": String(S.setor === k), onclick: () => { S.setor = k; ls.set("hraigo.setor", k); registrar("setor", k); render(); } }, el("span", { class: "marca-op" }), l, el("span"))) ), reg, navegar(!!S.setor));
   } else if (st === 1) {
     put(p, ...topo(2, "prioridade", "Qual tensão do modelo brasileiro precisa ser enfrentada primeiro?", "São as seis tensões-semente que o Shadow Council usa para questionar o modelo."),
@@ -153,12 +153,25 @@ function renderParticipar() {
       el("div", { class: "fim" }, el("div", { class: "eu-id" }, window.PixelAvatar ? el("img", { class: "eu-av", src: PixelAvatar.url(S.pid, 4, "#E9EFF7"), alt: "" }) : null, el("span", {}, "Você é ", el("b", {}, apelido(S.pid, S.setor)))),
         el("h1", { class: "pergunta" }, "Sua luz entrou na câmara."),
         el("p", { class: "apoio" }, "Olhe o telão: você está no anel externo, no arco de " + ((C.setores.find(s => s[0] === S.setor) || ["", "outros"])[1]) + ". Cada escolha sua viajou até a tensão e a lacuna que você marcou."),
-        el("p", { class: "apoio" }, "Você pode mudar suas respostas até o fim da sessão; vale a última. Enquanto isso, explore a base de conhecimento e o monitoramento.")),
+        el("p", { class: "apoio" }, "Você pode mudar suas respostas até o fim da sessão; vale a última. Enquanto isso, explore a base de conhecimento e o monitoramento."),
+        identificacao()),
       el("a", { class: "bt ipe", href: "ao-vivo/?sala=" + encodeURIComponent(SALA) + "&modo=participante", style: "margin-top:8px;justify-content:center" }, "Entrar na câmara →"),
       el("p", { class: "apoio", style: "font-size:14px" }, "Na câmara você vê as contribuições da sala, reage a elas e muda suas escolhas. Tudo aparece para todos e no telão, com o seu avatar."),
       el("div", { class: "acoes" }, el("a", { class: "bt", href: "#conhecimento" }, "Conhecimento"), el("a", { class: "bt", href: "#monitoramento" }, "Monitoramento")),
       el("button", { class: "bt leve", style: "margin-top:16px", onclick: () => { S.passo = 0; render(); } }, "Revisar respostas"));
   }
+}
+
+/* Identificação opcional: o nome aparece ao lado do apelido; apelido e avatar continuam os mesmos. */
+function identificacao() {
+  const atual = S.resp.nome || "";
+  const inp = el("input", { class: "ident-in", maxlength: "60", autocomplete: "name", placeholder: "Seu nome", "aria-label": "Seu nome (opcional)" }); inp.value = atual;
+  const salvar = async v => { await registrar("nome", v); render(); };
+  return el("form", { class: "ident", onsubmit: e => { e.preventDefault(); salvar(inp.value.trim().slice(0, 60) || null); } },
+    el("p", { class: "apoio", style: "font-size:14px;margin:0" }, atual ? "Você se identificou como " + atual + ". O apelido e o avatar continuam os mesmos." : "Quer se identificar? É opcional e pode ser feito a qualquer momento. Seu nome aparece ao lado do apelido, que continua o mesmo, assim como o avatar."),
+    inp,
+    el("div", { class: "acoes" }, el("button", { class: "bt", type: "submit" }, atual ? "Atualizar nome" : "Mostrar meu nome"),
+      atual ? el("button", { class: "bt leve", type: "button", onclick: () => salvar(null) }, "Voltar a ficar anônimo") : el("span")));
 }
 
 /* ---------- ao vivo ---------- */

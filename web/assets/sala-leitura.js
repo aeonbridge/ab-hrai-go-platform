@@ -2,7 +2,9 @@
    Fontes: Supabase (leitura pública via RLS; escrita com a sessão anônima criada na participação) ou,
    sem configuração, BroadcastChannel entre abas (ensaio).
    API: HRAIGO_LEITURA.sala, .on(fn(msg, novo)), .estado(fn(cls, txt)), .participantes(), .injetar(msg),
-        .eu(), .setor(), .apelido(pid, setor), .enviar(k, v), .podeEnviar(), .iniciar() */
+        .eu(), .setor(), .apelido(pid, setor), .nome(pid), .rotulo(pid, setor), .enviar(k, v), .podeEnviar(), .iniciar()
+   Identidade: anônima por padrão. Apelido e avatar vêm do identificador e nunca mudam; o nome (chave "nome")
+   é opcional, pode ser mostrado ou retirado a qualquer momento e aparece só ao lado do apelido. */
 (() => {
 "use strict";
 const CFG = window.HRAIGO_CONFIG || {};
@@ -20,6 +22,9 @@ let sb = null, sessao = null;
 const supa = !!(CFG.supabaseUrl && CFG.supabaseAnonKey && window.supabase);
 const CURTO = { gov: "Governo", reg: "Regulador", leg: "Legislativo", est: "Estados", aca: "Academia", soc: "Sociedade", pri: "Privado", out: "Outro" };
 function apelido(pid, setor) { return (CURTO[setor] || "Pessoa") + "·" + String(pid || "").replace(/[^a-z0-9]/gi, "").slice(-3).toLowerCase(); }
+/* nome que a pessoa escolheu mostrar (chave "nome"); null enquanto anônima */
+function nome(pid) { const m = msgs.get(pid + "|nome"); return m && typeof m.v === "string" && m.v.trim() ? m.v.trim() : null; }
+function rotulo(pid, setor) { const n = nome(pid); return apelido(pid, setor) + (n ? " · " + n : ""); }
 function eu() { return supa ? (sessao ? sessao.user.id : null) : localPid; }
 
 const msgs = new Map(), ouvintes = [], estados = [];
@@ -76,7 +81,7 @@ async function iniciar() {
 }
 
 window.HRAIGO_LEITURA = {
-  sala, injetar, participantes, apelido, enviar, eu,
+  sala, injetar, participantes, apelido, nome, rotulo, enviar, eu,
   setor() { return ls.get("hraigo.setor"); },
   podeEnviar() { return !!eu() && !!ls.get("hraigo.setor"); },
   on(f) { ouvintes.push(f); }, estado(f) { estados.push(f); },

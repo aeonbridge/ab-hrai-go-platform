@@ -7,8 +7,10 @@ through ``/api/health`` and switches from local-only mode to live mode.
 Flow
 ----
 1. The facilitator opens a tension and shows its QR code. The code points to ``/m/<tension>``.
-2. ``/m/<tension>`` redirects to the page with ``?t=<tension>&entrar=1``; the page asks for a
-   name and one of the eight council roles and calls ``POST /api/join``.
+2. ``/m/<tension>`` redirects to the page with ``?t=<tension>&entrar=1``; the page asks for one
+   of the eight council roles and calls ``POST /api/join``. The person enters anonymously: the
+   server derives a nickname ("Pesquisa·7f3") and a face from the random participant id.
+   Adding a real name, at join or later (``POST /api/identify``), never changes either.
 3. The browser keeps the returned secret token and sends it as ``Authorization: Bearer``.
    It reports which tension it is looking at (``POST /api/presence``, heartbeat every 20 s),
    votes (``POST /api/vote``) and comments (``POST /api/comment``).
@@ -44,6 +46,9 @@ PRESENCE_TIMEOUT_S = 45
 SWEEP_EVERY_S = 10
 SSE_KEEPALIVE_S = 15
 MAX_BODY = 16 * 1024
+# Short role names used in anonymous nicknames; same wording as the page (STRATA_SHORT).
+STRATUM_NICK = {"regulators": "Reguladores", "publicOperators": "Poder público", "business": "Empresas", "research": "Pesquisa",
+                "civilSociety": "Sociedade civil", "workers": "Trabalhadores", "affectedGroups": "Afetados", "infrastructure": "Infraestrutura"}
 ID_RE = re.compile(r"^[A-Za-z0-9_.:-]{1,80}$")
 CONTROL_RE = re.compile(r"[\x00-\x1f\x7f]")
 
@@ -87,6 +92,19 @@ def clean_id(value, field: str, required: bool = True) -> str | None:
     return value
 
 
+def identity_of(participant_id: str, stratum: str, digits: int = 3) -> tuple[str, int]:
+    """Nickname and avatar seed derived from the participant id, so every device draws the same person."""
+    digest = hashlib.sha256(participant_id.encode("utf-8")).hexdigest()
+    return f"{STRATUM_NICK[stratum]}·{digest[:digits]}", int(digest[-8:], 16) % 10000
+
+
+def clean_optional_name(value) -> str | None:
+    """Real name a person chooses to show; empty or missing means anonymous."""
+    if value is None or (isinstance(value, str) and not value.strip()):
+        return None
+    return clean_text(value, "nome", 60)
+
+
 # ---------------------------------------------------------------- storage
 class MuralStore:
     """SQLite-backed store. One connection guarded by a lock; writers notify SSE listeners."""
@@ -97,8 +115,26 @@ class MuralStore:
         self.db.row_factory = sqlite3.Row
         self.db.execute("PRAGMA journal_mode=WAL")
         self.db.executescript(SCHEMA.read_text(encoding="utf-8"))
+        self._migrate()
         self.lock = threading.RLock()
         self.changed = threading.Condition()
+
+    def _migrate(self) -> None:
+        """Bring databases created before anonymous participation up to the current schema."""
+        cols = {r["name"] for r in self.db.execute("PRAGMA table_info(participant)")}
+        if "identified_name" not in cols:
+            self.db.execute("ALTER TABLE participant ADD COLUMN identified_name TEXT CHECK (identified_name IS NULL OR length(identified_name) BETWEEN 1 AND 60)")
+            self.db.execute("ALTER TABLE participant ADD COLUMN identified_at TEXT")
+        ddl = self.db.execute("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'mural_event'").fetchone()[0]
+        if "'identified'" not in ddl:
+            # SQLite cannot alter a CHECK constraint: rebuild the event table and keep every row and id.
+            self.db.execute("BEGIN")
+            self.db.execute("ALTER TABLE mural_event RENAME TO mural_event_v1")
+            self.db.execute("DROP INDEX IF EXISTS event_session")
+            self.db.execute("COMMIT")
+            self.db.executescript(SCHEMA.read_text(encoding="utf-8"))
+            self.db.execute("INSERT INTO mural_event SELECT * FROM mural_event_v1")
+            self.db.execute("DROP TABLE mural_event_v1")
 
     # -- helpers
     def _event(self, session_id, type_, participant_id=None, tension_id=None, proposal_id=None, payload=None) -> int:
@@ -128,25 +164,41 @@ class MuralStore:
         session_id = clean_id(data.get("session"), "session")
         scenario_id = clean_id(data.get("scenarioId") or "desconhecido", "scenarioId")
         run_id = clean_id(data.get("runId"), "runId", required=False)
-        name = clean_text(data.get("name"), "nome", 60)
         stratum = data.get("stratumId")
         if stratum not in STRATA:
             raise BadRequest("Escolha um dos papéis da lista.")
+        real_name = clean_optional_name(data.get("name"))  # optional: people may join anonymously
         tension = clean_id(data.get("tensionId"), "tensionId", required=False)
         token = secrets.token_urlsafe(32)
-        pid = str(uuid.uuid4())
-        seed = secrets.randbelow(10000)
         ts = now()
         with self.lock:
             self.db.execute("INSERT OR IGNORE INTO mural_session(session_id, scenario_id, run_id, created_at) VALUES (?,?,?,?)",
                             (session_id, scenario_id, run_id, ts))
+            taken = {r[0] for r in self.db.execute("SELECT display_name FROM participant WHERE session_id = ?", (session_id,))}
+            while True:  # a nickname is unique within the session; retry on the rare clash
+                pid = str(uuid.uuid4())
+                nick, seed = identity_of(pid, stratum)
+                if nick not in taken:
+                    break
             self.db.execute(
-                "INSERT INTO participant(participant_id, session_id, display_name, stratum_id, avatar_seed, token_hash, joined_tension, created_at, last_seen_at) VALUES (?,?,?,?,?,?,?,?,?)",
-                (pid, session_id, name, stratum, seed, token_hash(token), tension, ts, ts),
+                "INSERT INTO participant(participant_id, session_id, display_name, stratum_id, avatar_seed, token_hash, identified_name, identified_at, joined_tension, created_at, last_seen_at) "
+                "VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                (pid, session_id, nick, stratum, seed, token_hash(token), real_name, ts if real_name else None, tension, ts, ts),
             )
-            self._event(session_id, "joined", pid, tension, payload={"name": name, "stratumId": stratum})
+            self._event(session_id, "joined", pid, tension, payload={"stratumId": stratum, "identified": bool(real_name)})
         self._notify()
-        return {"participantId": pid, "token": token, "name": name, "stratumId": stratum, "avatarSeed": seed, "session": session_id}
+        return {"participantId": pid, "token": token, "name": nick, "identifiedAs": real_name, "stratumId": stratum,
+                "avatarSeed": seed, "session": session_id}
+
+    def identify(self, who: sqlite3.Row, data: dict) -> dict:
+        """Show (or stop showing) the person's real name. Nickname and face stay as they are."""
+        real_name = clean_optional_name(data.get("name"))
+        with self.lock:
+            self.db.execute("UPDATE participant SET identified_name = ?, identified_at = ? WHERE participant_id = ?",
+                            (real_name, now() if real_name else None, who["participant_id"]))
+            self._event(who["session_id"], "identified", who["participant_id"], payload={"identified": bool(real_name)})
+        self._notify()
+        return {"ok": True, "name": who["display_name"], "identifiedAs": real_name, "avatarSeed": who["avatar_seed"]}
 
     def presence(self, who: sqlite3.Row, data: dict) -> dict:
         """Enter a tension (or heartbeat it). ``tensionId`` null means the person left all tensions."""
@@ -165,7 +217,7 @@ class MuralStore:
                     self.db.execute("UPDATE presence SET heartbeat_at = ? WHERE participant_id = ? AND tension_id = ? AND left_at IS NULL", (ts, pid, tension))
                 else:
                     self.db.execute("INSERT INTO presence(participant_id, tension_id, entered_at, heartbeat_at) VALUES (?,?,?,?)", (pid, tension, ts, ts))
-                    self._event(sid, "entered", pid, tension, payload={"name": who["display_name"], "stratumId": who["stratum_id"]})
+                    self._event(sid, "entered", pid, tension, payload={"stratumId": who["stratum_id"]})
                     changed = True
         if changed:
             self._notify()
@@ -236,7 +288,7 @@ class MuralStore:
         """Everything the page needs to draw people, presence, tallies and comments."""
         session_id = clean_id(session_id, "session")
         with self.lock:
-            people = self.db.execute("SELECT participant_id, display_name, stratum_id, avatar_seed FROM participant WHERE session_id = ?", (session_id,)).fetchall()
+            people = self.db.execute("SELECT participant_id, display_name, identified_name, stratum_id, avatar_seed FROM participant WHERE session_id = ?", (session_id,)).fetchall()
             pres = self.db.execute(
                 "SELECT p.tension_id, p.participant_id FROM presence p JOIN participant pa USING(participant_id) "
                 "WHERE pa.session_id = ? AND p.left_at IS NULL ORDER BY p.entered_at", (session_id,)).fetchall()
@@ -248,7 +300,8 @@ class MuralStore:
                 "WHERE pa.session_id = ? AND c.deleted_at IS NULL ORDER BY c.comment_id", (session_id,)).fetchall()
             last = self.db.execute("SELECT COALESCE(MAX(event_id), 0) FROM mural_event WHERE session_id = ?", (session_id,)).fetchone()[0]
         out = {"session": session_id, "lastEventId": last,
-               "participants": {r["participant_id"]: {"name": r["display_name"], "stratumId": r["stratum_id"], "avatarSeed": r["avatar_seed"]} for r in people},
+               "participants": {r["participant_id"]: {"name": r["display_name"], "identifiedAs": r["identified_name"], "stratumId": r["stratum_id"],
+                                                    "avatarSeed": r["avatar_seed"]} for r in people},
                "presence": {}, "votes": {}, "comments": {}}
         for r in pres:
             out["presence"].setdefault(r["tension_id"], []).append(r["participant_id"])
@@ -262,10 +315,10 @@ class MuralStore:
     def events_since(self, session_id: str, after: int) -> list[dict]:
         with self.lock:
             rows = self.db.execute(
-                "SELECT e.*, pa.display_name, pa.stratum_id FROM mural_event e LEFT JOIN participant pa USING(participant_id) "
+                "SELECT e.*, pa.display_name, pa.identified_name, pa.stratum_id FROM mural_event e LEFT JOIN participant pa USING(participant_id) "
                 "WHERE e.session_id = ? AND e.event_id > ? ORDER BY e.event_id LIMIT 200", (session_id, after)).fetchall()
         return [{"id": r["event_id"], "type": r["type"], "participantId": r["participant_id"], "name": r["display_name"],
-                 "stratumId": r["stratum_id"], "tensionId": r["tension_id"], "proposalId": r["proposal_id"],
+                 "identifiedAs": r["identified_name"], "stratumId": r["stratum_id"], "tensionId": r["tension_id"], "proposalId": r["proposal_id"],
                  "payload": json.loads(r["payload"] or "{}"), "at": r["created_at"]} for r in rows]
 
 
@@ -342,7 +395,7 @@ class MuralHandler(BaseHTTPRequestHandler):
             if url.path == "/api/join":
                 return self._json(self.store.join(data), HTTPStatus.CREATED)
             routes = {"/api/presence": self.store.presence, "/api/vote": self.store.vote,
-                      "/api/comment": self.store.comment, "/api/comment/delete": self.store.delete_comment}
+                      "/api/comment": self.store.comment, "/api/identify": self.store.identify, "/api/comment/delete": self.store.delete_comment}
             if url.path in routes:
                 return self._json(routes[url.path](self._who(data), data))
             return self._json({"error": "Rota desconhecida."}, HTTPStatus.NOT_FOUND)

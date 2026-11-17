@@ -83,6 +83,12 @@ body.semgl #semgl{display:grid} body.semgl #gl{display:none}
 @media (max-width:900px){#leitura,#legenda{display:none}#falas{width:calc(100% - 44px);left:22px;transform:none}#entrar{width:220px}.n-grande{font-size:72px}}
 /* ---------- modo participante: o celular de quem entrou pelo QR (docs/07-camara.md §7.8) ---------- */
 #ver,#gaveta,#voce{display:none}
+#ficha .ident{display:grid;gap:8px;margin:12px 0 4px}
+#ficha .ident label{font-size:13px;color:var(--color-text-secondary)}
+#ficha .ident input{min-height:44px;border-radius:10px;border:1px solid rgba(214,226,240,.25);background:rgba(7,12,22,.6);color:var(--color-text-primary);padding:0 12px;font:inherit}
+#ficha .ident-bts{display:flex;gap:8px;flex-wrap:wrap}
+#ficha .ident button{min-height:44px;border-radius:999px;padding:0 16px;font:600 14px/1 var(--font-body,inherit);border:1px solid rgba(214,226,240,.25);background:transparent;color:var(--color-text-primary);cursor:pointer}
+#ficha .ident button[type=submit]{background:var(--color-action-primary-bg);color:var(--color-action-primary-fg);border-color:var(--color-action-primary-bg)}
 .av{width:28px;height:28px;border-radius:7px;image-rendering:pixelated;flex:none;vertical-align:middle;border:1px solid rgba(214,226,240,.2)}
 .av.sm{width:18px;height:18px;border-radius:4px;margin:-4px 2px 0 0}
 .toast{display:inline-flex;align-items:center;gap:8px;max-width:min(92vw,560px);line-height:1.25}
@@ -473,7 +479,7 @@ function toast(txt) { const d = document.createElement("div"); d.className = "to
 const MOV = Object.fromEntries(C.movimentos);
 function mostrarFala(pid, v, setor, sim) {
   const d = document.createElement("div"); d.className = "fala vidro " + (v.mv || "");
-  d.innerHTML = `<div class="m"><img class="av sm" src="${PixelAvatar.url(pid, 3)}" alt=""> ${esc(L.apelido(pid, setor))} · ${esc(MOV[v.mv] || "Contribuição")}${sim ? " · simulada" : ""}</div><p>${esc(v.tx)}</p><div class="m" data-cont="${esc(pid)}"></div>`;
+  d.innerHTML = `<div class="m"><img class="av sm" src="${PixelAvatar.url(pid, 3)}" alt=""> ${esc(L.rotulo(pid, setor))} · ${esc(MOV[v.mv] || "Contribuição")}${sim ? " · simulada" : ""}</div><p>${esc(v.tx)}</p><div class="m" data-cont="${esc(pid)}"></div>`;
   $("#falas").prepend(d); while ($("#falas").children.length > 2) $("#falas").lastChild.remove();
 }
 
@@ -571,7 +577,7 @@ const REACOES = [["apoio", "Apoio", 0x38C2B4, "↑"], ["contesto", "Contesto", 0
 const VERBO = { apoio: "apoiou", contesto: "contestou", fonte: "pediu fonte a" };
 const agora = [];
 const setorDe = pid => (pessoas.get(pid) || {}).setor;
-const quem = pid => L.apelido(pid, setorDe(pid));
+const quem = pid => L.rotulo(pid, setorDe(pid));
 const corta = (s, n) => { s = String(s || ""); return s.length > n ? s.slice(0, n - 1) + "…" : s; };
 const hora = ts => new Date(ts || Date.now()).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
 function contribuicoes() {
@@ -590,6 +596,7 @@ function registrarAgora(m) {
   else if (m.k === "q2" && typeof m.v === "number") txt = "posicionou-se no eixo T5";
   else if (m.k === "q3") { const t = LACUNAS.find(x => x.id === m.v); txt = "apontou a lacuna " + (t ? t.label : m.v); }
   else if (m.k === "q4" && m.v && m.v.tx) txt = (MOV[m.v.mv] || "Contribuiu") + ": “" + corta(m.v.tx, 70) + "”";
+  else if (m.k === "nome") txt = typeof m.v === "string" && m.v.trim() ? "identificou-se: " + corta(m.v.trim(), 60) : "voltou a ficar anônima";
   else if (m.k.startsWith("r:") && VERBO[m.v]) { const a = m.k.slice(2); txt = VERBO[m.v] + " " + (a === L.eu() ? "você" : quem(a)); }
   if (!txt) return null;
   agora.unshift({ pid: m.pid, txt, ts: m.ts || Date.now(), sim: !!m.sim });
@@ -613,7 +620,7 @@ function destacarEu() {
 }
 function renderVoce() {
   const v = $("#voce");
-  if (L.podeEnviar()) { v.className = "chip"; v.removeAttribute("href"); v.innerHTML = `<img class="av" src="${PixelAvatar.url(L.eu(), 3)}" alt=""><span class="lbl">você ·</span> <b>${esc(L.apelido(L.eu(), L.setor()))}</b>`; }
+  if (L.podeEnviar()) { v.className = "chip"; v.removeAttribute("href"); v.innerHTML = `<img class="av" src="${PixelAvatar.url(L.eu(), 3)}" alt=""><span class="lbl">você ·</span> <b>${esc(L.apelido(L.eu(), L.setor()))}</b>`; v.setAttribute("role", "button"); v.tabIndex = 0; v.title = "Ver sua ficha e, se quiser, mostrar seu nome"; v.onclick = () => abrirFicha({ pessoa: L.eu() }); }
   else { v.outerHTML = `<a class="chip cta" id="voce" href="${esc(entrarHref())}">Entrar na câmara →</a>`; }
 }
 function entrarHref() { const u = new URL("../", location.href); u.searchParams.set("sala", L.sala); u.hash = "participar"; return u.toString(); }
@@ -644,7 +651,7 @@ function renderMesa() {
   $("#abaMesa").innerHTML = (pode ? "" : chamadaEntrar("Para reagir às contribuições, entre na câmara. Leva 30 segundos, sem cadastro.")) + cs.slice(0, 60).map(c => {
     const { c: n, minha } = reacoesDe(c.pid, ps), meu = c.pid === eu;
     return `<article class="card ${esc(c.v.mv || "")}${meu ? " meu" : ""}">
-      <div class="quem" data-pid="${esc(c.pid)}" role="button" tabindex="0" style="cursor:pointer"><img class="av" src="${PixelAvatar.url(c.pid, 3)}" alt=""><b>${esc(meu ? "Você" : L.apelido(c.pid, c.setor))}</b>${c.sim ? " · simulada" : ""}<span class="mv">${esc(MOV[c.v.mv] || "Contribuição")}</span></div>
+      <div class="quem" data-pid="${esc(c.pid)}" role="button" tabindex="0" style="cursor:pointer"><img class="av" src="${PixelAvatar.url(c.pid, 3)}" alt=""><b>${esc(meu ? "Você" : L.rotulo(c.pid, c.setor))}</b>${c.sim ? " · simulada" : ""}<span class="mv">${esc(MOV[c.v.mv] || "Contribuição")}</span></div>
       <p>${esc(c.v.tx)}</p>
       <div class="reacoes" role="group" aria-label="Reagir">${REACOES.map(([k, rot, , ic]) => `<button class="${k}" data-alvo="${esc(c.pid)}" data-r="${k}" aria-pressed="${minha === k}" ${meu || !pode ? "disabled" : ""} aria-label="${rot}: ${n[k]}">${ic} ${rot} <b>${n[k]}</b></button>`).join("")}${meu ? "<small>sua contribuição</small>" : ""}</div>
     </article>`;
@@ -715,7 +722,10 @@ function htmlFicha(f) {
     const pos = q2 == null ? null : Math.abs(q2) < .15 ? "No meio, entre os dois polos" : (Math.abs(q2) > .6 ? "Perto de: " : "Inclina para: ") + (q2 < 0 ? pol[0] : pol[1]);
     const q4 = pr.q4 && pr.q4.v && pr.q4.v.tx ? pr.q4.v : null, rc = q4 ? reacoesDe(id).c : null;
     const linhas = [["Setor", SETOR_LONGO[setor] || "Não informado"], ["Tensão escolhida", s1 ? s1.id + " · " + s1.title : null], ["Posição em T5", pos], ["Lacuna apontada", l3 ? l3.label : null]].filter(x => x[1]);
-    return `<div class="cab"><img src="${PixelAvatar.url(id, 4, "#E9EFF7")}" alt=""><div><div class="tag">${eu ? "Você" : pr.sim ? "Pessoa simulada" : "Pessoa na sala"}</div><h3>${esc(L.apelido(id, setor))}</h3><div class="sub">Anônima: o apelido vem do setor e do identificador do aparelho.</div></div></div>
+    return `<div class="cab"><img src="${PixelAvatar.url(id, 4, "#E9EFF7")}" alt=""><div><div class="tag">${eu ? "Você" : pr.sim ? "Pessoa simulada" : "Pessoa na sala"}</div><h3>${esc(L.apelido(id, setor))}</h3><div class="sub">${L.nome(id) ? `Identificou-se como <b>${esc(L.nome(id))}</b>. Apelido e avatar continuam os mesmos.` : "Anônima: o apelido vem do setor e do identificador do aparelho."}</div></div></div>
+      ${eu ? `<form class="ident" data-ident><label for="identNome">${L.nome(id) ? "Nome mostrado ao lado do apelido" : "Quer se identificar? Opcional: seu nome aparece ao lado do apelido, e apelido e avatar não mudam."}</label>
+        <input id="identNome" maxlength="60" autocomplete="name" placeholder="Seu nome" value="${esc(L.nome(id) || "")}">
+        <div class="ident-bts"><button type="submit">${L.nome(id) ? "Atualizar nome" : "Mostrar meu nome"}</button>${L.nome(id) ? `<button type="button" data-anon>Voltar a ficar anônima</button>` : ""}</div></form>` : ""}
       <dl>${linhas.map(([a, b]) => `<div><dt>${a}</dt><dd>${esc(b)}</dd></div>`).join("")}${q4 ? `<div><dt>Contribuição · ${esc(MOV[q4.mv] || "")}</dt><dd>“${esc(q4.tx)}”</dd><dd class="sub">${REACOES.map(([k, rot, , ic]) => ic + " " + rot + " " + rc[k]).join("  ·  ")}</dd></div>` : ""}</dl>
       ${linhas.length < 2 && !q4 ? `<p class="sub">Ainda não escolheu nada além do setor.</p>` : ""}`;
   }
@@ -735,6 +745,12 @@ function abrirFicha(f, ev) {
   const el = $("#ficha"); fichaAtual = f;
   el.innerHTML = `<button class="fx" aria-label="Fechar">×</button>` + htmlFicha(f); el.classList.add("on");
   el.querySelector(".fx").onclick = fecharFicha;
+  const fi = el.querySelector("[data-ident]");
+  if (fi) {
+    const salvar = async v => { try { await L.enviar("nome", v); toast(v ? "Seu nome aparece ao lado do apelido" : "Você voltou a ficar anônima"); abrirFicha(f); } catch (e) { toast("Não foi possível salvar. Verifique a conexão."); } };
+    fi.onsubmit = e => { e.preventDefault(); const v = fi.querySelector("input").value.trim().slice(0, 60); salvar(v || null); };
+    const an = fi.querySelector("[data-anon]"); if (an) an.onclick = () => salvar(null);
+  }
   if (!PARTICIPANTE && ev) { const w = 360, x = Math.min(innerWidth - w - 12, Math.max(12, ev.clientX + 16)), y = Math.min(innerHeight - el.offsetHeight - 12, Math.max(70, ev.clientY - 40)); el.style.left = x + "px"; el.style.top = y + "px"; }
 }
 function fecharFicha() { $("#ficha").classList.remove("on"); fichaAtual = null; }

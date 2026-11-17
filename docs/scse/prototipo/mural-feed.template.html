@@ -286,6 +286,7 @@ nav.bottom button[aria-current="page"]{color:var(--text)}
 @keyframes pulse{70%{box-shadow:0 0 0 8px rgba(56,194,180,0)}100%{box-shadow:0 0 0 0 rgba(56,194,180,0)}}
 .comment .del{color:var(--muted);font-size:12px;margin-left:8px;text-decoration:underline}
 @media (prefers-reduced-motion: reduce){ *{transition:none !important;animation:none !important} }
+.ident{color:var(--muted,#93A3BC);font-weight:500}
 </style>
 </head>
 <body>
@@ -673,6 +674,7 @@ document.addEventListener("click", e => {
   if (t.dataset.role) { document.querySelectorAll("[data-role]").forEach(r => r.setAttribute("aria-checked", r === t)); return; }
   if (t.id === "me-btn") return meSheet();
   if (t.id === "leave-session") { LIVE.me = null; try { localStorage.removeItem(LIVE.key); } catch(e) {} $("#sheet").classList.remove("open"); paintMe(); render(); toast("Você saiu desta sessão"); return; }
+  if (t.id === "go-anon") return identify(null);
   if (t.id === "change-role") { $("#sheet").classList.remove("open"); return openJoin(ui.tension); }
   if (t.dataset.delComment) { liveApi("/api/comment/delete", {commentId:+t.dataset.delComment}).catch(err => toast(err.message)); return; }
   if (t.id === "copy-link") { navigator.clipboard?.writeText(t.dataset.url).then(() => toast("Link copiado")); return; }
@@ -700,6 +702,7 @@ document.addEventListener("click", e => { if (e.target.closest("button")) return
 document.addEventListener("input", e => { const f = e.target.closest("form.say"); if (f) f.querySelector("button").disabled = !e.target.value.trim(); });
 document.addEventListener("submit", e => {
   if (e.target.id === "join-form") { e.preventDefault(); return submitJoin(e.target); }
+  if (e.target.id === "identify-form") { e.preventDefault(); return identify(e.target.name.value.trim() || null); }
   const f = e.target.closest("form.say"); if (!f) return; e.preventDefault();
   const input = f.querySelector("input"), text = input.value.trim(), id = f.closest(".post").dataset.id; if (!text) return;
   if (LIVE.on) {
@@ -783,6 +786,9 @@ function faceSvg(seed, c, size = 30){
   return `<svg class="face" width="${size}" height="${size}" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="${c}"/>${hair}${eyes}${mouth}</svg>`;
 }
 function person(pid){ return (LIVE.state && LIVE.state.participants[pid]) || null; }
+/* Nickname always comes first; a real name, when the person chose to show one, is added beside it. */
+function whoHtml(x){ return `<b>${esc(x.name)}</b>${x.identifiedAs ? ` <span class="ident">${esc(x.identifiedAs)}</span>` : ""}`; }
+function whoText(x){ return x.identifiedAs ? `${x.name} (${x.identifiedAs})` : x.name; }
 function personFace(pid, size){ const x = person(pid); return x ? faceSvg(x.avatarSeed, STRATA_C[x.stratumId] || "#BFC6CF", size) : ""; }
 function stackHtml(pids, max = 2, size = 30){
   if (!pids.length) return "";
@@ -790,7 +796,7 @@ function stackHtml(pids, max = 2, size = 30){
   return shown + (pids.length > max ? `<span class="more">+${pids.length - max}</span>` : "");
 }
 function namesLine(pids){
-  const n = pids.map(pid => person(pid)).filter(Boolean).map(x => `<b>${esc(x.name)}</b>`);
+  const n = pids.map(pid => person(pid)).filter(Boolean).map(whoHtml);
   if (!n.length) return "";
   return n.length === 1 ? `${n[0]} está aqui` : n.length === 2 ? `${n[0]} e ${n[1]} estão aqui` : `${n[0]}, ${n[1]} e mais ${n.length - 2} estão aqui`;
 }
@@ -821,7 +827,7 @@ function paintLive(){
     el.innerHTML = all.length ? `<span class="stack">${stackHtml(all, 3, 24)}</span><span>Pessoas: ${HUMAN.map(([k, label]) => `<b>${(v[k] || []).length}</b> ${label.toLowerCase()}`).join(", ")}</span>` : ""; });
   document.querySelectorAll("[data-slist]").forEach(el => { const list = st.comments[el.dataset.slist] || [];
     el.innerHTML = list.map(c => { const x = person(c.participantId) || {name:"Pessoa", stratumId:""};
-      return `<div class="comment">${personFace(c.participantId, 28) || `<span class="dotav"></span>`}<div class="txt"><div><b>${esc(x.name)}</b> <span class="verb" style="--vc:${STRATA_C[x.stratumId] || "#93A3BC"}">${esc(STRATA_SHORT[x.stratumId] || "")}</span> ${esc(c.body)}</div>
+      return `<div class="comment">${personFace(c.participantId, 28) || `<span class="dotav"></span>`}<div class="txt"><div>${whoHtml(x)} <span class="verb" style="--vc:${STRATA_C[x.stratumId] || "#93A3BC"}">${esc(STRATA_SHORT[x.stratumId] || "")}</span> ${esc(c.body)}</div>
         <div class="meta">pessoa, ${new Date(c.createdAt).toLocaleString("pt-BR")}${LIVE.me && LIVE.me.participantId === c.participantId ? `<button class="del" data-del-comment="${c.id}">apagar</button>` : ""}</div></div></div>`; }).join(""); });
   if (LIVE.me) {
     document.querySelectorAll(".post").forEach(post => { const id = post.dataset.id, v = st.votes[id] || {};
@@ -833,6 +839,7 @@ function paintLive(){
 function paintMe(){
   const b = $("#me-btn"); b.hidden = !(LIVE.on && LIVE.me);
   if (LIVE.on && LIVE.me) b.innerHTML = `${faceSvg(LIVE.me.avatarSeed, STRATA_C[LIVE.me.stratumId], 26)}<span>${esc(LIVE.me.name)}</span>`;
+  if (LIVE.on && LIVE.me) b.setAttribute("aria-label", `Você: ${whoText(LIVE.me)}`);
 }
 
 function livePresence(){
@@ -846,8 +853,9 @@ function liveStream(){
     const e = JSON.parse(ev.data); LIVE.after = e.id;
     const mine = LIVE.me && e.participantId === LIVE.me.participantId;
     if (!mine && e.name) {
-      const who = `${e.name} (${STRATA_SHORT[e.stratumId] || "pessoa"})`;
+      const who = whoText(e);
       if (e.type === "joined") toast(`${who} entrou na sessão`);
+      else if (e.type === "identified" && e.identifiedAs) toast(`${e.name} se identificou: ${e.identifiedAs}`);
       else if (e.type === "entered" && e.tensionId === ui.tension) toast(`${who} entrou nesta tensão`);
       else if (e.type === "comment" && e.tensionId === ui.tension) toast(`${who} comentou em ${e.proposalId}`);
     }
@@ -890,43 +898,56 @@ async function qrFullscreen(tid){
   $("#sheet").classList.remove("open"); f.classList.add("open");
 }
 
-/* Join: name + one of the council roles; the person speaks as a human in that role. */
+/* Join: one of the council roles. Anonymous by default; a real name is optional and can be added
+   or removed later without changing the nickname or the face. */
 let afterJoin = null;
 function openJoin(tid, then){
   afterJoin = then || null;
   const t = TENSIONS.find(x => x.id === tid), seed = Math.floor(Math.random() * 10000);
   $("#sheet-panel").innerHTML = `<form id="join-form" data-tension="${esc(tid || "")}" data-seed="${seed}">
     <h2 id="sheet-title" style="font:700 24px/1.1 var(--display);margin:0 0 6px">Quem é você nesta conversa?</h2>
-    <p class="note">${t ? `Você vai entrar em <b>${esc(t.title)}</b>. ` : ""}Escolha o papel de onde você fala. Você participa como pessoa, não como assento do conselho sintético. Seu nome, papel, votos e comentários ficam visíveis para quem está no mural e são gravados para a revisão.</p>
-    <div class="field"><label for="join-name">Seu nome</label><input id="join-name" name="name" maxlength="60" autocomplete="name" required value="${esc(LIVE.me ? LIVE.me.name : "")}"></div>
+    <p class="note">${t ? `Você vai entrar em <b>${esc(t.title)}</b>. ` : ""}Escolha o papel de onde você fala. Você participa como pessoa, não como assento do conselho sintético.</p>
+    <p class="note">Você entra <b>anônimo</b>, com um apelido e uma carinha gerados ao acaso. Se quiser, mostre seu nome agora ou depois; o apelido e a carinha continuam os mesmos. Papel, votos e comentários ficam visíveis no mural e são gravados para a revisão.</p>
     <div class="roles" role="radiogroup" aria-label="Seu papel">${STRATA.map(s => `<button type="button" class="role" role="radio" data-role="${s.id}" aria-checked="${LIVE.me && LIVE.me.stratumId === s.id}" style="--c:${s.c}">${faceSvg(seed, s.c, 30)}<span>${esc(s.label)}</span></button>`).join("")}</div>
+    <div class="field"><label for="join-name">Seu nome <span class="note">(opcional)</span></label><input id="join-name" name="name" maxlength="60" autocomplete="name" placeholder="Deixe em branco para ficar anônimo"></div>
     <p class="err" id="join-err" hidden></p>
     <button class="btn" type="submit" style="width:100%">${t ? `Entrar em ${esc(t.id)}` : "Entrar"}</button>
     <div style="margin-top:10px"><button type="button" class="btn ghost" data-close-sheet style="width:100%">Agora não</button></div></form>`;
-  $("#sheet").classList.add("open"); setTimeout(() => $("#join-name").focus(), 50);
+  $("#sheet").classList.add("open"); setTimeout(() => (document.querySelector('[data-role][aria-checked="true"]') || document.querySelector("[data-role]")).focus(), 50);
 }
 async function submitJoin(form){
   const err = $("#join-err"), role = form.querySelector('[data-role][aria-checked="true"]'), name = form.name.value.trim();
   const fail = m => { err.textContent = m; err.hidden = false; };
-  if (!name) return fail("Escreva seu nome.");
   if (!role) return fail("Escolha um papel.");
   try {
     const tid = form.dataset.tension || null;
-    const me = await liveApi("/api/join", {session:P.packetId, scenarioId:P.scenarioId || RUN.index.scenarioId, runId:RUN.index.runId, name, stratumId:role.dataset.role, tensionId:tid});
+    const me = await liveApi("/api/join", {session:P.packetId, scenarioId:P.scenarioId || RUN.index.scenarioId, runId:RUN.index.runId, name:name || null, stratumId:role.dataset.role, tensionId:tid});
     LIVE.me = me; try { localStorage.setItem(LIVE.key, JSON.stringify(me)); } catch(e) {}
     $("#sheet").classList.remove("open"); paintMe();
     history.replaceState(null, "", location.pathname + (tid ? `#tensao-${tid}` : ""));
     if (tid) ui.tension = tid;
     render(); livePresence(); await liveRefresh();
-    toast(`Bem-vindo, ${me.name}`);
+    toast(me.identifiedAs ? `Você entrou como ${me.name}, identificado como ${me.identifiedAs}` : `Você entrou como ${me.name}, anônimo`);
     if (afterJoin) { const f = afterJoin; afterJoin = null; f(); }
   } catch(e) { fail(e.message); }
+}
+async function identify(name){
+  try {
+    const r = await liveApi("/api/identify", {name});
+    LIVE.me.identifiedAs = r.identifiedAs; try { localStorage.setItem(LIVE.key, JSON.stringify(LIVE.me)); } catch(e) {}
+    paintMe(); await liveRefresh(); meSheet();
+    toast(r.identifiedAs ? `Seu nome aparece ao lado de ${LIVE.me.name}` : `Você voltou a ficar anônimo como ${LIVE.me.name}`);
+  } catch(e) { const err = $("#ident-err"); if (err) { err.textContent = e.message; err.hidden = false; } else toast(e.message); }
 }
 function meSheet(){
   const me = LIVE.me;
   $("#sheet-panel").innerHTML = `<div style="display:flex;gap:12px;align-items:center;margin-bottom:12px">${faceSvg(me.avatarSeed, STRATA_C[me.stratumId], 52)}<div><h2 id="sheet-title" style="font:700 22px/1.1 var(--display);margin:0">${esc(me.name)}</h2><span class="note">${esc((STRATA.find(s => s.id === me.stratumId) || {}).label || "")}</span></div></div>
-    <p class="note">Você fala como pessoa neste papel. Votos e comentários ficam com seu nome para a revisão.</p>
-    <div style="display:grid;gap:8px"><button class="btn" id="change-role">Entrar com outro papel</button><button class="btn ghost" id="leave-session">Sair desta sessão</button><button class="btn ghost" data-close-sheet>Fechar</button></div>`;
+    <p class="note">Você fala como pessoa neste papel. Votos e comentários ficam com seu apelido${me.identifiedAs ? ` e seu nome, <b>${esc(me.identifiedAs)}</b>` : ""} para a revisão.</p>
+    <form id="identify-form" style="margin:0 0 12px"><div class="field"><label for="ident-name">${me.identifiedAs ? "Nome mostrado ao lado do apelido" : "Quer se identificar? Seu nome aparece ao lado do apelido"}</label>
+      <input id="ident-name" name="name" maxlength="60" autocomplete="name" value="${esc(me.identifiedAs || "")}" placeholder="Seu nome"></div>
+      <p class="err" id="ident-err" hidden></p>
+      <div style="display:flex;gap:8px"><button class="btn" type="submit" style="flex:1">${me.identifiedAs ? "Atualizar nome" : "Mostrar meu nome"}</button>${me.identifiedAs ? `<button class="btn ghost" type="button" id="go-anon">Voltar a ficar anônimo</button>` : ""}</div></form>
+    <div style="display:grid;gap:8px"><button class="btn ghost" id="change-role">Entrar com outro papel</button><button class="btn ghost" id="leave-session">Sair desta sessão</button><button class="btn ghost" data-close-sheet>Fechar</button></div>`;
   $("#sheet").classList.add("open");
 }
 
