@@ -57,7 +57,7 @@ async function iniciarSupabase() {
     if (r.error) throw r.error;
     session = r.data.session;
   }
-  S.pid = session.user.id; S.modo = "supabase";
+  S.pid = session.user.id; S.modo = "supabase"; status("vivo", "conectado · " + SALA);
   const linha = r => ({ pid: r.pid, k: r.k, v: r.v, setor: r.setor, ts: r.ts });
   const { data, error } = await sb.from("respostas").select("pid,k,v,setor,ts").eq("sala", SALA).limit(5000);
   if (error) throw error;
