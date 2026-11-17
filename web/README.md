@@ -11,6 +11,7 @@ Visual: tema `camara` do design system v2 (`design-system/docs/07-camara.md`). `
 - `#participar`: fluxo de 5 passos no celular (anônimo).
 - `#ao-vivo`: telão para projeção (QR code, contagem, agregados, simulação de reserva).
 - `#conhecimento` (começa pelo modelo brasileiro: 22 componentes e cobertura das 28 áreas) e `#monitoramento`: acesso individual.
+- `apresentacao/`: **storytelling em 12 cenas**, do conceito à iteração contínua. A câmara se monta camada por camada; na cena 8 a plateia entra pelo QR code de verdade, e a última cena abre o telão ao vivo. Teclas: setas ou espaço avançam, S simula chegadas, F tela cheia. Link direto para uma cena: `#cena-8`.
 - `ao-vivo/`: **telão 3D ao vivo**. Quem entra pelo QR code vira uma luz no anel externo da câmara; cada escolha viaja até a tensão ou lacuna escolhida. Teclas: 1 a 4 mudam a câmera, S simula chegadas, G liga ou desliga o giro. Sem WebGL, cai no painel 2D.
 - `camara/`: tour 3D guiado do Shadow Council, com alternativa sem WebGL.
 A sala vem do parâmetro `?sala=`; o QR code já inclui a sala.
