@@ -9,8 +9,9 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> rdf:type owl:Ontology .
-<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> owl:versionIRI <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory/1.0.0> .
-<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> owl:versionInfo "1.0.0" .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> owl:versionIRI <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory/1.1.0> .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> owl:priorVersion <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory/1.0.0> .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> owl:versionInfo "1.1.0" .
 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> dcterms:title "HRAI-GO General Regulatory Intelligence Ontology"@en .
 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> rdfs:comment "Canonical legal, policy and national-context model. OWL/SWRL do not certify legal applicability, review, validity or compliance."@en .
 hrai:Jurisdiction rdf:type owl:Class .
@@ -1204,3 +1205,369 @@ hrai:R18_UpperIndicatorThreshold swrl:body _:b142 .
 _:b146 rdf:first _:b141 .
 _:b146 rdf:rest rdf:nil .
 hrai:R18_UpperIndicatorThreshold swrl:head _:b146 .
+
+# ---------------------------------------------------------------------------
+# v1.1.0 (proposta): investimento público e execução; fechamento de impacto;
+# perspectivas sintéticas; dispositivos e requisitos de propostas legislativas.
+# Mudança aditiva: nenhum termo da v1.0.0 foi removido ou renomeado.
+# ---------------------------------------------------------------------------
+hrai:PublicPolicyPlan rdf:type owl:Class .
+hrai:PublicPolicyPlan rdfs:label "PublicPolicyPlan"@en .
+hrai:PublicPolicyPlan rdfs:comment "Time-bound public plan (e.g. a national AI plan) organised in axes and funded by budget allocations. A plan is not a regulation."@en .
+hrai:PublicPolicyPlan rdfs:subClassOf hrai:PolicyInstrument .
+hrai:PolicyPlanAxis rdf:type owl:Class .
+hrai:PolicyPlanAxis rdfs:label "PolicyPlanAxis"@en .
+hrai:PolicyPlanAxis rdfs:comment "Thematic axis or programme line of a public policy plan."@en .
+hrai:PolicyPlanAxis rdfs:subClassOf hrai:PolicyInstrument .
+hrai:BudgetAllocation rdf:type owl:Class .
+hrai:BudgetAllocation rdfs:label "BudgetAllocation"@en .
+hrai:BudgetAllocation rdfs:comment "Planned public funding attached to a policy instrument for a period. A declared amount, not evidence of execution."@en .
+hrai:ExecutionRecord rdf:type owl:Class .
+hrai:ExecutionRecord rdfs:label "ExecutionRecord"@en .
+hrai:ExecutionRecord rdfs:comment "Observed execution (committed, disbursed or paid) of a budget allocation at a date, captured from a source snapshot."@en .
+hrai:ExecutionBelowAlertRatioRecord rdf:type owl:Class .
+hrai:ExecutionBelowAlertRatioRecord rdfs:label "ExecutionBelowAlertRatioRecord"@en .
+hrai:ExecutionBelowAlertRatioRecord rdfs:comment "Execution record whose executed/allocated ratio is below an analyst-configured alert ratio. Investigative signal, not evidence of policy failure."@en .
+hrai:ExecutionBelowAlertRatioRecord rdfs:subClassOf hrai:ExecutionRecord .
+hrai:planHasAxis rdf:type owl:ObjectProperty .
+hrai:planHasAxis rdfs:domain hrai:PublicPolicyPlan .
+hrai:planHasAxis rdfs:range hrai:PolicyPlanAxis .
+hrai:planHasAxis rdfs:label "planHasAxis"@en .
+hrai:planHasAxis rdfs:comment "Links a plan to one of its axes."@en .
+hrai:instrumentPursuesObjective rdf:type owl:ObjectProperty .
+hrai:instrumentPursuesObjective rdfs:domain hrai:PolicyInstrument .
+hrai:instrumentPursuesObjective rdfs:range hrai:PolicyObjective .
+hrai:instrumentPursuesObjective rdfs:label "instrumentPursuesObjective"@en .
+hrai:instrumentPursuesObjective rdfs:comment "Objective declared by a policy instrument. Use instead of pursuesObjective, whose domain is RegulatoryModel."@en .
+hrai:instrumentHasAllocation rdf:type owl:ObjectProperty .
+hrai:instrumentHasAllocation rdfs:domain hrai:PolicyInstrument .
+hrai:instrumentHasAllocation rdfs:range hrai:BudgetAllocation .
+hrai:instrumentHasAllocation rdfs:label "instrumentHasAllocation"@en .
+hrai:instrumentHasAllocation rdfs:comment "Budget allocation planned for a policy instrument."@en .
+hrai:allocationExecutionRecord rdf:type owl:ObjectProperty .
+hrai:allocationExecutionRecord rdfs:domain hrai:BudgetAllocation .
+hrai:allocationExecutionRecord rdfs:range hrai:ExecutionRecord .
+hrai:allocationExecutionRecord rdfs:label "allocationExecutionRecord"@en .
+hrai:allocationExecutionRecord rdfs:comment "Execution observation for an allocation."@en .
+hrai:allocationSource rdf:type owl:ObjectProperty .
+hrai:allocationSource rdfs:domain hrai:BudgetAllocation .
+hrai:allocationSource rdfs:range hrai:SourceSnapshot .
+hrai:allocationSource rdfs:label "allocationSource"@en .
+hrai:allocationSource rdfs:comment "Source snapshot that declares the allocation."@en .
+hrai:executionRecordSource rdf:type owl:ObjectProperty .
+hrai:executionRecordSource rdfs:domain hrai:ExecutionRecord .
+hrai:executionRecordSource rdfs:range hrai:SourceSnapshot .
+hrai:executionRecordSource rdfs:label "executionRecordSource"@en .
+hrai:executionRecordSource rdfs:comment "Source snapshot from which execution was captured."@en .
+hrai:allocatedAmount rdf:type owl:DatatypeProperty .
+hrai:allocatedAmount rdfs:domain hrai:BudgetAllocation .
+hrai:allocatedAmount rdfs:range xsd:decimal .
+hrai:allocatedAmount rdfs:label "allocatedAmount"@en .
+hrai:allocatedAmount rdfs:comment "Declared allocated amount, in allocationCurrency."@en .
+hrai:allocationCurrency rdf:type owl:DatatypeProperty .
+hrai:allocationCurrency rdfs:domain hrai:BudgetAllocation .
+hrai:allocationCurrency rdfs:range xsd:string .
+hrai:allocationCurrency rdfs:label "allocationCurrency"@en .
+hrai:allocationCurrency rdfs:comment "ISO 4217 currency code of the allocated amount."@en .
+hrai:allocationPeriodStart rdf:type owl:DatatypeProperty .
+hrai:allocationPeriodStart rdfs:domain hrai:BudgetAllocation .
+hrai:allocationPeriodStart rdfs:range xsd:date .
+hrai:allocationPeriodStart rdfs:label "allocationPeriodStart"@en .
+hrai:allocationPeriodStart rdfs:comment "Start of the allocation period."@en .
+hrai:allocationPeriodEnd rdf:type owl:DatatypeProperty .
+hrai:allocationPeriodEnd rdfs:domain hrai:BudgetAllocation .
+hrai:allocationPeriodEnd rdfs:range xsd:date .
+hrai:allocationPeriodEnd rdfs:label "allocationPeriodEnd"@en .
+hrai:allocationPeriodEnd rdfs:comment "End of the allocation period."@en .
+hrai:executionAlertRatio rdf:type owl:DatatypeProperty .
+hrai:executionAlertRatio rdfs:domain hrai:BudgetAllocation .
+hrai:executionAlertRatio rdfs:range xsd:decimal .
+hrai:executionAlertRatio rdfs:label "executionAlertRatio"@en .
+hrai:executionAlertRatio rdfs:comment "Analyst-configured investigative ratio (0-1). Not a legal or contractual target."@en .
+hrai:executedAmount rdf:type owl:DatatypeProperty .
+hrai:executedAmount rdfs:domain hrai:ExecutionRecord .
+hrai:executedAmount rdfs:range xsd:decimal .
+hrai:executedAmount rdfs:label "executedAmount"@en .
+hrai:executedAmount rdfs:comment "Observed executed amount, in executionCurrency."@en .
+hrai:executionCurrency rdf:type owl:DatatypeProperty .
+hrai:executionCurrency rdfs:domain hrai:ExecutionRecord .
+hrai:executionCurrency rdfs:range xsd:string .
+hrai:executionCurrency rdfs:label "executionCurrency"@en .
+hrai:executionCurrency rdfs:comment "ISO 4217 currency code of the executed amount."@en .
+hrai:executionKind rdf:type owl:DatatypeProperty .
+hrai:executionKind rdfs:domain hrai:ExecutionRecord .
+hrai:executionKind rdfs:range xsd:string .
+hrai:executionKind rdfs:label "executionKind"@en .
+hrai:executionKind rdfs:comment "Execution stage observed: committed, disbursed or paid. Stages are not comparable with each other."@en .
+hrai:executionObservedAt rdf:type owl:DatatypeProperty .
+hrai:executionObservedAt rdfs:domain hrai:ExecutionRecord .
+hrai:executionObservedAt rdfs:range xsd:date .
+hrai:executionObservedAt rdfs:label "executionObservedAt"@en .
+hrai:executionObservedAt rdfs:comment "Date the execution figure refers to."@en .
+hrai:ImpactReviewOutcome rdf:type owl:Class .
+hrai:ImpactReviewOutcome rdfs:label "ImpactReviewOutcome"@en .
+hrai:ImpactReviewOutcome rdfs:comment "Controlled outcome of a change impact evaluation."@en .
+hrai:NoMaterialImpactOutcome rdf:type hrai:ImpactReviewOutcome .
+hrai:NoMaterialImpactOutcome rdfs:label "NoMaterialImpact"@en .
+hrai:ReassessmentRequiredOutcome rdf:type hrai:ImpactReviewOutcome .
+hrai:ReassessmentRequiredOutcome rdfs:label "ReassessmentRequired"@en .
+hrai:ReassessmentCompletedOutcome rdf:type hrai:ImpactReviewOutcome .
+hrai:ReassessmentCompletedOutcome rdfs:label "ReassessmentCompleted"@en .
+hrai:impactEvaluationHasOutcome rdf:type owl:ObjectProperty .
+hrai:impactEvaluationHasOutcome rdfs:domain hrai:ChangeImpactAssessment .
+hrai:impactEvaluationHasOutcome rdfs:range hrai:ImpactReviewOutcome .
+hrai:impactEvaluationHasOutcome rdfs:label "impactEvaluationHasOutcome"@en .
+hrai:impactEvaluationHasOutcome rdfs:comment "Outcome recorded by a human impact evaluation."@en .
+hrai:impactEvaluationBy rdf:type owl:ObjectProperty .
+hrai:impactEvaluationBy rdfs:domain hrai:ChangeImpactAssessment .
+hrai:impactEvaluationBy rdfs:range hrai:ReviewActor .
+hrai:impactEvaluationBy rdfs:label "impactEvaluationBy"@en .
+hrai:impactEvaluationBy rdfs:comment "Reviewer responsible for the impact evaluation."@en .
+hrai:impactEvaluatedAt rdf:type owl:DatatypeProperty .
+hrai:impactEvaluatedAt rdfs:domain hrai:ChangeImpactAssessment .
+hrai:impactEvaluatedAt rdfs:range xsd:dateTime .
+hrai:impactEvaluatedAt rdfs:label "impactEvaluatedAt"@en .
+hrai:impactEvaluatedAt rdfs:comment "When the impact evaluation was recorded."@en .
+hrai:assessmentImpactEvaluatedFor rdf:type owl:ObjectProperty .
+hrai:assessmentImpactEvaluatedFor rdfs:domain hrai:ComplianceAssessment .
+hrai:assessmentImpactEvaluatedFor rdfs:range hrai:RegulatoryChangeEvent .
+hrai:assessmentImpactEvaluatedFor rdfs:label "assessmentImpactEvaluatedFor"@en .
+hrai:assessmentImpactEvaluatedFor rdfs:comment "Inferred: an impact evaluation with an outcome exists for this assessment and change. Does not change compliance status."@en .
+hrai:impactReviewStatus owl:deprecated true .
+hrai:impactReviewStatus rdfs:comment "Deprecated in 1.1.0: free-text status. Use impactEvaluationHasOutcome with an ImpactReviewOutcome individual."@en .
+hrai:SyntheticStakeholderPerspective rdf:type owl:Class .
+hrai:SyntheticStakeholderPerspective rdfs:label "SyntheticStakeholderPerspective"@en .
+hrai:SyntheticStakeholderPerspective rdfs:comment "Documented perspective voiced by a synthetic agent (e.g. an SCSE council seat). Never a real person, group or authority. Aligns conceptually with scse:PerspectiveAgent; no formal import."@en .
+hrai:SyntheticStakeholderPerspective rdfs:subClassOf hrai:Stakeholder .
+hrai:IdentifiedStakeholder rdf:type owl:Class .
+hrai:IdentifiedStakeholder rdfs:label "IdentifiedStakeholder"@en .
+hrai:IdentifiedStakeholder rdfs:comment "Stakeholder whose identity or institutional mandate was verified by the platform."@en .
+hrai:IdentifiedStakeholder rdfs:subClassOf hrai:Stakeholder .
+hrai:SyntheticStakeholderPerspective owl:disjointWith hrai:IdentifiedStakeholder .
+hrai:SyntheticStakeholderPosition rdf:type owl:Class .
+hrai:SyntheticStakeholderPosition rdfs:label "SyntheticStakeholderPosition"@en .
+hrai:SyntheticStakeholderPosition rdfs:comment "Position expressed by a synthetic perspective. Must not be read as a stakeholder's actual view."@en .
+hrai:SyntheticStakeholderPosition rdfs:subClassOf hrai:StakeholderPosition .
+hrai:perspectiveGroundedIn rdf:type owl:ObjectProperty .
+hrai:perspectiveGroundedIn rdfs:domain hrai:SyntheticStakeholderPerspective .
+hrai:perspectiveGroundedIn rdfs:range hrai:Evidence .
+hrai:perspectiveGroundedIn rdfs:label "perspectiveGroundedIn"@en .
+hrai:perspectiveGroundedIn rdfs:comment "Documented source that grounds a synthetic perspective."@en .
+hrai:ProposedProvision rdf:type owl:Class .
+hrai:ProposedProvision rdfs:label "ProposedProvision"@en .
+hrai:ProposedProvision rdfs:comment "Provision contained in a version of a legislative proposal. Has no binding force."@en .
+hrai:ProposedProvision rdfs:subClassOf hrai:LegalProvision .
+hrai:ProspectiveRequirement rdf:type owl:Class .
+hrai:ProspectiveRequirement rdfs:label "ProspectiveRequirement"@en .
+hrai:ProspectiveRequirement rdfs:comment "Normative requirement derived from a proposed provision. Prospective, not currently binding."@en .
+hrai:ProspectiveRequirement rdfs:subClassOf hrai:NormativeRequirement .
+hrai:instrumentInJurisdiction rdfs:comment "Jurisdiction where the instrument originates. Origin only: says nothing about enactment, effectiveness or applicability. For proposals, prefer proposalInJurisdiction."@en .
+hrai:provisionInJurisdiction rdfs:comment "Jurisdictional origin of a provision. A provision of a LegislativeProposal is also typed ProposedProvision (R22)."@en .
+hrai:proposalInJurisdiction rdfs:subPropertyOf hrai:instrumentInJurisdiction .
+hrai:R19_ExecutionBelowAlertRatio rdf:type swrl:Imp .
+hrai:R19_ExecutionBelowAlertRatio rdfs:label "R19_ExecutionBelowAlertRatio"@en .
+hrai:R19_ExecutionBelowAlertRatio rdfs:comment "Investigative execution signal, not evidence of policy failure; read period and execution kind first."@en .
+_:r19_1 rdf:type swrl:ClassAtom .
+_:r19_1 swrl:classPredicate hrai:BudgetAllocation .
+_:r19_1 swrl:argument1 hrai:var_R19_ExecutionBelowAlertRatio_al .
+_:r19_2 rdf:type swrl:DatavaluedPropertyAtom .
+_:r19_2 swrl:propertyPredicate hrai:allocatedAmount .
+_:r19_2 swrl:argument1 hrai:var_R19_ExecutionBelowAlertRatio_al .
+_:r19_2 swrl:argument2 hrai:var_R19_ExecutionBelowAlertRatio_a .
+_:r19_3 rdf:type swrl:DatavaluedPropertyAtom .
+_:r19_3 swrl:propertyPredicate hrai:allocationCurrency .
+_:r19_3 swrl:argument1 hrai:var_R19_ExecutionBelowAlertRatio_al .
+_:r19_3 swrl:argument2 hrai:var_R19_ExecutionBelowAlertRatio_cur .
+_:r19_4 rdf:type swrl:DatavaluedPropertyAtom .
+_:r19_4 swrl:propertyPredicate hrai:executionAlertRatio .
+_:r19_4 swrl:argument1 hrai:var_R19_ExecutionBelowAlertRatio_al .
+_:r19_4 swrl:argument2 hrai:var_R19_ExecutionBelowAlertRatio_t .
+_:r19_5 rdf:type swrl:IndividualPropertyAtom .
+_:r19_5 swrl:propertyPredicate hrai:allocationExecutionRecord .
+_:r19_5 swrl:argument1 hrai:var_R19_ExecutionBelowAlertRatio_al .
+_:r19_5 swrl:argument2 hrai:var_R19_ExecutionBelowAlertRatio_x .
+_:r19_6 rdf:type swrl:DatavaluedPropertyAtom .
+_:r19_6 swrl:propertyPredicate hrai:executedAmount .
+_:r19_6 swrl:argument1 hrai:var_R19_ExecutionBelowAlertRatio_x .
+_:r19_6 swrl:argument2 hrai:var_R19_ExecutionBelowAlertRatio_e .
+_:r19_7 rdf:type swrl:DatavaluedPropertyAtom .
+_:r19_7 swrl:propertyPredicate hrai:executionCurrency .
+_:r19_7 swrl:argument1 hrai:var_R19_ExecutionBelowAlertRatio_x .
+_:r19_7 swrl:argument2 hrai:var_R19_ExecutionBelowAlertRatio_cur .
+_:r19_8 rdf:type swrl:BuiltinAtom .
+_:r19_8 swrl:builtin swrlb:divide .
+_:r19_9 rdf:first hrai:var_R19_ExecutionBelowAlertRatio_r .
+_:r19_9 rdf:rest _:r19_10 .
+_:r19_10 rdf:first hrai:var_R19_ExecutionBelowAlertRatio_e .
+_:r19_10 rdf:rest _:r19_11 .
+_:r19_11 rdf:first hrai:var_R19_ExecutionBelowAlertRatio_a .
+_:r19_11 rdf:rest rdf:nil .
+_:r19_8 swrl:arguments _:r19_9 .
+_:r19_12 rdf:type swrl:BuiltinAtom .
+_:r19_12 swrl:builtin swrlb:lessThan .
+_:r19_13 rdf:first hrai:var_R19_ExecutionBelowAlertRatio_r .
+_:r19_13 rdf:rest _:r19_14 .
+_:r19_14 rdf:first hrai:var_R19_ExecutionBelowAlertRatio_t .
+_:r19_14 rdf:rest rdf:nil .
+_:r19_12 swrl:arguments _:r19_13 .
+_:r19_15 rdf:type swrl:ClassAtom .
+_:r19_15 swrl:classPredicate hrai:ExecutionBelowAlertRatioRecord .
+_:r19_15 swrl:argument1 hrai:var_R19_ExecutionBelowAlertRatio_x .
+hrai:var_R19_ExecutionBelowAlertRatio_al rdf:type swrl:Variable .
+hrai:var_R19_ExecutionBelowAlertRatio_a rdf:type swrl:Variable .
+hrai:var_R19_ExecutionBelowAlertRatio_cur rdf:type swrl:Variable .
+hrai:var_R19_ExecutionBelowAlertRatio_t rdf:type swrl:Variable .
+hrai:var_R19_ExecutionBelowAlertRatio_x rdf:type swrl:Variable .
+hrai:var_R19_ExecutionBelowAlertRatio_e rdf:type swrl:Variable .
+hrai:var_R19_ExecutionBelowAlertRatio_r rdf:type swrl:Variable .
+_:r19_16 rdf:first _:r19_1 .
+_:r19_16 rdf:rest _:r19_17 .
+_:r19_17 rdf:first _:r19_2 .
+_:r19_17 rdf:rest _:r19_18 .
+_:r19_18 rdf:first _:r19_3 .
+_:r19_18 rdf:rest _:r19_19 .
+_:r19_19 rdf:first _:r19_4 .
+_:r19_19 rdf:rest _:r19_20 .
+_:r19_20 rdf:first _:r19_5 .
+_:r19_20 rdf:rest _:r19_21 .
+_:r19_21 rdf:first _:r19_6 .
+_:r19_21 rdf:rest _:r19_22 .
+_:r19_22 rdf:first _:r19_7 .
+_:r19_22 rdf:rest _:r19_23 .
+_:r19_23 rdf:first _:r19_8 .
+_:r19_23 rdf:rest _:r19_24 .
+_:r19_24 rdf:first _:r19_12 .
+_:r19_24 rdf:rest rdf:nil .
+hrai:R19_ExecutionBelowAlertRatio swrl:body _:r19_16 .
+_:r19_25 rdf:first _:r19_15 .
+_:r19_25 rdf:rest rdf:nil .
+hrai:R19_ExecutionBelowAlertRatio swrl:head _:r19_25 .
+hrai:R20_ImpactEvaluated rdf:type swrl:Imp .
+hrai:R20_ImpactEvaluated rdfs:label "R20_ImpactEvaluated"@en .
+hrai:R20_ImpactEvaluated rdfs:comment "Records that an impact evaluation exists; it does not change compliance status."@en .
+_:r20_1 rdf:type swrl:ClassAtom .
+_:r20_1 swrl:classPredicate hrai:ChangeImpactAssessment .
+_:r20_1 swrl:argument1 hrai:var_R20_ImpactEvaluated_c .
+_:r20_2 rdf:type swrl:IndividualPropertyAtom .
+_:r20_2 swrl:propertyPredicate hrai:impactEvaluationForChange .
+_:r20_2 swrl:argument1 hrai:var_R20_ImpactEvaluated_c .
+_:r20_2 swrl:argument2 hrai:var_R20_ImpactEvaluated_e .
+_:r20_3 rdf:type swrl:IndividualPropertyAtom .
+_:r20_3 swrl:propertyPredicate hrai:impactEvaluationConcernsAssessment .
+_:r20_3 swrl:argument1 hrai:var_R20_ImpactEvaluated_c .
+_:r20_3 swrl:argument2 hrai:var_R20_ImpactEvaluated_a .
+_:r20_4 rdf:type swrl:IndividualPropertyAtom .
+_:r20_4 swrl:propertyPredicate hrai:impactEvaluationHasOutcome .
+_:r20_4 swrl:argument1 hrai:var_R20_ImpactEvaluated_c .
+_:r20_4 swrl:argument2 hrai:var_R20_ImpactEvaluated_o .
+_:r20_5 rdf:type swrl:IndividualPropertyAtom .
+_:r20_5 swrl:propertyPredicate hrai:assessmentImpactEvaluatedFor .
+_:r20_5 swrl:argument1 hrai:var_R20_ImpactEvaluated_a .
+_:r20_5 swrl:argument2 hrai:var_R20_ImpactEvaluated_e .
+hrai:var_R20_ImpactEvaluated_c rdf:type swrl:Variable .
+hrai:var_R20_ImpactEvaluated_e rdf:type swrl:Variable .
+hrai:var_R20_ImpactEvaluated_a rdf:type swrl:Variable .
+hrai:var_R20_ImpactEvaluated_o rdf:type swrl:Variable .
+_:r20_6 rdf:first _:r20_1 .
+_:r20_6 rdf:rest _:r20_7 .
+_:r20_7 rdf:first _:r20_2 .
+_:r20_7 rdf:rest _:r20_8 .
+_:r20_8 rdf:first _:r20_3 .
+_:r20_8 rdf:rest _:r20_9 .
+_:r20_9 rdf:first _:r20_4 .
+_:r20_9 rdf:rest rdf:nil .
+hrai:R20_ImpactEvaluated swrl:body _:r20_6 .
+_:r20_10 rdf:first _:r20_5 .
+_:r20_10 rdf:rest rdf:nil .
+hrai:R20_ImpactEvaluated swrl:head _:r20_10 .
+hrai:R21_SyntheticPosition rdf:type swrl:Imp .
+hrai:R21_SyntheticPosition rdfs:label "R21_SyntheticPosition"@en .
+hrai:R21_SyntheticPosition rdfs:comment "Synthetic origin propagates to the position; it is not a real stakeholder's view."@en .
+_:r21_1 rdf:type swrl:ClassAtom .
+_:r21_1 swrl:classPredicate hrai:StakeholderPosition .
+_:r21_1 swrl:argument1 hrai:var_R21_SyntheticPosition_pos .
+_:r21_2 rdf:type swrl:IndividualPropertyAtom .
+_:r21_2 swrl:propertyPredicate hrai:positionExpressedBy .
+_:r21_2 swrl:argument1 hrai:var_R21_SyntheticPosition_pos .
+_:r21_2 swrl:argument2 hrai:var_R21_SyntheticPosition_s .
+_:r21_3 rdf:type swrl:ClassAtom .
+_:r21_3 swrl:classPredicate hrai:SyntheticStakeholderPerspective .
+_:r21_3 swrl:argument1 hrai:var_R21_SyntheticPosition_s .
+_:r21_4 rdf:type swrl:ClassAtom .
+_:r21_4 swrl:classPredicate hrai:SyntheticStakeholderPosition .
+_:r21_4 swrl:argument1 hrai:var_R21_SyntheticPosition_pos .
+hrai:var_R21_SyntheticPosition_pos rdf:type swrl:Variable .
+hrai:var_R21_SyntheticPosition_s rdf:type swrl:Variable .
+_:r21_5 rdf:first _:r21_1 .
+_:r21_5 rdf:rest _:r21_6 .
+_:r21_6 rdf:first _:r21_2 .
+_:r21_6 rdf:rest _:r21_7 .
+_:r21_7 rdf:first _:r21_3 .
+_:r21_7 rdf:rest rdf:nil .
+hrai:R21_SyntheticPosition swrl:body _:r21_5 .
+_:r21_8 rdf:first _:r21_4 .
+_:r21_8 rdf:rest rdf:nil .
+hrai:R21_SyntheticPosition swrl:head _:r21_8 .
+hrai:R22_ProposedProvision rdf:type swrl:Imp .
+hrai:R22_ProposedProvision rdfs:label "R22_ProposedProvision"@en .
+hrai:R22_ProposedProvision rdfs:comment "Provision of a proposal; no binding force."@en .
+_:r22_1 rdf:type swrl:ClassAtom .
+_:r22_1 swrl:classPredicate hrai:LegalProvision .
+_:r22_1 swrl:argument1 hrai:var_R22_ProposedProvision_p .
+_:r22_2 rdf:type swrl:IndividualPropertyAtom .
+_:r22_2 swrl:propertyPredicate hrai:provisionOfVersion .
+_:r22_2 swrl:argument1 hrai:var_R22_ProposedProvision_p .
+_:r22_2 swrl:argument2 hrai:var_R22_ProposedProvision_v .
+_:r22_3 rdf:type swrl:IndividualPropertyAtom .
+_:r22_3 swrl:propertyPredicate hrai:versionOfInstrument .
+_:r22_3 swrl:argument1 hrai:var_R22_ProposedProvision_v .
+_:r22_3 swrl:argument2 hrai:var_R22_ProposedProvision_ins .
+_:r22_4 rdf:type swrl:ClassAtom .
+_:r22_4 swrl:classPredicate hrai:LegislativeProposal .
+_:r22_4 swrl:argument1 hrai:var_R22_ProposedProvision_ins .
+_:r22_5 rdf:type swrl:ClassAtom .
+_:r22_5 swrl:classPredicate hrai:ProposedProvision .
+_:r22_5 swrl:argument1 hrai:var_R22_ProposedProvision_p .
+hrai:var_R22_ProposedProvision_p rdf:type swrl:Variable .
+hrai:var_R22_ProposedProvision_v rdf:type swrl:Variable .
+hrai:var_R22_ProposedProvision_ins rdf:type swrl:Variable .
+_:r22_6 rdf:first _:r22_1 .
+_:r22_6 rdf:rest _:r22_7 .
+_:r22_7 rdf:first _:r22_2 .
+_:r22_7 rdf:rest _:r22_8 .
+_:r22_8 rdf:first _:r22_3 .
+_:r22_8 rdf:rest _:r22_9 .
+_:r22_9 rdf:first _:r22_4 .
+_:r22_9 rdf:rest rdf:nil .
+hrai:R22_ProposedProvision swrl:body _:r22_6 .
+_:r22_10 rdf:first _:r22_5 .
+_:r22_10 rdf:rest rdf:nil .
+hrai:R22_ProposedProvision swrl:head _:r22_10 .
+hrai:R23_ProspectiveRequirement rdf:type swrl:Imp .
+hrai:R23_ProspectiveRequirement rdfs:label "R23_ProspectiveRequirement"@en .
+hrai:R23_ProspectiveRequirement rdfs:comment "Requirement derived from a proposal; prospective, not currently binding."@en .
+_:r23_1 rdf:type swrl:ClassAtom .
+_:r23_1 swrl:classPredicate hrai:NormativeRequirement .
+_:r23_1 swrl:argument1 hrai:var_R23_ProspectiveRequirement_req .
+_:r23_2 rdf:type swrl:IndividualPropertyAtom .
+_:r23_2 swrl:propertyPredicate hrai:derivedFromProvision .
+_:r23_2 swrl:argument1 hrai:var_R23_ProspectiveRequirement_req .
+_:r23_2 swrl:argument2 hrai:var_R23_ProspectiveRequirement_p .
+_:r23_3 rdf:type swrl:ClassAtom .
+_:r23_3 swrl:classPredicate hrai:ProposedProvision .
+_:r23_3 swrl:argument1 hrai:var_R23_ProspectiveRequirement_p .
+_:r23_4 rdf:type swrl:ClassAtom .
+_:r23_4 swrl:classPredicate hrai:ProspectiveRequirement .
+_:r23_4 swrl:argument1 hrai:var_R23_ProspectiveRequirement_req .
+hrai:var_R23_ProspectiveRequirement_req rdf:type swrl:Variable .
+hrai:var_R23_ProspectiveRequirement_p rdf:type swrl:Variable .
+_:r23_5 rdf:first _:r23_1 .
+_:r23_5 rdf:rest _:r23_6 .
+_:r23_6 rdf:first _:r23_2 .
+_:r23_6 rdf:rest _:r23_7 .
+_:r23_7 rdf:first _:r23_3 .
+_:r23_7 rdf:rest rdf:nil .
+hrai:R23_ProspectiveRequirement swrl:body _:r23_5 .
+_:r23_8 rdf:first _:r23_4 .
+_:r23_8 rdf:rest rdf:nil .
+hrai:R23_ProspectiveRequirement swrl:head _:r23_8 .

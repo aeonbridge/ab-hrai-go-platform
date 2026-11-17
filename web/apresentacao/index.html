@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070C16">
+<title>HRAI-GO · Do conceito à iteração contínua</title>
+<link rel="stylesheet" href="../assets/fontes.css">
+<link rel="stylesheet" href="../assets/tokens.css">
+<style>
+/* Apresentação: a câmara se monta uma camada por cena. Texto à esquerda, cena ao fundo, um valor por cena. */
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--color-bg-canvas);color:var(--color-text-primary);font:16px/1.55 var(--font-sans);overflow:hidden;-webkit-font-smoothing:antialiased}
+#gl{position:fixed;inset:0;width:100%;height:100%;display:block}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--color-border-focus);outline-offset:2px}
+.vidro{background:var(--color-bg-glass);border:1px solid rgba(214,226,240,.14);border-radius:22px;backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);box-shadow:0 30px 80px rgba(0,0,0,.4)}
+#texto{position:fixed;left:max(28px,4vw);top:50%;transform:translateY(-50%);width:min(500px,40vw);padding:34px 34px 30px;z-index:5;transition:opacity .5s,transform .5s}
+#texto.saindo{opacity:0;transform:translateY(-46%)}
+.ato{font:500 11.5px/1.2 var(--font-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--color-action-primary-bg)}
+#texto h1{font:800 clamp(30px,3.3vw,48px)/1.02 var(--font-display);letter-spacing:-.025em;margin:12px 0 16px;text-wrap:balance}
+#texto p{margin:0 0 12px;color:#CBD5E2;font-size:17.5px;text-wrap:pretty}
+#texto p b{color:var(--color-text-primary)}
+.valor{margin-top:18px;padding:14px 16px;border-radius:14px;border:1px solid rgba(232,163,61,.45);background:rgba(232,163,61,.08)}
+.valor span{display:block;font:500 11px/1 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--color-action-primary-bg);margin-bottom:6px}
+.valor div{font:600 16.5px/1.4 var(--font-sans)}
+.fatos{display:flex;flex-direction:column;gap:8px;margin:14px 0 4px}
+.fatos div{display:grid;grid-template-columns:94px 1fr;gap:12px;font-size:15px;color:#CBD5E2}
+.fatos b{font:500 13px/1.4 var(--font-mono);color:var(--color-text-link)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.chip{font:500 12px/1 var(--font-mono);padding:7px 11px;border-radius:999px;border:1px solid rgba(214,226,240,.22);color:var(--color-text-secondary);display:inline-flex;gap:7px;align-items:center}
+.chip i{width:10px;height:10px;display:inline-block}
+.ciclo{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:14px 0 4px}
+.ciclo div{border:1px solid rgba(214,226,240,.18);border-radius:12px;padding:9px 8px;font-size:12.5px;line-height:1.3;color:#CBD5E2;opacity:.35;transition:opacity .4s,border-color .4s,background .4s}
+.ciclo div b{display:block;font:700 14px/1.1 var(--font-display);color:var(--color-text-primary);margin-bottom:3px}
+.ciclo div.on{opacity:1;border-color:var(--color-action-primary-bg);background:rgba(232,163,61,.08)}
+.ciclo div.humano.on{border-color:var(--color-tone-civic-fg);background:rgba(56,194,180,.08)}
+.principios{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.principios div{border-left:3px solid var(--color-action-primary-bg);padding:4px 0 4px 10px;font-size:14.5px;color:#CBD5E2}
+.principios b{display:block;color:var(--color-text-primary);font-size:15px}
+#qrBox{position:fixed;right:max(28px,4vw);top:50%;transform:translateY(-50%) scale(.96);width:300px;padding:22px;z-index:5;display:flex;flex-direction:column;gap:12px;opacity:0;pointer-events:none;transition:opacity .5s,transform .5s}
+#qrBox.on{opacity:1;pointer-events:auto;transform:translateY(-50%) scale(1)}
+.qr{background:#fff;border-radius:12px;padding:10px}.qr svg{display:block;width:100%;height:auto}
+.n-grande{font:800 92px/.85 var(--font-display);color:var(--color-action-primary-bg);letter-spacing:-.05em;text-shadow:0 0 34px rgba(232,163,61,.45);font-variant-numeric:tabular-nums}
+.n-rot{font:500 12.5px/1.3 var(--font-mono);color:var(--color-text-secondary)}
+#comparar{position:fixed;right:max(28px,4vw);top:50%;transform:translateY(-50%);width:380px;padding:22px;z-index:5;opacity:0;pointer-events:none;transition:opacity .5s}
+#comparar.on{opacity:1}
+#comparar h2{font:700 19px/1.1 var(--font-display);margin:6px 0 12px}
+.lin{display:grid;grid-template-columns:minmax(0,1fr) 52px 52px;gap:8px;align-items:center;font-size:14px;padding:7px 0;border-top:1px solid rgba(214,226,240,.08)}
+.lin.cab{font:500 10.5px/1.2 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-tertiary);border-top:0}
+.lin b{font:500 15px/1 var(--font-mono);text-align:right}
+.lin .s{color:var(--color-tone-iris-fg)} .lin .h{color:var(--color-action-primary-bg)}
+#evento{position:fixed;left:50%;top:13%;transform:translate(-50%,-30px);padding:14px 20px;z-index:6;opacity:0;transition:opacity .5s,transform .6s cubic-bezier(.2,.8,.2,1);text-align:center;pointer-events:none}
+#evento.on{opacity:1;transform:translate(-50%,0)}
+#evento b{display:block;font:700 20px/1.2 var(--font-display)}
+#evento span{font:500 12px/1 var(--font-mono);color:var(--color-tone-crimson-fg);letter-spacing:.1em;text-transform:uppercase}
+#nav{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;gap:16px;padding:16px max(28px,4vw) calc(16px + env(safe-area-inset-bottom,0px));z-index:6}
+#pontos{display:flex;gap:6px;flex:1;justify-content:center}
+#pontos button{width:9px;height:9px;border-radius:999px;border:0;padding:0;background:rgba(214,226,240,.25);transition:all .3s}
+#pontos button[aria-current="step"]{width:30px;background:var(--color-action-primary-bg)}
+.nb{border:1px solid rgba(214,226,240,.22);background:rgba(7,12,22,.6);border-radius:999px;padding:9px 16px;font-weight:600;font-size:14px}
+.nb.prim{background:var(--color-action-primary-bg);border-color:var(--color-action-primary-bg);color:var(--color-action-primary-fg)}
+#marca{position:fixed;top:18px;left:max(28px,4vw);display:flex;gap:10px;align-items:center;font:700 16px/1 var(--font-display);z-index:6}
+#marca i{width:20px;height:20px;border-radius:50%;border:2px solid var(--color-action-primary-bg);box-shadow:0 0 12px rgba(232,163,61,.6)}
+#contador{position:fixed;top:20px;right:max(28px,4vw);font:500 12px/1 var(--font-mono);color:var(--color-text-tertiary);z-index:6}
+.rot3d{position:fixed;transform:translate(-50%,-150%);font:600 12.5px/1.2 var(--font-sans);white-space:nowrap;pointer-events:none;z-index:3;padding:4px 9px;border-radius:999px;background:rgba(7,12,22,.72);border:1px solid rgba(214,226,240,.16);opacity:0;transition:opacity .4s}
+.rot3d.lacuna{color:var(--color-tone-crimson-fg);border-color:var(--color-tone-crimson-border)}
+.rot3d.tensao{color:var(--color-text-link);border-color:rgba(232,163,61,.5)}
+@media (max-width:900px){#texto{left:16px;right:16px;width:auto;top:auto;bottom:76px;transform:none;padding:20px;max-height:55vh;overflow:auto}#texto.saindo{transform:translateY(10px)}#texto h1{font-size:26px}#texto p{font-size:15.5px}#qrBox,#comparar{right:16px;top:70px;transform:none;width:200px;padding:14px}#qrBox.on{transform:none}#comparar{display:none}.n-grande{font-size:56px}.principios{grid-template-columns:1fr}.ciclo{grid-template-columns:1fr 1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div id="marca"><i></i>HRAI-GO</div>
+<div id="contador"></div>
+<article id="texto" class="vidro" aria-live="polite"></article>
+<aside id="qrBox" class="vidro" aria-label="Entre na câmara">
+  <div class="ato">Entre agora</div>
+  <div class="qr" id="qr" role="img" aria-label="QR code para participar"></div>
+  <div><div class="n-grande" id="total">0</div><div class="n-rot" id="totalRot">pessoas na câmara</div></div>
+  <button class="nb" id="simular">Simular chegada</button>
+</aside>
+<aside id="comparar" class="vidro" aria-live="polite">
+  <div class="ato">Lente Q1 · omissão</div>
+  <h2>A sala e o conselho, lado a lado</h2>
+  <div id="tabela"></div>
+</aside>
+<div id="evento" class="vidro"><span>Evento normativo</span><b>UE · Omnibus de IA entra em vigor</b><div style="font-size:13.5px;color:#CBD5E2">27/07/2026 · obrigações de alto risco adiadas para 2027 e 2028</div></div>
+<nav id="nav" aria-label="Navegação da apresentação">
+  <button class="nb" id="ant">← Anterior</button>
+  <div id="pontos"></div>
+  <button class="nb prim" id="prox">Próxima →</button>
+</nav>
+
+<script src="../config.js"></script>
+<script src="../vendor/qrcode.js"></script>
+<script src="../vendor/supabase.js"></script>
+<script src="../assets/modelo.js"></script>
+<script src="../assets/conteudo.js"></script>
+<script src="../assets/sala-leitura.js"></script>
+<script src="../vendor/three/three.min.js"></script>
+<script src="../vendor/three/CopyShader.js"></script>
+<script src="../vendor/three/LuminosityHighPassShader.js"></script>
+<script src="../vendor/three/EffectComposer.js"></script>
+<script src="../vendor/three/RenderPass.js"></script>
+<script src="../vendor/three/ShaderPass.js"></script>
+<script src="../vendor/three/UnrealBloomPass.js"></script>
+<script>
+(() => {
+"use strict";
+const M = window.HRAIGO_MODELO, C = window.HRAIGO_CONTEUDO, L = window.HRAIGO_LEITURA;
+const REDUZ = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const COR = { teal: 0x38C2B4, brass: 0xE8A33D, brass2: 0xF5D49A, violet: 0xA78BFA, coral: 0xFF7A59, cinza: 0x6F7F95, tinta: 0x070C16 };
+const ESTRATO = { regulators: 0xF0A93B, publicOperators: 0xE4572E, business: 0xC45BAA, research: 0x8E7CF0, civilSociety: 0x4A90E2, workers: 0x2FB5A8, affectedGroups: 0x7BD36B, infrastructure: 0xBFC6CF };
+const SETORES = C.setores.map(s => s[0]);
+const LACUNAS = M.topics.filter(t => t.strength === "none");
+const nInf = M.components.filter(c => c.basis === "inferred").length;
+
+/* ================= cenas ================= */
+const CENAS = [
+ { ato: "Abertura", t: "O Brasil investe em IA mais rápido do que consegue avaliar o próprio modelo de governança.",
+   h: `<div class="fatos"><div><b>R$ 23 bi</b>Plano Brasileiro de IA, 2024–2028, em cinco eixos</div><div><b>dez/2024</b>PL 2338 aprovado no Senado; ainda sem parecer na Câmara</div><div><b>jul/2026</b>A UE, referência do PL, adia suas regras de alto risco</div></div><p>Enquanto isso, a avaliação continua sendo relatório: lido uma vez, desatualizado em meses.</p>`,
+   v: "Uma pergunta que ninguém responde hoje: o modelo brasileiro ainda faz sentido, agora?", cam: "longe", camadas: [] },
+ { ato: "Ato 1 · O objeto", t: "Primeiro, o modelo vira algo que se pode ver.",
+   h: `<p>As <b>${M.components.length} peças</b> do arranjo brasileiro (leis, planos, instituições, mecanismos, recursos) empilhadas por tipo. A cor diz a força jurídica de cada uma.</p><div class="chips"><span class="chip"><i style="background:#38C2B4"></i>em vigor</span><span class="chip"><i style="background:#E8A33D"></i>política pública</span><span class="chip"><i style="border:1.5px dashed #A78BFA"></i>projeto de lei</span><span class="chip"><i style="border:1.5px dashed #6F7F95"></i>${nInf} a confirmar</span></div>`,
+   v: "Uma proposta nunca parece obrigação. O PL 2338 aparece vazado e tracejado porque não vincula ninguém.", cam: "torre", camadas: ["base", "torre"] },
+ { ato: "Ato 1 · O objeto", t: "Por trás da imagem, uma ontologia que raciocina.",
+   h: `<p>Cada peça é um indivíduo da ontologia regulatória HRAI-GO: <b>66 classes</b> e <b>23 regras</b> que dizem o que uma mudança afeta, de onde vem cada fato e o que ainda é só proposta.</p><p>Nenhuma regra declara alguém conforme ou não conforme. Isso é decisão de gente.</p>`,
+   v: "Toda conclusão tem um caminho até a fonte. Dá para perguntar “por quê?” e receber a cadeia inteira.", cam: "torre", camadas: ["base", "torre", "grafo"] },
+ { ato: "Ato 2 · O conselho", t: "Vinte perspectivas sintéticas questionam o modelo.",
+   h: `<p>Oito estratos: reguladores, poder público, empresas, pesquisa, sociedade civil, trabalhadores, grupos afetados e infraestrutura. Cada assento é uma perspectiva documentada, com fontes e pontos cegos declarados, e diferentes famílias de modelos de IA.</p>`,
+   v: "Pluralidade barata e rápida para testar o modelo antes de levá-lo a público. Não substitui pessoas; prepara a conversa com elas.", cam: "anel", camadas: ["base", "torre", "assentos"] },
+ { ato: "Ato 2 · O conselho", t: "E as cadeiras vazias ficam à vista.",
+   h: `<p>${M.unrep.length} perspectivas não têm fonte documental suficiente, entre elas povos indígenas, o Judiciário e o Congresso. O sistema não inventa o que pensariam.</p>`,
+   v: "Honestidade como função: mostrar quem falta vale mais do que simular quem não está.", cam: "anel", camadas: ["base", "torre", "assentos", "vazias"], foco: "vazias" },
+ { ato: "Ato 2 · O conselho", t: "Às cegas, o conselho diz o que esperava encontrar.",
+   h: `<p>Antes de ver o modelo, cada assento lista o que um arranjo nacional deveria cobrir. As expectativas viajam até as <b>${M.topics.length} áreas</b> da taxonomia. Depois, o véu cai e o código cruza expectativa com cobertura.</p><p><b>${LACUNAS.length} áreas não têm nenhum componente</b>, entre elas participação social, crianças e vulneráveis, e energia.</p>`,
+   v: "As lacunas aparecem sem viés de ancoragem: ninguém viu o modelo antes de dizer o que faltava.", cam: "cupula", camadas: ["base", "torre", "assentos", "vazias", "cupula", "lacunas"], acao: "r1" },
+ { ato: "Ato 2 · O conselho", t: "O debate começa onde existe conflito real.",
+   h: `<p>Seis tensões-semente atravessam a câmara, como continuidade do plano versus supervisão, ou auditoria versus capacidade de fiscalizar. São os pontos em que objetivos legítimos puxam para lados opostos.</p>`,
+   v: "Tempo de decisão gasto no que está em disputa, não no que é consenso confortável.", cam: "arcos", camadas: ["base", "torre", "assentos", "vazias", "cupula", "lacunas", "arcos"] },
+ { ato: "Ato 3 · A sala", t: "Agora, vocês entram na câmara.",
+   h: `<p>Aponte a câmera para o QR code. Cada pessoa vira uma luz que entra pelo lado da plateia e ocupa o anel externo, no arco do seu setor. Sem nome, sem cadastro.</p>`,
+   v: "Participação que se vê acontecer. Humanos ao lado dos agentes, nunca somados a eles.", cam: "sala", camadas: ["base", "torre", "assentos", "vazias", "cupula", "lacunas", "arcos", "humanos"], qr: true },
+ { ato: "Ato 3 · A sala", t: "Cada escolha viaja até onde dói.",
+   h: `<p>No celular, cada pessoa marca a tensão e a lacuna mais urgentes. As escolhas voam até a câmara: os anéis das lacunas crescem com os votos da sala.</p><p>Ao lado, o que a sala prioriza e o que o conselho sintético esperava. Onde os dois divergem está a pauta.</p>`,
+   v: "Prioridade humana confrontada com expectativa sintética. A divergência vira agenda, não ruído.", cam: "cupula", camadas: ["base", "torre", "assentos", "vazias", "cupula", "lacunas", "humanos"], comparar: true },
+ { ato: "Ato 4 · Iteração contínua", t: "Então o mundo muda.",
+   h: `<p>A Sentinela detecta um evento normativo. As regras propagam o impacto pela torre e marcam o que precisa ser relido, sem decidir nada.</p><div class="ciclo" id="ciclo"><div><b>Detectar</b>fonte oficial</div><div><b>Reabrir</b>regras marcam</div><div><b>Reler</b>conselho reavalia</div><div class="humano"><b>Ratificar</b>pessoa decide</div><div><b>Publicar</b>nova versão</div></div>`,
+   v: "Conclusões com prazo de validade. Nada muda de status sem revisão humana registrada.", cam: "evento", camadas: ["base", "torre", "grafo", "assentos", "vazias"], acao: "evento" },
+ { ato: "Por que confiar", t: "Feito para resistir a um parecer, não só a uma demo.",
+   h: `<div class="principios"><div><b>Proposta ≠ obrigação</b>A força jurídica tem cor e traço próprios.</div><div><b>Sem placar</b>Contagem de agentes não é vontade social.</div><div><b>Humano decide</b>Agente propõe; pessoa ratifica, com nome.</div><div><b>Origem sempre</b>Toda afirmação aponta para a sua fonte.</div></div>`,
+   v: "Legitimidade diante de quem regula, de quem é regulado e de quem é afetado.", cam: "longe", camadas: ["base", "torre", "assentos", "vazias", "cupula", "lacunas", "arcos", "humanos"] },
+ { ato: "Próximo passo", t: "Um piloto real, com uma consulta pública real.",
+   h: `<p>Pegar uma consulta já encerrada ligada ao PBIA, como o guia de uso ético de IA do Ministério da Justiça, passar as contribuições pelo pipeline e comparar com a síntese oficial.</p><p>A pergunta do piloto é uma só: <b>a câmara encontra algo relevante que a síntese oficial não encontrou, em menos tempo?</b></p>`,
+   v: "Valor medido em uma decisão pública concreta, não em demonstração.", cam: "longe", camadas: ["base", "torre", "grafo", "assentos", "vazias", "cupula", "lacunas", "arcos", "humanos"] }
+];
+
+/* ================= motor 3D ================= */
+let renderer;
+try { renderer = new THREE.WebGLRenderer({ canvas: $("#gl"), antialias: true }); } catch (e) {}
+const tem3D = !!renderer;
+let scene, camera, composer, bloom, camadas = {}, alvoCam, posCam, olharCam, olhar, assentosArr = [], cupula = {}, arcos = {}, rotulos = [], pessoas = new Map(), feixes = [], blocos = [], onda = null, topoTorre;
+const porSetor = Object.fromEntries(SETORES.map(s => [s, 0]));
+const CAMS = {
+  longe: [new THREE.Vector3(0, 18, 44), new THREE.Vector3(0, 6, 0)],
+  torre: [new THREE.Vector3(4, 7, 13), new THREE.Vector3(0, 3.2, 0)],
+  anel: [new THREE.Vector3(0, 16, 23), new THREE.Vector3(0, 1, 0)],
+  cupula: [new THREE.Vector3(0, 5, 27), new THREE.Vector3(0, 11, 0)],
+  arcos: [new THREE.Vector3(0, 9, 30), new THREE.Vector3(0, 8, 0)],
+  sala: [new THREE.Vector3(0, 30, 26), new THREE.Vector3(0, 0, 0)],
+  evento: [new THREE.Vector3(0, 9, 19), new THREE.Vector3(0, 3.4, 0)]
+};
+if (tem3D) {
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.setSize(innerWidth, innerHeight);
+  scene = new THREE.Scene(); scene.background = new THREE.Color(COR.tinta); scene.fog = new THREE.FogExp2(COR.tinta, .015);
+  camera = new THREE.PerspectiveCamera(46, innerWidth / innerHeight, .1, 400);
+  const enquadrar = () => { if (innerWidth > 900) camera.setViewOffset(innerWidth, innerHeight, -innerWidth * .17, 0, innerWidth, innerHeight); else camera.clearViewOffset(); };
+  enquadrar(); addEventListener("resize", enquadrar);
+  composer = new THREE.EffectComposer(renderer); composer.addPass(new THREE.RenderPass(scene, camera));
+  bloom = new THREE.UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), .9, .55, .12); composer.addPass(bloom);
+  scene.add(new THREE.AmbientLight(0x3A4E78, .9));
+  const l1 = new THREE.PointLight(0xF5D49A, 1.4, 90); l1.position.set(0, 26, 0); scene.add(l1);
+  const l2 = new THREE.PointLight(0x38C2B4, .6, 60); l2.position.set(-18, 6, 18); scene.add(l2);
+  posCam = CAMS.longe[0].clone(); olharCam = CAMS.longe[1].clone(); alvoCam = CAMS.longe;
+  const grupo = nome => { const g = new THREE.Group(); g.userData = { alfa: 0, alvo: 0 }; scene.add(g); camadas[nome] = g; return g; };
+  const mat = (cor, op = 1, extra = {}) => { const m = new THREE.MeshStandardMaterial({ color: cor, emissive: cor, emissiveIntensity: .45, transparent: true, opacity: op, roughness: .4, metalness: .2, ...extra }); m.userData.base = op; return m; };
+  const basica = (cor, op = 1, extra = {}) => { const m = new THREE.MeshBasicMaterial({ color: cor, transparent: true, opacity: op, ...extra }); m.userData.base = op; return m; };
+  const linha = (pts, cor, op, tracejada) => { const g = new THREE.BufferGeometry().setFromPoints(pts); const m = tracejada ? new THREE.LineDashedMaterial({ color: cor, transparent: true, opacity: op, dashSize: .5, gapSize: .4 }) : new THREE.LineBasicMaterial({ color: cor, transparent: true, opacity: op }); m.userData.base = op; const l = new THREE.Line(g, m); if (tracejada) l.computeLineDistances(); return l; };
+  const circulo = (r, n = 160) => Array.from({ length: n + 1 }, (_, i) => { const a = i / n * Math.PI * 2; return new THREE.Vector3(Math.cos(a) * r, .02, Math.sin(a) * r); });
+
+  /* base */
+  const base = grupo("base");
+  const chao = new THREE.Mesh(new THREE.CircleGeometry(34, 96), new THREE.MeshStandardMaterial({ color: 0x0A1322, roughness: .9, transparent: true, opacity: 1 })); chao.material.userData.base = 1; chao.rotation.x = -Math.PI / 2; base.add(chao);
+  base.add(linha(circulo(7.5), COR.violet, .35, true), linha(circulo(13.5), COR.brass, .28), linha(circulo(19), 0x2A3B5A, .5), linha(circulo(26), 0x1C2B45, .5));
+  { const n = 900, pos = new Float32Array(n * 3); for (let i = 0; i < n; i++) { const r = 70 + Math.random() * 90, th = Math.random() * Math.PI * 2, ph = Math.random() * Math.PI * .5; pos[i * 3] = Math.cos(th) * Math.sin(ph) * r; pos[i * 3 + 1] = Math.cos(ph) * r * .8 + 5; pos[i * 3 + 2] = Math.sin(th) * Math.sin(ph) * r; }
+    const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.BufferAttribute(pos, 3)); scene.add(new THREE.Points(g, new THREE.PointsMaterial({ color: 0x9DACBF, size: .35, transparent: true, opacity: .55 }))); }
+
+  /* torre */
+  const torre = grupo("torre");
+  const ANDARES = ["instrument", "institution", "mechanism", "resource", "metric"];
+  const corStatus = s => s === "effective" ? COR.teal : s === "policy" ? COR.brass : COR.violet;
+  ANDARES.forEach((k, andar) => {
+    const cs = M.components.filter(c => c.kind === k);
+    cs.forEach((c, i) => {
+      const a = i / Math.max(cs.length, 1) * Math.PI * 2 + andar * .5, r = 1.1 + (cs.length > 4 ? .5 : 0);
+      const geo = new THREE.BoxGeometry(.95, .62, .95), prop = c.status === "proposed", inf = c.basis === "inferred";
+      const b = new THREE.Mesh(geo, mat(corStatus(c.status), prop ? .22 : inf ? .5 : 1, { emissiveIntensity: prop ? .25 : .45 }));
+      b.position.set(Math.cos(a) * r, 1 + andar * .95, Math.sin(a) * r); b.userData = { c, emiss: prop ? .25 : .45 }; torre.add(b); blocos.push(b);
+      if (prop || inf) { const e = new THREE.LineSegments(new THREE.EdgesGeometry(geo), new THREE.LineDashedMaterial({ color: prop ? COR.violet : COR.cinza, dashSize: .12, gapSize: .08, transparent: true, opacity: 1 })); e.material.userData.base = 1; e.computeLineDistances(); e.position.copy(b.position); torre.add(e); }
+    });
+  });
+  topoTorre = new THREE.Vector3(0, 1 + ANDARES.length * .95 + .4, 0);
+  const nucleo = new THREE.Mesh(new THREE.SphereGeometry(.42, 24, 16), basica(COR.brass2)); nucleo.position.copy(topoTorre); torre.add(nucleo);
+
+  /* grafo: componentes que compartilham áreas */
+  const grafo = grupo("grafo");
+  for (let i = 0; i < blocos.length; i++) for (let j = i + 1; j < blocos.length; j++) {
+    const a = blocos[i].userData.c, b = blocos[j].userData.c;
+    if (a.topics.some(t => b.topics.includes(t))) grafo.add(linha([blocos[i].position, blocos[j].position], COR.brass2, .22));
+  }
+
+  /* assentos */
+  const ass = grupo("assentos"), vaz = grupo("vazias");
+  const total = M.strata.reduce((a, s) => a + s.seats, 0) + M.unrep.length; let idx = 0;
+  M.strata.forEach(s => { for (let k = 0; k < s.seats; k++) {
+    const a = idx++ / total * Math.PI * 2;
+    const m = new THREE.Mesh(new THREE.OctahedronGeometry(.42), mat(ESTRATO[s.id], 1, { emissiveIntensity: .55 }));
+    m.position.set(Math.cos(a) * 7.5, 1.1, Math.sin(a) * 7.5); m.userData = { fase: Math.random() * 6, estrato: s.id, ordem: assentosArr.length }; ass.add(m); assentosArr.push(m);
+  } });
+  M.unrep.forEach(() => { const a = idx++ / total * Math.PI * 2; const t = new THREE.Mesh(new THREE.TorusGeometry(.48, .035, 8, 32), basica(COR.cinza, .8, { wireframe: true })); t.position.set(Math.cos(a) * 7.5, 1.1, Math.sin(a) * 7.5); t.lookAt(0, 1.1, 0); vaz.add(t); });
+
+  /* cúpula e lacunas */
+  const cup = grupo("cupula"), lac = grupo("lacunas");
+  M.topics.forEach((t, i) => {
+    const n = M.topics.length, y = 1 - (i + .5) / n * .55, rr = Math.sqrt(1 - y * y), th = i * 2.399963;
+    const p = new THREE.Vector3(Math.cos(th) * rr * 17, 7 + y * 12, Math.sin(th) * rr * 17);
+    let o;
+    if (t.strength === "none") {
+      o = new THREE.Mesh(new THREE.TorusGeometry(.75, .07, 12, 48), basica(COR.coral)); o.lookAt(0, 6, 0); lac.add(o);
+      const el = document.createElement("div"); el.className = "rot3d lacuna"; el.textContent = t.label; document.body.appendChild(el); rotulos.push({ el, pos: p, camada: "lacunas" });
+    } else {
+      const cor = t.strength === "inForce" ? COR.teal : t.strength === "proposedOnly" ? COR.violet : COR.cinza;
+      o = new THREE.Mesh(new THREE.SphereGeometry(.22, 16, 12), basica(cor, t.strength === "inferredOnly" ? .5 : .9)); cup.add(o);
+    }
+    o.position.copy(p); o.userData.votos = 0; o.userData.alvo = 1; cupula[t.id] = o;
+  });
+
+  /* arcos */
+  const arc = grupo("arcos");
+  M.seeds.forEach((s, i) => {
+    const a1 = i / M.seeds.length * Math.PI * 2, a2 = a1 + Math.PI * .72, am = a1 + Math.PI * .36;
+    const p1 = new THREE.Vector3(Math.cos(a1) * 10.5, 2.4, Math.sin(a1) * 10.5), p2 = new THREE.Vector3(Math.cos(a2) * 10.5, 2.4, Math.sin(a2) * 10.5);
+    const meio = new THREE.Vector3(Math.cos(am) * 9.5, 13 + (i % 2) * 1.6, Math.sin(am) * 9.5);
+    const curva = new THREE.QuadraticBezierCurve3(p1, meio, p2);
+    const m = basica(COR.brass, .32); const tubo = new THREE.Mesh(new THREE.TubeGeometry(curva, 80, .05, 8, false), m); arc.add(tubo);
+    arcos[s.id] = { m, topo: curva.getPoint(.5), votos: 0 };
+    const el = document.createElement("div"); el.className = "rot3d tensao"; el.textContent = s.id + " · " + s.title; document.body.appendChild(el); rotulos.push({ el, pos: curva.getPoint(.5), camada: "arcos", soCena: 6 });
+  });
+  grupo("humanos");
+  addEventListener("resize", () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); composer.setSize(innerWidth, innerHeight); bloom.setSize(innerWidth, innerHeight); });
+}
+
+/* ================= pessoas e feixes ================= */
+const geoP = tem3D ? new THREE.SphereGeometry(.3, 20, 14) : null, geoF = tem3D ? new THREE.SphereGeometry(.16, 12, 8) : null;
+const ENTRADA = tem3D ? new THREE.Vector3(0, 3, 30) : null;
+function vaga(setor, n) { const si = Math.max(0, SETORES.indexOf(setor)), arco = Math.PI * 2 / SETORES.length, fil = Math.floor(n / 6), col = n % 6; const a = si * arco + arco * (.12 + col / 6 * .76); return new THREE.Vector3(Math.cos(a) * (13.5 + fil * 1.1), .9 + fil * .15, Math.sin(a) * (13.5 + fil * 1.1)); }
+function chegar(pid, setor, sim) {
+  if (pessoas.has(pid)) return pessoas.get(pid);
+  const s = SETORES.includes(setor) ? setor : "out", p = { pid, setor: s, sim };
+  if (tem3D) { p.para = vaga(s, porSetor[s]++); p.mesh = new THREE.Mesh(geoP, new THREE.MeshBasicMaterial({ color: sim ? 0xC9A86A : COR.brass2, transparent: true })); p.mesh.material.userData.base = 1; p.mesh.position.copy(ENTRADA); camadas.humanos.add(p.mesh); p.de = ENTRADA.clone(); p.t0 = performance.now(); p.dur = REDUZ ? 1 : 1800; for (let i = 0; i < 3; i++) feixe(ENTRADA, p.para, COR.brass2, null, i * 90); }
+  pessoas.set(pid, p); $("#total").textContent = pessoas.size;
+  const sims = [...pessoas.values()].filter(x => x.sim).length; $("#totalRot").textContent = "pessoas na câmara" + (sims ? ` · ${sims} simuladas` : "");
+  return p;
+}
+function feixe(de, para, cor, fim, atraso = 0) {
+  if (!tem3D) { fim && fim(); return; }
+  const meio = de.clone().add(para).multiplyScalar(.5); meio.y += 5 + Math.random() * 3;
+  const m = new THREE.Mesh(geoF, new THREE.MeshBasicMaterial({ color: cor })); m.visible = false; scene.add(m);
+  feixes.push({ curva: new THREE.QuadraticBezierCurve3(de.clone(), meio, para.clone()), m, t0: performance.now() + atraso, dur: REDUZ ? 10 : 1500, fim });
+}
+L.on((m, novo) => {
+  const p = chegar(m.pid, m.setor || (m.k === "setor" ? m.v : null), m.sim);
+  if (!tem3D) return tabela();
+  const d = novo ? 1900 : 0;
+  if (m.k === "q1" && arcos[m.v]) feixe(p.para, arcos[m.v].topo, COR.brass, () => { arcos[m.v].votos++; }, d);
+  if (m.k === "q3" && cupula[m.v]) feixe(p.para, cupula[m.v].position, COR.coral, () => { const o = cupula[m.v]; o.userData.votos++; o.userData.alvo = 1 + Math.min(2.4, o.userData.votos * .2); o.userData.flash = 1; tabela(); }, d);
+  if (m.k === "q4") feixe(p.para, topoTorre, COR.brass2, null, d);
+  tabela();
+});
+function tabela() {
+  const ps = L.participantes(), c = {}; ps.forEach(p => { if (p.q3) c[p.q3.v] = (c[p.q3.v] || 0) + 1; });
+  $("#tabela").innerHTML = `<div class="lin cab"><span>Área sem componente</span><span style="text-align:right">conselho</span><span style="text-align:right">sala</span></div>` +
+    LACUNAS.map(t => [t.label, (C.esperadoPor[t.id] || []).length, c[t.id] || 0]).sort((a, b) => b[2] - a[2] || b[1] - a[1])
+      .map(([l, s, h]) => `<div class="lin"><span>${esc(l)}</span><b class="s">${s}</b><b class="h">${h}</b></div>`).join("") +
+    `<p style="font-size:12.5px;color:var(--color-text-tertiary);margin:10px 0 0">Conselho: estratos sintéticos que esperavam a área antes de ver o modelo (ilustrativo). Sala: pessoas que a marcaram como mais urgente.</p>`;
+}
+function simular(n) {
+  const rnd = a => a[Math.floor(Math.random() * a.length)];
+  for (let i = 0; i < n; i++) setTimeout(() => {
+    const pid = "sim-" + Math.random().toString(36).slice(2, 9), setor = rnd(SETORES), b = { pid, setor, sim: true, ts: Date.now() };
+    L.injetar({ ...b, k: "setor", v: setor });
+    setTimeout(() => L.injetar({ ...b, k: "q1", v: Math.random() < .35 ? "T5" : rnd(M.seeds).id, ts: Date.now() }), 900);
+    setTimeout(() => L.injetar({ ...b, k: "q3", v: Math.random() < .3 ? "participation" : Math.random() < .5 ? "children-vulnerable" : rnd(LACUNAS).id, ts: Date.now() }), 1700);
+  }, i * 550);
+}
+$("#simular").onclick = () => simular(12);
+
+/* ================= ações de cena ================= */
+function acaoR1() {
+  if (!tem3D) return;
+  assentosArr.forEach((a, i) => {
+    const alvos = Object.entries(C.esperadoPor).filter(([, ss]) => ss.includes(a.userData.estrato)).map(([t]) => t);
+    const extra = M.topics[(i * 7) % M.topics.length].id;
+    [...alvos, extra].forEach((t, k) => cupula[t] && feixe(a.position, cupula[t].position, ESTRATO[a.userData.estrato], () => { if (cupula[t].userData.alvo !== undefined) cupula[t].userData.flash = 1; }, i * 90 + k * 200));
+  });
+}
+let cicloTimer = [];
+function acaoEvento() {
+  cicloTimer.forEach(clearTimeout); cicloTimer = [];
+  $("#evento").classList.add("on");
+  const passos = () => document.querySelectorAll("#ciclo div");
+  [0, 1, 2, 3, 4].forEach(i => cicloTimer.push(setTimeout(() => passos()[i] && passos()[i].classList.add("on"), 600 + i * 1300)));
+  cicloTimer.push(setTimeout(() => { if (tem3D) onda = { t0: performance.now() }; }, 1500));
+  cicloTimer.push(setTimeout(() => $("#evento").classList.remove("on"), 6500));
+}
+
+/* ================= navegação ================= */
+let atual = -1;
+const pontos = $("#pontos");
+CENAS.forEach((c, i) => { const b = document.createElement("button"); b.setAttribute("aria-label", "Cena " + (i + 1) + ": " + c.t); b.onclick = () => ir(i); pontos.appendChild(b); });
+function ir(i) {
+  i = Math.max(0, Math.min(CENAS.length - 1, i)); if (i === atual) return;
+  const c = CENAS[i], tx = $("#texto"); atual = i;
+  tx.classList.add("saindo");
+  setTimeout(() => {
+    tx.innerHTML = `<div class="ato">${esc(c.ato)}</div><h1>${esc(c.t)}</h1>${c.h}<div class="valor"><span>Valor</span><div>${esc(c.v)}</div></div>`;
+    tx.classList.remove("saindo");
+  }, REDUZ ? 0 : 280);
+  pontos.querySelectorAll("button").forEach((b, k) => b.setAttribute("aria-current", k === i ? "step" : "false"));
+  $("#contador").textContent = String(i + 1).padStart(2, "0") + " / " + String(CENAS.length).padStart(2, "0");
+  $("#ant").disabled = i === 0; $("#prox").textContent = i === CENAS.length - 1 ? "Abrir a câmara ao vivo →" : "Próxima →";
+  $("#qrBox").classList.toggle("on", !!c.qr); $("#comparar").classList.toggle("on", !!c.comparar);
+  if (c.qr && !pessoas.size && !L.participantes().length) setTimeout(() => { if (atual === i && !pessoas.size) simular(10); }, 9000);
+  if (tem3D) { for (const [n, g] of Object.entries(camadas)) g.userData.alvo = c.camadas.includes(n) ? 1 : 0; alvoCam = CAMS[c.cam]; }
+  if (c.acao === "r1") setTimeout(acaoR1, 900);
+  if (c.acao === "evento") acaoEvento(); else { $("#evento").classList.remove("on"); }
+  try { history.replaceState(null, "", "#cena-" + (i + 1)); } catch (e) {}
+}
+$("#prox").onclick = () => atual === CENAS.length - 1 ? (location.href = "../ao-vivo/?sala=" + encodeURIComponent(L.sala) + "&camada=tudo") : ir(atual + 1);
+$("#ant").onclick = () => ir(atual - 1);
+addEventListener("keydown", e => {
+  if (["ArrowRight", "PageDown", " ", "Enter"].includes(e.key)) { e.preventDefault(); ir(atual + 1); }
+  if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); ir(atual - 1); }
+  if (e.key === "s" || e.key === "S") simular(12);
+  if (e.key === "f" || e.key === "F") document.documentElement.requestFullscreen?.().catch(() => {});
+});
+let toque = null;
+addEventListener("touchstart", e => { toque = e.touches[0].clientX; }, { passive: true });
+addEventListener("touchend", e => { if (toque == null) return; const dx = e.changedTouches[0].clientX - toque; if (Math.abs(dx) > 60) ir(atual + (dx < 0 ? 1 : -1)); toque = null; });
+
+/* QR */
+const link = L.linkParticipar(), q = qrcode(0, "M"); q.addData(link); q.make();
+$("#qr").innerHTML = q.createSvgTag({ cellSize: 6, margin: 0, scalable: true });
+tabela();
+
+/* ================= laço ================= */
+if (tem3D) {
+  const v = new THREE.Vector3(), ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  let ang = 0;
+  const quadro = now => {
+    requestAnimationFrame(quadro);
+    const t = now / 1000;
+    for (const [n, g] of Object.entries(camadas)) {
+      const u = g.userData; const ant = u.alfa; u.alfa += (u.alvo - u.alfa) * .05;
+      if (Math.abs(u.alfa - ant) > .0005 || (u.alfa > .001 && u.alfa < .999)) g.traverse(o => { if (o.material && o.material.userData.base !== undefined) o.material.opacity = o.material.userData.base * u.alfa; });
+      g.visible = u.alfa > .01;
+    }
+    /* assentos surgem um a um */
+    const aAss = camadas.assentos.userData.alfa;
+    assentosArr.forEach(a => { const k = Math.max(0, Math.min(1, aAss * 1.6 - a.userData.ordem / assentosArr.length * .6)); a.scale.setScalar(.001 + k); a.rotation.y = t * .6 + a.userData.fase; a.position.y = 1.1 + Math.sin(t * 1.3 + a.userData.fase) * .12; });
+    camadas.torre.rotation.y = t * .08;
+    /* onda do evento */
+    if (onda) { const k = (now - onda.t0) / 2600; const y = topoTorre.y - k * (topoTorre.y + .5);
+      blocos.forEach(b => { const d = Math.abs(b.position.y - y); b.material.emissiveIntensity = b.userData.emiss + Math.max(0, 1.6 - d * 2.2); });
+      if (k > 1.2) { onda = null; blocos.forEach(b => b.material.emissiveIntensity = b.userData.emiss); } }
+    for (const id in cupula) { const o = cupula[id]; o.userData.flash = Math.max(0, (o.userData.flash || 0) - .02); const s = o.scale.x + ((o.userData.alvo || 1) + o.userData.flash * .7 - o.scale.x) * .08; o.scale.setScalar(s); }
+    for (const id in arcos) { const a = arcos[id]; a.m.opacity = a.m.userData.base * camadas.arcos.userData.alfa * (1 + Math.min(2, a.votos * .25)); }
+    for (const p of pessoas.values()) { if (!p.mesh) continue; const k = Math.min(1, (now - p.t0) / p.dur), e = ease(k); p.mesh.position.lerpVectors(p.de, p.para, e); if (k < 1) p.mesh.position.y += Math.sin(e * Math.PI) * 4; else p.mesh.position.y = p.para.y + Math.sin(t * 1.6 + p.para.x) * .08; }
+    for (let i = feixes.length - 1; i >= 0; i--) { const f = feixes[i], k = (now - f.t0) / f.dur; if (k < 0) continue; if (k >= 1) { scene.remove(f.m); f.m.material.dispose(); feixes.splice(i, 1); f.fim && f.fim(); continue; } f.m.visible = true; f.curva.getPoint(ease(k), f.m.position); f.m.scale.setScalar(1 + Math.sin(k * Math.PI) * .6); }
+    /* câmera */
+    if (!REDUZ) ang += .0009;
+    const [pos, alvo] = alvoCam;
+    const rot = new THREE.Vector3(pos.x * Math.cos(ang) - pos.z * Math.sin(ang), pos.y, pos.x * Math.sin(ang) + pos.z * Math.cos(ang));
+    posCam.lerp(rot, .035); olharCam.lerp(alvo, .045); camera.position.copy(posCam); camera.lookAt(olharCam);
+    /* rótulos */
+    for (const r of rotulos) {
+      const cam = camadas[r.camada].userData.alfa; let vis = cam > .5 && (!r.soCena || atual === r.soCena);
+      if (vis) { v.copy(r.pos).project(camera); vis = v.z < 1 && Math.abs(v.x) < 1 && Math.abs(v.y) < 1; if (vis) { r.el.style.left = ((v.x + 1) / 2 * innerWidth) + "px"; r.el.style.top = ((1 - v.y) / 2 * innerHeight) + "px"; } }
+      r.el.style.opacity = vis ? 1 : 0;
+    }
+    composer.render();
+  };
+  requestAnimationFrame(quadro);
+} else { document.body.style.background = "radial-gradient(1200px 700px at 70% 30%,#14223A,#070C16 60%)"; }
+
+const inicial = parseInt((location.hash.match(/cena-(\d+)/) || [])[1] || "1", 10) - 1;
+ir(inicial);
+L.iniciar();
+})();
+</script>
+</body>
+</html>

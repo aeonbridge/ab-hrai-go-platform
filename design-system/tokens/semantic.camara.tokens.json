@@ -1,0 +1,296 @@
+{
+  "$description": "HRAI-GO semantic tokens, tema camara (padrão desde o DS v2). Mesmas chaves dos temas light e dark; mesmos tons de domínio com rampas da câmara 3D: civic→teal, ochre→brass, iris→violet, crimson→coral, lagoon→sky.",
+  "color": {
+    "$type": "color",
+    "bg": {
+      "canvas": {
+        "$value": "{color.chamber.950}"
+      },
+      "surface": {
+        "$value": "{color.chamber.900}"
+      },
+      "subtle": {
+        "$value": "{color.chamber.800}"
+      },
+      "muted": {
+        "$value": "{color.chamber.700}"
+      },
+      "inverse": {
+        "$value": "{color.chamber.50}"
+      },
+      "scrim": {
+        "$value": "#000000B3"
+      },
+      "glass": {
+        "$value": "#0C1525C7",
+        "$description": "Painel translúcido sobre a cena 3D (blur 14px). Contraste medido sobre bg.canvas."
+      },
+      "glassStrong": {
+        "$value": "#142036E0",
+        "$description": "Painel translúcido denso para texto longo sobre a cena."
+      }
+    },
+    "text": {
+      "primary": {
+        "$value": "{color.chamber.50}"
+      },
+      "secondary": {
+        "$value": "{color.chamber.200}"
+      },
+      "tertiary": {
+        "$value": "{color.chamber.300}"
+      },
+      "disabled": {
+        "$value": "{color.chamber.500}"
+      },
+      "inverse": {
+        "$value": "{color.chamber.900}"
+      },
+      "link": {
+        "$value": "{color.brass.300}"
+      },
+      "linkHover": {
+        "$value": "{color.brass.200}"
+      }
+    },
+    "border": {
+      "subtle": {
+        "$value": "{color.chamber.800}"
+      },
+      "default": {
+        "$value": "{color.chamber.700}"
+      },
+      "control": {
+        "$value": "{color.chamber.400}"
+      },
+      "strong": {
+        "$value": "{color.chamber.300}"
+      },
+      "focus": {
+        "$value": "{color.brass.400}"
+      }
+    },
+    "action": {
+      "primary": {
+        "bg": {
+          "$value": "{color.brass.400}"
+        },
+        "bgHover": {
+          "$value": "{color.brass.300}"
+        },
+        "bgPress": {
+          "$value": "{color.brass.200}"
+        },
+        "fg": {
+          "$value": "{color.brass.950}"
+        }
+      },
+      "secondary": {
+        "bg": {
+          "$value": "{color.chamber.900}"
+        },
+        "bgHover": {
+          "$value": "{color.teal.950}"
+        },
+        "border": {
+          "$value": "{color.brass.400}"
+        },
+        "fg": {
+          "$value": "{color.brass.200}"
+        }
+      },
+      "ghost": {
+        "bgHover": {
+          "$value": "{color.chamber.800}"
+        },
+        "fg": {
+          "$value": "{color.chamber.100}"
+        }
+      },
+      "danger": {
+        "bg": {
+          "$value": "{color.coral.300}"
+        },
+        "bgHover": {
+          "$value": "{color.coral.200}"
+        },
+        "fg": {
+          "$value": "{color.coral.950}"
+        }
+      },
+      "selected": {
+        "bg": {
+          "$value": "{color.teal.950}"
+        },
+        "fg": {
+          "$value": "{color.teal.200}"
+        },
+        "indicator": {
+          "$value": "{color.teal.300}"
+        }
+      }
+    },
+    "tone": {
+      "neutral": {
+        "fg": {
+          "$value": "{color.chamber.200}"
+        },
+        "bg": {
+          "$value": "{color.chamber.800}"
+        },
+        "border": {
+          "$value": "{color.chamber.400}"
+        },
+        "solid": {
+          "$value": "{color.chamber.200}"
+        },
+        "solidFg": {
+          "$value": "{color.chamber.950}"
+        }
+      },
+      "civic": {
+        "fg": {
+          "$value": "{color.teal.200}"
+        },
+        "bg": {
+          "$value": "{color.teal.950}"
+        },
+        "border": {
+          "$value": "{color.teal.400}"
+        },
+        "solid": {
+          "$value": "{color.teal.300}"
+        },
+        "solidFg": {
+          "$value": "{color.teal.950}"
+        }
+      },
+      "verdant": {
+        "fg": {
+          "$value": "{color.verdant.200}"
+        },
+        "bg": {
+          "$value": "{color.verdant.950}"
+        },
+        "border": {
+          "$value": "{color.verdant.400}"
+        },
+        "solid": {
+          "$value": "{color.verdant.300}"
+        },
+        "solidFg": {
+          "$value": "{color.verdant.950}"
+        }
+      },
+      "crimson": {
+        "fg": {
+          "$value": "{color.coral.200}"
+        },
+        "bg": {
+          "$value": "{color.coral.950}"
+        },
+        "border": {
+          "$value": "{color.coral.400}"
+        },
+        "solid": {
+          "$value": "{color.coral.300}"
+        },
+        "solidFg": {
+          "$value": "{color.coral.950}"
+        }
+      },
+      "ochre": {
+        "fg": {
+          "$value": "{color.brass.200}"
+        },
+        "bg": {
+          "$value": "{color.brass.950}"
+        },
+        "border": {
+          "$value": "{color.brass.400}"
+        },
+        "solid": {
+          "$value": "{color.brass.300}"
+        },
+        "solidFg": {
+          "$value": "{color.brass.950}"
+        }
+      },
+      "iris": {
+        "fg": {
+          "$value": "{color.violet.200}"
+        },
+        "bg": {
+          "$value": "{color.violet.950}"
+        },
+        "border": {
+          "$value": "{color.violet.400}"
+        },
+        "solid": {
+          "$value": "{color.violet.300}"
+        },
+        "solidFg": {
+          "$value": "{color.violet.950}"
+        }
+      },
+      "lagoon": {
+        "fg": {
+          "$value": "{color.sky.200}"
+        },
+        "bg": {
+          "$value": "{color.sky.950}"
+        },
+        "border": {
+          "$value": "{color.sky.400}"
+        },
+        "solid": {
+          "$value": "{color.sky.300}"
+        },
+        "solidFg": {
+          "$value": "{color.sky.950}"
+        }
+      }
+    },
+    "simulation": {
+      "hatchBg": {
+        "$value": "{color.chamber.900}"
+      },
+      "hatchLine": {
+        "$value": "{color.chamber.700}"
+      },
+      "labelFg": {
+        "$value": "{color.chamber.100}"
+      }
+    }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "sm": {
+      "$value": {
+        "color": "#00000066",
+        "offsetX": "0px",
+        "offsetY": "1px",
+        "blur": "2px",
+        "spread": "0px"
+      }
+    },
+    "md": {
+      "$value": {
+        "color": "#00000080",
+        "offsetX": "0px",
+        "offsetY": "4px",
+        "blur": "12px",
+        "spread": "-2px"
+      }
+    },
+    "lg": {
+      "$value": {
+        "color": "#00000099",
+        "offsetX": "0px",
+        "offsetY": "12px",
+        "blur": "32px",
+        "spread": "-4px"
+      }
+    }
+  }
+}

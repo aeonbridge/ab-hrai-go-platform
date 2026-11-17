@@ -28,6 +28,7 @@ NON_TEXT = 3.0  # WCAG 1.4.11, UI component boundaries and meaningful graphics
 
 TONES = ["neutral", "civic", "verdant", "crimson", "ochre", "iris", "lagoon"]
 SURFACES = ["bg.canvas", "bg.surface", "bg.subtle"]
+GLASS = ["bg.glass", "bg.glassStrong"]  # tema camara: compostos sobre bg.canvas antes de medir
 
 
 def pairs() -> list[tuple[str, str, float, str]]:
@@ -114,6 +115,14 @@ def ratio(fg_hex: str, bg_hex: str) -> float:
     return (hi + 0.05) / (lo + 0.05)
 
 
+def composite(top_hex: str, under_hex: str) -> str:
+    """Flatten a translucent color over an opaque one, returning #RRGGBB."""
+    tr, tg, tb, ta = rgba(top_hex)
+    ur, ug, ub, _ = rgba(under_hex)
+    mix = (tr * ta + ur * (1 - ta), tg * ta + ug * (1 - ta), tb * ta + ub * (1 - ta))
+    return "#" + "".join(f"{round(c * 255):02X}" for c in mix)
+
+
 def load_theme(name: str) -> dict[str, str]:
     primitives = flatten(json.loads((TOKENS / "primitives.tokens.json").read_text()))
     semantic = flatten(json.loads((TOKENS / f"semantic.{name}.tokens.json").read_text()))
@@ -130,10 +139,18 @@ def main() -> int:
         "",
     ]
     failures = 0
-    for theme in ["light", "dark"]:
+    for theme in ["camara", "light", "dark"]:
         colors = load_theme(theme)
+        theme_pairs = pairs()
+        for g in GLASS:
+            if g in colors:
+                colors[g] = composite(colors[g], colors["bg.canvas"])
+                for fg in ["text.primary", "text.secondary", "text.tertiary", "text.link"]:
+                    theme_pairs.append((fg, g, TEXT, "text on translucent panel over canvas"))
+                for tone in TONES:
+                    theme_pairs.append((f"tone.{tone}.fg", g, TEXT, "status text on translucent panel"))
         lines += [f"## {theme}", "", "| Foreground | Background | Use | Ratio | Min | Result |", "|---|---|---|---:|---:|---|"]
-        for fg, bg, minimum, use in pairs():
+        for fg, bg, minimum, use in theme_pairs:
             r = ratio(colors[fg], colors[bg])
             ok = r >= minimum
             failures += not ok

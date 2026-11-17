@@ -1,0 +1,846 @@
+<title>Mesa de Tensões</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Schibsted+Grotesk:wght@500;700;800&display=swap">
+<style>
+/* Layout: uma tensão por vez. Trilho de fila à esquerda, foco no centro (campo de posições + mesa humana), estado da deliberação à direita. */
+:root{
+  --paper:#EEF1F4; --surface:#FFFFFF; --sunk:#E3E8ED; --ink:#13212E; --ink-2:#4B5C6C; --ink-3:#6F7F8F; --line:#D2DAE2; --line-2:#BCC7D2;
+  --human:#00766C; --human-soft:#D7EEEB;
+  --shadow:#57558F; --shadow-soft:#E6E5F3;
+  --crit-4:#B8341A; --crit-3:#A15C00; --crit-2:#76732A; --crit-1:#6B7B8C;
+  --crit-4-soft:#F7E1DB; --crit-3-soft:#F5E8D3; --crit-2-soft:#EDEDD9; --crit-1-soft:#E4E9EE;
+  --ep-verified:#1C62A8; --ep-evidence:#00766C; --ep-synthetic:#57558F; --ep-hypothesis:#8A6A12; --ep-unknown:#7C8896;
+  --focus:#1C62A8;
+  --f-display:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
+  --f-body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --r-s:4px; --r-m:8px;
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:24px; --s-6:32px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0C131A; --surface:#131D27; --sunk:#0A1015; --ink:#E2E8EE; --ink-2:#9DAEBE; --ink-3:#7A8B9B; --line:#24323F; --line-2:#334452;
+  --human:#3DC3B4; --human-soft:#123430;
+  --shadow:#A9A6EC; --shadow-soft:#24233F;
+  --crit-4:#FF7B5E; --crit-3:#EFA944; --crit-2:#CDBE62; --crit-1:#8C9CAD;
+  --crit-4-soft:#3A1C15; --crit-3-soft:#36270F; --crit-2-soft:#2D2B15; --crit-1-soft:#1D2731;
+  --ep-verified:#6CAEF0; --ep-evidence:#3DC3B4; --ep-synthetic:#A9A6EC; --ep-hypothesis:#DDB64D; --ep-unknown:#8E9BA8;
+  --focus:#6CAEF0; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0C131A; --surface:#131D27; --sunk:#0A1015; --ink:#E2E8EE; --ink-2:#9DAEBE; --ink-3:#7A8B9B; --line:#24323F; --line-2:#334452;
+  --human:#3DC3B4; --human-soft:#123430;
+  --shadow:#A9A6EC; --shadow-soft:#24233F;
+  --crit-4:#FF7B5E; --crit-3:#EFA944; --crit-2:#CDBE62; --crit-1:#8C9CAD;
+  --crit-4-soft:#3A1C15; --crit-3-soft:#36270F; --crit-2-soft:#2D2B15; --crit-1-soft:#1D2731;
+  --ep-verified:#6CAEF0; --ep-evidence:#3DC3B4; --ep-synthetic:#A9A6EC; --ep-hypothesis:#DDB64D; --ep-unknown:#8E9BA8;
+  --focus:#6CAEF0; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.mono{font-family:var(--f-mono)}
+.eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.muted{color:var(--ink-2)}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--surface);border-bottom:1px solid var(--line)}
+.top-in{display:flex;align-items:center;gap:var(--s-4);padding-block:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:10px;margin-right:auto;min-width:0}
+.brand b{font-family:var(--f-display);font-weight:800;font-size:18px;letter-spacing:-.01em}
+.brand span{font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
+.tabs{display:flex;gap:2px;background:var(--sunk);border-radius:var(--r-m);padding:3px}
+.tabs a{padding:5px 12px;border-radius:6px;text-decoration:none;color:var(--ink-2);font-size:13px;font-weight:500}
+.tabs a[aria-current="page"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.conn{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);display:flex;align-items:center;gap:6px}
+.conn i{width:7px;height:7px;border-radius:50%;background:var(--ink-3);display:inline-block}
+.conn.live i{background:var(--human)}
+
+/* shell */
+.view{padding-block:var(--s-5) 64px}
+.focus-grid{display:grid;grid-template-columns:248px minmax(0,1fr) 272px;gap:var(--s-5);align-items:start;max-width:1440px;margin:0 auto}
+@media (max-width:1180px){.focus-grid{grid-template-columns:220px minmax(0,1fr)}.side{grid-column:2}}
+@media (max-width:820px){.focus-grid{grid-template-columns:minmax(0,1fr)}.side{grid-column:auto}}
+
+/* queue rail */
+.rail{position:sticky;top:calc(env(safe-area-inset-top,0px) + 76px);display:flex;flex-direction:column;gap:var(--s-2)}
+.rail-h{display:flex;justify-content:space-between;align-items:baseline;padding:0 2px 4px}
+.qlist{display:flex;flex-direction:column;gap:6px}
+.qitem{display:grid;grid-template-columns:4px 1fr;gap:10px;text-align:left;background:transparent;border:1px solid transparent;border-radius:var(--r-m);padding:9px 10px 9px 0;width:100%}
+.qitem:hover{background:var(--surface);border-color:var(--line)}
+.qitem[aria-current="true"]{background:var(--surface);border-color:var(--line-2)}
+.qitem .stripe{border-radius:2px;align-self:stretch}
+.qitem .qt{font-size:13px;font-weight:600;line-height:1.3}
+.qitem .qt em{font-style:normal;color:var(--ink-3);font-weight:400}
+.qmeta{display:flex;gap:8px;align-items:center;margin-top:4px;font-family:var(--f-mono);font-size:11px;color:var(--ink-3);flex-wrap:wrap}
+.here{display:inline-flex;align-items:center;gap:3px;color:var(--human)}
+.here::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--human)}
+@media (max-width:820px){
+  .rail{position:static}
+  .qlist{flex-direction:row;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x mandatory}
+  .qitem{min-width:220px;scroll-snap-align:start;background:var(--surface);border-color:var(--line)}
+}
+
+/* criticality */
+.crit{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px 2px 6px;border-radius:999px}
+.crit .pips{display:inline-flex;gap:2px}
+.crit .pips i{width:4px;height:10px;border-radius:1px;background:currentColor;opacity:.25}
+.crit .pips i.on{opacity:1}
+.c4{color:var(--crit-4);background:var(--crit-4-soft)} .c3{color:var(--crit-3);background:var(--crit-3-soft)}
+.c2{color:var(--crit-2);background:var(--crit-2-soft)} .c1{color:var(--crit-1);background:var(--crit-1-soft)}
+.bg4{background:var(--crit-4)} .bg3{background:var(--crit-3)} .bg2{background:var(--crit-2)} .bg1{background:var(--crit-1)}
+
+/* focus header */
+.focus{display:flex;flex-direction:column;gap:var(--s-5);min-width:0}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-m)}
+.fhead{padding:var(--s-5);display:flex;flex-direction:column;gap:var(--s-4)}
+.fhead-top{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.poles{display:grid;grid-template-columns:1fr auto 1fr;gap:var(--s-3);align-items:center}
+.pole{font-family:var(--f-display);font-weight:700;font-size:clamp(20px,2.4vw,28px);line-height:1.12;letter-spacing:-.015em}
+.pole.b{text-align:right}
+.vs{font-family:var(--f-mono);font-size:12px;color:var(--ink-3);display:flex;flex-direction:column;align-items:center;gap:2px}
+.vs svg{display:block}
+@media (max-width:560px){.poles{grid-template-columns:1fr}.pole.b{text-align:left}.vs{flex-direction:row}}
+.question{font-size:16px;max-width:68ch;color:var(--ink-2);margin:0}
+.critrow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s-3);border-top:1px solid var(--line);padding-top:var(--s-4)}
+@media (max-width:560px){.critrow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.cdim .bar{display:flex;gap:3px;margin-top:6px}
+.cdim .bar i{flex:1;height:6px;border-radius:2px;background:var(--sunk)}
+.cdim .v{font-size:12px;color:var(--ink-2);margin-top:4px}
+.calib{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--ink-2)}
+.seg{display:inline-flex;border:1px solid var(--line-2);border-radius:var(--r-s);overflow:hidden}
+.seg button{border:0;background:transparent;padding:4px 10px;font-size:12px;font-family:var(--f-mono)}
+.seg button+button{border-left:1px solid var(--line-2)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
+
+/* known */
+.known{padding:var(--s-4) var(--s-5);display:flex;flex-direction:column;gap:10px}
+.fact{display:grid;grid-template-columns:150px minmax(0,1fr);gap:var(--s-3);align-items:start;font-size:14px}
+@media (max-width:560px){.fact{grid-template-columns:1fr;gap:4px}}
+.ep{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:11px;letter-spacing:.03em;white-space:nowrap}
+.ep i{width:14px;height:14px;border-radius:3px;flex:none;display:inline-block}
+.ep.verified{color:var(--ep-verified)} .ep.verified i{background:var(--ep-verified)}
+.ep.evidence{color:var(--ep-evidence)} .ep.evidence i{background:transparent;border:2px solid var(--ep-evidence)}
+.ep.synthetic{color:var(--ep-synthetic)} .ep.synthetic i{background:transparent;border:2px dashed var(--ep-synthetic)}
+.ep.hypothesis{color:var(--ep-hypothesis)} .ep.hypothesis i{background:transparent;border:2px dotted var(--ep-hypothesis)}
+.ep.unknown{color:var(--ep-unknown)} .ep.unknown i{background:repeating-linear-gradient(45deg,var(--ep-unknown) 0 2px,transparent 2px 5px);border:1px solid var(--ep-unknown)}
+
+/* field */
+.sec-h{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s-3);flex-wrap:wrap}
+.sec-h h2{font-size:19px}
+.field-wrap{padding:var(--s-5);display:flex;flex-direction:column;gap:var(--s-4)}
+.field{position:relative;height:188px;margin:0 6px}
+.axis{position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,var(--ink-2),var(--line-2) 50%,var(--ink-2))}
+.axis-lbl{position:absolute;top:calc(50% + 6px);font-family:var(--f-mono);font-size:10px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;max-width:40%}
+.axis-lbl.a{left:0} .axis-lbl.b{right:0;text-align:right}
+.lane-tag{position:absolute;left:-2px;font-family:var(--f-mono);font-size:10px;color:var(--ink-3)}
+.mk{position:absolute;transform:translate(-50%,-50%);display:grid;place-items:center;border:0;padding:0;background:transparent}
+.mk.syn{width:30px;height:30px}
+.mk.syn::before{content:"";position:absolute;inset:4px;transform:rotate(45deg);border:2px dashed var(--shadow);background:var(--shadow-soft);border-radius:3px}
+.mk.syn span{position:relative;font-family:var(--f-mono);font-size:9.5px;font-weight:500;color:var(--shadow)}
+.mk.syn.sel::before{border-style:solid;background:var(--shadow);}
+.mk.syn.sel span{color:var(--surface)}
+.mk.syn.coi::after{content:"";position:absolute;right:-1px;top:-1px;width:8px;height:8px;border-radius:50%;background:var(--crit-3);border:2px solid var(--surface)}
+.ghost{position:absolute;transform:translate(-50%,-50%) rotate(45deg);width:12px;height:12px;border:1px dashed var(--shadow);opacity:.55;border-radius:2px}
+.trail{position:absolute;height:0;border-top:1px dashed var(--shadow);opacity:.5}
+.mk.hum{width:16px;height:16px;border-radius:50%;background:var(--human);border:2px solid var(--surface);box-shadow:0 0 0 1px var(--human)}
+.mk.hum.me{box-shadow:0 0 0 2px var(--ink)}
+.mk.hum.empty{background:transparent;border:1px dashed var(--human);box-shadow:none}
+.field-help{font-size:13px;color:var(--ink-2);display:flex;gap:var(--s-4);flex-wrap:wrap;align-items:center}
+.place{display:flex;gap:var(--s-3);align-items:center;flex-wrap:wrap;font-size:13px}
+.place input[type=range]{flex:1;min-width:160px;accent-color:var(--human)}
+
+/* seats */
+.seats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-3)}
+@media (max-width:640px){.seats{grid-template-columns:1fr}}
+.seat{border:1px dashed var(--line-2);border-radius:var(--r-m);padding:var(--s-3) var(--s-4);display:flex;flex-direction:column;gap:8px;background:var(--surface);text-align:left}
+.seat.sel{border:1.5px solid var(--shadow);background:var(--shadow-soft)}
+.seat-h{display:flex;gap:8px;align-items:center}
+.dia{width:12px;height:12px;transform:rotate(45deg);border:2px dashed var(--shadow);flex:none;border-radius:2px}
+.seat-h b{font-size:13.5px;font-weight:600}
+.seat-h .code{margin-left:auto;font-family:var(--f-mono);font-size:10px;color:var(--shadow)}
+.seat p{margin:0;font-size:14px}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-family:var(--f-mono);font-size:10.5px;padding:1px 6px;border-radius:3px;background:var(--sunk);color:var(--ink-2)}
+.tag.warn{background:var(--crit-3-soft);color:var(--crit-3)}
+.tag.mv{background:var(--shadow-soft);color:var(--shadow)}
+.seat .blind{font-size:12.5px;color:var(--ink-3)}
+.seat .blind b{font-weight:500;color:var(--ink-2)}
+.seat-actions{display:flex;gap:8px;margin-top:2px}
+.seat.unrep{background:repeating-linear-gradient(135deg,transparent 0 6px,var(--sunk) 6px 7px);border-color:var(--ink-3)}
+.seat.unrep .dia{border-color:var(--ink-3);border-style:dotted}
+.btn{border:1px solid var(--line-2);background:var(--surface);border-radius:var(--r-s);padding:5px 10px;font-size:13px;font-weight:500}
+.btn:hover{border-color:var(--ink-3)}
+.btn.primary{background:var(--human);border-color:var(--human);color:var(--surface)}
+.btn.ghosty{border-color:transparent;background:transparent;color:var(--ink-2);padding:4px 6px}
+.btn.ghosty:hover{color:var(--ink)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* debate */
+.debate{padding:var(--s-5);display:flex;flex-direction:column;gap:var(--s-4)}
+.composer{border:1px solid var(--line-2);border-radius:var(--r-m);background:var(--paper);padding:var(--s-3);display:flex;flex-direction:column;gap:10px}
+.moves{display:flex;gap:6px;flex-wrap:wrap}
+.mv-btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line-2);background:var(--surface);border-radius:999px;padding:4px 11px 4px 8px;font-size:12.5px;font-weight:500}
+.mv-btn[aria-pressed="true"]{border-color:currentColor;box-shadow:inset 0 0 0 1px currentColor}
+.mv-ico{width:16px;height:16px;flex:none}
+.m-support{color:var(--human)} .m-challenge{color:var(--crit-4)} .m-evidence{color:var(--ep-verified)} .m-amend{color:var(--crit-2)} .m-uncertain{color:var(--ep-unknown)}
+.composer textarea{width:100%;min-height:76px;resize:vertical;border:1px solid var(--line);border-radius:var(--r-s);background:var(--surface);padding:10px;line-height:1.45}
+.crow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.crow input,.crow select{border:1px solid var(--line);border-radius:var(--r-s);background:var(--surface);padding:5px 8px;font-size:13px;min-width:0}
+.crow input{flex:1 1 220px}
+.anchor{display:inline-flex;gap:6px;align-items:center;font-size:12.5px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:2px 4px 2px 10px}
+.anchor button{border:0;background:transparent;color:var(--ink-3);padding:0 4px;font-size:14px;line-height:1}
+.feedbar{display:flex;justify-content:space-between;gap:var(--s-3);align-items:center;flex-wrap:wrap}
+.feed{display:flex;flex-direction:column;gap:var(--s-3)}
+.post{display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px}
+.av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:600;color:#fff;background:var(--human);overflow:hidden}
+.av img{width:100%;height:100%;object-fit:cover}
+.pbody{min-width:0;display:flex;flex-direction:column;gap:5px}
+.phead{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;font-size:13px}
+.phead b{font-weight:600}
+.phead .role{font-family:var(--f-mono);font-size:10.5px;color:var(--ink-3)}
+.phead time{font-size:12px;color:var(--ink-3);margin-left:auto}
+.movechip{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600}
+.ptext{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.ptext.challenge{border-left:2px solid var(--crit-4);padding-left:10px}
+.ref{font-size:12px;color:var(--ink-3);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.ref .to-syn{color:var(--shadow)}
+.src{font-family:var(--f-mono);font-size:11.5px;color:var(--ep-evidence);overflow-wrap:anywhere}
+.src.none{color:var(--ink-3)}
+.pact{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.mark{border:1px solid var(--line);background:transparent;border-radius:999px;padding:1px 9px;font-size:12px;color:var(--ink-2)}
+.mark[aria-pressed="true"]{border-color:var(--human);color:var(--human);background:var(--human-soft)}
+.replies{display:flex;flex-direction:column;gap:var(--s-3);border-left:1px solid var(--line);padding-left:var(--s-3);margin-top:4px}
+.empty{border:1px dashed var(--line-2);border-radius:var(--r-m);padding:var(--s-4);font-size:14px;color:var(--ink-2);display:flex;flex-direction:column;gap:8px}
+.banner{font-size:12.5px;background:var(--crit-3-soft);color:var(--crit-3);border-radius:var(--r-s);padding:6px 10px}
+
+/* side */
+.side{display:flex;flex-direction:column;gap:var(--s-4);position:sticky;top:calc(env(safe-area-inset-top,0px) + 76px)}
+@media (max-width:1180px){.side{position:static}}
+.sblock{padding:var(--s-4);display:flex;flex-direction:column;gap:10px}
+.rounds{display:grid;grid-template-columns:repeat(9,1fr);gap:3px}
+.rounds i{height:22px;border-radius:3px;background:var(--sunk);display:grid;place-items:center;font-family:var(--f-mono);font-style:normal;font-size:9.5px;color:var(--ink-3)}
+.rounds i.done{background:var(--shadow-soft);color:var(--shadow)}
+.rounds i.now{background:var(--shadow);color:var(--surface)}
+.slist{display:flex;flex-direction:column;gap:8px;font-size:13px;margin:0;padding:0;list-style:none}
+.slist li{display:flex;gap:8px;align-items:flex-start}
+.people{display:flex;gap:-4px;flex-wrap:wrap;align-items:center}
+.people .av{width:26px;height:26px;font-size:11px;border:2px solid var(--surface);margin-right:-6px}
+.counter{font-family:var(--f-display);font-weight:700;font-size:26px;line-height:1}
+.minor{font-size:13px;border-left:2px solid var(--shadow);padding-left:10px;color:var(--ink-2)}
+.limits{font-size:12px;color:var(--ink-3);margin:0;padding-left:16px}
+
+/* board */
+.board{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:var(--s-5)}
+.board-h{display:flex;justify-content:space-between;gap:var(--s-4);align-items:end;flex-wrap:wrap}
+.board-h h1{font-size:clamp(26px,3.4vw,38px);letter-spacing:-.02em}
+.board-h p{margin:6px 0 0;max-width:62ch;color:var(--ink-2)}
+.tbl{overflow-x:auto}
+.trow{display:grid;grid-template-columns:6px minmax(220px,2.2fr) 110px repeat(4,74px) 120px 90px;gap:var(--s-3);align-items:center;padding:12px var(--s-4) 12px 0;border-bottom:1px solid var(--line);min-width:900px}
+.trow.h{font-family:var(--f-mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);padding-block:8px}
+.trow .stripe{align-self:stretch;border-radius:0 2px 2px 0}
+.trow .tt{font-weight:600;font-size:14px;line-height:1.3;text-align:left;background:none;border:0;padding:0}
+.trow .tt:hover{text-decoration:underline}
+.trow .tt small{display:block;font-weight:400;color:var(--ink-3);font-size:12px;margin-top:2px}
+.dots{display:flex;gap:3px}
+.dots i{width:10px;height:10px;border-radius:2px;background:var(--sunk)}
+.hist{display:flex;align-items:flex-end;gap:2px;height:24px}
+.hist i{width:14px;background:var(--human);border-radius:2px 2px 0 0;min-height:1px;opacity:.85}
+.hist i.model{outline:1.5px dashed var(--shadow);outline-offset:1px}
+.num{font-variant-numeric:tabular-nums;font-family:var(--f-mono);font-size:13px}
+.legend{display:flex;gap:var(--s-4);flex-wrap:wrap;font-size:12.5px;color:var(--ink-2)}
+
+/* system */
+.sys{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+.sys h1{font-size:clamp(28px,3.6vw,42px);letter-spacing:-.02em}
+.sys h2{font-size:22px;margin-bottom:var(--s-3)}
+.sys .lede{max-width:66ch;color:var(--ink-2);font-size:16px;margin:10px 0 0}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-4)}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-4)}
+.grid5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--s-3)}
+@media (max-width:860px){.grid3,.grid5{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.grid2,.grid3,.grid5{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-m);padding:var(--s-4);display:flex;flex-direction:column;gap:8px;min-width:0}
+.card h3{font-size:15px}
+.card p{margin:0;font-size:13.5px;color:var(--ink-2)}
+.princ{counter-reset:p;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-4)}
+@media (max-width:640px){.princ{grid-template-columns:1fr}}
+.princ .card h3::before{counter-increment:p;content:"P" counter(p) "  ";font-family:var(--f-mono);font-size:12px;color:var(--ink-3)}
+.sw{height:44px;border-radius:var(--r-s);border:1px solid var(--line)}
+.swl{font-family:var(--f-mono);font-size:11px;color:var(--ink-2)}
+.typerow{display:grid;grid-template-columns:140px minmax(0,1fr);gap:var(--s-4);align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line)}
+@media (max-width:560px){.typerow{grid-template-columns:1fr;gap:2px}}
+.vox{display:flex;gap:var(--s-4);align-items:center}
+.open-q{font-size:14px;color:var(--ink-2);margin:0;padding-left:18px}
+.open-q li{margin-bottom:6px}
+@media (prefers-reduced-motion:no-preference){.mk{transition:left .35s ease,top .35s ease}.qitem,.seat{transition:background .15s,border-color .15s}}
+</style>
+
+<header class="top wrap">
+  <div class="top-in">
+    <div class="brand"><b>Mesa de Tensões</b><span>HRAI-GO · SCSE · protótipo</span></div>
+    <nav class="tabs" aria-label="Vistas">
+      <a href="#foco" data-v="foco">Foco</a>
+      <a href="#fila" data-v="fila">Fila</a>
+      <a href="#sistema" data-v="sistema">Sistema</a>
+    </nav>
+    <div class="conn" id="conn"><i></i><span>modo local</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- FOCO -->
+  <section class="view" id="v-foco">
+    <div class="focus-grid">
+      <aside class="rail" aria-label="Fila de tensões">
+        <div class="rail-h"><span class="eyebrow">Fila · por criticidade</span><a class="eyebrow" href="#fila">ver tudo</a></div>
+        <div class="qlist" id="qlist"></div>
+      </aside>
+
+      <div class="focus" id="focus">
+        <article class="panel fhead" id="fhead"></article>
+        <section class="panel known" id="known" aria-label="O que sabemos"></section>
+        <section class="panel field-wrap" id="fieldsec" aria-label="Campo de posições"></section>
+        <section class="panel debate" id="debate" aria-label="Mesa humana"></section>
+      </div>
+
+      <aside class="side" id="side" aria-label="Estado da deliberação"></aside>
+    </div>
+  </section>
+
+  <!-- FILA -->
+  <section class="view" id="v-fila" hidden>
+    <div class="board">
+      <div class="board-h">
+        <div>
+          <div class="eyebrow">Triagem</div>
+          <h1>Onde a atenção é mais necessária agora</h1>
+          <p>A ordem vem de quatro dimensões explícitas, não de engajamento. A leitura humana de criticidade aparece ao lado da do modelo, para que a divergência fique visível.</p>
+        </div>
+        <div class="seg" role="group" aria-label="Ordenar">
+          <button data-sort="crit" aria-pressed="true">Criticidade</button>
+          <button data-sort="gap">Humano × modelo</button>
+          <button data-sort="act">Atividade</button>
+        </div>
+      </div>
+      <div class="panel tbl"><div id="board"></div></div>
+      <div class="legend">
+        <span><b class="mono">IMP</b> impacto em direitos</span>
+        <span><b class="mono">IRR</b> irreversibilidade</span>
+        <span><b class="mono">LAC</b> lacuna de evidência</span>
+        <span><b class="mono">DIS</b> dissenso no conselho</span>
+        <span>Leitura humana: barras = votos por nível (1→4); contorno tracejado = nível do modelo</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SISTEMA -->
+  <section class="view" id="v-sistema" hidden>
+    <div class="sys" id="sys"></div>
+  </section>
+</main>
+
+<script>
+(() => {
+"use strict";
+
+/* ---------------- dados de cenário (sintéticos, ilustrativos) ---------------- */
+const ROUNDS=["R0","R1","R2","R3","R4","R5","R6","R7","R8"];
+const ROUND_NAME={R0:"Preparação",R1:"Revisão independente",R2:"Teses de abertura",R3:"Contra-exame",R4:"Revisão por evidência",R5:"Negociação",R6:"Ramos contrafactuais",R7:"Minoria e auditoria",R8:"Publicação"};
+const EP={verified:"Fato verificado",evidence:"Achado c/ evidência",synthetic:"Perspectiva sintética",hypothesis:"Hipótese",unknown:"Desconhecido"};
+
+const T=[
+ {id:"t1",scen:"BR-POLICY-001",mode:"Política regulatória",round:"R5",
+  a:"Auditoria ex-ante obrigatória",b:"Viabilidade para pequenas empresas",
+  q:"A exigência de auditoria antes da entrada em operação protege direitos sem concentrar o mercado em quem pode pagar por ela?",
+  c:{imp:3,irr:2,lac:3,dis:3},
+  why:"Afeta acesso a emprego e serviços; o conselho diverge e não há dado de custo calibrado para o Brasil.",
+  facts:[
+   ["verified","O cenário trata a proposta legislativa como texto em tramitação (status proposed), não como obrigação vigente."],
+   ["evidence","O conselho citou 3 estudos de custo de auditoria independente. Nenhum foi calibrado para o mercado brasileiro."],
+   ["hypothesis","Uma exigência uniforme pode afastar fornecedores locais de pequeno porte de setores de alto risco."],
+   ["unknown","Quantos auditores independentes qualificados existem hoje no país."]],
+  seats:[
+   {id:"DD",l:"Direitos digitais",p0:-.8,p:-.7,t:"Sem auditoria prévia, o dano a grupos vulneráveis só aparece depois de ocorrer. Defende auditoria obrigatória com escopo proporcional ao risco.",s:3,blind:"Subestima o custo de conformidade para fornecedores pequenos."},
+   {id:"TR",l:"Trabalhadores",p0:-.6,p:-.6,t:"Sistemas de RH de alto risco afetam renda e carreira. Pede auditoria com participação de representação trabalhista.",s:2},
+   {id:"PE",l:"Pequenas empresas de tecnologia",p0:.9,p:.55,rev:true,t:"Revisou na R4: aceita auditoria se houver modelo simplificado e prazo escalonado por porte.",s:2,blind:"Mistura porte do fornecedor com gravidade do impacto."},
+   {id:"FI",l:"Capacidade de fiscalização",p0:.1,p:.35,t:"A exigência só funciona com credenciamento de auditores. Sem isso, vira carimbo.",s:1,flag:true},
+   {id:"GP",l:"Grandes plataformas",p0:.3,p:.15,coi:true,t:"Apoia auditoria padronizada: um padrão único reduz incerteza jurídica para quem já tem estrutura.",s:2,blind:"Não declara o ganho competitivo de barreiras de entrada."},
+   {id:"AA",l:"Pesquisa em auditoria algorítmica",p0:-.3,p:-.25,t:"Auditoria só antes da operação dá falsa segurança. Propõe combinar com monitoramento contínuo por amostragem.",s:4},
+   {id:"--",l:"Usuários de serviços públicos automatizados",unrep:true}],
+  minority:"Direitos digitais mantém que qualquer simplificação por porte deve excluir sistemas que decidem acesso a serviços essenciais.",
+  open:"Qual seria o custo mínimo de uma auditoria proporcional para um sistema de triagem de currículos?"},
+ {id:"t2",scen:"BR-SOLUTION-001",mode:"Conformidade de solução",round:"R4",
+  a:"Testar viés com dados sensíveis",b:"Minimização de dados pessoais",
+  q:"Para mostrar que a triagem não discrimina, é preciso tratar a origem racial dos candidatos. Esse tratamento é proporcional?",
+  c:{imp:3,irr:3,lac:2,dis:3},
+  why:"Erro em qualquer direção é difícil de reverter: discriminação não medida ou vazamento de dado sensível.",
+  facts:[
+   ["verified","O dossiê do RecruitmentScreeningAssistant (fictício) não registra nenhum teste de viés por grupo."],
+   ["evidence","Origem racial ou étnica é dado pessoal sensível na LGPD (art. 5º, II). Vigência e hipótese legal aplicável: verificação pendente."],
+   ["hypothesis","Inferir raça a partir de CEP ou nome pode ser mais arriscado do que coletar autodeclaração opcional."],
+   ["unknown","Se a autoridade de proteção de dados já se manifestou sobre esse uso específico."]],
+  seats:[
+   {id:"PD",l:"Proteção de dados",p0:.8,p:.5,rev:true,t:"Coletar dado sensível para auditar é legítimo só com finalidade restrita, base legal clara e separação do fluxo de decisão.",s:3},
+   {id:"AR",l:"Movimento antirracista",p0:-.9,p:-.85,t:"Sem medir, a discriminação fica invisível. Pede autodeclaração opcional e relatório público agregado.",s:3},
+   {id:"SI",l:"Segurança da informação",p0:.6,p:.6,t:"Uma base que cruza raça e resultado de triagem é alvo de alto valor. Exige isolamento e retenção curta.",s:2},
+   {id:"FS",l:"Fornecedor da solução",p0:.75,p:.35,rev:true,coi:true,flag:true,t:"Prefere testes com dados sintéticos. Admitiu na R4 que eles não capturam vieses do histórico real.",s:1},
+   {id:"EA",l:"Estatística aplicada",p0:-.4,p:-.5,t:"Amostras pequenas por subgrupo geram falsos negativos. Sugere agregar entre clientes, com governança.",s:2,blind:"Agregação entre clientes cria novo fluxo de compartilhamento."},
+   {id:"--",l:"Candidatos indígenas",unrep:true}],
+  minority:"O assento do fornecedor mantém que testes sintéticos bastam numa primeira versão.",
+  open:"Qual hipótese legal sustenta tratar origem racial exclusivamente para auditoria de viés?"},
+ {id:"t3",scen:"BR-SOLUTION-001",mode:"Conformidade de solução",round:"R5",
+  a:"Revisão humana efetiva",b:"Escala operacional da triagem",
+  q:"Quando chegam 4.000 currículos por vaga, que revisão humana é real e não apenas formal?",
+  c:{imp:2,irr:2,lac:2,dis:3},
+  why:"Dissenso alto sobre o que conta como revisão; risco de cumprimento só no papel.",
+  facts:[
+   ["evidence","A LGPD (art. 20) prevê o direito de pedir revisão de decisões tomadas só com tratamento automatizado. Texto vigente: verificação pendente."],
+   ["verified","O dossiê declara média de 4.000 candidaturas por vaga em picos sazonais (dado do cenário fictício)."],
+   ["hypothesis","Revisores sob pressão de volume tendem a confirmar a recomendação automática."],
+   ["unknown","Taxa de pedidos de revisão esperada entre candidatos."]],
+  seats:[
+   {id:"TB",l:"Trabalhadores",p0:-.8,p:-.7,t:"Revisão só conta se o revisor puder reverter e tiver tempo mínimo por caso.",s:2},
+   {id:"RH",l:"Gestão de RH",p0:.8,p:.55,rev:true,t:"Revisar tudo é inviável. Propõe amostragem mais revisão obrigatória para todo candidato que pedir.",s:2},
+   {id:"FH",l:"Fatores humanos",p0:-.2,p:-.4,rev:true,t:"Viés de automação é bem documentado. Recomenda esconder o score do revisor na primeira leitura.",s:4},
+   {id:"AT",l:"Advocacia trabalhista",p0:-.5,p:-.5,flag:true,t:"Revisão sem registro do motivo não serve como prova em litígio.",s:1},
+   {id:"FS",l:"Fornecedor da solução",p0:.9,p:.7,coi:true,t:"Explicações por candidato já permitem contestar. Revisão humana seria redundante.",s:1,blind:"Confunde explicação com possibilidade de reversão."},
+   {id:"--",l:"Candidatos com deficiência",unrep:true}],
+  minority:"Advocacia trabalhista sustenta que amostragem não atende a um direito individual.",
+  open:"Qual o tempo mínimo de revisão por caso para que ela seja efetiva?"},
+ {id:"t4",scen:"BR-SOLUTION-001",mode:"Conformidade de solução",round:"R3",
+  a:"Explicação compreensível ao candidato",b:"Segredo comercial do modelo",
+  q:"Quanto do funcionamento do ranqueamento o candidato precisa conhecer para conseguir contestar?",
+  c:{imp:2,irr:1,lac:1,dis:2},
+  why:"Há proposta técnica que reduz o conflito; falta testá-la com candidatos.",
+  facts:[
+   ["hypothesis","Explicações contrafactuais podem informar o candidato sem expor pesos do modelo."],
+   ["unknown","Se candidatos entendem explicações contrafactuais melhor do que listas de fatores."]],
+  seats:[
+   {id:"DC",l:"Defesa do consumidor",p0:-.7,p:-.7,t:"O candidato precisa saber quais critérios pesaram e como corrigir dados errados.",s:2},
+   {id:"FS",l:"Fornecedor da solução",p0:.8,p:.7,coi:true,t:"Expor critérios detalhados permite manipular currículos e revela propriedade intelectual.",s:1},
+   {id:"XA",l:"Explicabilidade técnica",p0:-.1,p:-.05,t:"Explicações contrafactuais (o que mudaria o resultado) informam sem expor pesos.",s:3},
+   {id:"RH",l:"Gestão de RH",p0:.3,p:.3,t:"Aceita explicar critérios gerais na vaga; resiste a explicação individual.",s:1},
+   {id:"--",l:"Candidatos com baixa escolaridade formal",unrep:true}],
+  minority:"Ainda não há posição minoritária registrada: a rodada R7 não ocorreu.",
+  open:"Uma explicação contrafactual é suficiente para exercer o direito de revisão?"},
+ {id:"t5",scen:"BR-POLICY-001",mode:"Política regulatória",round:"R2",
+  a:"Prazo curto de vigência",b:"Capacidade de fiscalização instalada",
+  q:"Um prazo curto acelera proteção ou cria uma norma que ninguém consegue fiscalizar?",
+  c:{imp:2,irr:1,lac:1,dis:1},
+  why:"Conselho ainda nas teses de abertura; pouca divergência explícita até aqui.",
+  facts:[
+   ["hypothesis","Prazos escalonados por grau de risco reduzem o pico de demanda sobre a fiscalização."],
+   ["unknown","Orçamento e quadro de pessoal previstos para a autoridade competente."]],
+  seats:[
+   {id:"DD",l:"Direitos digitais",p0:-.6,p:-.6,t:"Cada ano sem vigência é um ano de sistemas de alto risco sem regra.",s:2},
+   {id:"FI",l:"Capacidade de fiscalização",p0:.6,p:.6,t:"Vigência sem quadro técnico gera fiscalização seletiva e insegurança.",s:1,flag:true},
+   {id:"PE",l:"Pequenas empresas de tecnologia",p0:.5,p:.5,t:"Precisa de tempo para adaptar produtos e contratos.",s:1},
+   {id:"--",l:"Governos estaduais e municipais",unrep:true}],
+  minority:"Sem posição minoritária: o conselho ainda está na R2.",
+  open:"Qual capacidade de fiscalização mínima justificaria um prazo curto?"},
+ {id:"t6",scen:"BR-POLICY-001",mode:"Política regulatória",round:"R6",
+  a:"Sandbox regulatório",b:"Igualdade entre fornecedores",
+  q:"Quem entra no sandbox ganha vantagem de mercado sobre quem fica de fora?",
+  c:{imp:1,irr:1,lac:1,dis:1},
+  why:"Impacto restrito; o conselho convergiu para critérios públicos de seleção.",
+  facts:[
+   ["hypothesis","Critérios de entrada públicos e rotativos reduzem a percepção de favorecimento."]],
+  seats:[
+   {id:"IN",l:"Inovação e startups",p0:-.6,p:-.4,rev:true,t:"Sandbox reduz custo de aprender a cumprir a norma.",s:2},
+   {id:"CO",l:"Defesa da concorrência",p0:.6,p:.3,rev:true,t:"Aceita com critérios públicos e prazo máximo de permanência.",s:2},
+   {id:"DD",l:"Direitos digitais",p0:.2,p:.1,t:"Participantes do sandbox não podem ter menos salvaguardas para usuários.",s:1},
+   {id:"--",l:"Fornecedores fora dos grandes centros",unrep:true}],
+  minority:"Defesa da concorrência registra que prazo de permanência acima de 2 anos distorce o mercado.",
+  open:"Quem decide a entrada no sandbox e com que critérios?"}
+];
+
+const W={imp:.35,irr:.25,lac:.2,dis:.2};
+const DIMS=[["imp","Impacto em direitos","IMP"],["irr","Irreversibilidade","IRR"],["lac","Lacuna de evidência","LAC"],["dis","Dissenso no conselho","DIS"]];
+const LV=["","baixa","moderada","alta","crítica"];
+function score(t){return (t.c.imp*W.imp+t.c.irr*W.irr+t.c.lac*W.lac+t.c.dis*W.dis)/3}
+function level(t){const s=score(t);return s>=.75?4:s>=.55?3:s>=.35?2:1}
+T.sort((x,y)=>score(y)-score(x));
+
+const MOVES=[
+ {k:"support",l:"Sustentar",cls:"m-support",spec:"support",d:"Reforça uma posição com razão própria."},
+ {k:"challenge",l:"Contestar",cls:"m-challenge",spec:"challenge",d:"Aponta falha, conflito ou consequência ignorada."},
+ {k:"evidence",l:"Pedir evidência",cls:"m-evidence",spec:"requestEvidence",d:"Pede a fonte que falta. Fica aberto até alguém responder com fonte."},
+ {k:"amend",l:"Propor alternativa",cls:"m-amend",spec:"proposeAmendment",d:"Sugere salvaguarda, exceção ou desenho diferente."},
+ {k:"uncertain",l:"Declarar incerteza",cls:"m-uncertain",spec:"declareUncertainty",d:"Diz o que não se sabe e o que mudaria sua leitura."}
+];
+const MV=Object.fromEntries(MOVES.map(m=>[m.k,m]));
+const ICONS={
+ support:'<svg class="mv-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2"/></svg>',
+ challenge:'<svg class="mv-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" fill="none" stroke="currentColor" stroke-width="2"/></svg>',
+ evidence:'<svg class="mv-ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 10l4 4" stroke="currentColor" stroke-width="2"/></svg>',
+ amend:'<svg class="mv-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2"/></svg>',
+ uncertain:'<svg class="mv-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M5.5 6a2.5 2.5 0 115 0c0 1.6-2.5 1.8-2.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="8" cy="12.6" r="1.1" fill="currentColor"/></svg>'
+};
+const ROLES={pub:"Contribuidor(a) público(a)",stk:"Stakeholder · autodeclarado",exp:"Revisor(a) especialista · autodeclarado"};
+const MARKS=[["agree","Concordo"],["shift","Mudou minha leitura"],["nosrc","Falta fonte"]];
+
+/* ---------------- estado ---------------- */
+const S={tid:T[0].id,seat:null,anchor:null,move:"challenge",role:"pub",sort:"hot",bsort:"crit",
+  posts:[],marks:[],calib:{},meId:null,local:true,names:{},peers:[],db:null,user:null,room:null};
+let localSeq=0;
+
+/* ---------------- util ---------------- */
+const $=s=>document.querySelector(s);
+const el=(tag,attrs={},...kids)=>{const n=document.createElement(tag);for(const[k,v]of Object.entries(attrs)){if(v==null||v===false)continue;if(k==="class")n.className=v;else if(k==="html")n.innerHTML=v;else if(k.startsWith("on"))n.addEventListener(k.slice(2),v);else n.setAttribute(k,v===true?"":v)}for(const c of kids.flat()){if(c==null||c===false)continue;n.append(c.nodeType?c:document.createTextNode(String(c)))}return n};
+const tById=id=>T.find(t=>t.id===id);
+function ago(ms){const s=Math.max(0,(Date.now()-ms)/1000);if(s<60)return"agora";if(s<3600)return"há "+Math.floor(s/60)+" min";if(s<86400)return"há "+Math.floor(s/3600)+" h";return"há "+Math.floor(s/86400)+" d"}
+function initials(n){return(n||"?").split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join("")||"?"}
+function critBadge(lv){return el("span",{class:"crit c"+lv,title:"Criticidade "+LV[lv]},el("span",{class:"pips",html:[1,2,3,4].map(i=>`<i class="${i<=lv?"on":""}"></i>`).join("")}),LV[lv])}
+function epTag(k){return el("span",{class:"ep "+k},el("i"),EP[k])}
+function nameOf(uid){if(uid===S.meId&&S.local)return"Você";const n=S.names[uid];return(n&&n.name)||"Participante"}
+function avatar(uid){const p=S.names[uid];const a=el("span",{class:"av",style:p&&p.color?`background:${p.color}`:null},initials(nameOf(uid)));if(p&&p.avatarUrl){const i=el("img",{alt:"",src:p.avatarUrl});i.onerror=()=>i.remove();a.append(i)}return a}
+function myCal(tid){return(S.calib[S.meId]||{})[tid]||{}}
+
+/* ---------------- derivados ---------------- */
+const postsOf=tid=>S.posts.filter(p=>p.tid===tid);
+function marksOf(pid,kind){return S.marks.filter(m=>m.pid===pid&&m.kind===kind)}
+function humanCalib(tid){const out=[0,0,0,0,0];for(const u of Object.values(S.calib)){const c=u&&u[tid];if(c&&c.lvl)out[c.lvl]++}return out}
+function humanPos(tid){const r=[];for(const[uid,u]of Object.entries(S.calib)){const c=u&&u[tid];if(c&&typeof c.pos==="number")r.push({uid,pos:c.pos})}return r}
+function openEvidence(tid){const ps=postsOf(tid);return ps.filter(p=>p.move==="evidence"&&!ps.some(r=>r.replyTo===p.id&&r.src))}
+function hereCount(tid){return S.peers.filter(p=>p.presence&&p.presence.tid===tid).length}
+
+/* ---------------- render: fila (trilho) ---------------- */
+function renderQueue(){
+  const q=$("#qlist");q.replaceChildren();
+  for(const t of T){
+    const lv=level(t),n=postsOf(t.id).length,h=hereCount(t.id);
+    q.append(el("button",{class:"qitem","aria-current":t.id===S.tid?"true":"false",onclick:()=>select(t.id)},
+      el("span",{class:"stripe bg"+lv}),
+      el("span",{},
+        el("div",{class:"qt"},t.a," ",el("em",{},"⟷")," ",t.b),
+        el("div",{class:"qmeta"},el("span",{},LV[lv]),el("span",{},t.round),el("span",{},n+" contrib."),h?el("span",{class:"here"},h+" aqui"):null))));
+  }
+}
+
+/* ---------------- render: cabeçalho da tensão ---------------- */
+function renderHead(){
+  const t=tById(S.tid),lv=level(t),f=$("#fhead");f.replaceChildren();
+  const hc=humanCalib(t.id),votes=hc.reduce((a,b)=>a+b,0);
+  const mine=myCal(t.id).lvl||0;
+  f.append(
+    el("div",{class:"fhead-top"},critBadge(lv),el("span",{class:"eyebrow"},t.mode+" · "+t.scen),el("span",{class:"eyebrow",style:"margin-left:auto"},"Rodada "+t.round+" · "+ROUND_NAME[t.round])),
+    el("div",{class:"poles"},
+      el("h1",{class:"pole a"},t.a),
+      el("div",{class:"vs",html:'<svg width="44" height="14" viewBox="0 0 44 14" aria-hidden="true"><path d="M1 7h42M1 7l5-5M1 7l5 5M43 7l-5-5M43 7l-5 5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>em tensão</span>'}),
+      el("h1",{class:"pole b"},t.b)),
+    el("p",{class:"question"},t.q),
+    el("div",{class:"critrow"},DIMS.map(([k,l])=>el("div",{class:"cdim"},
+      el("div",{class:"eyebrow"},l),
+      el("div",{class:"bar",html:[1,2,3].map(i=>`<i class="${i<=t.c[k]?"bg"+Math.max(lv,2):""}"></i>`).join("")}),
+      el("div",{class:"v"},["nenhum","baixo","médio","alto"][t.c[k]])))),
+    el("div",{class:"calib"},
+      el("span",{},"Por que está no topo: ",el("span",{class:"muted"},t.why)),
+    ),
+    el("div",{class:"calib"},
+      el("span",{},"Sua leitura da criticidade:"),
+      el("div",{class:"seg",role:"group","aria-label":"Sua leitura da criticidade"},[1,2,3,4].map(i=>el("button",{"aria-pressed":String(mine===i),onclick:()=>setCal(t.id,{lvl:mine===i?null:i})},LV[i]))),
+      el("span",{class:"mono",style:"font-size:12px"},votes?`${votes} leitura${votes>1?"s":""} humana${votes>1?"s":""} · modelo: ${LV[lv]}`:"nenhuma leitura humana ainda · modelo: "+LV[lv]))
+  );
+}
+
+function renderKnown(){
+  const t=tById(S.tid),k=$("#known");k.replaceChildren(
+    el("div",{class:"sec-h"},el("h2",{},"O que sabemos"),el("span",{class:"eyebrow"},"cada afirmação traz seu status epistêmico")),
+    ...t.facts.map(([c,txt])=>el("div",{class:"fact"},epTag(c),el("span",{},txt))));
+}
+
+/* ---------------- render: campo de posições ---------------- */
+function lanes(items,key,gap){const sorted=[...items].sort((a,b)=>a[key]-b[key]);const last=[];for(const it of sorted){let L=0;while(last[L]!=null&&it[key]-last[L]<gap)L++;last[L]=it[key];it._lane=L}return items}
+const X=p=>((p+1)/2*100);
+function renderField(){
+  const t=tById(S.tid),sec=$("#fieldsec");sec.replaceChildren();
+  const seats=t.seats.filter(s=>!s.unrep).map(s=>({...s}));
+  lanes(seats,"p",.14);
+  const hum=humanPos(t.id).map(h=>({...h}));lanes(hum,"pos",.06);
+  const field=el("div",{class:"field",role:"img","aria-label":"Posições dos assentos sintéticos acima do eixo e das pessoas abaixo, entre os dois polos"});
+  field.append(el("div",{class:"axis"}),el("div",{class:"axis-lbl a"},"← "+t.a),el("div",{class:"axis-lbl b"},t.b+" →"));
+  for(const s of seats){
+    const y=50-22-s._lane*26;
+    if(Math.abs(s.p0-s.p)>.02){
+      const x0=X(s.p0),x1=X(s.p);
+      field.append(el("div",{class:"trail",style:`left:${Math.min(x0,x1)}%;width:${Math.abs(x1-x0)}%;top:${y}%`}));
+      field.append(el("div",{class:"ghost",style:`left:${x0}%;top:${y}%`,title:s.l+" na R2"}));
+    }
+    field.append(el("button",{class:"mk syn"+(S.seat===s.id?" sel":"")+(s.coi?" coi":""),style:`left:${X(s.p)}%;top:${y}%`,title:`${s.l} (perspectiva sintética)`,"aria-label":s.l,onclick:()=>{S.seat=S.seat===s.id?null:s.id;renderField()}},el("span",{},s.id)));
+  }
+  for(const h of hum){
+    const y=50+20+h._lane*14;
+    field.append(el("span",{class:"mk hum"+(h.uid===S.meId?" me":""),style:`left:${X(h.pos)}%;top:${Math.min(y,94)}%`,title:nameOf(h.uid)}));
+  }
+  if(!hum.length) field.append(el("span",{class:"mk hum empty",style:"left:50%;top:76%",title:"Nenhuma pessoa posicionada ainda"}));
+  const mine=myCal(t.id).pos;
+  const rng=el("input",{type:"range",id:"pos-"+t.id,min:"-100",max:"100",step:"5",value:String(Math.round((mine??0)*100)),"aria-label":"Sua posição entre os polos"});
+  rng.addEventListener("change",()=>setCal(t.id,{pos:Number(rng.value)/100}));
+  sec.append(
+    el("div",{class:"sec-h"},el("h2",{},"Campo de posições"),el("span",{class:"eyebrow"},`${seats.length} assentos sintéticos · ${hum.length} pessoa${hum.length===1?"":"s"}`)),
+    el("div",{class:"field-help"},
+      el("span",{class:"vox"},el("span",{class:"dia"}),"Conselho das sombras (acima do eixo)"),
+      el("span",{class:"vox"},el("span",{class:"mk hum",style:"position:static;transform:none"}),"Pessoas (abaixo)"),
+      el("span",{class:"vox"},el("span",{class:"ghost",style:"position:static;transform:rotate(45deg)"}),"posição na R2 → atual"),
+      el("span",{class:"vox"},el("span",{style:"width:8px;height:8px;border-radius:50%;background:var(--crit-3);display:inline-block"}),"conflito de interesse declarado")),
+    field,
+    el("div",{class:"place"},el("label",{for:"pos-"+t.id},"Onde você está:"),el("span",{class:"mono",style:"font-size:11px"},"A"),rng,el("span",{class:"mono",style:"font-size:11px"},"B"),
+      mine!=null?el("button",{class:"btn ghosty",onclick:()=>setCal(t.id,{pos:null})},"remover"):el("span",{class:"muted",style:"font-size:12px"},"arraste e solte para se posicionar")),
+    el("div",{class:"seats"},t.seats.map(s=>seatCard(t,s)))
+  );
+}
+function seatCard(t,s){
+  if(s.unrep) return el("div",{class:"seat unrep"},
+    el("div",{class:"seat-h"},el("span",{class:"dia"}),el("b",{},s.l),el("span",{class:"code"},"sem assento")),
+    el("p",{class:"muted"},"Sem lastro documental. O conselho não fala por este grupo."),
+    el("div",{class:"seat-actions"},el("button",{class:"btn",onclick:()=>{S.anchor={type:"gap",id:s.l,label:"Lacuna: "+s.l};S.move="uncertain";renderDebate();focusComposer()}},"Apontar fonte ou voz")));
+  return el("div",{class:"seat"+(S.seat===s.id?" sel":""),id:"seat-"+s.id},
+    el("div",{class:"seat-h"},el("span",{class:"dia"}),el("b",{},s.l),el("span",{class:"code"},s.id+" · sintético")),
+    el("p",{},s.t),
+    el("div",{class:"tags"},
+      el("span",{class:"tag"},s.s+" fonte"+(s.s>1?"s":"")+" · verificação pendente"),
+      s.flag?el("span",{class:"tag warn"},"lastro insuficiente"):null,
+      s.rev?el("span",{class:"tag mv"},"revisou posição"):null,
+      s.coi?el("span",{class:"tag warn"},"conflito de interesse"):null),
+    s.blind?el("div",{class:"blind"},el("b",{},"Ponto cego declarado: "),s.blind):null,
+    el("div",{class:"seat-actions"},
+      el("button",{class:"btn",onclick:()=>{S.anchor={type:"seat",id:s.id,label:s.l};S.move="challenge";renderDebate();focusComposer()}},"Contestar"),
+      el("button",{class:"btn ghosty",onclick:()=>{S.anchor={type:"seat",id:s.id,label:s.l};S.move="evidence";renderDebate();focusComposer()}},"Pedir fonte")));
+}
+
+/* ---------------- render: mesa humana ---------------- */
+function renderDebate(){
+  const t=tById(S.tid),d=$("#debate");
+  const draft=$("#ctext")?$("#ctext").value:"";const dsrc=$("#csrc")?$("#csrc").value:"";
+  const ae=document.activeElement,aeId=ae&&ae.id,selS=ae&&ae.selectionStart,selE=ae&&ae.selectionEnd;
+  d.replaceChildren();
+  const ps=postsOf(t.id);
+  d.append(el("div",{class:"sec-h"},el("h2",{},"Mesa humana"),el("span",{class:"eyebrow"},ps.length+(ps.length===1?" contribuição":" contribuições")+" · ordem por "+({hot:"disputa",new:"recência",open:"sem resposta"})[S.sort])));
+  if(S.local) d.append(el("div",{class:"banner"},"Modo local: suas contribuições ficam só nesta aba. Abra o artefato com sessão iniciada no claude.ai para debater com outras pessoas."));
+  // composer
+  const m=MV[S.move];
+  const ta=el("textarea",{id:"ctext",placeholder:placeholderFor(S.move),"aria-label":"Sua contribuição",maxlength:"1200"});ta.value=draft;
+  const src=el("input",{id:"csrc",placeholder:"Fonte (link ou referência). Sem fonte, conta como opinião.","aria-label":"Fonte"});src.value=dsrc;
+  const role=el("select",{id:"crole","aria-label":"Papel com que você fala"},Object.entries(ROLES).map(([k,v])=>el("option",{value:k,selected:S.role===k},v)));
+  role.onchange=()=>S.role=role.value;
+  const send=el("button",{class:"btn primary",onclick:submit},"Publicar");
+  d.append(el("div",{class:"composer"},
+    el("div",{class:"moves",role:"group","aria-label":"Tipo de movimento"},MOVES.map(mv=>el("button",{class:"mv-btn "+mv.cls,"aria-pressed":String(S.move===mv.k),title:mv.d,onclick:()=>{S.move=mv.k;renderDebate()}},el("span",{html:ICONS[mv.k],style:"display:inline-flex"}),mv.l))),
+    S.anchor?el("div",{class:"crow"},el("span",{class:"anchor"},"respondendo a ",el("b",{},S.anchor.type==="seat"?"◇ "+S.anchor.label:S.anchor.label),el("button",{"aria-label":"Remover âncora",onclick:()=>{S.anchor=null;renderDebate()}},"×"))):null,
+    ta,
+    el("div",{class:"crow"},src),
+    el("div",{class:"crow"},role,el("span",{class:"muted",style:"font-size:12px;margin-right:auto"},m.d),send)));
+  // sort
+  d.append(el("div",{class:"feedbar"},
+    el("div",{class:"seg",role:"group","aria-label":"Ordenar contribuições"},[["hot","Em disputa"],["new","Recentes"],["open","Sem resposta"]].map(([k,l])=>el("button",{"aria-pressed":String(S.sort===k),onclick:()=>{S.sort=k;renderDebate()}},l))),
+    el("span",{class:"muted",style:"font-size:12px"},"Não há ordenação por popularidade.")));
+  const feed=el("div",{class:"feed"});
+  const roots=ps.filter(p=>!p.replyTo||!ps.some(x=>x.id===p.replyTo));
+  const kids=pid=>ps.filter(p=>p.replyTo===pid).sort((a,b)=>a.at-b.at);
+  const heat=p=>{const k=kids(p.id);return k.filter(x=>x.move==="challenge").length*3+k.length+(p.move==="challenge"?2:0)+(p.move==="evidence"&&!k.some(x=>x.src)?2:0)+marksOf(p.id,"nosrc").length};
+  let list=[...roots];
+  if(S.sort==="new")list.sort((a,b)=>b.at-a.at);
+  else if(S.sort==="open")list=list.filter(p=>!kids(p.id).length).sort((a,b)=>b.at-a.at);
+  else list.sort((a,b)=>heat(b)-heat(a)||b.at-a.at);
+  if(!list.length){
+    feed.append(el("div",{class:"empty"},
+      el("b",{},S.sort==="open"&&ps.length?"Tudo o que foi dito já tem resposta.":"Ninguém falou sobre esta tensão ainda."),
+      el("span",{},"Comece pela pergunta em aberto do conselho: ",el("i",{},t.open)),
+      el("span",{class:"muted",style:"font-size:13px"},"Escolha um movimento acima. Contestar um assento sintético ou pedir uma fonte costuma render mais do que concordar.")));
+  }
+  for(const p of list){
+    const node=postNode(p,t);
+    const k=kids(p.id);
+    if(k.length)node.querySelector(".pbody").append(el("div",{class:"replies"},k.map(r=>postNode(r,t,true))));
+    feed.append(node);
+  }
+  d.append(feed);
+  if(aeId==="ctext"||aeId==="csrc"){const n=document.getElementById(aeId);n.focus({preventScroll:true});try{n.setSelectionRange(selS,selE)}catch(e){}}
+}
+function placeholderFor(k){return{support:"Que razão própria você acrescenta a esta posição?",challenge:"O que falha nesta posição? Qual consequência foi ignorada?",evidence:"Que fonte ou dado resolveria isto? Seja específico.",amend:"Que salvaguarda, exceção ou desenho diferente você propõe?",uncertain:"O que não se sabe aqui, e o que mudaria sua leitura?"}[k]}
+function postNode(p,t,isReply){
+  const mv=MV[p.move]||MV.support;
+  const seat=p.anchorSeat?t.seats.find(s=>s.id===p.anchorSeat):null;
+  const parent=p.replyTo?S.posts.find(x=>x.id===p.replyTo):null;
+  const pb=el("div",{class:"pbody"},
+    el("div",{class:"phead"},el("b",{},nameOf(p.uid)),el("span",{class:"role"},ROLES[p.role]||ROLES.pub),el("time",{},ago(p.at))),
+    el("div",{class:"movechip "+mv.cls},el("span",{html:ICONS[mv.k],style:"display:inline-flex"}),mv.l),
+    seat?el("div",{class:"ref"},"→ ",el("span",{class:"to-syn"},"◇ "+seat.l+" (sintético)")):null,
+    p.gap?el("div",{class:"ref"},"→ lacuna de representação: "+p.gap):null,
+    el("p",{class:"ptext"+(p.move==="challenge"?" challenge":"")},p.text),
+    p.src?el("div",{class:"src"},"fonte: "+p.src):el("div",{class:"src none"},"opinião · sem fonte"),
+    el("div",{class:"pact"},
+      MARKS.map(([k,l])=>{const ms=marksOf(p.id,k);const on=ms.some(m=>m.uid===S.meId);return el("button",{class:"mark","aria-pressed":String(on),onclick:()=>toggleMark(p.id,k,on)},l+(ms.length?" · "+ms.length:""))}),
+      !isReply?el("button",{class:"btn ghosty",onclick:()=>{S.anchor={type:"post",id:p.id,label:"@"+nameOf(p.uid)+" · "+mv.l.toLowerCase()};S.move=p.move==="evidence"?"support":"challenge";renderDebate();focusComposer()}},"Responder"):null,
+      p.uid===S.meId?el("button",{class:"btn ghosty",onclick:()=>removePost(p.id)},"Remover"):null));
+  return el("div",{class:"post",id:"p-"+p.id},avatar(p.uid),pb);
+}
+function focusComposer(){const c=$("#ctext");if(c){c.focus({preventScroll:true});c.scrollIntoView({block:"center",behavior:"smooth"})}}
+
+/* ---------------- render: lateral ---------------- */
+function renderSide(){
+  const t=tById(S.tid),sd=$("#side");sd.replaceChildren();
+  const ri=ROUNDS.indexOf(t.round);
+  const oe=openEvidence(t.id);
+  const here=S.peers.filter(p=>p.presence&&p.presence.tid===t.id);
+  sd.append(
+    el("section",{class:"panel sblock"},el("div",{class:"eyebrow"},"Protocolo do conselho"),
+      el("div",{class:"rounds"},ROUNDS.map((r,i)=>el("i",{class:i<ri?"done":i===ri?"now":"",title:r+" "+ROUND_NAME[r]},r))),
+      el("div",{style:"font-size:13px"},el("b",{},t.round+" · "+ROUND_NAME[t.round]))),
+    el("section",{class:"panel sblock"},el("div",{class:"eyebrow"},"Aqui agora"),
+      here.length?el("div",{class:"people"},here.slice(0,12).map(p=>avatar(p.by||"?"))):null,
+      el("div",{style:"font-size:13px",class:"muted"},S.room?(here.length?`${here.length} pessoa${here.length>1?"s":""} nesta tensão`:"Só você, por enquanto."):"Presença indisponível neste modo.")),
+    el("section",{class:"panel sblock"},el("div",{class:"eyebrow"},"Pedidos de evidência abertos"),
+      el("div",{class:"counter"},String(oe.length)),
+      oe.length?el("ul",{class:"slist"},oe.slice(0,4).map(p=>el("li",{},el("a",{href:"#foco",onclick:e=>{e.preventDefault();document.getElementById("p-"+p.id)?.scrollIntoView({block:"center",behavior:"smooth"})}},p.text.slice(0,80)+(p.text.length>80?"…":""))))):el("div",{class:"muted",style:"font-size:13px"},"Um pedido fecha quando alguém responde com fonte.")),
+    el("section",{class:"panel sblock"},el("div",{class:"eyebrow"},"Posição minoritária preservada"),el("div",{class:"minor"},t.minority)),
+    el("section",{class:"panel sblock"},el("div",{class:"eyebrow"},"Pergunta em aberto"),el("div",{style:"font-size:14px"},t.open)),
+    el("section",{class:"panel sblock"},el("div",{class:"eyebrow"},"Limites desta leitura"),
+      el("ul",{class:"limits"},
+        el("li",{},"Os assentos são recortes de perspectiva documentada, não pessoas nem grupos reais."),
+        el("li",{},"Contagens do conselho não indicam apoio da população."),
+        el("li",{},"Fontes ainda não verificadas contra o texto oficial.")))
+  );
+}
+
+/* ---------------- render: board ---------------- */
+function renderBoard(){
+  const b=$("#board");b.replaceChildren();
+  b.append(el("div",{class:"trow h"},el("span"),el("span",{},"Tensão"),el("span",{},"Criticidade"),...DIMS.map(d=>el("span",{},d[2])),el("span",{},"Leitura humana"),el("span",{},"Debate")));
+  let rows=T.map(t=>{const hc=humanCalib(t.id);const n=hc.reduce((a,b)=>a+b,0);const mean=n?hc.reduce((a,c,i)=>a+c*i,0)/n:null;return{t,lv:level(t),hc,n,gap:mean==null?-1:Math.abs(mean-level(t)),act:postsOf(t.id).length}});
+  if(S.bsort==="gap")rows.sort((a,b)=>b.gap-a.gap);else if(S.bsort==="act")rows.sort((a,b)=>b.act-a.act);
+  for(const r of rows){
+    const mx=Math.max(1,...r.hc);
+    b.append(el("div",{class:"trow"},
+      el("span",{class:"stripe bg"+r.lv}),
+      el("button",{class:"tt",onclick:()=>{select(r.t.id);location.hash="foco"}},r.t.a+" ⟷ "+r.t.b,el("small",{},r.t.mode+" · "+r.t.round+" · "+ROUND_NAME[r.t.round])),
+      el("span",{},critBadge(r.lv)),
+      ...DIMS.map(([k])=>el("span",{class:"dots",title:k+": "+r.t.c[k]+"/3",html:[1,2,3].map(i=>`<i class="${i<=r.t.c[k]?"bg"+r.lv:""}"></i>`).join("")})),
+      el("span",{class:"hist",title:r.n?`${r.n} leitura(s) humana(s)`:"sem leituras humanas",html:[1,2,3,4].map(i=>`<i class="${i===r.lv?"model":""}" style="height:${r.n?Math.max(2,r.hc[i]/mx*24):2}px;${r.n?"":"opacity:.25"}"></i>`).join("")}),
+      el("span",{class:"num"},r.act+" · "+openEvidence(r.t.id).length+" abertos")));
+  }
+}
+
+/* ---------------- render: sistema ---------------- */
+function renderSystem(){
+  const s=$("#sys");
+  const sw=(v,l)=>el("div",{},el("div",{class:"sw",style:`background:var(${v})`}),el("div",{class:"swl"},l),el("div",{class:"swl",style:"color:var(--ink-3)"},v));
+  s.replaceChildren(
+    el("div",{},el("div",{class:"eyebrow"},"Design system · v0.2 proposta"),el("h1",{},"Gramática da deliberação"),
+      el("p",{class:"lede"},"A versão anterior era uma paleta de documento: tinta, azul-marinho, verde-azulado e ouro, pensada para PDF. Esta proposta parte do que a interface precisa tornar inconfundível: quem está falando, com que lastro, e quanto aquilo importa. Cor nunca carrega sozinha nenhum desses três eixos; forma e texto também carregam.")),
+    el("section",{},el("h2",{},"Princípios"),el("div",{class:"princ"},
+      [["Uma tensão por vez","A tela de trabalho mostra uma tensão. A fila existe para escolher, não para rolar."],
+       ["Voz sintética nunca se parece com voz humana","Assentos do conselho são losangos tracejados em mono; pessoas são círculos sólidos. Nenhum componente mistura os dois."],
+       ["Todo enunciado declara seu status","Fato verificado, achado com evidência, perspectiva sintética, hipótese e desconhecido têm forma própria (sólido, contorno, tracejado, pontilhado, hachurado)."],
+       ["Ordem por criticidade, nunca por popularidade","Não existe ordenar por curtidas. Reações são epistêmicas (“mudou minha leitura”, “falta fonte”), e contagem do conselho não vira percentual de apoio."],
+       ["Dissenso é preservado, não resolvido pela interface","Posição minoritária tem lugar fixo na tela. Lacunas de representação aparecem como assentos vazios, não somem."],
+       ["A criticidade se explica","O nível vem de quatro dimensões visíveis. Pessoas podem discordar dele, e a divergência humano × modelo é um dado de primeira classe."]
+      ].map(([h,p])=>el("div",{class:"card"},el("h3",{},h),el("p",{},p))))),
+    el("section",{},el("h2",{},"Status epistêmico"),el("div",{class:"grid5"},
+      [["verified","Confirmado contra fonte oficial ou documento do cenário."],["evidence","Sustentado por fonte, ainda sujeito a verificação de vigência."],["synthetic","Dito por um assento do conselho. Nunca é fato."],["hypothesis","Plausível, não testado. Pede experimento ou dado."],["unknown","Lacuna declarada. Mostrar é melhor que omitir."]].map(([k,d])=>el("div",{class:"card"},epTag(k),el("p",{},d))))),
+    el("section",{},el("h2",{},"Vozes"),el("div",{class:"grid2"},
+      el("div",{class:"card"},el("div",{class:"vox"},el("span",{class:"mk syn",style:"position:relative;transform:none"},el("span",{},"DD")),el("h3",{},"Assento sintético")),el("p",{},"Losango tracejado, código em mono, sempre com o sufixo “sintético”. Mostra fontes, lastro, ponto cego e conflito de interesse. Deslocamento da R2 até a posição atual aparece como rastro.")),
+      el("div",{class:"card"},el("div",{class:"vox"},el("span",{class:"mk hum",style:"position:relative;transform:none"}),el("h3",{},"Pessoa")),el("p",{},"Círculo sólido, nome real resolvido pela plataforma, papel autodeclarado visível. Cor de destaque verde-azulada reservada a ações humanas.")),
+      el("div",{class:"card"},el("div",{class:"vox"},el("span",{class:"dia",style:"border-style:dotted;border-color:var(--ink-3)"}),el("h3",{},"Lacuna de representação")),el("p",{},"Assento hachurado sem fala. Convida a apontar fonte ou voz, sem inventar o que o grupo pensaria.")),
+      el("div",{class:"card"},el("div",{class:"vox"},el("span",{style:"width:10px;height:10px;border-radius:50%;background:var(--crit-3);display:inline-block"}),el("h3",{},"Conflito de interesse")),el("p",{},"Ponto âmbar no canto do assento e etiqueta textual. Não desqualifica a posição; contextualiza.")))),
+    el("section",{},el("h2",{},"Criticidade"),el("div",{class:"grid2"},
+      el("div",{class:"card"},el("div",{class:"tags"},[4,3,2,1].map(critBadge)),el("p",{},"Quatro níveis, sempre com pips e palavra. A rampa semântica é separada da cor de destaque e da cor sintética.")),
+      el("div",{class:"card"},el("h3",{},"Fórmula do protótipo"),el("p",{class:"mono",style:"font-size:12px"},"s = (0,35·IMP + 0,25·IRR + 0,20·LAC + 0,20·DIS) / 3"),el("p",{},"crítica ≥ 0,75 · alta ≥ 0,55 · moderada ≥ 0,35. Pesos são hipótese de trabalho e devem ser calibrados com revisores.")))),
+    el("section",{},el("h2",{},"Movimentos de debate"),el("p",{class:"lede",style:"margin:0 0 12px"},"Toda contribuição humana escolhe um movimento. Eles espelham as ações do protocolo do conselho, o que permite comparar humanos e assentos no mesmo vocabulário."),
+      el("div",{class:"grid5"},MOVES.map(m=>el("div",{class:"card"},el("div",{class:"movechip "+m.cls},el("span",{html:ICONS[m.k],style:"display:inline-flex"}),m.l),el("p",{},m.d),el("span",{class:"tag"},m.spec))))),
+    el("section",{},el("h2",{},"Tokens"),
+      el("div",{class:"grid5"},sw("--paper","Papel"),sw("--surface","Superfície"),sw("--ink","Tinta"),sw("--human","Humano"),sw("--shadow","Sombra")),
+      el("div",{class:"grid5",style:"margin-top:12px"},sw("--crit-4","Crítica"),sw("--crit-3","Alta"),sw("--crit-2","Moderada"),sw("--crit-1","Baixa"),sw("--ep-verified","Verificado"))),
+    el("section",{},el("h2",{},"Tipografia"),
+      el("div",{class:"typerow"},el("span",{class:"eyebrow"},"Display"),el("span",{style:"font-family:var(--f-display);font-weight:700;font-size:26px"},"Schibsted Grotesk: polos da tensão")),
+      el("div",{class:"typerow"},el("span",{class:"eyebrow"},"Texto"),el("span",{},"IBM Plex Sans para fala humana e explicações, 15/1.5.")),
+      el("div",{class:"typerow"},el("span",{class:"eyebrow"},"Máquina"),el("span",{class:"mono"},"IBM Plex Mono: assentos sintéticos, rodadas, ids, contagens."))),
+    el("section",{},el("h2",{},"Decisões em aberto"),el("ol",{class:"open-q"},
+      el("li",{},"Quem pode editar os pesos de criticidade, e isso gera versão auditável?"),
+      el("li",{},"Papel autodeclarado basta para o protótipo. Em produção, os níveis de autoridade da HRAI-GO (VerifiedStakeholder, ExpertReviewer) precisam de verificação real."),
+      el("li",{},"Contribuições humanas devem retroalimentar o conselho (R4) ou ficar como trilha separada? Misturar quebra a regra de que opinião simulada não é dado observado."),
+      el("li",{},"Moderação: hoje só o próprio autor remove o que escreveu.")))
+  );
+}
+
+/* ---------------- ações ---------------- */
+function select(id){S.tid=id;S.seat=null;S.anchor=null;renderFocus();if(S.room)S.room.presence({tid:id}).catch(()=>{});window.scrollTo({top:0,behavior:"smooth"})}
+async function submit(){
+  const ta=$("#ctext"),text=ta.value.trim(),src=$("#csrc").value.trim().slice(0,300);
+  if(text.length<3){ta.focus();ta.setAttribute("aria-invalid","true");return}
+  const doc={tid:S.tid,uid:S.meId,move:S.move,text:text.slice(0,1200),src:src||null,role:S.role,
+    replyTo:S.anchor&&S.anchor.type==="post"?S.anchor.id:null,anchorSeat:S.anchor&&S.anchor.type==="seat"?S.anchor.id:null,gap:S.anchor&&S.anchor.type==="gap"?S.anchor.id:null,at:Date.now()};
+  if(S.local){S.posts.push({id:"l"+(++localSeq),...doc})}
+  else{try{await S.db.collection("posts").add(doc)}catch(e){showErr(e);return}}
+  ta.value="";$("#csrc").value="";S.anchor=null;renderAll();
+}
+async function removePost(id){
+  if(S.local){S.posts=S.posts.filter(p=>p.id!==id);renderAll();return}
+  try{await S.db.doc("posts/"+id).delete()}catch(e){showErr(e)}
+}
+async function toggleMark(pid,kind,on){
+  const id=`${pid}__${S.meId}__${kind}`;
+  if(S.local){if(on)S.marks=S.marks.filter(m=>m.id!==id);else S.marks.push({id,pid,uid:S.meId,kind});renderAll();return}
+  try{if(on)await S.db.doc("marks/"+id).delete();else await S.db.doc("marks/"+id).set({pid,uid:S.meId,kind})}catch(e){showErr(e)}
+}
+let calQ=Promise.resolve();
+function setCal(tid,patch){
+  const mine={...(S.calib[S.meId]||{})};const cur={...(mine[tid]||{})};
+  for(const[k,v]of Object.entries(patch)){if(v==null)delete cur[k];else cur[k]=v}
+  if(Object.keys(cur).length)mine[tid]=cur;else delete mine[tid];
+  S.calib[S.meId]=mine;renderAll();
+  if(!S.local)calQ=calQ.then(()=>S.db.doc("calib/"+S.meId).set(mine)).catch(showErr);
+}
+function showErr(e){const c=$("#conn span");c.textContent=e&&e.code==="not_granted"?"somente leitura":"erro ao salvar";console.warn(e)}
+
+/* ---------------- roteamento ---------------- */
+function route(){
+  const v=(location.hash||"#foco").slice(1);const view=["foco","fila","sistema"].includes(v)?v:"foco";
+  for(const n of["foco","fila","sistema"])$("#v-"+n).hidden=n!==view;
+  document.querySelectorAll(".tabs a").forEach(a=>a.setAttribute("aria-current",a.dataset.v===view?"page":"false"));
+}
+document.querySelectorAll("[data-sort]").forEach(b=>b.addEventListener("click",()=>{S.bsort=b.dataset.sort;document.querySelectorAll("[data-sort]").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));renderBoard()}));
+window.addEventListener("hashchange",route);
+
+function renderFocus(){renderQueue();renderHead();renderKnown();renderField();renderDebate();renderSide()}
+let raf=0;function renderAll(){cancelAnimationFrame(raf);raf=requestAnimationFrame(()=>{renderQueue();renderHead();renderField();renderDebate();renderSide();renderBoard()})}
+
+/* ---------------- boot ---------------- */
+S.meId="local-me";
+route();renderFocus();renderBoard();renderSystem();
+
+async function resolveNames(){
+  if(!S.user)return;
+  const ids=new Set([...S.posts.map(p=>p.uid),...Object.keys(S.calib),...S.peers.map(p=>p.by).filter(Boolean)]);
+  const need=[...ids].filter(i=>i&&!S.names[i]);
+  if(!need.length)return;
+  try{const ps=await S.user.profiles(need);Object.assign(S.names,ps);renderAll()}catch(e){}
+}
+async function connect(){
+  if(!window.claude||!window.claude.use)return;
+  const [db,user,room]=await Promise.all([claude.use("db"),claude.use("user"),claude.use("room")].map(p=>p.catch(()=>null)));
+  if(user){S.user=user;try{const id=await user.id();if(id)S.meId=id}catch(e){}}
+  if(db&&S.meId!=="local-me"){
+    S.db=db;S.local=false;S.posts=[];S.marks=[];S.calib={};
+    const c=$("#conn");c.classList.add("live");c.querySelector("span").textContent="conectando…";
+    const timer=setTimeout(()=>{c.querySelector("span").textContent="sem resposta do servidor"},10000);
+    db.collection("posts").orderBy("at","desc").limit(500).onSnapshot(snap=>{clearTimeout(timer);c.querySelector("span").textContent="ao vivo";S.posts=snap.docs.map(d=>({id:d.id,...d.data()}));renderAll();resolveNames()},e=>{clearTimeout(timer);c.classList.remove("live");c.querySelector("span").textContent="indisponível";});
+    db.collection("marks").limit(3000).onSnapshot(snap=>{S.marks=snap.docs.map(d=>({id:d.id,...d.data()}));renderAll()},()=>{});
+    db.collection("calib").limit(500).onSnapshot(snap=>{const o={};snap.docs.forEach(d=>o[d.id]=d.data());S.calib=o;renderAll();resolveNames()},()=>{});
+    renderAll();
+  }
+  if(room){
+    S.room=room;
+    room.presence({tid:S.tid}).catch(()=>{});
+    room.onPeers(ch=>{S.peers=ch.peers.filter(p=>p.kind==="viewer");renderQueue();renderSide();resolveNames()},()=>{S.room=null;renderSide()});
+  }
+}
+connect();
+})();
+</script>

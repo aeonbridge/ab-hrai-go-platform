@@ -1,4 +1,4 @@
-# HRAI-GO Regulatory General Ontology SWRL (v1.0.0)
+# HRAI-GO Regulatory General Ontology SWRL (v1.1.0)
 # Expressions below are standalone SWRLTab-style rules; names are comments.
 # No rule certifies legal applicability, enactment, or application compliance.
 Prefix: hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#>
@@ -57,3 +57,15 @@ hrai:PolicyClaim(?claim) ^ hrai:claimSupportedByEvidence(?claim,?evidence) -> hr
 
 # R18_UpperIndicatorThreshold: Explicit investigative threshold, not an automatic legal violation.
 hrai:ContextIndicator(?indicator) ^ hrai:hasNumericValue(?indicator,?value) ^ hrai:hasUpperAlertThreshold(?indicator,?threshold) ^ swrlb:greaterThan(?value,?threshold) -> hrai:ThresholdExceededIndicator(?indicator)
+
+# --- v1.1.0 ---
+# R19_ExecutionBelowAlertRatio: Investigative execution signal, not evidence of policy failure; read period and execution kind first.
+hrai:BudgetAllocation(?al) ^ hrai:allocatedAmount(?al,?a) ^ hrai:allocationCurrency(?al,?cur) ^ hrai:executionAlertRatio(?al,?t) ^ hrai:allocationExecutionRecord(?al,?x) ^ hrai:executedAmount(?x,?e) ^ hrai:executionCurrency(?x,?cur) ^ swrlb:divide(?r,?e,?a) ^ swrlb:lessThan(?r,?t) -> hrai:ExecutionBelowAlertRatioRecord(?x)
+# R20_ImpactEvaluated: Records that an impact evaluation exists; it does not change compliance status.
+hrai:ChangeImpactAssessment(?c) ^ hrai:impactEvaluationForChange(?c,?e) ^ hrai:impactEvaluationConcernsAssessment(?c,?a) ^ hrai:impactEvaluationHasOutcome(?c,?o) -> hrai:assessmentImpactEvaluatedFor(?a,?e)
+# R21_SyntheticPosition: Synthetic origin propagates to the position; it is not a real stakeholder's view.
+hrai:StakeholderPosition(?pos) ^ hrai:positionExpressedBy(?pos,?s) ^ hrai:SyntheticStakeholderPerspective(?s) -> hrai:SyntheticStakeholderPosition(?pos)
+# R22_ProposedProvision: Provision of a proposal; no binding force.
+hrai:LegalProvision(?p) ^ hrai:provisionOfVersion(?p,?v) ^ hrai:versionOfInstrument(?v,?ins) ^ hrai:LegislativeProposal(?ins) -> hrai:ProposedProvision(?p)
+# R23_ProspectiveRequirement: Requirement derived from a proposal; prospective, not currently binding.
+hrai:NormativeRequirement(?req) ^ hrai:derivedFromProvision(?req,?p) ^ hrai:ProposedProvision(?p) -> hrai:ProspectiveRequirement(?req)
