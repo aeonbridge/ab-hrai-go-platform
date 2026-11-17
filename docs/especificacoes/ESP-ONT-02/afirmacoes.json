@@ -35,13 +35,20 @@
   {
     "id": "C04",
     "tese": "O Brasil não prevê instância consultiva técnica independente equivalente ao painel científico do AI Act",
-    "status": "com evidência",
+    "status": "contestada",
     "evidencias": [
       "AI Act, art. 68: painel científico de peritos independentes (independência de fornecedores, representação de gênero e geográfica)",
       "PL 2338/2023 (2023), art. 32: estrutura limitada a uma autoridade competente designada pelo Executivo; não há instância técnico-científica independente"
     ],
-    "contestada_por": [],
-    "nota": "Válida para o texto de 2023 do corpus. O substitutivo do Senado (dez/2024) precisa ser incorporado ao corpus antes de afirmar para o texto atual."
+    "contestada_por": [
+      {
+        "afirmacao": "O texto aprovado pelo Senado em dez/2024 cria um comitê de especialistas e cientistas (CECIA) dentro do SIA; a comparação com o painel do AI Act depende de independência e mandato, não de existência",
+        "evidencias": [
+          "Alanoca et al. (2025), seção 6.6: o SIA, coordenado pela ANPD, integra o Conselho Permanente de Cooperação Regulatória (CRIA) e o Comitê de Especialistas e Cientistas de IA (CECIA)"
+        ]
+      }
+    ],
+    "nota": "Válida só para o texto de 2023. Segundo Alanoca et al. (2025), o substitutivo do Senado cria o CECIA: incorporar o texto primário (RF-01)."
   },
   {
     "id": "C05",
