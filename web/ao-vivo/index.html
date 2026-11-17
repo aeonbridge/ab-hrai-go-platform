@@ -80,6 +80,95 @@ body:not(.tudo) #falas{display:none}
 body.semgl #semgl{display:grid} body.semgl #gl{display:none}
 @media (max-width:1200px){#leitura{width:320px}#falas{width:min(560px,calc(100% - 680px))}}
 @media (max-width:900px){#leitura,#legenda{display:none}#falas{width:calc(100% - 44px);left:22px;transform:none}#entrar{width:220px}.n-grande{font-size:72px}}
+/* ---------- modo participante: o celular de quem entrou pelo QR (docs/07-camara.md §7.8) ---------- */
+#ver,#gaveta,#voce{display:none}
+.av{width:28px;height:28px;border-radius:7px;image-rendering:pixelated;flex:none;vertical-align:middle;border:1px solid rgba(214,226,240,.2)}
+.av.sm{width:18px;height:18px;border-radius:4px;margin:-4px 2px 0 0}
+.toast{display:inline-flex;align-items:center;gap:8px;max-width:min(92vw,560px);line-height:1.25}
+.toast .av{width:24px;height:24px}
+.toast span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.toast.ok{background:rgba(56,194,180,.16);border-color:rgba(56,194,180,.6);color:#BFF3EC}
+.toast.mal{background:rgba(255,122,89,.16);border-color:rgba(255,122,89,.6);color:#FFD2C4}
+.rotulo3d.voce{color:var(--color-action-primary-fg);background:var(--color-action-primary-bg);border-color:var(--color-action-primary-bg);font-weight:700}
+.fala .reac{margin-top:6px;text-transform:none;letter-spacing:0}
+body.participante #entrar,body.participante #leitura,body.participante #legenda,body.participante #etapa,body.participante #comandos,body.participante #falas{display:none!important}
+body.participante #ver,body.participante #gaveta{display:block}
+body.participante #voce{display:inline-flex;text-decoration:none;color:var(--color-text-primary);padding:4px 11px 4px 4px;min-height:36px}
+#voce.cta{background:var(--color-action-primary-bg);color:var(--color-action-primary-fg);border-color:var(--color-action-primary-bg);font-weight:700;padding:4px 14px}
+body.participante #topo{padding:calc(10px + env(safe-area-inset-top)) 12px 8px;gap:8px;background:linear-gradient(rgba(7,12,22,.85),rgba(7,12,22,0))}
+#ver{position:fixed;top:calc(58px + env(safe-area-inset-top));left:12px;right:12px;z-index:5;padding:8px;border-radius:16px}
+#verChips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+#verChips::-webkit-scrollbar{display:none}
+#verChips button,.op,.abas button,.reacoes button,.bt{min-height:44px;border-radius:999px;border:1px solid rgba(214,226,240,.22);background:rgba(7,12,22,.4);color:var(--color-text-primary);font:600 14px/1.1 var(--font-sans);padding:10px 14px;cursor:pointer;flex:none}
+#verChips button[aria-pressed="true"],.op[aria-pressed="true"],.abas button[aria-selected="true"]{background:var(--color-action-primary-bg);border-color:var(--color-action-primary-bg);color:var(--color-action-primary-fg)}
+#verLegenda{margin:6px 4px 0;font-size:12.5px;line-height:1.35;color:var(--color-text-secondary);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+body.participante #chegada{top:calc(150px + env(safe-area-inset-top));width:calc(100% - 24px)}
+#gaveta{position:fixed;left:0;right:0;bottom:0;z-index:6;border-radius:20px 20px 0 0;border-bottom:0;flex-direction:column;max-height:56vh;max-height:56dvh;padding-bottom:env(safe-area-inset-bottom)}
+body.participante #gaveta{display:flex}
+#gaveta.fechada .aba{display:none}
+.gaveta-cab{display:flex;align-items:center;gap:6px;padding:8px 10px 6px}
+#puxador{width:44px;height:44px;border-radius:50%;border:1px solid rgba(214,226,240,.22);background:transparent;color:var(--color-text-primary);font-size:18px;flex:none;transition:transform .3s}
+#gaveta.fechada #puxador{transform:rotate(180deg)}
+.abas{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1}
+.abas button{font-size:13.5px;padding:10px 12px;display:inline-flex;gap:6px;align-items:center}
+.abas button span:not(:empty){font:600 11px/1 var(--font-mono);background:rgba(7,12,22,.5);color:var(--color-text-primary);border-radius:999px;padding:3px 6px}
+.aba{overflow-y:auto;padding:4px 14px 16px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.vazio{color:var(--color-text-secondary);font-size:14px;padding:10px 2px}
+.card{padding:12px 0;border-bottom:1px solid rgba(214,226,240,.1)}
+.card:last-child{border-bottom:0}
+.card .quem{display:flex;align-items:center;gap:8px;font:500 12px/1.2 var(--font-mono);color:var(--color-text-secondary)}
+.card .quem b{color:var(--color-text-primary);font-weight:600}
+.card .mv{margin-left:auto;font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:999px;border:1px solid rgba(214,226,240,.2)}
+.card.challenge .mv{color:var(--color-tone-crimson-fg);border-color:var(--color-tone-crimson-border)}
+.card.evidence .mv{color:#7CC4FF;border-color:rgba(124,196,255,.5)}
+.card.support .mv{color:#38C2B4;border-color:rgba(56,194,180,.5)}
+.card.amend .mv{color:var(--color-text-link);border-color:rgba(232,163,61,.5)}
+.card p{margin:8px 0 10px;font-size:15.5px;line-height:1.45}
+.card.meu{background:rgba(232,163,61,.07);margin:0 -14px;padding:12px 14px;border-radius:12px}
+.reacoes{display:flex;gap:6px;flex-wrap:wrap}
+.reacoes button{font-size:13px;padding:8px 12px;display:inline-flex;gap:6px;align-items:center}
+.reacoes button b{font:600 12px/1 var(--font-mono)}
+.reacoes button[aria-pressed="true"].apoio{background:rgba(56,194,180,.22);border-color:#38C2B4}
+.reacoes button[aria-pressed="true"].contesto{background:rgba(255,122,89,.22);border-color:#FF7A59}
+.reacoes button[aria-pressed="true"].fonte{background:rgba(124,196,255,.2);border-color:#7CC4FF}
+.reacoes button:disabled{opacity:.55;cursor:default}
+.reacoes small{color:var(--color-text-tertiary);font-size:12px;align-self:center}
+.grupo{padding:12px 0;border-bottom:1px solid rgba(214,226,240,.1)}
+.grupo h3{font:700 16px/1.2 var(--font-display);margin:0 0 4px}
+.grupo .dica{margin:0 0 10px;font-size:13px;color:var(--color-text-secondary)}
+.ops{display:flex;flex-wrap:wrap;gap:6px}
+.op{font-size:13.5px;font-weight:500;text-align:left;border-radius:14px;line-height:1.25}
+.op small{display:block;font:500 10.5px/1 var(--font-mono);opacity:.8;margin-bottom:3px}
+.polos{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:var(--color-text-secondary);margin-top:4px}
+.polos span:last-child{text-align:right}
+.grupo input[type=range]{width:100%;height:44px;accent-color:#E8A33D}
+.grupo textarea{width:100%;min-height:88px;border-radius:12px;border:1px solid rgba(214,226,240,.22);background:rgba(7,12,22,.5);color:var(--color-text-primary);font:16px/1.4 var(--font-sans);padding:10px 12px;margin-top:8px;resize:vertical}
+.linha{display:flex;align-items:center;gap:10px;margin-top:8px}
+.linha small{color:var(--color-text-tertiary);font:500 11px/1 var(--font-mono);margin-right:auto}
+.bt.prim{background:var(--color-action-primary-bg);border-color:var(--color-action-primary-bg);color:var(--color-action-primary-fg);font-weight:700}
+.bt:disabled{opacity:.5}
+.chamada{padding:14px;border-radius:14px;border:1px solid rgba(232,163,61,.45);background:rgba(232,163,61,.08);margin:8px 0}
+.chamada p{margin:0 0 10px;font-size:14px}
+.chamada a{display:inline-flex;text-decoration:none}
+.ev{display:flex;gap:10px;align-items:flex-start;padding:8px 0;font-size:14px;line-height:1.35;border-bottom:1px solid rgba(214,226,240,.07)}
+.ev b{font-weight:600}
+.ev time{margin-left:auto;font:500 11px/1.3 var(--font-mono);color:var(--color-text-tertiary);flex:none}
+.ev.meu{color:var(--color-text-link)}
+.ev.sim{opacity:.7}
+body.participante .chip{white-space:nowrap}
+body.participante .marca{white-space:nowrap}
+@media (max-width:600px){body.participante #estado span{display:none}body.participante #estado{padding:9px}body.participante #voce .lbl{display:none}
+  body.participante .rotulo3d{font-size:11px;padding:3px 7px}
+  body.participante:not(.c3) .rotulo3d.lacuna{visibility:hidden}}
+@media (max-width:600px){body.participante #salaChip,body.participante #topo a.chip,body.participante #mini{display:none}body.participante .marca{font-size:15px}}
+/* participante em tela larga: o painel vira coluna à direita */
+@media (min-width:901px){
+  body.participante #gaveta{left:auto;top:0;width:400px;max-height:none;border-radius:0;border-top:0;border-right:0;padding-top:70px}
+  body.participante #ver{right:auto;width:min(560px,calc(100% - 440px));top:70px}
+  body.participante #chegada{left:calc((100% - 400px)/2);top:190px;width:auto}
+  body.participante #topo{right:400px}
+  body.participante #puxador{display:none} body.participante #gaveta.fechada .aba:not([hidden]){display:block}
+}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -89,6 +178,8 @@ body.semgl #semgl{display:grid} body.semgl #gl{display:none}
   <div class="marca"><span class="anel" aria-hidden="true"></span>HRAI-GO <span class="chip" id="salaChip">câmara ao vivo</span></div>
   <span class="chip" id="estado"><i></i><span>iniciando</span></span>
   <a class="chip" href="../#conhecimento" style="text-decoration:none">base de conhecimento</a>
+  <span class="chip" id="mini"><b id="totalMini">0</b>&nbsp;na câmara</span>
+  <span class="chip" id="voce"></span>
 </header>
 <aside id="entrar" class="vidro" aria-label="Entrar na câmara">
   <div class="eyebrow">Entre na câmara</div>
@@ -116,6 +207,7 @@ body.semgl #semgl{display:grid} body.semgl #gl{display:none}
 <nav id="comandos" class="vidro" aria-label="Comandos do apresentador">
   <button id="voltarC" aria-label="Camada anterior">←</button>
   <div id="camadasNav" role="group" aria-label="Camadas"></div>
+  <span id="passoMini" aria-live="polite"></span>
   <button id="avancarC" class="prim">Próxima camada →</button>
   <span class="sep"></span>
   <span class="soTudo"><button data-cam="camara" aria-pressed="true">1 · Câmara</button>
@@ -127,6 +219,12 @@ body.semgl #semgl{display:grid} body.semgl #gl{display:none}
   <button id="simular">Simular chegada</button>
   <button id="cheia">Tela cheia</button>
 </nav>
+<div id="ver" class="vidro" aria-label="O que ver na câmara"><div id="verChips" role="group" aria-label="Camadas"></div><p id="verLegenda"></p></div>
+<section id="gaveta" class="vidro" aria-label="Sua participação">
+  <div class="gaveta-cab"><button id="puxador" aria-label="Recolher ou abrir o painel">▾</button>
+    <div class="abas" role="tablist"><button role="tab" data-aba="mesa" aria-selected="true">Mesa<span id="nMesa"></span></button><button role="tab" data-aba="minhas" aria-selected="false">Minhas escolhas</button><button role="tab" data-aba="agora" aria-selected="false">Agora<span id="nAgora"></span></button></div></div>
+  <div id="abaMesa" class="aba" role="tabpanel"></div><div id="abaMinhas" class="aba" role="tabpanel" hidden></div><div id="abaAgora" class="aba" role="tabpanel" hidden></div>
+</section>
 <div id="semgl"><div><h1 style="font:700 30px var(--font-display)">A câmara 3D não abriu neste aparelho</h1><p>Use o <a id="painel2d" href="../#ao-vivo" style="color:var(--color-text-link)">painel ao vivo em 2D</a>, com os mesmos dados.</p></div></div>
 
 <script src="../config.js"></script>
@@ -136,6 +234,8 @@ body.semgl #semgl{display:grid} body.semgl #gl{display:none}
 <script src="../assets/modelo.js"></script>
 <script src="../assets/conteudo.js"></script>
 <script src="../assets/sala-leitura.js"></script>
+<script src="../vendor/pixel-avatar/parts.js"></script>
+<script src="../vendor/pixel-avatar/avatar.js"></script>
 <script src="../vendor/three/three.min.js"></script>
 <script src="../vendor/three/CopyShader.js"></script>
 <script src="../vendor/three/LuminosityHighPassShader.js"></script>
@@ -174,7 +274,12 @@ renderer.setSize(innerWidth, innerHeight);
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(COR.tinta);
 scene.fog = new THREE.FogExp2(COR.tinta, 0.016);
+const QS = new URLSearchParams(location.search);
+const PARTICIPANTE = QS.has("telao") ? false : (QS.get("modo") === "participante" || matchMedia("(max-width: 900px)").matches || !!L.setor());
+if (PARTICIPANTE) document.body.classList.add("participante");
 const camera = new THREE.PerspectiveCamera(48, innerWidth / innerHeight, 0.1, 400);
+const ajustarFov = () => { camera.fov = camera.aspect < .8 ? 72 : camera.aspect < 1.2 ? 58 : 48; camera.updateProjectionMatrix(); };
+ajustarFov(); addEventListener("resize", ajustarFov);
 const composer = new THREE.EffectComposer(renderer);
 composer.addPass(new THREE.RenderPass(scene, camera));
 const bloom = new THREE.UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.95, 0.55, 0.12);
@@ -288,11 +393,12 @@ function chegar(pid, setor, sim) {
   const alvo = vaga(s, porSetor[s]++);
   const m = new THREE.Mesh(geoPessoa, new THREE.MeshBasicMaterial({ color: sim ? 0xC9A86A : COR.brass2 }));
   m.position.copy(ENTRADA); scene.add(m);
+  const tex = new THREE.CanvasTexture(PixelAvatar.canvas(pid, 2)); tex.magFilter = THREE.NearestFilter; tex.minFilter = THREE.NearestFilter;
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, color: 0xC8C8C8, depthWrite: false })); sp.scale.set(1.15, 1.15, 1); sp.position.set(0, 1.05, 0); m.add(sp);
   const p = { pid, setor: s, mesh: m, de: ENTRADA.clone(), para: alvo, t0: performance.now(), dur: REDUZ ? 1 : 1800, sim };
   pessoas.set(pid, p);
   rastro(ENTRADA, alvo, COR.brass2, 1800);
   atualizarTotal();
-  if (!sim || pessoas.size % 4 === 1) toast(`${sim ? "Simulado" : "Nova pessoa"} · ${(C.setores.find(x => x[0] === s) || ["", "Outro"])[1]}`);
   return p;
 }
 function mover(pid, novoSetor) {
@@ -314,7 +420,7 @@ function rastro(de, para, cor, dur) { for (let i = 0; i < 4; i++) feixe(de, para
 /* ---------- contagem e painéis ---------- */
 const votosT = {}, votosL = {}, falas = [];
 let simulados = 0;
-function atualizarTotal() { $("#total").textContent = pessoas.size; $("#totalRot").textContent = "pessoas na câmara" + (simulados ? ` · ${simulados} simuladas` : ""); }
+function atualizarTotal() { $("#total").textContent = pessoas.size; $("#totalMini").textContent = pessoas.size; $("#totalRot").textContent = "pessoas na câmara" + (simulados ? ` · ${simulados} simuladas` : ""); }
 function barras(alvo, linhas, cor) {
   const max = Math.max(1, ...linhas.map(l => l[1]));
   $(alvo).innerHTML = linhas.map(([rot, n, extra]) => `<div class="barra"><div class="r"><span>${esc(rot)}${extra || ""}</span><b>${n}</b></div><div class="t"><i style="width:${n / max * 100}%;background:${cor}"></i></div></div>`).join("");
@@ -328,13 +434,13 @@ function painel() {
   barras("#barrasS", C.setores.map(([k, l]) => [l, cS[k] || 0]).filter(x => x[1]).sort((a, b) => b[1] - a[1]), "var(--color-text-link)");
   for (const s of SEMENTES) { const a = arcos[s.id]; a.votos = cT[s.id] || 0; }
   for (const t of LACUNAS) { const o = cupula[t.id]; o.userData.votos = cL[t.id] || 0; o.userData.alvo = 1 + Math.min(2.4, o.userData.votos * .18); }
-  rotulos.forEach(r => { r.el.querySelector("b").textContent = r.tipo === "lacuna" ? (cL[r.id] || 0) : (cT[r.id] || 0); });
+  rotulos.forEach(r => { if (r.tipo === "voce") return; r.el.querySelector("b").textContent = r.tipo === "lacuna" ? (cL[r.id] || 0) : (cT[r.id] || 0); });
 }
 function toast(txt) { const d = document.createElement("div"); d.className = "toast"; d.textContent = txt; $("#chegada").prepend(d); setTimeout(() => d.remove(), 2600); while ($("#chegada").children.length > 3) $("#chegada").lastChild.remove(); }
 const MOV = Object.fromEntries(C.movimentos);
-function mostrarFala(v, setor, sim) {
+function mostrarFala(pid, v, setor, sim) {
   const d = document.createElement("div"); d.className = "fala vidro " + (v.mv || "");
-  d.innerHTML = `<div class="m">${esc(MOV[v.mv] || "Contribuição")} · ${esc((C.setores.find(x => x[0] === setor) || ["", "sem setor"])[1])}${sim ? " · simulada" : ""}</div><p>${esc(v.tx)}</p>`;
+  d.innerHTML = `<div class="m"><img class="av sm" src="${PixelAvatar.url(pid, 3)}" alt=""> ${esc(L.apelido(pid, setor))} · ${esc(MOV[v.mv] || "Contribuição")}${sim ? " · simulada" : ""}</div><p>${esc(v.tx)}</p><div class="m" data-cont="${esc(pid)}"></div>`;
   $("#falas").prepend(d); while ($("#falas").children.length > 2) $("#falas").lastChild.remove();
 }
 
@@ -347,8 +453,15 @@ L.on((m, novo) => {
   const ve = g => g.userData.alvo > .5;
   if (m.k === "q1" && arcos[m.v] && ve(gArc)) feixe(origem(), arcos[m.v].topo, COR.brass, () => pulso(arcos[m.v]), novo ? 1900 : 0);
   if (m.k === "q3" && cupula[m.v] && ve(gLac)) feixe(origem(), cupula[m.v].position, COR.coral, () => { cupula[m.v].userData.flash = 1; }, novo ? 1900 : 0);
-  if (m.k === "q4" && m.v && m.v.tx) feixe(origem(), topoTorre, COR.brass2, () => { nucleo.userData.flash = 1; mostrarFala(m.v, p.setor, m.sim); }, novo ? 1900 : 0);
-  clearTimeout(painelPend); painelPend = setTimeout(painel, 120);
+  if (m.k === "q4" && m.v && m.v.tx) feixe(origem(), topoTorre, COR.brass2, () => { nucleo.userData.flash = 1; mostrarFala(m.pid, m.v, p.setor, m.sim); atualizarContagensFalas(); }, novo ? 1900 : 0);
+  if (m.k.startsWith("r:")) { const alvo = pessoas.get(m.k.slice(2)), rr = REACOES.find(x => x[0] === m.v); if (alvo && rr) feixe(origem(), alvo.para.clone(), rr[2], atualizarContagensFalas, novo ? 1900 : 0); else atualizarContagensFalas(); }
+  const txt = registrarAgora(m), aoVivo = (m.ts || 0) > T0 - 2000;
+  if (txt && aoVivo) {
+    if (!PARTICIPANTE) { if (!m.sim || m.k === "q4" || m.k.startsWith("r:")) toastAv(m.pid, txt); }
+    else if (m.k.startsWith("r:") && m.k.slice(2) === L.eu() && m.pid !== L.eu() && m.v !== "nenhuma") toastAv(m.pid, txt);
+  }
+  if (m.pid === L.eu()) destacarEu();
+  clearTimeout(painelPend); painelPend = setTimeout(() => { painel(); atualizarUI(); }, 120);
 });
 function pulso(a) { a.flash = 1; }
 
@@ -363,6 +476,7 @@ function simular(n) {
     setTimeout(() => L.injetar({ ...b, k: "q1", v: Math.random() < .35 ? "T5" : Math.random() < .5 ? "T4" : rnd(SEMENTES).id, ts: Date.now() }), 900);
     setTimeout(() => L.injetar({ ...b, k: "q3", v: Math.random() < .3 ? "participation" : Math.random() < .5 ? "children-vulnerable" : rnd(LACUNAS).id, ts: Date.now() }), 1700);
     if (Math.random() < .45) setTimeout(() => { const f = rnd(FALAS_SIM); L.injetar({ ...b, k: "q4", v: { mv: f[0], tx: f[1] }, ts: Date.now() }); }, 2600);
+    setTimeout(() => { const cs = contribuicoes().filter(c => c.pid !== pid); if (cs.length && Math.random() < .7) L.injetar({ ...b, k: "r:" + rnd(cs).pid, v: rnd(REACOES)[0], ts: Date.now() }); }, 4200);
   }, i * 650);
 }
 
@@ -379,7 +493,8 @@ const camPos = CAMS.camara.pos.clone(), camAlvo = CAMS.camara.alvo.clone();
 function modo(m) { camModo = m; document.querySelectorAll("[data-cam]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.cam === m))); }
 document.querySelectorAll("[data-cam]").forEach(b => b.onclick = () => modo(b.dataset.cam));
 const CAMADAS = [
-  { n: "Entrada", t: "Entre na câmara", d: "Aponte a câmera para o QR code. Cada pessoa vira uma luz no anel externo, no arco do seu setor. Sem nome, sem cadastro.", g: [], cam: "sala" },
+  PARTICIPANTE ? { n: "Você", t: "Você está na câmara", d: "Cada luz no anel externo é uma pessoa da sala, no arco do seu setor. A sua está entre elas.", g: [], cam: "sala" }
+    : { n: "Entrada", t: "Entre na câmara", d: "Aponte a câmera para o QR code. Cada pessoa vira uma luz no anel externo, no arco do seu setor. Sem nome, sem cadastro.", g: [], cam: "sala" },
   { n: "Modelo", t: "O modelo brasileiro em exame", d: M.components.length + " peças empilhadas por tipo. A cor é a força jurídica: em vigor, política pública e projeto de lei, vazado porque não vincula.", g: [torre], cam: "modelo" },
   { n: "Conselho", t: "O conselho das sombras", d: "20 perspectivas sintéticas em 8 estratos. As cadeiras vazias são grupos sem fonte documental: o sistema não inventa o que pensariam.", g: [torre, gAss, gVaz], cam: "camara" },
   { n: "Lacunas", t: "O que falta no modelo", d: "A cúpula reúne as " + M.topics.length + " áreas da taxonomia. Os anéis coral são as " + LACUNAS.length + " áreas sem nenhum componente e crescem com os votos da sala.", g: [torre, gAss, gVaz, gCup, gLac], cam: "lacunas" },
@@ -396,7 +511,10 @@ function camada(i) {
   document.querySelectorAll("[data-camada]").forEach(e => e.classList.toggle("oculto", +e.dataset.camada > i && i < CAMADAS.length - 1));
   $("#etapaN").textContent = "Camada " + (i + 1) + " de " + CAMADAS.length; $("#etapaT").textContent = c.t; $("#etapaD").textContent = c.d;
   navC.querySelectorAll("button").forEach((b, k) => b.setAttribute("aria-current", k === i ? "step" : "false"));
-  $("#voltarC").disabled = i === 0; $("#avancarC").textContent = i === CAMADAS.length - 1 ? "Recomeçar" : "Próxima camada →";
+  $("#voltarC").disabled = i === 0; $("#avancarC").textContent = i === CAMADAS.length - 1 ? "Recomeçar" : (PARTICIPANTE ? "Próxima →" : "Próxima camada →");
+  $("#passoMini").textContent = (i + 1) + "/" + CAMADAS.length + " · " + c.n;
+  document.querySelectorAll("#verChips button").forEach((b, k) => b.setAttribute("aria-pressed", String(k === i)));
+  $("#verLegenda").textContent = c.d || "Tudo junto: modelo, conselho, lacunas, tensões e a sala.";
   modo(c.cam);
 }
 $("#voltarC").onclick = () => camada(camadaAtual - 1);
@@ -404,13 +522,152 @@ $("#avancarC").onclick = () => camada(camadaAtual === CAMADAS.length - 1 ? 0 : c
 $("#girar").onclick = e => { girar = !girar; e.currentTarget.setAttribute("aria-pressed", String(girar)); };
 $("#simular").onclick = () => simular(12);
 $("#cheia").onclick = () => { (document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen?.())?.catch?.(() => {}); };
+const digitando = e => !!(e.target.closest && e.target.closest("input,textarea,select,button,a,[contenteditable]"));
 addEventListener("keydown", e => {
+  if (digitando(e)) return;
   if (["ArrowRight", "PageDown", " "].includes(e.key)) { e.preventDefault(); camada(camadaAtual + 1); return; }
   if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); camada(camadaAtual - 1); return; }
 });
-addEventListener("keydown", e => { const k = { "1": "camara", "2": "sala", "3": "tensoes", "4": "lacunas" }[e.key]; if (k) modo(k); if (e.key === "s" || e.key === "S") simular(12); if (e.key === "g" || e.key === "G") $("#girar").click(); });
+addEventListener("keydown", e => { if (digitando(e)) return; const k = { "1": "camara", "2": "sala", "3": "tensoes", "4": "lacunas" }[e.key]; if (k) modo(k); if (e.key === "s" || e.key === "S") simular(12); if (e.key === "g" || e.key === "G") $("#girar").click(); });
 addEventListener("resize", () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); composer.setSize(innerWidth, innerHeight); bloom.setSize(innerWidth, innerHeight); });
 
+/* ---------- participação: quem entrou pelo QR age daqui, e a sala vê ---------- */
+const T0 = Date.now();
+const REACOES = [["apoio", "Apoio", 0x38C2B4, "↑"], ["contesto", "Contesto", 0xFF7A59, "⟂"], ["fonte", "Falta fonte", 0x7CC4FF, "?"]];
+const VERBO = { apoio: "apoiou", contesto: "contestou", fonte: "pediu fonte a" };
+const agora = [];
+const setorDe = pid => (pessoas.get(pid) || {}).setor;
+const quem = pid => L.apelido(pid, setorDe(pid));
+const corta = (s, n) => { s = String(s || ""); return s.length > n ? s.slice(0, n - 1) + "…" : s; };
+const hora = ts => new Date(ts || Date.now()).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+function contribuicoes() {
+  return L.participantes().filter(p => p.q4 && p.q4.v && p.q4.v.tx)
+    .map(p => ({ pid: p.pid, setor: p.setor, sim: p.sim, v: p.q4.v, ts: p.q4.ts || 0 })).sort((a, b) => b.ts - a.ts);
+}
+function reacoesDe(alvo, ps = L.participantes()) {
+  const c = { apoio: 0, contesto: 0, fonte: 0 }; let minha = null;
+  for (const p of ps) { const r = p["r:" + alvo]; if (r && c[r.v] != null) { c[r.v]++; if (p.pid === L.eu()) minha = r.v; } }
+  return { c, minha };
+}
+function registrarAgora(m) {
+  let txt = null;
+  if (m.k === "setor") txt = "entrou na câmara";
+  else if (m.k === "q1") { const s = SEMENTES.find(x => x.id === m.v); txt = "escolheu a tensão " + (s ? s.id + " · " + s.title : m.v); }
+  else if (m.k === "q2" && typeof m.v === "number") txt = "posicionou-se no eixo T5";
+  else if (m.k === "q3") { const t = LACUNAS.find(x => x.id === m.v); txt = "apontou a lacuna " + (t ? t.label : m.v); }
+  else if (m.k === "q4" && m.v && m.v.tx) txt = (MOV[m.v.mv] || "Contribuiu") + ": “" + corta(m.v.tx, 70) + "”";
+  else if (m.k.startsWith("r:") && VERBO[m.v]) { const a = m.k.slice(2); txt = VERBO[m.v] + " " + (a === L.eu() ? "você" : quem(a)); }
+  if (!txt) return null;
+  agora.unshift({ pid: m.pid, txt, ts: m.ts || Date.now(), sim: !!m.sim });
+  if (agora.length > 80) agora.length = 80;
+  return txt;
+}
+function toastAv(pid, txt, cls = "") {
+  const d = document.createElement("div"); d.className = "toast " + cls;
+  d.innerHTML = (pid ? `<img class="av" src="${PixelAvatar.url(pid, 3)}" alt=""><span><b>${esc(PARTICIPANTE && pid === L.eu() ? "Você" : quem(pid))}</b> ${esc(txt)}</span>` : `<span>${esc(txt)}</span>`);
+  $("#chegada").prepend(d); setTimeout(() => d.remove(), 3200); while ($("#chegada").children.length > 3) $("#chegada").lastChild.remove();
+}
+/* a sua luz: anel e rótulo "você" */
+let euMarcado = null;
+function destacarEu() {
+  if (!PARTICIPANTE) return;
+  const id = L.eu(), p = id && pessoas.get(id); if (!p || euMarcado === id) return; euMarcado = id;
+  const anel = new THREE.Mesh(new THREE.TorusGeometry(.62, .06, 8, 40), new THREE.MeshBasicMaterial({ color: COR.brass }));
+  anel.rotation.x = Math.PI / 2; p.mesh.add(anel); p.mesh.scale.setScalar(1.35);
+  const el = document.createElement("div"); el.className = "rotulo3d voce"; el.textContent = "você"; document.body.appendChild(el);
+  rotulos.push({ el, pos: p.mesh.position, id, tipo: "voce" });
+}
+function renderVoce() {
+  const v = $("#voce");
+  if (L.podeEnviar()) { v.className = "chip"; v.removeAttribute("href"); v.innerHTML = `<img class="av" src="${PixelAvatar.url(L.eu(), 3)}" alt=""><span class="lbl">você ·</span> <b>${esc(L.apelido(L.eu(), L.setor()))}</b>`; }
+  else { v.outerHTML = `<a class="chip cta" id="voce" href="${esc(entrarHref())}">Entrar na câmara →</a>`; }
+}
+function entrarHref() { const u = new URL("../", location.href); u.searchParams.set("sala", L.sala); u.hash = "participar"; return u.toString(); }
+
+/* camadas como chips no participante */
+CAMADAS.forEach((c, i) => { const b = document.createElement("button"); b.textContent = c.n; b.setAttribute("aria-pressed", "false"); b.onclick = () => camada(i); $("#verChips").appendChild(b); });
+
+/* gaveta */
+const gav = $("#gaveta");
+$("#puxador").onclick = () => { gav.classList.toggle("fechada"); $("#puxador").setAttribute("aria-expanded", String(!gav.classList.contains("fechada"))); };
+document.querySelectorAll(".abas button").forEach(b => b.onclick = () => abrirAba(b.dataset.aba));
+function abrirAba(a) {
+  gav.classList.remove("fechada");
+  document.querySelectorAll(".abas button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.aba === a)));
+  ["mesa", "minhas", "agora"].forEach(k => { $("#aba" + k[0].toUpperCase() + k.slice(1)).hidden = k !== a; });
+  if (a === "minhas") renderMinhas();
+}
+async function mandar(k, v, ok = "a sala viu sua escolha") {
+  try { await L.enviar(k, v); toastAv(null, "✓ " + ok, "ok"); return true; }
+  catch (e) { console.warn(e); toastAv(null, "Não foi enviado. " + (e && e.message ? corta(e.message, 60) : "Tente de novo."), "mal"); return false; }
+}
+function chamadaEntrar(txt) { return `<div class="chamada"><p>${esc(txt)}</p><a class="bt prim" href="${esc(entrarHref())}">Entrar na câmara →</a></div>`; }
+
+function renderMesa() {
+  const ps = L.participantes(), cs = contribuicoes(), eu = L.eu(), pode = L.podeEnviar();
+  $("#nMesa").textContent = cs.length || "";
+  if (!cs.length) { $("#abaMesa").innerHTML = `<p class="vazio">Ninguém publicou ainda. Publique a primeira contribuição em <b>Minhas escolhas</b>.</p>`; return; }
+  $("#abaMesa").innerHTML = (pode ? "" : chamadaEntrar("Para reagir às contribuições, entre na câmara. Leva 30 segundos, sem cadastro.")) + cs.slice(0, 60).map(c => {
+    const { c: n, minha } = reacoesDe(c.pid, ps), meu = c.pid === eu;
+    return `<article class="card ${esc(c.v.mv || "")}${meu ? " meu" : ""}">
+      <div class="quem"><img class="av" src="${PixelAvatar.url(c.pid, 3)}" alt=""><b>${esc(meu ? "Você" : L.apelido(c.pid, c.setor))}</b>${c.sim ? " · simulada" : ""}<span class="mv">${esc(MOV[c.v.mv] || "Contribuição")}</span></div>
+      <p>${esc(c.v.tx)}</p>
+      <div class="reacoes" role="group" aria-label="Reagir">${REACOES.map(([k, rot, , ic]) => `<button class="${k}" data-alvo="${esc(c.pid)}" data-r="${k}" aria-pressed="${minha === k}" ${meu || !pode ? "disabled" : ""} aria-label="${rot}: ${n[k]}">${ic} ${rot} <b>${n[k]}</b></button>`).join("")}${meu ? "<small>sua contribuição</small>" : ""}</div>
+    </article>`;
+  }).join("");
+}
+$("#abaMesa").addEventListener("click", e => {
+  const b = e.target.closest("button[data-r]"); if (!b || b.disabled) return;
+  const ligado = b.getAttribute("aria-pressed") === "true";
+  mandar("r:" + b.dataset.alvo, ligado ? "nenhuma" : b.dataset.r, ligado ? "reação retirada" : "a sala viu sua reação");
+});
+function meuRegistro() { const id = L.eu(); return L.participantes().find(p => p.pid === id) || {}; }
+function renderMinhas() {
+  const box = $("#abaMinhas");
+  if (!L.podeEnviar()) { box.innerHTML = chamadaEntrar("Você ainda não entrou na câmara deste aparelho. Entre para escolher, se posicionar e publicar. Tudo o que fizer aparece para a sala e no telão."); return; }
+  const r = meuRegistro(), q1 = r.q1 && r.q1.v, q2 = r.q2 && typeof r.q2.v === "number" ? r.q2.v : 0, q3 = r.q3 && r.q3.v, q4 = (r.q4 && r.q4.v) || {};
+  const polos = C.polos || ["", ""];
+  box.innerHTML = `
+  <div class="grupo"><h3>Qual tensão enfrentar primeiro?</h3><p class="dica">Sua escolha vira um feixe até o arco da tensão.</p>
+    <div class="ops" data-k="q1">${SEMENTES.map(s => `<button class="op" data-v="${s.id}" aria-pressed="${q1 === s.id}"><small>${s.id}</small>${esc(s.title)}</button>`).join("")}</div></div>
+  <div class="grupo"><h3>Sua posição na tensão T5</h3><p class="dica">Auditoria × capacidade de fiscalizar. Solte o controle para enviar.</p>
+    <input type="range" id="q2" min="-100" max="100" step="5" value="${Math.round(q2 * 100)}" aria-label="Sua posição entre os dois polos">
+    <div class="polos"><span>${esc(polos[0])}</span><span>${esc(polos[1])}</span></div></div>
+  <div class="grupo"><h3>O que falta no modelo?</h3><p class="dica">Áreas sem nenhum componente. Sua escolha acende o anel na cúpula.</p>
+    <div class="ops" data-k="q3">${LACUNAS.map(t => `<button class="op" data-v="${t.id}" aria-pressed="${q3 === t.id}">${esc(t.label)}</button>`).join("")}</div></div>
+  <div class="grupo"><h3>Sua contribuição para a mesa</h3><p class="dica">Aparece na Mesa de todos e no telão, com seu avatar. Os outros podem apoiar, contestar ou pedir fonte.</p>
+    <div class="ops" data-mv>${C.movimentos.map(([k, rot]) => `<button class="op" data-mv="${k}" aria-pressed="${(q4.mv || "support") === k}">${esc(rot)}</button>`).join("")}</div>
+    <textarea id="q4tx" maxlength="280" placeholder="Uma frase objetiva. Ex.: quem fiscaliza a auditoria?">${esc(q4.tx || "")}</textarea>
+    <div class="linha"><small id="q4n">${(q4.tx || "").length}/280</small><button class="bt prim" id="publicar">${q4.tx ? "Atualizar" : "Publicar"}</button></div></div>`;
+}
+$("#abaMinhas").addEventListener("click", async e => {
+  const b = e.target.closest("button"); if (!b) return;
+  const grupo = b.closest("[data-k]");
+  if (grupo && b.dataset.v) { grupo.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x === b))); await mandar(grupo.dataset.k, b.dataset.v); return; }
+  if (b.dataset.mv) { b.parentElement.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x === b))); return; }
+  if (b.id === "publicar") {
+    const tx = $("#q4tx").value.trim(); if (tx.length < 3) { $("#q4tx").focus(); toastAv(null, "Escreva ao menos uma frase.", "mal"); return; }
+    const mv = ($("#abaMinhas [data-mv][aria-pressed=true]") || {}).dataset?.mv || "support";
+    b.disabled = true; if (await mandar("q4", { mv, tx }, "publicado na mesa e no telão")) { b.textContent = "Atualizar"; abrirAba("mesa"); } b.disabled = false;
+  }
+});
+$("#abaMinhas").addEventListener("change", e => { if (e.target.id === "q2") mandar("q2", Number(e.target.value) / 100, "sua posição entrou no eixo"); });
+$("#abaMinhas").addEventListener("input", e => { if (e.target.id === "q4tx") $("#q4n").textContent = e.target.value.length + "/280"; });
+function renderAgora() {
+  const eu = L.eu(), novos = agora.filter(a => a.ts > T0 - 2000).length;
+  $("#nAgora").textContent = novos || "";
+  $("#abaAgora").innerHTML = agora.length ? agora.slice(0, 60).map(a => `<div class="ev${a.pid === eu ? " meu" : ""}${a.sim ? " sim" : ""}"><img class="av" src="${PixelAvatar.url(a.pid, 3)}" alt=""><span><b>${esc(a.pid === eu ? "Você" : quem(a.pid))}</b> ${esc(a.txt)}</span><time>${hora(a.ts)}</time></div>`).join("") : `<p class="vazio">Ainda sem movimento na sala.</p>`;
+}
+function atualizarContagensFalas() {
+  const ps = L.participantes();
+  document.querySelectorAll("#falas [data-cont]").forEach(d => { const { c } = reacoesDe(d.dataset.cont, ps); d.className = "m reac"; d.textContent = REACOES.map(([k, rot, , ic]) => `${ic} ${rot} ${c[k]}`).join("   "); });
+}
+function atualizarUI() {
+  if (!PARTICIPANTE) { atualizarContagensFalas(); return; }
+  renderMesa(); renderAgora(); renderVoce();
+  if (!$("#abaMinhas").hidden && !$("#abaMinhas").contains(document.activeElement) && !$("#abaMinhas").children.length) renderMinhas();
+}
+if (PARTICIPANTE) { renderVoce(); renderMesa(); renderAgora(); }
 /* ---------- laço ---------- */
 const v = new THREE.Vector3(), ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 function quadro(now) {
@@ -442,16 +699,16 @@ function quadro(now) {
     v.copy(r.pos).project(camera);
     let vis = v.z < 1 && Math.abs(v.x) < 1.1 && Math.abs(v.y) < 1.1;
     if (r.tipo === "tensao" && camModo !== "tensoes") vis = vis && topoT.includes(r.id);
-    if ((r.tipo === "tensao" ? gArc : gLac).userData.k < .35) vis = false;
+    if (r.tipo !== "voce" && (r.tipo === "tensao" ? gArc : gLac).userData.k < .35) vis = false;
     r.el.style.opacity = vis ? 1 : 0;
     if (vis) { r.el.style.left = ((v.x + 1) / 2 * innerWidth) + "px"; r.el.style.top = ((1 - v.y) / 2 * innerHeight) + "px"; }
   }
   composer.render();
 }
 requestAnimationFrame(quadro);
-{ const pc = new URLSearchParams(location.search).get("camada"); camada(pc === "tudo" ? CAMADAS.length - 1 : Math.max(0, (parseInt(pc, 10) || 1) - 1)); }
+{ const pc = new URLSearchParams(location.search).get("camada"); camada(pc === "tudo" || (PARTICIPANTE && !pc) ? CAMADAS.length - 1 : Math.max(0, (parseInt(pc, 10) || 1) - 1)); }
 painel();
-L.iniciar();
+L.iniciar().then(() => { destacarEu(); atualizarUI(); renderVoce(); });
 })();
 </script>
 </body>
