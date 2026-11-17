@@ -63,6 +63,44 @@ def preflight(config: ModelConfig, providers: list[str], dry_run: bool, transpor
     return problems
 
 
+def write_latest_index(base: Path, scenario_id: str, label: str, *, dry_run: bool = False) -> Path:
+    """Write a portable index for the latest run and its downloadable artifacts."""
+    root = base.parent
+    artifacts = []
+    for path in sorted(base.rglob("*")):
+        if not path.is_file() or path.is_symlink() or path.name.startswith("._"):
+            continue
+        artifacts.append({
+            "path": path.relative_to(root).as_posix(),
+            "name": path.name,
+            "sizeBytes": path.stat().st_size,
+        })
+
+    def artifact_path(relative_path: str) -> str | None:
+        candidate = base / relative_path
+        return candidate.relative_to(root).as_posix() if candidate.is_file() else None
+
+    index = {
+        "schemaVersion": 1,
+        "scenarioId": scenario_id,
+        "runId": base.name,
+        "label": label,
+        "generatedAt": datetime.now(timezone.utc).isoformat(),
+        "dryRun": dry_run,
+        "packetPath": artifact_path("merged-packet.json"),
+        "reportPath": artifact_path("rep-01/report.md"),
+        "reportJsonPath": artifact_path("rep-01/report.json"),
+        "httpTracePath": next((item["path"] for item in artifacts if item["name"] == "openrouter-http.jsonl"), None),
+        "artifacts": artifacts,
+    }
+    index_path = root / "latest.json"
+    index_path.parent.mkdir(parents=True, exist_ok=True)
+    temporary_path = index_path.with_suffix(".json.tmp")
+    temporary_path.write_text(json.dumps(index, ensure_ascii=False, indent=2), encoding="utf-8")
+    temporary_path.replace(index_path)
+    return index_path
+
+
 def run_scenario(scenario_path: str | Path, config: ModelConfig, opts: RunOptions,
                  out_root: str | Path = "runs") -> dict:
     scenario = load_scenario(scenario_path)
@@ -128,4 +166,5 @@ def run_scenario(scenario_path: str | Path, config: ModelConfig, opts: RunOption
         out["review"] = review
     base.mkdir(parents=True, exist_ok=True)
     (base / "sensitivity-report.json").write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_latest_index(base, scenario["scenarioId"], label, dry_run=opts.dry_run)
     return out

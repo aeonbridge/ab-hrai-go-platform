@@ -10,7 +10,7 @@ from scse.config import ModelConfig
 from scse.council import compose
 from scse.governance_engine import GovernanceEngine
 from scse.report import compile_run
-from scse.runner import RunOptions, run_scenario
+from scse.runner import RunOptions, run_scenario, write_latest_index
 from scse.world import ScenarioError, load_scenario, prepare, validate
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -40,6 +40,28 @@ def test_context_loader_ignores_hidden_appledouble_json(tmp_path):
     (tmp_path / "._2026-11-14.json").write_bytes(b"AppleDouble metadata is not a context snapshot")
     loaded = gv.load_context(tmp_path, "2026-11-14")
     assert loaded["contextId"] == "ctx"
+
+
+def test_latest_run_index_exposes_packet_report_and_all_run_artifacts(tmp_path):
+    run_dir = tmp_path / "GOV-BR-001" / "20261115T000000Z-test"
+    (run_dir / "rep-01").mkdir(parents=True)
+    (run_dir / "merged-packet.json").write_text("{}", encoding="utf-8")
+    (run_dir / "rep-01" / "report.md").write_text("# Report", encoding="utf-8")
+    (run_dir / "rep-01" / "report.json").write_text("{}", encoding="utf-8")
+    (run_dir / "rep-01" / "openrouter-http.jsonl").write_text("{}\n", encoding="utf-8")
+    (run_dir / "._report.md").write_text("AppleDouble sidecar", encoding="utf-8")
+
+    index_path = write_latest_index(run_dir, "GOV-BR-001", "stratified-test")
+    index = json.loads(index_path.read_text(encoding="utf-8"))
+    paths = {artifact["path"] for artifact in index["artifacts"]}
+
+    assert index["packetPath"] == "20261115T000000Z-test/merged-packet.json"
+    assert index["reportPath"] == "20261115T000000Z-test/rep-01/report.md"
+    assert index["reportJsonPath"] == "20261115T000000Z-test/rep-01/report.json"
+    assert index["httpTracePath"] == "20261115T000000Z-test/rep-01/openrouter-http.jsonl"
+    assert "20261115T000000Z-test/rep-01/openrouter-http.jsonl" in paths
+    assert all(path.startswith("20261115T000000Z-test/") for path in paths)
+    assert not any("._" in path for path in paths)
 
 
 def test_every_cited_source_resolves():
@@ -345,6 +367,12 @@ def test_two_iterations_with_a_human_in_the_loop(tmp_path, capsys):
                         out_root=tmp_path / "runs")
     review = out1["review"]
     assert Path(review["reviewSheet"]).exists() and review["proposals"] > 0
+    latest_path = tmp_path / "runs" / "GOV-BR-001" / "latest.json"
+    latest = json.loads(latest_path.read_text(encoding="utf-8"))
+    assert latest["runId"] == Path(out1["outDir"]).name and latest["dryRun"] is True
+    assert (latest_path.parent / latest["packetPath"]).is_file()
+    assert (latest_path.parent / latest["reportPath"]).is_file()
+    assert any(artifact["name"] == "report.json" for artifact in latest["artifacts"])
     template = json.loads(Path(review["decisionsTemplate"]).read_text())
     packet = json.loads(Path(review["mergedPacket"]).read_text())
     assert all(d["decision"] is None for d in template["decisions"])

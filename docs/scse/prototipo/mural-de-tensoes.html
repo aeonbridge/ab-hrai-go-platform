@@ -62,6 +62,12 @@ header.top{display:grid;gap:10px}
 .source{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-size:13.5px;color:var(--muted)}
 .source label.btn{display:inline-flex;align-items:center}
 .source input[type=file]{position:absolute;width:1px;height:1px;opacity:0}
+.run-files{display:grid;gap:8px;padding:10px 12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;font-size:13px}
+.run-files details{display:grid;gap:8px}
+.run-files summary{cursor:pointer;color:var(--accent);font-weight:600}
+.run-files .files{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.run-files .file-link{border:1px solid var(--line-2);border-radius:8px;padding:5px 8px;color:var(--muted);text-decoration:none;font:500 11.5px/1.3 var(--mono);overflow-wrap:anywhere}
+.run-files .file-link:hover{border-color:var(--accent);color:var(--accent)}
 .notice{border-left:3px solid var(--accent);padding:8px 12px;background:var(--surface);border-radius:0 10px 10px 0;font-size:14px;max-width:80ch}
 .error{border-left-color:var(--against)}
 
@@ -182,6 +188,14 @@ form.add textarea{min-height:76px;resize:vertical}
       <input type="file" id="packet-file" accept="application/json,.json">
       <button class="link" id="use-example" hidden>Voltar ao exemplo</button>
     </div>
+    <section class="run-files" id="run-artifacts" hidden aria-label="Arquivos da execução">
+      <div class="row" id="run-meta"></div>
+      <div class="row" id="featured-downloads"></div>
+      <details id="all-downloads">
+        <summary id="all-downloads-label">Todos os arquivos</summary>
+        <div class="files" id="artifact-links"></div>
+      </details>
+    </section>
     <div id="load-msg" class="notice error" hidden></div>
   </header>
   <main id="view"></main>
@@ -327,7 +341,7 @@ function normalize(pk){
 }
 
 /* ============================================================== state */
-const state = {data:null, cards:[], summaries:{}, names:{}, me:null, canWrite:false, db:null, user:null, sample:null,
+const state = {data:null, cards:[], summaries:{}, names:{}, me:null, canWrite:false, db:null, user:null, sample:null, artifactRun:null,
   mode:"conversa", filter:null, cell:null, facilBusy:false, facilErr:"", unsub:[]};
 try { state.mode = localStorage.getItem("mural-mode") || "conversa"; } catch(e) {}
 
@@ -574,16 +588,54 @@ $("#packet-file").addEventListener("change", async e => {
 });
 
 /* ============================================================== data + shared store */
-function setData(pk){
+function setData(pk, artifactRun=null, latestUrl=null){
   state.data = normalize(pk);
-  $("#dataset-tag").innerHTML = state.data.example ? `<span class="tag example">Exemplo ilustrativo</span>` : `<span class="tag">Pacote carregado</span>`;
-  $("#source-label").textContent = state.data.example ? "Mostrando propostas de exemplo, não uma execução real." : `Mostrando: ${state.data.label}${state.data.asOf ? ` · data ${state.data.asOf}` : ""}.`;
+  state.artifactRun = artifactRun;
+  const runTag = artifactRun ? (artifactRun.dryRun ? "Execução simulada" : artifactRun.httpTracePath ? "Execução OpenRouter" : "Execução concluída") : "Pacote carregado";
+  $("#dataset-tag").innerHTML = state.data.example ? `<span class="tag example">Exemplo ilustrativo</span>` : `<span class="tag">${esc(runTag)}</span>`;
+  $("#source-label").textContent = state.data.example ? "Mostrando propostas de exemplo, não uma execução real." : artifactRun
+    ? `Execução ${artifactRun.runId} · ${state.data.label}${artifactRun.generatedAt ? ` · ${new Date(artifactRun.generatedAt).toLocaleString("pt-BR")}` : ""}.`
+    : `Mostrando: ${state.data.label}${state.data.asOf ? ` · data ${state.data.asOf}` : ""}.`;
   $("#use-example").hidden = state.data.example;
+  renderRunArtifacts(artifactRun, latestUrl);
   $("#load-msg").hidden = true;
   state.cards = []; state.summaries = {}; state.filter = null; state.cell = null;
   subscribe();
   if (currentTension() === null && location.hash.startsWith("#tensao-")) history.replaceState(null, "", location.pathname + location.search);
   route();
+}
+function renderRunArtifacts(run, latestUrl){
+  const panel = $("#run-artifacts"), meta = $("#run-meta"), featured = $("#featured-downloads"), list = $("#artifact-links");
+  meta.replaceChildren(); featured.replaceChildren(); list.replaceChildren();
+  panel.hidden = !run || !latestUrl || !Array.isArray(run.artifacts);
+  if (panel.hidden) return;
+  const label = document.createElement("span");
+  label.className = "muted";
+  const packet = state.data;
+  label.textContent = `${packet.tensions.length} tensões · ${packet.proposals.length} propostas · ${packet.strata.length} estratos · ${run.artifacts.length} arquivos disponíveis`;
+  meta.append(label);
+  const addLink = (container, artifact, className="file-link") => {
+    if (!artifact || typeof artifact.path !== "string") return;
+    const href = new URL(artifact.path, latestUrl);
+    if (href.origin !== latestUrl.origin) return;
+    const link = document.createElement("a");
+    link.className = className;
+    link.href = href.href;
+    link.download = artifact.name || href.pathname.split("/").pop();
+    link.textContent = artifact.label || artifact.name || link.download;
+    container.append(link);
+  };
+  const report = run.artifacts.find(file => file.path === run.reportPath);
+  const reportJson = run.artifacts.find(file => file.path === run.reportJsonPath);
+  const httpTrace = run.artifacts.find(file => file.path === run.httpTracePath);
+  if (report) addLink(featured, {...report, label:"Report (.md)"}, "btn");
+  if (reportJson) addLink(featured, {...reportJson, label:"Report estruturado (.json)"}, "btn");
+  if (httpTrace) addLink(featured, {...httpTrace, label:"Requests/responses OpenRouter (.jsonl)"}, "btn");
+  const summary = $("#all-downloads-label");
+  summary.textContent = `Todos os arquivos da execução (${run.artifacts.length})`;
+  for (const artifact of run.artifacts) {
+    addLink(list, artifact.name === "openrouter-http.jsonl" ? {...artifact, label:"Requests/responses OpenRouter (.jsonl)"} : artifact);
+  }
 }
 function subscribe(){
   state.unsub.forEach(u => { try { u(); } catch(e) {} }); state.unsub = [];
@@ -685,13 +737,35 @@ async function callFacilitator(t){
 }
 
 /* ============================================================== boot */
-setData(examplePacket());
+async function loadLatestRun(){
+  const scenarioId = new URLSearchParams(location.search).get("scenario") || "GOV-BR-001";
+  if (!/^[A-Za-z0-9_-]+$/.test(scenarioId)) throw new Error("Identificador de cenário inválido.");
+  const latestUrl = new URL(`../../../runs/${encodeURIComponent(scenarioId)}/latest.json`, location.href);
+  const indexResponse = await fetch(latestUrl, {cache:"no-store"});
+  if (!indexResponse.ok) throw new Error(`Índice da execução indisponível (HTTP ${indexResponse.status}).`);
+  const run = await indexResponse.json();
+  if (run.scenarioId !== scenarioId || !run.packetPath) throw new Error("A execução mais recente não contém um pacote de revisão.");
+  const packetUrl = new URL(run.packetPath, latestUrl);
+  if (packetUrl.origin !== latestUrl.origin) throw new Error("O pacote aponta para outra origem.");
+  const packetResponse = await fetch(packetUrl, {cache:"no-store"});
+  if (!packetResponse.ok) throw new Error(`Pacote de revisão indisponível (HTTP ${packetResponse.status}).`);
+  setData(await packetResponse.json(), run, latestUrl);
+}
+(async () => {
+  try { await loadLatestRun(); }
+  catch(err) {
+    setData(examplePacket());
+    const msg = $("#load-msg");
+    msg.textContent = `Execução real não carregada; exibindo o exemplo ilustrativo. ${err.message}`;
+    msg.hidden = false;
+  }
+})();
 (async () => {
   if (!window.claude || !claude.use) return;
   const [db, user, sample] = await Promise.all([claude.use("db"), claude.use("user"), claude.use("sample")].map(p => p.catch(() => null)));
   state.db = db; state.user = user; state.sample = sample;
   if (user) { try { state.me = await user.id(); } catch(e) {} try { const c = await user.can("data.write"); state.canWrite = c !== false; } catch(e) { state.canWrite = true; } }
   else state.canWrite = !!db;
-  subscribe(); route();
+  if (state.data) { subscribe(); route(); }
 })();
 </script>

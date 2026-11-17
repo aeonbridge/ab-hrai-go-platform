@@ -1,4 +1,4 @@
-"""Command line interface: ``scse validate|run|experiment|models``."""
+"""Command line interface: ``scse validate|run|experiment|govern|models|mural``."""
 from __future__ import annotations
 
 import argparse
@@ -262,7 +262,24 @@ def build_parser() -> argparse.ArgumentParser:
     m.add_argument("--providers")
     m.add_argument("--transport", choices=["openrouter", "direct"])
     m.set_defaults(func=cmd_models)
+
+    mu = sub.add_parser("mural", help="mural de tensões ao vivo: QR por tensão, papéis humanos, votos e comentários")
+    mus = mu.add_subparsers(dest="mural_cmd", required=True)
+    sv = mus.add_parser("serve", help="sobe o servidor do mural (SQLite + eventos ao vivo)")
+    sv.add_argument("--host", default="127.0.0.1", help="0.0.0.0 para celulares na mesma rede")
+    sv.add_argument("--port", type=int, default=8000)
+    sv.add_argument("--db", default=str(REPO_ROOT / "runs/mural/mural.sqlite3"), help="arquivo SQLite das interações humanas")
+    sv.add_argument("--public-url", help="endereço público (ex.: túnel) usado nos QR codes")
+    sv.add_argument("--serve-runs", action="store_true", help="também serve runs/ (links de arquivos da execução); não use em URL pública")
+    mu.set_defaults(func=cmd_mural)
     return ap
+
+
+def cmd_mural(args) -> int:
+    from .mural_server import serve
+
+    serve(args.host, args.port, Path(args.db), args.public_url, args.serve_runs)
+    return 0
 
 
 def main(argv: list[str] | None = None) -> int:

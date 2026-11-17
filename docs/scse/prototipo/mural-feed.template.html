@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mural de Tensões</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<!--
+  Template for the run-backed tension wall. scripts/build_run_prototypes.py replaces the
+  RUN placeholder with the run index, the slimmed revision packet and the council roster.
+  Layout: a social feed. Strata are "stories", each proposal is a post whose cover is the
+  council table seen from above (the same ring as the 3D tour), lit by each stratum's stance.
+-->
+<style>
+:root{
+  color-scheme: dark;
+  --chamber:#0E1626; --deep:#09101D; --surface:#152038; --surface-2:#1C2945;
+  --line:rgba(214,226,240,.12); --line-2:rgba(214,226,240,.22);
+  --text:#EAF0F7; --muted:#93A3BC; --brass:#E8A33D; --brass-2:#F5C571;
+  --for:#38C2B4; --against:#FF7A59; --amend:#6EA0FF; --split:#A78BFA; --silent:#3A4659;
+  --q1:#38C2B4; --q2:#FF7A59; --q3:#E8A33D;
+  --display:"Bricolage Grotesque", system-ui, sans-serif; --body:"IBM Plex Sans", system-ui, sans-serif;
+  --feed:min(100%, 520px);
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:150px}
+body{margin:0;background:radial-gradient(120% 80% at 50% -10%, #1A2A4A 0%, var(--chamber) 45%, var(--deep) 100%) fixed;color:var(--text);font:400 15px/1.5 var(--body);-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+a{color:var(--brass-2)}
+:focus-visible{outline:2px solid var(--brass-2);outline-offset:3px;border-radius:6px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+svg{display:block}
+
+/* ---------------------------------------------------------------- shell */
+.app{display:grid;grid-template-columns:1fr;justify-items:center;padding-bottom:84px}
+header.top{position:sticky;top:0;z-index:20;width:100%;backdrop-filter:blur(14px);background:rgba(9,16,29,.72);border-bottom:1px solid var(--line)}
+.top-in{max-width:var(--feed);margin:0 auto;display:flex;align-items:center;gap:12px;padding:12px 16px}
+.wordmark{font:700 24px/1 var(--display);letter-spacing:-.02em;margin:0;flex:1}
+.wordmark small{display:block;font:500 12.5px/1.4 var(--body);color:var(--muted);letter-spacing:0;margin-top:3px}
+.icon-btn{width:40px;height:40px;display:grid;place-items:center;border-radius:12px;color:var(--text)}
+.icon-btn:hover{background:var(--surface)}
+main{width:var(--feed);min-width:0}
+aside{display:none;position:sticky;top:90px;align-self:start;padding-top:24px}
+
+/* ---------------------------------------------------------------- stories */
+.stories{display:flex;gap:14px;overflow-x:auto;padding:16px 16px 10px;scrollbar-width:none}
+.stories::-webkit-scrollbar{display:none}
+.story{flex:0 0 auto;width:72px;display:grid;justify-items:center;gap:6px;font-size:12px;color:var(--muted);text-align:center}
+.story .ring{width:68px;height:68px;border-radius:50%;padding:3px;background:conic-gradient(from 200deg, var(--c), var(--brass), var(--c));transition:transform .2s}
+.story.seen .ring{background:var(--line-2)}
+.story:hover .ring{transform:scale(1.05)}
+.story .av{width:100%;height:100%;border-radius:50%;border:3px solid var(--deep);display:grid;place-items:center;background:radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--c) 85%, white), var(--c) 55%, color-mix(in srgb, var(--c) 50%, black));font:700 18px/1 var(--display);color:#0B1220}
+.story span{line-height:1.2;max-width:76px}
+
+/* ---------------------------------------------------------------- tension chips */
+.chips{position:sticky;top:70px;z-index:10;display:flex;gap:8px;overflow-x:auto;padding:10px 16px;background:linear-gradient(var(--chamber) 70%, transparent);scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;padding:7px 14px;border-radius:999px;border:1px solid var(--line-2);font-size:13.5px;color:var(--muted);white-space:nowrap}
+.chip b{color:var(--text);font-weight:600;margin-right:4px}
+.chip[aria-pressed="true"]{background:var(--text);color:var(--deep);border-color:var(--text)}
+.chip[aria-pressed="true"] b{color:var(--deep)}
+
+/* ---------------------------------------------------------------- tension banner */
+.banner{margin:6px 16px 22px;padding:22px 20px 18px;border-radius:24px;background:linear-gradient(150deg, var(--surface-2), var(--surface) 60%);border:1px solid var(--line)}
+.banner h2{font:700 clamp(26px, 6vw, 34px)/1.05 var(--display);letter-spacing:-.025em;margin:0 0 10px;text-wrap:balance}
+.banner p{margin:0 0 16px;color:var(--muted);max-width:60ch}
+.spread{display:flex;height:12px;border-radius:999px;overflow:hidden;background:var(--silent)}
+.spread i{display:block;height:100%}
+.spread-legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:13px;color:var(--muted)}
+.spread-legend span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c);margin-right:6px;vertical-align:1px}
+.seeders{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:13px;color:var(--muted)}
+.dotav{width:22px;height:22px;border-radius:50%;background:var(--c);border:2px solid var(--surface);flex:0 0 auto}
+.seeders .dotav+.dotav{margin-left:-14px}
+
+/* ---------------------------------------------------------------- post */
+.post{margin:0 0 30px;border-bottom:1px solid var(--line);padding-bottom:18px}
+@media (min-width:560px){ .post{border:1px solid var(--line);border-radius:22px;background:rgba(21,32,56,.55);padding-bottom:16px;overflow:hidden} }
+.post-head{display:flex;align-items:center;gap:11px;padding:12px 14px}
+.post-head .av{width:38px;height:38px;border-radius:50%;padding:2px;background:conic-gradient(var(--c), var(--brass), var(--c))}
+.post-head .av i{display:block;width:100%;height:100%;border-radius:50%;border:2px solid var(--deep);background:var(--c)}
+.who{flex:1;min-width:0;line-height:1.25}
+.who b{font-weight:600}
+.who small{display:block;color:var(--muted);font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lens{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;color:var(--deep);background:var(--lc)}
+
+.carousel{position:relative;aspect-ratio:1/1;background:var(--deep)}
+.track{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.track::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;height:100%;scroll-snap-align:center;position:relative;overflow:hidden}
+.cover{background:radial-gradient(90% 70% at 50% 38%, color-mix(in srgb, var(--lc) 26%, transparent), transparent 70%), linear-gradient(180deg, #0F1A2E, #0A111F);display:grid;grid-template-rows:1fr auto}
+.cover svg{width:100%;height:100%;max-height:100%}
+.cover{position:relative}
+.key{position:absolute;top:14px;left:14px;display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12px;color:var(--muted);max-width:70%}
+.key span::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--c);margin-right:5px}
+.key .au::before{background:none;border:2px solid var(--brass);width:6px;height:6px}
+.cover h3{margin:0;padding:0 22px 22px;font:700 clamp(21px, 5.2vw, 27px)/1.08 var(--display);letter-spacing:-.02em;text-wrap:balance}
+.textslide{padding:26px 24px;display:flex;flex-direction:column;gap:12px;background:linear-gradient(160deg, #18264200, #0B1322), var(--surface)}
+.textslide h4{margin:0;font:600 13px/1.3 var(--body);color:var(--brass-2)}
+.textslide .body{overflow:auto;font-size:15px;line-height:1.55;padding-right:6px;scrollbar-width:thin}
+.textslide .body p{margin:0 0 .8em}
+.grid8{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:18px;height:100%;background:var(--surface)}
+.cell{border-radius:16px;padding:10px 12px;background:color-mix(in srgb, var(--sc) 16%, var(--surface));border:1px solid color-mix(in srgb, var(--sc) 45%, transparent);display:flex;flex-direction:column;justify-content:space-between;min-height:0}
+.cell.silent{background:transparent;border-style:dashed;border-color:var(--line-2);color:var(--muted)}
+.cell b{font-size:13.5px;font-weight:600}
+.cell span{font:700 20px/1 var(--display);color:var(--sc)}
+.cell.silent span{color:var(--muted);font-weight:500;font-size:15px}
+.counter{position:absolute;top:12px;right:12px;font-size:12px;padding:3px 9px;border-radius:999px;background:rgba(9,16,29,.72)}
+.pager{display:flex;gap:6px;padding:10px 12px 0;overflow-x:auto;scrollbar-width:none}
+.pager::-webkit-scrollbar{display:none}
+.pager button{flex:1 0 auto;height:34px;padding:0 12px;border-radius:999px;font-size:13px;font-weight:600;color:var(--muted);border:1px solid var(--line);white-space:nowrap}
+.pager button[aria-selected="true"]{color:var(--deep);background:var(--brass);border-color:var(--brass)}
+.nav-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(9,16,29,.78);border:1px solid var(--line-2);color:var(--text);backdrop-filter:blur(6px);transition:opacity .2s}
+.nav-arrow.prev{left:10px}.nav-arrow.next{right:10px}
+.nav-arrow[disabled]{opacity:0;pointer-events:none}
+.next-hint{animation:nudge 1.6s ease-in-out 1.2s 2}
+@keyframes nudge{0%,100%{transform:translateY(-50%)}50%{transform:translate(5px,-50%)}}
+.burst{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;opacity:0}
+.burst.go{animation:burst .9s ease-out}
+@keyframes burst{0%{opacity:0;transform:scale(.4)}25%{opacity:1;transform:scale(1.1)}60%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.15)}}
+
+.actions{display:flex;align-items:center;gap:6px;padding:8px 10px 0}
+.act{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 12px;border-radius:999px;font-size:14px;font-weight:500;color:var(--text);border:1px solid var(--line-2);transition:background .15s, border-color .15s, transform .15s}
+.act:active{transform:scale(.94)}
+.act[aria-pressed="true"]{background:var(--ac);border-color:var(--ac);color:var(--deep)}
+.act.icon-only{border:0;padding:0 8px}
+.act.icon-only[aria-pressed="true"]{background:none;color:var(--brass)}
+.spacer{flex:1}
+.caption{padding:10px 16px 0;line-height:1.5}
+.caption .liked{font-size:14px;margin-bottom:6px}
+.caption .liked b{font-weight:600}
+.caption .desc{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;color:#D5DEEA}
+.caption .desc.open{display:block}
+.more{color:var(--muted);font-size:14px;margin-top:2px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;font-size:13.5px}
+.tags button{color:var(--brass-2)}
+.flag{color:var(--against)}
+.comments{padding:6px 16px 0}
+.comments>button{color:var(--muted);font-size:14px;margin:4px 0}
+.comment{display:grid;grid-template-columns:28px 1fr;gap:10px;padding:8px 0}
+.comment .dotav{width:28px;height:28px;border:0}
+.comment .txt{font-size:14px;line-height:1.5}
+.comment .txt b{font-weight:600}
+.comment .verb{color:var(--vc);font-weight:500}
+.comment .clamp{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.comment .clamp.open{display:block}
+.comment .meta{font-size:12px;color:var(--muted);margin-top:2px}
+form.say{display:flex;gap:10px;align-items:center;margin:8px 16px 0;padding-top:10px;border-top:1px solid var(--line)}
+form.say input{flex:1;background:none;border:0;color:var(--text);font:inherit;font-size:14px;padding:6px 0}
+form.say input::placeholder{color:var(--muted)}
+form.say input:focus{outline:none}
+form.say button{color:var(--brass-2);font-weight:600;font-size:14px}
+form.say button:disabled{opacity:.4;cursor:default}
+
+/* ---------------------------------------------------------------- grid view */
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;padding:0 0 20px}
+.tile{position:relative;aspect-ratio:1/1;background:linear-gradient(180deg, #0F1A2E, #0A111F);overflow:hidden}
+.tile svg{width:100%;height:100%}
+.tile .ov{position:absolute;inset:0;display:flex;align-items:flex-end;padding:8px;background:linear-gradient(transparent 45%, rgba(9,16,29,.92));font:600 12px/1.2 var(--body);text-align:left;opacity:.0;transition:opacity .2s}
+.tile:hover .ov,.tile:focus-visible .ov{opacity:1}
+.tile .mine{position:absolute;top:6px;right:6px;width:12px;height:12px;border-radius:50%;background:var(--mc);border:2px solid var(--deep)}
+
+/* ---------------------------------------------------------------- side panel & sheets */
+.card{border:1px solid var(--line);border-radius:20px;padding:18px;background:rgba(21,32,56,.55);margin-bottom:16px}
+.card h3{margin:0 0 6px;font:700 18px/1.2 var(--display)}
+.card p{margin:0 0 10px;color:var(--muted);font-size:13.5px}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.stat-row div{text-align:center}
+.stat-row b{display:block;font:700 22px/1 var(--display)}
+.stat-row span{font-size:12px;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:38px;padding:0 16px;border-radius:12px;font-weight:600;font-size:14px;background:var(--brass);color:#1A1306}
+.btn.ghost{background:none;border:1px solid var(--line-2);color:var(--text)}
+.files{display:flex;flex-direction:column;gap:6px;max-height:260px;overflow:auto;margin-top:8px}
+.files a{font-size:13px;text-decoration:none;color:var(--text);display:flex;justify-content:space-between;gap:10px;padding:6px 8px;border-radius:8px}
+.files a:hover{background:var(--surface-2)}
+.files a span{color:var(--muted)}
+.heat{display:grid;grid-template-columns:auto repeat(8, 1fr);gap:3px;font-size:11.5px;align-items:center}
+.heat .h{color:var(--muted);text-align:center}
+.heat .r{color:var(--muted);padding-right:6px;white-space:nowrap}
+.heat i{display:block;aspect-ratio:1/1;border-radius:4px;background:var(--silent)}
+.sheet{position:fixed;inset:0;z-index:40;display:none;align-items:flex-end;justify-content:center;background:rgba(5,9,17,.6);backdrop-filter:blur(4px)}
+.sheet.open{display:flex}
+.sheet .panel{width:min(100%, 520px);max-height:86vh;overflow:auto;background:var(--chamber);border:1px solid var(--line);border-radius:24px 24px 0 0;padding:20px 18px 30px}
+@media (min-width:700px){ .sheet{align-items:center} .sheet .panel{border-radius:24px} }
+nav.bottom{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;justify-content:space-around;padding:8px 0 calc(8px + env(safe-area-inset-bottom));background:rgba(9,16,29,.9);backdrop-filter:blur(14px);border-top:1px solid var(--line)}
+nav.bottom button{display:grid;justify-items:center;gap:3px;font-size:11.5px;color:var(--muted);min-width:64px}
+nav.bottom button[aria-current="page"]{color:var(--text)}
+.empty{padding:40px 24px;text-align:center;color:var(--muted)}
+.empty h3{font:700 22px/1.2 var(--display);color:var(--text);margin:0 0 8px}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(20px);opacity:0;z-index:60;background:var(--text);color:var(--deep);padding:10px 16px;border-radius:12px;font-weight:600;font-size:14px;transition:all .25s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ---------------------------------------------------------------- story viewer */
+.viewer{position:fixed;inset:0;z-index:50;display:none;background:#05080F;touch-action:manipulation}
+.viewer.open{display:grid;place-items:center}
+.vframe{position:relative;width:min(100vw, calc(100vh * 9 / 16), 460px);height:min(100vh, 820px);background:radial-gradient(110% 60% at 50% 0%, color-mix(in srgb, var(--c) 55%, #0E1626), #0E1626 62%);display:flex;flex-direction:column;overflow:hidden}
+@media (min-width:600px){ .vframe{border-radius:22px;height:min(92vh, 820px)} }
+.bars{display:flex;gap:4px;padding:12px 12px 0}
+.bars i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.28);overflow:hidden}
+.bars i b{display:block;height:100%;width:0;background:#fff}
+.bars i.done b{width:100%}
+.vhead{display:flex;align-items:center;gap:10px;padding:12px 14px}
+.vhead .dotav{width:36px;height:36px;border:2px solid rgba(255,255,255,.6)}
+.vhead div{flex:1;line-height:1.25}
+.vhead small{display:block;color:rgba(234,240,247,.7);font-size:12.5px}
+.vbody{flex:1;display:flex;flex-direction:column;justify-content:center;gap:18px;padding:10px 26px 20px;min-height:0}
+.vstance{align-self:flex-start;font-weight:600;font-size:13.5px;padding:6px 12px;border-radius:999px;background:var(--sc);color:var(--deep)}
+.vquote{font:600 clamp(19px, 5vw, 23px)/1.32 var(--display);letter-spacing:-.01em;margin:0;overflow:auto}
+.vprop{border-top:1px solid rgba(255,255,255,.18);padding-top:14px;font-size:14px;color:rgba(234,240,247,.85)}
+.vfoot{display:flex;gap:10px;padding:0 20px 22px}
+.vfoot .btn{flex:1}
+.vtap{position:absolute;top:70px;bottom:90px;width:35%;z-index:2}
+.vtap.l{left:0}.vtap.r{right:0}
+.vclose{position:absolute;top:22px;right:10px;z-index:3;color:#fff}
+
+.code{display:inline;padding:0 .3em;margin:0 .05em;border-radius:6px;font:inherit;color:inherit;background:rgba(232,163,61,.13);box-shadow:inset 0 -1.5px 0 rgba(232,163,61,.55);cursor:pointer;line-height:inherit;text-align:left}
+.code:hover{background:rgba(232,163,61,.24)}
+.code.fic{box-shadow:inset 0 -1.5px 0 rgba(255,122,89,.0);background:rgba(255,122,89,.10);border-bottom:1.5px dashed rgba(255,122,89,.7);border-radius:6px 6px 0 0}
+.code.k-claim{background:rgba(110,160,255,.13);box-shadow:inset 0 -1.5px 0 rgba(110,160,255,.6)}
+.src{display:inline-flex;align-items:center;gap:4px;vertical-align:1px;margin:0 .15em;padding:1px 8px;border-radius:999px;font-size:.78em;font-weight:600;color:var(--muted);border:1px solid var(--line-2)}
+.src:hover{color:var(--text);border-color:var(--brass)}
+.vquote .code,.vquote .src{position:relative;z-index:3}
+.pop{position:absolute;z-index:70;width:min(330px, calc(100vw - 24px));background:#1A2742;border:1px solid var(--line-2);border-radius:16px;padding:14px 16px;box-shadow:0 18px 50px rgba(0,0,0,.45);font-size:14px;line-height:1.45}
+.pop[hidden]{display:none}
+.pop .kind{font-size:12.5px;color:var(--brass-2);font-weight:600}
+.pop h5{margin:3px 0 6px;font:700 17px/1.2 var(--display)}
+.pop p{margin:0 0 6px;color:#C9D4E3}
+.pop .fic{color:var(--against);font-size:12.5px;font-weight:600}
+.pop .cd{font-size:12px;color:var(--muted)}
+.pop ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.pop li b{display:block;font-weight:600}
+.pop li span{font-size:12.5px;color:var(--muted)}
+.howto{margin:0 0 22px;padding:16px 18px;border-radius:20px;border:1px solid rgba(232,163,61,.35);background:rgba(232,163,61,.07);font-size:14px}
+.howto h3{margin:0 0 6px;font:700 17px/1.2 var(--display)}
+.howto p{margin:0 0 10px;color:#C9D4E3}
+.howto .row{display:flex;gap:10px;flex-wrap:wrap}
+.legend-codes{display:grid;gap:12px;margin:12px 0 16px;font-size:13.5px}
+.legend-codes div{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.legend-codes .code{white-space:nowrap}
+.legend-codes span{color:#C9D4E3;max-width:46ch}
+@media (min-width:560px){ .howto{margin-inline:0} }
+@media (max-width:559px){ .howto{margin-inline:16px} }
+@media (min-width:560px){ .banner{margin-inline:0} .stories,.chips{padding-inline:0} }
+@media (min-width:1080px){
+  .app{grid-template-columns:minmax(0,1fr) var(--feed) 320px minmax(0,1fr);column-gap:40px;padding-bottom:40px}
+  .app>main{grid-column:2} .app>aside{grid-column:3;display:block}
+  .top-in{max-width:880px} nav.bottom{display:none} .toast{bottom:32px}
+}
+/* live layer: faces, presence, QR, join */
+.face{display:block;border-radius:50%;flex:0 0 auto}
+.stack{display:inline-flex;align-items:center}
+.stack .face{border:2px solid var(--deep);margin-left:-10px;box-sizing:content-box}
+.stack .face:first-child{margin-left:0}
+.stack .more{margin-left:-8px;min-width:26px;height:26px;padding:0 7px;border-radius:999px;display:grid;place-items:center;background:var(--surface-2);border:2px solid var(--deep);font-size:12px;font-weight:600;box-sizing:content-box}
+.here{display:flex;align-items:center;gap:10px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);flex-wrap:wrap}
+.here .who-here{flex:1;min-width:160px;font-size:13.5px;color:var(--muted)}
+.here .who-here b{color:var(--text);font-weight:600}
+.qr-btn{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border-radius:999px;background:var(--text);color:var(--deep);font-weight:600;font-size:13.5px}
+.chip .pc{display:inline-grid;place-items:center;min-width:18px;height:18px;margin-left:6px;padding:0 5px;border-radius:999px;background:var(--for);color:var(--deep);font-size:11px;font-weight:700}
+.chip .pc:empty{display:none}
+.humans{display:flex;align-items:center;gap:10px;margin-top:8px;font-size:13.5px;color:var(--muted)}
+.humans:empty{display:none}
+.humans b{color:var(--text);font-weight:600}
+.me-btn{display:flex;align-items:center;gap:8px;padding:4px 10px 4px 4px;border-radius:999px;border:1px solid var(--line-2);font-size:13px;font-weight:600}
+.me-btn[hidden]{display:none}
+@media (max-width:440px){ .me-btn span{display:none} .me-btn{padding:3px} .wordmark{font-size:21px} }
+.qrbox{display:grid;place-items:center;background:#fff;border-radius:20px;padding:18px;margin:14px auto;width:min(100%, 340px);aspect-ratio:1/1}
+.qrbox svg{width:100%;height:100%}
+.qrurl{text-align:center;font-size:14px;word-break:break-all;color:var(--muted);margin:0 0 14px}
+.qr-full{position:fixed;inset:0;z-index:80;background:#fff;display:none;flex-direction:column;align-items:center;justify-content:center;gap:24px;color:#0B1220;padding:24px}
+.qr-full.open{display:flex}
+.qr-full h2{font:700 clamp(28px, 5vw, 56px)/1.05 var(--display);margin:0;text-align:center;max-width:22ch}
+.qr-full .qrbox{width:min(70vh, 80vw);margin:0;padding:0}
+.qr-full p{font-size:clamp(16px, 2.2vw, 24px);margin:0}
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0 16px}
+.role{display:flex;align-items:center;gap:10px;padding:10px;border-radius:14px;border:1.5px solid var(--line-2);text-align:left;font-size:13.5px;line-height:1.25}
+.role[aria-checked="true"]{border-color:var(--c);background:color-mix(in srgb, var(--c) 18%, transparent)}
+.field{display:grid;gap:6px;margin:12px 0}
+.field label{font-size:13.5px;font-weight:600}
+.field input{height:44px;border-radius:12px;border:1px solid var(--line-2);background:var(--deep);color:var(--text);padding:0 14px;font:inherit}
+.field input:focus{outline:2px solid var(--brass-2);outline-offset:1px}
+.note{font-size:13px;color:var(--muted);margin:0 0 14px}
+.err{color:var(--against);font-size:13.5px;margin:0 0 10px}
+.live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--for);margin-right:6px;box-shadow:0 0 0 0 rgba(56,194,180,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(56,194,180,0)}100%{box-shadow:0 0 0 0 rgba(56,194,180,0)}}
+.comment .del{color:var(--muted);font-size:12px;margin-left:8px;text-decoration:underline}
+@media (prefers-reduced-motion: reduce){ *{transition:none !important;animation:none !important} }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <h1 class="wordmark">Mural de Tensões<small id="run-line"></small></h1>
+    <button class="me-btn" id="me-btn" hidden aria-label="Seu papel nesta sessão"></button>
+    <button class="icon-btn" id="open-run" aria-label="Sobre esta execução"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5" stroke-linecap="round"/></svg></button>
+  </div>
+</header>
+
+<div class="app">
+  <main>
+    <section class="stories" id="stories" aria-label="Falas de cada estrato"></section>
+    <nav class="chips" id="chips" aria-label="Filtrar por tensão"></nav>
+    <div id="view"></div>
+  </main>
+  <aside id="side" aria-label="Execução e mapa de calor"></aside>
+</div>
+
+<nav class="bottom" aria-label="Seções">
+  <button data-nav="feed"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M4 10h16"/></svg>Feed</button>
+  <button data-nav="grade"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4zM9.3 4v16M14.7 4v16M4 9.3h16M4 14.7h16"/></svg>Grade</button>
+  <button data-nav="agenda"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 4h12v17l-6-4-6 4z" stroke-linejoin="round"/></svg>Agenda</button>
+  <button data-nav="run"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5" stroke-linecap="round"/></svg>Execução</button>
+</nav>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title"><div class="panel" id="sheet-panel"></div></div>
+
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Falas do estrato">
+  <div class="vframe" id="vframe"></div>
+</div>
+<div class="pop" id="pop" role="dialog" aria-label="O que é isto" hidden></div>
+<div class="toast" id="toast" role="status"></div>
+<div class="qr-full" id="qr-full" role="dialog" aria-modal="true" aria-label="QR code em tela cheia"></div>
+
+<script>
+/* Run data injected at build time (index, slimmed packet, roster seats). */
+const RUN = /*__RUN__*/null;
+
+/* ============================================================== vocabulary */
+const STRATA_C = {regulators:"#F0A93B",publicOperators:"#E4572E",business:"#C45BAA",research:"#8E7CF0",civilSociety:"#4A90E2",workers:"#2FB5A8",affectedGroups:"#7BD36B",infrastructure:"#BFC6CF"};
+const STRATA_INI = {regulators:"Rg",publicOperators:"PP",business:"Em",research:"Pq",civilSociety:"SC",workers:"Tr",affectedGroups:"Af",infrastructure:"In"};
+const STRATA_SHORT = {regulators:"Reguladores",publicOperators:"Poder público",business:"Empresas",research:"Pesquisa",civilSociety:"Sociedade civil",workers:"Trabalhadores",affectedGroups:"Afetados",infrastructure:"Infraestrutura"};
+const STANCE = {for:{pt:"a favor",c:"#38C2B4"},amend:{pt:"pede ajuste",c:"#6EA0FF"},split:{pt:"dividido",c:"#A78BFA"},against:{pt:"contra",c:"#FF7A59"},silent:{pt:"sem posição",c:"#3A4659"}};
+const ORDER = ["for","amend","split","against","silent"];
+const STANCE_PL = {for:"a favor",amend:"pedem ajuste",split:"divididos",against:"contra",silent:"sem posição"};
+const LENS = {omission:{pt:"Omissão",c:"#38C2B4"},excess:{pt:"Excesso",c:"#FF7A59"},advantage:{pt:"Vantagem",c:"#E8A33D"}};
+const VERB = {author:"propôs",support:"apoiou",challenge:"contestou",amendment:"emendou",position:"comentou"};
+const CHANGE_PT = {add:"adicionar",modify:"modificar",remove:"remover",keep:"manter"};
+const SLIDE_NAMES = ["Mesa", "Achado", "Estratos", "Redação"];
+const HUMAN = [["for","Apoio","#38C2B4"],["amend","Ajuste","#6EA0FF"],["against","Contra","#FF7A59"]];
+const REDUCE = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const paras = t => esc(t).split(/\n{2,}/).map(x => `<p>${x}</p>`).join("");
+const short = (t, n) => { t = String(t || "").replace(/\s+/g, " ").trim(); if (t.length <= n) return t; const c = t.slice(0, n); const s = Math.max(c.lastIndexOf(". "), c.lastIndexOf("; ")); return s > n * .55 ? c.slice(0, s + 1) : c.slice(0, c.lastIndexOf(" ")) + "…"; };
+const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
+const toast = msg => { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove("show"), 1800); };
+
+/* ============================================================== codes → names
+   The council cites model parts and sources by code (GM-03, CF-13, BRF-CTX-PUBSVC, C0047-R2).
+   rich() swaps each code for its readable name (tap for detail) and folds pure source lists
+   in parentheses into one "fontes" chip. */
+const GLOSS = RUN.glossary || {};
+const TOPICS = RUN.topics || {};
+const KIND_PT = {component:"Parte do modelo de governança", feature:"Traço do contexto brasileiro", fact:"Fato do contexto em 14/11/2026",
+  indicator:"Indicador do cenário", source:"Fonte do pacote de evidências", claim:"Fala registrada nesta execução"};
+const CODE_KEYS = Object.keys(GLOSS).sort((a, b) => b.length - a.length);
+const CODE_RE = CODE_KEYS.length ? new RegExp(`(?<![\\w-])(${CODE_KEYS.map(k => k.replace(/[.*+?^${}()|[\]\\-]/g, "\\$&")).join("|")})(?![\\w-])`, "g") : null;
+const isWord = k => /^[A-Z]+$/.test(k);  // plain acronyms like LGPD stay as words in running text
+function chip(k){ const g = GLOSS[k]; return `<button class="code k-${g.kind}${g.fictional ? " fic" : ""}" data-code="${esc(k)}" title="${esc(g.name)}">${esc(g.short)}</button>`; }
+function rich(text){
+  let h = esc(text);
+  if (!CODE_RE) return h;
+  const held = [];
+  h = h.replace(/\(([^()]{2,500})\)/g, (m, inner) => {
+    const codes = inner.match(CODE_RE) || [];
+    if (!codes.length) return m;
+    const rest = inner.replace(CODE_RE, "").replace(/\be\b/g, "").replace(/[\s,;]/g, "");
+    if (rest) return m;
+    const uniq = [...new Set(codes)], kinds = uniq.map(k => GLOSS[k].kind);
+    const sources = kinds.every(k => k === "source" || k === "indicator"), claims = kinds.every(k => k === "claim");
+    if (uniq.length === 1 && !sources && !claims) return m;  // a single model part reads better inline
+    const n = uniq.length, label = claims ? (n > 1 ? `${n} falas` : "ver fala") : sources ? `${n} fonte${n > 1 ? "s" : ""}` : `${n} referências`;
+    held.push(`<button class="src" data-codes="${uniq.join(",")}">${label}</button>`);
+    return `\u0000${held.length - 1}\u0000`;
+  });
+  h = h.replace(CODE_RE, k => isWord(k) ? k : chip(k));
+  return h.replace(/\u0000(\d+)\u0000/g, (m, i) => held[+i]);
+}
+const richParas = t => String(t || "").split(/\n{2,}/).map(x => `<p>${rich(x)}</p>`).join("");
+function targetHtml(p){ return p.componentId ? (GLOSS[p.componentId] ? chip(p.componentId) : esc(`${p.componentId} ${p.componentTitle || ""}`)) : esc(TOPICS[p.topic] || p.topic || ""); }
+
+/* ============================================================== data */
+const P = RUN.packet;
+const STRATA = P.strata.map(s => ({id:s.stratumId, label:s.label, short:STRATA_SHORT[s.stratumId] || s.label, c:STRATA_C[s.stratumId] || "#BFC6CF",
+  seat:(RUN.seats || []).find(x => x.stratumId === s.stratumId) || null}));
+const SIDX = Object.fromEntries(STRATA.map((s, i) => [s.id, i]));
+const PROPS = P.proposals.map(p => {
+  const pos = {};
+  for (const r of p.stratumPositions) pos[r.stratumId] = {stance: STANCE[r.stance] ? r.stance : "silent", statements:(r.statements || []).filter(s => s.text)};
+  for (const s of STRATA) pos[s.id] = pos[s.id] || {stance:"silent", statements:[]};
+  const title = p.proposedTitle || short(p.title, 110);
+  return {id:p.proposalId, title, finding:p.text || "", proposed:p.proposedDescription || "", lens:p.lens, change:p.change,
+    componentId:p.componentId || null, componentTitle:p.componentTitle || "", topic:p.topic || null,
+    target: p.componentId ? (GLOSS[p.componentId] ? GLOSS[p.componentId].short : `${p.componentId} ${p.componentTitle || ""}`.trim()) : (TOPICS[p.topic] || p.topic || ""), author:(p.author || {}).stratumId,
+    provider:(p.author || {}).provider, tensions:p.tensionIds || [], legal:!!p.requiresLegalReview, pos,
+    support:(p.support || {}).seats || 0, challenges:(p.challenges || []).length, amendments:(p.amendments || []).length};
+});
+const TENSIONS = (P.seedTensions || []).map(t => ({id:t.id, title:t.title, description:t.description || "", strata:t.strata || []}));
+if (PROPS.some(p => !p.tensions.length)) TENSIONS.push({id:"outras", title:"Fora das tensões iniciais", description:"Propostas que o conselho levantou sem ligar a nenhuma tensão semeada.", strata:[]});
+const inTension = (p, tid) => tid === "outras" ? !p.tensions.length : p.tensions.includes(tid);
+
+/* ============================================================== local state */
+const KEY = `mural:${P.packetId}`;
+const store = (() => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) { return {}; } })();
+store.react = store.react || {}; store.saved = store.saved || {}; store.notes = store.notes || {}; store.seen = store.seen || {};
+const persist = () => { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch(e) {} };
+const ui = {view:"feed", tension:null, slide:{}};
+
+/* ============================================================== council table (cover art) */
+/* Seats on a ring like the 3D chamber; each lights by its stratum's stance and draws a line to the proposal. */
+function tableSvg(p, {size=400, animate=false, labels=true} = {}){
+  const c = size / 2, R = size * .33, lc = LENS[p.lens].c;
+  const seats = STRATA.map((s, i) => { const a = -Math.PI / 2 + i * Math.PI * 2 / STRATA.length; return {s, x:c + Math.cos(a) * R, y:c + Math.sin(a) * R * .82, a}; });
+  const lines = seats.map(({s, x, y}) => { const st = p.pos[s.id].stance; if (st === "silent") return "";
+    const len = Math.hypot(x - c, y - c).toFixed(1);
+    return `<line x1="${c}" y1="${c}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="${STANCE[st].c}" stroke-width="${size * .008}" stroke-linecap="round" ${animate ? `stroke-dasharray="${len}" stroke-dashoffset="${len}" class="draw"` : ""} opacity=".9"/>`; }).join("");
+  const dots = seats.map(({s, x, y, a}) => { const st = p.pos[s.id].stance, on = st !== "silent", author = s.id === p.author, r = size * (author ? .052 : .04);
+    const ca = Math.cos(a), sa = Math.sin(a), off = r + size * (author ? .045 : .03);
+    const lx = x + ca * off, ly = y + sa * off * .9 + size * .012, anchor = Math.abs(ca) < .3 ? "middle" : ca > 0 ? "start" : "end";
+    const ty = Math.abs(ca) < .3 ? (sa < 0 ? y - off : y + off + size * .024) : ly;
+    return `<g>${author ? `<circle cx="${x}" cy="${y}" r="${r + size * .022}" fill="none" stroke="#E8A33D" stroke-width="${size * .008}"/>` : ""}
+      <circle cx="${x}" cy="${y}" r="${r}" fill="${on ? STANCE[st].c : "none"}" stroke="${on ? "none" : "#53627A"}" stroke-width="${size * .005}" ${on ? "" : `stroke-dasharray="${size * .012} ${size * .01}"`}/>
+      ${labels ? `<text x="${lx.toFixed(1)}" y="${ty.toFixed(1)}" text-anchor="${anchor}" fill="${on ? s.c : "#5E6D85"}" font-family="IBM Plex Sans" font-weight="${on ? 600 : 400}" font-size="${size * .034}">${esc(s.short)}</text>` : ""}</g>`; }).join("");
+  return `<svg viewBox="0 0 ${size} ${size}" role="img" aria-label="Posição dos estratos em ${esc(p.id)}">
+    <ellipse cx="${c}" cy="${c}" rx="${R * 1.22}" ry="${R * 1.0}" fill="none" stroke="rgba(214,226,240,.10)" stroke-width="${size * .004}"/>
+    <ellipse cx="${c}" cy="${c}" rx="${R * .55}" ry="${R * .45}" fill="${lc}" opacity=".08"/>
+    ${lines}${dots}
+    <circle cx="${c}" cy="${c}" r="${size * .07}" fill="#0E1626" stroke="${lc}" stroke-width="${size * .01}"/>
+    <text x="${c}" y="${c + size * .016}" text-anchor="middle" fill="${lc}" font-family="Bricolage Grotesque" font-weight="700" font-size="${size * .046}">${esc(p.id)}</text>
+  </svg>`;
+}
+function tally(list){ const t = {for:0, amend:0, split:0, against:0, silent:0}; for (const p of list) for (const s of STRATA) t[p.pos[s.id].stance]++; return t; }
+
+/* ============================================================== stories */
+function renderStories(){
+  $("#stories").innerHTML = STRATA.map(s => {
+    const n = PROPS.filter(p => p.pos[s.id].statements.length).length;
+    return `<button class="story ${store.seen[s.id] ? "seen" : ""}" data-story="${s.id}" style="--c:${s.c}" aria-label="Ver ${plural(n, "fala", "falas")} de ${esc(s.label)}">
+      <span class="ring"><span class="av">${esc(STRATA_INI[s.id] || s.short.slice(0, 2))}</span></span><span>${esc(s.short)}</span></button>`;
+  }).join("");
+}
+const story = {sid:null, items:[], i:0, timer:null, t0:0, paused:false, dur:8000};
+function openStory(sid){
+  const items = [];
+  for (const p of PROPS) for (const st of p.pos[sid].statements) items.push({p, st});
+  if (!items.length) { toast("Este estrato não se pronunciou"); return; }
+  Object.assign(story, {sid, items, i:0});
+  store.seen[sid] = true; persist(); renderStories();
+  $("#viewer").classList.add("open"); document.body.style.overflow = "hidden";
+  showStory();
+}
+function showStory(){
+  const s = STRATA[SIDX[story.sid]], {p, st} = story.items[story.i], sc = STANCE[st.stance] || STANCE.silent;
+  const f = $("#vframe"); f.style.setProperty("--c", s.c);
+  f.innerHTML = `<div class="bars">${story.items.map((_, k) => `<i class="${k < story.i ? "done" : ""}"><b ${k === story.i ? 'id="bar"' : ""}></b></i>`).join("")}</div>
+    <div class="vhead"><span class="dotav" style="--c:${s.c}"></span><div><b>${esc(s.label)}</b><small>${esc(s.seat ? s.seat.model : "")} · rodada ${esc(st.roundId || "")}</small></div></div>
+    <button class="icon-btn vclose" id="vclose" aria-label="Fechar"><svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <button class="vtap l" data-v="-1" aria-label="Fala anterior"></button><button class="vtap r" data-v="1" aria-label="Próxima fala"></button>
+    <div class="vbody"><span class="vstance" style="--sc:${sc.c}">${esc(VERB[st.role] || "comentou")} ${esc(p.id)}</span>
+      <p class="vquote">“${rich(short(st.text, 420))}”</p>
+      <div class="vprop">${esc(p.title)}</div></div>
+    <div class="vfoot"><button class="btn" data-open-post="${p.id}">Abrir proposta</button></div>`;
+  story.t0 = performance.now(); story.paused = false; tickStory();
+}
+function tickStory(){
+  cancelAnimationFrame(story.timer);
+  const bar = $("#bar"); if (!bar) return;
+  if (REDUCE) { bar.style.width = "100%"; return; }
+  const step = now => {
+    if (!$("#viewer").classList.contains("open")) return;
+    if (story.paused) { story.t0 = now - story.elapsed; story.timer = requestAnimationFrame(step); return; }
+    story.elapsed = now - story.t0; const k = Math.min(1, story.elapsed / story.dur); bar.style.width = (k * 100) + "%";
+    if (k >= 1) moveStory(1); else story.timer = requestAnimationFrame(step);
+  };
+  story.timer = requestAnimationFrame(step);
+}
+function moveStory(d){
+  const n = story.i + d;
+  if (n < 0) { story.i = 0; showStory(); return; }
+  if (n >= story.items.length) {
+    const next = STRATA[SIDX[story.sid] + 1];
+    if (next && d > 0 && PROPS.some(p => p.pos[next.id].statements.length)) { openStory(next.id); return; }
+    closeStory(); return;
+  }
+  story.i = n; showStory();
+}
+function closeStory(){ cancelAnimationFrame(story.timer); $("#viewer").classList.remove("open"); document.body.style.overflow = ""; }
+
+/* ============================================================== chips + banner */
+function renderChips(){
+  const all = `<button class="chip" data-tension="" aria-pressed="${!ui.tension}"><b>Todas</b>${PROPS.length}</button>`;
+  requestAnimationFrame(() => { const on = $("#chips [aria-pressed=\"true\"]"); if (on) on.scrollIntoView({block:"nearest", inline:"center"}); });
+  $("#chips").innerHTML = all + TENSIONS.map(t => `<button class="chip" data-tension="${t.id}" aria-pressed="${ui.tension === t.id}" title="${esc(t.title)}"><b>${t.id === "outras" ? "Outras" : t.id}</b>${esc(short(t.title, 34))}<span class="pc" data-pc="${t.id}"></span></button>`).join("");
+  paintLive();
+}
+function bannerHtml(t, list){
+  const tl = tally(list), total = Object.values(tl).reduce((a, b) => a + b, 0) || 1;
+  return `<section class="banner" aria-labelledby="bt">
+    <h2 id="bt">${esc(t.title)}</h2><p>${esc(t.description)}</p>
+    <div class="spread" role="img" aria-label="Posições somadas dos estratos nesta tensão">${ORDER.map(k => `<i style="width:${tl[k] / total * 100}%;background:${STANCE[k].c}"></i>`).join("")}</div>
+    <div class="spread-legend">${ORDER.filter(k => tl[k]).map(k => `<span style="--c:${STANCE[k].c}">${tl[k]} ${tl[k] === 1 ? STANCE[k].pt : STANCE_PL[k]}</span>`).join("")}</div>
+    ${t.strata.length ? `<div class="seeders">${t.strata.map(s => `<span class="dotav" style="--c:${STRATA_C[s]}"></span>`).join("")}<span>Semeada por ${t.strata.map(s => esc(STRATA_SHORT[s])).join(" e ")}, ${plural(list.length, "proposta", "propostas")}</span></div>` : ""}
+    <div class="here"><span class="stack" data-stack="${t.id}"></span><span class="who-here" data-here="${t.id}"></span>
+      <button class="qr-btn" data-qr="${t.id}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 18h2v2h-2zM14 18h2M18 14h2"/></svg>QR para entrar</button></div>
+  </section>`;
+}
+
+/* ============================================================== post */
+function likedLine(p){
+  const g = s => STRATA.filter(x => p.pos[x.id].stance === s).map(x => x.short);
+  const fav = g("for"), amd = g("amend"), ag = g("against");
+  const parts = [];
+  if (fav.length) parts.push(`Defendida por <b>${esc(fav[0])}</b>${fav.length > 1 ? ` e mais ${fav.length - 1}` : ""}`);
+  if (amd.length) parts.push(`${amd.length} pede${amd.length > 1 ? "m" : ""} ajuste`);
+  const spl = g("split"); if (spl.length) parts.push(`${spl.length} dividido${spl.length > 1 ? "s" : ""}`);
+  if (ag.length) parts.push(`<span style="color:var(--against)">${ag.length} contra</span>`);
+  return parts.join(", ") || "Nenhum outro estrato se pronunciou";
+}
+function commentsOf(p){
+  const out = [];
+  for (const s of STRATA) for (const st of p.pos[s.id].statements) out.push({s, st});
+  const rank = {R2:1, R3:2, R4:3, R5:4, R6:5};
+  return out.sort((a, b) => (rank[a.st.roundId] || 9) - (rank[b.st.roundId] || 9));
+}
+function postHtml(p){
+  const a = STRATA[SIDX[p.author]] || STRATA[0], L = LENS[p.lens], mine = store.react[p.id], saved = !!store.saved[p.id];
+  const comments = commentsOf(p), notes = store.notes[p.id] || [];
+  const slides = [
+    `<div class="slide cover" style="--lc:${L.c}"><div class="key">${ORDER.filter(k => k !== "silent" && STRATA.some(x => p.pos[x.id].stance === k)).map(k => `<span style="--c:${STANCE[k].c}">${STANCE[k].pt}</span>`).join("")}<span class="au">autor</span></div>${tableSvg(p, {animate:!REDUCE})}<h3>${esc(p.title)}</h3></div>`,
+    `<div class="slide textslide"><h4>O achado</h4><div class="body">${richParas(p.finding)}</div></div>`,
+    `<div class="slide"><div class="grid8">${STRATA.map(s => { const st = p.pos[s.id].stance;
+        return `<div class="cell ${st === "silent" ? "silent" : ""}" style="--sc:${STANCE[st].c}"><b>${esc(s.short)}</b><span>${esc(STANCE[st].pt)}</span></div>`; }).join("")}</div></div>`,
+  ];
+  if (p.proposed) slides.push(`<div class="slide textslide"><h4>Redação proposta para ${esc(CHANGE_PT[p.change] || p.change)}: ${esc(p.target)}</h4><div class="body">${richParas(p.proposed)}</div></div>`);
+  const k = ui.slide[p.id] || 0;
+  return `<article class="post" id="${p.id}" data-id="${p.id}" aria-labelledby="t-${p.id}">
+    <div class="post-head"><span class="av" style="--c:${a.c}"><i></i></span>
+      <div class="who"><b>${esc(a.label)}</b><small>${esc(a.seat ? a.seat.model : p.provider || "")}</small></div>
+      <span class="lens" style="--lc:${L.c}">${esc(L.pt)}</span></div>
+    <div class="carousel"><div class="track" data-track="${p.id}" tabindex="0" aria-label="Slides da proposta ${p.id}">${slides.join("")}</div>
+      <span class="counter" aria-hidden="true">${k + 1}/${slides.length}</span>
+      <button class="nav-arrow prev" data-step="-1" aria-label="Tela anterior" ${k === 0 ? "disabled" : ""}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button class="nav-arrow next ${k === 0 ? "next-hint" : ""}" data-step="1" aria-label="Próxima tela" ${k === slides.length - 1 ? "disabled" : ""}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg></button>
+      <div class="burst" aria-hidden="true"><svg width="120" height="120" viewBox="0 0 24 24" fill="#38C2B4"><circle cx="12" cy="12" r="11" opacity=".2"/><path d="M7 12.5l3.2 3.2L17.5 8.5" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <div class="pager" role="tablist" aria-label="Telas da proposta ${p.id}">${SLIDE_NAMES.slice(0, slides.length).map((n, i) => `<button role="tab" data-slide="${i}" aria-selected="${i === k}">${n}</button>`).join("")}</div>
+    <div class="actions" role="group" aria-label="Sua posição sobre ${p.id}">
+      ${HUMAN.map(([v, t, c]) => `<button class="act" data-react="${v}" style="--ac:${c}" aria-pressed="${mine === v}">${t}</button>`).join("")}
+      <span class="spacer"></span>
+      <button class="act icon-only" data-save aria-pressed="${saved}" aria-label="${saved ? "Tirar da agenda" : "Salvar na agenda"}"><svg width="24" height="24" viewBox="0 0 24 24" fill="${saved ? "currentColor" : "none"}" stroke="currentColor" stroke-width="1.8"><path d="M6 4h12v17l-6-4-6 4z" stroke-linejoin="round"/></svg></button>
+    </div>
+    <div class="caption">
+      <div class="liked">${likedLine(p)}</div>
+      <div class="humans" data-humans="${p.id}"></div>
+      <div class="desc" id="t-${p.id}"><b>${esc(a.short)}</b> ${rich(short(p.finding, 360))}</div>
+      <button class="more" data-more>mais</button>
+      <div class="tags">${p.tensions.map(t => `<button data-tension="${t}">#${t}</button>`).join("")}<span style="color:var(--muted)">${targetHtml(p)}</span>${p.legal ? `<span class="flag">revisão jurídica</span>` : ""}</div>
+    </div>
+    <div class="comments">
+      ${comments.length > 1 ? `<button data-allc>Ver as ${comments.length} falas do conselho</button>` : ""}
+      <div class="clist">${commentHtml(comments.slice(-1)[0])}</div>
+      <div class="slist" data-slist="${p.id}"></div>
+      <div class="nlist">${LIVE.on ? "" : notes.map(noteHtml).join("")}</div>
+    </div>
+    <form class="say" data-say><label class="sr" for="say-${p.id}">Seu comentário sobre ${p.id}</label>
+      <input id="say-${p.id}" placeholder="Comente como revisor…" maxlength="500" autocomplete="off"><button type="submit" disabled>Publicar</button></form>
+  </article>`;
+}
+function commentHtml(c){
+  if (!c) return "";
+  const sc = STANCE[c.st.stance] || STANCE.silent;
+  return `<div class="comment"><span class="dotav" style="--c:${c.s.c}"></span><div class="txt"><div class="clamp"><b>${esc(c.s.short)}</b> <span class="verb" style="--vc:${sc.c}">${esc(VERB[c.st.role] || "comentou")}</span> ${rich(c.st.text)}</div>
+    <div class="meta">rodada ${esc(c.st.roundId || "")}${c.st.provider ? `, ${esc(c.st.provider)}` : ""}</div></div></div>`;
+}
+function noteHtml(n){ return `<div class="comment"><span class="dotav" style="--c:var(--brass)"></span><div class="txt"><div><b>Você</b> ${esc(n.text)}</div><div class="meta">${new Date(n.at).toLocaleString("pt-BR")}</div></div></div>`; }
+
+/* ============================================================== views */
+function visible(){ return ui.tension ? PROPS.filter(p => inTension(p, ui.tension)) : PROPS; }
+function render(){
+  renderChips();
+  document.querySelectorAll("nav.bottom button").forEach(b => { if (b.dataset.nav === ui.view) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current"); });
+  const v = $("#view"), list = visible(), t = TENSIONS.find(x => x.id === ui.tension);
+  if (ui.view === "grade") {
+    v.innerHTML = (t ? bannerHtml(t, list) : "") + `<div class="pgrid">${list.map(p => `<button class="tile" data-goto="${p.id}" aria-label="${esc(p.id)}: ${esc(p.title)}">${tableSvg(p, {size:200, labels:false})}
+      ${store.react[p.id] ? `<span class="mine" style="--mc:${STANCE[store.react[p.id]].c}"></span>` : ""}<span class="ov">${esc(short(p.title, 70))}</span></button>`).join("")}</div>`;
+  } else if (ui.view === "agenda") {
+    const saved = PROPS.filter(p => store.saved[p.id] || store.react[p.id] || (store.notes[p.id] || []).length);
+    v.innerHTML = saved.length ? `<div style="padding:0 16px 16px;display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="export">Baixar minhas reações (.json)</button><button class="btn ghost" id="clear">Limpar</button></div>${saved.map(postHtml).join("")}`
+      : `<div class="empty"><h3>Sua agenda está vazia</h3><p>Salve, reaja ou comente uma proposta no feed. Ela aparece aqui para a reunião de revisão.</p><button class="btn" data-nav="feed">Ir para o feed</button></div>`;
+  } else {
+    v.innerHTML = (store.howto ? "" : howtoHtml()) + (t ? bannerHtml(t, list) : "") + list.map(postHtml).join("");
+  }
+  wire(); renderSide(); paintLive();
+}
+function legendCodes(){
+  // Shortest real example of each kind keeps the chips on one line.
+  const ex = k => Object.keys(GLOSS).filter(c => GLOSS[c].kind === k && (k !== "source" || GLOSS[c].fictional)).sort((a, b) => GLOSS[a].short.length - GLOSS[b].short.length)[0];
+  const row = (k, txt) => ex(k) ? `<div>${chip(ex(k))}<span>${txt}</span></div>` : "";
+  return `<div class="legend-codes">${row("component", "Parte do modelo brasileiro de governança de IA: lei, plano, órgão ou mecanismo.")}
+    ${row("feature", "Traço do contexto brasileiro usado como argumento.")}${row("fact", "Fato do momento, em 14/11/2026.")}
+    ${row("source", "Fonte citada. Tracejado em coral: dado fictício do mundo simulado, não é número real.")}${row("claim", "Outra fala do conselho, com a rodada em que foi feita.")}</div>`;
+}
+function howtoHtml(){
+  return `<section class="howto" aria-labelledby="howto-t"><h3 id="howto-t">Como ler as falas</h3>
+    <p>Os assentos citam partes do modelo e fontes por código. Aqui cada código vira um nome destacado. Toque nele para ver o que é.</p>
+    ${legendCodes()}<div class="row"><button class="btn" id="howto-ok">Entendi</button></div></section>`;
+}
+function renderSide(){
+  const ix = RUN.index, s = RUN.summary || {};
+  const heat = `<div class="heat" role="img" aria-label="Mapa de calor: estratos por tensão"><span></span>${STRATA.map(x => `<span class="h" title="${esc(x.label)}" style="color:${x.c}">●</span>`).join("")}
+    ${TENSIONS.map(t => { const list = PROPS.filter(p => inTension(p, t.id));
+      return `<button class="r" data-tension="${t.id}">${t.id === "outras" ? "Outras" : t.id}</button>${STRATA.map(x => { const n = list.filter(p => p.pos[x.id].stance !== "silent").length, ag = list.filter(p => ["against","split"].includes(p.pos[x.id].stance)).length;
+        const col = ag ? STANCE.against.c : STANCE.for.c, op = list.length ? .15 + .85 * n / list.length : 0;
+        return `<i title="${esc(x.short)} em ${t.id}: ${n} de ${list.length} propostas${ag ? `, ${ag} contra ou dividido` : ""}" style="background:${n ? col : "var(--silent)"};opacity:${n ? op.toFixed(2) : .5}"></i>`; }).join("")}`; }).join("")}</div>`;
+  $("#side").innerHTML = `<div class="card"><h3>Esta execução</h3><p>Conselho sintético de ${STRATA.length} assentos, rodadas R1 a R7. Nenhuma posição aqui é de pessoa ou órgão real.</p>
+      <div class="stat-row"><div><b>${s.publicClaims ?? "–"}</b><span>falas públicas</span></div><div><b>${s.challenges ?? "–"}</b><span>contestações</span></div><div><b>${s.amendments ?? "–"}</b><span>emendas</span></div></div>
+      <button class="btn ghost" data-nav="run" style="width:100%">Ver arquivos da execução</button></div>
+    <div class="card"><h3>Quem falou onde</h3><p>Cor forte: o estrato se pronunciou em muitas propostas da tensão. Coral: contestou ou ficou dividido em ao menos uma.</p>${heat}</div>`;
+}
+function runSheet(){
+  const ix = RUN.index, base = `../../../runs/${ix.scenarioId}/`;
+  const kb = n => n > 1048576 ? (n / 1048576).toFixed(1) + " MB" : Math.max(1, Math.round(n / 1024)) + " KB";
+  $("#sheet-panel").innerHTML = `<h2 id="sheet-title" style="font:700 24px/1.1 var(--display);margin:0 0 6px">Execução ${esc(ix.scenarioId)}</h2>
+    <p style="color:var(--muted);margin:0 0 14px">${esc(ix.runId)}<br>Gerada em ${new Date(ix.generatedAt).toLocaleString("pt-BR")}. Resultado de simulação deliberativa sintética, com indicadores fictícios. Não é consulta pública nem parecer jurídico.</p>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">${STRATA.map(s => `<div style="display:flex;gap:10px;align-items:center;font-size:14px"><span class="dotav" style="--c:${s.c}"></span><b style="font-weight:600;flex:1">${esc(s.label)}</b><span style="color:var(--muted)">${esc(s.seat ? s.seat.model : "")}</span></div>`).join("")}</div>
+    <h3 style="font:700 17px/1.2 var(--display);margin:16px 0 4px">Como ler os códigos</h3>${legendCodes()}
+    <div class="files">${(ix.artifacts || []).map(f => `<a href="${esc(base + f.path)}" target="_blank" rel="noopener">${esc(f.path.replace(ix.runId + "/", ""))}<span>${kb(f.sizeBytes)}</span></a>`).join("")}</div>
+    <div style="margin-top:16px"><button class="btn ghost" data-close-sheet style="width:100%">Fechar</button></div>`;
+  $("#sheet").classList.add("open"); $("#sheet-panel button").focus();
+}
+
+/* ============================================================== interactions */
+function wire(){
+  document.querySelectorAll("[data-track]").forEach(tr => {
+    tr.onscroll = () => { const i = Math.round(tr.scrollLeft / tr.clientWidth), id = tr.dataset.track; if (ui.slide[id] === i) return; ui.slide[id] = i;
+      const post = tr.closest(".post"), n = tr.children.length;
+      post.querySelectorAll(".pager [data-slide]").forEach((d, k) => d.setAttribute("aria-selected", k === i));
+      post.querySelector(".counter").textContent = `${i + 1}/${n}`;
+      post.querySelector(".nav-arrow.prev").disabled = i === 0; const nx = post.querySelector(".nav-arrow.next"); nx.disabled = i === n - 1; nx.classList.remove("next-hint"); };
+    tr.onkeydown = e => { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); tr.scrollBy({left:(e.key === "ArrowRight" ? 1 : -1) * tr.clientWidth, behavior:REDUCE ? "auto" : "smooth"}); } };
+    tr.ondblclick = () => react(tr.closest(".post").dataset.id, "for", true);
+  });
+  if (!REDUCE) drawObserver.disconnect(), document.querySelectorAll(".post .cover svg").forEach(s => drawObserver.observe(s));
+}
+const drawObserver = new IntersectionObserver(entries => entries.forEach(e => { if (!e.isIntersecting) return;
+  e.target.querySelectorAll("line.draw").forEach((l, i) => { l.style.transition = `stroke-dashoffset .7s cubic-bezier(.2,.7,.2,1) ${i * 70}ms`; requestAnimationFrame(() => l.setAttribute("stroke-dashoffset", "0")); });
+  drawObserver.unobserve(e.target); }), {threshold:.45});
+
+function react(id, v, fromTap){
+  if (LIVE.on && !LIVE.me) { openJoin(ui.tension, () => react(id, v, fromTap)); return; }
+  const post = document.querySelector(`.post[data-id="${id}"]`);
+  if (fromTap && store.react[id] === v) { burst(post); return; }
+  store.react[id] = store.react[id] === v ? undefined : v; if (!store.react[id]) delete store.react[id]; persist();
+  post.querySelectorAll("[data-react]").forEach(b => b.setAttribute("aria-pressed", b.dataset.react === store.react[id]));
+  if (store.react[id] === "for") burst(post);
+  if (store.react[id]) toast(`Registrado: ${HUMAN.find(h => h[0] === v)[1].toLowerCase()} em ${id}`);
+  if (LIVE.on) liveApi("/api/vote", {proposalId:id, tensionId:ui.tension, stance:store.react[id] || null}).catch(err => toast(err.message));
+}
+function burst(post){ const b = post.querySelector(".burst"); b.classList.remove("go"); void b.offsetWidth; b.classList.add("go"); }
+
+document.addEventListener("click", e => {
+  const t = e.target.closest("button, a");
+  if (!e.target.closest("#pop") && !(t && (t.dataset.code || t.dataset.codes))) closePop();
+  if (!t) { if (e.target.id === "sheet") $("#sheet").classList.remove("open"); return; }
+  if (t.dataset.code || t.dataset.codes) { e.stopPropagation(); return openPop(t); }
+  if (t.dataset.step || t.dataset.slide !== undefined) { const tr = t.closest(".post").querySelector("[data-track]"), cur = Math.round(tr.scrollLeft / tr.clientWidth);
+    const to = t.dataset.slide !== undefined ? +t.dataset.slide : cur + +t.dataset.step;
+    tr.scrollTo({left:to * tr.clientWidth, behavior:REDUCE ? "auto" : "smooth"}); return; }
+  if (t.dataset.qr) return openQr(t.dataset.qr);
+  if (t.id === "qr-fullscreen") return qrFullscreen(t.dataset.tension);
+  if (t.closest("#qr-full")) { $("#qr-full").classList.remove("open"); return; }
+  if (t.dataset.role) { document.querySelectorAll("[data-role]").forEach(r => r.setAttribute("aria-checked", r === t)); return; }
+  if (t.id === "me-btn") return meSheet();
+  if (t.id === "leave-session") { LIVE.me = null; try { localStorage.removeItem(LIVE.key); } catch(e) {} $("#sheet").classList.remove("open"); paintMe(); render(); toast("Você saiu desta sessão"); return; }
+  if (t.id === "change-role") { $("#sheet").classList.remove("open"); return openJoin(ui.tension); }
+  if (t.dataset.delComment) { liveApi("/api/comment/delete", {commentId:+t.dataset.delComment}).catch(err => toast(err.message)); return; }
+  if (t.id === "copy-link") { navigator.clipboard?.writeText(t.dataset.url).then(() => toast("Link copiado")); return; }
+  if (t.id === "howto-ok") { store.howto = true; persist(); t.closest(".howto").remove(); return; }
+  const post = t.closest(".post"), id = post && post.dataset.id;
+  if (t.dataset.story) return openStory(t.dataset.story);
+  if (t.dataset.v) return moveStory(+t.dataset.v);
+  if (t.id === "vclose") return closeStory();
+  if (t.dataset.openPost) { closeStory(); return goTo(t.dataset.openPost); }
+  if (t.dataset.tension !== undefined) { setTension(t.dataset.tension || null); return; }
+  if (t.dataset.nav) { if (t.dataset.nav === "run") return runSheet(); ui.view = t.dataset.nav; $("#sheet").classList.remove("open"); syncHash(); render(); scrollTo({top:0}); return; }
+  if (t.dataset.closeSheet !== undefined) return $("#sheet").classList.remove("open");
+  if (t.id === "open-run") return runSheet();
+  if (t.dataset.goto) return goTo(t.dataset.goto);
+  if (t.dataset.react) return react(id, t.dataset.react);
+  if (t.dataset.save !== undefined) { store.saved[id] = !store.saved[id]; if (!store.saved[id]) delete store.saved[id]; persist();
+    t.setAttribute("aria-pressed", !!store.saved[id]); t.querySelector("svg").setAttribute("fill", store.saved[id] ? "currentColor" : "none");
+    t.setAttribute("aria-label", store.saved[id] ? "Tirar da agenda" : "Salvar na agenda"); toast(store.saved[id] ? `${id} salva na agenda` : `${id} saiu da agenda`); return; }
+  if (t.dataset.more !== undefined) { const d = post.querySelector(".desc"); d.classList.toggle("open"); d.innerHTML = d.classList.contains("open") ? `<b>${esc(STRATA[SIDX[PROPS.find(p => p.id === id).author]].short)}</b> ${rich(PROPS.find(p => p.id === id).finding)}` : d.innerHTML; t.textContent = d.classList.contains("open") ? "menos" : "mais"; return; }
+  if (t.dataset.allc !== undefined) { const p = PROPS.find(x => x.id === id); post.querySelector(".clist").innerHTML = commentsOf(p).map(commentHtml).join(""); t.remove(); return; }
+  if (t.id === "export") return exportReactions();
+  if (t.id === "clear") { store.react = {}; store.saved = {}; store.notes = {}; persist(); render(); toast("Reações apagadas neste navegador"); return; }
+});
+document.addEventListener("click", e => { if (e.target.closest("button")) return; const c = e.target.closest(".clamp"); if (c) c.classList.toggle("open"); });
+document.addEventListener("input", e => { const f = e.target.closest("form.say"); if (f) f.querySelector("button").disabled = !e.target.value.trim(); });
+document.addEventListener("submit", e => {
+  if (e.target.id === "join-form") { e.preventDefault(); return submitJoin(e.target); }
+  const f = e.target.closest("form.say"); if (!f) return; e.preventDefault();
+  const input = f.querySelector("input"), text = input.value.trim(), id = f.closest(".post").dataset.id; if (!text) return;
+  if (LIVE.on) {
+    if (!LIVE.me) { openJoin(ui.tension); return; }
+    f.querySelector("button").disabled = true;
+    liveApi("/api/comment", {proposalId:id, tensionId:ui.tension, body:text}).then(() => { input.value = ""; toast("Comentário publicado para todos"); })
+      .catch(err => { toast(err.message); f.querySelector("button").disabled = false; });
+    return;
+  }
+  (store.notes[id] = store.notes[id] || []).push({text, at:new Date().toISOString()}); persist();
+  f.closest(".post").querySelector(".nlist").insertAdjacentHTML("beforeend", noteHtml(store.notes[id].slice(-1)[0]));
+  input.value = ""; f.querySelector("button").disabled = true; toast("Comentário publicado neste navegador");
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && !$("#pop").hidden) { closePop(); return; }
+  if ($("#viewer").classList.contains("open")) { if (e.key === "Escape") closeStory(); if (e.key === "ArrowRight") moveStory(1); if (e.key === "ArrowLeft") moveStory(-1); return; }
+  if (e.key === "Escape") { $("#sheet").classList.remove("open"); $("#qr-full").classList.remove("open"); }
+});
+["pointerdown","pointerup","pointerleave"].forEach(ev => $("#vframe").addEventListener(ev, e => { story.paused = ev === "pointerdown" || !$("#pop").hidden; }));
+
+function openPop(btn){
+  const pop = $("#pop"), codes = btn.dataset.code ? [btn.dataset.code] : btn.dataset.codes.split(",");
+  if (!pop.hidden && pop.dataset.for === codes.join(",")) return closePop();
+  const one = k => { const g = GLOSS[k]; return g ? g : {kind:"source", name:k, short:k, detail:"", fictional:false}; };
+  if (codes.length === 1) { const g = one(codes[0]);
+    pop.innerHTML = `<div class="kind">${esc(KIND_PT[g.kind] || "Referência")}</div><h5>${esc(g.name)}</h5>${g.detail ? `<p>${esc(short(g.detail, 380))}</p>` : ""}
+      ${g.fictional ? `<div class="fic">Dado fictício do mundo simulado, não é número real do Brasil.</div>` : ""}<div class="cd">Código ${esc(codes[0])}</div>`;
+  } else {
+    pop.innerHTML = `<div class="kind">${codes.length} referências citadas aqui</div><ul>${codes.map(k => { const g = one(k);
+      return `<li><b>${esc(g.name)}</b><span>${esc(KIND_PT[g.kind] || "")}${g.fictional ? ", fictício" : ""}</span></li>`; }).join("")}</ul>`;
+  }
+  pop.dataset.for = codes.join(","); pop.hidden = false;
+  const r = btn.getBoundingClientRect(), w = pop.offsetWidth, h = pop.offsetHeight;
+  let x = Math.min(Math.max(12, r.left + r.width / 2 - w / 2), innerWidth - w - 12), y = r.bottom + 8;
+  if (y + h > innerHeight - 12 && r.top - h - 8 > 12) y = r.top - h - 8;
+  pop.style.left = (x + scrollX) + "px"; pop.style.top = (y + scrollY) + "px";
+  if ($("#viewer").classList.contains("open")) { pop.style.position = "fixed"; pop.style.left = x + "px"; pop.style.top = y + "px"; story.paused = true; } else pop.style.position = "absolute";
+}
+function closePop(){ const pop = $("#pop"); if (pop.hidden) return; pop.hidden = true; if ($("#viewer").classList.contains("open")) story.paused = false; }
+addEventListener("scroll", () => closePop(), {passive:true});
+
+function exportReactions(){
+  const out = {packetId:P.packetId, runId:RUN.index.runId, exportedAt:new Date().toISOString(),
+    proposals:PROPS.filter(p => store.react[p.id] || store.saved[p.id] || store.notes[p.id]).map(p => ({proposalId:p.id, title:p.title, reaction:store.react[p.id] || null, saved:!!store.saved[p.id], comments:store.notes[p.id] || []}))};
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(out, null, 2)], {type:"application/json"}));
+  a.download = `reacoes-${P.scenarioId || "mural"}.json`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+function setTension(tid){ ui.tension = tid; if (ui.view === "agenda") ui.view = "feed"; syncHash(); render(); scrollTo({top:0, behavior:REDUCE ? "auto" : "smooth"}); livePresence(); }
+function goTo(id){ ui.view = "feed"; const p = PROPS.find(x => x.id === id); if (ui.tension && p && !inTension(p, ui.tension)) ui.tension = null; history.replaceState(null, "", "#" + id); render();
+  const el = document.getElementById(id); if (el) el.scrollIntoView({behavior:REDUCE ? "auto" : "smooth", block:"start"}); }
+function syncHash(){ const h = ui.view !== "feed" ? ui.view : ui.tension ? `tensao-${ui.tension}` : ""; history.replaceState(null, "", h ? "#" + h : location.pathname + location.search); }
+function fromHash(){
+  const h = decodeURIComponent(location.hash.slice(1)), qt = new URLSearchParams(location.search).get("t");
+  if (qt && TENSIONS.some(t => t.id === qt) && !h) { ui.tension = qt; ui.view = "feed"; }
+  if (h.startsWith("tensao-")) { ui.tension = TENSIONS.some(t => t.id === h.slice(7)) ? h.slice(7) : null; ui.view = "feed"; }
+  else if (["grade","agenda"].includes(h)) ui.view = h;
+  render();
+  if (PROPS.some(p => p.id === h)) goTo(h);
+  livePresence();
+}
+
+/* ============================================================== live layer
+   Active only when the page is served by `scse mural serve` (/api/health answers). People join
+   with a name and one of the council roles; presence, votes and comments are stored server-side
+   (schemas/mural.sql) and pushed to every open page by Server-Sent Events. */
+const LIVE = {on:false, publicUrl:null, key:`mural-live:${P.packetId}`, me:null, state:null, es:null, hb:null, after:0, refreshT:null};
+try { LIVE.me = JSON.parse(localStorage.getItem(LIVE.key)) || null; } catch(e) {}
+
+/* Small generated face per person: role colour, eyes, mouth and hair picked from the seed. */
+function faceSvg(seed, c, size = 30){
+  const e = seed % 4, m = Math.floor(seed / 4) % 4, h = Math.floor(seed / 16) % 5, k = "#0B1220";
+  const eyes = [`<circle cx="11" cy="14" r="1.6" fill="${k}"/><circle cx="21" cy="14" r="1.6" fill="${k}"/>`,
+    `<ellipse cx="11" cy="14" rx="1.5" ry="2.1" fill="${k}"/><ellipse cx="21" cy="14" rx="1.5" ry="2.1" fill="${k}"/>`,
+    `<path d="M9 14.5q2-2 4 0M19 14.5q2-2 4 0" stroke="${k}" stroke-width="1.5" fill="none" stroke-linecap="round"/>`,
+    `<circle cx="11" cy="14" r="2.4" fill="#fff"/><circle cx="11.4" cy="14.3" r="1.2" fill="${k}"/><circle cx="21" cy="14" r="2.4" fill="#fff"/><circle cx="21.4" cy="14.3" r="1.2" fill="${k}"/>`][e];
+  const mouth = [`<path d="M11 20q5 4.5 10 0" stroke="${k}" stroke-width="1.6" fill="none" stroke-linecap="round"/>`,
+    `<path d="M10.5 19.5q5.5 6 11 0z" fill="${k}"/>`, `<path d="M12 21h8" stroke="${k}" stroke-width="1.6" stroke-linecap="round"/>`,
+    `<ellipse cx="16" cy="21" rx="2.2" ry="2.6" fill="${k}"/>`][m];
+  const hair = ["", `<path d="M8 9q8-8 16 0q-8-3-16 0z" fill="${k}" opacity=".8"/>`, `<path d="M15 3q3 2 1 5" stroke="${k}" stroke-width="1.8" fill="none" stroke-linecap="round"/>`,
+    `<circle cx="16" cy="3.5" r="3" fill="${k}" opacity=".8"/>`, `<path d="M6 12q1-9 10-9t10 9q-3-5-10-5t-10 5z" fill="${k}" opacity=".8"/>`][h];
+  return `<svg class="face" width="${size}" height="${size}" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="${c}"/>${hair}${eyes}${mouth}</svg>`;
+}
+function person(pid){ return (LIVE.state && LIVE.state.participants[pid]) || null; }
+function personFace(pid, size){ const x = person(pid); return x ? faceSvg(x.avatarSeed, STRATA_C[x.stratumId] || "#BFC6CF", size) : ""; }
+function stackHtml(pids, max = 2, size = 30){
+  if (!pids.length) return "";
+  const shown = pids.slice(0, max).map(pid => personFace(pid, size)).join("");
+  return shown + (pids.length > max ? `<span class="more">+${pids.length - max}</span>` : "");
+}
+function namesLine(pids){
+  const n = pids.map(pid => person(pid)).filter(Boolean).map(x => `<b>${esc(x.name)}</b>`);
+  if (!n.length) return "";
+  return n.length === 1 ? `${n[0]} está aqui` : n.length === 2 ? `${n[0]} e ${n[1]} estão aqui` : `${n[0]}, ${n[1]} e mais ${n.length - 2} estão aqui`;
+}
+
+async function liveApi(path, body){
+  const res = await fetch(path, {method:"POST", headers:{"Content-Type":"application/json", ...(LIVE.me ? {Authorization:`Bearer ${LIVE.me.token}`} : {})}, body:JSON.stringify(body)});
+  const data = await res.json().catch(() => ({}));
+  if (res.status === 401 && LIVE.me) { LIVE.me = null; try { localStorage.removeItem(LIVE.key); } catch(e) {} paintMe(); }
+  if (!res.ok) throw new Error(data.error || `Falha (${res.status})`);
+  return data;
+}
+async function liveRefresh(){
+  const res = await fetch(`/api/state?session=${encodeURIComponent(P.packetId)}`, {cache:"no-store"});
+  if (!res.ok) return;
+  LIVE.state = await res.json(); paintLive();
+}
+function scheduleRefresh(){ clearTimeout(LIVE.refreshT); LIVE.refreshT = setTimeout(liveRefresh, 250); }
+
+/* Repaint only the live containers, so scroll position and typed text survive. */
+function paintLive(){
+  if (!LIVE.on || !LIVE.state) return;
+  const st = LIVE.state;
+  document.querySelectorAll("[data-pc]").forEach(el => { const n = (st.presence[el.dataset.pc] || []).length; el.textContent = n ? n : ""; });
+  document.querySelectorAll("[data-stack]").forEach(el => { el.innerHTML = stackHtml(st.presence[el.dataset.stack] || [], 2, 38); });
+  document.querySelectorAll("[data-here]").forEach(el => { const pids = st.presence[el.dataset.here] || [];
+    el.innerHTML = pids.length ? namesLine(pids) : "Ninguém nesta tensão agora. Mostre o QR para as pessoas entrarem."; });
+  document.querySelectorAll("[data-humans]").forEach(el => { const v = st.votes[el.dataset.humans] || {}, all = [...(v.for || []), ...(v.amend || []), ...(v.against || [])];
+    el.innerHTML = all.length ? `<span class="stack">${stackHtml(all, 3, 24)}</span><span>Pessoas: ${HUMAN.map(([k, label]) => `<b>${(v[k] || []).length}</b> ${label.toLowerCase()}`).join(", ")}</span>` : ""; });
+  document.querySelectorAll("[data-slist]").forEach(el => { const list = st.comments[el.dataset.slist] || [];
+    el.innerHTML = list.map(c => { const x = person(c.participantId) || {name:"Pessoa", stratumId:""};
+      return `<div class="comment">${personFace(c.participantId, 28) || `<span class="dotav"></span>`}<div class="txt"><div><b>${esc(x.name)}</b> <span class="verb" style="--vc:${STRATA_C[x.stratumId] || "#93A3BC"}">${esc(STRATA_SHORT[x.stratumId] || "")}</span> ${esc(c.body)}</div>
+        <div class="meta">pessoa, ${new Date(c.createdAt).toLocaleString("pt-BR")}${LIVE.me && LIVE.me.participantId === c.participantId ? `<button class="del" data-del-comment="${c.id}">apagar</button>` : ""}</div></div></div>`; }).join(""); });
+  if (LIVE.me) {
+    document.querySelectorAll(".post").forEach(post => { const id = post.dataset.id, v = st.votes[id] || {};
+      const mine = ["for","amend","against"].find(k => (v[k] || []).includes(LIVE.me.participantId));
+      if (mine) store.react[id] = mine; else delete store.react[id];
+      post.querySelectorAll("[data-react]").forEach(b => b.setAttribute("aria-pressed", b.dataset.react === mine)); });
+  }
+}
+function paintMe(){
+  const b = $("#me-btn"); b.hidden = !(LIVE.on && LIVE.me);
+  if (LIVE.on && LIVE.me) b.innerHTML = `${faceSvg(LIVE.me.avatarSeed, STRATA_C[LIVE.me.stratumId], 26)}<span>${esc(LIVE.me.name)}</span>`;
+}
+
+function livePresence(){
+  if (!LIVE.on || !LIVE.me) return;
+  liveApi("/api/presence", {tensionId:ui.tension || null}).catch(() => {});
+}
+function liveStream(){
+  if (LIVE.es) LIVE.es.close();
+  LIVE.es = new EventSource(`/api/events?session=${encodeURIComponent(P.packetId)}&after=${LIVE.after}`);
+  LIVE.es.addEventListener("mural", ev => {
+    const e = JSON.parse(ev.data); LIVE.after = e.id;
+    const mine = LIVE.me && e.participantId === LIVE.me.participantId;
+    if (!mine && e.name) {
+      const who = `${e.name} (${STRATA_SHORT[e.stratumId] || "pessoa"})`;
+      if (e.type === "joined") toast(`${who} entrou na sessão`);
+      else if (e.type === "entered" && e.tensionId === ui.tension) toast(`${who} entrou nesta tensão`);
+      else if (e.type === "comment" && e.tensionId === ui.tension) toast(`${who} comentou em ${e.proposalId}`);
+    }
+    scheduleRefresh();
+  });
+}
+
+/* QR code: built in the browser with qrcode-generator (loaded on first use). */
+let qrLib = null;
+function loadQrLib(){
+  if (window.qrcode) return Promise.resolve(window.qrcode);
+  return qrLib || (qrLib = new Promise((ok, fail) => { const s = document.createElement("script");
+    s.src = "https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"; s.onload = () => ok(window.qrcode); s.onerror = () => fail(new Error("Não carregou o gerador de QR (sem internet?).")); document.head.append(s); }));
+}
+function joinUrl(tid){ return `${LIVE.publicUrl || location.origin}/m/${encodeURIComponent(tid)}`; }
+async function qrSvg(url){ const q = (await loadQrLib())(0, "M"); q.addData(url); q.make(); return q.createSvgTag({cellSize:8, margin:2, scalable:true}); }
+async function openQr(tid){
+  const t = TENSIONS.find(x => x.id === tid);
+  if (!LIVE.on) {
+    $("#sheet-panel").innerHTML = `<h2 id="sheet-title" style="font:700 22px/1.15 var(--display);margin:0 0 8px">QR para entrar em ${esc(tid)}</h2>
+      <p class="note">O QR só funciona com o mural aberto pelo servidor ao vivo, que guarda quem entrou, os votos e os comentários. No terminal, na pasta do projeto:</p>
+      <pre style="background:var(--deep);padding:12px;border-radius:12px;overflow:auto;font-size:13px">scse mural serve --host 0.0.0.0</pre>
+      <p class="note">Depois abra o endereço que ele mostrar. Para quem está fora da rede, use um túnel e passe <b>--public-url</b>.</p>
+      <button class="btn ghost" data-close-sheet style="width:100%">Fechar</button>`;
+    $("#sheet").classList.add("open"); return;
+  }
+  const url = joinUrl(tid);
+  $("#sheet-panel").innerHTML = `<h2 id="sheet-title" style="font:700 22px/1.15 var(--display);margin:0 0 4px">Entrar em ${esc(tid)}</h2>
+    <p class="note" style="margin:0">${esc(t ? t.title : "")}. Quem escanear escolhe um papel e entra direto nesta tensão.</p>
+    <div class="qrbox" id="qrbox"><span style="color:#0B1220">Gerando…</span></div><p class="qrurl">${esc(url)}</p>
+    ${/^https?:\/\/(127\.|localhost)/.test(url) ? `<p class="err">Este endereço só abre neste computador. Para celulares, rode o servidor com --host 0.0.0.0 e abra o mural pelo IP da rede, ou use --public-url com um túnel.</p>` : ""}
+    <div style="display:flex;gap:10px"><button class="btn" id="qr-fullscreen" data-tension="${esc(tid)}" style="flex:1">Projetar em tela cheia</button><button class="btn ghost" id="copy-link" data-url="${esc(url)}">Copiar link</button></div>
+    <div style="margin-top:10px"><button class="btn ghost" data-close-sheet style="width:100%">Fechar</button></div>`;
+  $("#sheet").classList.add("open");
+  try { $("#qrbox").innerHTML = await qrSvg(url); } catch(err) { $("#qrbox").innerHTML = `<span style="color:#0B1220;text-align:center">${esc(err.message)}</span>`; }
+}
+async function qrFullscreen(tid){
+  const t = TENSIONS.find(x => x.id === tid), url = joinUrl(tid), f = $("#qr-full");
+  f.innerHTML = `<h2>${esc(t ? t.title : tid)}</h2><div class="qrbox">${await qrSvg(url).catch(err => esc(err.message))}</div><p>Escaneie, escolha seu papel e participe. ${esc(url)}</p><button class="btn ghost" style="color:#0B1220;border-color:#0B1220">Fechar</button>`;
+  $("#sheet").classList.remove("open"); f.classList.add("open");
+}
+
+/* Join: name + one of the council roles; the person speaks as a human in that role. */
+let afterJoin = null;
+function openJoin(tid, then){
+  afterJoin = then || null;
+  const t = TENSIONS.find(x => x.id === tid), seed = Math.floor(Math.random() * 10000);
+  $("#sheet-panel").innerHTML = `<form id="join-form" data-tension="${esc(tid || "")}" data-seed="${seed}">
+    <h2 id="sheet-title" style="font:700 24px/1.1 var(--display);margin:0 0 6px">Quem é você nesta conversa?</h2>
+    <p class="note">${t ? `Você vai entrar em <b>${esc(t.title)}</b>. ` : ""}Escolha o papel de onde você fala. Você participa como pessoa, não como assento do conselho sintético. Seu nome, papel, votos e comentários ficam visíveis para quem está no mural e são gravados para a revisão.</p>
+    <div class="field"><label for="join-name">Seu nome</label><input id="join-name" name="name" maxlength="60" autocomplete="name" required value="${esc(LIVE.me ? LIVE.me.name : "")}"></div>
+    <div class="roles" role="radiogroup" aria-label="Seu papel">${STRATA.map(s => `<button type="button" class="role" role="radio" data-role="${s.id}" aria-checked="${LIVE.me && LIVE.me.stratumId === s.id}" style="--c:${s.c}">${faceSvg(seed, s.c, 30)}<span>${esc(s.label)}</span></button>`).join("")}</div>
+    <p class="err" id="join-err" hidden></p>
+    <button class="btn" type="submit" style="width:100%">${t ? `Entrar em ${esc(t.id)}` : "Entrar"}</button>
+    <div style="margin-top:10px"><button type="button" class="btn ghost" data-close-sheet style="width:100%">Agora não</button></div></form>`;
+  $("#sheet").classList.add("open"); setTimeout(() => $("#join-name").focus(), 50);
+}
+async function submitJoin(form){
+  const err = $("#join-err"), role = form.querySelector('[data-role][aria-checked="true"]'), name = form.name.value.trim();
+  const fail = m => { err.textContent = m; err.hidden = false; };
+  if (!name) return fail("Escreva seu nome.");
+  if (!role) return fail("Escolha um papel.");
+  try {
+    const tid = form.dataset.tension || null;
+    const me = await liveApi("/api/join", {session:P.packetId, scenarioId:P.scenarioId || RUN.index.scenarioId, runId:RUN.index.runId, name, stratumId:role.dataset.role, tensionId:tid});
+    LIVE.me = me; try { localStorage.setItem(LIVE.key, JSON.stringify(me)); } catch(e) {}
+    $("#sheet").classList.remove("open"); paintMe();
+    history.replaceState(null, "", location.pathname + (tid ? `#tensao-${tid}` : ""));
+    if (tid) ui.tension = tid;
+    render(); livePresence(); await liveRefresh();
+    toast(`Bem-vindo, ${me.name}`);
+    if (afterJoin) { const f = afterJoin; afterJoin = null; f(); }
+  } catch(e) { fail(e.message); }
+}
+function meSheet(){
+  const me = LIVE.me;
+  $("#sheet-panel").innerHTML = `<div style="display:flex;gap:12px;align-items:center;margin-bottom:12px">${faceSvg(me.avatarSeed, STRATA_C[me.stratumId], 52)}<div><h2 id="sheet-title" style="font:700 22px/1.1 var(--display);margin:0">${esc(me.name)}</h2><span class="note">${esc((STRATA.find(s => s.id === me.stratumId) || {}).label || "")}</span></div></div>
+    <p class="note">Você fala como pessoa neste papel. Votos e comentários ficam com seu nome para a revisão.</p>
+    <div style="display:grid;gap:8px"><button class="btn" id="change-role">Entrar com outro papel</button><button class="btn ghost" id="leave-session">Sair desta sessão</button><button class="btn ghost" data-close-sheet>Fechar</button></div>`;
+  $("#sheet").classList.add("open");
+}
+
+async function liveBoot(){
+  if (!/^https?:$/.test(location.protocol)) return;
+  try {
+    const res = await fetch("/api/health", {cache:"no-store"}); if (!res.ok) return;
+    const h = await res.json(); if (!h.live) return;
+    LIVE.on = true; LIVE.publicUrl = h.publicUrl || null;
+  } catch(e) { return; }
+  $("#run-line").innerHTML = `<span class="live-dot" aria-hidden="true"></span>Ao vivo, ${esc(RUN.index.scenarioId)}`;
+  await liveRefresh(); LIVE.after = LIVE.state ? LIVE.state.lastEventId : 0;
+  liveStream(); paintMe(); render();
+  if (LIVE.me && LIVE.state && !LIVE.state.participants[LIVE.me.participantId]) { LIVE.me = null; try { localStorage.removeItem(LIVE.key); } catch(e) {} paintMe(); }
+  const qs = new URLSearchParams(location.search);
+  if (qs.get("entrar") === "1" && !LIVE.me) openJoin(qs.get("t") || ui.tension);
+  livePresence();
+  LIVE.hb = setInterval(livePresence, 20000);
+  addEventListener("pagehide", () => { if (LIVE.me) navigator.sendBeacon("/api/presence", new Blob([JSON.stringify({tensionId:null, token:LIVE.me.token})], {type:"application/json"})); });
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") { livePresence(); scheduleRefresh(); } });
+}
+
+/* ============================================================== boot */
+$("#run-line").textContent = `${RUN.index.scenarioId}, ${PROPS.length} propostas de ${STRATA.length} estratos`;
+document.title = `Mural de Tensões · ${RUN.index.scenarioId}`;
+renderStories(); fromHash();
+addEventListener("hashchange", fromHash);
+liveBoot();
+</script>
+</body>
+</html>
