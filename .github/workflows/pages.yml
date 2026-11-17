@@ -2,7 +2,7 @@ name: Publicar observatório (GitHub Pages)
 
 on:
   push:
-    branches: [main, claude/awesome-planck-wvuayj]
+    branches: [main]  # o ambiente github-pages só aceita deploy da main
     paths: ['web/**', '.github/workflows/pages.yml']
   workflow_dispatch:
 

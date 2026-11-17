@@ -25,7 +25,8 @@ const dataBR = d => d.split("-").reverse().join("/");
 
 /* ---------- sala ---------- */
 const params = new URLSearchParams(location.search);
-let SALA = (params.get("sala") || ls.get("hraigo.sala") || "").toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
+const EV = window.HRAIGO_EVENTO || {};
+let SALA = (params.get("sala") || EV.sala || ls.get("hraigo.sala") || "").toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
 if (SALA.length < 4) SALA = "sala-" + Math.random().toString(36).slice(2, 8);
 ls.set("hraigo.sala", SALA);
 if (location.protocol.startsWith("http") && params.get("sala") !== SALA) { const u = new URL(location.href); u.searchParams.set("sala", SALA); history.replaceState(null, "", u); }
@@ -57,7 +58,7 @@ async function iniciarSupabase() {
     if (r.error) throw r.error;
     session = r.data.session;
   }
-  S.pid = session.user.id; S.modo = "supabase";
+  S.pid = session.user.id; S.modo = "supabase"; status("vivo", "conectado · " + SALA); agendar();
   const linha = r => ({ pid: r.pid, k: r.k, v: r.v, setor: r.setor, ts: r.ts });
   const { data, error } = await sb.from("respostas").select("pid,k,v,setor,ts").eq("sala", SALA).limit(5000);
   if (error) throw error;
@@ -106,7 +107,7 @@ function simular(n) {
   agendar();
 }
 let raf = 0; function agendar() { cancelAnimationFrame(raf); raf = requestAnimationFrame(render); }
-function linkParticipar() { const u = new URL(location.href); u.searchParams.set("sala", SALA); u.hash = "participar"; return u.toString(); }
+function linkParticipar() { if (EV.linkPublico && EV.sala === SALA) return EV.linkPublico; const u = new URL(location.href); u.searchParams.set("sala", SALA); u.hash = "participar"; return u.toString(); }
 
 /* ---------- participar ---------- */
 const TOTAL = 5;
