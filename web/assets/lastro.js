@@ -1,0 +1,114 @@
+/* Gerado por scripts/ontologia/lastro.py. Não editar à mão.
+   Elementos exibidos com e sem lastro na ontologia (RF-12); usado no selo das fichas e no slide (RF-15). */
+window.HRAIGO_LASTRO = {
+ "comLastro": 5,
+ "conjuntos": {
+  "branches": {
+   "comLastro": 0,
+   "rotulo": "Ramos de cenário",
+   "semLastro": 4,
+   "total": 4
+  },
+  "components": {
+   "comLastro": 5,
+   "rotulo": "Componentes do modelo",
+   "semLastro": 17,
+   "total": 22
+  },
+  "features": {
+   "comLastro": 0,
+   "rotulo": "Traços de contexto",
+   "semLastro": 14,
+   "total": 14
+  },
+  "seeds": {
+   "comLastro": 0,
+   "rotulo": "Tensões-semente",
+   "semLastro": 6,
+   "total": 6
+  },
+  "strata": {
+   "comLastro": 0,
+   "rotulo": "Estratos do conselho",
+   "semLastro": 8,
+   "total": 8
+  },
+  "topics": {
+   "comLastro": 0,
+   "rotulo": "Áreas da taxonomia (cúpula)",
+   "semLastro": 28,
+   "total": 28
+  },
+  "unrep": {
+   "comLastro": 0,
+   "rotulo": "Cadeiras vazias",
+   "semLastro": 6,
+   "total": 6
+  }
+ },
+ "itens": {
+  "components:GM-02": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Plan"
+   ]
+  },
+  "components:GM-03": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Law_13709_2018_LGPD"
+   ]
+  },
+  "components:GM-04": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PL_2338_2023"
+   ]
+  },
+  "components:GM-15": {
+   "estado": "proximo",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_GovernanceByCITDigital"
+   ]
+  },
+  "components:GM-17": {
+   "estado": "proximo",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action01_AISupercomputer",
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action27_SovereignCloud"
+   ]
+  },
+  "components:GM-18": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action09_PortugueseLLM"
+   ]
+  },
+  "components:GM-19": {
+   "estado": "proximo",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis2_DiffusionTraining"
+   ]
+  },
+  "components:GM-20": {
+   "estado": "proximo",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis3_PublicServices"
+   ]
+  },
+  "components:GM-21": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action51_AlgorithmicTransparencyCentre"
+   ]
+  },
+  "components:GM-22": {
+   "estado": "proximo",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis4_BusinessInnovation"
+   ]
+  }
+ },
+ "semLastro": 83,
+ "total": 88
+};

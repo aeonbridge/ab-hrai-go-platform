@@ -9,6 +9,10 @@ on:
       - 'tests/verify_regulatory_instances.py'
       - 'scripts/build_regulatory_instances.py'
       - '.github/workflows/validate-regulatory.yml'
+      - 'web/assets/modelo.js'
+      - 'web/assets/lastro.js'
+      - 'scripts/ontologia/lastro.py'
+      - 'ontologies/scse/**'
   workflow_dispatch:
 
 permissions:
@@ -19,6 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -30,3 +36,5 @@ jobs:
         run: python scripts/build_regulatory_instances.py --check
       - name: Validate ABox instances against TBox and execute SWRL rules
         run: python tests/verify_regulatory_instances.py
+      - name: Displayed elements without ontology backing never increase (RF-12)
+        run: python scripts/ontologia/lastro.py --check --base-ref HEAD~1
