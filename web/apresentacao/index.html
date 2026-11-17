@@ -351,7 +351,7 @@ function ir(i) {
   if (c.acao === "evento") acaoEvento(); else { $("#evento").classList.remove("on"); }
   try { history.replaceState(null, "", "#cena-" + (i + 1)); } catch (e) {}
 }
-$("#prox").onclick = () => atual === CENAS.length - 1 ? (location.href = "../ao-vivo/?sala=" + encodeURIComponent(L.sala)) : ir(atual + 1);
+$("#prox").onclick = () => atual === CENAS.length - 1 ? (location.href = "../ao-vivo/?sala=" + encodeURIComponent(L.sala) + "&camada=tudo") : ir(atual + 1);
 $("#ant").onclick = () => ir(atual - 1);
 addEventListener("keydown", e => {
   if (["ArrowRight", "PageDown", " ", "Enter"].includes(e.key)) { e.preventDefault(); ir(atual + 1); }

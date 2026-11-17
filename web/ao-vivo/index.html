@@ -54,11 +54,28 @@ button{font:inherit;color:inherit;cursor:pointer}
 .rotulo3d.lacuna{color:var(--color-tone-crimson-fg);border-color:var(--color-tone-crimson-border)}
 .rotulo3d.tensao{color:var(--color-text-link);border-color:rgba(232,163,61,.5)}
 .rotulo3d b{font:500 11px/1 var(--font-mono);margin-left:6px;color:var(--color-text-primary)}
-#chegada{position:fixed;left:50%;top:80px;transform:translateX(-50%);z-index:6;pointer-events:none;display:flex;flex-direction:column;gap:6px;align-items:center}
+#chegada{position:fixed;left:50%;top:214px;transform:translateX(-50%);z-index:6;pointer-events:none;display:flex;flex-direction:column;gap:6px;align-items:center}
 .toast{font:600 14px/1 var(--font-sans);padding:10px 16px;border-radius:999px;background:rgba(232,163,61,.16);border:1px solid rgba(232,163,61,.55);color:var(--color-text-link);animation:sobe .5s ease-out}
 #legenda{position:fixed;left:22px;bottom:22px;z-index:4;padding:12px 14px;display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:var(--color-text-secondary);max-width:300px}
 #legenda span{display:flex;gap:8px;align-items:center}
 #legenda i{width:10px;height:10px;display:inline-block;flex:none}
+#etapa{position:fixed;top:72px;left:50%;transform:translateX(-50%);width:min(640px,calc(100% - 720px));padding:14px 22px;z-index:5;text-align:center;transition:opacity .5s}
+#etapa h1{font:700 26px/1.1 var(--font-display);margin:6px 0 6px;letter-spacing:-.02em}
+#etapa p{margin:0;color:#CBD5E2;font-size:15px}
+body.tudo #etapa{opacity:0;pointer-events:none}
+#entrar{transition:left .7s cubic-bezier(.2,.8,.2,1),top .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1),width .7s}
+body.c0 #entrar{left:50%;top:54%;transform:translate(-50%,-50%);width:360px}
+body.c0 #etapa{top:20px}
+body.c0 #chegada{top:160px}
+body.tudo #chegada{top:80px}
+#camadasNav{display:flex;gap:4px;align-items:center}
+#camadasNav button{padding:7px 11px!important;font-size:12.5px!important;font-weight:500!important;opacity:.7}
+#camadasNav button[aria-current="step"]{opacity:1;border-color:var(--color-action-primary-bg)!important;color:var(--color-text-link)}
+#comandos .prim{background:var(--color-action-primary-bg);border-color:var(--color-action-primary-bg);color:var(--color-action-primary-fg)}
+.soTudo{display:none;gap:6px} body.tudo .soTudo{display:inline-flex}
+body:not(.tudo) #falas{display:none}
+[data-camada].oculto{display:none!important}
+@media (max-width:1200px){#etapa{width:min(560px,calc(100% - 44px));top:auto;bottom:150px}}
 #semgl{display:none;position:fixed;inset:0;place-items:center;text-align:center;padding:24px}
 body.semgl #semgl{display:grid} body.semgl #gl{display:none}
 @media (max-width:1200px){#leitura{width:320px}#falas{width:min(560px,calc(100% - 680px))}}
@@ -80,26 +97,31 @@ body.semgl #semgl{display:grid} body.semgl #gl{display:none}
   <div class="link" id="link"></div>
 </aside>
 <aside id="leitura" class="vidro" aria-live="polite">
-  <section><div class="eyebrow">P2 · tensões-semente</div><h2>O que enfrentar primeiro</h2><div id="barrasT"></div></section>
-  <section><div class="eyebrow">P4 · lente Q1, omissão</div><h2>O que falta no modelo</h2><div id="barrasL"></div></section>
-  <section><div class="eyebrow">P1 · quem está aqui</div><div id="barrasS"></div></section>
+  <section data-camada="4"><div class="eyebrow">P2 · tensões-semente</div><h2>O que enfrentar primeiro</h2><div id="barrasT"></div></section>
+  <section data-camada="3"><div class="eyebrow">P4 · lente Q1, omissão</div><h2>O que falta no modelo</h2><div id="barrasL"></div></section>
+  <section data-camada="0"><div class="eyebrow">P1 · quem está aqui</div><div id="barrasS"></div></section>
 </aside>
 <div id="falas" aria-live="polite"></div>
 <div id="chegada" aria-live="polite"></div>
 <aside id="legenda" class="vidro">
-  <span><i style="background:#38C2B4"></i>torre: componentes em vigor</span>
-  <span><i style="background:#E8A33D"></i>torre: política pública</span>
-  <span><i style="border:1.5px dashed #A78BFA"></i>torre: projeto de lei (não vincula)</span>
-  <span><i style="background:#F0A93B;transform:rotate(45deg)"></i>anel interno: 20 perspectivas sintéticas</span>
-  <span><i style="border:1.5px dashed #6F7F95;border-radius:50%"></i>cadeiras vazias: sem fonte documental</span>
-  <span><i style="background:#F5D49A;border-radius:50%;box-shadow:0 0 8px #E8A33D"></i>anel externo: pessoas na sala</span>
-  <span><i style="border:1.5px solid #FF7A59;border-radius:50%"></i>cúpula: áreas sem componente</span>
+  <span data-camada="1"><i style="background:#38C2B4"></i>torre: componentes em vigor</span>
+  <span data-camada="1"><i style="background:#E8A33D"></i>torre: política pública</span>
+  <span data-camada="1"><i style="border:1.5px dashed #A78BFA"></i>torre: projeto de lei (não vincula)</span>
+  <span data-camada="2"><i style="background:#F0A93B;transform:rotate(45deg)"></i>anel interno: 20 perspectivas sintéticas</span>
+  <span data-camada="2"><i style="border:1.5px dashed #6F7F95;border-radius:50%"></i>cadeiras vazias: sem fonte documental</span>
+  <span data-camada="0"><i style="background:#F5D49A;border-radius:50%;box-shadow:0 0 8px #E8A33D"></i>anel externo: pessoas na sala</span>
+  <span data-camada="3"><i style="border:1.5px solid #FF7A59;border-radius:50%"></i>cúpula: áreas sem componente</span>
 </aside>
+<div id="etapa" class="vidro" aria-live="polite"><div class="eyebrow" id="etapaN"></div><h1 id="etapaT"></h1><p id="etapaD"></p></div>
 <nav id="comandos" class="vidro" aria-label="Comandos do apresentador">
-  <button data-cam="camara" aria-pressed="true">1 · Câmara</button>
+  <button id="voltarC" aria-label="Camada anterior">←</button>
+  <div id="camadasNav" role="group" aria-label="Camadas"></div>
+  <button id="avancarC" class="prim">Próxima camada →</button>
+  <span class="sep"></span>
+  <span class="soTudo"><button data-cam="camara" aria-pressed="true">1 · Câmara</button>
   <button data-cam="sala">2 · Sala</button>
   <button data-cam="tensoes">3 · Tensões</button>
-  <button data-cam="lacunas">4 · Lacunas</button>
+  <button data-cam="lacunas">4 · Lacunas</button></span>
   <span class="sep"></span>
   <button id="girar" aria-pressed="true">Girar</button>
   <button id="simular">Simular chegada</button>
@@ -175,6 +197,10 @@ for (let i = 0; i < 8; i++) { const a = i / 8 * Math.PI * 2 + Math.PI / 8; const
 /* torre: componentes do modelo por tipo */
 const ANDARES = ["instrument", "institution", "mechanism", "resource", "metric"];
 const torre = new THREE.Group(); scene.add(torre);
+const gAss = new THREE.Group(), gVaz = new THREE.Group(), gCup = new THREE.Group(), gLac = new THREE.Group(), gArc = new THREE.Group();
+[gAss, gVaz, gCup, gLac, gArc].forEach(g => scene.add(g));
+const GERIDOS = [torre, gAss, gVaz, gCup, gLac, gArc];
+GERIDOS.forEach(g => { g.userData.k = 0; g.userData.alvo = 0; g.visible = false; });
 const corStatus = s => s === "effective" ? COR.teal : s === "policy" ? COR.brass : COR.violet;
 ANDARES.forEach((k, andar) => {
   const cs = M.components.filter(c => c.kind === k);
@@ -188,7 +214,7 @@ ANDARES.forEach((k, andar) => {
   });
 });
 const topoTorre = new THREE.Vector3(0, 1 + ANDARES.length * .95 + .4, 0);
-const nucleo = new THREE.Mesh(new THREE.SphereGeometry(.42, 24, 16), new THREE.MeshBasicMaterial({ color: COR.brass2 })); nucleo.position.copy(topoTorre); scene.add(nucleo);
+const nucleo = new THREE.Mesh(new THREE.SphereGeometry(.42, 24, 16), new THREE.MeshBasicMaterial({ color: COR.brass2 })); nucleo.position.copy(topoTorre); torre.add(nucleo);
 
 /* anel sintético: 20 assentos em 8 estratos + cadeiras vazias */
 const assentos = [];
@@ -197,14 +223,14 @@ let idx = 0;
 M.strata.forEach(s => { for (let k = 0; k < s.seats; k++) {
   const a = idx++ / totalAssentos * Math.PI * 2;
   const m = new THREE.Mesh(new THREE.OctahedronGeometry(.42), new THREE.MeshStandardMaterial({ color: ESTRATO_COR[s.id], emissive: ESTRATO_COR[s.id], emissiveIntensity: .55, roughness: .3 }));
-  m.position.set(Math.cos(a) * 7.5, 1.1, Math.sin(a) * 7.5); m.userData = { fase: Math.random() * 6 }; scene.add(m); assentos.push(m);
+  m.position.set(Math.cos(a) * 7.5, 1.1, Math.sin(a) * 7.5); m.userData = { fase: Math.random() * 6 }; gAss.add(m); assentos.push(m);
   const haste = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(m.position.x, 0, m.position.z), new THREE.Vector3(m.position.x, .7, m.position.z)]);
-  scene.add(new THREE.Line(haste, new THREE.LineBasicMaterial({ color: ESTRATO_COR[s.id], transparent: true, opacity: .4 })));
+  gAss.add(new THREE.Line(haste, new THREE.LineBasicMaterial({ color: ESTRATO_COR[s.id], transparent: true, opacity: .4 })));
 } });
 M.unrep.forEach(() => {
   const a = idx++ / totalAssentos * Math.PI * 2;
   const t = new THREE.Mesh(new THREE.TorusGeometry(.42, .03, 8, 32), new THREE.MeshBasicMaterial({ color: COR.cinza, transparent: true, opacity: .7, wireframe: true }));
-  t.position.set(Math.cos(a) * 7.5, 1.1, Math.sin(a) * 7.5); t.lookAt(0, 1.1, 0); scene.add(t);
+  t.position.set(Math.cos(a) * 7.5, 1.1, Math.sin(a) * 7.5); t.lookAt(0, 1.1, 0); gVaz.add(t);
 });
 
 /* cúpula: 28 áreas; as 6 lacunas são anéis coral */
@@ -222,7 +248,7 @@ M.topics.forEach((t, i) => {
     const cor = t.strength === "inForce" ? COR.teal : t.strength === "proposedOnly" ? COR.violet : COR.cinza;
     obj = new THREE.Mesh(new THREE.SphereGeometry(.22, 16, 12), new THREE.MeshBasicMaterial({ color: cor, transparent: true, opacity: t.strength === "inferredOnly" ? .5 : .9 }));
   }
-  obj.position.copy(p); obj.userData = { votos: 0, alvo: 1 }; scene.add(obj); cupula[t.id] = obj;
+  obj.position.copy(p); obj.userData = { votos: 0, alvo: 1 }; (t.strength === "none" ? gLac : gCup).add(obj); cupula[t.id] = obj;
 });
 
 /* tensões-semente: arcos sobre a câmara */
@@ -233,7 +259,7 @@ SEMENTES.forEach((s, i) => {
   const am = a1 + Math.PI * .36, meio = new THREE.Vector3(Math.cos(am) * 9.5, 13 + (i % 2) * 1.6, Math.sin(am) * 9.5);
   const curva = new THREE.QuadraticBezierCurve3(p1, meio, p2);
   const mat = new THREE.MeshBasicMaterial({ color: COR.brass, transparent: true, opacity: .14 });
-  const tubo = new THREE.Mesh(new THREE.TubeGeometry(curva, 80, .05, 8, false), mat); scene.add(tubo);
+  const tubo = new THREE.Mesh(new THREE.TubeGeometry(curva, 80, .05, 8, false), mat); gArc.add(tubo);
   const topo = curva.getPoint(.5);
   arcos[s.id] = { tubo, mat, curva, topo, votos: 0 };
   const el = document.createElement("div"); el.className = "rotulo3d tensao"; el.innerHTML = s.id + " · " + esc(s.title) + "<b>0</b>"; document.body.appendChild(el);
@@ -317,8 +343,9 @@ L.on((m, novo) => {
   const p = chegar(m.pid, m.setor || (m.k === "setor" ? m.v : null), m.sim);
   if (m.k === "setor") mover(m.pid, m.v);
   const origem = () => p.para.clone();
-  if (m.k === "q1" && arcos[m.v]) feixe(origem(), arcos[m.v].topo, COR.brass, () => pulso(arcos[m.v]), novo ? 1900 : 0);
-  if (m.k === "q3" && cupula[m.v]) feixe(origem(), cupula[m.v].position, COR.coral, () => { cupula[m.v].userData.flash = 1; }, novo ? 1900 : 0);
+  const ve = g => g.userData.alvo > .5;
+  if (m.k === "q1" && arcos[m.v] && ve(gArc)) feixe(origem(), arcos[m.v].topo, COR.brass, () => pulso(arcos[m.v]), novo ? 1900 : 0);
+  if (m.k === "q3" && cupula[m.v] && ve(gLac)) feixe(origem(), cupula[m.v].position, COR.coral, () => { cupula[m.v].userData.flash = 1; }, novo ? 1900 : 0);
   if (m.k === "q4" && m.v && m.v.tx) feixe(origem(), topoTorre, COR.brass2, () => { nucleo.userData.flash = 1; mostrarFala(m.v, p.setor, m.sim); }, novo ? 1900 : 0);
   clearTimeout(painelPend); painelPend = setTimeout(painel, 120);
 });
@@ -341,6 +368,7 @@ function simular(n) {
 /* ---------- câmera ---------- */
 const CAMS = {
   camara: { pos: new THREE.Vector3(0, 15, 36), alvo: new THREE.Vector3(0, 6, 0) },
+  modelo: { pos: new THREE.Vector3(5, 8, 15), alvo: new THREE.Vector3(0, 3.4, 0) },
   sala: { pos: new THREE.Vector3(0, 30, 22), alvo: new THREE.Vector3(0, 0, 0) },
   tensoes: { pos: new THREE.Vector3(0, 8, 24), alvo: new THREE.Vector3(0, 10, 0) },
   lacunas: { pos: new THREE.Vector3(0, 3, 14), alvo: new THREE.Vector3(0, 16, 0) }
@@ -349,9 +377,36 @@ let camModo = "camara", girar = !REDUZ, ang = 0;
 const camPos = CAMS.camara.pos.clone(), camAlvo = CAMS.camara.alvo.clone();
 function modo(m) { camModo = m; document.querySelectorAll("[data-cam]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.cam === m))); }
 document.querySelectorAll("[data-cam]").forEach(b => b.onclick = () => modo(b.dataset.cam));
+const CAMADAS = [
+  { n: "Entrada", t: "Entre na câmara", d: "Aponte a câmera para o QR code. Cada pessoa vira uma luz no anel externo, no arco do seu setor. Sem nome, sem cadastro.", g: [], cam: "sala" },
+  { n: "Modelo", t: "O modelo brasileiro em exame", d: M.components.length + " peças empilhadas por tipo. A cor é a força jurídica: em vigor, política pública e projeto de lei, vazado porque não vincula.", g: [torre], cam: "modelo" },
+  { n: "Conselho", t: "O conselho das sombras", d: "20 perspectivas sintéticas em 8 estratos. As cadeiras vazias são grupos sem fonte documental: o sistema não inventa o que pensariam.", g: [torre, gAss, gVaz], cam: "camara" },
+  { n: "Lacunas", t: "O que falta no modelo", d: "A cúpula reúne as " + M.topics.length + " áreas da taxonomia. Os anéis coral são as " + LACUNAS.length + " áreas sem nenhum componente e crescem com os votos da sala.", g: [torre, gAss, gVaz, gCup, gLac], cam: "lacunas" },
+  { n: "Tensões", t: "Onde há conflito real", d: "Seis tensões-semente atravessam a câmara e acendem conforme a sala escolhe.", g: [torre, gAss, gVaz, gCup, gLac, gArc], cam: "tensoes" },
+  { n: "Tudo", t: "A câmara completa", d: "", g: GERIDOS, cam: "camara" }
+];
+let camadaAtual = -1;
+const navC = $("#camadasNav");
+CAMADAS.forEach((c, i) => { const b = document.createElement("button"); b.textContent = c.n; b.onclick = () => camada(i); navC.appendChild(b); });
+function camada(i) {
+  i = Math.max(0, Math.min(CAMADAS.length - 1, i)); camadaAtual = i; const c = CAMADAS[i];
+  GERIDOS.forEach(g => g.userData.alvo = c.g.includes(g) ? 1 : 0);
+  document.body.className = document.body.className.replace(/\bc\d\b|\btudo\b/g, "").trim() + " c" + i + (i === CAMADAS.length - 1 ? " tudo" : "");
+  document.querySelectorAll("[data-camada]").forEach(e => e.classList.toggle("oculto", +e.dataset.camada > i && i < CAMADAS.length - 1));
+  $("#etapaN").textContent = "Camada " + (i + 1) + " de " + CAMADAS.length; $("#etapaT").textContent = c.t; $("#etapaD").textContent = c.d;
+  navC.querySelectorAll("button").forEach((b, k) => b.setAttribute("aria-current", k === i ? "step" : "false"));
+  $("#voltarC").disabled = i === 0; $("#avancarC").textContent = i === CAMADAS.length - 1 ? "Recomeçar" : "Próxima camada →";
+  modo(c.cam);
+}
+$("#voltarC").onclick = () => camada(camadaAtual - 1);
+$("#avancarC").onclick = () => camada(camadaAtual === CAMADAS.length - 1 ? 0 : camadaAtual + 1);
 $("#girar").onclick = e => { girar = !girar; e.currentTarget.setAttribute("aria-pressed", String(girar)); };
 $("#simular").onclick = () => simular(12);
 $("#cheia").onclick = () => { (document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen?.())?.catch?.(() => {}); };
+addEventListener("keydown", e => {
+  if (["ArrowRight", "PageDown", " "].includes(e.key)) { e.preventDefault(); camada(camadaAtual + 1); return; }
+  if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); camada(camadaAtual - 1); return; }
+});
 addEventListener("keydown", e => { const k = { "1": "camara", "2": "sala", "3": "tensoes", "4": "lacunas" }[e.key]; if (k) modo(k); if (e.key === "s" || e.key === "S") simular(12); if (e.key === "g" || e.key === "G") $("#girar").click(); });
 addEventListener("resize", () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); composer.setSize(innerWidth, innerHeight); bloom.setSize(innerWidth, innerHeight); });
 
@@ -364,6 +419,7 @@ function quadro(now) {
   const base = CAMS[camModo];
   const rot = new THREE.Vector3(base.pos.x * Math.cos(ang) - base.pos.z * Math.sin(ang), base.pos.y, base.pos.x * Math.sin(ang) + base.pos.z * Math.cos(ang));
   camPos.lerp(rot, .03); camAlvo.lerp(base.alvo, .04); camera.position.copy(camPos); camera.lookAt(camAlvo);
+  for (const g of GERIDOS) { const u = g.userData; u.k += (u.alvo - u.k) * .045; g.visible = u.k > .01; const e = u.k < .999 ? 1 - Math.pow(1 - u.k, 3) : 1; g.scale.setScalar(Math.max(.001, e)); }
   torre.rotation.y = t * .08;
   nucleo.userData.flash = Math.max(0, (nucleo.userData.flash || 0) - .02); nucleo.scale.setScalar(1 + nucleo.userData.flash * 1.6 + Math.sin(t * 2) * .05);
   assentos.forEach(a => { a.rotation.y = t * .6 + a.userData.fase; a.position.y = 1.1 + Math.sin(t * 1.3 + a.userData.fase) * .12; });
@@ -385,12 +441,14 @@ function quadro(now) {
     v.copy(r.pos).project(camera);
     let vis = v.z < 1 && Math.abs(v.x) < 1.1 && Math.abs(v.y) < 1.1;
     if (r.tipo === "tensao" && camModo !== "tensoes") vis = vis && topoT.includes(r.id);
+    if ((r.tipo === "tensao" ? gArc : gLac).userData.k < .35) vis = false;
     r.el.style.opacity = vis ? 1 : 0;
     if (vis) { r.el.style.left = ((v.x + 1) / 2 * innerWidth) + "px"; r.el.style.top = ((1 - v.y) / 2 * innerHeight) + "px"; }
   }
   composer.render();
 }
 requestAnimationFrame(quadro);
+{ const pc = new URLSearchParams(location.search).get("camada"); camada(pc === "tudo" ? CAMADAS.length - 1 : Math.max(0, (parseInt(pc, 10) || 1) - 1)); }
 painel();
 L.iniciar();
 })();
