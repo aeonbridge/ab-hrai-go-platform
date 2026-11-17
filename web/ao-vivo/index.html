@@ -55,7 +55,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .rotulo3d.tensao{color:var(--color-text-link);border-color:rgba(232,163,61,.5)}
 .rotulo3d b{font:500 11px/1 var(--font-mono);margin-left:6px;color:var(--color-text-primary)}
 #chegada{position:fixed;left:50%;top:214px;transform:translateX(-50%);z-index:6;pointer-events:none;display:flex;flex-direction:column;gap:6px;align-items:center}
-.toast{font:600 14px/1 var(--font-sans);padding:10px 16px;border-radius:999px;background:rgba(232,163,61,.16);border:1px solid rgba(232,163,61,.55);color:var(--color-text-link);animation:sobe .5s ease-out}
+.toast{font:600 14px/1 var(--font-sans);padding:10px 16px;border-radius:999px;background:rgba(7,12,22,.9);border:1px solid rgba(232,163,61,.6);color:var(--color-text-link);animation:sobe .5s ease-out}
 #legenda{position:fixed;left:22px;bottom:22px;z-index:4;padding:12px 14px;display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:var(--color-text-secondary);max-width:300px}
 #legenda span{display:flex;gap:8px;align-items:center}
 #legenda i{width:10px;height:10px;display:inline-block;flex:none}
@@ -87,8 +87,8 @@ body.semgl #semgl{display:grid} body.semgl #gl{display:none}
 .toast{display:inline-flex;align-items:center;gap:8px;max-width:min(92vw,560px);line-height:1.25}
 .toast .av{width:24px;height:24px}
 .toast span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.toast.ok{background:rgba(56,194,180,.16);border-color:rgba(56,194,180,.6);color:#BFF3EC}
-.toast.mal{background:rgba(255,122,89,.16);border-color:rgba(255,122,89,.6);color:#FFD2C4}
+.toast.ok{background:rgba(9,32,34,.92);border-color:rgba(56,194,180,.6);color:#BFF3EC}
+.toast.mal{background:rgba(40,16,12,.92);border-color:rgba(255,122,89,.6);color:#FFD2C4}
 .rotulo3d.voce{color:var(--color-action-primary-fg);background:var(--color-action-primary-bg);border-color:var(--color-action-primary-bg);font-weight:700}
 .fala .reac{margin-top:6px;text-transform:none;letter-spacing:0}
 body.participante #entrar,body.participante #leitura,body.participante #legenda,body.participante #etapa,body.participante #comandos,body.participante #falas{display:none!important}
@@ -202,6 +202,7 @@ body.participante .marca{white-space:nowrap}
   <span data-camada="2"><i style="border:1.5px dashed #6F7F95;border-radius:50%"></i>cadeiras vazias: sem fonte documental</span>
   <span data-camada="0"><i style="background:#F5D49A;border-radius:50%;box-shadow:0 0 8px #E8A33D"></i>anel externo: pessoas na sala</span>
   <span data-camada="3"><i style="border:1.5px solid #FF7A59;border-radius:50%"></i>cúpula: áreas sem componente</span>
+  <span data-camada="0"><i style="border:1.5px solid #F5D49A;border-radius:50%;opacity:.8"></i>anel da mesa: acende a cada contribuição escrita</span>
 </aside>
 <div id="etapa" class="vidro" aria-live="polite"><div class="eyebrow" id="etapaN"></div><h1 id="etapaT"></h1><p id="etapaD"></p></div>
 <nav id="comandos" class="vidro" aria-label="Comandos do apresentador">
@@ -282,7 +283,7 @@ const ajustarFov = () => { camera.fov = camera.aspect < .8 ? 72 : camera.aspect 
 ajustarFov(); addEventListener("resize", ajustarFov);
 const composer = new THREE.EffectComposer(renderer);
 composer.addPass(new THREE.RenderPass(scene, camera));
-const bloom = new THREE.UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.95, 0.55, 0.12);
+const bloom = new THREE.UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.6, 0.4, 0.62);
 composer.addPass(bloom);
 scene.add(new THREE.AmbientLight(0x3A4E78, 0.9));
 const luz = new THREE.PointLight(0xF5D49A, 1.4, 90); luz.position.set(0, 26, 0); scene.add(luz);
@@ -314,13 +315,16 @@ ANDARES.forEach((k, andar) => {
     const a = i / Math.max(cs.length, 1) * Math.PI * 2 + andar * .5, r = 1.1 + (cs.length > 4 ? .5 : 0);
     const geo = new THREE.BoxGeometry(.95, .62, .95);
     const proposto = c.status === "proposed", inferido = c.basis === "inferred";
-    const mat = new THREE.MeshStandardMaterial({ color: corStatus(c.status), emissive: corStatus(c.status), emissiveIntensity: proposto ? .25 : .45, transparent: proposto || inferido, opacity: proposto ? .22 : inferido ? .5 : 1, roughness: .4, metalness: .2 });
+    const mat = new THREE.MeshStandardMaterial({ color: corStatus(c.status), emissive: corStatus(c.status), emissiveIntensity: proposto ? .08 : .14, transparent: proposto || inferido, opacity: proposto ? .3 : inferido ? .6 : 1, roughness: .75, metalness: 0 });
     const b = new THREE.Mesh(geo, mat); b.position.set(Math.cos(a) * r, 1 + andar * .95, Math.sin(a) * r); torre.add(b);
     if (proposto || inferido) { const e = new THREE.LineSegments(new THREE.EdgesGeometry(geo), new THREE.LineDashedMaterial({ color: proposto ? COR.violet : COR.cinza, dashSize: .12, gapSize: .08 })); e.computeLineDistances(); e.position.copy(b.position); torre.add(e); }
   });
 });
-const topoTorre = new THREE.Vector3(0, 1 + ANDARES.length * .95 + .4, 0);
-const nucleo = new THREE.Mesh(new THREE.SphereGeometry(.42, 24, 16), new THREE.MeshBasicMaterial({ color: COR.brass2 })); nucleo.position.copy(topoTorre); torre.add(nucleo);
+/* mesa da sala: anel no chão ao redor da torre, onde chegam as contribuições escritas (P5) */
+const MESA_R = 3.4;
+const nucleo = new THREE.Mesh(new THREE.TorusGeometry(MESA_R, .05, 8, 96), new THREE.MeshBasicMaterial({ color: COR.brass2, transparent: true, opacity: .3 }));
+nucleo.rotation.x = Math.PI / 2; nucleo.position.y = .06; scene.add(nucleo);
+const pontoMesa = de => { const d = new THREE.Vector3(de.x, 0, de.z); if (d.lengthSq() < 1e-6) d.set(0, 0, 1); return d.normalize().multiplyScalar(MESA_R).setY(.1); };
 
 /* anel sintético: 20 assentos em 8 estratos + cadeiras vazias */
 const assentos = [];
@@ -453,7 +457,7 @@ L.on((m, novo) => {
   const ve = g => g.userData.alvo > .5;
   if (m.k === "q1" && arcos[m.v] && ve(gArc)) feixe(origem(), arcos[m.v].topo, COR.brass, () => pulso(arcos[m.v]), novo ? 1900 : 0);
   if (m.k === "q3" && cupula[m.v] && ve(gLac)) feixe(origem(), cupula[m.v].position, COR.coral, () => { cupula[m.v].userData.flash = 1; }, novo ? 1900 : 0);
-  if (m.k === "q4" && m.v && m.v.tx) feixe(origem(), topoTorre, COR.brass2, () => { nucleo.userData.flash = 1; mostrarFala(m.pid, m.v, p.setor, m.sim); atualizarContagensFalas(); }, novo ? 1900 : 0);
+  if (m.k === "q4" && m.v && m.v.tx) feixe(origem(), pontoMesa(p.para), COR.brass2, () => { nucleo.userData.flash = 1; mostrarFala(m.pid, m.v, p.setor, m.sim); atualizarContagensFalas(); }, novo ? 1900 : 0);
   if (m.k.startsWith("r:")) { const alvo = pessoas.get(m.k.slice(2)), rr = REACOES.find(x => x[0] === m.v); if (alvo && rr) feixe(origem(), alvo.para.clone(), rr[2], atualizarContagensFalas, novo ? 1900 : 0); else atualizarContagensFalas(); }
   const txt = registrarAgora(m), aoVivo = (m.ts || 0) > T0 - 2000;
   if (txt && aoVivo) {
@@ -679,7 +683,7 @@ function quadro(now) {
   camPos.lerp(rot, .03); camAlvo.lerp(base.alvo, .04); camera.position.copy(camPos); camera.lookAt(camAlvo);
   for (const g of GERIDOS) { const u = g.userData; u.k += (u.alvo - u.k) * .045; g.visible = u.k > .01; const e = u.k < .999 ? 1 - Math.pow(1 - u.k, 3) : 1; g.scale.setScalar(Math.max(.001, e)); }
   torre.rotation.y = t * .08;
-  nucleo.userData.flash = Math.max(0, (nucleo.userData.flash || 0) - .02); nucleo.scale.setScalar(1 + nucleo.userData.flash * 1.6 + Math.sin(t * 2) * .05);
+  nucleo.userData.flash = Math.max(0, (nucleo.userData.flash || 0) - .02); nucleo.material.opacity = .3 + nucleo.userData.flash * .7; nucleo.scale.setScalar(1 + nucleo.userData.flash * .08);
   assentos.forEach(a => { a.rotation.y = t * .6 + a.userData.fase; a.position.y = 1.1 + Math.sin(t * 1.3 + a.userData.fase) * .12; });
   for (const p of pessoas.values()) {
     const k = Math.min(1, (now - p.t0) / p.dur), e = ease(k);
