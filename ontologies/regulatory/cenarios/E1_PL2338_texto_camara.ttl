@@ -1,0 +1,83 @@
+# =============================================================================
+# Cenário E1 (ILUSTRATIVO) — chega uma nova versão do PL 2338/2023
+#
+# Finalidade: demonstrar o método de propagação de impacto da ontologia HRAI-GO.
+# NÃO é extração de fonte real. Os dispositivos, requisitos, controles, a avaliação e
+# a decisão de revisão abaixo são HIPOTÉTICOS e servem só para exercitar as regras.
+# Nada aqui afirma o conteúdo do PL, nem a conformidade de qualquer aplicação real.
+# A aplicação usada (Prova de Vida, Banco do Brasil) vem da instância do PBIA
+# (Tabela 1) apenas como exemplo de alvo; nenhuma avaliação real foi feita.
+# =============================================================================
+@prefix e1:      <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/cenario-e1#> .
+@prefix pbia:    <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#> .
+@prefix hrai:    <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+
+# 1. Monitoramento: nova captura de uma fonte legislativa (hipotética)
+e1:Fonte_PortalCamara a hrai:LegalSource ;
+    rdfs:label "Portal da Câmara dos Deputados — ficha de tramitação do PL 2338/2023 (exemplo)"@pt .
+e1:Snapshot_TextoCamara a hrai:SourceSnapshot ;
+    rdfs:label "Captura ilustrativa do texto em tramitação na Câmara"@pt ;
+    hrai:snapshotOfSource e1:Fonte_PortalCamara .
+
+# 2. Nova versão do mesmo instrumento: continua sendo PROPOSTA (LegislativeProposal)
+e1:Versao_TextoCamara a hrai:LegalInstrumentVersion ;
+    rdfs:label "PL 2338/2023 — versão ilustrativa em tramitação na Câmara"@pt ;
+    hrai:versionOfInstrument pbia:PL_2338_2023 ;
+    prov:wasDerivedFrom e1:Snapshot_TextoCamara .
+
+# 3. Dispositivos extraídos da nova versão (HIPOTÉTICOS; não são artigos verificados)
+e1:Disp_AvaliacaoPreliminar a hrai:LegalProvision ;
+    rdfs:label "Dispositivo ilustrativo A — avaliação preliminar de risco antes do uso"@pt ;
+    hrai:provisionOfVersion e1:Versao_TextoCamara ;
+    prov:wasDerivedFrom e1:Snapshot_TextoCamara .
+e1:Disp_AvaliacaoImpacto a hrai:LegalProvision ;
+    rdfs:label "Dispositivo ilustrativo B — avaliação de impacto algorítmico para alto risco"@pt ;
+    hrai:provisionOfVersion e1:Versao_TextoCamara ;
+    prov:wasDerivedFrom e1:Snapshot_TextoCamara .
+
+# 4. Requisitos normativos derivados dos dispositivos
+e1:Req_RegistroAvaliacaoPreliminar a hrai:NormativeRequirement ;
+    rdfs:label "Requisito ilustrativo — registrar a avaliação preliminar de risco"@pt ;
+    hrai:derivedFromProvision e1:Disp_AvaliacaoPreliminar ;
+    hrai:requirementNeedsControl e1:Ctrl_AvaliacaoRiscoDocumentada .
+e1:Req_AvaliacaoImpactoAltoRisco a hrai:NormativeRequirement ;
+    rdfs:label "Requisito ilustrativo — avaliação de impacto antes de operar sistema de alto risco"@pt ;
+    hrai:derivedFromProvision e1:Disp_AvaliacaoImpacto ;
+    hrai:requirementNeedsControl e1:Ctrl_AvaliacaoImpacto .
+
+e1:Ctrl_AvaliacaoRiscoDocumentada a hrai:GovernanceControl ;
+    rdfs:label "Controle: avaliação de risco documentada"@pt .
+e1:Ctrl_AvaliacaoImpacto a hrai:GovernanceControl ;
+    rdfs:label "Controle: avaliação de impacto algorítmico"@pt .
+
+# 5. Uma aplicação já avaliada antes da mudança (avaliação hipotética, sem status declarado aqui)
+pbia:App_BBProvaDeVida hrai:applicationImplementsControl e1:Ctrl_AvaliacaoRiscoDocumentada .
+e1:Avaliacao_ProvaDeVida a hrai:ComplianceAssessment ;
+    rdfs:label "Avaliação ilustrativa da Prova de Vida frente ao requisito de avaliação de impacto"@pt ;
+    hrai:assessesApplication pbia:App_BBProvaDeVida ;
+    hrai:assessesRequirement e1:Req_AvaliacaoImpactoAltoRisco .
+
+# 6. O evento de mudança que dispara a propagação
+e1:Mudanca_TextoCamara a hrai:RegulatoryChangeEvent ;
+    rdfs:label "Mudança detectada: nova versão do PL 2338/2023 em tramitação (ilustrativa)"@pt ;
+    hrai:changeAffectsVersion e1:Versao_TextoCamara ;
+    hrai:changeObservedInSnapshot e1:Snapshot_TextoCamara .
+
+# 7. Portão humano: a extração é candidata; um revisor aprova (aprovar não publica)
+e1:Revisor a hrai:ReviewActor ; rdfs:label "Revisora jurídica (exemplo)"@pt .
+e1:Decisao_Aprovada a hrai:ApprovalDecision ; hrai:reviewDecisionBy e1:Revisor .
+e1:Candidato_TextoCamara a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: dispositivos e requisitos extraídos da versão ilustrativa"@pt ;
+    hrai:candidateFromSnapshot e1:Snapshot_TextoCamara ;
+    hrai:hasReviewDecision e1:Decisao_Aprovada .
+
+# 8. Shadow Council: um assento sintético se posiciona sobre a tensão (perspectiva, não pessoa)
+e1:Assento_Reguladores1 a hrai:SyntheticStakeholderPerspective ;
+    rdfs:label "Assento sintético — reguladores e fiscalização (1 de 3)"@pt .
+e1:Posicao_Reguladores1 a hrai:StakeholderPosition ;
+    rdfs:label "Posição sintética: exigir avaliação de impacto só com capacidade de fiscalizar instalada"@pt ;
+    hrai:positionExpressedBy e1:Assento_Reguladores1 .
+pbia:Delib_PBIAElaboration2024 hrai:deliberationIncludesPosition e1:Posicao_Reguladores1 .

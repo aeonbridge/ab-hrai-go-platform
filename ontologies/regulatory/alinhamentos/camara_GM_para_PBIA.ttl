@@ -1,0 +1,37 @@
+# =============================================================================
+# Alinhamento proposto: componentes da câmara (modelo de governança GM-01..GM-22,
+# web/assets/modelo.js e cenário GOV-BR-001) -> indivíduos da instância do PBIA.
+#
+# skos:exactMatch  = mesmo objeto do mundo
+# skos:closeMatch  = objeto relacionado, mas não idêntico (ex.: componente amplo vs. eixo do plano)
+# sem alinhamento  = o componente não existe na instância (lacuna de cobertura do grafo)
+#
+# Proposta do autor deste relatório, PENDENTE DE REVISÃO. Cada linha registra o motivo.
+# =============================================================================
+@prefix gm:   <https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#> .
+@prefix pbia: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+gm:GM-01 rdfs:label "Estratégia Brasileira de IA (EBIA, 2021)"@pt ; rdfs:comment "Sem alinhamento: a EBIA não está instanciada no grafo do PBIA."@pt .
+gm:GM-02 rdfs:label "Plano Brasileiro de IA (PBIA) 2024-2028"@pt ; skos:exactMatch pbia:PBIA_Plan .
+gm:GM-03 rdfs:label "Lei Geral de Proteção de Dados (Lei 13.709/2018)"@pt ; skos:exactMatch pbia:Law_13709_2018_LGPD .
+gm:GM-04 rdfs:label "PL 2338/2023 (marco legal de IA)"@pt ; skos:exactMatch pbia:PL_2338_2023 .
+gm:GM-05 rdfs:label "Sistema Nacional de Regulação e Governança de IA (SIA)"@pt ; rdfs:comment "Sem alinhamento: o SIA é criado pelo PL, cujos dispositivos não foram extraídos."@pt .
+gm:GM-06 rdfs:label "Classificação por níveis de risco"@pt ; rdfs:comment "Sem alinhamento: mecanismo do PL; dispositivos não extraídos."@pt .
+gm:GM-07 rdfs:label "Regime de alto risco, incluindo o uso em saúde"@pt ; rdfs:comment "Sem alinhamento: mecanismo do PL; dispositivos não extraídos."@pt .
+gm:GM-08 rdfs:label "Direitos autorais e IA no PL"@pt ; rdfs:comment "Sem alinhamento: mecanismo do PL; dispositivos não extraídos."@pt .
+gm:GM-09 rdfs:label "Trabalho e segurança no PL"@pt ; rdfs:comment "Sem alinhamento: mecanismo do PL; dispositivos não extraídos."@pt .
+gm:GM-10 rdfs:label "Avaliação de impacto algorítmico e direitos das pessoas afetadas"@pt ; rdfs:comment "Sem alinhamento: mecanismo esperado no PL, não confirmado; dispositivos não extraídos."@pt .
+gm:GM-11 rdfs:label "Responsabilização civil por danos de sistemas de IA"@pt ; rdfs:comment "Sem alinhamento: mecanismo esperado no PL, não confirmado; dispositivos não extraídos."@pt .
+gm:GM-12 rdfs:label "Sandbox regulatório e ambiente de testes"@pt ; rdfs:comment "Sem alinhamento: mecanismo esperado no PL, não confirmado; dispositivos não extraídos."@pt .
+gm:GM-13 rdfs:label "Autoridade Nacional de Proteção de Dados (ANPD)"@pt ; rdfs:comment "Sem alinhamento: a ANPD não aparece como stakeholder na instância do PBIA."@pt .
+gm:GM-14 rdfs:label "Reguladores setoriais existentes"@pt ; rdfs:comment "Sem alinhamento: categoria genérica, sem indivíduo correspondente."@pt .
+gm:GM-15 rdfs:label "Grupo de trabalho interministerial do PBIA, coordenado pelo MCTI"@pt ; skos:closeMatch pbia:PBIA_GovernanceByCITDigital ; rdfs:comment "Próximo: a instância registra a governança do plano pelo CIT Digital, não o GT de 2025."@pt .
+gm:GM-16 rdfs:label "Painel público de acompanhamento do PBIA"@pt ; rdfs:comment "Sem alinhamento: o painel de execução não está instanciado (o Obia, Ação 52, é outro objeto)."@pt .
+gm:GM-17 rdfs:label "Infraestrutura nacional de computação"@pt ; skos:closeMatch pbia:Action01_AISupercomputer , pbia:Action27_SovereignCloud ; rdfs:comment "Próximo: o componente agrega supercomputador e armazenamento; a instância tem as ações separadas."@pt .
+gm:GM-18 rdfs:label "Modelos de linguagem em português"@pt ; skos:exactMatch pbia:Action09_PortugueseLLM .
+gm:GM-19 rdfs:label "Formação de especialistas e capacitação de servidores"@pt ; skos:closeMatch pbia:PBIA_Axis2_DiffusionTraining ; rdfs:comment "Próximo: o componente é parte do Eixo 2."@pt .
+gm:GM-20 rdfs:label "IA Brasil: IA no serviço público"@pt ; skos:closeMatch pbia:PBIA_Axis3_PublicServices ; rdfs:comment "Próximo: a iniciativa está dentro do Eixo 3."@pt .
+gm:GM-21 rdfs:label "Centro Nacional de Transparência Algorítmica e IA Confiável"@pt ; skos:exactMatch pbia:Action51_AlgorithmicTransparencyCentre .
+gm:GM-22 rdfs:label "Crédito e apoio à inovação empresarial em IA"@pt ; skos:closeMatch pbia:PBIA_Axis4_BusinessInnovation ; rdfs:comment "Próximo: o componente é parte do Eixo 4."@pt .

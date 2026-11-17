@@ -1,0 +1,292 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage{booktabs,longtable,tabularx,array}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric,fit,backgrounds}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\emergencystretch=3em
+
+\definecolor{latao}{HTML}{B9802A}
+\definecolor{tinta}{HTML}{0B1220}
+\definecolor{lagoa}{HTML}{1F8A80}
+\definecolor{coral}{HTML}{C9533A}
+\definecolor{cinza}{HTML}{5B6676}
+
+\pagestyle{fancy}\fancyhf{}
+\lhead{\small\color{cinza}HRAI-GO · Relatório técnico RT-ONT-01}
+\rhead{\small\color{cinza}\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,columns=fullflexible,frame=single,rulecolor=\color{cinza!40},
+  backgroundcolor=\color{cinza!5},xleftmargin=4pt,xrightmargin=4pt,literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ã}{{\~a}}1 {õ}{{\~o}}1 {ç}{{\c c}}1 {ê}{{\^e}}1 {â}{{\^a}}1 {ô}{{\^o}}1}
+
+\newcommand{\cadeia}[3]{{\raggedright\leftskip=\dimexpr #1\dimexpr 1.3em\relax\relax\parindent=0pt\hangindent=1.3em\hangafter=1 {\color{latao}$\hookrightarrow$}~{\ttfamily\footnotesize #2}\\[-1pt]\hspace*{1.3em}{\scriptsize\color{cinza}#3}\par\vspace{2pt}}}
+\newcommand{\nota}[1]{\par\smallskip\noindent\fcolorbox{latao}{latao!6}{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\small #1}}\par\smallskip}
+
+\title{\textbf{Ontologia regulatória HRAI-GO como fonte de verdade da câmara de governança}\\[4pt]
+\large Método de raciocínio rastreável, proposta de utilização e resultados de um cenário de mudança}
+\author{Plataforma HRAI-GO · Aeonbridge}
+\date{Relatório técnico RT-ONT-01 · 17 de novembro de 2026}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+\noindent A plataforma HRAI-GO apresenta o arranjo brasileiro de governança de IA numa câmara 3D ao vivo e numa base de conhecimento. Hoje os 22 componentes exibidos vêm de um cadastro próprio, sem ligação com a ontologia regulatória HRAI-GO (v1.1.0, 66 classes, 98 propriedades de objeto, 43 de dados e 23 regras SWRL), que só é usada em testes. Este relatório propõe um método para que a ontologia passe a ser a fonte de verdade da câmara, em seis etapas: camadas de dados com proveniência, extração candidata com revisão humana, alinhamento SKOS com o modelo exibido, raciocínio por encadeamento para frente com justificativa, propagação de impacto a partir de eventos de mudança e publicação para a interface. Implementamos um motor que executa as regras SWRL diretamente da ontologia e registra, para cada inferência, a cadeia até as triplas declaradas e a fonte. Sobre a instância real do Plano Brasileiro de IA (1.057 triplas), 9 das 23 regras disparam e produzem 56 inferências, idênticas às do verificador já existente no repositório. Num cenário \emph{ilustrativo} de nova versão do PL 2338/2023, 20 regras disparam, uma aplicação é marcada como \emph{potencialmente} afetada com cadeia de seis passos até a captura da fonte, os dispositivos permanecem classificados como proposta e nenhuma inferência afirma status jurídico, conformidade ou publicação. O alinhamento mostra que só 10 dos 22 componentes têm correspondente na instância (5 exatos, 5 próximos): a maior lacuna são os mecanismos do PL, cujos dispositivos ainda não foram extraídos.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Contexto e problema}
+
+A câmara ao vivo (\texttt{web/ao-vivo/}) e a apresentação (\texttt{web/apresentacao/}) mostram uma torre com 22 componentes do modelo brasileiro (GM-01 a GM-22), um conselho sintético de 20 assentos em 8 estratos, uma cúpula com 28 áreas temáticas e seis tensões-semente. Esses dados vêm de \texttt{web/assets/modelo.js}, derivado do protótipo do Shadow Council e do cenário \texttt{GOV-BR-001}.
+
+Em paralelo, o repositório mantém a ontologia regulatória HRAI-GO (\texttt{ontologies/regulatory/}) e uma instância do PBIA 2024--2028 extraída do documento oficial, com hash SHA-256 registrado. Uma auditoria do código encontrou três problemas:
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Dois cadastros paralelos.} Nenhum componente GM existe como indivíduo da instância: a busca por \texttt{GM-} no grafo do PBIA retorna zero ocorrências. Uma correção num lado não chega ao outro.
+  \item \textbf{Afirmação sem lastro na apresentação.} O slide ``Por trás da imagem, uma ontologia que raciocina'' diz que cada peça é um indivíduo da ontologia e que é possível perguntar ``por quê?'' e receber a cadeia inteira. Nada no site lê a ontologia ou executa regras.
+  \item \textbf{Ontologia usada só em testes.} Os scripts \texttt{tests/verify\_regulatory\_*.py} validam a estrutura e as regras, mas nenhum produto consome o resultado.
+\end{enumerate}
+
+\noindent Diante de um público de governo, o problema 2 é um risco de credibilidade: basta pedir a cadeia de um bloco. O objetivo deste trabalho é tornar a afirmação verdadeira, com um método reprodutível e verificável.
+
+\section{A ontologia HRAI-GO}
+
+\subsection{TBox}
+A ontologia geral (v1.1.0) tem 1.557 triplas, 66 classes, 98 propriedades de objeto e 43 de dados. Ela separa explicitamente categorias que costumam ser confundidas em sistemas de ``compliance'':
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{norma vigente} \emph{versus} \textbf{proposta legislativa} (\texttt{LegislativeProposal} é disjunta de \texttt{EnactedLegalInstrument});
+  \item \textbf{plano de política pública} (\texttt{PolicyInstrument}) \emph{versus} \textbf{instrumento jurídico}: o PBIA é plano, não gera requisitos normativos;
+  \item \textbf{perspectiva sintética} \emph{versus} \textbf{stakeholder identificado} (disjuntas): o conselho de IA nunca se passa por pessoa real;
+  \item \textbf{fato candidato} (\texttt{CandidateAssertion}) \emph{versus} \textbf{fato publicado} (\texttt{KnowledgeGraphRelease}), com uma decisão de revisão humana (\texttt{ReviewDecision}) entre os dois.
+\end{itemize}
+
+\subsection{Regras SWRL}
+As 23 regras estão serializadas em RDF na própria ontologia (\texttt{swrl:Imp}), com uma ressalva em \texttt{rdfs:comment}. Por construção, e verificado pelo teste existente, nenhuma cabeça de regra afirma \texttt{hasLegalStatus}, \texttt{assessmentHasStatus} ou \texttt{releasePublishesCandidate}. As regras marcam relações \emph{potenciais} (``potencialmente afetado'', ``precisa de revisão'') e classificações prudentes (``dispositivo de proposta'', ``requisito prospectivo''), nunca veredictos.
+
+\subsection{Instância do PBIA}
+A ABox \texttt{HRAI\_GO\_Regulatory\_BR\_PBIA\_2025.ttl} tem 1.057 triplas. Entre outros, ela contém:
+\begin{itemize}[leftmargin=*]
+  \item 69 stakeholders, 20 instrumentos de política, 17 aplicações de IA e 16 indicadores;
+  \item 5 tensões regulatórias, 2 lacunas e 8 afirmações de política;
+  \item 6 normas citadas e 1 proposta legislativa (PL 2338/2023);
+  \item um evento de captura da fonte.
+\end{itemize}
+Todo o conteúdo é \emph{candidato}: nenhum lote tem decisão de revisão. A instância não extrai dispositivos nem requisitos, por decisão de modelagem: o PBIA não é norma, e as normas citadas são só referências.
+
+\section{Método proposto}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[node distance=5mm and 6mm, every node/.style={font=\footnotesize},
+  caixa/.style={draw=tinta!70, rounded corners=3pt, fill=white, align=center, minimum height=11mm, text width=24mm},
+  humano/.style={caixa, draw=latao, fill=latao!10},
+  seta/.style={-{Stealth[length=2mm]}, thick, color=tinta!70}]
+\node[caixa] (m1) {M1\\Fontes e capturas\\(SHA-256)};
+\node[caixa, right=of m1] (m2) {M2\\Extração\\candidata};
+\node[humano, right=of m2] (rev) {Revisão humana\\\texttt{ReviewDecision}};
+\node[caixa, right=of rev] (kg) {Grafo publicado\\(release)};
+\node[caixa, below=10mm of kg] (m4) {M4\\Raciocínio SWRL\\com justificativa};
+\node[caixa, left=of m4] (m3) {M3\\Alinhamento SKOS\\GM $\leftrightarrow$ grafo};
+\node[caixa, left=of m3] (m5) {M5\\Evento de mudança\\e propagação};
+\node[caixa, left=of m5] (m6) {M6\\Publicação: câmara,\\fichas, telão};
+\draw[seta] (m1) -- (m2); \draw[seta] (m2) -- (rev); \draw[seta] (rev) -- (kg);
+\draw[seta] (kg) -- (m4); \draw[seta] (m3) -- (m4);
+\draw[seta] (m4.south) -- ++(0,-4mm) -| (m6.south);
+\draw[seta] (m5) -- (m3);
+\draw[seta, dashed] (m5.north) |- (m1.south east);
+\node[below=9mm of m5, text width=100mm, align=center, color=cinza] {fluxo contínuo: uma mudança na fonte reabre só o que depende dela};
+\end{tikzpicture}
+\caption{Etapas do método. Em latão, o único ponto em que algo vira fato publicado: decisão humana.}
+\label{fig:metodo}
+\end{figure}
+
+\subsection*{M1 · Camadas de dados com proveniência}
+Quatro camadas, em arquivos separados e com IRIs próprios:
+\begin{itemize}[leftmargin=*]
+  \item a TBox;
+  \item as instâncias extraídas de fontes reais (com \texttt{prov:wasDerivedFrom} até um \texttt{SourceSnapshot} com hash);
+  \item os \emph{cenários} hipotéticos, fora da pasta de instâncias e marcados como ilustrativos;
+  \item os \emph{alinhamentos} com o modelo exibido na câmara.
+\end{itemize}
+Misturar essas camadas é o erro que mais compromete credibilidade, porque transforma hipótese em fato.
+
+\subsection*{M2 · Extração candidata e portão humano}
+Toda extração entra como \texttt{CandidateAssertion} num \texttt{ExtractionBatch}. A regra R09 marca um candidato como \emph{revisado e aprovado} quando há \texttt{ApprovalDecision}. A publicação num \texttt{KnowledgeGraphRelease}, porém, nunca é inferida: é um ato explícito, transacional e autorizado.
+
+\subsection*{M3 · Alinhamento com o modelo exibido}
+Cada componente GM recebe um IRI estável e uma correspondência SKOS com o grafo. Usa-se \texttt{skos:exactMatch} quando é o mesmo objeto e \texttt{skos:closeMatch} quando é objeto relacionado, como um componente amplo e o eixo do plano que o contém. A ausência de correspondência fica registrada com o motivo. Esse arquivo é o contrato entre a interface e a ontologia. A proposta é gerar \texttt{modelo.js} a partir dele, em vez de manter o cadastro à mão.
+
+\subsection*{M4 · Raciocínio rastreável}
+Um motor de encadeamento para frente executa as regras SWRL lidas da própria ontologia até o ponto fixo, junto com um fechamento mínimo e explícito: \texttt{rdfs:subClassOf}, \texttt{rdfs:subPropertyOf} e \texttt{owl:inverseOf}. Cada tripla inferida guarda a regra, as ligações das variáveis e as triplas do corpo. Responder ``por quê?'' é percorrer essa árvore até as triplas declaradas e, delas, até a fonte. O motor aborta se alguma inferência tocar um predicado proibido.
+
+\subsection*{M5 · Propagação de impacto por eventos}
+Uma mudança na fonte vira um \texttt{RegulatoryChangeEvent} ligado à versão afetada. As regras R10 a R13 propagam o impacto \emph{potencial} pela cadeia versão $\to$ dispositivo $\to$ requisito $\to$ avaliação $\to$ aplicação. As regras R22 e R23 garantem que dispositivos e requisitos de uma proposta continuem marcados como proposta e como prospectivos. O resultado é uma fila de revisão, não um veredicto.
+
+\subsection*{M6 · Publicação para a plataforma}
+O grafo materializado alimenta a interface. Cada bloco, assento, tensão e lacuna da câmara mostra na ficha o IRI, a fonte, o estado de revisão e as inferências com a cadeia ``por quê?''. O monitoramento lista os eventos e o que cada um reabriu.
+
+\section{Implementação}
+
+\begin{itemize}[leftmargin=*]
+  \item \texttt{scripts/ontologia/raciocinar.py}: o motor (Python, rdflib 7.6). Ele interpreta os átomos SWRL de classe, propriedade de objeto e de dados, e os \emph{builtins} \texttt{greaterThan}, \texttt{lessThan}, \texttt{divide} e afins; registra justificativas; e oferece \texttt{--explicar} para imprimir a árvore de um sujeito.
+  \item \texttt{ontologies/regulatory/cenarios/E1\_PL2338\_texto\_camara.ttl}: o cenário ilustrativo da seção~\ref{sec:e1}.
+  \item \texttt{ontologies/regulatory/alinhamentos/camara\_GM\_para\_PBIA.ttl}: o alinhamento proposto (seção~\ref{sec:a1}).
+  \item \texttt{scripts/ontologia/experimentos.py}: roda os experimentos e gera \texttt{dados.json} e as tabelas incluídas neste relatório. Nenhum número aqui foi digitado à mão.
+\end{itemize}
+
+\nota{\textbf{Limitação deliberada.} O motor não é um raciocinador OWL~2 DL completo: não trata restrições, cardinalidade nem classes definidas. Em troca, cada conclusão é auditável linha a linha, o que importa mais neste domínio. Se a ontologia passar a depender de axiomas OWL mais ricos, a etapa M4 deve incorporar um raciocinador completo (HermiT ou Pellet) antes das regras.}
+
+\section{Experimentos e resultados}
+
+\subsection{E0 · Linha de base: instância real do PBIA}
+Sobre TBox mais ABox (2.614 triplas declaradas), o motor chega ao ponto fixo em 2 rodadas e cerca de 0,1\,s. Ele produz 79 triplas inferidas: 56 por regras SWRL, 16 por \texttt{owl:inverseOf} e 7 por \texttt{rdfs:subClassOf}.
+
+Disparam 9 das 23 regras: R03, R04, R05, R06, R07, R08, R15, R16 e R17. As contagens por regra coincidem exatamente com as do verificador independente que já existia no repositório (\texttt{tests/verify\_regulatory\_instances.py}): R03=20, R04=16, R05=1, R06=1, R07=3, R08=1, R15=1, R16=5, R17=8.
+
+As 14 regras que não disparam dependem de dispositivos, requisitos, avaliações de conformidade, orçamentos com execução ou limiares de indicador, e nada disso existe na instância. Isso não é defeito da instância: é a consequência correta de o PBIA ser um plano.
+
+\subsection{E1 · Cenário ilustrativo: nova versão do PL 2338/2023}\label{sec:e1}
+\nota{\textbf{Cenário hipotético.} Os dispositivos, requisitos, controles, a avaliação e a decisão de revisão do cenário E1 \emph{não} correspondem a artigos verificados do PL nem a qualquer avaliação real. A aplicação usada como alvo (Prova de Vida, Banco do Brasil) aparece na Tabela~1 do PBIA e foi escolhida só como exemplo de nó do grafo.}
+
+\noindent O cenário acrescenta 52 triplas à instância real:
+\begin{itemize}[leftmargin=*]
+  \item uma captura do portal legislativo;
+  \item uma nova \texttt{LegalInstrumentVersion} do mesmo PL, que continua sendo \texttt{LegislativeProposal};
+  \item dois dispositivos, cada um com um requisito derivado e o controle que exige;
+  \item uma avaliação anterior da aplicação frente a um dos requisitos;
+  \item o evento de mudança;
+  \item um candidato com decisão de aprovação;
+  \item a posição de um assento sintético do conselho numa deliberação.
+\end{itemize}
+
+\paragraph{Resultado.} Disparam 20 das 23 regras, e as inferências passam de 79 para 105. Todas as inferências do cenário estão no apêndice~\ref{ap:regras}. As principais:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{R10 e R11}: o evento \emph{potencialmente} afeta os 2 dispositivos e os 2 requisitos.
+  \item \textbf{R12 e R13}: a avaliação da aplicação precisa de revisão, e a aplicação fica \emph{potencialmente} impactada pela mudança. Não se afirma não conformidade.
+  \item \textbf{R22 e R23}: os 2 dispositivos são classificados como de proposta, e os 2 requisitos como \emph{prospectivos}. Mesmo depois da mudança, nada vira obrigação.
+  \item \textbf{R01 e R02}: dispositivos e requisitos recebem a \emph{origem} jurisdicional Brasil, que não é aplicabilidade.
+  \item \textbf{R15}: o evento é ligado à sua fonte.
+  \item \textbf{R09}: o candidato é marcado como revisado e aprovado; ele \emph{não} é publicado.
+  \item \textbf{R14}: o controle de avaliação de risco que a aplicação já implementa \emph{potencialmente} atende ao requisito de registro da avaliação preliminar.
+  \item \textbf{R21}: a posição do assento é classificada como posição sintética.
+\end{itemize}
+
+\paragraph{A cadeia ``por quê?''.} A árvore de justificativa da conclusão principal, gerada pelo motor, vai do topo até uma tripla declarada com fonte (ramo do dispositivo):
+
+\medskip
+\begin{minipage}{\linewidth}\small
+\input{tabelas/cadeia.tex}
+\end{minipage}
+\medskip
+
+\noindent A última tripla está ligada por \texttt{prov:wasDerivedFrom} à captura \texttt{e1:Snapshot\_TextoCamara}. Essa é a resposta a ``me mostre a cadeia até a fonte deste bloco''.
+
+\paragraph{Uma lacuna que só o grafo revela.} Uma consulta SPARQL simples sobre o grafo materializado lista os requisitos prospectivos que nenhum controle potencialmente atende. O resultado é \texttt{e1:Req\_AvaliacaoImpactoAltoRisco}: a aplicação implementa avaliação de risco documentada, mas não avaliação de impacto. É o tipo de achado que a câmara pode mostrar como ``lacuna de controle'', ao lado das lacunas de cobertura do modelo.
+
+\subsection{V1 · Verificação de completude do ponto fixo}
+Para cada regra sem \emph{builtin}, o corpo foi traduzido automaticamente numa consulta SPARQL e executado sobre o grafo final de E1. Toda cabeça encontrada precisa estar materializada.
+
+\begin{center}\small
+\begin{tabular}{lrr}
+\toprule
+Regra & cabeças encontradas pelo SPARQL & faltando no grafo\\
+\midrule
+\csname @@input\endcsname tabelas/verificacao.tex 
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent Não falta nenhuma: o motor chegou de fato ao ponto fixo. As regras com \emph{builtins} (R18, R19) não entram nesta verificação, e o cenário não as exercita. A contagem de R07 pelo SPARQL (5) é maior que a do motor (4) porque uma das cabeças já estava declarada na instância.
+
+\nota{O que V1 prova e o que não prova: V1 mostra que nada ficou sem inferir (completude), usando consultas independentes do código do motor. A correção de cada inferência (\emph{soundness}) é garantida por outro caminho: cada tripla inferida guarda as triplas do corpo que a produziram, e elas podem ser conferidas uma a uma. A coincidência com o verificador pré-existente em E0 é uma terceira evidência.}
+
+\subsection{V2 · Propriedades de segurança}
+Tanto em E0 quanto em E1:
+\begin{itemize}[leftmargin=*]
+  \item nenhuma inferência afirma status jurídico, status de conformidade ou publicação: 0 ocorrências, e o motor aborta se houver;
+  \item nenhum requisito prospectivo recebe status jurídico: 0 ocorrências.
+\end{itemize}
+
+\subsection{A1 · Alinhamento dos 22 componentes da câmara}\label{sec:a1}
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{l X l >{\raggedright\arraybackslash}p{40mm} r}
+\toprule
+GM & Componente exibido na câmara & tipo & indivíduo(s) no grafo & infer.\\
+\midrule
+\csname @@input\endcsname tabelas/alinhamento.tex 
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\noindent \textbf{Cobertura:} 5 correspondências exatas, 5 próximas e 12 ausentes. A maior lacuna são os sete mecanismos do PL (GM-05 a GM-12). Eles só existirão no grafo quando os dispositivos do PL forem extraídos de fonte oficial, com o mesmo tratamento do cenário E1, mas a partir do texto verificado.
+
+Também estão fora do grafo a EBIA, a ANPD, os reguladores setoriais e o painel de execução do PBIA. A coluna ``infer.'' conta as inferências SWRL sobre os indivíduos alinhados: hoje é pouco (quase só a origem jurisdicional, por R03), porque a instância tem poucas relações entre instrumentos.
+
+\nota{O alinhamento é proposta do autor e precisa de revisão. Três correspondências ``próximas'' (GM-19, GM-20, GM-22) ligam um componente a um eixo inteiro do plano. Isso é útil para navegação, mas não deve ser lido como equivalência.}
+
+\section{Proposta de utilização na plataforma}
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Fonte única.} Gerar \texttt{web/assets/modelo.js} a partir do grafo, das inferências e do alinhamento num passo de build no workflow do GitHub Pages. O cadastro manual deixa de existir.
+  \item \textbf{Fichas com ``por quê?''.} A ficha de cada elemento da câmara (já implementada) ganha:
+  \begin{itemize}
+    \item o IRI no grafo;
+    \item a fonte e o hash da captura;
+    \item o estado de revisão (candidato, aprovado, publicado);
+    \item as inferências com a árvore de justificativa, renderizada como no exemplo de E1.
+  \end{itemize}
+  \item \textbf{Camada de lacunas em dois tipos.} A câmara já mostra lacunas de \emph{cobertura}: áreas sem componente. O grafo acrescenta lacunas de \emph{controle} (requisitos sem controle, como em E1) e de \emph{extração} (componentes sem correspondente, como os 12 de A1).
+  \item \textbf{Monitoramento contínuo.} Cada captura nova gera um evento. O motor recalcula o grafo, e o painel de monitoramento lista o que foi reaberto e a fila de revisão humana.
+  \item \textbf{Shadow Council com o mesmo vocabulário.} As posições do conselho entram como \texttt{SyntheticStakeholderPosition}. R21 garante que nunca se confundam com posições de pessoas. As posições da sala no evento ao vivo podem entrar como posições identificadas (anônimas) da mesma deliberação.
+\end{enumerate}
+
+\paragraph{Ação imediata recomendada.} Até que os itens 1 e 2 estejam no ar, o slide da apresentação deve dizer o que é verdade. Sugestão de texto: ``o arranjo é descrito por uma ontologia com 66 classes e 23 regras, publicada e testada; a ligação peça a peça com a câmara está em implantação''.
+
+\section{Limitações e riscos}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Cenário ilustrativo.} E1 demonstra o método, não o conteúdo do PL 2338. Os números de E1 dependem do cenário construído.
+  \item \textbf{Instância não revisada.} Todo o grafo do PBIA ainda é candidato. Publicá-lo exige as decisões de revisão previstas em M2.
+  \item \textbf{Raciocínio parcial.} Ver a nota da seção de implementação.
+  \item \textbf{Identificadores.} Os IRIs da ontologia apontam para caminhos inexistentes no GitHub, e a ontologia do Shadow Council ainda usa \texttt{example.org}. Para uso externo, os IRIs precisam resolver (por exemplo, via \texttt{w3id.org} ou GitHub Pages).
+  \item \textbf{Alinhamento manual.} A1 foi feito por julgamento e deve passar por revisão.
+\end{itemize}
+
+\section{Reprodutibilidade}
+\begin{lstlisting}
+python3 tests/verify_regulatory_ontology.py      # TBox: 66 classes, 23 regras seguras
+python3 tests/verify_regulatory_instances.py     # ABox do PBIA
+python3 scripts/ontologia/experimentos.py        # E0, E1, V1, V2, A1 -> docs/relatorios/ontologia/
+python3 scripts/ontologia/raciocinar.py --extra ontologies/regulatory/cenarios/E1_PL2338_texto_camara.ttl \
+  --explicar https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_BBProvaDeVida
+cd docs/relatorios/ontologia && pdflatex relatorio.tex && pdflatex relatorio.tex
+\end{lstlisting}
+
+\appendix
+\section{Disparos por regra em E0 e E1}\label{ap:regras}
+\begin{center}\small
+\begin{longtable}{l l r r}
+\toprule
+Id & Regra & E0 (PBIA) & E1 (PBIA + cenário)\\
+\midrule\endhead
+\csname @@input\endcsname tabelas/regras.tex 
+\bottomrule
+\end{longtable}
+\end{center}
+
+\end{document}
