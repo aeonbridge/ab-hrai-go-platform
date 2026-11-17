@@ -28,7 +28,7 @@
 \imprimirfolhaderostorelatorio
 
 \begin{resumorelatorio}
-O HRAI-GO (Human-centred Regulatory AI, Governance Observatory) é um observatório público de governança de inteligência artificial (IA). Seu objetivo é responder a três perguntas norteadoras: quais especificidades do Brasil em relação às demais jurisdições analisadas devem nortear um modelo de governança de IA com foco estratégico para o Brasil como nação, e não apenas uma proposta regulatória baseada em princípios e valores afins; o que está sendo considerado e não deveria; e o que não está sendo considerado e deveria. A primeira define o ângulo de análise, e as outras duas são respondidas à luz dela. Ao fim do \emph{bootstrap}, a própria plataforma entrega uma resposta inicial a cada pergunta. O observatório representa os modelos de regulação de IA do Brasil e de outras jurisdições numa ontologia com proveniência até a fonte e os compara por uma taxonomia publicada e revisada por pares, estendida e declarada. Raciocina sobre eles com regras auditáveis que nunca emitem veredicto jurídico e põe o resultado diante de pessoas, ao vivo, num processo de deliberação em que perspectivas sintéticas ampliam o que é considerado sem nunca decidir. Cada elemento que o observatório mostra pode ser clicado e responde ``o que é, de onde veio e por que está aqui''. Este relatório descreve o método e a aplicação, e serve como critério de aceite da plataforma. Ele está escrito no presente, como estado-alvo verificável, e é a referência de aceite da especificação ESP-ONT-02. O método cobre o corpus com proveniência, a extração candidata com revisão humana, a taxonomia de base com sete extensões, a correspondência entre dispositivos, o raciocínio rastreável, as nove perguntas de competência, as afirmações com contra-evidência, a deliberação humana com o Shadow Council e o monitoramento contínuo. A aplicação descreve uma sessão pública ao vivo, o comparador Brasil $\times$ AI Act, a reação a mudanças de texto e a base de conhecimento. Os números marcados como meta não são medições; o único resultado medido é a classificação das 12 teses de um estudo comparativo externo. A plataforma está pronta quando todos os itens do checklist de aceitação estiverem marcados.
+O HRAI-GO (Human-centred Regulatory AI, Governance Observatory) é um observatório público de governança de inteligência artificial (IA). Seu objetivo é responder a três perguntas norteadoras: quais especificidades do Brasil em relação às demais jurisdições analisadas devem nortear um modelo de governança de IA com foco estratégico para o Brasil como nação, e não apenas uma proposta regulatória baseada em princípios e valores afins; o que está sendo considerado e não deveria; e o que não está sendo considerado e deveria. A primeira define o ângulo de análise, e as outras duas são respondidas à luz dela. Ao fim do \emph{bootstrap}, a própria plataforma entrega uma resposta inicial a cada pergunta. O observatório representa os modelos de regulação de IA do Brasil e de outras jurisdições numa ontologia com proveniência até a fonte e os compara por uma taxonomia publicada e revisada por pares, estendida e declarada. Raciocina sobre eles com regras auditáveis que nunca emitem veredicto jurídico e põe o resultado diante de pessoas, ao vivo, num processo de deliberação em que perspectivas sintéticas ampliam o que é considerado sem nunca decidir. Cada elemento que o observatório mostra pode ser clicado e responde ``o que é, de onde veio e por que está aqui''. Este relatório descreve o método e a aplicação, e serve como critério de aceite da plataforma. Ele está escrito no presente, como estado-alvo verificável, e é a referência de aceite da especificação ESP-ONT-02. O método cobre o corpus com proveniência, a extração candidata com revisão humana, a taxonomia de base com sete extensões, a correspondência entre dispositivos, a identificação das especificidades do Brasil frente às demais jurisdições, o raciocínio rastreável, as nove perguntas de competência, as afirmações com contra-evidência, a deliberação humana com o Shadow Council e o monitoramento contínuo. A aplicação descreve uma sessão pública ao vivo, o comparador Brasil $\times$ AI Act, a reação a mudanças de texto e a base de conhecimento. Os números marcados como meta não são medições; o único resultado medido é a classificação das 12 teses de um estudo comparativo externo. A plataforma está pronta quando todos os itens do checklist de aceitação estiverem marcados.
 \end{resumorelatorio}
 
 \pdfbookmark[0]{\listtablename}{lot}
@@ -47,7 +47,7 @@ O HRAI-GO (Human-centred Regulatory AI, Governance Observatory) é um observató
 
 O HRAI-GO (Human-centred Regulatory AI, Governance Observatory) é um observatório público de governança de inteligência artificial (IA). Este relatório descreve o método e a aplicação do observatório e serve como critério de aceite da plataforma: ele descreve o HRAI-GO como a plataforma deve existir quando a especificação ESP-ONT-02 estiver implementada.
 
-O escopo do documento é a motivação (as três perguntas norteadoras que a plataforma deve responder), o nome e o que ele promete, o problema que o observatório resolve, a arquitetura, o método (M1 a M9), a aplicação, os mecanismos que garantem o ``H'' e os limites declarados. O checklist de aceitação e a rastreabilidade até a especificação estão nos apêndices.
+O escopo do documento é a motivação (as três perguntas norteadoras que a plataforma deve responder), o nome e o que ele promete, o problema que o observatório resolve, a arquitetura, o método (M1 a M10), a aplicação, os mecanismos que garantem o ``H'' e os limites declarados. O checklist de aceitação e a rastreabilidade até a especificação estão nos apêndices.
 
 \destaque{\textbf{Como ler este documento.} Ele descreve o HRAI-GO como a plataforma deve existir quando a especificação ESP-ONT-02 estiver implementada. Está escrito no presente de propósito (técnica de ``escrever o futuro como queremos''), como estado-alvo verificável.
 \begin{itemize}[leftmargin=*]
@@ -68,7 +68,7 @@ O HRAI-GO existe para responder a três perguntas sobre o modelo brasileiro de g
   \item[QN3] \textbf{O que não está sendo considerado e deveria?}
 \end{description}
 
-\section{Por que a QN1 vem primeiro}
+\section{Por que a QN1 vem primeiro}\label{sec:qn1primeiro}
 
 A QN1 define o ângulo epistemológico do trabalho, e a QN2 e a QN3 estão subordinadas a ela. As duas só fazem sentido diante de um critério: considerado ou omitido \emph{em relação a quê}. Sem a QN1, esse critério passa a ser, por omissão, o modelo estrangeiro mais influente. A pergunta vira ``em que o Brasil se afasta do AI Act?'' e a análise se reduz à aderência a princípios e valores que o Brasil compartilha com outras jurisdições.
 
@@ -219,7 +219,24 @@ Cada valor é um \texttt{CriterionCoding}: versão do instrumento, critério, va
 \section{M4 · Correspondência entre dispositivos}
 Para cada área substantiva, os dispositivos do Brasil e do AI Act estão ligados por \texttt{ProvisionCorrespondence}, de um destes tipos: \emph{equivalente}, \emph{adaptado}, \emph{parcial} ou \emph{divergente}. Cada correspondência tem evidência e revisão humana. É sobre essas correspondências que o observatório responde ``o que o Brasil incorporou'' \rf{RF-06}.
 
-\section{M5 · Raciocínio rastreável}
+\section{M5 · Especificidades do Brasil frente às demais jurisdições}\label{sec:especificidades}
+Este é o passo que responde à QN1. Uma especificidade não é qualquer diferença: é uma diferença do Brasil em relação às demais jurisdições do corpus que se explica pelo contexto nacional e, por isso, deve orientar o modelo de governança. O observatório a produz em quatro etapas, sempre como candidata à revisão humana \rf{RF-18}.
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{A mesma régua para todas as jurisdições.} Brasil, UE, Reino Unido, EUA e as jurisdições decididas no RF-02 são codificados pelos mesmos 25 critérios e pelas extensões E1 a E7 (seção~\ref{sec:taxonomia}), na mesma matriz de áreas substantivas (E3) e, quando existem, pelos mesmos indicadores de capacidade e exposição, com fonte e ano-base \rf{RF-05, RF-07, RF-16}. Critério sem codificação numa jurisdição aparece como \emph{não codificado}, nunca como ``não tem''.
+  \item \textbf{Detecção das diferenças.} Uma consulta versionada compara o Brasil com cada jurisdição e com o conjunto, e classifica cada diferença em um de quatro tipos:
+    \begin{itemize}
+      \item \emph{exclusiva do Brasil}: o Brasil cobre a área ou o objetivo, e nenhuma outra jurisdição cobre;
+      \item \emph{ausente no Brasil}: outras jurisdições cobrem, o Brasil não;
+      \item \emph{de intensidade}: todas cobrem, com valores diferentes na escala aprovada (E4) ou com força jurídica diferente (E1);
+      \item \emph{de contexto}: um indicador de capacidade ou de exposição em que o Brasil difere das demais, por exemplo a capacidade de supervisão frente ao Eixo~5 do PBIA.
+    \end{itemize}
+    Só se compara o comparável: a diferença conta entre instrumentos do mesmo tipo (E1), ou com o tipo de cada um declarado ao lado, e uma ausência só vale dentro do escopo do \texttt{CoverageAssessment} da jurisdição.
+  \item \textbf{Explicação pelo contexto nacional.} Uma diferença vira \texttt{NationalSpecificity} candidata só quando é ligada a pelo menos uma das quatro dimensões da QN1 (contexto nacional, capacidades instaladas, exposições a risco e objetivos estratégicos), com evidência: dispositivo, indicador com fonte e ano-base, ou objetivo do PBIA. A ficha de cada especificidade mostra a dimensão, o tipo de diferença, a evidência brasileira, o valor de cada uma das demais jurisdições com a fonte, o escopo e o estado. Diferença sem explicação fica registrada como diferença, não como especificidade: divergir do AI Act, sozinho, não basta (seção~\ref{sec:qn1primeiro}).
+  \item \textbf{Revisão e uso.} Agentes de extração e o Shadow Council propõem e contestam especificidades, mas só uma \texttt{ReviewDecision} humana as aceita. As aceitas são o critério da QN2 e da QN3: cada item dessas perguntas aponta, por \texttt{groundedInSpecificity}, a especificidade em que se apoia. Quando o corpus muda (nova versão de um instrumento ou nova jurisdição), as especificidades afetadas são recalculadas e voltam à fila de revisão (seção~\ref{sec:monitoramento}).
+\end{enumerate}
+
+\section{M6 · Raciocínio rastreável}
 O motor executa as 30 regras em Semantic Web Rule Language (SWRL), de R01 a R30, lidas da própria ontologia, até o ponto fixo, com fechamento explícito de subclasse, subpropriedade e inversa. Cada tripla inferida guarda a regra, as ligações e as triplas do corpo, e a pergunta ``por quê?'' devolve a árvore até as triplas declaradas e a captura da fonte. O raciocínio do grafo completo roda na integração contínua (CI) em menos de 5\,s \rf{RNF-02}.
 
 Invariantes garantidas por teste:
@@ -230,8 +247,8 @@ Invariantes garantidas por teste:
   \item \textbf{I-4:} sintético nunca é contado como humano.
 \end{itemize}
 
-\section{M6 · Perguntas de competência}\label{sec:pc}
-O observatório responde a nove perguntas de competência (PC), agrupadas pela pergunta norteadora a que servem (capítulo~\ref{cap:motivacao}). Cada uma tem uma consulta versionada, um teste de regressão no CI e uma tela \rf{RF-08}, conforme a Tabela~\ref{tab:pc}. A PC9 operacionaliza a QN1 e é lida antes das demais: as respostas às PCs da QN2 e da QN3 citam as especificidades que ela identifica.
+\section{M7 · Perguntas de competência}\label{sec:pc}
+O observatório responde a nove perguntas de competência (PC), agrupadas pela pergunta norteadora a que servem (capítulo~\ref{cap:motivacao}). Cada uma tem uma consulta versionada, um teste de regressão no CI e uma tela \rf{RF-08}, conforme a Tabela~\ref{tab:pc}. A PC9 operacionaliza a QN1 e é lida antes das demais: ela consulta as especificidades produzidas pelo passo M5 (seção~\ref{sec:especificidades}), e as respostas às PCs da QN2 e da QN3 citam as especificidades que ela identifica.
 
 \begin{table}[htb]
 \caption{Perguntas de competência PC1 a PC9, por pergunta norteadora, e onde a resposta aparece}\label{tab:pc}
@@ -257,12 +274,12 @@ QN3 & PC4 & O que o contexto expõe a risco e nenhum instrumento cobre? & Câmar
 \fonte{Elaborado pelos autores (2026).}
 \end{table}
 
-\section{M7 · Afirmações com contra-evidência}
+\section{M8 · Afirmações com contra-evidência}
 Análises externas não entram como fato. Cada tese vira \texttt{PolicyClaim}, ligada às evidências do corpus que a sustentam e às contra-afirmações que a contestam, com relações distintas para contestar, qualificar e complementar. O observatório mostra o estado de cada tese: \emph{contestada}, \emph{com evidência} ou \emph{sem evidência no corpus}. Nunca diz ``verdadeira'' ou ``falsa'' \rf{RF-11}.
 
 \destaque{\textbf{Resultado já medido (17/11/2026).} As 12 teses do documento ``Análise Comparativa e Diretrizes Estratégicas'' \cite{estudo-comparativo} foram processadas pelo método: 4 contestadas, 6 com evidência e 2 sem evidência no corpus (ESP-ONT-02, apêndice~A). No estado-alvo, essa classificação é recalculada automaticamente a cada versão do corpus. Por exemplo, a tese C04 é reavaliada quando o substitutivo do Senado entra como fonte primária.}
 
-\section{M8 · Deliberação humana com o Shadow Council}
+\section{M9 · Deliberação humana com o Shadow Council}
 O Shadow Council é um conjunto de 20 perspectivas sintéticas em 8 estratos. Cada perspectiva é ancorada em documentos e declara seus pontos cegos, e os grupos sem fonte aparecem como cadeiras vazias. Ele participa de um protocolo de cinco rodadas:
 
 \begin{enumerate}[leftmargin=*, start=0]
@@ -281,8 +298,8 @@ O conselho não vota, não recomenda e não produz ``consenso sintético''. Cada
   \item \textbf{divergência preservada:} quantas alternativas terminam com desacordo registrado.
 \end{itemize}
 
-\section{M9 · Monitoramento contínuo}
-Cada nova captura gera um \texttt{RegulatoryChangeEvent}. As regras R10 a R13 propagam o impacto \emph{potencial} até dispositivos, requisitos, avaliações e aplicações. O monitoramento lista o que foi reaberto e alimenta a fila de revisão humana. Codificações da taxonomia ligadas à versão anterior são marcadas para recodificação \rf{RF-01, E5}.
+\section{M10 · Monitoramento contínuo}\label{sec:monitoramento}
+Cada nova captura gera um \texttt{RegulatoryChangeEvent}. As regras R10 a R13 propagam o impacto \emph{potencial} até dispositivos, requisitos, avaliações e aplicações. O monitoramento lista o que foi reaberto e alimenta a fila de revisão humana. Codificações da taxonomia ligadas à versão anterior são marcadas para recodificação, e as especificidades que dependem delas voltam à revisão \rf{RF-01, E5, RF-18}.
 
 %=====================================================================
 \chapter{Aplicação}
@@ -291,7 +308,7 @@ Cada nova captura gera um \texttt{RegulatoryChangeEvent}. As regras R10 a R13 pr
 Um auditório com representantes de governo, reguladores, academia, sociedade civil e setor privado. No telão, a câmara 3D, aberta com \texttt{?telao=1}. O QR code leva a \texttt{go.aeonbridge.io/ai-ethic-br}.
 
 \begin{itemize}[leftmargin=*]
-  \item \textbf{Entrada.} Quem escaneia escolhe o setor e entra na câmara. Recebe um avatar gerado a partir do identificador anônimo, igual em todos os aparelhos e sem nenhum dado pessoal, e um apelido como ``Academia·7f3''. A luz da pessoa aparece no anel externo, no arco do seu setor.
+  \item \textbf{Entrada.} Quem escaneia escolhe o setor e entra na câmara. Recebe um avatar gerado a partir do identificador anônimo, igual em todos os aparelhos e sem nenhum dado pessoal, e um apelido como ``Academia·7f3''. A participação é anônima por padrão. Quem quiser pode mostrar o próprio nome a qualquer momento, e retirá-lo depois: o nome aparece ao lado do apelido, e o apelido e o avatar não mudam. A luz da pessoa aparece no anel externo, no arco do seu setor.
   \item \textbf{Participação pelo celular.} No celular, a pessoa é participante, não espectadora.
     \begin{itemize}
       \item \emph{Minhas escolhas:} escolhe a tensão, se posiciona no eixo, aponta a lacuna e publica uma contribuição.
@@ -310,7 +327,7 @@ Um analista abre o comparador e vê:
   \item para cada área, os dispositivos lado a lado, com o tipo de correspondência \rf{PC2};
   \item a lista de requisitos transpostos que pressupõem capacidade sem indicador suficiente, por exemplo o orçamento de supervisão frente ao Eixo~5 do PBIA, sempre com a fonte do indicador e o limiar \rf{PC3};
   \item as exposições do contexto sem instrumento que as cubra, dentro do escopo declarado da avaliação de cobertura \rf{PC4};
-  \item o que é próprio do Brasil: as áreas e os objetivos que só o modelo brasileiro tem, como a soberania computacional com orçamento, a nuvem de governo e o modelo de linguagem de grande escala (LLM, \emph{large language model}) em português (E2 e E3).
+  \item o que é próprio do Brasil: as especificidades do passo M5, com a dimensão, o tipo de diferença e o valor de cada jurisdição, por exemplo as áreas e os objetivos que só o modelo brasileiro tem, como a soberania computacional com orçamento, a nuvem de governo e o modelo de linguagem de grande escala (LLM, \emph{large language model}) em português (E2 e E3).
 \end{itemize}
 
 \section{Quando o texto muda}
@@ -322,7 +339,7 @@ A base de conhecimento expõe os mesmos dados para leitura: instrumentos por jur
 \section{Resposta inicial às perguntas norteadoras}\label{sec:bootstrap}
 O \emph{bootstrap} termina quando a plataforma, usada sobre o próprio corpus, publica o relatório das perguntas norteadoras. Ele tem uma seção por pergunta, nesta ordem:
 \begin{enumerate}[leftmargin=*]
-  \item \textbf{QN1.} A lista das especificidades do Brasil, cada uma com a evidência (dispositivo, indicador com fonte e ano-base, ou objetivo do PBIA) e a comparação com as demais jurisdições do corpus (PC9, PC1, PC5).
+  \item \textbf{QN1.} A lista das especificidades do Brasil, cada uma com a evidência (dispositivo, indicador com fonte e ano-base, ou objetivo do PBIA) e a comparação com as demais jurisdições do corpus, produzidas pelo passo M5 (PC9, PC1, PC5).
   \item \textbf{QN2.} O que foi incorporado e não deveria, cada item ligado à especificidade da QN1 que ele contraria ou ignora (PC2, PC3, PC6).
   \item \textbf{QN3.} O que falta e deveria estar, cada item ligado à especificidade da QN1 que o exige, dentro do escopo declarado da avaliação de cobertura (PC4, PC6).
 \end{enumerate}
@@ -346,7 +363,7 @@ Humanos contestam, qualificam e apoiam com evidência & reações da Mesa gravad
 Sintético nunca passa por humano & disjunção na caixa terminológica (TBox), regra R21, cor e rótulo distintos na interface; invariante I-4\\
 Decisão é humana e justificada & \texttt{DecisionRecord} com afirmações citadas e divergências preservadas\\
 Ausências à vista & cadeiras vazias e estratos ausentes da sala destacados na revelação\\
-Privacidade & participação anônima, sem nome nem e-mail; avatar derivado do identificador anônimo\\
+Privacidade & participação anônima por padrão, sem e-mail; apelido e avatar derivados do identificador anônimo; identificação opcional, a qualquer momento e reversível, que mostra o nome ao lado do apelido sem mudar apelido nem avatar\\
 \bottomrule
 \end{tabularx}
 \fonte{Elaborado pelos autores (2026).}
@@ -421,13 +438,15 @@ V-26 & Relatório das perguntas norteadoras publicado ao fim do \emph{bootstrap}
 V-27 & Cada especificidade da QN1 tem evidência (dispositivo, indicador com fonte e ano-base ou objetivo do PBIA) e comparação com as demais jurisdições & PC9 responde; especificidades sem evidência = 0 & $\square$\\
 V-28 & Cada item da QN2 e da QN3 cita a especificidade da QN1 em que se apoia & consulta: itens QN2/QN3 sem ligação a especificidade = 0 & $\square$\\
 V-29 & Itens publicados das QN1 a QN3 têm decisão humana registrada & \texttt{ReviewDecision} humana para cada item & $\square$\\
+V-30 & Todas as jurisdições codificadas pela mesma régua; cada especificidade registra dimensão da QN1, tipo de diferença e o valor de cada uma das demais jurisdições, com fonte (passo M5) & consulta: especificidades sem dimensão, sem tipo ou sem valor das demais jurisdições = 0; jurisdições sem codificação aparecem como ``não codificado'' & $\square$\\
+V-31 & Participação anônima por padrão; identificação opcional não muda apelido nem avatar e pode ser desfeita & \texttt{tests/test\_identificacao\_ao\_vivo.py} verde; teste em aparelho real & $\square$\\
 \end{longtable}
 \fonte{Elaborado pelos autores (2026).}
 }
 
 \chapter{Rastreabilidade}
 \begin{itemize}[leftmargin=*]
-  \item \textbf{Especificação:} \texttt{docs/especificacoes/ESP-ONT-02/especificacao.pdf} (requisitos RF-01 a RF-17, RNF-01 e RNF-02).
+  \item \textbf{Especificação:} \texttt{docs/especificacoes/ESP-ONT-02/especificacao.pdf} (requisitos RF-01 a RF-18, RNF-01 e RNF-02).
   \item \textbf{Roteiro de execução:} \texttt{docs/especificacoes/ESP-ONT-02/EXECUCAO\_LOOP.md}.
   \item \textbf{Linha de base técnica:} \texttt{docs/relatorios/ontologia/relatorio.pdf} (RT-ONT-01).
   \item \textbf{Taxonomia de base:} Alanoca, S., Gur-Arieh, S., Zick, T., Klyman, K. (2025). \emph{Comparing Apples to Oranges: A Taxonomy for Navigating the Global Landscape of AI Regulation}. FAccT~'25. doi:10.1145/3715275.3732059 \cite{alanoca2025}.
