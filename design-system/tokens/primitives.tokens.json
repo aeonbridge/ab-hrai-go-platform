@@ -4,215 +4,818 @@
     "$type": "color",
     "ink": {
       "$description": "Neutral scale with a slight warm bias (paper and ink). Base of text, surfaces and borders.",
-      "0":   { "$value": "#FFFFFF" },
-      "25":  { "$value": "#FAFAF8" },
-      "50":  { "$value": "#F4F4F1" },
-      "100": { "$value": "#E9E8E3" },
-      "200": { "$value": "#D6D4CC" },
-      "300": { "$value": "#B8B5AB" },
-      "400": { "$value": "#8F8B82" },
-      "500": { "$value": "#6E6A62" },
-      "600": { "$value": "#57544D" },
-      "700": { "$value": "#43413C" },
-      "800": { "$value": "#2D2C29" },
-      "900": { "$value": "#1C1B19" },
-      "950": { "$value": "#121210" }
+      "0": {
+        "$value": "#FFFFFF"
+      },
+      "25": {
+        "$value": "#FAFAF8"
+      },
+      "50": {
+        "$value": "#F4F4F1"
+      },
+      "100": {
+        "$value": "#E9E8E3"
+      },
+      "200": {
+        "$value": "#D6D4CC"
+      },
+      "300": {
+        "$value": "#B8B5AB"
+      },
+      "400": {
+        "$value": "#8F8B82"
+      },
+      "500": {
+        "$value": "#6E6A62"
+      },
+      "600": {
+        "$value": "#57544D"
+      },
+      "700": {
+        "$value": "#43413C"
+      },
+      "800": {
+        "$value": "#2D2C29"
+      },
+      "900": {
+        "$value": "#1C1B19"
+      },
+      "950": {
+        "$value": "#121210"
+      }
     },
     "civic": {
       "$description": "Institutional blue. Brand, primary actions and the normative register (law, obligation).",
-      "50":  { "$value": "#EEF3FA" },
-      "100": { "$value": "#DAE4F3" },
-      "200": { "$value": "#B6C9E7" },
-      "300": { "$value": "#88A5D6" },
-      "400": { "$value": "#5C80C2" },
-      "500": { "$value": "#3D62A8" },
-      "600": { "$value": "#2E4E8C" },
-      "700": { "$value": "#253F73" },
-      "800": { "$value": "#1F335D" },
-      "900": { "$value": "#19284A" },
-      "950": { "$value": "#101A31" }
+      "50": {
+        "$value": "#EEF3FA"
+      },
+      "100": {
+        "$value": "#DAE4F3"
+      },
+      "200": {
+        "$value": "#B6C9E7"
+      },
+      "300": {
+        "$value": "#88A5D6"
+      },
+      "400": {
+        "$value": "#5C80C2"
+      },
+      "500": {
+        "$value": "#3D62A8"
+      },
+      "600": {
+        "$value": "#2E4E8C"
+      },
+      "700": {
+        "$value": "#253F73"
+      },
+      "800": {
+        "$value": "#1F335D"
+      },
+      "900": {
+        "$value": "#19284A"
+      },
+      "950": {
+        "$value": "#101A31"
+      }
     },
     "verdant": {
       "$description": "Green. Proven compliance and norms in force.",
-      "50":  { "$value": "#EDF7F0" },
-      "100": { "$value": "#D4ECDB" },
-      "200": { "$value": "#A9D8B8" },
-      "300": { "$value": "#74BD8F" },
-      "400": { "$value": "#45A06A" },
-      "500": { "$value": "#2B8452" },
-      "600": { "$value": "#206B42" },
-      "700": { "$value": "#1B5636" },
-      "800": { "$value": "#17452D" },
-      "900": { "$value": "#133725" },
-      "950": { "$value": "#0B2216" }
+      "50": {
+        "$value": "#EDF7F0"
+      },
+      "100": {
+        "$value": "#D4ECDB"
+      },
+      "200": {
+        "$value": "#A9D8B8"
+      },
+      "300": {
+        "$value": "#74BD8F"
+      },
+      "400": {
+        "$value": "#45A06A"
+      },
+      "500": {
+        "$value": "#2B8452"
+      },
+      "600": {
+        "$value": "#206B42"
+      },
+      "700": {
+        "$value": "#1B5636"
+      },
+      "800": {
+        "$value": "#17452D"
+      },
+      "900": {
+        "$value": "#133725"
+      },
+      "950": {
+        "$value": "#0B2216"
+      }
     },
     "crimson": {
       "$description": "Red. Proven non-compliance, errors and destructive actions.",
-      "50":  { "$value": "#FCEFEE" },
-      "100": { "$value": "#F8DAD8" },
-      "200": { "$value": "#F0B4AF" },
-      "300": { "$value": "#E5857D" },
-      "400": { "$value": "#D65A50" },
-      "500": { "$value": "#BF3D33" },
-      "600": { "$value": "#A02F27" },
-      "700": { "$value": "#832721" },
-      "800": { "$value": "#6A221D" },
-      "900": { "$value": "#561D19" },
-      "950": { "$value": "#35110E" }
+      "50": {
+        "$value": "#FCEFEE"
+      },
+      "100": {
+        "$value": "#F8DAD8"
+      },
+      "200": {
+        "$value": "#F0B4AF"
+      },
+      "300": {
+        "$value": "#E5857D"
+      },
+      "400": {
+        "$value": "#D65A50"
+      },
+      "500": {
+        "$value": "#BF3D33"
+      },
+      "600": {
+        "$value": "#A02F27"
+      },
+      "700": {
+        "$value": "#832721"
+      },
+      "800": {
+        "$value": "#6A221D"
+      },
+      "900": {
+        "$value": "#561D19"
+      },
+      "950": {
+        "$value": "#35110E"
+      }
     },
     "ochre": {
       "$description": "Amber. Insufficient evidence, warnings and stakeholder positions.",
-      "50":  { "$value": "#FBF5E8" },
-      "100": { "$value": "#F5E7C6" },
-      "200": { "$value": "#EBCE8C" },
-      "300": { "$value": "#DDB053" },
-      "400": { "$value": "#C9922B" },
-      "500": { "$value": "#A9761B" },
-      "600": { "$value": "#8A5F16" },
-      "700": { "$value": "#6F4C14" },
-      "800": { "$value": "#593D13" },
-      "900": { "$value": "#483212" },
-      "950": { "$value": "#2C1E0A" }
+      "50": {
+        "$value": "#FBF5E8"
+      },
+      "100": {
+        "$value": "#F5E7C6"
+      },
+      "200": {
+        "$value": "#EBCE8C"
+      },
+      "300": {
+        "$value": "#DDB053"
+      },
+      "400": {
+        "$value": "#C9922B"
+      },
+      "500": {
+        "$value": "#A9761B"
+      },
+      "600": {
+        "$value": "#8A5F16"
+      },
+      "700": {
+        "$value": "#6F4C14"
+      },
+      "800": {
+        "$value": "#593D13"
+      },
+      "900": {
+        "$value": "#483212"
+      },
+      "950": {
+        "$value": "#2C1E0A"
+      }
     },
     "iris": {
       "$description": "Violet. The propositional register: bills, hypotheses, policy proposals and open legal questions. Never used for anything that binds.",
-      "50":  { "$value": "#F3F1FB" },
-      "100": { "$value": "#E5E0F6" },
-      "200": { "$value": "#CBC1EC" },
-      "300": { "$value": "#AA9ADE" },
-      "400": { "$value": "#8B75CE" },
-      "500": { "$value": "#7158B8" },
-      "600": { "$value": "#5D4699" },
-      "700": { "$value": "#4B387C" },
-      "800": { "$value": "#3D2F64" },
-      "900": { "$value": "#322751" },
-      "950": { "$value": "#1F1833" }
+      "50": {
+        "$value": "#F3F1FB"
+      },
+      "100": {
+        "$value": "#E5E0F6"
+      },
+      "200": {
+        "$value": "#CBC1EC"
+      },
+      "300": {
+        "$value": "#AA9ADE"
+      },
+      "400": {
+        "$value": "#8B75CE"
+      },
+      "500": {
+        "$value": "#7158B8"
+      },
+      "600": {
+        "$value": "#5D4699"
+      },
+      "700": {
+        "$value": "#4B387C"
+      },
+      "800": {
+        "$value": "#3D2F64"
+      },
+      "900": {
+        "$value": "#322751"
+      },
+      "950": {
+        "$value": "#1F1833"
+      }
     },
     "lagoon": {
       "$description": "Teal. The empirical register: evidence, data, indicators and national context.",
-      "50":  { "$value": "#ECF6F6" },
-      "100": { "$value": "#D0EAEA" },
-      "200": { "$value": "#A2D4D4" },
-      "300": { "$value": "#6CB8B9" },
-      "400": { "$value": "#3F9A9C" },
-      "500": { "$value": "#267E81" },
-      "600": { "$value": "#1E666A" },
-      "700": { "$value": "#1A5356" },
-      "800": { "$value": "#164346" },
-      "900": { "$value": "#13373A" },
-      "950": { "$value": "#0B2224" }
+      "50": {
+        "$value": "#ECF6F6"
+      },
+      "100": {
+        "$value": "#D0EAEA"
+      },
+      "200": {
+        "$value": "#A2D4D4"
+      },
+      "300": {
+        "$value": "#6CB8B9"
+      },
+      "400": {
+        "$value": "#3F9A9C"
+      },
+      "500": {
+        "$value": "#267E81"
+      },
+      "600": {
+        "$value": "#1E666A"
+      },
+      "700": {
+        "$value": "#1A5356"
+      },
+      "800": {
+        "$value": "#164346"
+      },
+      "900": {
+        "$value": "#13373A"
+      },
+      "950": {
+        "$value": "#0B2224"
+      }
+    },
+    "chamber": {
+      "$description": "Tinta da câmara 3D (tema camara). Substitui ink no tema padrão.",
+      "0": {
+        "$value": "#FFFFFF"
+      },
+      "25": {
+        "$value": "#F4F7FB"
+      },
+      "50": {
+        "$value": "#EAF0F7"
+      },
+      "100": {
+        "$value": "#DCE6F2"
+      },
+      "200": {
+        "$value": "#C9D3E0"
+      },
+      "300": {
+        "$value": "#9DACBF"
+      },
+      "400": {
+        "$value": "#6F7F95"
+      },
+      "500": {
+        "$value": "#4E5F78"
+      },
+      "600": {
+        "$value": "#34465F"
+      },
+      "700": {
+        "$value": "#1C2B45"
+      },
+      "800": {
+        "$value": "#142036"
+      },
+      "900": {
+        "$value": "#0C1525"
+      },
+      "950": {
+        "$value": "#070C16"
+      }
+    },
+    "brass": {
+      "$description": "Latão: ação primária, foco e política pública no tema camara.",
+      "50": {
+        "$value": "#FDF4E4"
+      },
+      "100": {
+        "$value": "#F9E4BC"
+      },
+      "200": {
+        "$value": "#F5D49A"
+      },
+      "300": {
+        "$value": "#F0B556"
+      },
+      "400": {
+        "$value": "#E8A33D"
+      },
+      "500": {
+        "$value": "#C9862A"
+      },
+      "600": {
+        "$value": "#A06A20"
+      },
+      "700": {
+        "$value": "#7A511A"
+      },
+      "800": {
+        "$value": "#573A14"
+      },
+      "900": {
+        "$value": "#3A270E"
+      },
+      "950": {
+        "$value": "#241707"
+      }
+    },
+    "teal": {
+      "$description": "Teal: tom civic (norma vigente) no tema camara.",
+      "50": {
+        "$value": "#E6F8F6"
+      },
+      "100": {
+        "$value": "#C4EFEA"
+      },
+      "200": {
+        "$value": "#8FE0D6"
+      },
+      "300": {
+        "$value": "#5FD3C6"
+      },
+      "400": {
+        "$value": "#38C2B4"
+      },
+      "500": {
+        "$value": "#26A194"
+      },
+      "600": {
+        "$value": "#1E8075"
+      },
+      "700": {
+        "$value": "#19635B"
+      },
+      "800": {
+        "$value": "#154C46"
+      },
+      "900": {
+        "$value": "#103834"
+      },
+      "950": {
+        "$value": "#0A2320"
+      }
+    },
+    "coral": {
+      "$description": "Coral: tom crimson (lacuna, não atendida) no tema camara.",
+      "50": {
+        "$value": "#FFF0EB"
+      },
+      "100": {
+        "$value": "#FFD3C6"
+      },
+      "200": {
+        "$value": "#FFB39F"
+      },
+      "300": {
+        "$value": "#FF9A80"
+      },
+      "400": {
+        "$value": "#FF7A59"
+      },
+      "500": {
+        "$value": "#E85A38"
+      },
+      "600": {
+        "$value": "#BF4529"
+      },
+      "700": {
+        "$value": "#933521"
+      },
+      "800": {
+        "$value": "#6B281A"
+      },
+      "900": {
+        "$value": "#4A1C13"
+      },
+      "950": {
+        "$value": "#2A1712"
+      }
+    },
+    "violet": {
+      "$description": "Violeta: tom iris (proposta, hipótese; nunca vinculante) no tema camara.",
+      "50": {
+        "$value": "#F4F0FF"
+      },
+      "100": {
+        "$value": "#E4D7FF"
+      },
+      "200": {
+        "$value": "#C9B6FD"
+      },
+      "300": {
+        "$value": "#B49DFB"
+      },
+      "400": {
+        "$value": "#A78BFA"
+      },
+      "500": {
+        "$value": "#8B6CE8"
+      },
+      "600": {
+        "$value": "#6E52C4"
+      },
+      "700": {
+        "$value": "#563F9B"
+      },
+      "800": {
+        "$value": "#423177"
+      },
+      "900": {
+        "$value": "#2F2355"
+      },
+      "950": {
+        "$value": "#1C1535"
+      }
+    },
+    "sky": {
+      "$description": "Céu: tom lagoon (evidência empírica) no tema camara, distinto do teal normativo.",
+      "50": {
+        "$value": "#EEF2FF"
+      },
+      "100": {
+        "$value": "#D6E0FF"
+      },
+      "200": {
+        "$value": "#B4C6FF"
+      },
+      "300": {
+        "$value": "#8AA8FF"
+      },
+      "400": {
+        "$value": "#6E8EF0"
+      },
+      "500": {
+        "$value": "#5170D0"
+      },
+      "600": {
+        "$value": "#3E58A8"
+      },
+      "700": {
+        "$value": "#314680"
+      },
+      "800": {
+        "$value": "#26365F"
+      },
+      "900": {
+        "$value": "#1B2744"
+      },
+      "950": {
+        "$value": "#11182B"
+      }
+    },
+    "stratum": {
+      "$description": "Marcadores de identidade dos 8 estratos do Shadow Council, só no espaço 3D e em legendas. Nunca em barras, rankings ou totais. Sempre acompanhados de rótulo. Ver docs/07-camara.md §7.4.",
+      "regulators": {
+        "$value": "#F0A93B"
+      },
+      "publicOperators": {
+        "$value": "#E4572E"
+      },
+      "business": {
+        "$value": "#C45BAA"
+      },
+      "research": {
+        "$value": "#8E7CF0"
+      },
+      "civilSociety": {
+        "$value": "#4A90E2"
+      },
+      "workers": {
+        "$value": "#2FB5A8"
+      },
+      "affectedGroups": {
+        "$value": "#7BD36B"
+      },
+      "infrastructure": {
+        "$value": "#BFC6CF"
+      }
+    },
+    "provider": {
+      "$description": "Famílias de modelo dos assentos sintéticos. Identidade técnica, não juízo de qualidade.",
+      "anthropic": {
+        "$value": "#F2B66D"
+      },
+      "openai": {
+        "$value": "#7FD6C2"
+      },
+      "xai": {
+        "$value": "#E6ECF5"
+      },
+      "gemini": {
+        "$value": "#8AA8FF"
+      }
     }
   },
   "font": {
     "family": {
       "$type": "fontFamily",
-      "sans":  { "$value": ["IBM Plex Sans", "system-ui", "-apple-system", "Segoe UI", "Roboto", "sans-serif"], "$description": "UI, navigation, labels and data." },
-      "serif": { "$value": ["IBM Plex Serif", "Georgia", "Times New Roman", "serif"], "$description": "Legal text: articles, provisions, long normative passages." },
-      "mono":  { "$value": ["IBM Plex Mono", "ui-monospace", "SF Mono", "Menlo", "monospace"], "$description": "Identifiers: IRIs, article references, versions, hashes, timestamps." }
+      "sans": {
+        "$value": [
+          "IBM Plex Sans",
+          "system-ui",
+          "-apple-system",
+          "Segoe UI",
+          "Roboto",
+          "sans-serif"
+        ],
+        "$description": "UI, navigation, labels and data."
+      },
+      "serif": {
+        "$value": [
+          "IBM Plex Serif",
+          "Georgia",
+          "Times New Roman",
+          "serif"
+        ],
+        "$description": "Legal text: articles, provisions, long normative passages."
+      },
+      "mono": {
+        "$value": [
+          "IBM Plex Mono",
+          "ui-monospace",
+          "SF Mono",
+          "Menlo",
+          "monospace"
+        ],
+        "$description": "Identifiers: IRIs, article references, versions, hashes, timestamps."
+      },
+      "display": {
+        "$value": [
+          "Bricolage Grotesque",
+          "IBM Plex Sans",
+          "system-ui",
+          "sans-serif"
+        ],
+        "$description": "Títulos de cena e marca, tema camara. Nunca em texto jurídico, rótulo de estado ou dado."
+      }
     },
     "weight": {
       "$type": "fontWeight",
-      "regular":  { "$value": 400 },
-      "medium":   { "$value": 500 },
-      "semibold": { "$value": 600 },
-      "bold":     { "$value": 700 }
+      "regular": {
+        "$value": 400
+      },
+      "medium": {
+        "$value": 500
+      },
+      "semibold": {
+        "$value": 600
+      },
+      "bold": {
+        "$value": 700
+      }
     },
     "size": {
       "$type": "dimension",
       "$description": "Base 16px. On mobile, sizes scale with the OS text-size setting (Dynamic Type / fontScale).",
-      "100": { "$value": "12px" },
-      "200": { "$value": "14px" },
-      "300": { "$value": "16px" },
-      "400": { "$value": "18px" },
-      "500": { "$value": "20px" },
-      "600": { "$value": "24px" },
-      "700": { "$value": "30px" },
-      "800": { "$value": "36px" },
-      "900": { "$value": "48px" }
+      "100": {
+        "$value": "12px"
+      },
+      "200": {
+        "$value": "14px"
+      },
+      "300": {
+        "$value": "16px"
+      },
+      "400": {
+        "$value": "18px"
+      },
+      "500": {
+        "$value": "20px"
+      },
+      "600": {
+        "$value": "24px"
+      },
+      "700": {
+        "$value": "30px"
+      },
+      "800": {
+        "$value": "36px"
+      },
+      "900": {
+        "$value": "48px"
+      }
     },
     "lineHeight": {
       "$type": "number",
-      "tight":   { "$value": 1.2 },
-      "snug":    { "$value": 1.35 },
-      "normal":  { "$value": 1.5 },
-      "reading": { "$value": 1.65, "$description": "Long legal text in serif." }
+      "tight": {
+        "$value": 1.2
+      },
+      "snug": {
+        "$value": 1.35
+      },
+      "normal": {
+        "$value": 1.5
+      },
+      "reading": {
+        "$value": 1.65,
+        "$description": "Long legal text in serif."
+      }
     },
     "letterSpacing": {
       "$type": "dimension",
-      "tight":  { "$value": "-0.01em" },
-      "normal": { "$value": "0em" },
-      "caps":   { "$value": "0.06em", "$description": "Only for short uppercase overlines." }
+      "tight": {
+        "$value": "-0.01em"
+      },
+      "normal": {
+        "$value": "0em"
+      },
+      "caps": {
+        "$value": "0.06em",
+        "$description": "Only for short uppercase overlines."
+      }
     }
   },
   "space": {
     "$type": "dimension",
     "$description": "4px base grid.",
-    "0":  { "$value": "0px" },
-    "1":  { "$value": "4px" },
-    "2":  { "$value": "8px" },
-    "3":  { "$value": "12px" },
-    "4":  { "$value": "16px" },
-    "5":  { "$value": "20px" },
-    "6":  { "$value": "24px" },
-    "8":  { "$value": "32px" },
-    "10": { "$value": "40px" },
-    "12": { "$value": "48px" },
-    "16": { "$value": "64px" },
-    "20": { "$value": "80px" }
+    "0": {
+      "$value": "0px"
+    },
+    "1": {
+      "$value": "4px"
+    },
+    "2": {
+      "$value": "8px"
+    },
+    "3": {
+      "$value": "12px"
+    },
+    "4": {
+      "$value": "16px"
+    },
+    "5": {
+      "$value": "20px"
+    },
+    "6": {
+      "$value": "24px"
+    },
+    "8": {
+      "$value": "32px"
+    },
+    "10": {
+      "$value": "40px"
+    },
+    "12": {
+      "$value": "48px"
+    },
+    "16": {
+      "$value": "64px"
+    },
+    "20": {
+      "$value": "80px"
+    }
   },
   "radius": {
     "$type": "dimension",
-    "none": { "$value": "0px" },
-    "sm":   { "$value": "2px" },
-    "md":   { "$value": "4px" },
-    "lg":   { "$value": "8px" },
-    "xl":   { "$value": "12px" },
-    "full": { "$value": "9999px" }
+    "none": {
+      "$value": "0px"
+    },
+    "sm": {
+      "$value": "2px"
+    },
+    "md": {
+      "$value": "4px"
+    },
+    "lg": {
+      "$value": "8px"
+    },
+    "xl": {
+      "$value": "12px"
+    },
+    "full": {
+      "$value": "9999px"
+    }
   },
   "border": {
     "width": {
       "$type": "dimension",
-      "hairline": { "$value": "1px" },
-      "regular":  { "$value": "1.5px" },
-      "strong":   { "$value": "2px" },
-      "focus":    { "$value": "3px" }
+      "hairline": {
+        "$value": "1px"
+      },
+      "regular": {
+        "$value": "1.5px"
+      },
+      "strong": {
+        "$value": "2px"
+      },
+      "focus": {
+        "$value": "3px"
+      }
     }
   },
   "duration": {
     "$type": "duration",
-    "instant": { "$value": "0ms" },
-    "fast":    { "$value": "120ms" },
-    "base":    { "$value": "200ms" },
-    "slow":    { "$value": "320ms" }
+    "instant": {
+      "$value": "0ms"
+    },
+    "fast": {
+      "$value": "120ms"
+    },
+    "base": {
+      "$value": "200ms"
+    },
+    "slow": {
+      "$value": "320ms"
+    }
   },
   "easing": {
     "$type": "cubicBezier",
-    "standard":   { "$value": [0.2, 0, 0, 1] },
-    "decelerate": { "$value": [0, 0, 0, 1] },
-    "accelerate": { "$value": [0.3, 0, 1, 1] }
+    "standard": {
+      "$value": [
+        0.2,
+        0,
+        0,
+        1
+      ]
+    },
+    "decelerate": {
+      "$value": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "accelerate": {
+      "$value": [
+        0.3,
+        0,
+        1,
+        1
+      ]
+    }
   },
   "breakpoint": {
     "$type": "dimension",
     "$description": "Width at which each layout class starts.",
-    "compact":  { "$value": "0px",    "$description": "Phone portrait." },
-    "medium":   { "$value": "600px",  "$description": "Phone landscape, small tablet." },
-    "expanded": { "$value": "905px",  "$description": "Tablet, small laptop." },
-    "large":    { "$value": "1240px", "$description": "Desktop." },
-    "xlarge":   { "$value": "1600px", "$description": "Wide desktop and analyst workstations." }
+    "compact": {
+      "$value": "0px",
+      "$description": "Phone portrait."
+    },
+    "medium": {
+      "$value": "600px",
+      "$description": "Phone landscape, small tablet."
+    },
+    "expanded": {
+      "$value": "905px",
+      "$description": "Tablet, small laptop."
+    },
+    "large": {
+      "$value": "1240px",
+      "$description": "Desktop."
+    },
+    "xlarge": {
+      "$value": "1600px",
+      "$description": "Wide desktop and analyst workstations."
+    }
   },
   "size": {
     "$type": "dimension",
     "touchTarget": {
-      "min":         { "$value": "44px", "$description": "Absolute minimum touch target (iOS HIG)." },
-      "recommended": { "$value": "48px", "$description": "Default touch target on mobile (Material)." }
+      "min": {
+        "$value": "44px",
+        "$description": "Absolute minimum touch target (iOS HIG)."
+      },
+      "recommended": {
+        "$value": "48px",
+        "$description": "Default touch target on mobile (Material)."
+      }
     },
     "icon": {
-      "sm": { "$value": "16px" },
-      "md": { "$value": "20px" },
-      "lg": { "$value": "24px" }
+      "sm": {
+        "$value": "16px"
+      },
+      "md": {
+        "$value": "20px"
+      },
+      "lg": {
+        "$value": "24px"
+      }
     },
     "measure": {
-      "reading": { "$value": "68ch", "$description": "Maximum line length for legal text." }
+      "reading": {
+        "$value": "68ch",
+        "$description": "Maximum line length for legal text."
+      }
     }
   }
 }

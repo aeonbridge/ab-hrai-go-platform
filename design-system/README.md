@@ -1,8 +1,10 @@
 # HRAI-GO Design System
 
 Design system da **Plataforma Aberta de Inteligência Regulatória e Governança de IA
-(HRAI-GO)**, para web e mobile. A direção visual é institucional e cívica, com tema claro
-por padrão e escuro opcional.
+(HRAI-GO)**, para web e mobile. **DS v2 (17/11/2026):** a referência de experiência passa a ser a câmara 3D do Shadow
+Council (`docs/07-camara.md`). O tema `camara` é o padrão; os temas claro e escuro
+institucionais continuam para documentos e leitura jurídica. A camada semântica de domínio
+não mudou.
 
 O entregável é **tokens + especificação**, sem código de plataforma. Os tokens seguem o
 formato W3C DTCG e podem ser convertidos para CSS variables, Tailwind, React Native,
@@ -30,6 +32,7 @@ design-system/
 │   ├── primitives.tokens.json      escalas de cor, fonte, espaço, raio, borda, movimento, breakpoints
 │   ├── semantic.light.tokens.json  papéis (bg, text, border, action, tone.*) — tema claro
 │   ├── semantic.dark.tokens.json   mesmas chaves — tema escuro
+│   ├── semantic.camara.tokens.json mesmas chaves — tema câmara 3D (padrão desde o v2)
 │   └── domain.tokens.json          108 valores de domínio: tipo epistêmico, estado normativo,
 │                                    estado de obrigação, vinculação, voz, autoridade, Shadow
 │                                    Council, argumentação, equivalência, módulos…
@@ -40,6 +43,7 @@ design-system/
 │   ├── 04-componentes.md           átomos, moléculas e organismos, com API e diferenças web/mobile
 │   ├── 05-padroes-e-layouts.md     estrutura do app, templates por módulo, padrões transversais
 │   ├── 06-acessibilidade.md        WCAG 2.2 AA, contraste medido, teclado, leitor de tela, mobile
+│   ├── 07-camara.md                linguagem espacial 3D: torre, anel, cadeira vazia, véu, cúpula
 │   └── contrast-report.md          GERADO — contraste de todos os pares, nos dois temas
 ├── checklists/aceite.md            o que conferir antes de dar uma tela por pronta
 └── scripts/
@@ -50,7 +54,7 @@ design-system/
 ## Verificação
 
 ```bash
-python3 scripts/contrast_check.py    # → 0 failures (claro e escuro)
+python3 scripts/contrast_check.py    # → 0 failures (câmara, claro e escuro, incluindo vidro)
 python3 scripts/validate_domain.py   # → 108 domain values, 0 errors
 ```
 
@@ -68,7 +72,7 @@ contornos têm 4,1:1 ou mais. Os 86 ícones foram conferidos contra o lucide-rea
 2. Os tokens de domínio não viram cor diretamente. Viram uma **tabela de lookup**
    `grupo → valor → {tone, stroke, icon, label}`, consumida por um único `StatusBadge`. Ver
    `docs/03` §3.1.
-3. Fontes: IBM Plex Sans, Serif e Mono (OFL). Ícones: Lucide (ISC).
+3. Fontes: IBM Plex Sans, Serif e Mono, e Bricolage Grotesque para cena e marca (todas OFL). Ícones: Lucide (ISC).
 
 ## Decisões de design registradas
 
@@ -76,7 +80,9 @@ contornos têm 4,1:1 ou mais. Os 86 ícones foram conferidos contra o lucide-rea
 |---|---|
 | `iris` reservado para o que não vincula | Garante à primeira vista o critério de aceite §15.3 da spec ("nenhuma proposição pendente é apresentada como obrigação"). O `validate_domain.py` impõe isso |
 | Traço codifica força jurídica (tracejado → sólido → duplo) | Distingue proposta, vigência e aplicabilidade sem depender de cor, inclusive em impressão P&B |
-| Estratos de stakeholder sem cor | Cor criaria hierarquia de confiança entre setores |
+| Estratos sem cor na interface 2D; cor só como identidade na câmara 3D | Cor em agregado criaria hierarquia de confiança; no espaço 3D, sem cor não se segue um assento até a área que ele espera (v2) |
+| Vidro, luz e gradiente permitidos só como espaço | A câmara precisa de profundidade; o estado jurídico continua em rótulo, ícone e traço (v2) |
+| Tons de domínio mantidos, rampas trocadas no tema câmara | civic→teal, ochre→brass, iris→violet, crimson→coral, lagoon→sky: muda a cor, não o significado (v2) |
 | Confiança em tom neutro | Confiança não é boa nem ruim, então semáforo induziria leitura errada |
 | Sem placar no Shadow Council | Doze agentes contra oito não representam vontade social (spec §10.7) |
 | Cor de módulo só na navegação | Um estado (p. ex. "Atendida") precisa ter a mesma aparência em todos os módulos |

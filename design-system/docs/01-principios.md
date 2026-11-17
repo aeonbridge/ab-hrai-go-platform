@@ -45,8 +45,9 @@ mostra também o `LegalSnapshot` e os dois eixos de tempo (`validTime` e `record
 
 ## 1.4 Pluralidade sem falsa representatividade
 
-- Nenhum estrato de stakeholder recebe cor própria: todos usam cromo neutro, com ícone e
-  rótulo. Cor implicaria hierarquia de confiança.
+- Na interface 2D, nenhum estrato recebe cor própria: todos usam cromo neutro, com ícone e
+  rótulo. Na câmara 3D, a cor de estrato é permitida só como identidade de posição, nunca em
+  agregado (DS v2, `07-camara.md` §7.4).
 - Contagem de assentos ou de agentes nunca aparece como "vontade social". O Shadow Council
   mostra **cobertura** e **grau de suporte argumentativo**, nunca placar de votação (spec
   §10.7).
@@ -61,16 +62,18 @@ O FORESIGHT compara alternativas por indicadores separados e por fronteira de Pa
 interface não oferece índice composto de qualidade regulatória. Direitos fundamentais não
 aparecem como custo compensável num mesmo eixo (spec §10.7).
 
-## 1.6 Sóbrio, legível, institucional
+## 1.6 Câmara: profundidade a serviço do sentido (revisto no DS v2)
 
-- Claro por padrão, com tema escuro opcional e paridade completa entre os dois.
+- A referência de experiência é a câmara 3D do Shadow Council. Tema `camara` (escuro) por
+  padrão; temas claro e escuro sóbrios para documentos, impressão e leitura jurídica longa.
 - Tipografia que aguenta texto jurídico longo: serif para a norma, sans para a interface,
-  mono para identificadores.
-- Nenhum efeito decorativo que concorra com o conteúdo: sem gradiente, sem brilho, sem
-  glassmorphism. O peso visual fica com o estado jurídico, não com a marca.
+  mono para identificadores, display (Bricolage Grotesque) só para cena e marca.
+- Vidro, luz e gradiente são permitidos **como espaço**, nunca como portador de estado
+  jurídico. O peso semântico continua com rótulo, ícone e traço (`07-camara.md` §7.3).
 - **Sem emoji e sem ícone de "brilhos" (sparkles) para representar IA.** Agente aparece como
   agente, com o ícone `bot` ou `cpu`, rótulo e identidade. IA não é mágica, e a interface
   não deve sugerir que seja.
+- Toda cena tem alternativa sem 3D e com movimento reduzido, com o mesmo conteúdo.
 
 ## 1.7 Voz e redação
 
