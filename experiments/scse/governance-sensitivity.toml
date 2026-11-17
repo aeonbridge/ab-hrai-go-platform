@@ -1,0 +1,55 @@
+# Experimento: o resultado da revisão do modelo de governança depende de quem opina?
+#
+#   scse experiment experiments/scse/governance-sensitivity.toml --plan
+#   scse experiment experiments/scse/governance-sensitivity.toml --dry-run
+#
+# Perguntas:
+#  - O conselho estratificado e multi-provedor levanta mais omissões (Q1) e vantagens específicas (Q3)
+#    do que um agente único (B1)? Se não, a complexidade do conselho não se paga.
+#  - As propostas que se repetem entre réplicas e entre provedores são as mesmas? Proposta que só um
+#    provedor levanta é candidata a viés de modelo, não a achado.
+#  - A taxa de achados Q3 marcados como genéricos pelo crítico muda entre provedores?
+#
+# O custo sobe rápido: o modo de governança manda o modelo e o contexto inteiros em cada turno.
+# Comece com --plan e com seats = 8.
+
+name = "governance-sensitivity"
+description = "Sensibilidade da revisão do modelo de governança de IA ao provedor e ao desenho do conselho (SCSE v2, modo governanceReview)."
+providers = ["anthropic", "openai", "xai", "gemini"]
+scenarios = ["scenarios/governanca-brasil/GOV-BR-001.json"]
+seats = 8
+replicates = 3
+rounds = 6
+critic = true
+transport = "openrouter"
+
+hypotheses = [
+  "G1 O conselho estratificado e misto levanta mais tópicos esperados e mais omissões distintas do que o agente único (B1).",
+  "G2 Propostas presentes em 3 de 3 réplicas e em 2 ou mais provedores são mais estáveis do que as de um só provedor.",
+  "G3 A fração de achados Q3 'genéricos' (crítico) difere entre provedores; achado genérico não conta como vantagem distintiva.",
+  "G4 O estágio cego (R1) produz mais lacunas na matriz de cobertura do que a revisão feita já com o modelo à vista.",
+]
+
+[[arms]]
+id = "mixed-weighted"
+description = "Conselho estratificado, provedores misturados por estrato (referência)"
+mode = "stratified"
+assignment = "weighted"
+
+[[arms]]
+id = "solo"
+description = "Conselho estratificado inteiro num único provedor"
+mode = "stratified"
+per_provider = true
+
+[[arms]]
+id = "B2-unstratified"
+description = "B2: debate sem estratificação"
+mode = "unstratified"
+assignment = "rotate"
+
+[[arms]]
+id = "B1-single-agent"
+description = "B1: agente único"
+mode = "singleAgent"
+per_provider = true

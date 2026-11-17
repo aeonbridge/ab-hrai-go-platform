@@ -1,0 +1,120 @@
+{
+  "$description": "HRAI-GO semantic tokens, dark theme. Same keys as semantic.light.tokens.json. In dark mode, depth comes from lighter surfaces rather than shadows.",
+  "color": {
+    "$type": "color",
+    "bg": {
+      "canvas":  { "$value": "{color.ink.950}" },
+      "surface": { "$value": "{color.ink.900}" },
+      "subtle":  { "$value": "{color.ink.800}" },
+      "muted":   { "$value": "{color.ink.700}" },
+      "inverse": { "$value": "{color.ink.50}" },
+      "scrim":   { "$value": "#000000B3" }
+    },
+    "text": {
+      "primary":   { "$value": "{color.ink.50}" },
+      "secondary": { "$value": "{color.ink.200}" },
+      "tertiary":  { "$value": "{color.ink.300}" },
+      "disabled":  { "$value": "{color.ink.500}" },
+      "inverse":   { "$value": "{color.ink.900}" },
+      "link":      { "$value": "{color.civic.300}" },
+      "linkHover": { "$value": "{color.civic.200}" }
+    },
+    "border": {
+      "subtle":  { "$value": "{color.ink.800}" },
+      "default": { "$value": "{color.ink.700}" },
+      "control": { "$value": "{color.ink.400}" },
+      "strong":  { "$value": "{color.ink.300}" },
+      "focus":   { "$value": "{color.civic.300}" }
+    },
+    "action": {
+      "primary": {
+        "bg":      { "$value": "{color.civic.300}" },
+        "bgHover": { "$value": "{color.civic.200}" },
+        "bgPress": { "$value": "{color.civic.100}" },
+        "fg":      { "$value": "{color.civic.950}" }
+      },
+      "secondary": {
+        "bg":      { "$value": "{color.ink.900}" },
+        "bgHover": { "$value": "{color.civic.950}" },
+        "border":  { "$value": "{color.civic.300}" },
+        "fg":      { "$value": "{color.civic.200}" }
+      },
+      "ghost": {
+        "bgHover": { "$value": "{color.ink.800}" },
+        "fg":      { "$value": "{color.ink.100}" }
+      },
+      "danger": {
+        "bg":      { "$value": "{color.crimson.300}" },
+        "bgHover": { "$value": "{color.crimson.200}" },
+        "fg":      { "$value": "{color.crimson.950}" }
+      },
+      "selected": {
+        "bg": { "$value": "{color.civic.950}" },
+        "fg": { "$value": "{color.civic.200}" },
+        "indicator": { "$value": "{color.civic.300}" }
+      }
+    },
+    "tone": {
+      "neutral": {
+        "fg":      { "$value": "{color.ink.200}" },
+        "bg":      { "$value": "{color.ink.800}" },
+        "border":  { "$value": "{color.ink.400}" },
+        "solid":   { "$value": "{color.ink.200}" },
+        "solidFg": { "$value": "{color.ink.950}" }
+      },
+      "civic": {
+        "fg":      { "$value": "{color.civic.200}" },
+        "bg":      { "$value": "{color.civic.950}" },
+        "border":  { "$value": "{color.civic.400}" },
+        "solid":   { "$value": "{color.civic.300}" },
+        "solidFg": { "$value": "{color.civic.950}" }
+      },
+      "verdant": {
+        "fg":      { "$value": "{color.verdant.200}" },
+        "bg":      { "$value": "{color.verdant.950}" },
+        "border":  { "$value": "{color.verdant.400}" },
+        "solid":   { "$value": "{color.verdant.300}" },
+        "solidFg": { "$value": "{color.verdant.950}" }
+      },
+      "crimson": {
+        "fg":      { "$value": "{color.crimson.200}" },
+        "bg":      { "$value": "{color.crimson.950}" },
+        "border":  { "$value": "{color.crimson.400}" },
+        "solid":   { "$value": "{color.crimson.300}" },
+        "solidFg": { "$value": "{color.crimson.950}" }
+      },
+      "ochre": {
+        "fg":      { "$value": "{color.ochre.200}" },
+        "bg":      { "$value": "{color.ochre.950}" },
+        "border":  { "$value": "{color.ochre.400}" },
+        "solid":   { "$value": "{color.ochre.300}" },
+        "solidFg": { "$value": "{color.ochre.950}" }
+      },
+      "iris": {
+        "fg":      { "$value": "{color.iris.200}" },
+        "bg":      { "$value": "{color.iris.950}" },
+        "border":  { "$value": "{color.iris.400}" },
+        "solid":   { "$value": "{color.iris.300}" },
+        "solidFg": { "$value": "{color.iris.950}" }
+      },
+      "lagoon": {
+        "fg":      { "$value": "{color.lagoon.200}" },
+        "bg":      { "$value": "{color.lagoon.950}" },
+        "border":  { "$value": "{color.lagoon.400}" },
+        "solid":   { "$value": "{color.lagoon.300}" },
+        "solidFg": { "$value": "{color.lagoon.950}" }
+      }
+    },
+    "simulation": {
+      "hatchBg":   { "$value": "{color.ink.900}" },
+      "hatchLine": { "$value": "{color.ink.700}" },
+      "labelFg":   { "$value": "{color.ink.100}" }
+    }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "sm": { "$value": { "color": "#00000066", "offsetX": "0px", "offsetY": "1px", "blur": "2px", "spread": "0px" } },
+    "md": { "$value": { "color": "#00000080", "offsetX": "0px", "offsetY": "4px", "blur": "12px", "spread": "-2px" } },
+    "lg": { "$value": { "color": "#00000099", "offsetX": "0px", "offsetY": "12px", "blur": "32px", "spread": "-4px" } }
+  }
+}

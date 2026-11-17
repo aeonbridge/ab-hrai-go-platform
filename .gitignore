@@ -1,0 +1,12 @@
+__pycache__/
+*.egg-info/
+.pytest_cache/
+runs/
+.env
+
+# Keep local brainstorm server credentials and runtime state out of commits.
+.superpowers/brainstorm/.last-token
+.superpowers/brainstorm/.last-port
+.superpowers/brainstorm/*/state/server-info
+.superpowers/brainstorm/*/state/server-instance-id
+.superpowers/brainstorm/*/state/server.pid

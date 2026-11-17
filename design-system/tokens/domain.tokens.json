@@ -1,0 +1,218 @@
+{
+  "$description": "HRAI-GO domain tokens. Each entry is the visual signature of one controlled value of the platform ontology (canonical names follow the HRAI-GO concept spec of 11/11/2026). Fields: tone resolves to color.tone.<tone>.{fg,bg,border,solid,solidFg} in the active theme; stroke is the border style; $extensions.org.hraigo holds the Lucide icon, the labels and the canonical IRI local name. Color is never the only carrier: every entry has its own icon and label, and stroke separates the main families in grayscale. Rules of use: docs/03-semantica-de-dominio.md.",
+
+  "epistemicKind": {
+    "$description": "Mandatory epistemological separation (spec §1): the six kinds of object that must never be silently converted into one another. Every statement on screen carries exactly one of them.",
+    "officialLegalText": {
+      "tone":   { "$type": "string", "$value": "civic" },
+      "stroke": { "$type": "strokeStyle", "$value": "solid" },
+      "$extensions": { "org.hraigo": { "canonical": "OfficialLegalText", "icon": "lucide:scale", "label": { "pt-BR": "Texto jurídico oficial", "en": "Official legal text" }, "meaning": "Text from an official source, anchored to a provision, version and LegalSnapshot." } }
+    },
+    "legalInterpretation": {
+      "tone":   { "$type": "string", "$value": "civic" },
+      "stroke": { "$type": "strokeStyle", "$value": "dotted" },
+      "$extensions": { "org.hraigo": { "canonical": "LegalInterpretation", "icon": "lucide:message-square-quote", "label": { "pt-BR": "Interpretação jurídica", "en": "Legal interpretation" }, "meaning": "A reading of the text, attributed to an author, with a confidenceOfInterpretation. Always contestable." } }
+    },
+    "empiricalEvidence": {
+      "tone":   { "$type": "string", "$value": "lagoon" },
+      "stroke": { "$type": "strokeStyle", "$value": "solid" },
+      "$extensions": { "org.hraigo": { "canonical": "EvidenceRecord", "icon": "lucide:microscope", "label": { "pt-BR": "Evidência empírica", "en": "Empirical evidence" }, "meaning": "Data, indicator, audit, test, incident or study, with source, period and method." } }
+    },
+    "agentHypothesis": {
+      "tone":   { "$type": "string", "$value": "iris" },
+      "stroke": { "$type": "strokeStyle", "$value": "dotted" },
+      "$extensions": { "org.hraigo": { "canonical": "AgentHypothesis", "icon": "lucide:circle-help", "label": { "pt-BR": "Hipótese de agente", "en": "Agent hypothesis" }, "meaning": "An inference produced by a platform agent that has not been validated. Shown with the agent identity." } }
+    },
+    "stakeholderPosition": {
+      "tone":   { "$type": "string", "$value": "ochre" },
+      "stroke": { "$type": "strokeStyle", "$value": "solid" },
+      "$extensions": { "org.hraigo": { "canonical": "StakeholderPosition", "icon": "lucide:megaphone", "label": { "pt-BR": "Posição de stakeholder", "en": "Stakeholder position" }, "meaning": "A position attributed to a stakeholder, real or synthetic, with its voice and sources." } }
+    },
+    "normativeProposal": {
+      "tone":   { "$type": "string", "$value": "iris" },
+      "stroke": { "$type": "strokeStyle", "$value": "dashed" },
+      "$extensions": { "org.hraigo": { "canonical": "NormativeProposal", "icon": "lucide:file-pen-line", "label": { "pt-BR": "Proposta normativa", "en": "Normative proposal" }, "meaning": "LegislativeProposal (e.g. a bill in progress) or a PolicyClaim proposing improvement. Never binding." } }
+    }
+  },
+
+  "bindingness": {
+    "$description": "Whether a requirement can produce an obligation at the evaluated date. Rendered next to every requirement in VERIFY so that no pending proposal reads as a current legal obligation (acceptance criterion §15.3).",
+    "binding":    { "tone": { "$type": "string", "$value": "civic" }, "stroke": { "$type": "strokeStyle", "$value": "solid" },  "$extensions": { "org.hraigo": { "icon": "lucide:lock",       "label": { "pt-BR": "Vinculante na data",      "en": "Binding at date" } } } },
+    "deferred":   { "tone": { "$type": "string", "$value": "civic" }, "stroke": { "$type": "strokeStyle", "$value": "dashed" }, "$extensions": { "org.hraigo": { "icon": "lucide:calendar-clock", "label": { "pt-BR": "Em vigor · aplicação diferida", "en": "In force · deferred application" } } } },
+    "nonBinding": { "tone": { "$type": "string", "$value": "iris" },  "stroke": { "$type": "strokeStyle", "$value": "dashed" }, "$extensions": { "org.hraigo": { "icon": "lucide:lock-open",  "label": { "pt-BR": "Não vinculante",          "en": "Non-binding" } } } }
+  },
+
+  "normativeState": {
+    "$description": "Controlled normative states (spec §6.3). InForce and Applicable are NOT synonyms: a norm can be in force with obligations whose application is deferred. Approval in one chamber is not enactment.",
+    "proposed":          { "tone": { "$type": "string", "$value": "iris" },    "stroke": { "$type": "strokeStyle", "$value": "dashed" }, "$extensions": { "org.hraigo": { "canonical": "Proposed",          "icon": "lucide:file-pen-line",   "label": { "pt-BR": "Proposta",            "en": "Proposed" } } } },
+    "underDeliberation": { "tone": { "$type": "string", "$value": "iris" },    "stroke": { "$type": "strokeStyle", "$value": "dashed" }, "$extensions": { "org.hraigo": { "canonical": "UnderDeliberation", "icon": "lucide:messages-square", "label": { "pt-BR": "Em tramitação",       "en": "Under deliberation" } } } },
+    "approved":          { "tone": { "$type": "string", "$value": "iris" },    "stroke": { "$type": "strokeStyle", "$value": "solid" },  "$extensions": { "org.hraigo": { "canonical": "Approved",          "icon": "lucide:file-check-2",    "label": { "pt-BR": "Aprovada · não promulgada", "en": "Approved · not enacted" } } } },
+    "enacted":           { "tone": { "$type": "string", "$value": "civic" },   "stroke": { "$type": "strokeStyle", "$value": "dashed" }, "$extensions": { "org.hraigo": { "canonical": "Enacted",           "icon": "lucide:stamp",           "label": { "pt-BR": "Promulgada",          "en": "Enacted" } } } },
+    "inForce":           { "tone": { "$type": "string", "$value": "civic" },   "stroke": { "$type": "strokeStyle", "$value": "solid" },  "$extensions": { "org.hraigo": { "canonical": "InForce",           "icon": "lucide:scale",           "label": { "pt-BR": "Em vigor",            "en": "In force" } } } },
+    "applicable":        { "tone": { "$type": "string", "$value": "civic" },   "stroke": { "$type": "strokeStyle", "$value": "double" }, "$extensions": { "org.hraigo": { "canonical": "Applicable",        "icon": "lucide:gavel",           "label": { "pt-BR": "Aplicável",           "en": "Applicable" } } } },
+    "suspended":         { "tone": { "$type": "string", "$value": "ochre" },   "stroke": { "$type": "strokeStyle", "$value": "solid" },  "$extensions": { "org.hraigo": { "canonical": "Suspended",         "icon": "lucide:circle-pause",    "label": { "pt-BR": "Suspensa",            "en": "Suspended" } } } },
+    "repealed":          { "tone": { "$type": "string", "$value": "neutral" }, "stroke": { "$type": "strokeStyle", "$value": "solid" },  "$extensions": { "org.hraigo": { "canonical": "Repealed",          "icon": "lucide:archive-x",       "label": { "pt-BR": "Revogada",            "en": "Repealed" } } } },
+    "superseded":        { "tone": { "$type": "string", "$value": "neutral" }, "stroke": { "$type": "strokeStyle", "$value": "solid" },  "$extensions": { "org.hraigo": { "canonical": "Superseded",        "icon": "lucide:history",         "label": { "pt-BR": "Substituída",         "en": "Superseded" } } } },
+    "uncertain":         { "tone": { "$type": "string", "$value": "ochre" },   "stroke": { "$type": "strokeStyle", "$value": "dotted" }, "$extensions": { "org.hraigo": { "canonical": "Uncertain",         "icon": "lucide:circle-help",     "label": { "pt-BR": "Situação incerta",    "en": "Uncertain" } } } }
+  },
+
+  "obligationStatus": {
+    "$description": "State of one obligation for one application (spec §7.3). Only Satisfied and NotSatisfied are conclusions; InsufficientEvidence never implies either. PendingReview marks an automated result not yet validated under the review policy.",
+    "satisfied":            { "tone": { "$type": "string", "$value": "verdant" }, "stroke": { "$type": "strokeStyle", "$value": "solid" },  "$extensions": { "org.hraigo": { "canonical": "Satisfied",            "icon": "lucide:circle-check",   "label": { "pt-BR": "Atendida",                 "en": "Satisfied" } } } },
+    "notSatisfied":         { "tone": { "$type": "string", "$value": "crimson" }, "stroke": { "$type": "strokeStyle", "$value": "solid" },  "$extensions": { "org.hraigo": { "canonical": "NotSatisfied",         "icon": "lucide:circle-x",       "label": { "pt-BR": "Não atendida",             "en": "Not satisfied" } } } },
+    "insufficientEvidence": { "tone": { "$type": "string", "$value": "ochre" },   "stroke": { "$type": "strokeStyle", "$value": "solid" },  "$extensions": { "org.hraigo": { "canonical": "InsufficientEvidence", "icon": "lucide:triangle-alert", "label": { "pt-BR": "Evidência insuficiente",   "en": "Insufficient evidence" } } } },
+    "notApplicable":        { "tone": { "$type": "string", "$value": "neutral" }, "stroke": { "$type": "strokeStyle", "$value": "solid" },  "$extensions": { "org.hraigo": { "canonical": "NotApplicable",        "icon": "lucide:circle-minus",   "label": { "pt-BR": "Não aplicável",            "en": "Not applicable" } } } },
+    "legalUncertainty":     { "tone": { "$type": "string", "$value": "iris" },    "stroke": { "$type": "strokeStyle", "$value": "dotted" }, "$extensions": { "org.hraigo": { "canonical": "LegalUncertainty",     "icon": "lucide:circle-help",    "label": { "pt-BR": "Incerteza jurídica",       "en": "Legal uncertainty" } } } },
+    "pendingReview":        { "tone": { "$type": "string", "$value": "civic" },   "stroke": { "$type": "strokeStyle", "$value": "dashed" }, "$extensions": { "org.hraigo": { "canonical": "PendingReview",        "icon": "lucide:hourglass",      "label": { "pt-BR": "Aguardando revisão",       "en": "Pending review" } } } }
+  },
+
+  "reviewStatus": {
+    "$description": "Human review and evidence review status of any published object (humanReviewStatus, evidenceReviewStatus).",
+    "pending":   { "tone": { "$type": "string", "$value": "civic" },   "stroke": { "$type": "strokeStyle", "$value": "dashed" }, "$extensions": { "org.hraigo": { "icon": "lucide:hourglass",    "label": { "pt-BR": "Revisão pendente", "en": "Review pending" } } } },
+    "reviewed":  { "tone": { "$type": "string", "$value": "verdant" }, "stroke": { "$type": "strokeStyle", "$value": "solid" },  "$extensions": { "org.hraigo": { "icon": "lucide:user-check",   "label": { "pt-BR": "Revisado por humano", "en": "Human reviewed" } } } },
+    "contested": { "tone": { "$type": "string", "$value": "ochre" },   "stroke": { "$type": "strokeStyle", "$value": "solid" },  "$extensions": { "org.hraigo": { "icon": "lucide:flag",        "label": { "pt-BR": "Contestado",       "en": "Contested" } } } },
+    "corrected": { "tone": { "$type": "string", "$value": "neutral" }, "stroke": { "$type": "strokeStyle", "$value": "solid" },  "$extensions": { "org.hraigo": { "icon": "lucide:file-diff",   "label": { "pt-BR": "Corrigido · histórico preservado", "en": "Corrected · history kept" } } } },
+    "invalidated": { "tone": { "$type": "string", "$value": "crimson" }, "stroke": { "$type": "strokeStyle", "$value": "solid" }, "$extensions": { "org.hraigo": { "icon": "lucide:ban",        "label": { "pt-BR": "Invalidado",       "en": "Invalidated" } } } }
+  },
+
+  "synthetic": {
+    "$description": "Synthetic and fictional content. Orthogonal to epistemicKind: a stakeholder position can be synthetic. Never removable from the rendering (spec §10.5, methodological prohibition).",
+    "syntheticPerspective": { "tone": { "$type": "string", "$value": "neutral" }, "stroke": { "$type": "strokeStyle", "$value": "dashed" }, "$extensions": { "org.hraigo": { "canonical": "hasSyntheticStatus=true", "icon": "lucide:bot", "label": { "pt-BR": "Perspectiva sintética", "en": "Synthetic perspective" }, "meaning": "Voice produced by a PerspectiveAgent from documented sources. Not a person, not a mandate." } } },
+    "fictionalExample":     { "tone": { "$type": "string", "$value": "neutral" }, "stroke": { "$type": "strokeStyle", "$value": "dashed" }, "$extensions": { "org.hraigo": { "icon": "lucide:flask-conical", "label": { "pt-BR": "Exemplo fictício · dados simulados", "en": "Fictional example · simulated data" }, "meaning": "Rendered on the hatch background (color.simulation.*) with the full label." } } }
+  },
+
+  "authorityLevel": {
+    "$description": "Open model with authority levels (spec §12.1). Shown on every contributor identity. Level is permission, not credibility: credibility comes from evidence.",
+    "publicContributor":       { "tone": { "$type": "string", "$value": "neutral" }, "$extensions": { "org.hraigo": { "canonical": "PublicContributor",       "icon": "lucide:user",          "label": { "pt-BR": "Contribuidor público",      "en": "Public contributor" } } } },
+    "verifiedStakeholder":     { "tone": { "$type": "string", "$value": "civic" },   "$extensions": { "org.hraigo": { "canonical": "VerifiedStakeholder",     "icon": "lucide:badge-check",   "label": { "pt-BR": "Stakeholder verificado",    "en": "Verified stakeholder" } } } },
+    "expertReviewer":          { "tone": { "$type": "string", "$value": "neutral" }, "$extensions": { "org.hraigo": { "canonical": "ExpertReviewer",          "icon": "lucide:user-round-search", "label": { "pt-BR": "Revisor especialista",  "en": "Expert reviewer" } } } },
+    "regulatorySourceCurator": { "tone": { "$type": "string", "$value": "neutral" }, "$extensions": { "org.hraigo": { "canonical": "RegulatorySourceCurator", "icon": "lucide:book-check",    "label": { "pt-BR": "Curador de fonte oficial",  "en": "Regulatory source curator" } } } },
+    "ontologyMaintainer":      { "tone": { "$type": "string", "$value": "neutral" }, "$extensions": { "org.hraigo": { "canonical": "OntologyMaintainer",      "icon": "lucide:network",       "label": { "pt-BR": "Mantenedor da ontologia",   "en": "Ontology maintainer" } } } },
+    "systemOperator":          { "tone": { "$type": "string", "$value": "neutral" }, "$extensions": { "org.hraigo": { "canonical": "SystemOperator",          "icon": "lucide:server-cog",    "label": { "pt-BR": "Operador do sistema · sem autoridade jurídica", "en": "System operator · no legal authority" } } } }
+  },
+
+  "voice": {
+    "$description": "Who is speaking (spec §8.2/§10.5): an institution speaking officially, an individual expert, or an agent. A synthetic or platform agent must never share the signature of an official position.",
+    "officialInstitution": { "tone": { "$type": "string", "$value": "civic" },   "stroke": { "$type": "strokeStyle", "$value": "solid" },  "$extensions": { "org.hraigo": { "icon": "lucide:landmark",    "label": { "pt-BR": "Posição institucional oficial", "en": "Official institutional position" } } } },
+    "individual":          { "tone": { "$type": "string", "$value": "neutral" }, "stroke": { "$type": "strokeStyle", "$value": "solid" },  "$extensions": { "org.hraigo": { "icon": "lucide:user-round", "label": { "pt-BR": "Fala individual",               "en": "Individual" } } } },
+    "platformAgent":       { "tone": { "$type": "string", "$value": "neutral" }, "stroke": { "$type": "strokeStyle", "$value": "dotted" }, "$extensions": { "org.hraigo": { "icon": "lucide:cpu",        "label": { "pt-BR": "Agente da plataforma",          "en": "Platform agent" } } } },
+    "perspectiveAgent":    { "tone": { "$type": "string", "$value": "neutral" }, "stroke": { "$type": "strokeStyle", "$value": "dashed" }, "$extensions": { "org.hraigo": { "icon": "lucide:bot",        "label": { "pt-BR": "Perspectiva sintética",         "en": "Synthetic perspective" } } } }
+  },
+
+  "stakeholderStratum": {
+    "$description": "Initial stakeholder strata for a Brazilian AI session (spec §10.2). Neutral chrome only: no stratum gets a hue, so none looks more or less trustworthy. Strata are not homogeneous.",
+    "regulators":       { "$extensions": { "org.hraigo": { "icon": "lucide:landmark",       "label": { "pt-BR": "Regulação e fiscalização",    "en": "Regulators & enforcement" } } } },
+    "publicOperators":  { "$extensions": { "org.hraigo": { "icon": "lucide:building",       "label": { "pt-BR": "Poder público operador",      "en": "Public operators" } } } },
+    "productiveSector": { "$extensions": { "org.hraigo": { "icon": "lucide:factory",        "label": { "pt-BR": "Setor produtivo",             "en": "Productive sector" } } } },
+    "research":         { "$extensions": { "org.hraigo": { "icon": "lucide:graduation-cap", "label": { "pt-BR": "Pesquisa e especialistas",    "en": "Research & experts" } } } },
+    "civilSociety":     { "$extensions": { "org.hraigo": { "icon": "lucide:users-round",    "label": { "pt-BR": "Sociedade civil e direitos",  "en": "Civil society & rights" } } } },
+    "workers":          { "$extensions": { "org.hraigo": { "icon": "lucide:hard-hat",       "label": { "pt-BR": "Trabalhadores e profissões",  "en": "Workers & professions" } } } },
+    "affectedGroups":   { "$extensions": { "org.hraigo": { "icon": "lucide:heart-handshake","label": { "pt-BR": "Grupos diretamente afetados", "en": "Directly affected groups" } } } },
+    "infrastructure":   { "$extensions": { "org.hraigo": { "icon": "lucide:zap",            "label": { "pt-BR": "Infraestrutura e ecossistema","en": "Infrastructure & ecosystem" } } } }
+  },
+
+  "coverageState": {
+    "$description": "Coverage of a stratum or seat by documented positions (CoverageMatrix, spec §10.5). Missing source means Unrepresented, never an invented position.",
+    "covered":       { "tone": { "$type": "string", "$value": "lagoon" },  "stroke": { "$type": "strokeStyle", "$value": "solid" },  "$extensions": { "org.hraigo": { "icon": "lucide:file-check",  "label": { "pt-BR": "Coberto por fontes",          "en": "Covered by sources" } } } },
+    "partial":       { "tone": { "$type": "string", "$value": "ochre" },   "stroke": { "$type": "strokeStyle", "$value": "dotted" }, "$extensions": { "org.hraigo": { "icon": "lucide:file-minus",  "label": { "pt-BR": "Cobertura parcial",           "en": "Partial coverage" } } } },
+    "unrepresented": { "tone": { "$type": "string", "$value": "neutral" }, "stroke": { "$type": "strokeStyle", "$value": "dashed" }, "$extensions": { "org.hraigo": { "canonical": "Unrepresented", "icon": "lucide:square-dashed", "label": { "pt-BR": "Não representado · sem fonte", "en": "Unrepresented · no source" } } } }
+  },
+
+  "councilRound": {
+    "$description": "Six-round deliberative protocol of a ShadowCouncilSession (spec §10.6). Rendered as a stepper; each round keeps every contribution traceable.",
+    "r0": { "order": { "$type": "number", "$value": 0 }, "$extensions": { "org.hraigo": { "icon": "lucide:file-text",       "label": { "pt-BR": "Dossiê de evidências",              "en": "Evidence brief" } } } },
+    "r1": { "order": { "$type": "number", "$value": 1 }, "$extensions": { "org.hraigo": { "icon": "lucide:split",           "label": { "pt-BR": "Posições independentes",            "en": "Independent positions" } } } },
+    "r2": { "order": { "$type": "number", "$value": 2 }, "$extensions": { "org.hraigo": { "icon": "lucide:swords",          "label": { "pt-BR": "Contraditório",                     "en": "Cross-examination" } } } },
+    "r3": { "order": { "$type": "number", "$value": 3 }, "$extensions": { "org.hraigo": { "icon": "lucide:pencil-line",     "label": { "pt-BR": "Revisão estruturada",               "en": "Structured revision" } } } },
+    "r4": { "order": { "$type": "number", "$value": 4 }, "$extensions": { "org.hraigo": { "icon": "lucide:file-warning",    "label": { "pt-BR": "Relatório de minoria",              "en": "Minority report" } } } },
+    "r5": { "order": { "$type": "number", "$value": 5 }, "$extensions": { "org.hraigo": { "icon": "lucide:user-check",      "label": { "pt-BR": "Síntese e revisão humana",          "en": "Synthesis & human review" } } } }
+  },
+
+  "councilMode": {
+    "exploratory": { "tone": { "$type": "string", "$value": "neutral" }, "stroke": { "$type": "strokeStyle", "$value": "dashed" }, "$extensions": { "org.hraigo": { "icon": "lucide:compass",     "label": { "pt-BR": "Sessão exploratória", "en": "Exploratory session" } } } },
+    "validated":   { "tone": { "$type": "string", "$value": "civic" },   "stroke": { "$type": "strokeStyle", "$value": "solid" },  "$extensions": { "org.hraigo": { "icon": "lucide:shield-check", "label": { "pt-BR": "Sessão validada",     "en": "Validated session" } } } }
+  },
+
+  "argumentRelation": {
+    "$description": "Edges of the Argumentation Knowledge Graph (a claim can be supported, challenged, qualified or superseded). Line style + end marker + label carry the meaning; color reinforces.",
+    "supports":    { "tone": { "$type": "string", "$value": "verdant" }, "stroke": { "$type": "strokeStyle", "$value": "solid" },  "$extensions": { "org.hraigo": { "canonical": "supportedBy",  "marker": "arrow",      "icon": "lucide:arrow-up-right",     "label": { "pt-BR": "apoia",     "en": "supports" } } } },
+    "challenges":  { "tone": { "$type": "string", "$value": "crimson" }, "stroke": { "$type": "strokeStyle", "$value": "dashed" }, "$extensions": { "org.hraigo": { "canonical": "challengedBy", "marker": "bar",        "icon": "lucide:shield-off",         "label": { "pt-BR": "contesta",  "en": "challenges" } } } },
+    "qualifies":   { "tone": { "$type": "string", "$value": "ochre" },   "stroke": { "$type": "strokeStyle", "$value": "dotted" }, "$extensions": { "org.hraigo": { "canonical": "qualifiedBy",  "marker": "diamond",    "icon": "lucide:sliders-horizontal", "label": { "pt-BR": "qualifica", "en": "qualifies" } } } },
+    "supersedes":  { "tone": { "$type": "string", "$value": "neutral" }, "stroke": { "$type": "strokeStyle", "$value": "double" }, "$extensions": { "org.hraigo": { "canonical": "supersededBy", "marker": "open-arrow", "icon": "lucide:replace",            "label": { "pt-BR": "substitui", "en": "supersedes" } } } },
+    "derivedFrom": { "tone": { "$type": "string", "$value": "neutral" }, "stroke": { "$type": "strokeStyle", "$value": "solid" },  "$extensions": { "org.hraigo": { "canonical": "wasDerivedFrom", "marker": "circle",   "icon": "lucide:git-branch",         "label": { "pt-BR": "deriva de", "en": "derived from" } } } }
+  },
+
+  "deliberationOutcome": {
+    "$description": "Outcome of a question. Questions without consensus remain open and are labelled as such; minority arguments are reported, not averaged away.",
+    "open":            { "tone": { "$type": "string", "$value": "neutral" }, "$extensions": { "org.hraigo": { "icon": "lucide:circle-dot-dashed", "label": { "pt-BR": "Em aberto",              "en": "Open" } } } },
+    "convergent":      { "tone": { "$type": "string", "$value": "verdant" }, "$extensions": { "org.hraigo": { "icon": "lucide:git-merge",         "label": { "pt-BR": "Convergência argumentativa", "en": "Argumentative convergence" } } } },
+    "dissentRecorded": { "tone": { "$type": "string", "$value": "ochre" },   "$extensions": { "org.hraigo": { "icon": "lucide:split",             "label": { "pt-BR": "Dissenso registrado",    "en": "Dissent recorded" } } } },
+    "inconclusive":    { "tone": { "$type": "string", "$value": "neutral" }, "$extensions": { "org.hraigo": { "icon": "lucide:circle-slash-2",    "label": { "pt-BR": "Inconclusivo por falta de dados", "en": "Inconclusive · missing data" } } } }
+  },
+
+  "controversyStage": {
+    "$description": "Lifecycle of a controversy in DEBATE (spec §8.3). Rendered as a stepper.",
+    "detect":       { "order": { "$type": "number", "$value": 1 }, "$extensions": { "org.hraigo": { "icon": "lucide:radar",          "label": { "pt-BR": "Detectar",      "en": "Detect" } } } },
+    "substantiate": { "order": { "$type": "number", "$value": 2 }, "$extensions": { "org.hraigo": { "icon": "lucide:file-search",    "label": { "pt-BR": "Fundamentar",   "en": "Substantiate" } } } },
+    "contest":      { "order": { "$type": "number", "$value": 3 }, "$extensions": { "org.hraigo": { "icon": "lucide:shield-off",     "label": { "pt-BR": "Contestar",     "en": "Contest" } } } },
+    "deliberate":   { "order": { "$type": "number", "$value": 4 }, "$extensions": { "org.hraigo": { "icon": "lucide:messages-square", "label": { "pt-BR": "Deliberar",    "en": "Deliberate" } } } },
+    "simulate":     { "order": { "$type": "number", "$value": 5 }, "$extensions": { "org.hraigo": { "icon": "lucide:flask-conical",  "label": { "pt-BR": "Simular",       "en": "Simulate" } } } },
+    "propose":      { "order": { "$type": "number", "$value": 6 }, "$extensions": { "org.hraigo": { "icon": "lucide:file-pen-line",  "label": { "pt-BR": "Propor",        "en": "Propose" } } } },
+    "observe":      { "order": { "$type": "number", "$value": 7 }, "$extensions": { "org.hraigo": { "icon": "lucide:eye",            "label": { "pt-BR": "Acompanhar",    "en": "Observe" } } } }
+  },
+
+  "tensionType": {
+    "$description": "Canonical taxonomy of regulatory tensions (spec §8.2). Shown as a labelled chip in the propositional/deliberative context; no hue per type.",
+    "protectionInnovation":     { "$extensions": { "org.hraigo": { "canonical": "ProtectionInnovationTension",      "icon": "lucide:shield-half",       "label": { "pt-BR": "Proteção × inovação",            "en": "Protection × innovation" } } } },
+    "sovereigntyOpenness":      { "$extensions": { "org.hraigo": { "canonical": "SovereigntyOpennessTension",       "icon": "lucide:globe-lock",        "label": { "pt-BR": "Soberania × abertura",           "en": "Sovereignty × openness" } } } },
+    "privacyUtility":           { "$extensions": { "org.hraigo": { "canonical": "PrivacyUtilityTension",            "icon": "lucide:eye-off",           "label": { "pt-BR": "Privacidade × utilidade",        "en": "Privacy × utility" } } } },
+    "transparencySecurity":     { "$extensions": { "org.hraigo": { "canonical": "TransparencySecurityTension",      "icon": "lucide:scan-eye",          "label": { "pt-BR": "Transparência × segurança",      "en": "Transparency × security" } } } },
+    "capacityGap":              { "$extensions": { "org.hraigo": { "canonical": "RegulatoryCapacityGap",            "icon": "lucide:gauge",             "label": { "pt-BR": "Lacuna de capacidade",           "en": "Regulatory capacity gap" } } } },
+    "distributionalImpact":     { "$extensions": { "org.hraigo": { "canonical": "DistributionalImpactTension",      "icon": "lucide:chart-pie",         "label": { "pt-BR": "Impacto distributivo",           "en": "Distributional impact" } } } },
+    "coverageGap":              { "$extensions": { "org.hraigo": { "canonical": "RegulatoryCoverageGap",            "icon": "lucide:square-dashed",     "label": { "pt-BR": "Lacuna de cobertura",            "en": "Regulatory coverage gap" } } } },
+    "obsolescence":             { "$extensions": { "org.hraigo": { "canonical": "RegulatoryObsolescence",           "icon": "lucide:hourglass",         "label": { "pt-BR": "Obsolescência regulatória",      "en": "Regulatory obsolescence" } } } },
+    "jurisdictionalConflict":   { "$extensions": { "org.hraigo": { "canonical": "JurisdictionalConflict",           "icon": "lucide:git-compare-arrows","label": { "pt-BR": "Conflito entre jurisdições",     "en": "Jurisdictional conflict" } } } },
+    "implementationFeasibility":{ "$extensions": { "org.hraigo": { "canonical": "ImplementationFeasibilityTension", "icon": "lucide:wrench",            "label": { "pt-BR": "Viabilidade de implementação",   "en": "Implementation feasibility" } } } }
+  },
+
+  "equivalence": {
+    "$description": "Comparative library (spec §9.2): similar concepts do not automatically produce identical duties. The three kinds are always labelled explicitly; never a single 'equivalent' badge.",
+    "semantic":   { "tone": { "$type": "string", "$value": "neutral" }, "stroke": { "$type": "strokeStyle", "$value": "dotted" }, "$extensions": { "org.hraigo": { "icon": "lucide:languages",  "label": { "pt-BR": "Equivalência semântica", "en": "Semantic equivalence" } } } },
+    "functional": { "tone": { "$type": "string", "$value": "lagoon" },  "stroke": { "$type": "strokeStyle", "$value": "dashed" }, "$extensions": { "org.hraigo": { "icon": "lucide:cog",        "label": { "pt-BR": "Semelhança funcional",   "en": "Functional similarity" } } } },
+    "legal":      { "tone": { "$type": "string", "$value": "civic" },   "stroke": { "$type": "strokeStyle", "$value": "solid" },  "$extensions": { "org.hraigo": { "icon": "lucide:equal",      "label": { "pt-BR": "Equivalência jurídica",  "en": "Legal equivalence" } } } },
+    "divergent":  { "tone": { "$type": "string", "$value": "ochre" },   "stroke": { "$type": "strokeStyle", "$value": "solid" },  "$extensions": { "org.hraigo": { "icon": "lucide:equal-not",  "label": { "pt-BR": "Divergência",            "en": "Divergent" } } } }
+  },
+
+  "confidence": {
+    "$description": "Confidence in a source or interpretation (confidenceOfInterpretation). 3-segment meter + label in the neutral tone: confidence is not good or bad, so it never takes traffic-light color.",
+    "low":    { "segments": { "$type": "number", "$value": 1 }, "$extensions": { "org.hraigo": { "label": { "pt-BR": "Confiança baixa", "en": "Low confidence" } } } },
+    "medium": { "segments": { "$type": "number", "$value": 2 }, "$extensions": { "org.hraigo": { "label": { "pt-BR": "Confiança média", "en": "Medium confidence" } } } },
+    "high":   { "segments": { "$type": "number", "$value": 3 }, "$extensions": { "org.hraigo": { "label": { "pt-BR": "Confiança alta",  "en": "High confidence" } } } }
+  },
+
+  "time": {
+    "$description": "Bitemporal model (spec §6.2). Both axes are named on screen whenever a date filters content.",
+    "validTime":  { "$extensions": { "org.hraigo": { "icon": "lucide:calendar",       "label": { "pt-BR": "Vigência considerada", "en": "Valid time" }, "meaning": "When the fact or requirement held legally for the application." } } },
+    "recordTime": { "$extensions": { "org.hraigo": { "icon": "lucide:database",       "label": { "pt-BR": "Registrado em",        "en": "Record time" }, "meaning": "When the platform learned, recorded or corrected the fact." } } },
+    "legalSnapshot": { "$extensions": { "org.hraigo": { "icon": "lucide:camera",      "label": { "pt-BR": "Retrato jurídico",     "en": "Legal snapshot" }, "meaning": "Dated, versioned cut of the known legal framework (e.g. legal-snapshot-br-2026-11-11)." } } }
+  },
+
+  "module": {
+    "$description": "Domain components of the platform (spec §1.1, roadmap §16). Module accent is used ONLY in navigation chrome (active indicator, page overline). Content badges never take the module color. SHADOW COUNCIL is a sub-module of DEBATE.",
+    "norm":          { "tone": { "$type": "string", "$value": "civic" },   "$extensions": { "org.hraigo": { "icon": "lucide:library",         "label": { "pt-BR": "NORM",           "en": "NORM" },           "subtitle": { "pt-BR": "Inteligência normativa",           "en": "Normative intelligence" } } } },
+    "verify":        { "tone": { "$type": "string", "$value": "lagoon" },  "$extensions": { "org.hraigo": { "icon": "lucide:shield-check",    "label": { "pt-BR": "VERIFY",         "en": "VERIFY" },         "subtitle": { "pt-BR": "Conformidade de aplicações",       "en": "Application compliance" } } } },
+    "debate":        { "tone": { "$type": "string", "$value": "ochre" },   "$extensions": { "org.hraigo": { "icon": "lucide:messages-square", "label": { "pt-BR": "DEBATE",         "en": "DEBATE" },         "subtitle": { "pt-BR": "Inteligência de políticas",        "en": "Policy intelligence" } } } },
+    "shadowCouncil": { "tone": { "$type": "string", "$value": "ochre" },   "$extensions": { "org.hraigo": { "icon": "lucide:armchair",        "label": { "pt-BR": "SHADOW COUNCIL", "en": "SHADOW COUNCIL" }, "subtitle": { "pt-BR": "Conselho deliberativo sintético", "en": "Synthetic deliberative council" } } } },
+    "foresight":     { "tone": { "$type": "string", "$value": "iris" },    "$extensions": { "org.hraigo": { "icon": "lucide:telescope",       "label": { "pt-BR": "FORESIGHT",      "en": "FORESIGHT" },      "subtitle": { "pt-BR": "Alternativas e cenários",          "en": "Policy alternatives" } } } }
+  },
+
+  "knowledgeGraph": {
+    "$description": "Node styling for graph visualizations. Shape + label carry identity; tone reinforces.",
+    "legal":           { "tone": { "$type": "string", "$value": "civic" },   "$extensions": { "org.hraigo": { "shape": "rectangle",         "icon": "lucide:scale",           "label": { "pt-BR": "Jurídico",            "en": "Legal KG" } } } },
+    "nationalContext": { "tone": { "$type": "string", "$value": "lagoon" },  "$extensions": { "org.hraigo": { "shape": "hexagon",           "icon": "lucide:map",             "label": { "pt-BR": "Contexto nacional",   "en": "National context KG" } } } },
+    "application":     { "tone": { "$type": "string", "$value": "neutral" }, "$extensions": { "org.hraigo": { "shape": "rounded-rectangle", "icon": "lucide:app-window",      "label": { "pt-BR": "Aplicações",          "en": "Application KG" } } } },
+    "argument":        { "tone": { "$type": "string", "$value": "ochre" },   "$extensions": { "org.hraigo": { "shape": "ellipse",           "icon": "lucide:messages-square", "label": { "pt-BR": "Argumentos",          "en": "Argument KG" } } } },
+    "comparative":     { "tone": { "$type": "string", "$value": "iris" },    "$extensions": { "org.hraigo": { "shape": "diamond",           "icon": "lucide:columns-3",       "label": { "pt-BR": "Comparativo",         "en": "Comparative policy KG" } } } },
+    "provenance":      { "tone": { "$type": "string", "$value": "neutral" }, "$extensions": { "org.hraigo": { "shape": "circle",            "icon": "lucide:fingerprint-pattern",     "label": { "pt-BR": "Proveniência",        "en": "Provenance KG" } } } }
+  }
+}

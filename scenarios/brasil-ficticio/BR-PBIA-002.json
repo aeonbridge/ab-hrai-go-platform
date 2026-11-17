@@ -1,0 +1,81 @@
+{
+  "scenarioId": "BR-PBIA-002",
+  "mode": "regulatoryPolicy",
+  "jurisdiction": {
+    "code": "BR",
+    "name": "Brazil"
+  },
+  "asOfDate": "2026-11-14",
+  "question": "No Brasil fictício, quais trade-offs entre soberania computacional, custo, energia e dependência tecnológica emergem ao priorizar infraestrutura nacional de IA até 2033?",
+  "regulatorySources": [
+    {
+      "id": "PBIA-DOC",
+      "title": "Plano Brasileiro de Inteligência Artificial 2024-2028",
+      "status": "effective",
+      "uri": "https://indico.rnp.br/event/155/contributions/1369/attachments/569/876/Plano_Brasileiro_de_IA.pdf",
+      "kind": "policyDocument"
+    },
+    {
+      "id": "LGPD",
+      "title": "Lei Geral de Proteção de Dados (Lei 13.709/2018)",
+      "status": "effective",
+      "uri": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm",
+      "kind": "law"
+    }
+  ],
+  "contextSources": [
+    {
+      "id": "WORLD-BRF",
+      "title": "Brasil fictício (world pack)",
+      "status": "unknown",
+      "uri": "urn:scse:world:brasil-ficticio",
+      "kind": "other"
+    }
+  ],
+  "council": {
+    "strategy": "documentedPerspectiveCoverage",
+    "targetSeats": 20,
+    "requiredReview": true
+  },
+  "simulation": {
+    "rounds": 6,
+    "replicates": 3,
+    "randomSeed": 2028,
+    "tokenBudget": 4000000,
+    "maxCostUsd": 40,
+    "branches": [
+      {
+        "id": "public-sector-national-cloud",
+        "hypothesis": "Órgãos federais passam a ser obrigados a usar nuvem nacional para cargas de IA com dados pessoais.",
+        "patch": {
+          "publicSectorCloudMandate": "national"
+        },
+        "assumptions": [
+          "Premissa sintética do mundo fictício; não é afirmação sobre o Brasil real."
+        ]
+      },
+      {
+        "id": "chip-supply-shock",
+        "hypothesis": "Restrição externa reduz em 40% o acesso a aceleradores importados por dois anos.",
+        "patch": {
+          "IND-FOREIGN-COMPUTE-SHARE": 0.85,
+          "acceleratorSupplyShock": -0.4
+        },
+        "assumptions": [
+          "Premissa sintética do mundo fictício; não é afirmação sobre o Brasil real."
+        ]
+      },
+      {
+        "id": "hybrid-with-localization",
+        "hypothesis": "Modelo híbrido: provedores estrangeiros permitidos com localização de dados e auditoria.",
+        "patch": {
+          "dataLocalization": true,
+          "foreignProvidersAllowed": true
+        },
+        "assumptions": [
+          "Premissa sintética do mundo fictício; não é afirmação sobre o Brasil real."
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,272 @@
+- generic [ref=f2e2]:
+  - complementary "Navegação principal" [ref=f2e3]:
+    - link "HRAI-GO, início" [ref=f2e4] [cursor=pointer]:
+      - /url: "#top"
+      - generic [ref=f2e8]:
+        - generic [ref=f2e9]: HRAI-GO
+        - generic [ref=f2e10]: Inteligência regulatória
+    - paragraph [ref=f2e11]: Plataforma
+    - navigation [ref=f2e12]:
+      - link "Visão geral" [ref=f2e13] [cursor=pointer]:
+        - /url: "#overview"
+      - link "NORM · Comparar" [ref=f2e17] [cursor=pointer]:
+        - /url: "#comparison"
+      - link "Linha do tempo" [ref=f2e21] [cursor=pointer]:
+        - /url: "#timeline"
+      - link "Análise" [ref=f2e25] [cursor=pointer]:
+        - /url: "#metrics"
+      - link "Revisão humana" [ref=f2e29] [cursor=pointer]:
+        - /url: "#review"
+    - generic [ref=f2e33]:
+      - text: Retrato jurídico
+      - strong [ref=f2e34]: legal-snapshot-br-2026-11-11
+      - text: "Referência: 11/11/2026"
+  - generic [ref=f2e35]:
+    - banner [ref=f2e36]:
+      - generic [ref=f2e37]:
+        - generic [ref=f2e38]: HRAI-GO
+        - generic [aria-hidden] [ref=f2e39]: /
+        - generic [ref=f2e40]: Biblioteca comparativa
+      - button "Ativar tema escuro" [ref=f2e42] [cursor=pointer]
+    - region "Data de referência" [ref=f2e45]:
+      - generic [ref=f2e49]:
+        - text: Retrato jurídico
+        - strong [ref=f2e50]: BR · 11/11/2026
+      - generic [ref=f2e51]:
+        - generic [ref=f2e52]:
+          - text: "validTime:"
+          - code [ref=f2e53]: 2026-11-11
+        - generic [ref=f2e54]:
+          - text: "recordTime:"
+          - code [ref=f2e55]: 2026-11-11
+        - generic [ref=f2e56]:
+          - text: "Snapshot:"
+          - code [ref=f2e57]: BR-2026-11-11
+    - main [ref=f2e58]:
+      - generic [ref=f2e60]:
+        - generic [ref=f2e61]:
+          - paragraph [ref=f2e62]: NORM · Biblioteca comparativa
+          - heading "Comparação regulatória por função, efeito e tempo jurídico" [level=1] [ref=f2e63]
+          - paragraph [ref=f2e64]: Uma leitura comparável de instrumentos do Brasil, da União Europeia e do Reino Unido. Propostas, normas vigentes e interpretações permanecem identificadas como objetos distintos.
+        - region "Unidades de comparação funcional" [ref=f2e65]:
+          - generic [ref=f2e67]:
+            - heading "Unidades de comparação funcional" [level=2] [ref=f2e68]
+            - paragraph [ref=f2e69]: As afirmações interpretativas apontam para a fonte usada. Projetos de lei aparecem separados das obrigações vigentes.
+          - generic [ref=f2e70]:
+            - generic [ref=f2e71]: Unidade de comparação
+            - combobox "Unidade de comparação" [ref=f2e72]:
+              - option "Recrutamento e alto risco" [selected]
+              - option "Modelos de propósito geral"
+              - option "Sandboxes e MPMEs"
+              - option "Supervisão institucional"
+              - option "Todas as unidades"
+          - generic [ref=f2e73]:
+            - article [ref=f2e74]:
+              - generic [ref=f2e75]:
+                - generic [ref=f2e76]:
+                  - generic [ref=f2e77]: FRU-001-HR-RECRUIT
+                  - heading "Governança de sistemas de IA em recrutamento" [level=3] [ref=f2e78]
+                - generic [ref=f2e79]:
+                  - generic [ref=f2e80]: Semelhança funcional
+                  - strong [ref=f2e81]: 88%
+                  - generic [ref=f2e82]: Dados demonstrativos
+                  - generic [ref=f2e85]: "Planejado: CosineSim · base a conectar"
+                  - link "Ver método e base" [ref=f2e86] [cursor=pointer]:
+                    - /url: "#src-corpus"
+              - generic [ref=f2e89]:
+                - region "Brasil, recrutamento" [ref=f2e90]:
+                  - heading "Brasil (BR)" [level=4] [ref=f2e91]
+                  - generic [ref=f2e92]: Proposta normativa
+                  - link "PL 2.338/2023" [ref=f2e96] [cursor=pointer]:
+                    - /url: "#src-pl"
+                  - paragraph [ref=f2e99]: O PL 2.338/2023 propõe classificar aplicações de alto risco e prever avaliação de impacto e medidas de governança.
+                  - generic [ref=f2e100]: Interpretação jurídica
+                  - link "LGPD · art. 20" [ref=f2e104] [cursor=pointer]:
+                    - /url: "#src-lgpd"
+                  - paragraph [ref=f2e107]: A LGPD, art. 20, trata da revisão de decisões tomadas unicamente com base em tratamento automatizado.
+                - region "União Europeia, recrutamento" [ref=f2e108]:
+                  - heading "União Europeia (EU)" [level=4] [ref=f2e109]
+                  - generic [ref=f2e110]: Interpretação jurídica
+                  - link "AI Act · Anexo III" [ref=f2e114] [cursor=pointer]:
+                    - /url: "#src-eu-ai-act"
+                  - paragraph [ref=f2e117]: O AI Act inclui determinados sistemas usados em emprego e recrutamento entre os sistemas de alto risco e prevê deveres relacionados a risco, dados e supervisão humana.
+                - region "Reino Unido, recrutamento" [ref=f2e118]:
+                  - heading "Reino Unido (UK)" [level=4] [ref=f2e119]
+                  - generic [ref=f2e120]: Interpretação jurídica
+                  - link "Equality Act · orientação ICO" [ref=f2e124] [cursor=pointer]:
+                    - /url: "#src-uk-equality"
+                  - paragraph [ref=f2e127]: A aplicação do Equality Act e as orientações da ICO compõem referências para avaliar discriminação e perfilamento em processos de seleção.
+            - paragraph [ref=f2e128]: Exibindo Recrutamento e alto risco.
+        - region "Panorama por jurisdição" [ref=f2e129]:
+          - generic [ref=f2e130]:
+            - generic [ref=f2e131]:
+              - heading "Panorama por jurisdição" [level=2] [ref=f2e132]
+              - paragraph [ref=f2e133]: O estado normativo e a vinculação são apresentados com rótulo, ícone e padrão de borda.
+            - generic [ref=f2e134]: Snapshot BR-2026-11-11
+          - generic [ref=f2e135]:
+            - article [ref=f2e136]:
+              - generic [ref=f2e138]:
+                - generic [aria-hidden] [ref=f2e139]: BR
+                - generic [ref=f2e140]:
+                  - heading "Brasil" [level=3] [ref=f2e141]
+                  - paragraph [ref=f2e142]: República Federativa do Brasil
+              - generic [ref=f2e143]: Interpretação jurídica
+              - paragraph [ref=f2e146]: "Regime híbrido: proposta geral de governança de IA em tramitação e diplomas vigentes aplicáveis."
+              - generic [ref=f2e147]:
+                - generic [ref=f2e148]: PL 2.338/2023 · em tramitação
+                - generic [ref=f2e151]: LGPD · em vigor
+                - generic [ref=f2e154]: Vinculante na data · art. 20
+              - link "Fontes e proveniência" [ref=f2e157] [cursor=pointer]:
+                - /url: "#src-lgpd"
+            - article [ref=f2e160]:
+              - generic [ref=f2e162]:
+                - generic [aria-hidden] [ref=f2e163]: EU
+                - generic [ref=f2e164]:
+                  - heading "União Europeia" [level=3] [ref=f2e165]
+                  - paragraph [ref=f2e166]: Espaço jurídico comunitário
+              - generic [ref=f2e167]: Interpretação jurídica
+              - paragraph [ref=f2e170]: Regulamento horizontal com aplicação escalonada por grupo de obrigações e marcos temporais.
+              - generic [ref=f2e171]:
+                - generic [ref=f2e172]: EU AI Act · em vigor
+                - generic [ref=f2e175]: Em vigor · aplicação diferida
+                - generic [ref=f2e178]: Vinculante conforme o marco aplicável
+              - link "Fontes e proveniência" [ref=f2e181] [cursor=pointer]:
+                - /url: "#src-eu-ai-act"
+            - article [ref=f2e184]:
+              - generic [ref=f2e186]:
+                - generic [aria-hidden] [ref=f2e187]: UK
+                - generic [ref=f2e188]:
+                  - heading "Reino Unido" [level=3] [ref=f2e189]
+                  - paragraph [ref=f2e190]: Jurisdição britânica
+              - generic [ref=f2e191]: Interpretação jurídica
+              - paragraph [ref=f2e194]: Abordagem distribuída por reguladores setoriais, com orientações e instrumentos de natureza distinta.
+              - generic [ref=f2e195]:
+                - generic [ref=f2e196]: Orientações setoriais
+                - generic [ref=f2e199]: Orientação · não vinculante
+              - link "Fontes e proveniência" [ref=f2e202] [cursor=pointer]:
+                - /url: "#src-uk"
+        - region "Marcos normativos e aplicação" [ref=f2e205]:
+          - generic [ref=f2e207]:
+            - heading "Marcos normativos e aplicação" [level=2] [ref=f2e208]
+            - paragraph [ref=f2e209]: Vigência e aplicabilidade são marcos distintos; cada etapa informa seu estado em texto.
+          - generic [ref=f2e210]:
+            - generic [ref=f2e211]:
+              - generic [ref=f2e212]: Brasil · PL 2.338/2023
+              - generic [ref=f2e213]:
+                - generic [ref=f2e214]: Em tramitação · proposta não vinculante
+                - generic [ref=f2e217]: LGPD em vigor · aplicação conforme a lei
+            - generic [ref=f2e220]:
+              - generic [ref=f2e221]: União Europeia · AI Act
+              - generic [ref=f2e222]:
+                - generic [ref=f2e223]: Em vigor desde 2024
+                - generic [ref=f2e226]: Aplicação por etapas · 2025–2027
+            - generic [ref=f2e229]:
+              - generic [ref=f2e230]: Reino Unido
+              - generic [ref=f2e231]: Orientação setorial · atualização contínua
+        - region "Método, evidência e confiança" [ref=f2e235]:
+          - generic [ref=f2e237]:
+            - heading "Método, evidência e confiança" [level=2] [ref=f2e238]
+            - paragraph [ref=f2e239]: Os valores desta captura são demonstrativos e não vêm de um cálculo conectado; similaridade não mede qualidade regulatória.
+          - generic [ref=f2e240]:
+            - article [ref=f2e241]:
+              - heading "Distância vetorial normativa" [level=3] [ref=f2e242]
+              - generic [ref=f2e245]: Dados demonstrativos
+              - text: "Planejado: CosineSim · base a conectar"
+              - link "Ver método e base" [ref=f2e248] [cursor=pointer]:
+                - /url: "#src-corpus"
+              - paragraph [ref=f2e251]: A visualização prevê comparar matrizes de requisitos por similaridade de cosseno.
+              - generic [ref=f2e252]:
+                - generic [ref=f2e253]: Brasil ↔ União Europeia
+                - strong [ref=f2e254]: 0,84
+              - generic [ref=f2e255]:
+                - generic [ref=f2e256]: Brasil ↔ Reino Unido
+                - strong [ref=f2e257]: 0,59
+              - generic [ref=f2e258]:
+                - generic [ref=f2e259]: União Europeia ↔ Reino Unido
+                - strong [ref=f2e260]: 0,47
+              - paragraph [ref=f2e261]: Escala e pesos dependem do corpus; o valor não decide qual política é melhor.
+            - article [ref=f2e262]:
+              - heading "Taxonomia SKOS" [level=3] [ref=f2e263]
+              - generic [ref=f2e266]: Interpretação
+              - link "Base a conectar" [ref=f2e269] [cursor=pointer]:
+                - /url: "#src-corpus"
+              - paragraph [ref=f2e272]: Predicados de alinhamento usados para indexar relações entre requisitos e instrumentos.
+              - generic [ref=f2e273]:
+                - generic [ref=f2e274]: exactMatch
+                - strong [ref=f2e275]: Direito à explicação
+              - generic [ref=f2e276]:
+                - generic [ref=f2e277]: closeMatch
+                - strong [ref=f2e278]: AIA ↔ FRIA
+              - generic [ref=f2e279]:
+                - generic [ref=f2e280]: broadMatch
+                - strong [ref=f2e281]: Função regulatória
+              - generic [ref=f2e282]: "Confiança da interpretação: não informada"
+            - article [ref=f2e284]:
+              - heading "Registro de revisão" [level=3] [ref=f2e285]
+              - paragraph [ref=f2e288]: Não há revisor humano ou data de revisão registrados neste recorte.
+              - generic [ref=f2e289]:
+                - generic [ref=f2e290]: Unidades no recorte
+                - strong [ref=f2e291]: "4"
+              - generic [ref=f2e292]:
+                - generic [ref=f2e293]: Proveniência
+                - strong [ref=f2e294]: Fontes listadas
+              - generic [ref=f2e295]:
+                - generic [ref=f2e296]: Revisão humana
+                - strong [ref=f2e297]: Não registrada
+        - region "Revisão humana e auditoria" [ref=f2e298]:
+          - generic [ref=f2e300]:
+            - heading "Revisão humana e auditoria" [level=2] [ref=f2e301]
+            - paragraph [ref=f2e302]: A autoria e a revisão são registradas como metadados do material exibido.
+          - article [ref=f2e303]:
+            - generic [ref=f2e304]:
+              - heading "Revisão humana ainda não registrada" [level=3] [ref=f2e305]
+              - paragraph [ref=f2e306]: O protótipo não atribui as interpretações a uma pessoa revisora. Registre identidade, autoridade e data quando a revisão ocorrer.
+            - generic [ref=f2e307]: Aguardando revisão humana
+        - region "Fontes e proveniência" [ref=f2e311]:
+          - generic [ref=f2e313]:
+            - heading "Fontes e proveniência" [level=2] [ref=f2e314]
+            - paragraph [ref=f2e315]: Os chips em cada afirmação levam ao registro da referência documental usada nesta tela.
+          - generic [ref=f2e316]:
+            - list [ref=f2e317]:
+              - listitem [ref=f2e318]:
+                - strong [ref=f2e319]: Base comparativa · pendente de conexão
+                - text: Os percentuais e distâncias desta captura são demonstrativos e estão fixos no HTML. O protótipo não consulta uma base nem executa CosineSim. Conecte o corpus, documente os pesos e vincule cada resultado aos registros antes de apresentar evidência empírica.
+              - listitem [ref=f2e320]:
+                - strong [ref=f2e321]: PL 2.338/2023 · substitutivo
+                - text: Proposta legislativa citada no recorte brasileiro. Estado apresentado como “em tramitação”; não vinculante na data de referência.
+                - link "Abrir registro oficial do Senado" [ref=f2e322] [cursor=pointer]:
+                  - /url: https://www25.senado.leg.br/web/atividade/materias/-/materia/157233
+                - text: .
+              - listitem [ref=f2e323]:
+                - strong [ref=f2e324]: Lei nº 13.709/2018 · LGPD, art. 20
+                - text: Referência normativa brasileira sobre revisão de decisões tomadas unicamente com base em tratamento automatizado.
+                - link "Abrir texto no Planalto" [ref=f2e325] [cursor=pointer]:
+                  - /url: https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm
+                - text: .
+              - listitem [ref=f2e326]:
+                - strong [ref=f2e327]: Regulamento (UE) 2024/1689 · AI Act
+                - text: Referência para classificação de risco, modelos de propósito geral, sandboxes e autoridades competentes.
+                - link "Abrir texto oficial no EUR-Lex" [ref=f2e328] [cursor=pointer]:
+                  - /url: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
+                - text: .
+              - listitem [ref=f2e329]:
+                - strong [ref=f2e330]: Política e orientações setoriais do Reino Unido
+                - text: Referências a documentos de política e materiais de reguladores setoriais usados no recorte comparativo.
+                - link "White Paper · GOV.UK" [ref=f2e331] [cursor=pointer]:
+                  - /url: https://www.gov.uk/government/publications/ai-regulation-a-pro-innovation-approach/white-paper
+                - text: ·
+                - link "ICO · Recruitment Rewired" [ref=f2e332] [cursor=pointer]:
+                  - /url: https://ico.org.uk/about-the-ico/what-we-do/recruitment-rewired/
+                - text: .
+              - listitem [ref=f2e333]:
+                - strong [ref=f2e334]: Equality Act 2010 · orientações da ICO
+                - text: Referências para a leitura de discriminação e perfilamento no contexto de recrutamento.
+                - link "Equality Act 2010" [ref=f2e335] [cursor=pointer]:
+                  - /url: https://www.legislation.gov.uk/ukpga/2010/15/contents
+                - text: .
+            - generic [ref=f2e339]:
+              - strong [ref=f2e340]: Escopo do protótipo
+              - text: Esta tela organiza referências e interpretações para avaliação humana. Os valores desta captura são demonstrativos, não foram calculados a partir de um corpus e não constituem evidência jurídica ou estatística.
+        - generic [ref=f2e341]:
+          - generic [ref=f2e342]: HRAI-GO · Plataforma Aberta de Inteligência Regulatória e Governança de IA
+          - generic [ref=f2e343]: "Tokens e semântica: design-system/ · referência do protótipo: 11/11/2026"

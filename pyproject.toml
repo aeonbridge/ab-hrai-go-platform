@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scse"
+version = "0.1.0"
+description = "Shadow Council Simulation Environment (HRAI-GO): deliberative multi-agent, multi-provider runtime"
+requires-python = ">=3.11"
+dependencies = ["jsonschema>=4.20", "python-dotenv>=1.0"]
+
+[project.optional-dependencies]
+anthropic = ["anthropic>=2.8"]
+openai = ["openai>=3.0"]
+gemini = ["google-genai>=3.0"]
+all = ["anthropic>=2.8", "openai>=3.0", "google-genai>=3.0"]
+dev = ["pytest>=8"]
+
+[project.scripts]
+scse = "scse.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/scse"]
+pythonpath = ["src"]

@@ -1,0 +1,1120 @@
+# =============================================================================
+# HRAI-GO Regulatory General Ontology — ABox (instâncias)
+# Fonte: Plano Brasileiro de Inteligência Artificial (PBIA) 2024-2028
+#        MCTI / CGEE, Brasília, 2025, 104 p., ISBN 978-65-5775-097-1
+#        Arquivo: docs/ai-regulations/br/000149 - CGEE Plano Brasileiro de
+#                 Inteligência Artificial (VN) 8 Defeso Eleitoral.pdf
+#        SHA-256: b654240701e7be87578e6dc505244366d35b8cadeeb01727ae12b091ef3e46f5
+#
+# Decisões de modelagem (separações epistemológicas da TBox):
+#  - O PBIA é um PLANO de política pública, não uma norma jurídica. Por isso é
+#    instanciado como hrai:PolicyInstrument, e NÃO como hrai:LegalInstrument.
+#    Nenhum hrai:NormativeRequirement é derivado dele.
+#  - Normas citadas pelo PBIA (LAI, LGPD, decretos, portaria, AI Act) são
+#    registradas apenas como referências (hrai:LegalInstrument); não são
+#    extraídos dispositivos, versões vigentes nem requisitos a partir delas.
+#  - O PL 2338/2023 é hrai:LegislativeProposal (em tramitação segundo a fonte).
+#    Seu estado ProposedLegalStatus reflete a data da fonte, não o dia de hoje.
+#  - Todo o conteúdo é extração candidata (hrai:CandidateAssertion) sem
+#    hrai:ReviewDecision: NÃO está aprovado para publicação em KnowledgeGraphRelease.
+#  - Valores monetários usam schema:MonetaryAmount (vocabulário existente),
+#    evitando criar propriedade nova na TBox.
+#  - Indicadores reproduzem números citados pela fonte (que cita terceiros);
+#    a fonte primária de cada número está em hrai:hasIndicatorMethod.
+# =============================================================================
+
+@prefix pbia:    <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#> .
+@prefix hrai:    <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix schema:  <https://schema.org/> .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia>
+    a owl:Ontology ;
+    owl:imports <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> ;
+    owl:versionInfo "1.0.0" ;
+    dcterms:title "HRAI-GO ABox — Plano Brasileiro de Inteligência Artificial (PBIA) 2024-2028"@pt ;
+    dcterms:created "2026-11-11"^^xsd:date ;
+    prov:wasDerivedFrom pbia:Snapshot_PBIA_VN8 ;
+    rdfs:comment "Instâncias candidatas extraídas do PBIA. Não certificam aplicabilidade jurídica, vigência ou conformidade. Pendentes de revisão humana."@pt .
+
+# -----------------------------------------------------------------------------
+# 1. Proveniência: fonte, snapshot, agente de extração e lote
+# -----------------------------------------------------------------------------
+
+pbia:Source_PBIA
+    a hrai:LegalSource ;
+    rdfs:label "Publicação MCTI/CGEE — Plano Brasileiro de Inteligência Artificial"@pt ;
+    hrai:sourceURI "urn:isbn:978-65-5775-097-1"^^xsd:anyURI ;
+    rdfs:comment "Fonte documental de política pública (não é diário oficial). Os Anexos 1 e 2 são atualizados periodicamente pelo MCTI, segundo a nota 1 da Introdução."@pt .
+
+pbia:Snapshot_PBIA_VN8
+    a hrai:SourceSnapshot ;
+    rdfs:label "PBIA — versão VN 8 (edição para o período de defeso eleitoral), PDF 108 páginas"@pt ;
+    hrai:snapshotOfSource pbia:Source_PBIA ;
+    hrai:snapshotURI "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/docs/ai-regulations/br/000149%20-%20CGEE%20Plano%20Brasileiro%20de%20Intelig%C3%AAncia%20Artificial%20(VN)%208%20Defeso%20Eleitoral.pdf"^^xsd:anyURI ;
+    hrai:snapshotSHA256 "b654240701e7be87578e6dc505244366d35b8cadeeb01727ae12b091ef3e46f5" ;
+    hrai:sourcePublishedAt "2026-07-17T10:42:03-03:00"^^xsd:dateTime ;
+    hrai:sourceCapturedAt "2026-11-11T23:02:00-03:00"^^xsd:dateTime ;
+    rdfs:comment "sourcePublishedAt corresponde ao CreationDate do PDF (Adobe InDesign). A ficha catalográfica do documento indica ano de publicação 2025."@pt .
+
+pbia:Agent_DocumentExtraction
+    a hrai:MonitoringAgent ;
+    rdfs:label "Agente de extração documental HRAI-GO (Claude Code, extração assistida por LLM)"@pt .
+
+pbia:Batch_PBIA_20261111
+    a hrai:ExtractionBatch ;
+    rdfs:label "Lote de extração PBIA — 2026-11-11"@pt ;
+    hrai:extractionContainsCandidate
+        pbia:Candidate_PolicyInstruments ,
+        pbia:Candidate_NationalContext ,
+        pbia:Candidate_TensionsGapsClaims ,
+        pbia:Candidate_LegalReferences ,
+        pbia:Candidate_Deliberation ,
+        pbia:Candidate_AIApplications .
+
+pbia:Candidate_PolicyInstruments
+    a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: PBIA, eixos, programas, ações e orçamentos (Seções 3 e Anexo 2)"@pt ;
+    hrai:candidateFromSnapshot pbia:Snapshot_PBIA_VN8 ;
+    hrai:candidateProducedBy pbia:Agent_DocumentExtraction .
+
+pbia:Candidate_NationalContext
+    a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: contexto nacional e indicadores (Seções 1 e 3.4 — 'Onde estamos?')"@pt ;
+    hrai:candidateFromSnapshot pbia:Snapshot_PBIA_VN8 ;
+    hrai:candidateProducedBy pbia:Agent_DocumentExtraction .
+
+pbia:Candidate_TensionsGapsClaims
+    a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: tensões, lacunas e afirmações de política (Seções 1, 2 e 3.4.5)"@pt ;
+    hrai:candidateFromSnapshot pbia:Snapshot_PBIA_VN8 ;
+    hrai:candidateProducedBy pbia:Agent_DocumentExtraction .
+
+pbia:Candidate_LegalReferences
+    a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: normas e proposta legislativa citadas (Seção 3.4.5, nota 2 e nota 10)"@pt ;
+    hrai:candidateFromSnapshot pbia:Snapshot_PBIA_VN8 ;
+    hrai:candidateProducedBy pbia:Agent_DocumentExtraction .
+
+pbia:Candidate_Deliberation
+    a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: processo participativo de elaboração do PBIA (Introdução)"@pt ;
+    hrai:candidateFromSnapshot pbia:Snapshot_PBIA_VN8 ;
+    hrai:candidateProducedBy pbia:Agent_DocumentExtraction .
+
+pbia:Candidate_AIApplications
+    a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: iniciativas de IA de empresas no Brasil (Tabela 1)"@pt ;
+    hrai:candidateFromSnapshot pbia:Snapshot_PBIA_VN8 ;
+    hrai:candidateProducedBy pbia:Agent_DocumentExtraction .
+
+pbia:Change_PBIA_VN8_Captured
+    a hrai:RegulatoryChangeEvent ;
+    rdfs:label "Captura da versão VN 8 do PBIA"@pt ;
+    hrai:changeObservedInSnapshot pbia:Snapshot_PBIA_VN8 ;
+    hrai:changeDetectedBy pbia:Agent_DocumentExtraction ;
+    hrai:changeDetectedAt "2026-11-11T23:02:00-03:00"^^xsd:dateTime ;
+    hrai:changeRecordedAt "2026-11-11T23:02:00-03:00"^^xsd:dateTime ;
+    hrai:changeDescription "Primeira ingestão do PBIA no grafo. Não há versão anterior registrada para comparação (diff)."@pt .
+
+# Evidências documentais (localizadores de página do PDF, numeração impressa)
+pbia:Evidence_PBIA_Sec1
+    a hrai:Evidence ;
+    rdfs:label "PBIA, Seção 1 — Contexto da IA no mundo e no Brasil (p. 15-24)"@pt ;
+    prov:wasDerivedFrom pbia:Snapshot_PBIA_VN8 .
+
+pbia:Evidence_PBIA_Sec2
+    a hrai:Evidence ;
+    rdfs:label "PBIA, Seção 2 — O que é uma IA para o Bem de Todos? (p. 25-27)"@pt ;
+    prov:wasDerivedFrom pbia:Snapshot_PBIA_VN8 .
+
+pbia:Evidence_PBIA_Sec3
+    a hrai:Evidence ;
+    rdfs:label "PBIA, Seção 3 — Plano de ação, eixos estruturantes (p. 29-44)"@pt ;
+    prov:wasDerivedFrom pbia:Snapshot_PBIA_VN8 .
+
+pbia:Evidence_PBIA_Sec3_4_5
+    a hrai:Evidence ;
+    rdfs:label "PBIA, Seção 3.4.5 — Eixo 5: Apoio ao processo regulatório e de governança (p. 42-44)"@pt ;
+    prov:wasDerivedFrom pbia:Snapshot_PBIA_VN8 .
+
+pbia:Evidence_PBIA_Annex2
+    a hrai:Evidence ;
+    rdfs:label "PBIA, Anexo 2 — Ações estruturantes (p. 67-91)"@pt ;
+    prov:wasDerivedFrom pbia:Snapshot_PBIA_VN8 .
+
+# -----------------------------------------------------------------------------
+# 2. Jurisdições e contexto nacional
+# -----------------------------------------------------------------------------
+
+pbia:Brazil
+    a hrai:Jurisdiction ;
+    rdfs:label "Brasil"@pt , "Brazil"@en ;
+    hrai:hasNationalContext pbia:BrazilAIContext_PBIA ;
+    hrai:hasRegulatoryModel pbia:BrazilAIRegulatoryModel_PBIA .
+
+pbia:EuropeanUnion
+    a hrai:Jurisdiction ;
+    rdfs:label "União Europeia"@pt , "European Union"@en ;
+    rdfs:comment "Registrada apenas porque o PBIA cita o AI Act como referência de governança (Seção 4, nota 9)."@pt .
+
+pbia:BrazilAIContext_PBIA
+    a hrai:NationalContext ;
+    rdfs:label "Contexto nacional de IA no Brasil segundo o PBIA (diagnósticos 'Onde estamos?')"@pt ;
+    hrai:contextOfJurisdiction pbia:Brazil ;
+    prov:wasDerivedFrom pbia:Snapshot_PBIA_VN8 ;
+    rdfs:comment "Vantagens: matriz elétrica limpa, SUS e bases de dados nacionais, população jovem com rápida adoção tecnológica, centros de pesquisa. Desafios: P&D insuficiente, infraestrutura computacional e de dados limitada, escassez de profissionais e fuga de cérebros, dependência externa de hardware, desigualdade educacional."@pt .
+
+# Dimensões de contexto
+pbia:Dim_ComputeInfrastructure a hrai:ContextDimension ; rdfs:label "Infraestrutura computacional"@pt .
+pbia:Dim_EnergySustainability  a hrai:ContextDimension ; rdfs:label "Energia e sustentabilidade"@pt .
+pbia:Dim_DataEcosystem         a hrai:ContextDimension ; rdfs:label "Ecossistema de dados"@pt .
+pbia:Dim_SkillsEducation       a hrai:ContextDimension ; rdfs:label "Formação, capacitação e educação"@pt .
+pbia:Dim_PublicSectorAdoption  a hrai:ContextDimension ; rdfs:label "Adoção de IA no setor público"@pt .
+pbia:Dim_BusinessAdoption      a hrai:ContextDimension ; rdfs:label "Adoção de IA e inovação empresarial"@pt .
+pbia:Dim_Productivity          a hrai:ContextDimension ; rdfs:label "Produtividade"@pt .
+
+# -----------------------------------------------------------------------------
+# 3. Indicadores de contexto (valores citados pelo PBIA)
+# -----------------------------------------------------------------------------
+
+pbia:Ind_RenewableShareElectricityMatrix2023
+    a hrai:ContextIndicator ;
+    rdfs:label "Participação de fontes renováveis na matriz elétrica brasileira (2023)"@pt ;
+    hrai:hasNumericValue "89.2"^^xsd:decimal ;
+    hrai:numericUnit "percent" ;
+    hrai:hasIndicatorMethod "EPE (2024), citado no PBIA, Eixo 1 'Onde estamos?', p. 34. Ano de referência: 2023."@pt ;
+    hrai:indicatorMeasuredFor pbia:BrazilAIContext_PBIA ;
+    hrai:indicatorMeasuresDimension pbia:Dim_EnergySustainability ;
+    hrai:indicatorSource pbia:Snapshot_PBIA_VN8 .
+
+pbia:Ind_RenewableShareEnergyMatrix_Axis4
+    a hrai:ContextIndicator ;
+    rdfs:label "Participação de fontes renováveis na 'matriz energética' citada no Eixo 4"@pt ;
+    hrai:hasNumericValue "83"^^xsd:decimal ;
+    hrai:numericUnit "percent" ;
+    hrai:hasIndicatorMethod "PBIA, Eixo 4 'Onde estamos?', p. 41; ano e fonte primária não informados."@pt ;
+    hrai:indicatorMeasuredFor pbia:BrazilAIContext_PBIA ;
+    hrai:indicatorMeasuresDimension pbia:Dim_EnergySustainability ;
+    hrai:indicatorSource pbia:Snapshot_PBIA_VN8 ;
+    rdfs:comment "Atenção à curadoria: valor diverge dos 89,2% (matriz elétrica, 2023) do Eixo 1. Pode ser outro ano ou outro recorte; requer verificação na fonte primária antes de uso analítico."@pt .
+
+pbia:Ind_DataCenterLoadProjection2037
+    a hrai:ContextIndicator ;
+    rdfs:label "Projeção de carga de novos data centers até 2037 (SP, RS e CE)"@pt ;
+    hrai:hasNumericValue "2.5"^^xsd:decimal ;
+    hrai:numericUnit "GW" ;
+    hrai:hasIndicatorMethod "MME (Brasil, 2024b), citado no PBIA, p. 34. Projeção: crescimento de 600% sobre a carga atual, considerando apenas novos projetos nos três principais polos."@pt ;
+    hrai:indicatorMeasuredFor pbia:BrazilAIContext_PBIA ;
+    hrai:indicatorMeasuresDimension pbia:Dim_EnergySustainability ;
+    hrai:indicatorSource pbia:Snapshot_PBIA_VN8 .
+
+pbia:Ind_PegasoSupercomputerPerformance
+    a hrai:ContextIndicator ;
+    rdfs:label "Desempenho do supercomputador Pégaso (Petrobras)"@pt ;
+    hrai:hasNumericValue "42"^^xsd:decimal ;
+    hrai:numericUnit "PFlop/s" ;
+    hrai:hasIndicatorMethod "TOP500 (2024), citado no PBIA, p. 34: mais potente da América Latina, 56º no ranking mundial."@pt ;
+    hrai:indicatorMeasuredFor pbia:BrazilAIContext_PBIA ;
+    hrai:indicatorMeasuresDimension pbia:Dim_ComputeInfrastructure ;
+    hrai:indicatorSource pbia:Snapshot_PBIA_VN8 .
+
+pbia:Ind_SantosDumontSupercomputerPerformance
+    a hrai:ContextIndicator ;
+    rdfs:label "Capacidade combinada do supercomputador Santos Dumont (LNCC)"@pt ;
+    hrai:hasNumericValue "5.1"^^xsd:decimal ;
+    hrai:numericUnit "PFlop/s" ;
+    hrai:hasIndicatorMethod "TOP500 (2024), citado no PBIA, p. 34; soma das três arquiteturas."@pt ;
+    hrai:indicatorMeasuredFor pbia:BrazilAIContext_PBIA ;
+    hrai:indicatorMeasuresDimension pbia:Dim_ComputeInfrastructure ;
+    hrai:indicatorSource pbia:Snapshot_PBIA_VN8 .
+
+pbia:Ind_SinapadComputePower
+    a hrai:ContextIndicator ;
+    rdfs:label "Poder computacional total do Sinapad"@pt ;
+    hrai:hasNumericValue "6.2"^^xsd:decimal ;
+    hrai:numericUnit "PFlop/s" ;
+    hrai:hasIndicatorMethod "PBIA, Eixo 1, p. 34 (valor aproximado)."@pt ;
+    hrai:indicatorMeasuredFor pbia:BrazilAIContext_PBIA ;
+    hrai:indicatorMeasuresDimension pbia:Dim_ComputeInfrastructure ;
+    hrai:indicatorSource pbia:Snapshot_PBIA_VN8 .
+
+pbia:Ind_DataCentersInOperation
+    a hrai:ContextIndicator ;
+    rdfs:label "Data centers em operação no Brasil (13ª posição mundial)"@pt ;
+    hrai:hasNumericValue "168"^^xsd:decimal ;
+    hrai:numericUnit "data centers" ;
+    hrai:hasIndicatorMethod "ABES (2024) e Cetic.br (2023c), citados no PBIA, Eixo 4, p. 41. Comparação: EUA com mais de 5.000."@pt ;
+    hrai:indicatorMeasuredFor pbia:BrazilAIContext_PBIA ;
+    hrai:indicatorMeasuresDimension pbia:Dim_ComputeInfrastructure ;
+    hrai:indicatorSource pbia:Snapshot_PBIA_VN8 .
+
+pbia:Ind_OpenDataBases
+    a hrai:ContextIndicator ;
+    rdfs:label "Bases abertas no Portal Brasileiro de Dados Abertos"@pt ;
+    hrai:hasNumericValue "13000"^^xsd:decimal ;
+    hrai:numericUnit "datasets (lower bound)" ;
+    hrai:hasIndicatorMethod "Brasil (2025), citado no PBIA, p. 34: mais de 13 mil bases de 264 organizações."@pt ;
+    hrai:indicatorMeasuredFor pbia:BrazilAIContext_PBIA ;
+    hrai:indicatorMeasuresDimension pbia:Dim_DataEcosystem ;
+    hrai:indicatorSource pbia:Snapshot_PBIA_VN8 .
+
+pbia:Ind_STEMGraduatesShare
+    a hrai:ContextIndicator ;
+    rdfs:label "Participação de graduados em STEM no Brasil"@pt ;
+    hrai:hasNumericValue "15"^^xsd:decimal ;
+    hrai:numericUnit "percent" ;
+    hrai:hasIndicatorMethod "PBIA, Eixo 2, p. 37. Comparação: Chile 25%, México 26%."@pt ;
+    hrai:indicatorMeasuredFor pbia:BrazilAIContext_PBIA ;
+    hrai:indicatorMeasuresDimension pbia:Dim_SkillsEducation ;
+    hrai:indicatorSource pbia:Snapshot_PBIA_VN8 .
+
+pbia:Ind_ICTTalentDeficit2021_2025
+    a hrai:ContextIndicator ;
+    rdfs:label "Déficit estimado de profissionais de TIC (2021-2025)"@pt ;
+    hrai:hasNumericValue "530000"^^xsd:decimal ;
+    hrai:numericUnit "professionals" ;
+    hrai:hasIndicatorMethod "BRASSCOM (2021), citado no PBIA, p. 37; demanda projetada de 800 mil novos talentos."@pt ;
+    hrai:indicatorMeasuredFor pbia:BrazilAIContext_PBIA ;
+    hrai:indicatorMeasuresDimension pbia:Dim_SkillsEducation ;
+    hrai:indicatorSource pbia:Snapshot_PBIA_VN8 .
+
+pbia:Ind_PISAMathBelowBasic
+    a hrai:ContextIndicator ;
+    rdfs:label "Estudantes sem conhecimentos básicos de matemática (Pisa)"@pt ;
+    hrai:hasNumericValue "68"^^xsd:decimal ;
+    hrai:numericUnit "percent" ;
+    hrai:hasIndicatorMethod "ABC (2023), citado no PBIA, p. 37."@pt ;
+    hrai:indicatorMeasuredFor pbia:BrazilAIContext_PBIA ;
+    hrai:indicatorMeasuresDimension pbia:Dim_SkillsEducation ;
+    hrai:indicatorSource pbia:Snapshot_PBIA_VN8 .
+
+pbia:Ind_PublicBodiesUsingAI2023
+    a hrai:ContextIndicator ;
+    rdfs:label "Órgãos públicos federais e estaduais que usaram ao menos uma tecnologia de IA"@pt ;
+    hrai:hasNumericValue "30"^^xsd:decimal ;
+    hrai:numericUnit "percent" ;
+    hrai:hasIndicatorMethod "TIC Governo Eletrônico 2023 (Cetic.br, 2023b), citado no PBIA, p. 23 e 38. Concentração nos poderes Legislativo, Judiciário e no Ministério Público."@pt ;
+    hrai:indicatorMeasuredFor pbia:BrazilAIContext_PBIA ;
+    hrai:indicatorMeasuresDimension pbia:Dim_PublicSectorAdoption ;
+    hrai:indicatorSource pbia:Snapshot_PBIA_VN8 .
+
+pbia:Ind_CompaniesUsingAI
+    a hrai:ContextIndicator ;
+    rdfs:label "Empresas brasileiras que utilizam tecnologias de IA"@pt ;
+    hrai:hasNumericValue "13"^^xsd:decimal ;
+    hrai:numericUnit "percent" ;
+    hrai:hasIndicatorMethod "ABES (2024) e Cetic.br (2023c), citados no PBIA, p. 41."@pt ;
+    hrai:indicatorMeasuredFor pbia:BrazilAIContext_PBIA ;
+    hrai:indicatorMeasuresDimension pbia:Dim_BusinessAdoption ;
+    hrai:indicatorSource pbia:Snapshot_PBIA_VN8 .
+
+pbia:Ind_StartupFunding2019_2023
+    a hrai:ContextIndicator ;
+    rdfs:label "Capital levantado por startups brasileiras (2019-2023)"@pt ;
+    hrai:hasNumericValue "17.6"^^xsd:decimal ;
+    hrai:numericUnit "billion USD" ;
+    hrai:hasIndicatorMethod "Google for Startups (2024), citado no PBIA, p. 41. O Brasil abriga 30% das startups Deep Tech da América Latina e Caribe; IA representa 16% delas."@pt ;
+    hrai:indicatorMeasuredFor pbia:BrazilAIContext_PBIA ;
+    hrai:indicatorMeasuresDimension pbia:Dim_BusinessAdoption ;
+    hrai:indicatorSource pbia:Snapshot_PBIA_VN8 .
+
+pbia:Ind_IndustryAIDisruptionPerception2021
+    a hrai:ContextIndicator ;
+    rdfs:label "Empresas industriais que percebem a IA como disruptiva em seus setores"@pt ;
+    hrai:hasNumericValue "76"^^xsd:decimal ;
+    hrai:numericUnit "percent" ;
+    hrai:hasIndicatorMethod "Embrapii (2021), amostra de 164 empresas industriais, citado no PBIA, p. 23. 95% teriam interesse em P&D em IA com centros de pesquisa."@pt ;
+    hrai:indicatorMeasuredFor pbia:BrazilAIContext_PBIA ;
+    hrai:indicatorMeasuresDimension pbia:Dim_BusinessAdoption ;
+    hrai:indicatorSource pbia:Snapshot_PBIA_VN8 .
+
+pbia:Ind_ManufacturingProductivityChange2001_2021
+    a hrai:ContextIndicator ;
+    rdfs:label "Variação da produtividade do trabalho na indústria de transformação (2001-2021)"@pt ;
+    hrai:hasNumericValue "-24"^^xsd:decimal ;
+    hrai:numericUnit "percent" ;
+    hrai:hasIndicatorMethod "CNI (2022), citado no PBIA, p. 23."@pt ;
+    hrai:indicatorMeasuredFor pbia:BrazilAIContext_PBIA ;
+    hrai:indicatorMeasuresDimension pbia:Dim_Productivity ;
+    hrai:indicatorSource pbia:Snapshot_PBIA_VN8 .
+
+# -----------------------------------------------------------------------------
+# 4. Modelo regulatório, objetivos e instrumentos de política
+# -----------------------------------------------------------------------------
+
+pbia:BrazilAIRegulatoryModel_PBIA
+    a hrai:RegulatoryModel ;
+    rdfs:label "Modelo brasileiro de política e governança de IA descrito no PBIA ('IA para o Bem de Todos')"@pt ;
+    hrai:adoptedByJurisdiction pbia:Brazil ;
+    hrai:usesPolicyInstrument
+        pbia:PBIA_Plan ,
+        pbia:PBIA_ImmediateImpactActions ,
+        pbia:PBIA_Axis1_InfrastructureDevelopment ,
+        pbia:PBIA_Axis2_DiffusionTraining ,
+        pbia:PBIA_Axis3_PublicServices ,
+        pbia:PBIA_Axis4_BusinessInnovation ,
+        pbia:PBIA_Axis5_RegulatoryGovernanceSupport ,
+        pbia:Prog5A_RegulatoryFrameworkImprovement ,
+        pbia:Prog5B_AIGovernanceSupport ,
+        pbia:Action50_ResponsibleAIGuides ,
+        pbia:Action51_AlgorithmicTransparencyCentre ,
+        pbia:Action52_BrazilianAIObservatory ,
+        pbia:Action53_AIGovernanceSupportNetwork ,
+        pbia:Action54_InternationalDebateNetwork ,
+        pbia:Action01_AISupercomputer ,
+        pbia:Action09_PortugueseLLM ,
+        pbia:Action25_AIUseMonitoringGovernment ,
+        pbia:Action27_SovereignCloud ,
+        pbia:FederalGovernmentAICore ,
+        pbia:PBIA_GovernanceByCITDigital ;
+    hrai:pursuesObjective
+        pbia:Obj_CentralObjective ,
+        pbia:Obj_ImproveLivesProductiveCapacity ,
+        pbia:Obj_TechVanguardComputeInfrastructure ,
+        pbia:Obj_PortugueseLLMNationalData ,
+        pbia:Obj_GlobalLeadershipSovereignty ,
+        pbia:Obj_Pillar1_HumanCentred ,
+        pbia:Obj_Pillar2_SocialEnvironmentalChallenges ,
+        pbia:Obj_Pillar3_RightToDevelopmentSovereignty ,
+        pbia:Obj_Pillar4_TransparentAccountable ,
+        pbia:Obj_Pillar5_FairGlobalCooperation ,
+        pbia:Obj_Axis5_ThreeYear ,
+        pbia:Obj_Axis5_FiveYear ;
+    prov:wasDerivedFrom pbia:Snapshot_PBIA_VN8 ;
+    rdfs:comment "Modelo orientado a fomento e capacidades (98% do orçamento em ações estruturantes), com apoio ao processo regulatório em curso (PL 2338/2023) e instrumentos de soft law (guias, observatório) enquanto não há lei específica."@pt .
+
+# --- Objetivos -----------------------------------------------------------------
+
+pbia:Obj_CentralObjective
+    a hrai:PolicyObjective ;
+    rdfs:label "Objetivo central do PBIA"@pt ;
+    dcterms:description "Promover o desenvolvimento, a disponibilização e o uso da inteligência artificial no Brasil, orientada à solução dos grandes desafios nacionais, sociais, econômicos, ambientais e culturais, de forma a garantir a segurança e os direitos individuais e coletivos, a inclusão social, a defesa da democracia, a integridade da informação, a proteção do trabalho e dos trabalhadores, a soberania nacional e o desenvolvimento econômico sustentável da nação."@pt ;
+    prov:wasDerivedFrom pbia:Evidence_PBIA_Sec3 .
+
+pbia:Obj_ImproveLivesProductiveCapacity
+    a hrai:PolicyObjective ;
+    rdfs:label "Melhorar a vida dos brasileiros por inovações em IA voltadas à capacidade produtiva e ao bem-estar social"@pt .
+
+pbia:Obj_TechVanguardComputeInfrastructure
+    a hrai:PolicyObjective ;
+    rdfs:label "Posicionar o Brasil na vanguarda tecnológica com infraestrutura computacional para IA"@pt .
+
+pbia:Obj_PortugueseLLMNationalData
+    a hrai:PolicyObjective ;
+    rdfs:label "Desenvolver LLMs em português baseados em dados nacionais"@pt .
+
+pbia:Obj_GlobalLeadershipSovereignty
+    a hrai:PolicyObjective ;
+    rdfs:label "Fortalecer a liderança global do Brasil em IA com soberania e compartilhamento internacional de capacidades"@pt .
+
+pbia:Obj_Pillar1_HumanCentred
+    a hrai:PolicyObjective ;
+    rdfs:label "Pilar I — IA centrada no ser humano e acessível a todos, prevenindo desigualdade e vieses discriminatórios"@pt .
+
+pbia:Obj_Pillar2_SocialEnvironmentalChallenges
+    a hrai:PolicyObjective ;
+    rdfs:label "Pilar II — IA orientada à superação de desafios sociais, ambientais e econômicos e aos ODS"@pt .
+
+pbia:Obj_Pillar3_RightToDevelopmentSovereignty
+    a hrai:PolicyObjective ;
+    rdfs:label "Pilar III — IA fundamentada no direito ao desenvolvimento e na soberania nacional"@pt .
+
+pbia:Obj_Pillar4_TransparentAccountable
+    a hrai:PolicyObjective ;
+    rdfs:label "Pilar IV — IA transparente, rastreável e responsável (privacidade, soberania de dados, cibersegurança, consumidor, propriedade intelectual e direitos autorais)"@pt .
+
+pbia:Obj_Pillar5_FairGlobalCooperation
+    a hrai:PolicyObjective ;
+    rdfs:label "Pilar V — Cooperação global justa, integridade da informação e defesa da democracia"@pt .
+
+pbia:Obj_Axis5_ThreeYear
+    a hrai:PolicyObjective ;
+    rdfs:label "Eixo 5 — metas em três anos"@pt ;
+    dcterms:description "Aprovar e implementar marco regulatório nacional para IA; criar comitê nacional de ética em IA com participação multissetorial; estabelecer padrões nacionais para avaliação de risco e impacto de sistemas de IA em setores críticos."@pt ;
+    prov:wasDerivedFrom pbia:Evidence_PBIA_Sec3_4_5 .
+
+pbia:Obj_Axis5_FiveYear
+    a hrai:PolicyObjective ;
+    rdfs:label "Eixo 5 — metas em cinco anos"@pt ;
+    dcterms:description "Reconhecimento como líder regional em regulação e governança de IA; acordos de cooperação internacional em governança de IA com pelo menos 10 países; modelo brasileiro adotado ou adaptado por pelo menos 5 países em desenvolvimento."@pt ;
+    prov:wasDerivedFrom pbia:Evidence_PBIA_Sec3_4_5 .
+
+# --- Instrumentos: plano, eixos, programas e ações ------------------------------
+
+pbia:PBIA_Plan
+    a hrai:PolicyInstrument ;
+    rdfs:label "Plano Brasileiro de Inteligência Artificial (PBIA) 2024-2028 — 'IA para o Bem de Todos'"@pt ;
+    dcterms:identifier "ISBN 978-65-5775-097-1" ;
+    dcterms:issued "2025"^^xsd:gYear ;
+    dcterms:creator pbia:SH_MCTI , pbia:SH_CGEE ;
+    dcterms:hasPart
+        pbia:PBIA_ImmediateImpactActions ,
+        pbia:PBIA_Axis1_InfrastructureDevelopment ,
+        pbia:PBIA_Axis2_DiffusionTraining ,
+        pbia:PBIA_Axis3_PublicServices ,
+        pbia:PBIA_Axis4_BusinessInnovation ,
+        pbia:PBIA_Axis5_RegulatoryGovernanceSupport ;
+    schema:amount [ a schema:MonetaryAmount ; schema:value "23030000000"^^xsd:decimal ; schema:currency "BRL" ] ;
+    prov:wasDerivedFrom pbia:Snapshot_PBIA_VN8 ;
+    rdfs:comment "Plano de política pública demandado ao CCT em 2024-03-07, coordenado pelo MCTI com apoio do CGEE. Investimento previsto 2024-2028: R$ 23,03 bilhões (crédito, recursos públicos e contrapartida privada). Não é instrumento jurídico vinculante."@pt .
+
+pbia:PBIA_ImmediateImpactActions
+    a hrai:PolicyInstrument ;
+    rdfs:label "PBIA — Ações de impacto imediato (Anexo 1)"@pt ;
+    dcterms:isPartOf pbia:PBIA_Plan ;
+    schema:amount [ a schema:MonetaryAmount ; schema:value "435040000"^^xsd:decimal ; schema:currency "BRL" ] ;
+    rdfs:comment "1,9% do total. Nove áreas: saúde; agricultura e pecuária; meio ambiente, clima e sustentabilidade; indústria, comércio e serviços; educação; desenvolvimento social; gestão de serviços públicos; trabalho e emprego; defesa, segurança pública e cibernética. Resultados aferíveis em até 12 meses."@pt .
+
+pbia:PBIA_Axis1_InfrastructureDevelopment
+    a hrai:PolicyInstrument ;
+    rdfs:label "PBIA — Eixo 1: Infraestrutura e desenvolvimento de IA"@pt ;
+    dcterms:isPartOf pbia:PBIA_Plan ;
+    schema:amount [ a schema:MonetaryAmount ; schema:value "5790000000"^^xsd:decimal ; schema:currency "BRL" ] ;
+    rdfs:comment "25,2% do total. Programas: Infraestrutura para IA; Sustentabilidade e Energias Renováveis para IA; Ecossistema de Dados e Software para IA; P&D em IA."@pt .
+
+pbia:PBIA_Axis2_DiffusionTraining
+    a hrai:PolicyInstrument ;
+    rdfs:label "PBIA — Eixo 2: Difusão, formação e capacitação em IA"@pt ;
+    dcterms:isPartOf pbia:PBIA_Plan ;
+    schema:amount [ a schema:MonetaryAmount ; schema:value "1150000000"^^xsd:decimal ; schema:currency "BRL" ] ;
+    rdfs:comment "5,0% do total. Metas: 5.000 vagas de graduação e 190.000 profissionais capacitados em três anos; 230.000 profissionais e 85% da população adulta com conhecimento básico sobre IA em cinco anos."@pt .
+
+pbia:PBIA_Axis3_PublicServices
+    a hrai:PolicyInstrument ;
+    rdfs:label "PBIA — Eixo 3: IA para melhoria do serviço público"@pt ;
+    dcterms:isPartOf pbia:PBIA_Plan ;
+    schema:amount [ a schema:MonetaryAmount ; schema:value "1760000000"^^xsd:decimal ; schema:currency "BRL" ] ;
+    rdfs:comment "7,6% do total. Metas: IA em 10 órgãos federais por ano e 20% dos servidores federais capacitados em três anos; 70% dos órgãos federais e 50% dos estaduais usando IA em cinco anos."@pt .
+
+pbia:PBIA_Axis4_BusinessInnovation
+    a hrai:PolicyInstrument ;
+    rdfs:label "PBIA — Eixo 4: IA para inovação empresarial"@pt ;
+    dcterms:isPartOf pbia:PBIA_Plan ;
+    schema:amount [ a schema:MonetaryAmount ; schema:value "13790000000"^^xsd:decimal ; schema:currency "BRL" ] ;
+    rdfs:comment "59,9% do total. Alinhado à Nova Indústria Brasil (Missão 4). Metas: 25% de adoção de IA pelas empresas em três anos; 40% em cinco anos."@pt .
+
+pbia:PBIA_Axis5_RegulatoryGovernanceSupport
+    a hrai:PolicyInstrument ;
+    rdfs:label "PBIA — Eixo 5: Apoio ao processo regulatório e de governança da IA"@pt ;
+    dcterms:isPartOf pbia:PBIA_Plan ;
+    dcterms:hasPart pbia:Prog5A_RegulatoryFrameworkImprovement , pbia:Prog5B_AIGovernanceSupport ;
+    schema:amount [ a schema:MonetaryAmount ; schema:value "103250000"^^xsd:decimal ; schema:currency "BRL" ] ;
+    prov:wasDerivedFrom pbia:Evidence_PBIA_Sec3_4_5 ;
+    rdfs:comment "0,4% do total. Busca consolidar arcabouço de governança de IA que promova a inovação, assegure o direito ao desenvolvimento, proteja direitos humanos, integridade da informação, direitos autorais e conexos, o trabalho e os trabalhadores."@pt .
+
+pbia:Prog5A_RegulatoryFrameworkImprovement
+    a hrai:PolicyInstrument ;
+    rdfs:label "Programa de Apoio ao Aperfeiçoamento do Marco Regulatório para IA"@pt ;
+    dcterms:isPartOf pbia:PBIA_Axis5_RegulatoryGovernanceSupport ;
+    dcterms:hasPart pbia:Action50_ResponsibleAIGuides , pbia:Action51_AlgorithmicTransparencyCentre ;
+    rdfs:comment "Estudos de impacto, metodologias de avaliação de risco e centro nacional de transparência algorítmica."@pt .
+
+pbia:Prog5B_AIGovernanceSupport
+    a hrai:PolicyInstrument ;
+    rdfs:label "Programa de Apoio à Governança da IA"@pt ;
+    dcterms:isPartOf pbia:PBIA_Axis5_RegulatoryGovernanceSupport ;
+    dcterms:hasPart pbia:Action52_BrazilianAIObservatory , pbia:Action53_AIGovernanceSupportNetwork , pbia:Action54_InternationalDebateNetwork .
+
+pbia:Action50_ResponsibleAIGuides
+    a hrai:PolicyInstrument ;
+    rdfs:label "Ação 50 — Guias Brasileiros de IA Responsável"@pt ;
+    dcterms:isPartOf pbia:Prog5A_RegulatoryFrameworkImprovement ;
+    schema:amount [ a schema:MonetaryAmount ; schema:value "500000"^^xsd:decimal ; schema:currency "BRL" ] ;
+    schema:funder pbia:SH_MJSP ;
+    prov:wasDerivedFrom pbia:Evidence_PBIA_Annex2 ;
+    rdfs:comment "Metas: Guia para IA Ética e Responsável em 3 meses; Guia de IA para o Setor Público em 6 meses; workshops periódicos. Instrumento de orientação (soft law), não vinculante."@pt .
+
+pbia:Action51_AlgorithmicTransparencyCentre
+    a hrai:PolicyInstrument ;
+    rdfs:label "Ação 51 — Centro Nacional de Transparência Algorítmica e IA Confiável"@pt ;
+    dcterms:isPartOf pbia:Prog5A_RegulatoryFrameworkImprovement ;
+    schema:amount [ a schema:MonetaryAmount ; schema:value "40000000"^^xsd:decimal ; schema:currency "BRL" ] ;
+    prov:wasDerivedFrom pbia:Evidence_PBIA_Annex2 ;
+    rdfs:comment "Metas: estabelecimento do Centro em até 120 dias; estudo sobre riscos da IA e transparência algorítmica 6 meses após criação. Fonte: FNDCT não reembolsável."@pt .
+
+pbia:Action52_BrazilianAIObservatory
+    a hrai:PolicyInstrument ;
+    rdfs:label "Ação 52 — Observatório Brasileiro de IA (Obia)"@pt ;
+    dcterms:isPartOf pbia:Prog5B_AIGovernanceSupport ;
+    schema:amount [ a schema:MonetaryAmount ; schema:value "11750000"^^xsd:decimal ; schema:currency "BRL" ] ;
+    schema:funder pbia:SH_CGIbr ;
+    prov:wasDerivedFrom pbia:Evidence_PBIA_Annex2 ;
+    rdfs:comment "Metas: lançamento em 30 dias; desenvolvimento contínuo de indicadores nas principais dimensões da IA. Fonte: FNDCT não reembolsável e CGI.br."@pt .
+
+pbia:Action53_AIGovernanceSupportNetwork
+    a hrai:PolicyInstrument ;
+    rdfs:label "Ação 53 — Rede de apoio à governança da IA no Brasil"@pt ;
+    dcterms:isPartOf pbia:Prog5B_AIGovernanceSupport ;
+    schema:amount [ a schema:MonetaryAmount ; schema:value "26000000"^^xsd:decimal ; schema:currency "BRL" ] ;
+    prov:wasDerivedFrom pbia:Evidence_PBIA_Annex2 ;
+    rdfs:comment "Meta: estruturação da rede em 12 meses. Componentes: rede de pesquisa MCTI (R$ 25 milhões) e Referencial Nacional de Uso da IA na Educação (R$ 1 milhão). Fonte: FNDCT não reembolsável e MEC."@pt .
+
+pbia:Action54_InternationalDebateNetwork
+    a hrai:PolicyInstrument ;
+    rdfs:label "Ação 54 — Rede de apoio à participação do Brasil no debate internacional"@pt ;
+    dcterms:isPartOf pbia:Prog5B_AIGovernanceSupport ;
+    schema:amount [ a schema:MonetaryAmount ; schema:value "25000000"^^xsd:decimal ; schema:currency "BRL" ] ;
+    prov:wasDerivedFrom pbia:Evidence_PBIA_Annex2 ;
+    rdfs:comment "Meta: estruturação da rede em 12 meses. Fonte: FNDCT não reembolsável."@pt .
+
+pbia:Action01_AISupercomputer
+    a hrai:PolicyInstrument ;
+    rdfs:label "Ação 1 — Supercomputador de IA (Top 5 mundial)"@pt ;
+    dcterms:isPartOf pbia:PBIA_Axis1_InfrastructureDevelopment ;
+    schema:amount [ a schema:MonetaryAmount ; schema:value "1800000000"^^xsd:decimal ; schema:currency "BRL" ] ;
+    prov:wasDerivedFrom pbia:Evidence_PBIA_Annex2 ;
+    rdfs:comment "Meta: atualizar o Santos Dumont (LNCC) para figurar entre os cinco maiores da lista TOP500 em cinco anos. Fontes: FNDCT não reembolsável, Petrobras e Fapesp."@pt .
+
+pbia:Action09_PortugueseLLM
+    a hrai:PolicyInstrument ;
+    rdfs:label "Ação 9 — IA baseada em dados nacionais (LLM em português)"@pt ;
+    dcterms:isPartOf pbia:PBIA_Axis1_InfrastructureDevelopment ;
+    schema:amount [ a schema:MonetaryAmount ; schema:value "1100000000"^^xsd:decimal ; schema:currency "BRL" ] ;
+    prov:wasDerivedFrom pbia:Evidence_PBIA_Annex2 ;
+    rdfs:comment "Metas: ampliar conjuntos de dados nacionais curados; LLM robusto em segurança para português em 12 meses. Fontes: FNDCT reembolsável, não reembolsável e setor privado."@pt .
+
+pbia:Action25_AIUseMonitoringGovernment
+    a hrai:PolicyInstrument ;
+    rdfs:label "Ação 25 — Monitoramento do Desenvolvimento e Uso da IA no governo federal"@pt ;
+    dcterms:isPartOf pbia:PBIA_Axis3_PublicServices ;
+    schema:amount [ a schema:MonetaryAmount ; schema:value "4000000"^^xsd:decimal ; schema:currency "BRL" ] ;
+    prov:wasDerivedFrom pbia:Evidence_PBIA_Annex2 ;
+    rdfs:comment "Meta: levantamento anual sobre adoção de IA nos órgãos e entidades do governo federal. Fonte: MGI."@pt .
+
+pbia:Action27_SovereignCloud
+    a hrai:PolicyInstrument ;
+    rdfs:label "Ação 27 — Nuvem Soberana"@pt ;
+    dcterms:isPartOf pbia:PBIA_Axis3_PublicServices ;
+    schema:amount [ a schema:MonetaryAmount ; schema:value "1000000000"^^xsd:decimal ; schema:currency "BRL" ] ;
+    prov:wasDerivedFrom pbia:Evidence_PBIA_Annex2 ;
+    rdfs:comment "Nuvem privada ou comunitária gerida exclusivamente por órgãos ou empresas públicas. Meta: migrar dados classificados em grau de sigilo para nuvem de governo até 2027. Fontes: Serpro e Dataprev."@pt .
+
+pbia:FederalGovernmentAICore
+    a hrai:PolicyInstrument ;
+    rdfs:label "Núcleo de IA do Governo Federal"@pt ;
+    dcterms:isPartOf pbia:PBIA_Axis3_PublicServices ;
+    rdfs:comment "Coordenado pela Secretaria de Governo Digital (SGD/MGI); inicialmente composto por MGI, MCTI, Enap, Serpro e Dataprev. Responsabilidades: colaboração e padronização, aceleração da transformação digital, monitoramento do uso de IA no governo."@pt .
+
+pbia:PBIA_GovernanceByCITDigital
+    a hrai:PolicyInstrument ;
+    rdfs:label "Governança e monitoramento do PBIA pelo CIT Digital"@pt ;
+    dcterms:isPartOf pbia:PBIA_Plan ;
+    dcterms:references pbia:Decree_12308_2024 ;
+    rdfs:comment "Estrutura de governança do Plano coordenada pelo Comitê Interministerial para a Transformação Digital (CIT Digital), órgão colegiado consultivo instituído pelo Decreto 12.308/2024."@pt .
+
+# -----------------------------------------------------------------------------
+# 5. Normas e proposta legislativa referenciadas (sem extração de dispositivos)
+# -----------------------------------------------------------------------------
+
+pbia:PL_2338_2023
+    a hrai:LegislativeProposal ;
+    rdfs:label "Projeto de Lei 2338/2023 — marco regulatório da IA"@pt ;
+    hrai:instrumentIdentifier "PL 2338/2023" ;
+    hrai:instrumentInJurisdiction pbia:Brazil ;
+    hrai:proposalInJurisdiction pbia:Brazil ;
+    hrai:hasVersion pbia:PL_2338_2023_AsCitedInPBIA ;
+    prov:wasDerivedFrom pbia:Evidence_PBIA_Sec3_4_5 ;
+    rdfs:comment "Segundo o PBIA, em tramitação no Congresso Nacional. Proposta não equivale a norma aprovada ou vigente."@pt .
+
+pbia:PL_2338_2023_AsCitedInPBIA
+    a hrai:LegalInstrumentVersion ;
+    rdfs:label "PL 2338/2023 — estado conforme citado no PBIA"@pt ;
+    hrai:versionOfInstrument pbia:PL_2338_2023 ;
+    hrai:versionIdentifier "as-cited-in-PBIA-VN8" ;
+    hrai:hasLegalStatus hrai:ProposedLegalStatus ;
+    rdfs:comment "Estado válido para a data da fonte. Requer nova verificação no portal do Congresso antes de qualquer avaliação temporal."@pt .
+
+pbia:Law_12527_2011
+    a hrai:EnactedLegalInstrument ;
+    rdfs:label "Lei 12.527/2011 — Lei de Acesso à Informação"@pt ;
+    hrai:instrumentIdentifier "Lei 12.527/2011" ;
+    hrai:instrumentInJurisdiction pbia:Brazil ;
+    rdfs:comment "Citada pelo PBIA como base da transparência pública e da Política de Dados Abertos."@pt .
+
+pbia:Law_13709_2018_LGPD
+    a hrai:EnactedLegalInstrument ;
+    rdfs:label "Lei 13.709/2018 — Lei Geral de Proteção de Dados Pessoais (LGPD)"@pt ;
+    hrai:instrumentIdentifier "Lei 13.709/2018" ;
+    hrai:instrumentInJurisdiction pbia:Brazil ;
+    rdfs:comment "Citada pelo PBIA (premissa 08 e Eixo 5) como parâmetro de tratamento de dados pessoais. Número da lei não aparece no texto do PBIA; identificação pela sigla LGPD."@pt .
+
+pbia:Decree_10046_2019
+    a hrai:EnactedLegalInstrument ;
+    rdfs:label "Decreto 10.046/2019 — compartilhamento de dados na administração pública federal"@pt ;
+    hrai:instrumentIdentifier "Decreto 10.046/2019" ;
+    hrai:instrumentInJurisdiction pbia:Brazil .
+
+pbia:Decree_12308_2024
+    a hrai:EnactedLegalInstrument ;
+    rdfs:label "Decreto 12.308/2024 — institui o CIT Digital"@pt ;
+    hrai:instrumentIdentifier "Decreto 12.308/2024" ;
+    hrai:instrumentInJurisdiction pbia:Brazil .
+
+pbia:Ordinance_MCTI_8251_2024
+    a hrai:EnactedLegalInstrument ;
+    rdfs:label "Portaria MCTI 8.251/2024 — Grupo de Trabalho de elaboração do PBIA"@pt ;
+    hrai:instrumentIdentifier "Portaria MCTI 8.251/2024" ;
+    hrai:instrumentInJurisdiction pbia:Brazil .
+
+pbia:EU_AIAct
+    a hrai:EnactedLegalInstrument ;
+    rdfs:label "Regulamento europeu sobre inteligência artificial (AI Act)"@pt ;
+    hrai:instrumentIdentifier "EU AI Act" ;
+    hrai:instrumentInJurisdiction pbia:EuropeanUnion ;
+    rdfs:comment "Citado como exemplo internacional de governança (Scientific Panel e Advisory Forum). Sem aplicabilidade presumida ao Brasil."@pt .
+
+# -----------------------------------------------------------------------------
+# 6. Lacunas e tensões regulatórias
+# -----------------------------------------------------------------------------
+
+pbia:Gap_NoSpecificAILaw
+    a hrai:RegulatoryGap ;
+    rdfs:label "Ausência de lei específica de IA no Brasil"@pt ;
+    hrai:gapInJurisdiction pbia:Brazil ;
+    hrai:gapConcernsObjective pbia:Obj_Axis5_ThreeYear , pbia:Obj_Pillar4_TransparentAccountable ;
+    dcterms:references pbia:PL_2338_2023 ;
+    prov:wasDerivedFrom pbia:Evidence_PBIA_Sec3_4_5 ;
+    rdfs:comment "Na ausência de lei específica, o desafio é promover confiança pública, padrões adequados à realidade brasileira e orientações de boas práticas."@pt .
+
+pbia:Gap_AISpecificDataGovernance
+    a hrai:RegulatoryGap ;
+    rdfs:label "Lacunas na governança de dados específica para IA (componentes estratégico e prático)"@pt ;
+    hrai:gapInJurisdiction pbia:Brazil ;
+    hrai:gapConcernsObjective pbia:Obj_Pillar4_TransparentAccountable ;
+    dcterms:references pbia:Law_12527_2011 , pbia:Law_13709_2018_LGPD , pbia:Decree_10046_2019 ;
+    prov:wasDerivedFrom pbia:Evidence_PBIA_Sec3_4_5 ;
+    rdfs:comment "O quadro de dados (LAI, LGPD, Decreto 10.046/2019) existe, mas persistem lacunas na parametrização do desenvolvimento e uso ético e responsável da IA."@pt .
+
+pbia:Tension_InnovationVsRightsProtection
+    a hrai:RegulatoryTension ;
+    rdfs:label "Fomento à inovação versus proteção de direitos individuais e coletivos"@pt ;
+    hrai:tensionInJurisdiction pbia:Brazil ;
+    hrai:tensionInvolvesObjective pbia:Obj_GlobalLeadershipSovereignty , pbia:Obj_Pillar4_TransparentAccountable ;
+    hrai:hasPolicyClaim pbia:Claim_AgileRegulationWithoutInhibitingInnovation ;
+    prov:wasDerivedFrom pbia:Evidence_PBIA_Sec1 .
+
+pbia:Tension_AutomationVsLabourProtection
+    a hrai:RegulatoryTension ;
+    rdfs:label "Automação por IA versus proteção do trabalho e dos trabalhadores"@pt ;
+    hrai:tensionInJurisdiction pbia:Brazil ;
+    hrai:tensionInvolvesObjective pbia:Obj_CentralObjective , pbia:Obj_ImproveLivesProductiveCapacity ;
+    hrai:hasPolicyClaim pbia:Claim_AIThreatensEmployment , pbia:Claim_HistoricalAdaptationBenefits ;
+    prov:wasDerivedFrom pbia:Evidence_PBIA_Sec1 .
+
+pbia:Tension_ComputeExpansionVsEnergyWater
+    a hrai:RegulatoryTension ;
+    rdfs:label "Expansão de data centers e supercomputação versus consumo de energia e água e estabilidade do sistema elétrico"@pt ;
+    hrai:tensionInJurisdiction pbia:Brazil ;
+    hrai:tensionInvolvesObjective pbia:Obj_TechVanguardComputeInfrastructure , pbia:Obj_Pillar2_SocialEnvironmentalChallenges ;
+    hrai:hasPolicyClaim pbia:Claim_CleanMatrixCompetitiveAdvantage , pbia:Claim_DataCentreGridOverloadRisk ;
+    prov:wasDerivedFrom pbia:Evidence_PBIA_Sec3 .
+
+pbia:Tension_SovereigntyVsInternationalCooperation
+    a hrai:RegulatoryTension ;
+    rdfs:label "Soberania tecnológica e de dados versus colaboração internacional"@pt ;
+    hrai:tensionInJurisdiction pbia:Brazil ;
+    hrai:tensionInvolvesObjective pbia:Obj_Pillar3_RightToDevelopmentSovereignty , pbia:Obj_Pillar5_FairGlobalCooperation ;
+    hrai:hasPolicyClaim pbia:Claim_SovereigntyCooperationBalance ;
+    prov:wasDerivedFrom pbia:Evidence_PBIA_Sec2 .
+
+pbia:Tension_TalentMigrationAcademiaIndustry
+    a hrai:RegulatoryTension ;
+    rdfs:label "Migração de talentos da academia para a indústria: competitividade versus capacidade de pesquisa e formação"@pt ;
+    hrai:tensionInJurisdiction pbia:Brazil ;
+    hrai:tensionInvolvesObjective pbia:Obj_TechVanguardComputeInfrastructure ;
+    hrai:hasPolicyClaim pbia:Claim_TalentMigrationContradiction ;
+    prov:wasDerivedFrom pbia:Evidence_PBIA_Sec1 .
+
+# -----------------------------------------------------------------------------
+# 7. Afirmações de política (claims). Evidência anexada NÃO verifica veracidade.
+# -----------------------------------------------------------------------------
+
+pbia:Claim_AgileRegulationWithoutInhibitingInnovation
+    a hrai:PolicyClaim ;
+    rdfs:label "Marcos regulatórios ágeis devem proteger organizações e consumidores sem inibir a inovação"@pt ;
+    hrai:claimText "O desenvolvimento acelerado da IA demanda marcos regulatórios ágeis que garantam seu uso ético e seguro, protegendo organizações e consumidores finais sem inibir a inovação."@pt ;
+    hrai:claimSupportedByEvidence pbia:Evidence_PBIA_Sec1 .
+
+pbia:Claim_AIThreatensEmployment
+    a hrai:PolicyClaim ;
+    rdfs:label "A IA desafia estruturas tradicionais de emprego e suscita receio de desemprego tecnológico"@pt ;
+    hrai:claimText "Na educação e no trabalho, a IA desafia estruturas tradicionais de emprego, exigindo adaptação e requalificação; revoluções tecnológicas suscitam preocupações com o desemprego tecnológico."@pt ;
+    hrai:claimSupportedByEvidence pbia:Evidence_PBIA_Sec1 ;
+    hrai:challengedByClaim pbia:Claim_HistoricalAdaptationBenefits .
+
+pbia:Claim_HistoricalAdaptationBenefits
+    a hrai:PolicyClaim ;
+    rdfs:label "A trajetória histórica sugere adaptação das sociedades e benefícios econômicos após a apreensão inicial"@pt ;
+    hrai:claimText "Após um período inicial de apreensão, as sociedades tendem a se adaptar às novas tecnologias, frequentemente resultando em benefícios econômicos e sociais abrangentes; a transição, porém, raramente é uniforme."@pt ;
+    hrai:claimSupportedByEvidence pbia:Evidence_PBIA_Sec1 .
+
+pbia:Claim_CleanMatrixCompetitiveAdvantage
+    a hrai:PolicyClaim ;
+    rdfs:label "A matriz elétrica limpa é vantagem competitiva para IA sustentável"@pt ;
+    hrai:claimText "A matriz elétrica predominantemente limpa e renovável do Brasil é um diferencial estratégico para o desenvolvimento de uma IA sustentável."@pt ;
+    hrai:claimSupportedByEvidence pbia:Evidence_PBIA_Sec3 .
+
+pbia:Claim_DataCentreGridOverloadRisk
+    a hrai:PolicyClaim ;
+    rdfs:label "Novos supercomputadores e data centers podem sobrecarregar o sistema elétrico nacional"@pt ;
+    hrai:claimText "O crescimento previsto de supercomputadores e data centers representa um desafio potencial de sobrecarga ao sistema elétrico nacional, exigindo planejamento e investimentos em eficiência energética."@pt ;
+    hrai:claimSupportedByEvidence pbia:Evidence_PBIA_Sec3 .
+
+pbia:Claim_SovereigntyCooperationBalance
+    a hrai:PolicyClaim ;
+    rdfs:label "É preciso equilibrar proteção dos interesses nacionais e colaborações internacionais mutuamente benéficas"@pt ;
+    hrai:claimText "Deve-se buscar um equilíbrio entre a proteção dos interesses nacionais e a participação em colaborações internacionais mutuamente benéficas, com atenção a países da África e da América Latina."@pt ;
+    hrai:claimSupportedByEvidence pbia:Evidence_PBIA_Sec2 .
+
+pbia:Claim_TalentMigrationContradiction
+    a hrai:PolicyClaim ;
+    rdfs:label "A migração de talentos para a indústria é desejável e preocupante ao mesmo tempo"@pt ;
+    hrai:claimText "A migração de talentos da academia para a indústria é desejável do ponto de vista da competitividade, mas pode ameaçar a capacidade da academia de inovar e formar a próxima geração de pesquisadores."@pt ;
+    hrai:claimSupportedByEvidence pbia:Evidence_PBIA_Sec1 .
+
+pbia:Claim_AIIsNotPanacea
+    a hrai:PolicyClaim ;
+    rdfs:label "A IA não é solução universal; o sucesso do PBIA depende de ações complementares"@pt ;
+    hrai:claimText "A IA é uma ferramenta estratégica para gargalos específicos; o sucesso do PBIA depende de ações complementares em educação, infraestrutura digital e redução de disparidades regionais."@pt ;
+    hrai:claimSupportedByEvidence pbia:Evidence_PBIA_Sec3 .
+
+# -----------------------------------------------------------------------------
+# 8. Stakeholders e posições
+# -----------------------------------------------------------------------------
+
+# Nível institucional apenas. Pessoas físicas citadas no PBIA (titulares e
+# suplentes do CCT, equipe técnica) não são instanciadas: um representante não
+# é stakeholder institucional e nomes pessoais não agregam ao modelo.
+# Tipos schema:* adicionais classificam a natureza jurídica/setorial do ator.
+# Vínculos usam vocabulário existente (schema:memberOf, schema:parentOrganization,
+# schema:funder, schema:provider, dcterms:contributor), sem estender a TBox.
+
+# --- 8.1 Poder Executivo federal ----------------------------------------------
+pbia:SH_PresidencyOfTheRepublic a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Presidência da República"@pt ;
+    rdfs:comment "Preside o CCT; demandou o PBIA ao CCT em 2024-03-07."@pt .
+pbia:SH_CasaCivil a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Casa Civil da Presidência da República"@pt ; schema:memberOf pbia:SH_CCT .
+pbia:SH_SAM_CasaCivil a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Secretaria de Articulação e Monitoramento da Casa Civil (SAM/CC/PR)"@pt ;
+    schema:parentOrganization pbia:SH_CasaCivil ; schema:memberOf pbia:SH_WG_PBIA .
+pbia:SH_SecretariaGeral a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Secretaria-Geral da Presidência da República"@pt ; schema:memberOf pbia:SH_CCT .
+pbia:SH_GSI a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Gabinete de Segurança Institucional da Presidência da República (GSI)"@pt ; schema:memberOf pbia:SH_CCT .
+pbia:SH_Secom a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Secretaria de Comunicação Social da Presidência da República (Secom/PR)"@pt .
+pbia:SH_AGU a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Advocacia-Geral da União (AGU)"@pt ; schema:memberOf pbia:SH_CCT .
+pbia:SH_MCTI a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Ministério da Ciência, Tecnologia e Inovação (MCTI)"@pt ; schema:memberOf pbia:SH_CCT ;
+    rdfs:comment "Coordena o PBIA e é coautor da publicação."@pt .
+pbia:SH_Sexec_MCTI a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Secretaria-Executiva do MCTI (Sexec/MCTI)"@pt ;
+    schema:parentOrganization pbia:SH_MCTI ; schema:memberOf pbia:SH_WG_PBIA ;
+    rdfs:comment "Lidera o Grupo de Trabalho de elaboração do PBIA (Portaria MCTI 8.251/2024)."@pt .
+pbia:SH_Setad_MCTI a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Secretaria de Ciência e Tecnologia para Transformação Digital do MCTI (Setad/MCTI)"@pt ;
+    schema:parentOrganization pbia:SH_MCTI ; schema:memberOf pbia:SH_WG_PBIA .
+pbia:SH_ASCCT_MCTI a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Assessoria do Conselho Nacional de Ciência e Tecnologia (ASCCT/MCTI)"@pt ;
+    schema:parentOrganization pbia:SH_MCTI ; schema:memberOf pbia:SH_WG_PBIA .
+pbia:SH_MAPA a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Ministério da Agricultura e Pecuária (MAPA)"@pt ; schema:memberOf pbia:SH_CCT .
+pbia:SH_MD a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Ministério da Defesa"@pt ; schema:memberOf pbia:SH_CCT .
+pbia:SH_MDIC a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Ministério do Desenvolvimento, Indústria, Comércio e Serviços (MDIC)"@pt ;
+    schema:memberOf pbia:SH_CCT , pbia:SH_WG_PBIA ;
+    rdfs:comment "Revisa alíquotas de importação, ex-tarifários e PPB de servidores para a cadeia de data centers (nota 8, Eixo 4)."@pt .
+pbia:SH_MEC a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Ministério da Educação (MEC)"@pt ; schema:memberOf pbia:SH_CCT .
+pbia:SH_MF a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Ministério da Fazenda"@pt ; schema:memberOf pbia:SH_CCT .
+pbia:SH_RFB a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Receita Federal do Brasil (RFB)"@pt ; schema:parentOrganization pbia:SH_MF .
+pbia:SH_MIDR a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Ministério da Integração e do Desenvolvimento Regional (MIDR)"@pt ; schema:memberOf pbia:SH_CCT .
+pbia:SH_MMA a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Ministério do Meio Ambiente e Mudança do Clima (MMA)"@pt ; schema:memberOf pbia:SH_CCT .
+pbia:SH_MME a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Ministério de Minas e Energia (MME)"@pt ; schema:memberOf pbia:SH_CCT ;
+    rdfs:comment "Fonte da projeção de 2,5 GW de carga de data centers até 2037."@pt .
+pbia:SH_MPO a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Ministério do Planejamento e Orçamento (MPO)"@pt ; schema:memberOf pbia:SH_CCT .
+pbia:SH_MRE a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Ministério das Relações Exteriores (MRE)"@pt ; schema:memberOf pbia:SH_CCT , pbia:SH_WG_PBIA .
+pbia:SH_MS a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Ministério da Saúde"@pt ; schema:memberOf pbia:SH_CCT .
+pbia:SH_MGI a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Ministério da Gestão e da Inovação em Serviços Públicos (MGI)"@pt ;
+    schema:memberOf pbia:SH_CCT , pbia:SH_WG_PBIA .
+pbia:SH_SGD_MGI a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Secretaria de Governo Digital (SGD/MGI)"@pt ; schema:parentOrganization pbia:SH_MGI ;
+    rdfs:comment "Coordena o Núcleo de IA do Governo Federal e responde pelas cinco ações do Eixo 3 a ele vinculadas."@pt .
+pbia:SH_MJSP a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Ministério da Justiça e Segurança Pública (MJSP)"@pt ; schema:memberOf pbia:SH_WG_PBIA .
+pbia:SH_CGU a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Controladoria-Geral da União (CGU)"@pt .
+
+# --- 8.2 Colegiados -----------------------------------------------------------
+pbia:SH_CCT a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Conselho Nacional de Ciência e Tecnologia (CCT)"@pt ;
+    rdfs:comment "Orientação estratégica do PBIA. Composição (I) ministros de Estado, (II) representantes dos produtores e usuários de C&T — pessoas físicas, não instanciadas — e (III) entidades de ensino, pesquisa, ciência e tecnologia."@pt .
+pbia:SH_WG_PBIA a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Grupo de Trabalho de elaboração do PBIA"@pt ;
+    dcterms:references pbia:Ordinance_MCTI_8251_2024 ;
+    rdfs:comment "Instituído pela Portaria MCTI 8.251/2024, liderado pela Sexec/MCTI; contou também com acadêmicos (não individualizados)."@pt .
+pbia:SH_CITDigital a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Comitê Interministerial para a Transformação Digital (CIT Digital)"@pt ;
+    dcterms:references pbia:Decree_12308_2024 ;
+    rdfs:comment "Órgão colegiado consultivo; coordena a governança e o monitoramento do PBIA."@pt .
+pbia:SH_CGIbr a hrai:Stakeholder , schema:Organization ;
+    rdfs:label "Comitê Gestor da Internet no Brasil (CGI.br)"@pt .
+
+# --- 8.3 Poder Legislativo ----------------------------------------------------
+pbia:SH_NationalCongress a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Congresso Nacional"@pt ;
+    rdfs:comment "Instância de tramitação do PL 2338/2023."@pt .
+
+# --- 8.4 Empresas públicas, agências, institutos e fundações ---------------------
+pbia:SH_CGEE a hrai:Stakeholder , schema:ResearchOrganization ;
+    rdfs:label "Centro de Gestão e Estudos Estratégicos (CGEE)"@pt ; schema:memberOf pbia:SH_WG_PBIA ;
+    rdfs:comment "Apoio técnico e coautoria da publicação (3º Contrato de Gestão CGEE 2022/2030)."@pt .
+pbia:SH_BNDES a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Banco Nacional de Desenvolvimento Econômico e Social (BNDES)"@pt ;
+    rdfs:comment "Listado no PBIA como 'Banco Nacional de Desenvolvimento Social'."@pt .
+pbia:SH_CNPq a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq)"@pt .
+pbia:SH_Embrapa a hrai:Stakeholder , schema:ResearchOrganization ;
+    rdfs:label "Empresa Brasileira de Pesquisa Agropecuária (Embrapa)"@pt .
+pbia:SH_Embrapii a hrai:Stakeholder , schema:ResearchOrganization ;
+    rdfs:label "Empresa Brasileira de Pesquisa e Inovação Industrial (Embrapii)"@pt .
+pbia:SH_Finep a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Financiadora de Estudos e Projetos (Finep)"@pt ;
+    rdfs:comment "Chamadas 'Soluções de IA para o Poder Público' com MGI, MCTI e Enap: 17 projetos, 22 desafios; terceiro edital para nove desafios."@pt .
+pbia:SH_LNCC a hrai:Stakeholder , schema:ResearchOrganization ;
+    rdfs:label "Laboratório Nacional de Computação Científica (LNCC)"@pt ;
+    rdfs:comment "Opera o supercomputador Santos Dumont, alvo da Ação 1."@pt .
+pbia:SH_Enap a hrai:Stakeholder , schema:EducationalOrganization ;
+    rdfs:label "Escola Nacional de Administração Pública (Enap)"@pt .
+pbia:SH_Serpro a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Serviço Federal de Processamento de Dados (Serpro)"@pt .
+pbia:SH_Dataprev a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Empresa de Tecnologia e Informações da Previdência (Dataprev)"@pt .
+pbia:SH_Petrobras a hrai:Stakeholder , schema:Corporation ;
+    rdfs:label "Petrobras"@pt ;
+    rdfs:comment "Seis supercomputadores, incluindo o Pégaso (42 PFlop/s)."@pt .
+pbia:SH_Fapesp a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Fundação de Amparo à Pesquisa do Estado de São Paulo (Fapesp)"@pt .
+pbia:SH_RioCityHall a hrai:Stakeholder , schema:GovernmentOrganization ;
+    rdfs:label "Prefeitura do Rio de Janeiro"@pt .
+
+# --- 8.5 Entidades de ensino, pesquisa e C&T no CCT (inciso III) ---------------
+pbia:SH_ABC a hrai:Stakeholder , schema:Organization ;
+    rdfs:label "Academia Brasileira de Ciências (ABC)"@pt ; schema:memberOf pbia:SH_CCT .
+pbia:SH_SBPC a hrai:Stakeholder , schema:Organization ;
+    rdfs:label "Sociedade Brasileira para o Progresso da Ciência (SBPC)"@pt ; schema:memberOf pbia:SH_CCT .
+pbia:SH_Andifes a hrai:Stakeholder , schema:Organization ;
+    rdfs:label "Associação Nacional dos Dirigentes das Instituições Federais de Ensino Superior (Andifes)"@pt ; schema:memberOf pbia:SH_CCT .
+pbia:SH_Consecti a hrai:Stakeholder , schema:Organization ;
+    rdfs:label "Conselho Nacional de Secretários Estaduais para Assuntos de CT&I (Consecti)"@pt ; schema:memberOf pbia:SH_CCT .
+pbia:SH_Ibrachics a hrai:Stakeholder , schema:Organization ;
+    rdfs:label "Instituto Brasileiro de Cidades Humanas, Inteligentes, Criativas e Sustentáveis (Ibrachics)"@pt ; schema:memberOf pbia:SH_CCT .
+pbia:SH_Confap a hrai:Stakeholder , schema:Organization ;
+    rdfs:label "Conselho Nacional das Fundações Estaduais de Amparo à Pesquisa (Confap)"@pt ; schema:memberOf pbia:SH_CCT .
+pbia:SH_Abruem a hrai:Stakeholder , schema:Organization ;
+    rdfs:label "Associação Brasileira dos Reitores das Universidades Estaduais e Municipais (Abruem)"@pt ; schema:memberOf pbia:SH_CCT .
+pbia:SH_Abruc a hrai:Stakeholder , schema:Organization ;
+    rdfs:label "Associação Brasileira das Instituições Comunitárias de Educação Superior (Abruc)"@pt ; schema:memberOf pbia:SH_CCT .
+pbia:SH_Conif a hrai:Stakeholder , schema:Organization ;
+    rdfs:label "Conselho Nacional das Instituições da Rede Federal de Educação Profissional, Científica e Tecnológica (Conif)"@pt ; schema:memberOf pbia:SH_CCT .
+pbia:SH_ANPG a hrai:Stakeholder , schema:Organization ;
+    rdfs:label "Associação Nacional de Pós-Graduandos (ANPG)"@pt ; schema:memberOf pbia:SH_CCT .
+
+# --- 8.6 Setor produtivo ------------------------------------------------------
+pbia:SH_CNI a hrai:Stakeholder , schema:Organization ;
+    rdfs:label "Confederação Nacional da Indústria (CNI)"@pt ; schema:memberOf pbia:SH_WG_PBIA .
+pbia:SH_SistemaS a hrai:Stakeholder , schema:Organization ;
+    rdfs:label "Sistema S"@pt .
+
+# --- 8.7 Desenvolvedores das iniciativas da Tabela 1 ----------------------------
+pbia:SH_OpenAI         a hrai:Stakeholder , schema:Corporation ; rdfs:label "OpenAI"@pt .
+pbia:SH_FundacaoLemann a hrai:Stakeholder , schema:NGO ; rdfs:label "Fundação Lemann"@pt .
+pbia:SH_Lenovo         a hrai:Stakeholder , schema:Corporation ; rdfs:label "Lenovo"@pt .
+pbia:SH_UFBA           a hrai:Stakeholder , schema:CollegeOrUniversity ; rdfs:label "Universidade Federal da Bahia (UFBA)"@pt .
+pbia:SH_FGV_RJ         a hrai:Stakeholder , schema:CollegeOrUniversity ; rdfs:label "Fundação Getulio Vargas — Rio de Janeiro (FGV-RJ)"@pt .
+pbia:SH_UFAM           a hrai:Stakeholder , schema:CollegeOrUniversity ; rdfs:label "Universidade Federal do Amazonas (UFAM)"@pt .
+pbia:SH_WideLabs       a hrai:Stakeholder , schema:Corporation ; rdfs:label "WideLabs"@pt .
+pbia:SH_Stefanini      a hrai:Stakeholder , schema:Corporation ; rdfs:label "Stefanini"@pt .
+pbia:SH_BancoDoBrasil  a hrai:Stakeholder , schema:Corporation ; rdfs:label "Banco do Brasil"@pt .
+pbia:SH_Caixa          a hrai:Stakeholder , schema:Corporation ; rdfs:label "Caixa Econômica Federal"@pt .
+pbia:SH_MaritacaAI     a hrai:Stakeholder , schema:Corporation ; rdfs:label "Maritaca AI"@pt .
+pbia:SH_NeuralMind     a hrai:Stakeholder , schema:Corporation ; rdfs:label "NeuralMind"@pt .
+
+# --- 8.8 Vínculos dos stakeholders com o PBIA e seus instrumentos ----------------
+# Contribuintes: GT, CCT e "Demais instituições participantes" (folha de rosto).
+pbia:PBIA_Plan dcterms:contributor
+    pbia:SH_CCT , pbia:SH_WG_PBIA ,
+    pbia:SH_BNDES , pbia:SH_CNI , pbia:SH_CNPq , pbia:SH_CGU , pbia:SH_Embrapa , pbia:SH_Embrapii ,
+    pbia:SH_Dataprev , pbia:SH_Finep , pbia:SH_GSI , pbia:SH_Petrobras , pbia:SH_RFB ,
+    pbia:SH_SAM_CasaCivil , pbia:SH_Secom , pbia:SH_Serpro , pbia:SH_SistemaS .
+
+# Núcleo de IA: coordenação SGD; composição inicial MGI, MCTI, Enap, Serpro, Dataprev.
+pbia:FederalGovernmentAICore dcterms:contributor
+    pbia:SH_SGD_MGI , pbia:SH_MGI , pbia:SH_MCTI , pbia:SH_Enap , pbia:SH_Serpro , pbia:SH_Dataprev .
+
+pbia:PBIA_GovernanceByCITDigital dcterms:contributor pbia:SH_CITDigital .
+
+# Atores referidos por instrumentos (sem papel de financiador ou executor).
+pbia:Action01_AISupercomputer dcterms:references pbia:SH_LNCC .
+pbia:PL_2338_2023 dcterms:references pbia:SH_NationalCongress .
+
+# Financiadores declarados no Anexo 2 (FNDCT é fundo, não ator; não instanciado).
+pbia:Action01_AISupercomputer schema:funder pbia:SH_Petrobras , pbia:SH_Fapesp .
+pbia:Action25_AIUseMonitoringGovernment schema:funder pbia:SH_MGI .
+pbia:Action27_SovereignCloud schema:funder pbia:SH_Serpro , pbia:SH_Dataprev .
+pbia:Action53_AIGovernanceSupportNetwork schema:funder pbia:SH_MEC .
+
+# Desenvolvedores das aplicações (Tabela 1).
+pbia:App_ApoIAStartupsEducacao       schema:provider pbia:SH_OpenAI , pbia:SH_FundacaoLemann .
+pbia:App_ProjetoLibras               schema:provider pbia:SH_Lenovo .
+pbia:App_ChatGPTNavesConhecimento    schema:provider pbia:SH_OpenAI , pbia:SH_RioCityHall .
+pbia:App_CombateDesinformacao        schema:provider pbia:SH_OpenAI , pbia:SH_UFBA , pbia:SH_FGV_RJ .
+pbia:App_PlataformaAcolhimento       schema:provider pbia:SH_WideLabs .
+pbia:App_MonitoramentoAmazonia       schema:provider pbia:SH_OpenAI , pbia:SH_UFAM .
+pbia:App_BatimentosFlorestaAmazonica schema:provider pbia:SH_Stefanini .
+pbia:App_BBMenosFraudes              schema:provider pbia:SH_BancoDoBrasil .
+pbia:App_BBProvaDeVida               schema:provider pbia:SH_BancoDoBrasil .
+pbia:App_BBPequenoNegocioIA          schema:provider pbia:SH_BancoDoBrasil .
+pbia:App_CaixaOtimizacaoSFH          schema:provider pbia:SH_Caixa .
+pbia:App_CaixaHabitacao              schema:provider pbia:SH_Caixa .
+pbia:App_MaritalkAI                  schema:provider pbia:SH_MaritacaAI .
+pbia:App_BERTimbau                   schema:provider pbia:SH_NeuralMind .
+pbia:App_StefaniniCombateFraude      schema:provider pbia:SH_Stefanini .
+pbia:App_StefaniniIndustriaAco       schema:provider pbia:SH_Stefanini .
+pbia:App_WideJuridico                schema:provider pbia:SH_WideLabs .
+
+# Participação explícita na deliberação (CCT, GT e seus membros, demais
+# instituições participantes). A regra R07 acrescenta os autores das posições.
+pbia:Delib_PBIAElaboration2024 hrai:deliberationIncludesStakeholder
+    pbia:SH_CCT , pbia:SH_WG_PBIA ,
+    pbia:SH_Sexec_MCTI , pbia:SH_Setad_MCTI , pbia:SH_ASCCT_MCTI , pbia:SH_SAM_CasaCivil ,
+    pbia:SH_MDIC , pbia:SH_MGI , pbia:SH_MJSP , pbia:SH_MRE , pbia:SH_CGEE , pbia:SH_CNI ,
+    pbia:SH_BNDES , pbia:SH_CNPq , pbia:SH_CGU , pbia:SH_Embrapa , pbia:SH_Embrapii ,
+    pbia:SH_Dataprev , pbia:SH_Finep , pbia:SH_GSI , pbia:SH_Petrobras , pbia:SH_RFB ,
+    pbia:SH_Secom , pbia:SH_Serpro , pbia:SH_SistemaS .
+
+# --- 8.9 Posições ---------------------------------------------------------------
+
+pbia:Pos_Presidency_AIForGood
+    a hrai:StakeholderPosition ;
+    rdfs:label "Presidência: IA 'do bem', ética e não discriminatória"@pt ;
+    hrai:positionExpressedBy pbia:SH_PresidencyOfTheRepublic ;
+    hrai:positionText "Necessidade de desenvolver e adotar tecnologia que melhore a vida do cidadão, pautada por princípios éticos e não discriminatórios; IA para saúde, para os pobres e para a descarbonização, e não para disseminar fake news (demanda ao CCT em 2024-03-07)."@pt ;
+    hrai:positionSupportsClaim pbia:Claim_AgileRegulationWithoutInhibitingInnovation .
+
+pbia:Pos_MCTI_SovereignAI
+    a hrai:StakeholderPosition ;
+    rdfs:label "MCTI: desenvolver IA no Brasil, com soberania e inclusão"@pt ;
+    hrai:positionExpressedBy pbia:SH_MCTI ;
+    hrai:positionText "Não importar simplesmente soluções, mas desenvolvê-las no Brasil, por brasileiros e para brasileiros; nuvem soberana para proteger dados estratégicos; ênfase em capacitação diante de impactos no trabalho (Apresentação)."@pt ;
+    hrai:positionSupportsClaim pbia:Claim_SovereigntyCooperationBalance , pbia:Claim_HistoricalAdaptationBenefits .
+
+pbia:Pos_ABC_EducationalInequality
+    a hrai:StakeholderPosition ;
+    rdfs:label "ABC: contexto educacional crítico e lacuna entre excelência acadêmica e implementação"@pt ;
+    hrai:positionExpressedBy pbia:SH_ABC ;
+    hrai:positionText "Apenas pequena parcela da população tem acesso à educação de qualidade; sem investimentos e políticas eficazes, o País corre risco de declínio tecnológico acelerado (ABC, 2023, citado no PBIA)."@pt ;
+    hrai:positionSupportsClaim pbia:Claim_AIIsNotPanacea .
+
+pbia:Pos_CNI_ProductivityDecline
+    a hrai:StakeholderPosition ;
+    rdfs:label "CNI: queda de produtividade industrial motiva adoção de IA"@pt ;
+    hrai:positionExpressedBy pbia:SH_CNI ;
+    hrai:positionText "Queda de 24% na produtividade do trabalho na indústria de transformação entre 2001 e 2021 (CNI, 2022, citado no PBIA)."@pt ;
+    hrai:positionSupportsClaim pbia:Claim_HistoricalAdaptationBenefits .
+
+# -----------------------------------------------------------------------------
+# 9. Deliberação (elaboração participativa do PBIA) e alternativas
+# -----------------------------------------------------------------------------
+
+pbia:Delib_PBIAElaboration2024
+    a hrai:Deliberation ;
+    rdfs:label "Processo de elaboração participativa do PBIA (2024)"@pt ;
+    hrai:deliberationIncludesPosition
+        pbia:Pos_Presidency_AIForGood ,
+        pbia:Pos_MCTI_SovereignAI ,
+        pbia:Pos_ABC_EducationalInequality ,
+        pbia:Pos_CNI_ProductivityDecline ;
+    hrai:deliberatesOnTension
+        pbia:Tension_InnovationVsRightsProtection ,
+        pbia:Tension_AutomationVsLabourProtection ,
+        pbia:Tension_ComputeExpansionVsEnergyWater ,
+        pbia:Tension_SovereigntyVsInternationalCooperation ;
+    hrai:deliberationProposesAlternative
+        pbia:Alt_DualApproachImmediateAndStructural ,
+        pbia:Alt_SoftLawAndRegulatorySupportPendingLaw ,
+        pbia:Alt_InterministerialGovernanceCITDigital ;
+    dcterms:references pbia:Ordinance_MCTI_8251_2024 ;
+    prov:wasDerivedFrom pbia:Evidence_PBIA_Sec1 ;
+    rdfs:comment "Quatro meses de trabalho: duas reuniões do CCT (38 documentos, mais de 300 propostas), seis oficinas temáticas (cerca de 300 participantes), mais de 30 reuniões bilaterais, 117 instituições públicas, privadas e da sociedade civil. GT coordenado pela Sexec/MCTI (Portaria MCTI 8.251/2024)."@pt .
+
+pbia:Alt_DualApproachImmediateAndStructural
+    a hrai:PolicyAlternative ;
+    rdfs:label "Abordagem dual: ações de impacto imediato + ações estruturantes em cinco eixos"@pt ;
+    hrai:alternativeTargetsObjective pbia:Obj_CentralObjective ;
+    rdfs:comment "Alternativa adotada pelo PBIA: 1,9% do orçamento em ações de impacto imediato e 98% em ações estruturantes."@pt .
+
+pbia:Alt_SoftLawAndRegulatorySupportPendingLaw
+    a hrai:PolicyAlternative ;
+    rdfs:label "Guias, observatório e centro de transparência como apoio ao processo regulatório enquanto o PL 2338/2023 tramita"@pt ;
+    hrai:alternativeTargetsObjective pbia:Obj_Axis5_ThreeYear , pbia:Obj_Pillar4_TransparentAccountable .
+
+pbia:Alt_InterministerialGovernanceCITDigital
+    a hrai:PolicyAlternative ;
+    rdfs:label "Governança do Plano por comitê interministerial (CIT Digital), inspirada em exemplos dos EUA, UE e Reino Unido"@pt ;
+    hrai:alternativeTargetsObjective pbia:Obj_CentralObjective .
+
+pbia:Assess_PBIADiagnostic
+    a hrai:PolicyImpactAssessment ;
+    rdfs:label "Diagnóstico do próprio PBIA ('Onde estamos?') que fundamenta a abordagem dual"@pt ;
+    hrai:assessesPolicyAlternative pbia:Alt_DualApproachImmediateAndStructural ;
+    hrai:assessmentUsesIndicator
+        pbia:Ind_RenewableShareElectricityMatrix2023 ,
+        pbia:Ind_DataCentersInOperation ,
+        pbia:Ind_STEMGraduatesShare ,
+        pbia:Ind_PublicBodiesUsingAI2023 ,
+        pbia:Ind_CompaniesUsingAI ;
+    hrai:policyAssessmentEvidence pbia:Evidence_PBIA_Sec3 ;
+    hrai:impactAssessmentIdentifiesGap pbia:Gap_NoSpecificAILaw , pbia:Gap_AISpecificDataGovernance ;
+    hrai:impactAssessmentIdentifiesTension pbia:Tension_ComputeExpansionVsEnergyWater ;
+    rdfs:comment "Autoavaliação do formulador do plano, não avaliação independente de impacto."@pt .
+
+# -----------------------------------------------------------------------------
+# 10. Aplicações de IA citadas (Tabela 1) — sem qualquer juízo de conformidade
+# -----------------------------------------------------------------------------
+
+pbia:App_ApoIAStartupsEducacao      a hrai:AIApplication ; rdfs:label "ApoIA Startups - Educação (OpenAI e Fundação Lemann)"@pt ; hrai:applicationInJurisdiction pbia:Brazil .
+pbia:App_ProjetoLibras              a hrai:AIApplication ; rdfs:label "Projeto Libras (Lenovo)"@pt ; hrai:applicationInJurisdiction pbia:Brazil .
+pbia:App_ChatGPTNavesConhecimento   a hrai:AIApplication ; rdfs:label "ChatGPT4 nas Naves do Conhecimento (OpenAI e Prefeitura do Rio)"@pt ; hrai:applicationInJurisdiction pbia:Brazil .
+pbia:App_CombateDesinformacao       a hrai:AIApplication ; rdfs:label "Combate à desinformação (OpenAI, UFBA e FGV-RJ)"@pt ; hrai:applicationInJurisdiction pbia:Brazil .
+pbia:App_PlataformaAcolhimento      a hrai:AIApplication ; rdfs:label "Plataforma Acolhimento (WideLabs)"@pt ; hrai:applicationInJurisdiction pbia:Brazil .
+pbia:App_MonitoramentoAmazonia      a hrai:AIApplication ; rdfs:label "Monitoramento da Amazônia (OpenAI e UFAM)"@pt ; hrai:applicationInJurisdiction pbia:Brazil .
+pbia:App_BatimentosFlorestaAmazonica a hrai:AIApplication ; rdfs:label "Batimentos cardíacos da Floresta Amazônica - IA (Stefanini)"@pt ; hrai:applicationInJurisdiction pbia:Brazil .
+pbia:App_BBMenosFraudes             a hrai:AIApplication ; rdfs:label "Menos fraudes em transações (Banco do Brasil)"@pt ; hrai:applicationInJurisdiction pbia:Brazil .
+pbia:App_BBProvaDeVida              a hrai:AIApplication ; rdfs:label "Prova de Vida (Banco do Brasil)"@pt ; hrai:applicationInJurisdiction pbia:Brazil .
+pbia:App_BBPequenoNegocioIA         a hrai:AIApplication ; rdfs:label "Pequeno Negócio + IA (Banco do Brasil)"@pt ; hrai:applicationInJurisdiction pbia:Brazil .
+pbia:App_CaixaOtimizacaoSFH         a hrai:AIApplication ; rdfs:label "Otimização do Sistema Financeiro de Habitação (Caixa Econômica Federal)"@pt ; hrai:applicationInJurisdiction pbia:Brazil .
+pbia:App_CaixaHabitacao             a hrai:AIApplication ; rdfs:label "IA para Solução de Habitação da Caixa (Caixa Econômica Federal)"@pt ; hrai:applicationInJurisdiction pbia:Brazil .
+pbia:App_MaritalkAI                 a hrai:AIApplication ; rdfs:label "Maritalk AI (Maritaca AI)"@pt ; hrai:applicationInJurisdiction pbia:Brazil .
+pbia:App_BERTimbau                  a hrai:AIApplication ; rdfs:label "BERTimbau (NeuralMind)"@pt ; hrai:applicationInJurisdiction pbia:Brazil .
+pbia:App_StefaniniCombateFraude     a hrai:AIApplication ; rdfs:label "Combate a fraude financeira (Stefanini)"@pt ; hrai:applicationInJurisdiction pbia:Brazil .
+pbia:App_StefaniniIndustriaAco      a hrai:AIApplication ; rdfs:label "IA na indústria do aço (Stefanini)"@pt ; hrai:applicationInJurisdiction pbia:Brazil .
+pbia:App_WideJuridico               a hrai:AIApplication ; rdfs:label "Wide Jurídico (WideLabs)"@pt ; hrai:applicationInJurisdiction pbia:Brazil .

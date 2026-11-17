@@ -98,8 +98,27 @@ SELECT ?assessment ?event WHERE {
 - `IdentifiedStakeholder` registra que a identidade foi verificada; a ontologia não define o processo de verificação.
 - A mudança é uma proposta de `OntologyRelease` e deve passar pelo processo de governança da TBox antes de ser adotada.
 
+## Instâncias (ABox)
+
+As instâncias ficam em `instances/<jurisdição>/`, separadas da TBox, que **não** é alterada por elas. Cada ABox declara `owl:imports` da ontologia geral. O `.ttl` é a fonte editável; o `.owl` é gerado por `python scripts/build_regulatory_instances.py`.
+
+| Arquivo | Fonte | Conteúdo |
+|---|---|---|
+| `instances/br/HRAI_GO_Regulatory_BR_PBIA_2025.ttl` / `.owl` | PBIA 2024-2028 (MCTI/CGEE, 2025), versão VN 8, SHA-256 `b6542407…f46f5` | Jurisdição Brasil, contexto nacional e 16 indicadores, modelo regulatório, 12 objetivos, 20 instrumentos de política com orçamento (`schema:MonetaryAmount`), PL 2338/2023 e 6 normas citadas, 2 lacunas, 5 tensões, 8 afirmações, 69 stakeholders institucionais (CCT, GT, Núcleo de IA, financiadores, desenvolvedores) com 4 posições, deliberação, alternativas e 17 aplicações de IA |
+
+Decisões de modelagem do PBIA:
+
+- O PBIA é um **plano de política pública**: `PolicyInstrument`, nunca `LegalInstrument`. Nenhum `NormativeRequirement` é derivado dele.
+- Normas citadas (LAI, LGPD, Decretos 10.046/2019 e 12.308/2024, Portaria MCTI 8.251/2024, AI Act) são apenas referências: sem dispositivos, sem versões vigentes.
+- O PL 2338/2023 é `LegislativeProposal`, com `ProposedLegalStatus` válido para a data da fonte.
+- Todo o conteúdo está em `CandidateAssertion` sem `ReviewDecision`: **pendente de revisão**, ainda não publicável em `KnowledgeGraphRelease`.
+- Stakeholders só em nível institucional; pessoas físicas citadas (titulares/suplentes do CCT, equipes) não são instanciadas. Vínculos usam `schema:memberOf`, `schema:parentOrganization`, `schema:funder`, `schema:provider` e `dcterms:contributor`, sem estender a TBox.
+- O indicador de renováveis de 83% (Eixo 4) diverge dos 89,2% (Eixo 1). Ambos estão registrados e anotados para verificação na fonte primária.
+
 ## Validação
 
 O teste `tests/verify_regulatory_ontology.py` verifica parsing RDF, isomorfismo entre Turtle e RDF/XML, existência das 18 classes canônicas e das 11 classes da 1.1.0 com suas superclasses, as disjunções obrigatórias, a quantidade de regras SWRL (23), a segurança de cada regra (toda variável da cabeça aparece no corpo), a presença de ressalva em cada regra e a ausência de regras que afirmem `assessmentHasStatus`, `hasLegalStatus` ou `releasePublishesCandidate` automaticamente. Até a 1.0.0, o README anunciava esta última checagem, mas o teste não a fazia.
 
 O teste estrutural **não equivale** a execução de SWRL em reasoner como Drools, Pellet ou outro mecanismo compatível.
+
+O teste `tests/verify_regulatory_instances.py` valida cada ABox: isomorfismo Turtle/RDF-XML, existência dos termos `hrai:` na TBox, `rdfs:domain`/`rdfs:range`, tipos de literais, disjunção `LegislativeProposal`/`EnactedLegalInstrument` e ausência de `assessmentHasStatus`. Ele também executa as 18 regras SWRL serializadas na TBox com um interpretador simples de encadeamento progressivo e confere as inferências esperadas (R03-R08, R15-R17). Assim como o teste da TBox, isso é um teste estrutural, não substitui um reasoner.
