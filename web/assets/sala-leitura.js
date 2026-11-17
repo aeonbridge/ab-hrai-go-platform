@@ -6,7 +6,8 @@
 const CFG = window.HRAIGO_CONFIG || {};
 const ls = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
 const params = new URLSearchParams(location.search);
-let sala = (params.get("sala") || ls.get("hraigo.sala") || "").toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
+const EV = window.HRAIGO_EVENTO || {};
+let sala = (params.get("sala") || EV.sala || ls.get("hraigo.sala") || "").toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
 if (sala.length < 4) sala = "sala-" + Math.random().toString(36).slice(2, 8);
 ls.set("hraigo.sala", sala);
 if (location.protocol.startsWith("http") && params.get("sala") !== sala) { const u = new URL(location.href); u.searchParams.set("sala", sala); history.replaceState(null, "", u); }
@@ -54,7 +55,7 @@ async function iniciar() {
 window.HRAIGO_LEITURA = {
   sala, injetar, participantes,
   on(f) { ouvintes.push(f); }, estado(f) { estados.push(f); },
-  linkParticipar() { const u = new URL("../", location.href); u.searchParams.set("sala", sala); u.hash = "participar"; return u.toString(); },
+  linkParticipar() { if (EV.linkPublico && EV.sala === sala) return EV.linkPublico; const u = new URL("../", location.href); u.searchParams.set("sala", sala); u.hash = "participar"; return u.toString(); },
   iniciar
 };
 })();
