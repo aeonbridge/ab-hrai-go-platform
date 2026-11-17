@@ -522,7 +522,7 @@ const CAMS = {
 };
 let camModo = "camara", girar = !REDUZ, ang = 0;
 const camPos = CAMS.camara.pos.clone(), camAlvo = CAMS.camara.alvo.clone();
-function modo(m) { camModo = m; document.querySelectorAll("[data-cam]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.cam === m))); }
+function modo(m) { if (camModo !== m && typeof fecharFicha === "function") fecharFicha(); camModo = m; document.querySelectorAll("[data-cam]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.cam === m))); }
 document.querySelectorAll("[data-cam]").forEach(b => b.onclick = () => modo(b.dataset.cam));
 const CAMADAS = [
   PARTICIPANTE ? { n: "Você", t: "Você está na câmara", d: "Cada luz no anel externo é uma pessoa da sala, no arco do seu setor. A sua está entre elas.", g: [], cam: "sala" }
@@ -538,6 +538,7 @@ const navC = $("#camadasNav");
 CAMADAS.forEach((c, i) => { const b = document.createElement("button"); b.textContent = c.n; b.onclick = () => camada(i); navC.appendChild(b); });
 function camada(i) {
   i = Math.max(0, Math.min(CAMADAS.length - 1, i)); camadaAtual = i; const c = CAMADAS[i];
+  if (typeof fecharFicha === "function") fecharFicha();   /* a ficha descreve um objeto da camada anterior: não pode ficar presa na tela */
   GERIDOS.forEach(g => g.userData.alvo = c.g.includes(g) ? 1 : 0);
   document.body.className = document.body.className.replace(/\bc\d\b|\btudo\b/g, "").trim() + " c" + i + (i === CAMADAS.length - 1 ? " tudo" : "");
   document.querySelectorAll("[data-camada]").forEach(e => e.classList.toggle("oculto", +e.dataset.camada > i && i < CAMADAS.length - 1));
