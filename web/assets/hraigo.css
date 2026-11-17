@@ -193,4 +193,4 @@ textarea{width:100%;min-height:120px;border:1px solid var(--color-border-control
 /* identidade do participante no fim da participação */
 .eu-id{display:flex;align-items:center;gap:12px;font:500 14px/1.3 var(--font-mono);color:var(--color-text-secondary);margin-bottom:14px}
 .eu-id b{color:var(--color-text-primary);font-weight:600}
-.eu-av{width:56px;height:56px;border-radius:12px;image-rendering:pixelated;border:1px solid rgba(214,226,240,.2)}
+.eu-av{width:56px;height:56px;border-radius:12px;image-rendering:pixelated;background:#E9EFF7;border:2px solid #F5D49A}
