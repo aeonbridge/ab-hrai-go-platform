@@ -31,6 +31,8 @@ if (SALA.length < 4) SALA = "sala-" + Math.random().toString(36).slice(2, 8);
 ls.set("hraigo.sala", SALA);
 if (location.protocol.startsWith("http") && params.get("sala") !== SALA) { const u = new URL(location.href); u.searchParams.set("sala", SALA); history.replaceState(null, "", u); }
 
+const CURTO = { gov: "Governo", reg: "Regulador", leg: "Legislativo", est: "Estados", aca: "Academia", soc: "Sociedade", pri: "Privado", out: "Outro" };
+const apelido = (pid, setor) => (CURTO[setor] || "Pessoa") + "·" + String(pid || "").replace(/[^a-z0-9]/gi, "").slice(-3).toLowerCase();   /* mesma fórmula de sala-leitura.js */
 const S = { pid: ls.get("hraigo.pid") || ("local-" + Math.random().toString(36).slice(2, 10)), setor: ls.get("hraigo.setor"), resp: {}, passo: 0,
   msgs: new Map(), sim: [], ocultar: new Set(), textos: true, vista: "participar", kbSel: "modelo", kbQ: "", monF: "todos", modo: "local" };
 ls.set("hraigo.pid", S.pid);
@@ -146,10 +148,12 @@ function renderParticipar() {
         el("button", { class: "bt ipe", onclick: async () => { const t = ta.value.trim(); if (t.length > 2) await registrar("q4", { mv, tx: t.slice(0, 280) }); S.passo = 5; render(); } }, "Enviar")));
   } else {
     put(p, el("div", { class: "progresso" }, Array.from({ length: TOTAL }, () => el("i", { class: "on" }))),
-      el("div", { class: "fim" }, el("h1", { class: "pergunta" }, "Sua luz entrou na câmara."),
+      el("div", { class: "fim" }, el("div", { class: "eu-id" }, window.PixelAvatar ? el("img", { class: "eu-av", src: PixelAvatar.url(S.pid, 4), alt: "" }) : null, el("span", {}, "Você é ", el("b", {}, apelido(S.pid, S.setor)))),
+        el("h1", { class: "pergunta" }, "Sua luz entrou na câmara."),
         el("p", { class: "apoio" }, "Olhe o telão: você está no anel externo, no arco de " + ((C.setores.find(s => s[0] === S.setor) || ["", "outros"])[1]) + ". Cada escolha sua viajou até a tensão e a lacuna que você marcou."),
         el("p", { class: "apoio" }, "Você pode mudar suas respostas até o fim da sessão; vale a última. Enquanto isso, explore a base de conhecimento e o monitoramento.")),
-      el("a", { class: "bt ipe", href: "ao-vivo/?sala=" + encodeURIComponent(SALA), style: "margin-top:8px;justify-content:center" }, "Ver a câmara no celular →"),
+      el("a", { class: "bt ipe", href: "ao-vivo/?sala=" + encodeURIComponent(SALA) + "&modo=participante", style: "margin-top:8px;justify-content:center" }, "Entrar na câmara →"),
+      el("p", { class: "apoio", style: "font-size:14px" }, "Na câmara você vê as contribuições da sala, reage a elas e muda suas escolhas. Tudo aparece para todos e no telão, com o seu avatar."),
       el("div", { class: "acoes" }, el("a", { class: "bt", href: "#conhecimento" }, "Conhecimento"), el("a", { class: "bt", href: "#monitoramento" }, "Monitoramento")),
       el("button", { class: "bt leve", style: "margin-top:16px", onclick: () => { S.passo = 0; render(); } }, "Revisar respostas"));
   }
