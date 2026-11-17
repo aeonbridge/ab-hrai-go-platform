@@ -1,0 +1,473 @@
+<title>Observatório HRAI-GO</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Schibsted+Grotesk:wght@600;800&display=swap">
+<style>
+/* Layout: mobile-first. Participante no celular (passos), telão para o apresentador (QR + agregados ao vivo), base de conhecimento e monitoramento individuais. */
+:root{
+  --paper:#EEF1F4; --surface:#FFFFFF; --sunk:#E3E8ED; --ink:#13212E; --ink-2:#4B5C6C; --ink-3:#6F7F8F; --line:#D2DAE2; --line-2:#BCC7D2;
+  --human:#00766C; --human-soft:#D7EEEB; --shadow:#57558F; --shadow-soft:#E6E5F3;
+  --c4:#B8341A; --c3:#A15C00; --c2:#76732A; --c1:#6B7B8C;
+  --fit-n2:#B4532A; --fit-n1:#DDA27F; --fit-0:#D9DEE3; --fit-p1:#93B46C; --fit-p2:#4E7D2A;
+  --ok:#1E7F4F; --warn:#A15C00; --warn-soft:#F5E8D3; --focus:#1C62A8;
+  --f-display:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
+  --f-body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0C131A; --surface:#131D27; --sunk:#0A1015; --ink:#E2E8EE; --ink-2:#9DAEBE; --ink-3:#7A8B9B; --line:#24323F; --line-2:#334452;
+  --human:#3DC3B4; --human-soft:#123430; --shadow:#A9A6EC; --shadow-soft:#24233F;
+  --c4:#FF7B5E; --c3:#EFA944; --c2:#CDBE62; --c1:#8C9CAD;
+  --fit-n2:#E07A4C; --fit-n1:#8F5A3E; --fit-0:#2A3642; --fit-p1:#5F7E3E; --fit-p2:#9CCB6A;
+  --ok:#5BD18B; --warn:#EFA944; --warn-soft:#36270F; --focus:#6CAEF0; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0C131A; --surface:#131D27; --sunk:#0A1015; --ink:#E2E8EE; --ink-2:#9DAEBE; --ink-3:#7A8B9B; --line:#24323F; --line-2:#334452;
+  --human:#3DC3B4; --human-soft:#123430; --shadow:#A9A6EC; --shadow-soft:#24233F;
+  --c4:#FF7B5E; --c3:#EFA944; --c2:#CDBE62; --c1:#8C9CAD;
+  --fit-n2:#E07A4C; --fit-n1:#8F5A3E; --fit-0:#2A3642; --fit-p1:#5F7E3E; --fit-p2:#9CCB6A;
+  --ok:#5BD18B; --warn:#EFA944; --warn-soft:#36270F; --focus:#6CAEF0; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+h1,h2,h3{font-family:var(--f-display);margin:0;line-height:1.15;text-wrap:balance}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.mono{font-family:var(--f-mono)}
+.eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.muted{color:var(--ink-2)} .small{font-size:13px}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--surface);border-bottom:1px solid var(--line)}
+.top-in{display:flex;align-items:center;gap:12px;padding-block:10px;flex-wrap:wrap;max-width:1500px;margin:0 auto}
+.brand{display:flex;flex-direction:column;margin-right:auto;min-width:0}
+.brand b{font-family:var(--f-display);font-weight:800;font-size:18px;line-height:1.1}
+.brand span{font-family:var(--f-mono);font-size:10.5px;color:var(--ink-3)}
+.tabs{display:flex;gap:2px;background:var(--sunk);border-radius:8px;padding:3px;overflow-x:auto;max-width:100%}
+.tabs a{padding:6px 11px;border-radius:6px;text-decoration:none;color:var(--ink-2);font-size:13px;font-weight:500;white-space:nowrap}
+.tabs a[aria-current="page"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.conn{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);display:flex;align-items:center;gap:6px}
+.conn i{width:8px;height:8px;border-radius:50%;background:var(--ink-3);display:inline-block}
+.conn.live i{background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 25%,transparent)}
+.conn.bad i{background:var(--c4)}
+main{max-width:1500px;margin:0 auto}
+.view{padding-block:20px 60px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.btn{border:1px solid var(--line-2);background:var(--surface);border-radius:8px;padding:9px 14px;font-weight:500}
+.btn.primary{background:var(--human);border-color:var(--human);color:var(--surface);font-weight:600}
+.btn.ghost{border-color:transparent;background:transparent;color:var(--ink-2)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.tag{font-family:var(--f-mono);font-size:10.5px;padding:2px 7px;border-radius:4px;background:var(--sunk);color:var(--ink-2);white-space:nowrap;display:inline-block}
+.tag.ok{background:var(--human-soft);color:var(--human)} .tag.warn{background:var(--warn-soft);color:var(--warn)} .tag.syn{background:var(--shadow-soft);color:var(--shadow)} .tag.bad{background:color-mix(in srgb,var(--c4) 15%,transparent);color:var(--c4)}
+.dia{width:11px;height:11px;transform:rotate(45deg);border:2px dashed var(--shadow);flex:none;border-radius:2px;display:inline-block}
+.dot{width:11px;height:11px;border-radius:50%;background:var(--human);flex:none;display:inline-block}
+
+/* participar */
+.phone{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+.steps{display:flex;gap:4px}
+.steps i{flex:1;height:5px;border-radius:3px;background:var(--sunk)}
+.steps i.on{background:var(--human)}
+.card{padding:18px;display:flex;flex-direction:column;gap:14px}
+.card h2{font-size:21px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;gap:10px;align-items:center;text-align:left;border:1.5px solid var(--line-2);background:var(--surface);border-radius:10px;padding:12px 14px;font-size:15px}
+.opt[aria-pressed="true"]{border-color:var(--human);background:var(--human-soft)}
+.opt .k{margin-left:auto;font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
+.poles{display:flex;justify-content:space-between;gap:12px;font-family:var(--f-display);font-weight:600;font-size:15px}
+.poles span:last-child{text-align:right}
+input[type=range]{width:100%;accent-color:var(--human);height:32px}
+.rate{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 10px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line-2);border-radius:8px;overflow:hidden}
+.seg button{border:0;background:transparent;padding:7px 9px;font-family:var(--f-mono);font-size:12px;min-width:34px}
+.seg button+button{border-left:1px solid var(--line-2)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
+textarea{width:100%;min-height:96px;border:1px solid var(--line-2);border-radius:8px;background:var(--paper);padding:10px;resize:vertical}
+.nav{display:flex;justify-content:space-between;gap:10px}
+.sent{font-size:12.5px;color:var(--ok);font-family:var(--f-mono)}
+.sent.err{color:var(--c4)}
+
+/* telão */
+.stage{display:grid;grid-template-columns:330px minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:1000px){.stage{grid-template-columns:minmax(0,1fr)}}
+.qrbox{padding:20px;display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center;position:sticky;top:calc(env(safe-area-inset-top,0px) + 76px)}
+@media (max-width:1000px){.qrbox{position:static}}
+.qrbox svg{width:100%;max-width:260px;height:auto;background:#fff;padding:10px;border-radius:10px}
+.big{font-family:var(--f-display);font-weight:800;font-size:64px;line-height:1;font-variant-numeric:tabular-nums}
+.url{font-family:var(--f-mono);font-size:11px;color:var(--ink-2);overflow-wrap:anywhere}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:760px){.tiles{grid-template-columns:minmax(0,1fr)}}
+.tile{padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.tile.wide{grid-column:1/-1}
+.tile h3{font-size:17px}
+.bars{display:flex;flex-direction:column;gap:8px}
+.bar{display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:10px;align-items:center;font-size:13.5px}
+.bar .lbl{display:flex;justify-content:space-between;gap:6px;margin-bottom:3px}
+.bar .tr{height:12px;border-radius:6px;background:var(--sunk);overflow:hidden}
+.bar .tr i{display:block;height:100%;background:var(--human);border-radius:6px;transition:width .5s ease}
+.bar .n{font-family:var(--f-mono);font-size:13px;text-align:right;font-variant-numeric:tabular-nums}
+.field{position:relative;height:190px;margin:0 8px}
+.axis{position:absolute;left:0;right:0;top:50%;height:2px;background:var(--line-2)}
+.mk{position:absolute;transform:translate(-50%,-50%);transition:left .5s ease,top .5s ease}
+.mk.syn{width:22px;height:22px;display:grid;place-items:center}
+.mk.syn::before{content:"";position:absolute;inset:3px;transform:rotate(45deg);border:2px dashed var(--shadow);background:var(--shadow-soft);border-radius:2px}
+.mk.syn span{position:relative;font-family:var(--f-mono);font-size:8.5px;color:var(--shadow)}
+.mk.hum{width:12px;height:12px;border-radius:50%;background:var(--human);border:2px solid var(--surface);opacity:.85}
+.mk.med{width:2px;height:120px;background:var(--human);top:50%}
+.mk.med b{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);font-family:var(--f-mono);font-size:10px;color:var(--human);white-space:nowrap}
+.flabels{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:10.5px;color:var(--ink-3);text-transform:uppercase;gap:10px}
+.prow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.pc{display:flex;flex-direction:column;gap:4px;align-items:stretch;text-align:center;font-size:12px}
+.pc .cell{position:relative;aspect-ratio:1.4/1;border-radius:6px;overflow:hidden}
+.pc .cell svg{position:absolute;inset:0;width:100%;height:100%}
+.pc .cell .ne{position:absolute;right:4px;top:3px;width:17px;height:17px;border-radius:50%;background:var(--c4);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center;line-height:1}
+.pc b{font-family:var(--f-display);font-size:14px}
+.pc small{font-family:var(--f-mono);font-size:10.5px;color:var(--ink-3)}
+.feed{display:flex;flex-direction:column;gap:8px;max-height:420px;overflow:auto}
+.fi{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:start;border-left:3px solid var(--line-2);padding:4px 0 4px 10px;font-size:14px;animation:pop .4s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}}
+.fi.challenge{border-left-color:var(--c4)} .fi.support{border-left-color:var(--human)} .fi.evidence{border-left-color:var(--focus)} .fi.amend{border-left-color:var(--c2)}
+.fi .mv{font-family:var(--f-mono);font-size:10.5px;text-transform:uppercase;white-space:nowrap}
+.fi p{margin:0;overflow-wrap:anywhere}
+.fi small{display:block;color:var(--ink-3);font-size:11.5px}
+.ctrl{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--ink-2);align-items:center}
+
+/* base de conhecimento e monitor */
+.kb{display:grid;grid-template-columns:240px minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:860px){.kb{grid-template-columns:minmax(0,1fr)}}
+.side{display:flex;flex-direction:column;gap:6px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 76px)}
+@media (max-width:860px){.side{position:static;flex-direction:row;overflow-x:auto}}
+.side button{text-align:left;border:1px solid transparent;background:transparent;border-radius:8px;padding:8px 10px;font-size:14px;white-space:nowrap}
+.side button[aria-pressed="true"]{background:var(--surface);border-color:var(--line-2);font-weight:600}
+.search{width:100%;border:1px solid var(--line-2);border-radius:8px;background:var(--surface);padding:9px 12px}
+.jur{padding:20px;display:flex;flex-direction:column;gap:14px}
+.jur h2{font-size:24px}
+.inst{border-top:1px solid var(--line);padding-top:12px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px}
+.inst h3{font-size:16px}
+.inst p{margin:0;grid-column:1/-1;font-size:14px;color:var(--ink-2)}
+.inst .rel{grid-column:1/-1;font-size:13.5px;border-left:2px solid var(--human);padding-left:10px}
+.inst .src{grid-column:1/-1;font-size:12px;color:var(--ink-3)}
+.inst .src a{color:var(--ink-2)}
+.tl{display:flex;flex-direction:column}
+.ev{display:grid;grid-template-columns:96px 22px minmax(0,1fr);gap:0 12px;align-items:start}
+.ev .d{font-family:var(--f-mono);font-size:12px;color:var(--ink-3);text-align:right;padding-top:2px;font-variant-numeric:tabular-nums}
+.ev .rail{position:relative;align-self:stretch;display:flex;justify-content:center}
+.ev .rail::before{content:"";position:absolute;top:0;bottom:0;width:2px;background:var(--line)}
+.ev .rail i{position:relative;margin-top:5px;width:12px;height:12px;border-radius:50%;background:var(--ink-2);border:2px solid var(--paper)}
+.ev.br .rail i{background:var(--human)} .ev.fut .rail i{background:var(--paper);border:2px dashed var(--ink-3)}
+.ev .b{padding-bottom:18px;min-width:0}
+.ev .b b{display:block;font-size:15px}
+.ev .b p{margin:2px 0 6px;font-size:13.5px;color:var(--ink-2)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.today{font-family:var(--f-mono);font-size:11px;color:var(--c4);padding:6px 0 14px 130px}
+.banner{font-size:13px;background:var(--warn-soft);color:var(--warn);border-radius:8px;padding:8px 12px}
+@media (prefers-reduced-motion:reduce){.fi,.bar .tr i,.mk{animation:none;transition:none}}
+</style>
+
+<header class="top wrap">
+  <div class="top-in">
+    <div class="brand"><b>Observatório HRAI-GO</b><span id="sala-lbl">governança de IA · Brasil e mundo</span></div>
+    <nav class="tabs" aria-label="Seções">
+      <a href="#participar" data-v="participar">Participar</a>
+      <a href="#telao" data-v="telao">Ao vivo</a>
+      <a href="#conhecimento" data-v="conhecimento">Conhecimento</a>
+      <a href="#monitor" data-v="monitor">Monitoramento</a>
+    </nav>
+    <div class="conn" id="conn"><i></i><span>conectando…</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="view" id="v-participar"><div class="phone" id="phone"></div></section>
+  <section class="view" id="v-telao" hidden><div class="stage">
+    <aside class="panel qrbox" id="qrbox"></aside>
+    <div class="tiles" id="tiles"></div>
+  </div></section>
+  <section class="view" id="v-conhecimento" hidden><div class="kb" id="kb"></div></section>
+  <section class="view" id="v-monitor" hidden><div id="mon" style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:16px"></div></section>
+</main>
+
+<script>
+/* qrcode-generator 2.0.4 · (c) Kazuhiko Arase · MIT License · https://github.com/kazuhikoarase/qrcode-generator */
+__QRLIB__
+</script>
+<script>
+(() => {
+"use strict";
+/* ================= conteúdo ================= */
+const SECTORS=[["gov","Governo federal"],["reg","Agência reguladora"],["leg","Legislativo"],["est","Estados e municípios"],["aca","Academia"],["soc","Sociedade civil"],["pri","Setor privado"],["out","Outro"]];
+const TENSIONS=[
+ ["t1","Testar viés com dados sensíveis × minimização de dados",4],
+ ["t2","Auditoria ex-ante obrigatória × viabilidade para pequenas empresas",4],
+ ["t3","Revisão humana efetiva × escala operacional",3],
+ ["t4","Explicação ao cidadão × segredo comercial do modelo",2],
+ ["t5","Prazo curto de vigência × capacidade de fiscalização",2]];
+const POLE_A="Auditoria ex-ante obrigatória",POLE_B="Viabilidade para pequenas empresas";
+const SEATS=[["DD","Direitos digitais",-.7],["TR","Trabalhadores",-.6],["PE","Pequenas empresas",.55],["FI","Fiscalização",.35],["GP","Grandes plataformas",.15],["AA","Auditoria algorítmica",-.25]];
+const MODELS=[["ue","UE",-1],["us","EUA",1],["cn","China",-2],["uk","Reino Unido",1],["br","Brasil",0]];
+const CRIT="Capacidade estatal de fiscalização";
+const MOVES=[["support","Sustentar"],["challenge","Contestar"],["evidence","Pedir evidência"],["amend","Propor alternativa"]];
+const LV=["","baixa","moderada","alta","crítica"];
+
+/* ================= transporte ao vivo ================= */
+const S={pid:null,sector:null,ans:{},step:0,msgs:new Map(),sim:false,simMsgs:[],showText:true,hidden:new Set(),view:"participar",kbSel:"br",kbQ:"",monF:"all",transport:"local"};
+const ls={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+S.pid=ls.get("hrai.pid")||("p"+Math.random().toString(36).slice(2,10));ls.set("hrai.pid",S.pid);
+const params=new URLSearchParams(location.search);
+const isArtifact=!!(window.claude&&window.claude.use);
+const ARTIFACT_URL="__ARTIFACT_URL__";
+let SALA=(params.get("sala")||(isArtifact?"hraigo-principal":ls.get("hrai.sala"))||"").replace(/[^a-z0-9-]/gi,"").slice(0,40);
+if(!SALA){SALA="hraigo-"+Math.random().toString(36).slice(2,10)}
+ls.set("hrai.sala",SALA);
+try{const u=new URL(location.href);if(u.protocol.startsWith("http")&&u.searchParams.get("sala")!==SALA){u.searchParams.set("sala",SALA);history.replaceState(null,"",u)}}catch(e){}
+const conn=document.getElementById("conn");
+function setConn(cls,txt){conn.className="conn "+cls;conn.querySelector("span").textContent=txt}
+const bc=("BroadcastChannel" in window)?new BroadcastChannel("hrai-"+SALA):null;
+let sendImpl=async m=>{bc&&bc.postMessage(m);ingest(m)};
+function ingest(m){if(!m||typeof m!=="object"||!m.pid||!m.k)return;const key=m.pid+"|"+m.k;const prev=S.msgs.get(key);if(!prev||(m.ts||0)>=(prev.ts||0)){S.msgs.set(key,m);schedule()}}
+if(bc)bc.onmessage=e=>ingest(e.data);
+async function startNtfy(){
+  S.transport="ntfy";setConn("","conectando ao relay…");
+  const es=new EventSource("https://ntfy.sh/"+SALA+"/sse?since=all");
+  const seen=new Set();
+  es.onopen=()=>setConn("live","ao vivo · sala "+SALA.slice(-6));
+  es.onerror=()=>setConn("bad","relay indisponível · tentando de novo");
+  es.onmessage=e=>{try{const d=JSON.parse(e.data);if(d.event&&d.event!=="message")return;if(seen.has(d.id))return;seen.add(d.id);ingest(JSON.parse(d.message))}catch(err){}};
+  sendImpl=async m=>{ingest(m);bc&&bc.postMessage(m);
+    const r=await fetch("https://ntfy.sh/"+SALA,{method:"POST",body:JSON.stringify(m)});if(!r.ok)throw new Error("HTTP "+r.status)};
+}
+async function startArtifact(){
+  setConn("","conectando…");
+  const [db,user]=await Promise.all([claude.use("db").catch(()=>null),claude.use("user").catch(()=>null)]);
+  let uid=null;if(user){try{uid=await user.id()}catch(e){}}
+  if(!db||!uid){S.transport="local";setConn("bad","modo local · só leitura neste acesso");render();return}
+  S.transport="db";S.pid=uid;
+  const col=db.collection("salas/"+SALA+"/r");
+  const tm=setTimeout(()=>setConn("bad","sem resposta do servidor"),10000);
+  col.limit(2000).onSnapshot(s=>{clearTimeout(tm);setConn("live","ao vivo");s.docs.forEach(d=>ingest(d.data()))},()=>{clearTimeout(tm);setConn("bad","indisponível")});
+  sendImpl=async m=>{ingest(m);await col.doc(m.pid+"__"+m.k).set(m)};
+}
+async function send(k,v){const m={pid:S.pid,k,v,sector:S.sector,ts:Date.now()};try{await sendImpl(m);return true}catch(e){return false}}
+
+/* ================= agregação ================= */
+function current(){
+  const by=new Map();
+  const all=[...S.msgs.values(),...(S.sim?S.simMsgs:[])];
+  for(const m of all){let p=by.get(m.pid);if(!p){p={pid:m.pid,sim:!!m.sim};by.set(m.pid,p)}p[m.k]=m;if(m.sector)p.sector=m.sector}
+  return[...by.values()];
+}
+function simulate(n){
+  const rnd=a=>a[Math.floor(Math.random()*a.length)];const out=[];const now=Date.now();
+  const texts=[["challenge","Auditoria prévia sem credenciamento de auditores vira carimbo."],["evidence","Qual o custo médio de uma auditoria para uma startup brasileira?"],["amend","Escalonar por risco e porte, com prazo maior para PMEs."],["support","Serviços públicos essenciais precisam de auditoria antes de operar."],["challenge","Testes com dados sintéticos não pegam o viés do histórico real."],["evidence","Quantos sistemas de IA o governo federal usa hoje? Não há inventário público."],["amend","Registro público obrigatório de algoritmos usados por órgãos federais."]];
+  for(let i=0;i<n;i++){const pid="sim"+(S.simMsgs.length+i);const sec=rnd(SECTORS)[0];const b={pid,sector:sec,sim:true,ts:now};
+    out.push({...b,k:"sector",v:sec});
+    out.push({...b,k:"q1",v:Math.random()<.42?"t2":Math.random()<.5?"t1":rnd(TENSIONS)[0]});
+    out.push({...b,k:"q2",v:Math.max(-1,Math.min(1,(Math.random()-.55)*1.4))});
+    out.push({...b,k:"q3",v:Object.fromEntries(MODELS.map(([id,,a])=>[id,Math.max(-2,Math.min(2,Math.round(a+(id==="ue"?2:0)+(Math.random()-.5)*2)))]))});
+    if(Math.random()<.6){const t=rnd(texts);out.push({...b,k:"q4",v:{mv:t[0],tx:t[1]}})}}
+  S.simMsgs.push(...out);S.sim=true;schedule();
+}
+
+/* ================= helpers ================= */
+const $=s=>document.querySelector(s);
+const el=(tag,a={},...kids)=>{const n=document.createElement(tag);for(const[k,v]of Object.entries(a)){if(v==null||v===false)continue;if(k==="class")n.className=v;else if(k==="html")n.innerHTML=v;else if(k.startsWith("on"))n.addEventListener(k.slice(2),v);else n.setAttribute(k,v===true?"":v)}for(const c of kids.flat()){if(c==null||c===false)continue;n.append(c.nodeType?c:document.createTextNode(String(c)))}return n};
+const put=(n,...k)=>n.replaceChildren(...k.flat().filter(x=>x!=null&&x!==false));
+const fitVar=v=>v<=-1.5?"--fit-n2":v<=-.5?"--fit-n1":v<.5?"--fit-0":v<1.5?"--fit-p1":"--fit-p2";
+const sgn=v=>(v>0?"+":"")+(Math.round(v*10)/10);
+let raf=0;function schedule(){cancelAnimationFrame(raf);raf=requestAnimationFrame(render)}
+function partURL(){if(isArtifact&&ARTIFACT_URL.startsWith("https://"))return ARTIFACT_URL+"#participar";try{const u=new URL(location.href);u.searchParams.set("sala",SALA);u.hash="participar";return u.toString()}catch(e){return location.href}}
+
+/* ================= participar ================= */
+const STEPS=5;
+function renderPhone(){
+  const p=$("#phone");const st=S.step;
+  const nav=(canNext,label)=>el("div",{class:"nav"},st>0?el("button",{class:"btn ghost",onclick:()=>{S.step--;render()}},"Voltar"):el("span"),el("button",{class:"btn primary",disabled:!canNext,onclick:()=>{S.step++;render();scrollTo({top:0,behavior:"smooth"})}},label||"Próximo"));
+  const status=el("div",{class:"sent",id:"sent"});
+  const mark=async(k,v)=>{S.ans[k]=v;ls.set("hrai.ans."+SALA,JSON.stringify(S.ans));const ok=await send(k,v);const s=$("#sent");if(s){s.textContent=ok?"✓ registrado":"não foi possível enviar; tente de novo";s.className="sent"+(ok?"":" err")}};
+  const steps=el("div",{class:"steps",html:Array.from({length:STEPS},(_,i)=>`<i class="${i<=st?"on":""}"></i>`).join("")});
+  let body;
+  if(st===0){
+    body=el("div",{class:"panel card"},el("span",{class:"eyebrow"},"Passo 1 de 5 · anônimo"),el("h2",{},"De onde você olha para a governança de IA?"),
+      el("p",{class:"muted small",style:"margin:0"},"Não pedimos nome. O setor serve só para mostrar a diversidade de perspectivas no telão."),
+      el("div",{class:"opts"},SECTORS.map(([k,l])=>el("button",{class:"opt","aria-pressed":String(S.sector===k),onclick:()=>{S.sector=k;ls.set("hrai.sector",k);mark("sector",k);render()}},l))),status,nav(!!S.sector));
+  }else if(st===1){
+    body=el("div",{class:"panel card"},el("span",{class:"eyebrow"},"Passo 2 de 5 · prioridade"),el("h2",{},"Qual tensão o Brasil precisa resolver primeiro?"),
+      el("div",{class:"opts"},TENSIONS.map(([k,l,c])=>el("button",{class:"opt","aria-pressed":String(S.ans.q1===k),onclick:()=>{mark("q1",k);render()}},l,el("span",{class:"k"},"modelo: "+LV[c])))),status,nav(!!S.ans.q1));
+  }else if(st===2){
+    const r=el("input",{type:"range",min:"-100",max:"100",step:"5",value:String(Math.round((S.ans.q2??0)*100)),"aria-label":"Sua posição entre os dois polos"});
+    r.addEventListener("change",()=>mark("q2",Number(r.value)/100));
+    body=el("div",{class:"panel card"},el("span",{class:"eyebrow"},"Passo 3 de 5 · posição"),el("h2",{},"Onde você se posiciona nesta tensão?"),
+      el("div",{class:"poles"},el("span",{},POLE_A),el("span",{},POLE_B)),r,
+      el("p",{class:"muted small",style:"margin:0"},"No telão, sua posição aparece ao lado dos assentos sintéticos do Conselho das Sombras, para comparar humanos e agentes."),status,nav(S.ans.q2!=null));
+  }else if(st===3){
+    const q3=S.ans.q3||{};
+    body=el("div",{class:"panel card"},el("span",{class:"eyebrow"},"Passo 4 de 5 · comparação de modelos"),el("h2",{},"Quão adequado cada modelo seria ao Brasil em "+CRIT.toLowerCase()+"?"),
+      el("p",{class:"muted small",style:"margin:0"},"−2 inadequado · +2 muito adequado. Os agentes já deram a leitura deles; o telão mostra onde vocês divergem."),
+      el("div",{class:"rate"},MODELS.flatMap(([id,n])=>[el("b",{},n),el("div",{class:"seg",role:"group","aria-label":n},[-2,-1,0,1,2].map(v=>el("button",{"aria-pressed":String(q3[id]===v),onclick:()=>{mark("q3",{...q3,[id]:v});render()}},(v>0?"+":"")+v)))])),
+      status,nav(Object.keys(q3).length>=3));
+  }else if(st===4){
+    const ta=el("textarea",{id:"q4t",maxlength:"280",placeholder:"Em até 280 caracteres. O que falta nesse debate?","aria-label":"Sua contribuição"});ta.value=S.ans.q4?.tx||"";
+    let mv=S.ans.q4?.mv||"challenge";
+    const seg=el("div",{class:"opts",style:"flex-direction:row;flex-wrap:wrap"},MOVES.map(([k,l])=>el("button",{class:"opt",style:"padding:8px 12px","aria-pressed":String(mv===k),onclick:ev=>{mv=k;seg.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(b===ev.currentTarget)))}},l)));
+    body=el("div",{class:"panel card"},el("span",{class:"eyebrow"},"Passo 5 de 5 · contribuição"),el("h2",{},"Deixe uma contribuição para a mesa"),seg,ta,status,
+      el("div",{class:"nav"},el("button",{class:"btn ghost",onclick:()=>{S.step--;render()}},"Voltar"),el("button",{class:"btn primary",onclick:async()=>{const t=ta.value.trim();if(t.length>2)await mark("q4",{mv,tx:t.slice(0,280)});S.step=5;render()}},"Enviar e concluir")));
+  }else{
+    body=el("div",{class:"panel card"},el("span",{class:"eyebrow"},"Pronto"),el("h2",{},"Obrigado. Acompanhe o resultado no telão."),
+      el("p",{class:"muted",style:"margin:0"},"Você pode mudar suas respostas a qualquer momento; vale a última. Enquanto isso, explore a base de conhecimento e o monitoramento."),
+      el("div",{class:"nav"},el("a",{class:"btn",href:"#conhecimento"},"Base de conhecimento"),el("a",{class:"btn",href:"#monitor"},"Monitoramento")),
+      el("button",{class:"btn ghost",onclick:()=>{S.step=0;render()}},"Revisar respostas"));
+  }
+  put(p,steps,body);
+}
+
+/* ================= telão ================= */
+let qrDone="";
+function renderQR(){
+  const url=partURL();const box=$("#qrbox");
+  if(qrDone!==url){qrDone=url;const q=qrcode(0,"M");q.addData(url);q.make();box.dataset.svg=q.createSvgTag({cellSize:6,margin:2,scalable:true})}
+  const ps=current();const real=ps.filter(p=>!p.sim).length;
+  put(box,el("span",{class:"eyebrow"},"Aponte a câmera"),el("div",{html:box.dataset.svg}),
+    el("div",{class:"big"},String(ps.length)),el("div",{class:"muted small"},"participantes"+(S.sim?` (${ps.length-real} simulados)`:"")),
+    el("div",{class:"url"},url),
+    el("div",{class:"ctrl"},
+      el("button",{class:"btn",onclick:()=>simulate(12)},S.sim?"+12 simulados":"Simular participantes"),
+      S.sim?el("button",{class:"btn ghost",onclick:()=>{S.sim=false;S.simMsgs=[];schedule()}},"Remover simulação"):null,
+      el("button",{class:"btn ghost",onclick:()=>{S.showText=!S.showText;schedule()}},S.showText?"Ocultar textos":"Mostrar textos"),
+      el("button",{class:"btn ghost",onclick:()=>{const u=new URL(location.href);u.searchParams.set("sala","hraigo-"+Math.random().toString(36).slice(2,10));ls.set("hrai.sala","");location.href=u.toString()}},"Nova sala")),
+    S.transport==="local"?el("div",{class:"banner"},isArtifact?"Neste acesso a participação é só local. Para o público externo, use a versão hospedada.":"Modo local (arquivo aberto no computador). Hospede a página para receber participantes."):null);
+}
+function cellSVG(a,h){return `<svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,0 100,0 0,100" fill="var(${fitVar(a)})"/><polygon points="100,0 100,100 0,100" fill="${h==null?"var(--sunk)":`var(${fitVar(h)})`}"/><line x1="100" y1="0" x2="0" y2="100" stroke="var(--surface)" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>`}
+function renderTiles(){
+  const ps=current();const t=$("#tiles");
+  // setores
+  const sec=SECTORS.map(([k,l])=>[l,ps.filter(p=>(p.sector||p.sector?.v)===k||p.sector===k).length]);
+  const secCount=SECTORS.map(([k,l])=>[l,ps.filter(p=>p.sector===k).length]).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]);
+  const maxS=Math.max(1,...secCount.map(x=>x[1]));
+  // q1
+  const q1=TENSIONS.map(([k,l,c])=>[k,l,c,ps.filter(p=>p.q1&&p.q1.v===k).length]);const n1=q1.reduce((a,x)=>a+x[3],0);const max1=Math.max(1,...q1.map(x=>x[3]));
+  q1.sort((a,b)=>b[3]-a[3]);
+  // q2
+  const pos=ps.filter(p=>p.q2&&typeof p.q2.v==="number").map(p=>p.q2.v);
+  const med=pos.length?[...pos].sort((a,b)=>a-b)[Math.floor(pos.length/2)]:null;
+  const X=v=>((v+1)/2*100);
+  const field=el("div",{class:"field",role:"img","aria-label":"Posições humanas abaixo do eixo e assentos sintéticos acima"});
+  field.append(el("div",{class:"axis"}));
+  SEATS.forEach(([c,l,v],i)=>field.append(el("div",{class:"mk syn",style:`left:${X(v)}%;top:${22+(i%2)*16}%`,title:l+" (sintético)"},el("span",{},c))));
+  pos.forEach((v,i)=>field.append(el("div",{class:"mk hum",style:`left:${X(v)}%;top:${62+((i*37)%30)}%`})));
+  if(med!=null)field.append(el("div",{class:"mk med",style:`left:${X(med)}%`},el("b",{},"mediana humana")));
+  // q3
+  const q3=MODELS.map(([id,n,a])=>{const vs=ps.map(p=>p.q3&&p.q3.v&&p.q3.v[id]).filter(v=>typeof v==="number");const h=vs.length?vs.reduce((x,y)=>x+y,0)/vs.length:null;return{id,n,a,h,c:vs.length}});
+  // q4
+  const texts=ps.filter(p=>p.q4&&p.q4.v&&p.q4.v.tx&&!S.hidden.has(p.pid)).map(p=>({pid:p.pid,sim:p.sim,mv:p.q4.v.mv,tx:p.q4.v.tx,ts:p.q4.ts||0,sector:p.sector})).sort((a,b)=>b.ts-a.ts);
+  const mvCount=MOVES.map(([k,l])=>[l,texts.filter(x=>x.mv===k).length]);
+  put(t,
+    el("section",{class:"panel tile"},el("span",{class:"eyebrow"},"Quem está na sala"),el("h3",{},"Diversidade de perspectivas"),
+      secCount.length?el("div",{class:"bars"},secCount.map(([l,n])=>el("div",{class:"bar"},el("div",{},el("div",{class:"lbl"},el("span",{},l)),el("div",{class:"tr",html:`<i style="width:${n/maxS*100}%"></i>`})),el("span",{class:"n"},String(n))))):el("p",{class:"muted"},"Aguardando os primeiros participantes."),
+      secCount.length&&secCount.length<4?el("span",{class:"tag warn"},"Poucos setores representados: leia os resultados com cautela"):null),
+    el("section",{class:"panel tile"},el("span",{class:"eyebrow"},"Prioridade · "+n1+" respostas"),el("h3",{},"Qual tensão resolver primeiro"),
+      el("div",{class:"bars"},q1.map(([k,l,c,n])=>el("div",{class:"bar"},el("div",{},el("div",{class:"lbl"},el("span",{},l),el("span",{class:"tag"},"modelo: "+LV[c])),el("div",{class:"tr",html:`<i style="width:${n/max1*100}%"></i>`})),el("span",{class:"n"},String(n)))))),
+    el("section",{class:"panel tile wide"},el("span",{class:"eyebrow"},"Campo de posições · "+pos.length+" pessoas × "+SEATS.length+" assentos sintéticos"),el("h3",{},POLE_A+" ⟷ "+POLE_B),
+      el("div",{class:"legend"},el("span",{style:"display:flex;gap:6px;align-items:center"},el("span",{class:"dia"}),"Conselho das Sombras (acima)"),el("span",{style:"display:flex;gap:6px;align-items:center"},el("span",{class:"dot"}),"Pessoas na sala (abaixo)")),
+      field,el("div",{class:"flabels"},el("span",{},"← "+POLE_A),el("span",{},POLE_B+" →")),
+      med!=null?el("p",{class:"small muted",style:"margin:0"},`A mediana humana está em ${sgn(med)}; a média dos assentos sintéticos está em ${sgn(SEATS.reduce((a,s)=>a+s[2],0)/SEATS.length)}. Contagens da sala não representam a população.`):null),
+    el("section",{class:"panel tile wide"},el("span",{class:"eyebrow"},"Prisma · "+CRIT),el("h3",{},"Agentes × pessoas: onde divergimos"),
+      el("div",{class:"prow"},q3.map(m=>el("div",{class:"pc"},el("div",{class:"cell",html:cellSVG(m.a,m.h)+(m.h!=null&&Math.abs(m.h-m.a)>=1.5?'<span class="ne">≠</span>':"")}),el("b",{},m.n),el("small",{},"agentes "+sgn(m.a)+" · pessoas "+(m.h==null?"—":sgn(m.h)))))),
+      el("div",{class:"legend"},el("span",{},"Triângulo de cima: leitura dos agentes. De baixo: média da sala."),el("span",{},el("b",{style:"color:var(--c4)"},"≠")," divergência de 1,5 ponto ou mais"))),
+    el("section",{class:"panel tile wide"},el("span",{class:"eyebrow"},"Mesa humana · "+texts.length+" contribuições"),el("h3",{},"O que a sala trouxe"),
+      el("div",{class:"legend"},mvCount.map(([l,n])=>el("span",{class:"tag"},l+" · "+n))),
+      !S.showText?el("p",{class:"muted"},"Textos ocultos pelo apresentador."):texts.length?el("div",{class:"feed"},texts.slice(0,12).map(x=>el("div",{class:"fi "+x.mv},el("span",{class:"mv"},(MOVES.find(m=>m[0]===x.mv)||["",""])[1]),el("div",{},el("p",{},x.tx),el("small",{},(SECTORS.find(s=>s[0]===x.sector)||["","Sem setor"])[1]+(x.sim?" · simulado":""))),el("button",{class:"btn ghost",style:"padding:2px 6px;font-size:12px","aria-label":"Ocultar",onclick:()=>{S.hidden.add(x.pid);schedule()}},"ocultar")))):el("p",{class:"muted"},"As contribuições aparecem aqui assim que chegam.")));
+}
+
+/* ================= base de conhecimento ================= */
+const KB=[
+ {id:"br",n:"Brasil",model:"Risco (PL 2338) + investimento (PBIA) + proteção de dados (LGPD)",items:[
+  {t:"PL 2338/2023 · marco legal da IA",st:["Em tramitação","warn"],d:"Aprovado no Senado em 10/12/2024. Comissão especial instalada na Câmara em 20/05/2025; em out/2026 aguardava parecer do relator, que anunciou votação para depois das eleições.",rel:"Define o regime de risco que orientaria a fiscalização. Enquanto não é lei, requisitos derivados dele são prospectivos.",src:[["Câmara · ficha de tramitação","https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2487262"]]},
+  {t:"PBIA 2024–2028 · Plano Brasileiro de IA",st:["Em execução","ok"],d:"Cerca de R$ 23 bi em cinco eixos: infraestrutura (~R$ 5,8 bi), formação (~R$ 1,15 bi), serviços públicos (~R$ 1,76 bi), inovação empresarial (~R$ 13,8 bi) e regulação e governança (~R$ 103 mi). Valores por eixo vêm de apresentações do MCTI citadas por fontes secundárias.",rel:"O Eixo 5 financia o apoio ao processo regulatório; é pequeno diante dos demais.",src:[["MCTI · PBIA","https://www.gov.br/mcti/pt-br/acompanhe-o-mcti/transformacaodigital/plano-brasileiro-de-inteligencia-artificial"]]},
+  {t:"LGPD · art. 20",st:["Em vigor","ok"],d:"Direito de solicitar revisão de decisões tomadas unicamente com base em tratamento automatizado.",rel:"Hoje é o principal gancho legal vigente para decisões automatizadas.",src:[["Planalto · Lei 13.709/2018","https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm"]]},
+  {t:"Sandbox regulatório de IA · ANPD",st:["Piloto","ok"],d:"Primeiro ciclo de testagem iniciado em 18/03/2026, com três participantes selecionados; metodologia do CIAAM/USP.",rel:"Experiência concreta de regulação experimental no país.",src:[["ANPD · relatório de monitoramento","https://www.gov.br/anpd/pt-br/assuntos/projetos-acoes-iniciativas/sandbox/relatorio-1-de-monitoramento_ciclo-testagem_albert-franca-josua.pdf/@@display-file/file"]]},
+  {t:"Consultas públicas ligadas ao PBIA",st:["Encerradas","warn"],d:"Guia de uso ético de IA do MJSP (Ação 50 do Eixo 5, até 19/04/2026); diretrizes de IA na educação (MEC, out/2025; CNE, até jun/2026), na plataforma Brasil Participativo.",rel:"Geram contribuições que precisam de síntese rastreável: caso de uso direto da plataforma.",src:[["Agência Gov · consulta do MJSP","https://agenciagov.ebc.com.br/noticias/202603/mjsp-abre-consulta-publica-sobre-guia-de-uso-etico-de-inteligencia-artificial-1"]]}]},
+ {id:"ue",n:"União Europeia",model:"Risco, horizontal, conformidade ex ante",items:[
+  {t:"AI Act · Regulamento (UE) 2024/1689",st:["Em vigor, escalonado","ok"],d:"Proibições, alfabetização em IA, obrigações de modelos de propósito geral e transparência do art. 50 mantêm o calendário original.",rel:"Principal referência do PL 2338.",src:[["AI Act Explorer","https://artificialintelligenceact.eu/ai-act-explorer/digital-omnibus/"]]},
+  {t:"Digital Omnibus on AI · Regulamento (UE) 2026/1744",st:["Em vigor desde 27/07/2026","ok"],d:"Adiou o alto risco: sistemas do Anexo III a partir de 02/12/2027; IA embarcada em produtos (Anexo I) a partir de 02/08/2028. Prazo de marca d'água para sistemas existentes até 02/12/2026.",rel:"O adiamento sinaliza o custo de capacidade estatal e de normas técnicas que um regime de risco exige.",src:[["Gibson Dunn","https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/"]]}]},
+ {id:"us",n:"Estados Unidos",model:"Mercado, setorial, responsabilização ex post",items:[
+  {t:"EO 14365 · preempção de leis estaduais",st:["Em vigor","ok"],d:"Dez/2025: cria força-tarefa no DOJ para contestar leis estaduais de IA. Ordem executiva não revoga lei estadual sozinha; até ago/2026 não havia lei federal de preempção.",rel:"Fornecedor dominante de modelos e chips usados no Brasil.",src:[["Ropes & Gray","https://www.ropesgray.com/en/insights/alerts/2026/03/the-white-house-legislative-recommendations-national-policy-framework-for-artificial-intelligence-an"]]},
+  {t:"Leis estaduais",st:["Em disputa","warn"],d:"Estados seguem legislando; a aplicação da lei do Colorado foi pausada por ordem de 27/04/2026 (fontes secundárias).",rel:"Mosaico regulatório: custo jurídico maior para empresas pequenas.",src:[["SecurePrivacy","https://secureprivacy.ai/blog/trump-ai-executive-order-and-state-law-preemption-what-to-do-now"]]}]},
+ {id:"cn",n:"China",model:"Dirigido pelo Estado, registro e rotulagem",items:[
+  {t:"Registro de algoritmos e medidas para IA generativa",st:["Em vigor","ok"],d:"Registro de algoritmos de recomendação e medidas provisórias para IA generativa (2023).",rel:"Referência de soberania tecnológica, com custos para direitos.",src:[]},
+  {t:"Rotulagem de conteúdo sintético",st:["Verificar","warn"],d:"Medidas de rotulagem de conteúdo gerado por IA em vigor desde set/2025, segundo nosso conhecimento; não verificado nesta pesquisa.",rel:"Comparável ao art. 50 do AI Act.",src:[]}]},
+ {id:"uk",n:"Reino Unido",model:"Princípios aplicados por reguladores setoriais",items:[
+  {t:"Abordagem pró-inovação por princípios",st:["Verificar","warn"],d:"Sem lei geral de IA até onde verificamos; reguladores existentes aplicam princípios. Padrão de transparência algorítmica para o setor público.",rel:"Alternativa de menor custo estatal inicial.",src:[]}]},
+ {id:"as",n:"Ásia-Pacífico",model:"Leis-quadro de promoção com obrigações seletivas",items:[
+  {t:"Coreia do Sul · Lei Básica de IA",st:["Verificar","warn"],d:"Aprovada em dez/2024, com vigência prevista para jan/2026, segundo nosso conhecimento; não verificado nesta pesquisa.",rel:"Exemplo de lei-quadro que combina fomento e obrigações para IA de alto impacto.",src:[]},
+  {t:"Japão · Lei de Promoção de IA",st:["Verificar","warn"],d:"Lei de 2025 centrada em coordenação e fomento, segundo nosso conhecimento; não verificado nesta pesquisa.",rel:"Contraponto ao modelo regulatório europeu.",src:[]}]},
+ {id:"gl",n:"Multilateral",model:"Princípios e tratados",items:[
+  {t:"Princípios de IA da OCDE",st:["Vigentes","ok"],d:"Adotados em 2019 e revisados em 2024; o Brasil aderiu.",rel:"Base comum de vocabulário entre países.",src:[]},
+  {t:"Recomendação da UNESCO sobre ética da IA",st:["Vigente","ok"],d:"Adotada em 2021 pelos Estados-membros.",rel:"Referência para avaliação ética no setor público.",src:[]},
+  {t:"Convenção-Quadro do Conselho da Europa sobre IA",st:["Verificar","warn"],d:"Primeiro tratado internacional sobre IA, aberto à assinatura em set/2024; adesões a verificar.",rel:"Possível referência vinculante para países fora da UE.",src:[]}]}
+];
+function renderKB(){
+  const k=$("#kb");const q=S.kbQ.toLowerCase();
+  const list=q?KB.map(j=>({...j,items:j.items.filter(i=>(i.t+i.d+i.rel+j.n).toLowerCase().includes(q))})).filter(j=>j.items.length):KB.filter(j=>j.id===S.kbSel);
+  const search=el("input",{class:"search",type:"search",id:"kbq",placeholder:"Buscar: risco, sandbox, Omnibus…","aria-label":"Buscar na base"});search.value=S.kbQ;
+  search.addEventListener("input",()=>{S.kbQ=search.value;renderKB();const n=$("#kbq");n.focus();n.setSelectionRange(n.value.length,n.value.length)});
+  put(k,el("div",{class:"side"},search,KB.map(j=>el("button",{"aria-pressed":String(!q&&S.kbSel===j.id),onclick:()=>{S.kbSel=j.id;S.kbQ="";renderKB()}},j.n))),
+    el("div",{style:"display:flex;flex-direction:column;gap:16px;min-width:0"},
+      list.length?list.map(j=>el("article",{class:"panel jur"},el("div",{},el("span",{class:"eyebrow"},"Modelo de governança"),el("h2",{},j.n),el("p",{class:"muted",style:"margin:4px 0 0"},j.model)),
+        j.items.map(i=>el("div",{class:"inst"},el("h3",{},i.t),el("span",{class:"tag "+i.st[1]},i.st[0]),el("p",{},i.d),el("div",{class:"rel"},el("b",{},"Por que importa para o Brasil: "),i.rel),
+          el("div",{class:"src"},i.src.length?["Fonte: ",...i.src.flatMap(([l,u],x)=>[x?", ":"",el("a",{href:u,target:"_blank",rel:"noopener"},l)])]:"Fonte primária a confirmar."))))):el("p",{class:"muted"},"Nada encontrado."),
+      el("p",{class:"small muted"},"Estado em nov/2026, a partir de fontes oficiais e secundárias. Itens marcados “Verificar” vêm de conhecimento prévio e precisam de checagem antes de uso formal.")));
+}
+
+/* ================= monitoramento ================= */
+const EVENTS=[
+ ["2024-07-30","br","PBIA apresentado","Plano Brasileiro de IA 2024–2028, cerca de R$ 23 bi.","R03: instrumentos do plano ligados ao Brasil"],
+ ["2024-12-10","br","Senado aprova o PL 2338/2023","Texto segue para a Câmara.","Nova LegalInstrumentVersion em proposta"],
+ ["2025-05-20","br","Comissão especial instalada na Câmara","Relator: dep. Aguinaldo Ribeiro.",""],
+ ["2025-09-01","mu","China: rotulagem de conteúdo sintético","Data segundo nosso conhecimento; verificar.","Referência comparativa"],
+ ["2025-12-11","mu","EUA: EO 14365","Força-tarefa federal contra leis estaduais de IA.","RegulatoryChangeEvent externo"],
+ ["2026-03-18","br","ANPD inicia 1º ciclo do sandbox de IA","Três participantes; metodologia CIAAM/USP.",""],
+ ["2026-03-20","mu","EUA: diretrizes da Casa Branca para preempção","Documento não vinculante.",""],
+ ["2026-04-09","br","Chamada do FIP de IA (BNDESPAR/Finep)","Instrumento financeiro ligado ao PBIA.",""],
+ ["2026-04-19","br","Encerra consulta do guia ético de IA (MJSP)","Ação 50 do Eixo 5 do PBIA.","Contribuições → PolicyClaim e StakeholderPosition"],
+ ["2026-07-27","mu","UE: Omnibus de IA entra em vigor","Alto risco adiado para 2027 e 2028.","R10–R13: requisitos e avaliações marcados para reavaliação"],
+ ["2026-08-24","br","Relator adia votação do PL 2338","Votação prevista para depois das eleições.","Leituras do Brasil passam a ter validade condicionada"],
+ ["2026-12-02","fut","UE: fim do prazo de marca d'água para sistemas existentes","Previsto.",""],
+ ["2027-12-02","fut","UE: obrigações de alto risco (Anexo III)","Previsto.",""],
+ ["2028-08-02","fut","UE: alto risco em produtos (Anexo I)","Previsto.",""],
+ ["2028-12-31","fut","Fim do horizonte do PBIA","Previsto.","Avaliação final de execução por eixo"]];
+function renderMon(){
+  const m=$("#mon");const today=new Date().toISOString().slice(0,10);
+  const f=S.monF;const evs=EVENTS.filter(e=>f==="all"||(f==="br"?e[1]==="br"||(e[1]==="fut"&&/PBIA/.test(e[2])):f==="mu"?e[1]==="mu"||(e[1]==="fut"&&!/PBIA/.test(e[2])):e[1]==="fut"));
+  const tl=el("div",{class:"tl"});let placed=false;
+  for(const e of evs){if(!placed&&e[0]>today){tl.append(el("div",{class:"today"},"▼ hoje · "+today.split("-").reverse().join("/")));placed=true}
+    tl.append(el("div",{class:"ev "+(e[1]==="fut"?"fut":e[1])},el("span",{class:"d"},e[0].split("-").reverse().join("/")),el("span",{class:"rail"},el("i")),
+      el("div",{class:"b"},el("b",{},e[2]),el("p",{},e[3]),e[4]?el("span",{class:"tag syn"},"ontologia: "+e[4]):null)))}
+  if(!placed)tl.append(el("div",{class:"today"},"▼ hoje"));
+  put(m,el("div",{},el("span",{class:"eyebrow"},"Pulso normativo"),el("h2",{style:"font-size:26px"},"Monitoramento de governança de IA · Brasil e mundo"),
+      el("p",{class:"muted",style:"margin:6px 0 0"},"Cada evento pode virar um RegulatoryChangeEvent na ontologia HRAI-GO e reabrir conclusões por regras SWRL, sempre com revisão humana antes de publicar.")),
+    el("div",{class:"filters"},[["all","Tudo"],["br","Brasil"],["mu","Mundo"],["fut","Próximos marcos"]].map(([k,l])=>el("button",{class:"btn"+(S.monF===k?" primary":""),style:"padding:6px 12px",onclick:()=>{S.monF=k;renderMon()}},l))),
+    el("div",{class:"panel",style:"padding:20px 16px 4px"},tl),
+    el("p",{class:"small muted"},"Datas de fontes secundárias consultadas em nov/2026; confirmar nas fontes oficiais."));
+}
+
+/* ================= rotas ================= */
+const VIEWS=["participar","telao","conhecimento","monitor"];
+function route(){const v=(location.hash||"").slice(1);S.view=VIEWS.includes(v)?v:(matchMedia("(min-width: 1000px)").matches&&!params.get("sala")?"telao":"participar");
+  for(const n of VIEWS)$("#v-"+n).hidden=n!==S.view;document.querySelectorAll(".tabs a").forEach(a=>a.setAttribute("aria-current",a.dataset.v===S.view?"page":"false"));render()}
+function render(){
+  if(S.view==="participar"){const a=document.activeElement;if(!(a&&a.id==="q4t"))renderPhone()}
+  if(S.view==="telao"){renderQR();renderTiles()}
+  if(S.view==="conhecimento"&&!$("#kb").childElementCount)renderKB();
+  if(S.view==="monitor"&&!$("#mon").childElementCount)renderMon();
+}
+addEventListener("hashchange",route);
+try{S.ans=JSON.parse(ls.get("hrai.ans."+SALA)||"{}")}catch(e){S.ans={}}
+S.sector=ls.get("hrai.sector");
+$("#sala-lbl").textContent="sala "+SALA.slice(-6)+" · governança de IA · Brasil e mundo";
+route();
+if(isArtifact)startArtifact();
+else if(location.protocol.startsWith("http"))startNtfy();
+else setConn("bad","modo local · arquivo");
+})();
+</script>
