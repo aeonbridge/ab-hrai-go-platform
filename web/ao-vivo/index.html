@@ -50,7 +50,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 #comandos button{border:1px solid rgba(214,226,240,.2);background:transparent;border-radius:999px;padding:9px 15px;font-weight:600;font-size:14px}
 #comandos button[aria-pressed="true"]{background:var(--color-action-primary-bg);border-color:var(--color-action-primary-bg);color:var(--color-action-primary-fg)}
 #comandos .sep{width:1px;background:rgba(214,226,240,.18);margin:4px 4px}
-.rotulo3d{position:fixed;transform:translate(-50%,-140%);font:600 12.5px/1.2 var(--font-sans);white-space:nowrap;pointer-events:none;z-index:3;padding:4px 9px;border-radius:999px;background:rgba(7,12,22,.72);border:1px solid rgba(214,226,240,.16);transition:opacity .3s}
+.rotulo3d{position:fixed;transform:translate(-50%,-140%);font:600 12.5px/1.2 var(--font-sans);white-space:nowrap;pointer-events:none;cursor:pointer;z-index:3;padding:4px 9px;border-radius:999px;background:rgba(7,12,22,.72);border:1px solid rgba(214,226,240,.16);transition:opacity .3s}
 .rotulo3d.lacuna{color:var(--color-tone-crimson-fg);border-color:var(--color-tone-crimson-border)}
 .rotulo3d.tensao{color:var(--color-text-link);border-color:rgba(232,163,61,.5)}
 .rotulo3d b{font:500 11px/1 var(--font-mono);margin-left:6px;color:var(--color-text-primary)}
@@ -169,6 +169,29 @@ body.participante .marca{white-space:nowrap}
   body.participante #topo{right:400px}
   body.participante #puxador{display:none} body.participante #gaveta.fechada .aba:not([hidden]){display:block}
 }
+/* avatares das pessoas: HTML sobre a cena, nítidos e clicáveis (sem bloom nem neblina) */
+#pavs{position:fixed;inset:0;pointer-events:none;z-index:2}
+.pav{position:absolute;left:0;top:0;width:34px;height:34px;padding:0;border-radius:9px;border:2px solid #F5D49A;background:#E9EFF7;box-shadow:0 0 0 2px rgba(7,12,22,.85),0 6px 18px rgba(0,0,0,.5);pointer-events:auto;cursor:pointer;will-change:transform;transition:opacity .3s}
+.pav img{width:100%;height:100%;display:block;image-rendering:pixelated;border-radius:6px}
+.pav.sim{border-color:#8A97AB}
+.pav.eu{border-color:#E8A33D;border-width:3px;box-shadow:0 0 0 2px rgba(7,12,22,.85),0 0 18px rgba(232,163,61,.8)}
+.pav::after{content:"";position:absolute;left:50%;bottom:-7px;width:2px;height:6px;background:inherit;transform:translateX(-50%)}
+.pav:focus-visible{outline:3px solid var(--color-border-focus);outline-offset:2px}
+#ficha{position:fixed;z-index:8;width:min(360px,calc(100% - 24px));padding:16px 16px 14px;display:none}
+#ficha.on{display:block;animation:sobe .25s ease-out}
+#ficha .fx{position:absolute;top:8px;right:8px;width:44px;height:44px;border-radius:50%;border:0;background:transparent;color:var(--color-text-secondary);font-size:22px;cursor:pointer}
+#ficha .cab{display:flex;gap:12px;align-items:center;padding-right:40px}
+#ficha .cab img{width:64px;height:64px;border-radius:12px;image-rendering:pixelated;background:#E9EFF7;border:2px solid #F5D49A;flex:none}
+#ficha h3{font:700 19px/1.15 var(--font-display);margin:2px 0}
+#ficha .tag{font:500 11px/1.3 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--color-action-primary-bg)}
+#ficha .sub{font-size:13.5px;color:var(--color-text-secondary)}
+#ficha dl{margin:12px 0 0;display:grid;gap:8px}
+#ficha dt{font:500 10.5px/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--color-text-tertiary)}
+#ficha dd{margin:3px 0 0;font-size:14.5px;line-height:1.4}
+#ficha p{font-size:14px;line-height:1.45;margin:10px 0 0}
+#ficha .nota{font-size:12.5px;color:var(--color-tone-crimson-fg)}
+body.participante #ficha{left:12px!important;right:12px;top:calc(64px + env(safe-area-inset-top))!important;width:auto;max-height:60vh;overflow:auto}
+@media (min-width:901px){body.participante #ficha{right:auto;width:360px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -192,6 +215,8 @@ body.participante .marca{white-space:nowrap}
   <section data-camada="3"><div class="eyebrow">P4 · lente Q1, omissão</div><h2>O que falta no modelo</h2><div id="barrasL"></div></section>
   <section data-camada="0"><div class="eyebrow">P1 · quem está aqui</div><div id="barrasS"></div></section>
 </aside>
+<div id="pavs"></div>
+<aside id="ficha" class="vidro" role="dialog" aria-label="Detalhe"></aside>
 <div id="falas" aria-live="polite"></div>
 <div id="chegada" aria-live="polite"></div>
 <aside id="legenda" class="vidro">
@@ -316,14 +341,15 @@ ANDARES.forEach((k, andar) => {
     const geo = new THREE.BoxGeometry(.95, .62, .95);
     const proposto = c.status === "proposed", inferido = c.basis === "inferred";
     const mat = new THREE.MeshStandardMaterial({ color: corStatus(c.status), emissive: corStatus(c.status), emissiveIntensity: proposto ? .08 : .14, transparent: proposto || inferido, opacity: proposto ? .3 : inferido ? .6 : 1, roughness: .75, metalness: 0 });
-    const b = new THREE.Mesh(geo, mat); b.position.set(Math.cos(a) * r, 1 + andar * .95, Math.sin(a) * r); torre.add(b);
+    const b = new THREE.Mesh(geo, mat); b.userData.ficha = { comp: c }; b.position.set(Math.cos(a) * r, 1 + andar * .95, Math.sin(a) * r); torre.add(b);
     if (proposto || inferido) { const e = new THREE.LineSegments(new THREE.EdgesGeometry(geo), new THREE.LineDashedMaterial({ color: proposto ? COR.violet : COR.cinza, dashSize: .12, gapSize: .08 })); e.computeLineDistances(); e.position.copy(b.position); torre.add(e); }
   });
 });
 /* mesa da sala: anel no chão ao redor da torre, onde chegam as contribuições escritas (P5) */
-const MESA_R = 3.4;
+const MESA_R = 3.4, MESA_PEGA = [];
 const nucleo = new THREE.Mesh(new THREE.TorusGeometry(MESA_R, .05, 8, 96), new THREE.MeshBasicMaterial({ color: COR.brass2, transparent: true, opacity: .3 }));
 nucleo.rotation.x = Math.PI / 2; nucleo.position.y = .06; scene.add(nucleo);
+{ const pega = new THREE.Mesh(new THREE.TorusGeometry(MESA_R, .45, 6, 48), new THREE.MeshBasicMaterial({ visible: false })); pega.rotation.x = Math.PI / 2; pega.userData.ficha = { mesa: true }; scene.add(pega); MESA_PEGA.push(pega); }
 const pontoMesa = de => { const d = new THREE.Vector3(de.x, 0, de.z); if (d.lengthSq() < 1e-6) d.set(0, 0, 1); return d.normalize().multiplyScalar(MESA_R).setY(.1); };
 
 /* anel sintético: 20 assentos em 8 estratos + cadeiras vazias */
@@ -333,14 +359,14 @@ let idx = 0;
 M.strata.forEach(s => { for (let k = 0; k < s.seats; k++) {
   const a = idx++ / totalAssentos * Math.PI * 2;
   const m = new THREE.Mesh(new THREE.OctahedronGeometry(.42), new THREE.MeshStandardMaterial({ color: ESTRATO_COR[s.id], emissive: ESTRATO_COR[s.id], emissiveIntensity: .55, roughness: .3 }));
-  m.position.set(Math.cos(a) * 7.5, 1.1, Math.sin(a) * 7.5); m.userData = { fase: Math.random() * 6 }; gAss.add(m); assentos.push(m);
+  m.position.set(Math.cos(a) * 7.5, 1.1, Math.sin(a) * 7.5); m.userData = { fase: Math.random() * 6, ficha: { estrato: s } }; gAss.add(m); assentos.push(m);
   const haste = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(m.position.x, 0, m.position.z), new THREE.Vector3(m.position.x, .7, m.position.z)]);
   gAss.add(new THREE.Line(haste, new THREE.LineBasicMaterial({ color: ESTRATO_COR[s.id], transparent: true, opacity: .4 })));
 } });
-M.unrep.forEach(() => {
+M.unrep.forEach(nome => {
   const a = idx++ / totalAssentos * Math.PI * 2;
   const t = new THREE.Mesh(new THREE.TorusGeometry(.42, .03, 8, 32), new THREE.MeshBasicMaterial({ color: COR.cinza, transparent: true, opacity: .7, wireframe: true }));
-  t.position.set(Math.cos(a) * 7.5, 1.1, Math.sin(a) * 7.5); t.lookAt(0, 1.1, 0); gVaz.add(t);
+  t.position.set(Math.cos(a) * 7.5, 1.1, Math.sin(a) * 7.5); t.lookAt(0, 1.1, 0); t.userData.ficha = { vazio: nome }; gVaz.add(t);
 });
 
 /* cúpula: 28 áreas; as 6 lacunas são anéis coral */
@@ -358,7 +384,7 @@ M.topics.forEach((t, i) => {
     const cor = t.strength === "inForce" ? COR.teal : t.strength === "proposedOnly" ? COR.violet : COR.cinza;
     obj = new THREE.Mesh(new THREE.SphereGeometry(.22, 16, 12), new THREE.MeshBasicMaterial({ color: cor, transparent: true, opacity: t.strength === "inferredOnly" ? .5 : .9 }));
   }
-  obj.position.copy(p); obj.userData = { votos: 0, alvo: 1 }; (t.strength === "none" ? gLac : gCup).add(obj); cupula[t.id] = obj;
+  obj.position.copy(p); obj.userData = { votos: 0, alvo: 1, ficha: { topico: t } }; (t.strength === "none" ? gLac : gCup).add(obj); cupula[t.id] = obj;
 });
 
 /* tensões-semente: arcos sobre a câmara */
@@ -370,6 +396,7 @@ SEMENTES.forEach((s, i) => {
   const curva = new THREE.QuadraticBezierCurve3(p1, meio, p2);
   const mat = new THREE.MeshBasicMaterial({ color: COR.brass, transparent: true, opacity: .14 });
   const tubo = new THREE.Mesh(new THREE.TubeGeometry(curva, 80, .05, 8, false), mat); gArc.add(tubo);
+  const pega = new THREE.Mesh(new THREE.TubeGeometry(curva, 40, .3, 6, false), new THREE.MeshBasicMaterial({ visible: false })); pega.userData.ficha = { tensao: s }; gArc.add(pega);
   const topo = curva.getPoint(.5);
   arcos[s.id] = { tubo, mat, curva, topo, votos: 0 };
   const el = document.createElement("div"); el.className = "rotulo3d tensao"; el.innerHTML = s.id + " · " + esc(s.title) + "<b>0</b>"; document.body.appendChild(el);
@@ -397,9 +424,10 @@ function chegar(pid, setor, sim) {
   const alvo = vaga(s, porSetor[s]++);
   const m = new THREE.Mesh(geoPessoa, new THREE.MeshBasicMaterial({ color: sim ? 0xC9A86A : COR.brass2 }));
   m.position.copy(ENTRADA); scene.add(m);
-  const tex = new THREE.CanvasTexture(PixelAvatar.canvas(pid, 2)); tex.magFilter = THREE.NearestFilter; tex.minFilter = THREE.NearestFilter;
-  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, color: 0xC8C8C8, depthWrite: false })); sp.scale.set(1.15, 1.15, 1); sp.position.set(0, 1.05, 0); m.add(sp);
-  const p = { pid, setor: s, mesh: m, de: ENTRADA.clone(), para: alvo, t0: performance.now(), dur: REDUZ ? 1 : 1800, sim };
+  const el = document.createElement("button"); el.className = "pav" + (sim ? " sim" : ""); el.innerHTML = `<img src="${PixelAvatar.url(pid, 4, "#E9EFF7")}" alt="">`;
+  el.setAttribute("aria-label", "Ver " + L.apelido(pid, s)); el.onclick = ev => { ev.stopPropagation(); abrirFicha({ pessoa: pid }, ev); };
+  $("#pavs").appendChild(el); m.userData.pid = pid;
+  const p = { pid, setor: s, mesh: m, el, de: ENTRADA.clone(), para: alvo, t0: performance.now(), dur: REDUZ ? 1 : 1800, sim };
   pessoas.set(pid, p);
   rastro(ENTRADA, alvo, COR.brass2, 1800);
   atualizarTotal();
@@ -579,7 +607,7 @@ function destacarEu() {
   const anel = new THREE.Mesh(new THREE.TorusGeometry(.62, .06, 8, 40), new THREE.MeshBasicMaterial({ color: COR.brass }));
   anel.rotation.x = Math.PI / 2; p.mesh.add(anel); p.mesh.scale.setScalar(1.35);
   const el = document.createElement("div"); el.className = "rotulo3d voce"; el.textContent = "você"; document.body.appendChild(el);
-  rotulos.push({ el, pos: p.mesh.position, id, tipo: "voce" });
+  rotulos.push({ el, pos: p.mesh.position, id, tipo: "voce" }); p.el.classList.add("eu");
 }
 function renderVoce() {
   const v = $("#voce");
@@ -614,7 +642,7 @@ function renderMesa() {
   $("#abaMesa").innerHTML = (pode ? "" : chamadaEntrar("Para reagir às contribuições, entre na câmara. Leva 30 segundos, sem cadastro.")) + cs.slice(0, 60).map(c => {
     const { c: n, minha } = reacoesDe(c.pid, ps), meu = c.pid === eu;
     return `<article class="card ${esc(c.v.mv || "")}${meu ? " meu" : ""}">
-      <div class="quem"><img class="av" src="${PixelAvatar.url(c.pid, 3)}" alt=""><b>${esc(meu ? "Você" : L.apelido(c.pid, c.setor))}</b>${c.sim ? " · simulada" : ""}<span class="mv">${esc(MOV[c.v.mv] || "Contribuição")}</span></div>
+      <div class="quem" data-pid="${esc(c.pid)}" role="button" tabindex="0" style="cursor:pointer"><img class="av" src="${PixelAvatar.url(c.pid, 3)}" alt=""><b>${esc(meu ? "Você" : L.apelido(c.pid, c.setor))}</b>${c.sim ? " · simulada" : ""}<span class="mv">${esc(MOV[c.v.mv] || "Contribuição")}</span></div>
       <p>${esc(c.v.tx)}</p>
       <div class="reacoes" role="group" aria-label="Reagir">${REACOES.map(([k, rot, , ic]) => `<button class="${k}" data-alvo="${esc(c.pid)}" data-r="${k}" aria-pressed="${minha === k}" ${meu || !pode ? "disabled" : ""} aria-label="${rot}: ${n[k]}">${ic} ${rot} <b>${n[k]}</b></button>`).join("")}${meu ? "<small>sua contribuição</small>" : ""}</div>
     </article>`;
@@ -672,6 +700,63 @@ function atualizarUI() {
   if (!$("#abaMinhas").hidden && !$("#abaMinhas").contains(document.activeElement) && !$("#abaMinhas").children.length) renderMinhas();
 }
 if (PARTICIPANTE) { renderVoce(); renderMesa(); renderAgora(); }
+/* ---------- ficha: clicar em qualquer coisa da câmara mostra o que é ---------- */
+const STATUS = { effective: "Em vigor", policy: "Política pública", proposed: "Projeto de lei · não vincula" };
+const TIPO = { instrument: "Instrumento", institution: "Instituição", mechanism: "Mecanismo", resource: "Recurso", metric: "Métrica" };
+const FORCA = { inForce: "Coberta por componente em vigor", proposedOnly: "Só em projeto de lei", inferredOnly: "Só por inferência, sem fonte confirmada", none: "Nenhum componente: lacuna" };
+const SETOR_LONGO = Object.fromEntries(C.setores);
+function htmlFicha(f) {
+  if (f.pessoa) {
+    const id = f.pessoa, pr = L.participantes().find(x => x.pid === id) || {}, setor = pr.setor || setorDe(id), eu = id === L.eu();
+    const s1 = pr.q1 && SEMENTES.find(s => s.id === pr.q1.v), l3 = pr.q3 && LACUNAS.find(x => x.id === pr.q3.v), pol = C.polos || ["", ""];
+    const q2 = pr.q2 && typeof pr.q2.v === "number" ? pr.q2.v : null;
+    const pos = q2 == null ? null : Math.abs(q2) < .15 ? "No meio, entre os dois polos" : (Math.abs(q2) > .6 ? "Perto de: " : "Inclina para: ") + (q2 < 0 ? pol[0] : pol[1]);
+    const q4 = pr.q4 && pr.q4.v && pr.q4.v.tx ? pr.q4.v : null, rc = q4 ? reacoesDe(id).c : null;
+    const linhas = [["Setor", SETOR_LONGO[setor] || "Não informado"], ["Tensão escolhida", s1 ? s1.id + " · " + s1.title : null], ["Posição em T5", pos], ["Lacuna apontada", l3 ? l3.label : null]].filter(x => x[1]);
+    return `<div class="cab"><img src="${PixelAvatar.url(id, 4, "#E9EFF7")}" alt=""><div><div class="tag">${eu ? "Você" : pr.sim ? "Pessoa simulada" : "Pessoa na sala"}</div><h3>${esc(L.apelido(id, setor))}</h3><div class="sub">Anônima: o apelido vem do setor e do identificador do aparelho.</div></div></div>
+      <dl>${linhas.map(([a, b]) => `<div><dt>${a}</dt><dd>${esc(b)}</dd></div>`).join("")}${q4 ? `<div><dt>Contribuição · ${esc(MOV[q4.mv] || "")}</dt><dd>“${esc(q4.tx)}”</dd><dd class="sub">${REACOES.map(([k, rot, , ic]) => ic + " " + rot + " " + rc[k]).join("  ·  ")}</dd></div>` : ""}</dl>
+      ${linhas.length < 2 && !q4 ? `<p class="sub">Ainda não escolheu nada além do setor.</p>` : ""}`;
+  }
+  if (f.comp) { const c = f.comp; return `<div class="tag">${esc(c.id)} · ${esc(TIPO[c.kind] || c.kind)} · ${esc(STATUS[c.status] || c.status)}</div><h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p>${c.note ? `<p class="nota">${esc(c.note)}</p>` : ""}<p class="sub">${c.basis === "inferred" ? "Inferido pelo autor do modelo: conferir na fonte." : "Documentado em fonte pública."}</p>`; }
+  if (f.tensao) { const s = f.tensao, a = arcos[s.id], est = (s.strata || []).map(id => (M.strata.find(x => x.id === id) || {}).label).filter(Boolean);
+    return `<div class="tag">Tensão-semente ${esc(s.id)} · ${a.votos} voto${a.votos === 1 ? "" : "s"} da sala</div><h3>${esc(s.title)}</h3>${s.desc ? `<p>${esc(s.desc)}</p>` : ""}${est.length ? `<p class="sub">Estratos do conselho em atrito: ${esc(est.join(" × "))}.</p>` : ""}${s.id === "T5" ? `<p class="sub">É a tensão do eixo de posição: cada pessoa se coloca entre “${esc((C.polos || [])[0] || "")}” e “${esc((C.polos || [])[1] || "")}”.</p>` : ""}<p class="sub">O arco liga os dois lados da tensão e acende conforme a sala a escolhe.</p>`; }
+  if (f.mesa) { const n = contribuicoes().length; return `<div class="tag">Mesa da sala · ${n} contribuição${n === 1 ? "" : "ões"}</div><h3>Contribuições escritas</h3><p>Cada contribuição publicada viaja da luz de quem escreveu até este anel, que acende. O texto aparece no telão e na aba Mesa do celular, onde a sala pode apoiar, contestar ou pedir fonte.</p>`; }
+  if (f.estrato) { const s = f.estrato; return `<div class="tag">Conselho sintético · ${s.seats} assento${s.seats > 1 ? "s" : ""}</div><h3>${esc(s.label)}</h3><p>Perspectiva gerada a partir de documentos públicos desse estrato. Não é uma pessoa e não fala em nome de ninguém.</p>`; }
+  if (f.vazio) return `<div class="tag">Cadeira vazia</div><h3>${esc(f.vazio)}</h3><p>Sem fonte documental suficiente para gerar esta perspectiva. O sistema não inventa o que esse grupo pensaria.</p>`;
+  if (f.topico) { const tp = f.topico, cs = tp.comps.map(id => M.components.find(c => c.id === id)).filter(Boolean), votos = (cupula[tp.id].userData.votos || 0), esp = (C.esperadoPor[tp.id] || []).length;
+    return `<div class="tag">Área da taxonomia · ${esc(FORCA[tp.strength] || "")}</div><h3>${esc(tp.label)}</h3>${cs.length ? `<p>${cs.map(c => esc(c.id + " " + c.title)).join("<br>")}</p>` : `<p>Nenhum componente do modelo trata desta área. ${esp ? esp + " estrato" + (esp > 1 ? "s" : "") + " do conselho esperava" + (esp > 1 ? "m" : "") + " encontrá-la." : ""}</p><p class="sub">${votos} pessoa${votos === 1 ? "" : "s"} da sala apont${votos === 1 ? "ou" : "aram"} esta lacuna.</p>`}`; }
+  return "";
+}
+rotulos.forEach(r => { if (r.tipo === "voce") return; r.el.addEventListener("click", ev => { ev.stopPropagation(); abrirFicha(r.tipo === "tensao" ? { tensao: SEMENTES.find(s => s.id === r.id) } : { topico: M.topics.find(x => x.id === r.id) }, ev); }); });
+let fichaAtual = null;
+function abrirFicha(f, ev) {
+  const el = $("#ficha"); fichaAtual = f;
+  el.innerHTML = `<button class="fx" aria-label="Fechar">×</button>` + htmlFicha(f); el.classList.add("on");
+  el.querySelector(".fx").onclick = fecharFicha;
+  if (!PARTICIPANTE && ev) { const w = 360, x = Math.min(innerWidth - w - 12, Math.max(12, ev.clientX + 16)), y = Math.min(innerHeight - el.offsetHeight - 12, Math.max(70, ev.clientY - 40)); el.style.left = x + "px"; el.style.top = y + "px"; }
+}
+function fecharFicha() { $("#ficha").classList.remove("on"); fichaAtual = null; }
+addEventListener("keydown", e => { if (e.key === "Escape") fecharFicha(); });
+const raio = new THREE.Raycaster(), ptr = new THREE.Vector2();
+$("#gl").addEventListener("click", ev => {
+  ptr.set(ev.clientX / innerWidth * 2 - 1, -(ev.clientY / innerHeight) * 2 + 1); raio.setFromCamera(ptr, camera);
+  const alvos = []; GERIDOS.forEach(g => { if (g.visible && g.userData.k > .5) g.traverse(o => { if (o.userData && o.userData.ficha) alvos.push(o); }); });
+  for (const p of pessoas.values()) alvos.push(p.mesh);
+  MESA_PEGA.forEach(o => alvos.push(o));
+  const hits = raio.intersectObjects(alvos, false), largo = h => h.object.userData.ficha && (h.object.userData.ficha.tensao || h.object.userData.ficha.mesa);
+  let obj = ((hits.find(h => !largo(h)) || hits[0]) || {}).object;   /* arcos e mesa têm área de toque larga: só ganham se nada mais foi tocado */
+  if (!obj) {   /* tolerância para dedo: o objeto mais próximo na tela, até 28 px */
+    let melhor = 28 * 28; const w = new THREE.Vector3();
+    for (const o of alvos) { if (o.userData.ficha && (o.userData.ficha.mesa || o.userData.ficha.tensao)) continue; o.getWorldPosition(w); w.project(camera); if (w.z > 1) continue;
+      const dx = (w.x + 1) / 2 * innerWidth - ev.clientX, dy = (1 - w.y) / 2 * innerHeight - ev.clientY, d = dx * dx + dy * dy; if (d < melhor) { melhor = d; obj = o; } }
+  }
+  if (!obj) { fecharFicha(); return; }
+  abrirFicha(obj.userData.pid ? { pessoa: obj.userData.pid } : obj.userData.ficha, ev);
+});
+/* a Mesa também abre a ficha de quem escreveu */
+$("#abaMesa").addEventListener("click", e => { const q = e.target.closest(".quem"); if (q && q.dataset.pid) abrirFicha({ pessoa: q.dataset.pid }); });
+L.on(() => { if (fichaAtual && fichaAtual.pessoa) { clearTimeout(abrirFicha.t); abrirFicha.t = setTimeout(() => fichaAtual && abrirFicha(fichaAtual), 200); } });
+
 /* ---------- laço ---------- */
 const v = new THREE.Vector3(), ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 function quadro(now) {
@@ -699,12 +784,18 @@ function quadro(now) {
   for (const s of SEMENTES) { const a = arcos[s.id]; a.flash = Math.max(0, (a.flash || 0) - .015); a.mat.opacity = Math.min(.95, .14 + a.votos * .07 + a.flash * .6); }
   for (const tp of LACUNAS) { const o = cupula[tp.id]; o.userData.flash = Math.max(0, (o.userData.flash || 0) - .02); const s = o.scale.x + (o.userData.alvo + o.userData.flash * .8 - o.scale.x) * .08; o.scale.setScalar(s); o.rotation.z = t * .4; }
   const topoT = SEMENTES.map(s => [s.id, arcos[s.id].votos]).filter(x => x[1] > 0).sort((a, b) => b[1] - a[1]).slice(0, 2).map(x => x[0]);
+  for (const p of pessoas.values()) {
+    v.copy(p.mesh.position); v.y += .95; const dist = camera.position.distanceTo(v); v.project(camera);
+    const vis = v.z < 1 && Math.abs(v.x) < 1.05 && Math.abs(v.y) < 1.05;
+    p.el.style.opacity = vis ? 1 : 0; p.el.style.pointerEvents = vis ? "auto" : "none";
+    if (vis) { const s = Math.max(.62, Math.min(1.25, 26 / dist)); p.el.style.transform = `translate(${(v.x + 1) / 2 * innerWidth - 17}px,${(1 - v.y) / 2 * innerHeight - 34}px) scale(${s})`; p.el.style.zIndex = String(Math.round(1000 - dist * 10)); }
+  }
   for (const r of rotulos) {
     v.copy(r.pos).project(camera);
     let vis = v.z < 1 && Math.abs(v.x) < 1.1 && Math.abs(v.y) < 1.1;
     if (r.tipo === "tensao" && camModo !== "tensoes") vis = vis && topoT.includes(r.id);
     if (r.tipo !== "voce" && (r.tipo === "tensao" ? gArc : gLac).userData.k < .35) vis = false;
-    r.el.style.opacity = vis ? 1 : 0;
+    r.el.style.opacity = vis ? 1 : 0; if (r.tipo !== "voce") r.el.style.pointerEvents = vis ? "auto" : "none";
     if (vis) { r.el.style.left = ((v.x + 1) / 2 * innerWidth) + "px"; r.el.style.top = ((1 - v.y) / 2 * innerHeight) + "px"; }
   }
   composer.render();

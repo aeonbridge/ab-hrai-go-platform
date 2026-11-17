@@ -108,7 +108,9 @@ function simular(n) {
   }
   agendar();
 }
-let raf = 0; function agendar() { cancelAnimationFrame(raf); raf = requestAnimationFrame(render); }
+/* atualizações vindas da sala não redesenham o formulário de participação: refazer o DOM entre o toque e a soltura
+   faz o iPhone perder o toque ("Próximo" exigindo dois toques). O formulário só redesenha com ações da própria pessoa. */
+let raf = 0; function agendar() { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => render(false)); }
 function linkParticipar() { if (EV.linkPublico && EV.sala === SALA) return EV.linkPublico; const u = new URL(location.href); u.searchParams.set("sala", SALA); u.hash = "participar"; return u.toString(); }
 
 /* ---------- participar ---------- */
@@ -278,8 +280,8 @@ function rota() {
   document.querySelectorAll(".menu a").forEach(a => a.setAttribute("aria-current", a.dataset.v === S.vista ? "page" : "false"));
   render();
 }
-function render() {
-  if (S.vista === "participar") { const a = document.activeElement; if (!(a && a.id === "q4t")) renderParticipar(); }
+function render(participacao = true) {
+  if (S.vista === "participar" && participacao) { const a = document.activeElement; if (!(a && a.id === "q4t")) renderParticipar(); }
   if (S.vista === "ao-vivo") { renderLateral(); renderBlocos(); }
   if (S.vista === "conhecimento" && !$("#kb").childElementCount) renderKB();
   if (S.vista === "monitoramento" && !$("#mon").childElementCount) renderMon();
