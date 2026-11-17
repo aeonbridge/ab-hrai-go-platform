@@ -87,3 +87,21 @@ Além de `checklists/aceite.md`:
 - [ ] Toda cor de estrato aparece com rótulo, e nenhuma aparece em agregado numérico.
 - [ ] A cadeira vazia está presente sempre que houver `Unrepresented`.
 - [ ] Texto sobre vidro passa no `contrast_check.py` (tema `camara`).
+
+## 7.8 Câmara ao vivo (`web/ao-vivo/`)
+
+Evolução nascida da demo com público: a mesma câmara, agora habitada por quem está na sala.
+
+| Elemento | O que representa | Regra |
+|---|---|---|
+| **Anel humano** (externo) | Cada pessoa que entrou pelo QR code | Luz latão (`brass.200`), em arcos por setor. Entra pelo lado da plateia e voa até a vaga. Simulada: luz mais fosca e contagem separada ("12 simuladas"), nunca misturada sem aviso |
+| **Feixe de escolha** | Uma resposta saindo da pessoa até o objeto escolhido | Latão para tensão, coral para lacuna, latão claro para contribuição escrita. Dura o tempo do voo; não deixa rastro permanente |
+| **Arcos de tensão** | As 6 tensões-semente do modelo, sobre a câmara | A opacidade cresce com os votos da sala. Rótulo só para as duas mais votadas na visão geral; todas no modo Tensões |
+| **Anéis de lacuna** | Áreas sem componente na cúpula | O diâmetro cresce com os votos; o selo mostra quantos estratos sintéticos esperavam a área (R1), lado a lado com a sala |
+| **Núcleo da torre** | Destino das contribuições escritas | Pulsa quando uma contribuição chega; o texto aparece no telão com setor e movimento |
+
+Regras de leitura:
+
+- Contagens da sala são da sala. O telão nunca diz "o Brasil acha" nem soma sala com conselho.
+- Toda posição de estrato sintético mostrada como exemplo leva o selo "ilustrativa".
+- O apresentador pode ocultar textos. A câmara funciona sem WebGL pelo painel 2D (`../#ao-vivo`).

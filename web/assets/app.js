@@ -128,7 +128,9 @@ function renderParticipar() {
     const r = el("input", { class: "eixo-input", type: "range", min: "-100", max: "100", step: "5", value: String(Math.round((S.resp.q2 ?? 0) * 100)), "aria-label": "Sua posição entre os dois polos" });
     r.addEventListener("change", () => registrar("q2", Number(r.value) / 100));
     put(p, ...topo(3, "posição", "Onde você se posiciona nesta tensão?", "Tensão T5 do modelo. No telão, sua posição aparece no mesmo eixo que os oito estratos do Shadow Council."),
-      el("div", { class: "polos" }, el("span", {}, C.polos[0]), el("span", {}, C.polos[1])), r, reg, navegar(S.resp.q2 != null));
+      el("div", { class: "polos" }, el("span", {}, C.polos[0]), el("span", {}, C.polos[1])), r, reg,
+      el("div", { class: "acoes" }, el("button", { class: "bt leve", onclick: () => { S.passo--; render(); } }, "Voltar"),
+        el("button", { class: "bt ipe", onclick: async () => { if (S.resp.q2 == null) await registrar("q2", Number(r.value) / 100); S.passo++; render(); scrollTo({ top: 0, behavior: "smooth" }); } }, "Próximo")));
   } else if (st === 3) {
     put(p, ...topo(4, "lente Q1 · omissão", "Qual lacuna do modelo brasileiro é mais urgente?", "Nenhum dos " + M.components.length + " componentes do modelo cobre estas áreas. Ao lado, quantos estratos do conselho sintético esperavam cada uma antes de ver o modelo."),
       el("div", { class: "opcoes" }, LACUNAS.map(([k, l]) => { const n = (C.esperadoPor[k] || []).length;
@@ -142,8 +144,9 @@ function renderParticipar() {
       el("div", { class: "acoes" }, el("button", { class: "bt leve", onclick: () => { S.passo--; render(); } }, "Voltar"),
         el("button", { class: "bt ipe", onclick: async () => { const t = ta.value.trim(); if (t.length > 2) await registrar("q4", { mv, tx: t.slice(0, 280) }); S.passo = 5; render(); } }, "Enviar")));
   } else {
-    put(p, el("div", { class: "progresso" }, el("i", { style: "width:100%" })),
-      el("div", { class: "fim" }, el("h1", { class: "pergunta" }, "Obrigado. O resultado está no telão."),
+    put(p, el("div", { class: "progresso" }, Array.from({ length: TOTAL }, () => el("i", { class: "on" }))),
+      el("div", { class: "fim" }, el("h1", { class: "pergunta" }, "Sua luz entrou na câmara."),
+        el("p", { class: "apoio" }, "Olhe o telão: você está no anel externo, no arco de " + ((C.setores.find(s => s[0] === S.setor) || ["", "outros"])[1]) + ". Cada escolha sua viajou até a tensão e a lacuna que você marcou."),
         el("p", { class: "apoio" }, "Você pode mudar suas respostas até o fim da sessão; vale a última. Enquanto isso, explore a base de conhecimento e o monitoramento.")),
       el("div", { class: "acoes" }, el("a", { class: "bt", href: "#conhecimento" }, "Conhecimento"), el("a", { class: "bt", href: "#monitoramento" }, "Monitoramento")),
       el("button", { class: "bt leve", style: "margin-top:16px", onclick: () => { S.passo = 0; render(); } }, "Revisar respostas"));
@@ -277,6 +280,7 @@ function render() {
 }
 addEventListener("hashchange", rota);
 $("#sala-rotulo").textContent = "observatório · " + SALA;
+$("#lnkVivo").href = "ao-vivo/?sala=" + encodeURIComponent(SALA);
 rota();
 if (CFG.supabaseUrl && CFG.supabaseAnonKey && window.supabase) {
   iniciarSupabase().catch(e => { console.warn(e); S.modo = "local"; status("erro", "sem conexão: " + (e.message || "erro").slice(0, 40)); agendar(); });
