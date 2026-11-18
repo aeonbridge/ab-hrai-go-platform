@@ -46,6 +46,9 @@ def to_graph(name: str, comment: str, text: str, ns: dict[str, str], rule_ns: st
 
     def term(arg: str):
         arg = arg.strip()
+        if re.fullmatch(r"-?\d+(\.\d+)?", arg):
+            # canonical decimal lexical form ("3" -> "3.0"), stable across Turtle round trips
+            return Literal(arg if "." in arg else arg + ".0", datatype=rdflib.XSD.decimal)
         if arg.startswith("?"):
             v = URIRef(f"{rule_ns}var_{name}_{arg[1:]}")
             g.add((v, RDF.type, SWRL.Variable))

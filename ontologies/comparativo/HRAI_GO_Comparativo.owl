@@ -1,0 +1,830 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+   xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+>
+  <rdf:Description rdf:nodeID="N243a50aa49434699a1b881d13ce295bd">
+    <rdf:rest rdf:nodeID="Ne2e887d35704443481d61330e4f8a7b4"/>
+    <rdf:first rdf:nodeID="N859d6e50a4444cb8b5676a2a8efe0dae"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C21_PrivateSectorInclusion">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_StakeholderConsultation"/>
+    <skos:notation>C21</skos:notation>
+    <skos:prefLabel xml:lang="en">Private Sector Inclusion</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Inclusão do setor privado</skos:altLabel>
+    <skos:definition xml:lang="en">Captures whether industry stakeholders contribute to the legislative process.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C09_ThirdPartyAudits">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Enforcement"/>
+    <skos:notation>C09</skos:notation>
+    <skos:prefLabel xml:lang="en">Third-Party Audits</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Auditoria de terceiros</skos:altLabel>
+    <skos:definition xml:lang="en">Independent assessments conducted by external organizations to evaluate and verify compliance with certain standards.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C18_TechnicalExpertise">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Operationalization"/>
+    <skos:notation>C18</skos:notation>
+    <skos:prefLabel xml:lang="en">Technical Expertise</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Expertise técnica</skos:altLabel>
+    <skos:definition xml:lang="en">Highlights whether frameworks mandate and have the means to include technical expertise within regulatory bodies, ensuring informed oversight.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C12_RegulatorySandboxes">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Enforcement"/>
+    <skos:notation>C12</skos:notation>
+    <skos:prefLabel xml:lang="en">Regulatory Sandboxes</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Sandbox regulatório</skos:altLabel>
+    <skos:definition xml:lang="en">Controlled environments allowing companies to test AI systems under regulatory supervision.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Sanctions">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:topConceptOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:prefLabel xml:lang="en">Sanctions</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Sanções</skos:altLabel>
+    <skos:definition xml:lang="en">This category outlines the legal powers granted to enforcement bodies to ensure compliance with AI regulations and impose penalties on violators.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#E7_ImplementationParticipation">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#ExtensoesHRAIGO"/>
+    <skos:topConceptOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#ExtensoesHRAIGO"/>
+    <skos:notation>E7</skos:notation>
+    <skos:prefLabel xml:lang="pt">Participação na implementação</skos:prefLabel>
+    <skos:altLabel xml:lang="en">Participation in implementation</skos:altLabel>
+    <skos:definition xml:lang="pt">Participação de pessoas e grupos na implementação e na padronização, além da consulta no processo legislativo.</skos:definition>
+    <skos:example xml:lang="pt">Deliberação pública ao vivo e Shadow Council.</skos:example>
+    <skos:scopeNote xml:lang="pt">Extensão declarada da taxonomia de Alanoca, Gur-Arieh, Zick e Klyman (2025), Comparing Apples to Oranges, FAccT '25, doi:10.1145/3715275.3732059. Não altera as definições originais.</skos:scopeNote>
+    <rdfs:seeAlso rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_DigitalLegalMaturity">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:topConceptOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:prefLabel xml:lang="en">Maturity of the Digital Legal Landscape</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Maturidade do ecossistema legal digital</skos:altLabel>
+    <skos:definition xml:lang="en">Maturity assesses the overall advancement and robustness of a jurisdiction’s digital and AI governance framework. Jurisdictions with mature digital regulatory landscapes typically demonstrate comprehensive AI strategies and AI-adjacent regulations (e.g., data protection, platform content moderation).</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8497e76c549c4300911a046a36e875f1">
+    <swrl:propertyPredicate rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#codingCriterion"/>
+    <swrl:argument2 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C25_ApplicationFocused"/>
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:argument1 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_c3"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd795b0ab8d8246d2929e95400b58c3f6">
+    <swrl:argument1 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_c1"/>
+    <swrl:classPredicate rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#CriterionCoding"/>
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C01_LawAdoption">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Status"/>
+    <skos:notation>C01</skos:notation>
+    <skos:prefLabel xml:lang="en">Law adoption</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Adoção como lei</skos:altLabel>
+    <skos:definition xml:lang="en">Tracks whether AI legislation has been formally adopted as law yet.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8954c3ba8e69408aabf4ab6174d911c2">
+    <rdf:rest rdf:nodeID="Nf5b03333e5b04f059a4be203089763fb"/>
+    <rdf:first rdf:nodeID="Nefdbd46de01243908e526077f2735073"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <owl:imports rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory"/>
+    <owl:versionInfo>1.0.0</owl:versionInfo>
+    <owl:versionIRI rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo/1.0.0"/>
+    <dcterms:title xml:lang="en">HRAI-GO comparative module: base taxonomy and declared extensions</dcterms:title>
+    <dcterms:description xml:lang="pt">Módulo comparativo do HRAI-GO (Human-centred Regulatory AI, Governance Observatory): as 12 categorias e os 25 critérios de Alanoca et al. (2025), com as definições originais, e as extensões declaradas E1 a E7 (ESP-ONT-02, RF-16). As escalas dos critérios (E4) aguardam aprovação humana.</dcterms:description>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N859d6e50a4444cb8b5676a2a8efe0dae">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+    <swrl:classPredicate rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#ApprovalDecision"/>
+    <swrl:argument1 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_d2"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne2e887d35704443481d61330e4f8a7b4">
+    <rdf:rest rdf:nodeID="N21d4d972f3a44fdcae5184d80d84727a"/>
+    <rdf:first rdf:nodeID="Ncdfa828daa794fbcb40f8dcacecc0202"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Enforcement">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:topConceptOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:prefLabel xml:lang="en">Enforcement</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Fiscalização</skos:altLabel>
+    <skos:definition xml:lang="en">This metric focuses on the mechanisms and processes used to monitor, verify, and enforce compliance with AI regulations.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Operationalization">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:topConceptOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:prefLabel xml:lang="en">Operationalization</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Operacionalização</skos:altLabel>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8de04bf29cf64e03a425b9348fd6faac">
+    <swrl:argument2 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_x2"/>
+    <swrl:argument1 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_c2"/>
+    <swrl:propertyPredicate rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#codingScaleValue"/>
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne4929bf9c0414c65bafbfc1b2c2d7fcd">
+    <swrl:argument2 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_p3"/>
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#codingJustifiedBy"/>
+    <swrl:argument1 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_c3"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C10_ExistingOrNewAgency">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Enforcement"/>
+    <skos:notation>C10</skos:notation>
+    <skos:prefLabel xml:lang="en">Existing Agency or New Agency</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Agência existente ou nova</skos:altLabel>
+    <skos:definition xml:lang="en">Reflects whether enforcement is handled by existing regulatory bodies or if new agencies are established specifically for AI oversight.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C11_Liability">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Enforcement"/>
+    <skos:notation>C11</skos:notation>
+    <skos:prefLabel xml:lang="en">Liability</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Responsabilização</skos:altLabel>
+    <skos:definition xml:lang="en">This metric examines whether actors bear legal responsibility when AI systems cause harm or fail to comply with regulations.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C02_NoveltyOfLegalRegime">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Novelty"/>
+    <skos:notation>C02</skos:notation>
+    <skos:prefLabel xml:lang="en">Novelty of legal regime</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Lei nova ou adaptada</skos:altLabel>
+    <skos:definition xml:lang="en">This metric assesses whether the legislation is specifically developed to govern AI (new legislation) or if it adapts existing legal frameworks to apply to AI systems. The goal is to distinguish between laws crafted with AI in mind and those repurposed to address AI-related concerns.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#E3_SubstantiveCoverage">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#ExtensoesHRAIGO"/>
+    <skos:topConceptOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#ExtensoesHRAIGO"/>
+    <skos:notation>E3</skos:notation>
+    <skos:prefLabel xml:lang="pt">Cobertura substantiva</skos:prefLabel>
+    <skos:altLabel xml:lang="en">Substantive coverage</skos:altLabel>
+    <skos:definition xml:lang="pt">Áreas substantivas cobertas (as 28 áreas da câmara mais IA generativa e modelos de propósito geral), ligadas aos critérios quando houver relação.</skos:definition>
+    <skos:example xml:lang="pt">Lacunas de conteúdo: energia, crianças, desigualdade regional, participação.</skos:example>
+    <skos:scopeNote xml:lang="pt">Extensão declarada da taxonomia de Alanoca, Gur-Arieh, Zick e Klyman (2025), Comparing Apples to Oranges, FAccT '25, doi:10.1145/3715275.3732059. Não altera as definições originais.</skos:scopeNote>
+    <rdfs:seeAlso rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C14_Fines">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Sanctions"/>
+    <skos:notation>C14</skos:notation>
+    <skos:prefLabel xml:lang="en">Fines</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Multas</skos:altLabel>
+    <skos:definition xml:lang="en">Financial penalties imposed on non-compliant actors for violating AI regulations.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb7fc1e34d72049128b7e32f0a8901a93">
+    <swrl:arguments rdf:nodeID="N11e7f1bc3db94f8da6f71e889998ec5c"/>
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
+    <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#equal"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C16_StandardSetting">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Operationalization"/>
+    <skos:notation>C16</skos:notation>
+    <skos:prefLabel xml:lang="en">Standard Setting</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Definição de padrões</skos:altLabel>
+    <skos:definition xml:lang="en">Establishes technical and procedural benchmarks for AI development and deployment.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Reach">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:topConceptOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:prefLabel xml:lang="en">Reach</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Alcance</skos:altLabel>
+    <skos:definition xml:lang="en">Identifies sectors subject to AI regulations:</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#E5_VersionedCoding">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#ExtensoesHRAIGO"/>
+    <skos:topConceptOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#ExtensoesHRAIGO"/>
+    <skos:notation>E5</skos:notation>
+    <skos:prefLabel xml:lang="pt">Codificação por versão do instrumento</skos:prefLabel>
+    <skos:altLabel xml:lang="en">Coding per instrument version</skos:altLabel>
+    <skos:definition xml:lang="pt">A codificação pertence a uma versão do instrumento; mudou o texto, a codificação é refeita.</skos:definition>
+    <skos:example xml:lang="pt">PL 2338 de 2023 e de 2024; instrumentos revogados (EO 14110).</skos:example>
+    <skos:scopeNote xml:lang="pt">Extensão declarada da taxonomia de Alanoca, Gur-Arieh, Zick e Klyman (2025), Comparing Apples to Oranges, FAccT '25, doi:10.1145/3715275.3732059. Não altera as definições originais.</skos:scopeNote>
+    <rdfs:seeAlso rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C15_TemporaryInjunctions">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Sanctions"/>
+    <skos:notation>C15</skos:notation>
+    <skos:prefLabel xml:lang="en">Temporary Injunctions</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Injunções temporárias</skos:altLabel>
+    <skos:definition xml:lang="en">Legal orders that temporarily halt the development, deployment, or continued operation of AI systems suspected of posing significant risks or violating regulations.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C08_ContinuedReporting">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Enforcement"/>
+    <skos:notation>C08</skos:notation>
+    <skos:prefLabel xml:lang="en">Continued Reporting</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Relatórios contínuos</skos:altLabel>
+    <skos:definition xml:lang="en">Mandates periodic updates or assessments to monitor compliance over time.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C03_DigitalLegalMaturity">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_DigitalLegalMaturity"/>
+    <skos:notation>C03</skos:notation>
+    <skos:prefLabel xml:lang="en">Maturity of AI-relevant regulatory landscape</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Maturidade do ecossistema regulatório relevante para IA</skos:altLabel>
+    <skos:definition xml:lang="en">Maturity assesses the overall advancement and robustness of a jurisdiction’s digital and AI governance framework. Jurisdictions with mature digital regulatory landscapes typically demonstrate comprehensive AI strategies and AI-adjacent regulations (e.g., data protection, platform content moderation).</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#ExtensoesHRAIGO">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+    <skos:prefLabel xml:lang="pt">Extensões declaradas E1 a E7 do HRAI-GO</skos:prefLabel>
+    <skos:scopeNote xml:lang="pt">Extensão declarada da taxonomia de Alanoca, Gur-Arieh, Zick e Klyman (2025), Comparing Apples to Oranges, FAccT '25, doi:10.1145/3715275.3732059. Não altera as definições originais.</skos:scopeNote>
+    <rdfs:seeAlso rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf5b03333e5b04f059a4be203089763fb">
+    <rdf:rest rdf:nodeID="N243a50aa49434699a1b881d13ce295bd"/>
+    <rdf:first rdf:nodeID="N0a6d2f3406e34943b0cf8c5032426be8"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C07_Individuals">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Reach"/>
+    <skos:notation>C07</skos:notation>
+    <skos:prefLabel xml:lang="en">Individuals/Citizens</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Indivíduos</skos:altLabel>
+    <skos:definition xml:lang="en">Regulations addressing the use of AI systems by individuals.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0a6d2f3406e34943b0cf8c5032426be8">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:argument2 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_d2"/>
+    <swrl:argument1 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_c2"/>
+    <swrl:propertyPredicate rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#codingReview"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfeffc9b0c19541a2bb0aa4c517ee3355">
+    <swrl:propertyPredicate rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#codingSubject"/>
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:argument2 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_v"/>
+    <swrl:argument1 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_c3"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C20_CivilSocietyInclusion">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_StakeholderConsultation"/>
+    <skos:notation>C20</skos:notation>
+    <skos:prefLabel xml:lang="en">Civil Society Inclusion</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Inclusão da sociedade civil</skos:altLabel>
+    <skos:definition xml:lang="en">Reflects engagement with nongovernmental organizations, ensuring public interest is represented.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N07fe423eee0a44e9aac7bf9ae446b959">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+    <swrl:classPredicate rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#ApprovalDecision"/>
+    <swrl:argument1 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_d3"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Status">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:topConceptOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:prefLabel xml:lang="en">Status</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Status</skos:altLabel>
+    <skos:definition xml:lang="en">Tracks whether AI legislation has been formally adopted as law yet.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#E4_ScaledCoding">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#ExtensoesHRAIGO"/>
+    <skos:topConceptOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#ExtensoesHRAIGO"/>
+    <skos:notation>E4</skos:notation>
+    <skos:prefLabel xml:lang="pt">Codificação em escala, com evidência por valor</skos:prefLabel>
+    <skos:altLabel xml:lang="en">Scaled coding with evidence per value</skos:altLabel>
+    <skos:definition xml:lang="pt">Cada valor é registrado numa escala aprovada e ligado ao dispositivo que o justifica.</skos:definition>
+    <skos:example xml:lang="pt">Valores comparáveis e rastreáveis, em vez de descrições.</skos:example>
+    <skos:scopeNote xml:lang="pt">Extensão declarada da taxonomia de Alanoca, Gur-Arieh, Zick e Klyman (2025), Comparing Apples to Oranges, FAccT '25, doi:10.1145/3715275.3732059. Não altera as definições originais.</skos:scopeNote>
+    <rdfs:seeAlso rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ndd8e0b69a91b433595e438d035497a60">
+    <rdf:first rdf:nodeID="N0ec88244e135454fa419b6042ac965b8"/>
+    <rdf:rest rdf:nodeID="N437e372f5fce4cb88113ccc2046f1143"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C25_ApplicationFocused">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_RegulationLayer"/>
+    <skos:notation>C25</skos:notation>
+    <skos:prefLabel xml:lang="en">Application-Focused</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Aplicação</skos:altLabel>
+    <skos:definition xml:lang="en">Legislative focus on specific AI use cases (e.g., social scoring). This provides tailored oversight for distinct risk categories and applications.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C04_AppliesToGenerativeAI">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Scope"/>
+    <skos:notation>C04</skos:notation>
+    <skos:prefLabel xml:lang="en">Applies to Generative AI</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Aplica-se a IA generativa/GPAI</skos:altLabel>
+    <skos:definition xml:lang="en">Applies to Generative AI</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+    <skos:editorialNote xml:lang="pt">Tabelas 1 a 10 (critério sem definição em prosa na seção 5.1)</skos:editorialNote>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2d2da159efce485b9d7bcf7a9951a9e0">
+    <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual"/>
+    <swrl:arguments rdf:nodeID="N81127e19854a4f338eb427ba81e56ca8"/>
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C05_Industry">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Reach"/>
+    <skos:notation>C05</skos:notation>
+    <skos:prefLabel xml:lang="en">Industry</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Indústria</skos:altLabel>
+    <skos:definition xml:lang="en">Regulations targeting private sector companies and their AI applications.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#R28_HorizontalRiskBasedProfile">
+    <rdfs:label xml:lang="en">R28_HorizontalRiskBasedProfile</rdfs:label>
+    <swrl:body rdf:nodeID="N8569d26911bf4b09be16f427369d1c84"/>
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+    <swrl:head rdf:nodeID="Nfad6dae919e94f25ac6c000d33b64f1b"/>
+    <rdfs:comment xml:lang="en">Reading label derived from coded values; the criteria stay visible. Depends on approved E4 scales and reviewed codings.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#E6_ImplementationCapacity">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#ExtensoesHRAIGO"/>
+    <skos:topConceptOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#ExtensoesHRAIGO"/>
+    <skos:notation>E6</skos:notation>
+    <skos:prefLabel xml:lang="pt">Capacidade de implementação</skos:prefLabel>
+    <skos:altLabel xml:lang="en">Implementation capacity</skos:altLabel>
+    <skos:definition xml:lang="pt">Orçamento e pessoal disponíveis para supervisionar e implementar o instrumento.</skos:definition>
+    <skos:example xml:lang="pt">Orçamento e pessoal de supervisão (Eixo 5 do PBIA).</skos:example>
+    <skos:scopeNote xml:lang="pt">Extensão declarada da taxonomia de Alanoca, Gur-Arieh, Zick e Klyman (2025), Comparing Apples to Oranges, FAccT '25, doi:10.1145/3715275.3732059. Não altera as definições originais.</skos:scopeNote>
+    <rdfs:seeAlso rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_p2">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C22_ExAnte">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_RegulatoryApproach"/>
+    <skos:notation>C22</skos:notation>
+    <skos:prefLabel xml:lang="en">Ex Ante</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Ex ante</skos:altLabel>
+    <skos:definition xml:lang="en">A preventive approach that addresses risks before they arise, emphasizing measures like pre-market approval to ensure AI systems meet safety and compliance standards in advance.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_RegulatoryApproach">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:topConceptOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:prefLabel xml:lang="en">Regulatory Approach</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Abordagem regulatória</skos:altLabel>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nefdbd46de01243908e526077f2735073">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:argument1 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_c2"/>
+    <swrl:propertyPredicate rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#codingJustifiedBy"/>
+    <swrl:argument2 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_p2"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N47e2ba672fd44c2693964e580b5b3eee">
+    <swrl:argument2 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_v"/>
+    <swrl:propertyPredicate rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#codingSubject"/>
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:argument1 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_c2"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C13_CriminalCharges">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Sanctions"/>
+    <skos:notation>C13</skos:notation>
+    <skos:prefLabel xml:lang="en">Criminal Charges</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Sanções penais</skos:altLabel>
+    <skos:definition xml:lang="en">Frameworks that enable the prosecution of individuals, organizations, or entities for unlawful actions, negligence, or harm caused by AI systems.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N779abf9f167544bda3b0c136008b784b">
+    <swrl:argument1 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_c3"/>
+    <swrl:propertyPredicate rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#codingReview"/>
+    <swrl:argument2 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_d3"/>
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C23_ExPost">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_RegulatoryApproach"/>
+    <skos:notation>C23</skos:notation>
+    <skos:prefLabel xml:lang="en">Ex Post</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Ex post</skos:altLabel>
+    <skos:definition xml:lang="en">A reactive approach that evaluates AI systems after deployment, focusing on retrospective assessments and legal remedies. It allows individuals affected by AI to pursue recourse, including the right to file lawsuits.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ncdfa828daa794fbcb40f8dcacecc0202">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+    <swrl:argument1 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_c3"/>
+    <swrl:classPredicate rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#CriterionCoding"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8569d26911bf4b09be16f427369d1c84">
+    <rdf:rest rdf:nodeID="Nc78e1a75f6a94ef6922872c88a34e797"/>
+    <rdf:first rdf:nodeID="Nd795b0ab8d8246d2929e95400b58c3f6"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#hasDesignProfile">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">hasDesignProfile</rdfs:label>
+    <rdfs:comment xml:lang="en">Inferred (R28): the coded instrument version reads as this design profile.</rdfs:comment>
+    <rdfs:range rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#DesignProfile"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4b2082b377254cc282bee266a778baed">
+    <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3.0</rdf:first>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Scope">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:topConceptOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:prefLabel xml:lang="en">Scope</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Escopo</skos:altLabel>
+    <skos:definition xml:lang="en">Applies to Generative AI</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C24_TechnologyFocused">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_RegulationLayer"/>
+    <skos:notation>C24</skos:notation>
+    <skos:prefLabel xml:lang="en">Technology-Focused</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Tecnologia</skos:altLabel>
+    <skos:definition xml:lang="en">Regulations target AI infrastructure (e.g., dual-use foundation models).</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Naebbcbe4f5474a829eece27ea641aebc">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:argument1 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_c1"/>
+    <swrl:argument2 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_d1"/>
+    <swrl:propertyPredicate rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#codingReview"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6576b46c85fb4d5c8202d835ed10ad99">
+    <rdf:rest rdf:nodeID="N150b8392a8d846ff947e0395a06a1196"/>
+    <rdf:first rdf:nodeID="N5b80417643e843b681ed71e2bf1f90de"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N65999e01127c4ce99ecef55fcf2762e1">
+    <rdf:rest rdf:nodeID="N186e353246f3430c8d823487745437d8"/>
+    <rdf:first rdf:nodeID="N779abf9f167544bda3b0c136008b784b"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_x3">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N11e7f1bc3db94f8da6f71e889998ec5c">
+    <rdf:rest rdf:nodeID="N4b2082b377254cc282bee266a778baed"/>
+    <rdf:first rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_x1"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4c5eeeaa8a59485cb367064c3cb34f89">
+    <rdf:first rdf:nodeID="Neb9197ec5747490dac1002dd1e1b4add"/>
+    <rdf:rest rdf:nodeID="N1750acdb9c7c46f98797493226ccdcd1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#HorizontalRiskBasedRegulation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#DesignProfile"/>
+    <rdfs:label xml:lang="pt">Regulação horizontal por risco</rdfs:label>
+    <rdfs:comment xml:lang="pt">Lei ou projeto de lei (E1), com requisitos ex ante altos (C22) e foco em aplicações (C25).</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nca4e3e3752534fdd9a9a3e378e90ee33">
+    <swrl:propertyPredicate rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#codingSubject"/>
+    <swrl:argument2 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_v"/>
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:argument1 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_c1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#E1_LegalForm">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#ExtensoesHRAIGO"/>
+    <skos:topConceptOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#ExtensoesHRAIGO"/>
+    <skos:notation>E1</skos:notation>
+    <skos:prefLabel xml:lang="pt">Forma jurídica</skos:prefLabel>
+    <skos:altLabel xml:lang="en">Legal form</skos:altLabel>
+    <skos:definition xml:lang="pt">Amplia o critério Status para instrumentos não vinculantes: lei, projeto de lei, plano, princípios não estatutários e guia voluntário.</skos:definition>
+    <skos:example xml:lang="pt">PBIA (plano), Reino Unido (princípios não estatutários), NIST AI RMF (guia voluntário).</skos:example>
+    <skos:scopeNote xml:lang="pt">Extensão declarada da taxonomia de Alanoca, Gur-Arieh, Zick e Klyman (2025), Comparing Apples to Oranges, FAccT '25, doi:10.1145/3715275.3732059. Não altera as definições originais.</skos:scopeNote>
+    <rdfs:seeAlso rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N186e353246f3430c8d823487745437d8">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:nodeID="N07fe423eee0a44e9aac7bf9ae446b959"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#E2_PrimaryObjective">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#ExtensoesHRAIGO"/>
+    <skos:topConceptOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#ExtensoesHRAIGO"/>
+    <skos:notation>E2</skos:notation>
+    <skos:prefLabel xml:lang="pt">Objetivo primário</skos:prefLabel>
+    <skos:altLabel xml:lang="en">Primary objective</skos:altLabel>
+    <skos:definition xml:lang="pt">Objetivo que o instrumento declara como principal: direitos, inovação, desenvolvimento e soberania, ou segurança.</skos:definition>
+    <skos:example xml:lang="pt">O caráter desenvolvimentista e de soberania do modelo brasileiro (PBIA).</skos:example>
+    <skos:scopeNote xml:lang="pt">Extensão declarada da taxonomia de Alanoca, Gur-Arieh, Zick e Klyman (2025), Comparing Apples to Oranges, FAccT '25, doi:10.1145/3715275.3732059. Não altera as definições originais.</skos:scopeNote>
+    <rdfs:seeAlso rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne3d593f20bd24efc9a2177c537ade78c">
+    <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.0</rdf:first>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Novelty">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:topConceptOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:prefLabel xml:lang="en">Novelty</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Novidade</skos:altLabel>
+    <skos:definition xml:lang="en">This metric assesses whether the legislation is specifically developed to govern AI (new legislation) or if it adapts existing legal frameworks to apply to AI systems. The goal is to distinguish between laws crafted with AI in mind and those repurposed to address AI-related concerns.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N573732116688461ba4a42f8ab248a8b6">
+    <rdf:first rdf:nodeID="Naebbcbe4f5474a829eece27ea641aebc"/>
+    <rdf:rest rdf:nodeID="N821fed76ec2642c4b38b66d1af68ce8c"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N437e372f5fce4cb88113ccc2046f1143">
+    <rdf:first rdf:nodeID="N075f3e03be7848f5a91286742d102cbd"/>
+    <rdf:rest rdf:nodeID="N784ed516d8124ca9ba8eae0131884edd"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C19_InternationalCooperation">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_InternationalCooperation"/>
+    <skos:notation>C19</skos:notation>
+    <skos:prefLabel xml:lang="en">International Cooperation</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Alinhamento a marcos globais</skos:altLabel>
+    <skos:definition xml:lang="en">This metric evaluates alignment with global frameworks (e.g., OECD AI principles), which reflects efforts and the willingness of jurisdictions to contribute to international AI governance norms.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Neb9197ec5747490dac1002dd1e1b4add">
+    <swrl:propertyPredicate rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#codingScaleValue"/>
+    <swrl:argument1 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_c3"/>
+    <swrl:argument2 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_x3"/>
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_RegulationLayer">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:topConceptOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:prefLabel xml:lang="en">Regulation Layer</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Camada regulada</skos:altLabel>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C06_Government">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Reach"/>
+    <skos:notation>C06</skos:notation>
+    <skos:prefLabel xml:lang="en">Government/Federal Agencies</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Governo</skos:altLabel>
+    <skos:definition xml:lang="en">Regulations guiding AI use within public sector entities.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#DesignProfile">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">DesignProfile</rdfs:label>
+    <rdfs:comment xml:lang="en">Reading label derived from a combination of coded criteria (R28); the criteria stay visible.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N784ed516d8124ca9ba8eae0131884edd">
+    <rdf:first rdf:nodeID="Nb7fc1e34d72049128b7e32f0a8901a93"/>
+    <rdf:rest rdf:nodeID="N7af392ab6e08462d89123fbab58e2c89"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N150b8392a8d846ff947e0395a06a1196">
+    <rdf:rest rdf:nodeID="N284b9973687f4da6981ed4d3364d88a8"/>
+    <rdf:first rdf:nodeID="N47e2ba672fd44c2693964e580b5b3eee"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C17_Auditing">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdf:type rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#RegulatoryDesignCriterion"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:broader rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_Operationalization"/>
+    <skos:notation>C17</skos:notation>
+    <skos:prefLabel xml:lang="en">Auditing</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Auditoria</skos:altLabel>
+    <skos:definition xml:lang="en">Internal or external audits evaluate AI system performance and adherence to standards.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N848f661891194fb9be53183fe3124ef1">
+    <swrl:argument1 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_v"/>
+    <swrl:propertyPredicate rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#hasDesignProfile"/>
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:argument2 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#HorizontalRiskBasedRegulation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_p3">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_StakeholderConsultation">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:topConceptOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:prefLabel xml:lang="en">Stakeholder Consultation</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Consulta a partes interessadas</skos:altLabel>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N07bebb04a20d4fca8ebe3ad9a1063259">
+    <rdf:rest rdf:nodeID="N4c5eeeaa8a59485cb367064c3cb34f89"/>
+    <rdf:first rdf:nodeID="N8497e76c549c4300911a046a36e875f1"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5b80417643e843b681ed71e2bf1f90de">
+    <swrl:classPredicate rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#CriterionCoding"/>
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+    <swrl:argument1 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_c2"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+    <skos:prefLabel xml:lang="en">Taxonomy of AI regulation (Alanoca et al., 2025)</skos:prefLabel>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+    <dcterms:bibliographicCitation>Alanoca, S.; Gur-Arieh, S.; Zick, T.; Klyman, K. Comparing Apples to Oranges: A Taxonomy for Navigating the Global Landscape of AI Regulation. FAccT '25. doi:10.1145/3715275.3732059. Seção 5.1 (Selected Metrics); critério Scope a partir das Tabelas 1 a 10.</dcterms:bibliographicCitation>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2b3e82bdbbdc41f4bb7a069340d1d55a">
+    <rdf:rest rdf:nodeID="Ndff53f0a1fc148be976f0c9930e4d983"/>
+    <rdf:first rdf:nodeID="N8de04bf29cf64e03a425b9348fd6faac"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nda55744cf0124aae902ce05775666d2e">
+    <swrl:propertyPredicate rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#codingJustifiedBy"/>
+    <swrl:argument1 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_c1"/>
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:argument2 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_p1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_v">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_d1">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N075f3e03be7848f5a91286742d102cbd">
+    <swrl:argument1 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_c1"/>
+    <swrl:argument2 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_x1"/>
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+    <swrl:propertyPredicate rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#codingScaleValue"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N82bd4b35e0af4e77988076aaeca204a8">
+    <rdf:rest rdf:nodeID="N65999e01127c4ce99ecef55fcf2762e1"/>
+    <rdf:first rdf:nodeID="Ne4929bf9c0414c65bafbfc1b2c2d7fcd"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N81127e19854a4f338eb427ba81e56ca8">
+    <rdf:rest rdf:nodeID="N72604e6c67214f9194652af2565bed4e"/>
+    <rdf:first rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_x2"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9b361713097846f1be01b0c99931acc6">
+    <rdf:rest rdf:nodeID="Ne3d593f20bd24efc9a2177c537ade78c"/>
+    <rdf:first rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_x3"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0ec88244e135454fa419b6042ac965b8">
+    <swrl:argument1 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_c1"/>
+    <swrl:propertyPredicate rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#codingCriterion"/>
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:argument2 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#E1_LegalForm"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N284b9973687f4da6981ed4d3364d88a8">
+    <rdf:first rdf:nodeID="N4ed2bbf5265846a0a94f7dd8cc475f41"/>
+    <rdf:rest rdf:nodeID="N2b3e82bdbbdc41f4bb7a069340d1d55a"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1750acdb9c7c46f98797493226ccdcd1">
+    <rdf:rest rdf:nodeID="N82bd4b35e0af4e77988076aaeca204a8"/>
+    <rdf:first rdf:nodeID="Nbcaccab4c2ea44e5b63cbeac1cc88c95"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_c3">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7af392ab6e08462d89123fbab58e2c89">
+    <rdf:rest rdf:nodeID="N573732116688461ba4a42f8ab248a8b6"/>
+    <rdf:first rdf:nodeID="Nda55744cf0124aae902ce05775666d2e"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Cat_InternationalCooperation">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:topConceptOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#TaxonomiaAlanoca2025"/>
+    <skos:prefLabel xml:lang="en">International Cooperation</skos:prefLabel>
+    <skos:altLabel xml:lang="pt">Cooperação internacional</skos:altLabel>
+    <skos:definition xml:lang="en">This metric evaluates alignment with global frameworks (e.g., OECD AI principles), which reflects efforts and the willingness of jurisdictions to contribute to international AI governance norms.</skos:definition>
+    <dcterms:source rdf:resource="https://doi.org/10.1145/3715275.3732059"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N21d4d972f3a44fdcae5184d80d84727a">
+    <rdf:first rdf:nodeID="Nfeffc9b0c19541a2bb0aa4c517ee3355"/>
+    <rdf:rest rdf:nodeID="N07bebb04a20d4fca8ebe3ad9a1063259"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ndff53f0a1fc148be976f0c9930e4d983">
+    <rdf:first rdf:nodeID="N2d2da159efce485b9d7bcf7a9951a9e0"/>
+    <rdf:rest rdf:nodeID="N8954c3ba8e69408aabf4ab6174d911c2"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4ed2bbf5265846a0a94f7dd8cc475f41">
+    <swrl:argument2 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#C22_ExAnte"/>
+    <swrl:propertyPredicate rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#codingCriterion"/>
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+    <swrl:argument1 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_c2"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfad6dae919e94f25ac6c000d33b64f1b">
+    <rdf:first rdf:nodeID="N848f661891194fb9be53183fe3124ef1"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_c1">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_x1">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_c2">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nbcaccab4c2ea44e5b63cbeac1cc88c95">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
+    <swrl:arguments rdf:nodeID="N9b361713097846f1be01b0c99931acc6"/>
+    <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_d3">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N821fed76ec2642c4b38b66d1af68ce8c">
+    <rdf:rest rdf:nodeID="N6576b46c85fb4d5c8202d835ed10ad99"/>
+    <rdf:first rdf:nodeID="N9ff736e4fa0b41d5b4deb5157d4a8ce3"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc78e1a75f6a94ef6922872c88a34e797">
+    <rdf:rest rdf:nodeID="Ndd8e0b69a91b433595e438d035497a60"/>
+    <rdf:first rdf:nodeID="Nca4e3e3752534fdd9a9a3e378e90ee33"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_d2">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9ff736e4fa0b41d5b4deb5157d4a8ce3">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+    <swrl:argument1 rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_d1"/>
+    <swrl:classPredicate rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#ApprovalDecision"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_x2">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#var_R28_HorizontalRiskBasedProfile_p1">
+    <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N72604e6c67214f9194652af2565bed4e">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3.0</rdf:first>
+  </rdf:Description>
+</rdf:RDF>

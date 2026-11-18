@@ -1,0 +1,52 @@
+{
+  "fonte": "Alanoca, S.; Gur-Arieh, S.; Zick, T.; Klyman, K. Comparing Apples to Oranges: A Taxonomy for Navigating the Global Landscape of AI Regulation. FAccT '25. doi:10.1145/3715275.3732059. Seção 5.1 (Selected Metrics); critério Scope a partir das Tabelas 1 a 10.",
+  "doi": "10.1145/3715275.3732059",
+  "arquivo": "docs/references/3715275.3732059.pdf",
+  "nota": "Definições copiadas literalmente do paper (inglês), sem edição. Não alterar: invariante da taxonomia de base (EXECUCAO_LOOP.md).",
+  "categorias": [
+    {"id": "Status", "rotulo": "Status", "rotuloPt": "Status", "definicao": "Tracks whether AI legislation has been formally adopted as law yet.",
+     "criterios": [{"id": "C01_LawAdoption", "rotulo": "Law adoption", "rotuloPt": "Adoção como lei", "definicao": "Tracks whether AI legislation has been formally adopted as law yet."}]},
+    {"id": "Novelty", "rotulo": "Novelty", "rotuloPt": "Novidade", "definicao": "This metric assesses whether the legislation is specifically developed to govern AI (new legislation) or if it adapts existing legal frameworks to apply to AI systems. The goal is to distinguish between laws crafted with AI in mind and those repurposed to address AI-related concerns.",
+     "criterios": [{"id": "C02_NoveltyOfLegalRegime", "rotulo": "Novelty of legal regime", "rotuloPt": "Lei nova ou adaptada", "definicao": "This metric assesses whether the legislation is specifically developed to govern AI (new legislation) or if it adapts existing legal frameworks to apply to AI systems. The goal is to distinguish between laws crafted with AI in mind and those repurposed to address AI-related concerns."}]},
+    {"id": "DigitalLegalMaturity", "rotulo": "Maturity of the Digital Legal Landscape", "rotuloPt": "Maturidade do ecossistema legal digital", "definicao": "Maturity assesses the overall advancement and robustness of a jurisdiction’s digital and AI governance framework. Jurisdictions with mature digital regulatory landscapes typically demonstrate comprehensive AI strategies and AI-adjacent regulations (e.g., data protection, platform content moderation).",
+     "criterios": [{"id": "C03_DigitalLegalMaturity", "rotulo": "Maturity of AI-relevant regulatory landscape", "rotuloPt": "Maturidade do ecossistema regulatório relevante para IA", "definicao": "Maturity assesses the overall advancement and robustness of a jurisdiction’s digital and AI governance framework. Jurisdictions with mature digital regulatory landscapes typically demonstrate comprehensive AI strategies and AI-adjacent regulations (e.g., data protection, platform content moderation)."}]},
+    {"id": "Scope", "rotulo": "Scope", "rotuloPt": "Escopo", "definicao": "Applies to Generative AI",
+     "criterios": [{"id": "C04_AppliesToGenerativeAI", "rotulo": "Applies to Generative AI", "rotuloPt": "Aplica-se a IA generativa/GPAI", "definicao": "Applies to Generative AI", "origem": "Tabelas 1 a 10 (critério sem definição em prosa na seção 5.1)"}]},
+    {"id": "Reach", "rotulo": "Reach", "rotuloPt": "Alcance", "definicao": "Identifies sectors subject to AI regulations:",
+     "criterios": [
+       {"id": "C05_Industry", "rotulo": "Industry", "rotuloPt": "Indústria", "definicao": "Regulations targeting private sector companies and their AI applications."},
+       {"id": "C06_Government", "rotulo": "Government/Federal Agencies", "rotuloPt": "Governo", "definicao": "Regulations guiding AI use within public sector entities."},
+       {"id": "C07_Individuals", "rotulo": "Individuals/Citizens", "rotuloPt": "Indivíduos", "definicao": "Regulations addressing the use of AI systems by individuals."}]},
+    {"id": "Enforcement", "rotulo": "Enforcement", "rotuloPt": "Fiscalização", "definicao": "This metric focuses on the mechanisms and processes used to monitor, verify, and enforce compliance with AI regulations.",
+     "criterios": [
+       {"id": "C08_ContinuedReporting", "rotulo": "Continued Reporting", "rotuloPt": "Relatórios contínuos", "definicao": "Mandates periodic updates or assessments to monitor compliance over time."},
+       {"id": "C09_ThirdPartyAudits", "rotulo": "Third-Party Audits", "rotuloPt": "Auditoria de terceiros", "definicao": "Independent assessments conducted by external organizations to evaluate and verify compliance with certain standards."},
+       {"id": "C10_ExistingOrNewAgency", "rotulo": "Existing Agency or New Agency", "rotuloPt": "Agência existente ou nova", "definicao": "Reflects whether enforcement is handled by existing regulatory bodies or if new agencies are established specifically for AI oversight."},
+       {"id": "C11_Liability", "rotulo": "Liability", "rotuloPt": "Responsabilização", "definicao": "This metric examines whether actors bear legal responsibility when AI systems cause harm or fail to comply with regulations."},
+       {"id": "C12_RegulatorySandboxes", "rotulo": "Regulatory Sandboxes", "rotuloPt": "Sandbox regulatório", "definicao": "Controlled environments allowing companies to test AI systems under regulatory supervision."}]},
+    {"id": "Sanctions", "rotulo": "Sanctions", "rotuloPt": "Sanções", "definicao": "This category outlines the legal powers granted to enforcement bodies to ensure compliance with AI regulations and impose penalties on violators.",
+     "criterios": [
+       {"id": "C13_CriminalCharges", "rotulo": "Criminal Charges", "rotuloPt": "Sanções penais", "definicao": "Frameworks that enable the prosecution of individuals, organizations, or entities for unlawful actions, negligence, or harm caused by AI systems."},
+       {"id": "C14_Fines", "rotulo": "Fines", "rotuloPt": "Multas", "definicao": "Financial penalties imposed on non-compliant actors for violating AI regulations."},
+       {"id": "C15_TemporaryInjunctions", "rotulo": "Temporary Injunctions", "rotuloPt": "Injunções temporárias", "definicao": "Legal orders that temporarily halt the development, deployment, or continued operation of AI systems suspected of posing significant risks or violating regulations."}]},
+    {"id": "Operationalization", "rotulo": "Operationalization", "rotuloPt": "Operacionalização", "definicao": null,
+     "criterios": [
+       {"id": "C16_StandardSetting", "rotulo": "Standard Setting", "rotuloPt": "Definição de padrões", "definicao": "Establishes technical and procedural benchmarks for AI development and deployment."},
+       {"id": "C17_Auditing", "rotulo": "Auditing", "rotuloPt": "Auditoria", "definicao": "Internal or external audits evaluate AI system performance and adherence to standards."},
+       {"id": "C18_TechnicalExpertise", "rotulo": "Technical Expertise", "rotuloPt": "Expertise técnica", "definicao": "Highlights whether frameworks mandate and have the means to include technical expertise within regulatory bodies, ensuring informed oversight."}]},
+    {"id": "InternationalCooperation", "rotulo": "International Cooperation", "rotuloPt": "Cooperação internacional", "definicao": "This metric evaluates alignment with global frameworks (e.g., OECD AI principles), which reflects efforts and the willingness of jurisdictions to contribute to international AI governance norms.",
+     "criterios": [{"id": "C19_InternationalCooperation", "rotulo": "International Cooperation", "rotuloPt": "Alinhamento a marcos globais", "definicao": "This metric evaluates alignment with global frameworks (e.g., OECD AI principles), which reflects efforts and the willingness of jurisdictions to contribute to international AI governance norms."}]},
+    {"id": "StakeholderConsultation", "rotulo": "Stakeholder Consultation", "rotuloPt": "Consulta a partes interessadas", "definicao": null,
+     "criterios": [
+       {"id": "C20_CivilSocietyInclusion", "rotulo": "Civil Society Inclusion", "rotuloPt": "Inclusão da sociedade civil", "definicao": "Reflects engagement with nongovernmental organizations, ensuring public interest is represented."},
+       {"id": "C21_PrivateSectorInclusion", "rotulo": "Private Sector Inclusion", "rotuloPt": "Inclusão do setor privado", "definicao": "Captures whether industry stakeholders contribute to the legislative process."}]},
+    {"id": "RegulatoryApproach", "rotulo": "Regulatory Approach", "rotuloPt": "Abordagem regulatória", "definicao": null,
+     "criterios": [
+       {"id": "C22_ExAnte", "rotulo": "Ex Ante", "rotuloPt": "Ex ante", "definicao": "A preventive approach that addresses risks before they arise, emphasizing measures like pre-market approval to ensure AI systems meet safety and compliance standards in advance."},
+       {"id": "C23_ExPost", "rotulo": "Ex Post", "rotuloPt": "Ex post", "definicao": "A reactive approach that evaluates AI systems after deployment, focusing on retrospective assessments and legal remedies. It allows individuals affected by AI to pursue recourse, including the right to file lawsuits."}]},
+    {"id": "RegulationLayer", "rotulo": "Regulation Layer", "rotuloPt": "Camada regulada", "definicao": null,
+     "criterios": [
+       {"id": "C24_TechnologyFocused", "rotulo": "Technology-Focused", "rotuloPt": "Tecnologia", "definicao": "Regulations target AI infrastructure (e.g., dual-use foundation models)."},
+       {"id": "C25_ApplicationFocused", "rotulo": "Application-Focused", "rotuloPt": "Aplicação", "definicao": "Legislative focus on specific AI use cases (e.g., social scoring). This provides tailored oversight for distinct risk categories and applications."}]}
+  ]
+}

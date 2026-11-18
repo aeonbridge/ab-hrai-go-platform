@@ -15,6 +15,7 @@ import raciocinar  # noqa: E402
 
 CORE = ROOT / "ontologies/regulatory/HRAI_GO_Regulatory_General.ttl"
 SCSE = ROOT / "ontologies/scse/SCSE_Shadow_Council_Ontology.ttl"
+COMP = ROOT / "ontologies/comparativo/HRAI_GO_Comparativo.ttl"
 H = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
 S = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#")
 SW = rdflib.Namespace("http://www.w3.org/2003/11/swrl#")
@@ -96,6 +97,7 @@ def test_synthetic_never_counts_as_human_and_divergence(tmp_path):
 def all_rules():
     g = rdflib.Graph().parse(CORE)
     g.parse(SCSE)
+    g.parse(COMP)
     return g, sorted(set(g.subjects(RDF.type, SW.Imp)))
 
 
@@ -141,7 +143,7 @@ def test_i4_synthetic_and_identified_are_disjoint():
 
 
 def test_rnf02_full_graph_reasons_under_five_seconds():
-    files = [CORE, SCSE] + [Path(f) for pattern in ("ontologies/regulatory/instances/**/*.ttl", "ontologies/regulatory/cenarios/*.ttl",
+    files = [CORE, SCSE, COMP] + [Path(f) for pattern in ("ontologies/regulatory/instances/**/*.ttl", "ontologies/regulatory/cenarios/*.ttl",
                                                      "ontologies/regulatory/afirmacoes/*.ttl", "ontologies/regulatory/alinhamentos/*.ttl")
                             for f in sorted(glob.glob(str(ROOT / pattern), recursive=True))]
     t0 = time.perf_counter()

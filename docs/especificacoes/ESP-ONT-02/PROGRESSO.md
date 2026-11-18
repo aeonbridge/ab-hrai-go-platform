@@ -55,12 +55,29 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
   5105 triplas em 0,12 s (RNF-02 < 5 s).
 - **Pendente**: R28 (item 4).
 
+### Item 4 · RF-16 (formalização) módulo comparativo — 17/11/2026
+
+- **O que mudou**
+  - `ontologies/comparativo/` (novo módulo, importa o núcleo): 12 categorias e 25 critérios de Alanoca et al. com as
+    definições originais (copiadas literalmente da seção 5.1; "Scope" a partir das Tabelas 1 a 10), E1 a E7 com crédito
+    e DOI, perfil de desenho e regra R28.
+  - `alanoca2025-definicoes.json`: definições congeladas; o teste confere cada uma contra o texto do PDF.
+  - `scripts/ontologia/build_comparativo.py` gera o módulo (com `--check` no CI).
+  - `docs/especificacoes/ESP-ONT-02/escalas-E4-proposta.md`: escala proposta para cada um dos 25 critérios e para as
+    extensões, com exemplos tirados do que o paper registra para o Brasil. **Aguarda aprovação (D-02).**
+- **Observação**: o paper divide "Existing agency" e "Dedicated new agency" nas tabelas por país; a seção 5.1 trata as
+  duas como um critério ("Existing Agency or New Agency"). O módulo segue a seção 5.1, o que dá os 25 critérios.
+- **Divergência registrada** para o item 11: C18 (Technical Expertise) está como ausente no paper para o Brasil, mas o
+  texto do Senado cria o comitê de especialistas (CECIA); resolver contra o texto primário (tese C04).
+- **Comandos**: os quatro do protocolo com exit 0; `pytest tests/test_comparativo.py` → 7 passed; R28 dispara só com
+  codificações justificadas e aprovadas (fixture).
+
 ## Aguardando decisão
 
 | Id | Decisão | Quem | Bloqueia |
 |---|---|---|---|
 | D-01 | RF-02, China: incluir fontes primárias ou retirar da comparação | autor | V-03, item 11 (parte) |
-| D-02 | E4: aprovar as escalas dos 25 critérios (a sessão propõe) | autor | V-07, codificações (item 11) |
+| D-02 | E4: aprovar as escalas dos 25 critérios; proposta pronta em `escalas-E4-proposta.md` | autor | V-07, codificações (item 11), R28 |
 | D-03 | Revisão das extrações (dispositivos, correspondências BR↔UE, codificações, indicadores) | revisor humano | V-08 a V-11 |
 | D-04 | Alinhamento A1: os 5 componentes "próximos" (GM-15, GM-17, GM-19, GM-20, GM-22) e as teses do anexo | autor | contador sem lastro |
 | D-05 | RNF-01: domínio dos IRIs (w3id.org ou GitHub Pages) | autor | V-24 |
@@ -76,8 +93,8 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | V-02 | 🟡 | PBIA, PL 2023 e 2024 (SHA-256 no `EXECUCAO_LOOP.md`), UE, RU e EUA no corpus; falta `SourceSnapshot` de cada um no grafo |
 | V-03 | ⏸ | D-01 |
 | V-04 | ✅ | `tests/test_modulos.py` no CI (`validate-regulatory.yml`); item 2 |
-| V-05 | 🟡 | TBox 1.2.0, R24–R26, R29–R30, I-1 a I-4 testadas (`tests/test_invariantes.py`); falta R28 (item 4) |
-| V-06 | ⬜ | item 4 |
+| V-05 | ✅ | TBox 1.2.0, R24–R26 (núcleo), R28 (comparativo), R29–R30 (SCSE); I-1 a I-4 em `tests/test_invariantes.py` |
+| V-06 | ✅ | `tests/test_comparativo.py`: 25 critérios com definições originais conferidas no PDF, E1–E7 com crédito e DOI |
 | V-07 | ⏸ | D-02 |
 | V-08 | ⬜ | item 11 |
 | V-09 | ⬜ | item 11 |
