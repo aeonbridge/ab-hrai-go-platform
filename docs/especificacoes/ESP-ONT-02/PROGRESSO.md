@@ -243,11 +243,23 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
   - CI regenera respostas e relatório e falha se divergirem do grafo; `tests/test_respostas_qn.py`.
 - **Comandos**: protocolo com exit 0; pytest → 186 passed.
 
+### Decisão D-01 aplicada · China no corpus — 17/11/2026
+
+- **Decisão do autor**: incluir a China (mensagem "D-01 adicionado", com dois PDFs em `docs/ai-regulations/ch/`).
+- **Fontes**: as duas são **secundárias** (Regulations.AI, resumo de 2026 em imagem; Law Library of Congress, relatório de
+  junho de 2023). Não há texto oficial chinês no corpus; incluí-lo fica pendente (D-12).
+- `scripts/ontologia/extrair_china.py` → `instances/cn/HRAI_GO_Regulatory_CN.ttl`: jurisdição, 14 instrumentos (3 leis,
+  6 regras administrativas, 3 normas técnicas não vinculantes, 1 plano, 1 minuta) e 7 autoridades. A lista foi
+  transcrita das imagens do resumo pela sessão (LLM); 7 instrumentos também aparecem no relatório da LoC, conferido
+  automaticamente. Todos marcados "fonte secundária" e pendentes.
+- Especificidades da QN1 ganharam a comparação com a China (V-30 continua em zero); S7 compara com a supervisão
+  centralizada pela CAC, segundo fonte secundária.
+
 ## Aguardando decisão
 
 | Id | Decisão | Quem | Bloqueia |
 |---|---|---|---|
-| D-01 | RF-02, China: incluir fontes primárias ou retirar da comparação | autor | V-03, item 11 (parte) |
+| D-01 | ~~China~~ **resolvida em 17/11/2026**: incluída com fontes secundárias | autor | — |
 | D-02 | E4: aprovar as escalas dos 25 critérios; proposta pronta em `escalas-E4-proposta.md` | autor | V-07, codificações (item 11), R28 |
 | D-03 | Revisão das extrações (dispositivos do PL, do AI Act, princípios do Reino Unido, funções do NIST; 18 correspondências BR↔UE em `correspondencias/`; codificações, indicadores) e do mapeamento das 29 áreas para NIST, AI Act e critérios (`areas.json`) | revisor humano | V-08 a V-11 |
 | D-04 | Alinhamento A1: os 5 componentes "próximos" (GM-15, GM-17, GM-19, GM-20, GM-22) e as teses do anexo; ligações semente→afirmação e ramo→instrumento (`conselho/GOV-BR-001.ttl`) | autor | contador sem lastro |
@@ -257,6 +269,7 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
 | D-09 | Limiar inferior de alerta para o orçamento de governança (hoje 0,45% do PBIA) e para profissionais técnicos; sem limiar, R25 não sinaliza | autor | PC3 "abaixo do limiar" |
 | D-10 | Declarar os escopos de avaliação de cobertura (`CoverageAssessment`: jurisdição, snapshot, área) para a PC4 valer | autor | PC4, QN3 |
 | D-11 | Decidir cada item da resposta inicial (8 especificidades da QN1, 2 itens da QN2, 2 da QN3, 1 achado) em `docs/relatorios/perguntas-norteadoras/relatorio-QN.md` | autor | V-26, V-29 |
+| D-12 | Incluir textos oficiais chineses (CAC, Assembleia Popular Nacional) para substituir as fontes secundárias | autor | comparações com a China "não codificado" |
 | D-06 | PDF da "Análise Comparativa" no repositório (hoje as teses vêm de resumo) | autor | rastreabilidade das teses |
 
 ## Checklist V-01 a V-31
@@ -267,7 +280,7 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 |---|---|---|
 | V-01 | 🟡 | nome completo no README e relatórios (`tests/test_nomenclatura.py`); conferir site e `dcterms:title` |
 | V-02 | ✅ | `SourceSnapshot` com SHA-256 conferido para PBIA, PL 2023, PL 2024, AI Act, white paper e análise de impacto do Reino Unido, NIST AI RMF (`tests/test_internacional.py`) |
-| V-03 | ⏸ | D-01 |
+| V-03 | ✅ | decisão D-01 registrada (China incluída com fontes secundárias marcadas); nenhuma jurisdição sem snapshot com SHA-256 (`tests/test_china.py`, `tests/test_internacional.py`) |
 | V-04 | ✅ | `tests/test_modulos.py` no CI (`validate-regulatory.yml`); item 2 |
 | V-05 | ✅ | TBox 1.2.0, R24–R26 (núcleo), R28 (comparativo), R29–R30 (SCSE); I-1 a I-4 em `tests/test_invariantes.py` |
 | V-06 | ✅ | `tests/test_comparativo.py`: 25 critérios com definições originais conferidas no PDF, E1–E7 com crédito e DOI |

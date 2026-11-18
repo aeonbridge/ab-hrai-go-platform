@@ -5,6 +5,12 @@ window.HRAIGO_RESPOSTAS = {
    "comparacoes": [
     {
      "fonte": "",
+     "jurisdicao": "China",
+     "naoCodificado": true,
+     "valor": "não codificado: o Plano de Desenvolvimento de IA de Nova Geração (2017) aparece em fonte secundária, sem orçamento de computação informado"
+    },
+    {
+     "fonte": "",
      "jurisdicao": "Estados Unidos da América",
      "naoCodificado": true,
      "valor": "não codificado: o instrumento da jurisdição no corpus não é plano de investimento (E1) e o plano equivalente não está no corpus"
@@ -34,6 +40,12 @@ window.HRAIGO_RESPOSTAS = {
   },
   {
    "comparacoes": [
+    {
+     "fonte": "",
+     "jurisdicao": "China",
+     "naoCodificado": true,
+     "valor": "não codificado: a China só tem fontes secundárias no corpus (Regulations.AI 2026, Law Library of Congress 2023)"
+    },
     {
      "fonte": "",
      "jurisdicao": "Estados Unidos da América",
@@ -67,6 +79,12 @@ window.HRAIGO_RESPOSTAS = {
    "comparacoes": [
     {
      "fonte": "",
+     "jurisdicao": "China",
+     "naoCodificado": true,
+     "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
+    },
+    {
+     "fonte": "",
      "jurisdicao": "Estados Unidos da América",
      "naoCodificado": true,
      "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
@@ -95,6 +113,12 @@ window.HRAIGO_RESPOSTAS = {
   },
   {
    "comparacoes": [
+    {
+     "fonte": "",
+     "jurisdicao": "China",
+     "naoCodificado": true,
+     "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
+    },
     {
      "fonte": "",
      "jurisdicao": "Estados Unidos da América",
@@ -127,6 +151,12 @@ window.HRAIGO_RESPOSTAS = {
    "comparacoes": [
     {
      "fonte": "",
+     "jurisdicao": "China",
+     "naoCodificado": true,
+     "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
+    },
+    {
+     "fonte": "",
      "jurisdicao": "Estados Unidos da América",
      "naoCodificado": true,
      "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
@@ -155,6 +185,12 @@ window.HRAIGO_RESPOSTAS = {
   },
   {
    "comparacoes": [
+    {
+     "fonte": "",
+     "jurisdicao": "China",
+     "naoCodificado": true,
+     "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
+    },
     {
      "fonte": "",
      "jurisdicao": "Estados Unidos da América",
@@ -187,6 +223,12 @@ window.HRAIGO_RESPOSTAS = {
   {
    "comparacoes": [
     {
+     "fonte": "Regulations.AI, China AI Regulation Overview (RAI-CN-NA-SUMMARY-2026), gerado em 17/11/2026",
+     "jurisdicao": "China",
+     "naoCodificado": false,
+     "valor": "supervisão centralizada pela Administração do Ciberespaço (CAC) com ministérios setoriais, segundo fonte secundária"
+    },
+    {
      "fonte": "",
      "jurisdicao": "Estados Unidos da América",
      "naoCodificado": true,
@@ -217,6 +259,12 @@ window.HRAIGO_RESPOSTAS = {
   },
   {
    "comparacoes": [
+    {
+     "fonte": "",
+     "jurisdicao": "China",
+     "naoCodificado": true,
+     "valor": "não codificado: a China só tem fontes secundárias no corpus (Regulations.AI 2026, Law Library of Congress 2023)"
+    },
     {
      "fonte": "",
      "jurisdicao": "Estados Unidos da América",

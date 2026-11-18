@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:hrai="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:prov="http://www.w3.org/ns/prov#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Autoridade_CAC">
+    <rdfs:label xml:lang="en">Cyberspace Administration of China (CAC)</rdfs:label>
+    <dcterms:spatial>
+      <hrai:Jurisdiction rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#China">
+        <rdfs:label xml:lang="pt">China</rdfs:label>
+        <rdfs:comment xml:lang="pt">Fonte secundária: não há texto oficial chinês no corpus. Incluir os textos oficiais (CAC, Assembleia Popular Nacional) é pendência.</rdfs:comment>
+      </hrai:Jurisdiction>
+    </dcterms:spatial>
+    <prov:wasDerivedFrom>
+      <hrai:SourceSnapshot rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview">
+        <rdfs:label>Regulations.AI, China AI Regulation Overview (RAI-CN-NA-SUMMARY-2026), gerado em 17/11/2026</rdfs:label>
+        <rdfs:comment xml:lang="pt">Fonte secundária: não há texto oficial chinês no corpus.</rdfs:comment>
+        <hrai:snapshotOfSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Fonte_Overview"/>
+        <hrai:snapshotSHA256>34ca6c104b41255ae939e94bc29661173600aea5f1db02715c1022a35fc4e4b4</hrai:snapshotSHA256>
+        <hrai:snapshotURI rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/docs/ai-regulations/ch/China-china-ai-regulation-overview.pdf</hrai:snapshotURI>
+      </hrai:SourceSnapshot>
+    </prov:wasDerivedFrom>
+  </hrai:Stakeholder>
+  <hrai:ExtractionBatch rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Lote_China">
+    <rdfs:label xml:lang="pt">Lote: China, fontes secundárias</rdfs:label>
+    <hrai:extractionContainsCandidate>
+      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Candidate_AIContentLabeling">
+        <rdfs:label xml:lang="pt">Candidato (fonte secundária): Administrative Measures for the Labeling of AI-Generated Content / Measures for Identification (2025)</rdfs:label>
+        <dcterms:subject rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#AIContentLabeling"/>
+        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#SessaoLoop"/>
+      </hrai:CandidateAssertion>
+    </hrai:extractionContainsCandidate>
+    <hrai:extractionContainsCandidate>
+      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Candidate_AIMeasurementGuidelines">
+        <rdfs:label xml:lang="pt">Candidato (fonte secundária): Guidelines for AI Measurement System and Capability Building (2026 Edition)</rdfs:label>
+        <dcterms:subject rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#AIMeasurementGuidelines"/>
+        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#SessaoLoop"/>
+      </hrai:CandidateAssertion>
+    </hrai:extractionContainsCandidate>
+    <hrai:extractionContainsCandidate>
+      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Candidate_AgentInterconnection">
+        <rdfs:label xml:lang="pt">Candidato (fonte secundária): Artificial Intelligence - Agent Interconnection (GB/Z 185-2026)</rdfs:label>
+        <dcterms:subject rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#AgentInterconnection"/>
+        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#SessaoLoop"/>
+      </hrai:CandidateAssertion>
+    </hrai:extractionContainsCandidate>
+    <hrai:extractionContainsCandidate>
+      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Candidate_AlgorithmicRecommendation">
+        <rdfs:label xml:lang="pt">Candidato (fonte secundária): Provisions on the Administration of Algorithmic Recommendation in Internet Information Services (2021)</rdfs:label>
+        <dcterms:subject rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#AlgorithmicRecommendation"/>
+        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#SessaoLoop"/>
+      </hrai:CandidateAssertion>
+    </hrai:extractionContainsCandidate>
+    <hrai:extractionContainsCandidate>
+      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Candidate_AnthropomorphicAI">
+        <rdfs:label xml:lang="pt">Candidato (fonte secundária): Interim Measures for the Administration of Anthropomorphic AI Interaction Services (2025/2026)</rdfs:label>
+        <dcterms:subject rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#AnthropomorphicAI"/>
+        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#SessaoLoop"/>
+      </hrai:CandidateAssertion>
+    </hrai:extractionContainsCandidate>
+    <hrai:extractionContainsCandidate>
+      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Candidate_CybersecurityLaw">
+        <rdfs:label xml:lang="pt">Candidato (fonte secundária): Cybersecurity Law of the PRC (2016, amended 2025)</rdfs:label>
+        <dcterms:subject rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#CybersecurityLaw"/>
+        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#SessaoLoop"/>
+      </hrai:CandidateAssertion>
+    </hrai:extractionContainsCandidate>
+    <hrai:extractionContainsCandidate>
+      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Candidate_DataSecurityLaw">
+        <rdfs:label xml:lang="pt">Candidato (fonte secundária): Data Security Law of the PRC (2021)</rdfs:label>
+        <dcterms:subject rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#DataSecurityLaw"/>
+        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#SessaoLoop"/>
+      </hrai:CandidateAssertion>
+    </hrai:extractionContainsCandidate>
+    <hrai:extractionContainsCandidate>
+      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Candidate_DeepSynthesis">
+        <rdfs:label xml:lang="pt">Candidato (fonte secundária): Provisions on the Administration of Deep Synthesis of Internet-based Information Services (2022)</rdfs:label>
+        <dcterms:subject rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#DeepSynthesis"/>
+        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#SessaoLoop"/>
+      </hrai:CandidateAssertion>
+    </hrai:extractionContainsCandidate>
+    <hrai:extractionContainsCandidate>
+      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Candidate_DevelopmentPlan2017">
+        <rdfs:label xml:lang="pt">Candidato (fonte secundária): New Generation Artificial Intelligence Development Plan (2017)</rdfs:label>
+        <dcterms:subject rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#DevelopmentPlan2017"/>
+        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#SessaoLoop"/>
+      </hrai:CandidateAssertion>
+    </hrai:extractionContainsCandidate>
+    <hrai:extractionContainsCandidate>
+      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Candidate_DigitalVirtualHumanDraft">
+        <rdfs:label xml:lang="pt">Candidato (fonte secundária): Administrative Measures for Digital Virtual Human Information Services (Draft 2026)</rdfs:label>
+        <dcterms:subject rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#DigitalVirtualHumanDraft"/>
+        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#SessaoLoop"/>
+      </hrai:CandidateAssertion>
+    </hrai:extractionContainsCandidate>
+    <hrai:extractionContainsCandidate>
+      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Candidate_EthicsSafetyGuidelines">
+        <rdfs:label xml:lang="pt">Candidato (fonte secundária): Ethics-Safety Guidelines for Artificial Intelligence Applications 1.0 (2026)</rdfs:label>
+        <dcterms:subject rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#EthicsSafetyGuidelines"/>
+        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#SessaoLoop"/>
+      </hrai:CandidateAssertion>
+    </hrai:extractionContainsCandidate>
+    <hrai:extractionContainsCandidate>
+      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Candidate_GenerativeAIMeasures">
+        <rdfs:label xml:lang="pt">Candidato (fonte secundária): Interim Measures for the Administration of Generative AI Services (2023)</rdfs:label>
+        <dcterms:subject rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#GenerativeAIMeasures"/>
+        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#SessaoLoop"/>
+      </hrai:CandidateAssertion>
+    </hrai:extractionContainsCandidate>
+    <hrai:extractionContainsCandidate>
+      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Candidate_NetworkDataSecurity">
+        <rdfs:label xml:lang="pt">Candidato (fonte secundária): Regulations on Network Data Security Management (2024)</rdfs:label>
+        <dcterms:subject rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#NetworkDataSecurity"/>
+        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#SessaoLoop"/>
+      </hrai:CandidateAssertion>
+    </hrai:extractionContainsCandidate>
+    <hrai:extractionContainsCandidate>
+      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Candidate_PIPL">
+        <rdfs:label xml:lang="pt">Candidato (fonte secundária): Personal Information Protection Law of the PRC (PIPL) (2021)</rdfs:label>
+        <dcterms:subject rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#PIPL"/>
+        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#SessaoLoop"/>
+      </hrai:CandidateAssertion>
+    </hrai:extractionContainsCandidate>
+  </hrai:ExtractionBatch>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Autoridade_MIIT">
+    <rdfs:label xml:lang="en">Ministry of Industry and Information Technology (MIIT)</rdfs:label>
+    <dcterms:spatial rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#China"/>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+  </hrai:Stakeholder>
+  <owl:Ontology rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china">
+    <rdfs:label xml:lang="pt">China: instrumentos e autoridades de governança de IA, segundo fontes secundárias</rdfs:label>
+    <rdfs:comment xml:lang="pt">Gerado por scripts/ontologia/extrair_china.py. Decisão D-01 (autor, 17/11/2026): incluir a China. Fonte secundária: não há texto oficial chinês no corpus. Lista transcrita das imagens do overview pela sessão do loop (LLM); presença no relatório da Law Library of Congress conferida automaticamente.</rdfs:comment>
+  </owl:Ontology>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Autoridade_MPS">
+    <rdfs:label xml:lang="en">Ministry of Public Security (MPS)</rdfs:label>
+    <dcterms:spatial rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#China"/>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+  </hrai:Stakeholder>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Autoridade_NDRC">
+    <rdfs:label xml:lang="en">National Development and Reform Commission (NDRC)</rdfs:label>
+    <dcterms:spatial rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#China"/>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+  </hrai:Stakeholder>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Autoridade_TC260">
+    <rdfs:label xml:lang="en">National Technical Committee 260 on Cybersecurity (TC260)</rdfs:label>
+    <dcterms:spatial rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#China"/>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+  </hrai:Stakeholder>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Autoridade_MOST">
+    <rdfs:label xml:lang="en">Ministry of Science and Technology (MOST)</rdfs:label>
+    <dcterms:spatial rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#China"/>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+  </hrai:Stakeholder>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Autoridade_SAMR">
+    <rdfs:label xml:lang="en">State Administration for Market Regulation (SAMR)</rdfs:label>
+    <dcterms:spatial rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#China"/>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+  </hrai:Stakeholder>
+  <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#DevelopmentPlan2017">
+    <rdfs:label xml:lang="en">New Generation Artificial Intelligence Development Plan (2017)</rdfs:label>
+    <dcterms:date rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">2017</dcterms:date>
+    <dcterms:references>
+      <hrai:SourceSnapshot rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_LawLibrary">
+        <rdfs:label>Law Library of Congress, China: Regulation of Artificial Intelligence (June 2023)</rdfs:label>
+        <rdfs:comment xml:lang="pt">Fonte secundária: não há texto oficial chinês no corpus.</rdfs:comment>
+        <hrai:snapshotOfSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Fonte_LawLibrary"/>
+        <hrai:snapshotSHA256>58a3d37f7b2fec5b4c6f01f4515cea1fdf3c6c93a162a691109a2d7a40b8637d</hrai:snapshotSHA256>
+        <hrai:snapshotURI rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/docs/ai-regulations/ch/service-ll-llglrd-2023555933-2023555933.pdf</hrai:snapshotURI>
+      </hrai:SourceSnapshot>
+    </dcterms:references>
+    <skos:scopeNote xml:lang="pt">Plano estratégico (e1), segundo a fonte. Fonte secundária: não há texto oficial chinês no corpus.</skos:scopeNote>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+    <hrai:policyInstrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#China"/>
+  </hrai:PolicyInstrument>
+  <hrai:EnactedLegalInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#DeepSynthesis">
+    <rdfs:label xml:lang="en">Provisions on the Administration of Deep Synthesis of Internet-based Information Services (2022)</rdfs:label>
+    <dcterms:date rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">2022</dcterms:date>
+    <dcterms:references rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_LawLibrary"/>
+    <skos:scopeNote xml:lang="pt">Regra administrativa ou departamental vinculante, segundo a fonte. Fonte secundária: não há texto oficial chinês no corpus.</skos:scopeNote>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+    <hrai:instrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#China"/>
+  </hrai:EnactedLegalInstrument>
+  <hrai:EnactedLegalInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#PIPL">
+    <rdfs:label xml:lang="en">Personal Information Protection Law of the PRC (PIPL) (2021)</rdfs:label>
+    <dcterms:date rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">2021</dcterms:date>
+    <dcterms:references rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_LawLibrary"/>
+    <skos:scopeNote xml:lang="pt">Lei aprovada pelo comitê permanente da assembleia popular nacional, segundo a fonte. Fonte secundária: não há texto oficial chinês no corpus.</skos:scopeNote>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+    <hrai:instrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#China"/>
+  </hrai:EnactedLegalInstrument>
+  <hrai:EnactedLegalInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#AnthropomorphicAI">
+    <rdfs:label xml:lang="en">Interim Measures for the Administration of Anthropomorphic AI Interaction Services (2025/2026)</rdfs:label>
+    <dcterms:date rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">2025</dcterms:date>
+    <skos:scopeNote xml:lang="pt">Regra administrativa ou departamental vinculante, segundo a fonte. Fonte secundária: não há texto oficial chinês no corpus.</skos:scopeNote>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+    <hrai:instrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#China"/>
+  </hrai:EnactedLegalInstrument>
+  <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#AIMeasurementGuidelines">
+    <rdfs:label xml:lang="en">Guidelines for AI Measurement System and Capability Building (2026 Edition)</rdfs:label>
+    <dcterms:date rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">2026</dcterms:date>
+    <skos:scopeNote xml:lang="pt">Norma técnica ou guia não vinculante (e1), segundo a fonte. Fonte secundária: não há texto oficial chinês no corpus.</skos:scopeNote>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+    <hrai:policyInstrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#China"/>
+  </hrai:PolicyInstrument>
+  <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#AgentInterconnection">
+    <rdfs:label xml:lang="en">Artificial Intelligence - Agent Interconnection (GB/Z 185-2026)</rdfs:label>
+    <dcterms:date rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">2026</dcterms:date>
+    <skos:scopeNote xml:lang="pt">Norma técnica ou guia não vinculante (e1), segundo a fonte. Fonte secundária: não há texto oficial chinês no corpus.</skos:scopeNote>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+    <hrai:policyInstrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#China"/>
+  </hrai:PolicyInstrument>
+  <hrai:LegislativeProposal rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#DigitalVirtualHumanDraft">
+    <rdfs:label xml:lang="en">Administrative Measures for Digital Virtual Human Information Services (Draft 2026)</rdfs:label>
+    <dcterms:date rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">2026</dcterms:date>
+    <skos:scopeNote xml:lang="pt">Minuta, ainda não promulgada, segundo a fonte. Fonte secundária: não há texto oficial chinês no corpus.</skos:scopeNote>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+    <hrai:instrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#China"/>
+    <hrai:proposalInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#China"/>
+  </hrai:LegislativeProposal>
+  <hrai:EnactedLegalInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#NetworkDataSecurity">
+    <rdfs:label xml:lang="en">Regulations on Network Data Security Management (2024)</rdfs:label>
+    <dcterms:date rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">2024</dcterms:date>
+    <skos:scopeNote xml:lang="pt">Regra administrativa ou departamental vinculante, segundo a fonte. Fonte secundária: não há texto oficial chinês no corpus.</skos:scopeNote>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+    <hrai:instrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#China"/>
+  </hrai:EnactedLegalInstrument>
+  <hrai:EnactedLegalInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#AlgorithmicRecommendation">
+    <rdfs:label xml:lang="en">Provisions on the Administration of Algorithmic Recommendation in Internet Information Services (2021)</rdfs:label>
+    <dcterms:date rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">2021</dcterms:date>
+    <dcterms:references rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_LawLibrary"/>
+    <skos:scopeNote xml:lang="pt">Regra administrativa ou departamental vinculante, segundo a fonte. Fonte secundária: não há texto oficial chinês no corpus.</skos:scopeNote>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+    <hrai:instrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#China"/>
+  </hrai:EnactedLegalInstrument>
+  <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#EthicsSafetyGuidelines">
+    <rdfs:label xml:lang="en">Ethics-Safety Guidelines for Artificial Intelligence Applications 1.0 (2026)</rdfs:label>
+    <dcterms:date rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">2026</dcterms:date>
+    <skos:scopeNote xml:lang="pt">Norma técnica ou guia não vinculante (e1), segundo a fonte. Fonte secundária: não há texto oficial chinês no corpus.</skos:scopeNote>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+    <hrai:policyInstrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#China"/>
+  </hrai:PolicyInstrument>
+  <hrai:EnactedLegalInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#DataSecurityLaw">
+    <rdfs:label xml:lang="en">Data Security Law of the PRC (2021)</rdfs:label>
+    <dcterms:date rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">2021</dcterms:date>
+    <dcterms:references rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_LawLibrary"/>
+    <skos:scopeNote xml:lang="pt">Lei aprovada pelo comitê permanente da assembleia popular nacional, segundo a fonte. Fonte secundária: não há texto oficial chinês no corpus.</skos:scopeNote>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+    <hrai:instrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#China"/>
+  </hrai:EnactedLegalInstrument>
+  <hrai:EnactedLegalInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#CybersecurityLaw">
+    <rdfs:label xml:lang="en">Cybersecurity Law of the PRC (2016, amended 2025)</rdfs:label>
+    <dcterms:date rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">2016</dcterms:date>
+    <dcterms:references rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_LawLibrary"/>
+    <skos:scopeNote xml:lang="pt">Lei aprovada pelo comitê permanente da assembleia popular nacional, segundo a fonte. Fonte secundária: não há texto oficial chinês no corpus.</skos:scopeNote>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+    <hrai:instrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#China"/>
+  </hrai:EnactedLegalInstrument>
+  <hrai:LegalSource rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Fonte_Overview">
+    <rdfs:label>Regulations.AI</rdfs:label>
+  </hrai:LegalSource>
+  <hrai:MonitoringAgent rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#SessaoLoop">
+    <rdfs:label xml:lang="pt">Sessão do loop ESP-ONT-02 (Claude Code; transcrição de PDF em imagem assistida por LLM)</rdfs:label>
+  </hrai:MonitoringAgent>
+  <hrai:EnactedLegalInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#GenerativeAIMeasures">
+    <rdfs:label xml:lang="en">Interim Measures for the Administration of Generative AI Services (2023)</rdfs:label>
+    <dcterms:date rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">2023</dcterms:date>
+    <dcterms:references rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_LawLibrary"/>
+    <skos:scopeNote xml:lang="pt">Regra administrativa ou departamental vinculante, segundo a fonte. Fonte secundária: não há texto oficial chinês no corpus.</skos:scopeNote>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+    <hrai:instrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#China"/>
+  </hrai:EnactedLegalInstrument>
+  <hrai:EnactedLegalInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#AIContentLabeling">
+    <rdfs:label xml:lang="en">Administrative Measures for the Labeling of AI-Generated Content / Measures for Identification (2025)</rdfs:label>
+    <dcterms:date rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">2025</dcterms:date>
+    <skos:scopeNote xml:lang="pt">Regra administrativa ou departamental vinculante, segundo a fonte. Fonte secundária: não há texto oficial chinês no corpus.</skos:scopeNote>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Snapshot_Overview"/>
+    <hrai:instrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#China"/>
+  </hrai:EnactedLegalInstrument>
+  <hrai:LegalSource rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#Fonte_LawLibrary">
+    <rdfs:label>Law Library of Congress</rdfs:label>
+  </hrai:LegalSource>
+</rdf:RDF>
