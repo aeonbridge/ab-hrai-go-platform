@@ -54,7 +54,7 @@
    "dispositivo",
    "revisao"
   ],
-  "linhas": 0,
+  "linhas": 130,
   "pergunta": "QN1"
  },
  "PC6_afirmacoes": {
@@ -103,6 +103,13 @@
   ],
   "linhas": 56,
   "pergunta": "QN1"
+ },
+ "V08_codificacoes_sem_evidencia": {
+  "colunas": [
+   "c"
+  ],
+  "linhas": 0,
+  "pergunta": "aceite V-08"
  },
  "V16_sementes_sem_ligacao": {
   "colunas": [

@@ -1,0 +1,1384 @@
+# Gerado por scripts/ontologia/codificar.py. Não editar à mão. Candidatos pendentes de revisão.
+@prefix cod: <https://hrai-go.aeonbridge.io/data/comparativo/codificacoes#> .
+@prefix comp: <https://hrai-go.aeonbridge.io/ontology/comparativo#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix eu: <https://hrai-go.aeonbridge.io/data/regulatory/eu/aiact#> .
+@prefix hrai: <https://hrai-go.aeonbridge.io/ontology/regulatory#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pl: <https://hrai-go.aeonbridge.io/data/regulatory/br/pl2338#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://hrai-go.aeonbridge.io/data/comparativo/codificacoes> a owl:Ontology ;
+    rdfs:label "Codificações de Brasil e UE nos 25 critérios e na E1, com as dos autores do paper"@pt ;
+    owl:imports <https://hrai-go.aeonbridge.io/ontology/comparativo> .
+
+cod:Cod_BR_C01_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C01 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C01_LawAdoption ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "approved by the Brazilian Senate"@en .
+
+cod:Cod_BR_C02_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C02 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C02_NoveltyOfLegalRegime ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "New law."@en .
+
+cod:Cod_BR_C03_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C03 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C03_DigitalLegalMaturity ;
+    hrai:codingScaleValue 1.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "Complementing an emerging digital regulatory environment"@en .
+
+cod:Cod_BR_C04_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C04 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C04_AppliesToGenerativeAI ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "Applies to GPAI systems and generative AI systems."@en .
+
+cod:Cod_BR_C05_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C05 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C05_Industry ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "Law targets industry."@en .
+
+cod:Cod_BR_C06_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C06 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C06_Government ;
+    hrai:codingScaleValue 1.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "Not primarily targeting government or federal agencies."@en .
+
+cod:Cod_BR_C07_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C07 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C07_Individuals ;
+    hrai:codingScaleValue 1.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "Not primarily targeting individuals."@en .
+
+cod:Cod_BR_C08_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C08 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C08_ContinuedReporting ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "registration and documentation of the preliminary assessment"@en .
+
+cod:Cod_BR_C09_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C09 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C09_ThirdPartyAudits ;
+    hrai:codingScaleValue 1.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "Audit to be completed by a competent authority"@en .
+
+cod:Cod_BR_C10_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C10 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C10_ExistingOrNewAgency ;
+    hrai:codingScaleValue 1.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "Leveraging existing agencies; SIA"@en .
+
+cod:Cod_BR_C11_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C11 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C11_Liability ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "Includes a liability regime."@en .
+
+cod:Cod_BR_C12_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C12 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C12_RegulatorySandboxes ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "Includes regulatory sandboxes."@en .
+
+cod:Cod_BR_C13_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C13 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C13_CriminalCharges ;
+    hrai:codingScaleValue 0.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "Not included."@en .
+
+cod:Cod_BR_C14_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C14 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C14_Fines ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "up to BRL 50 million or 2% of turnover"@en .
+
+cod:Cod_BR_C15_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C15 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C15_TemporaryInjunctions ;
+    hrai:codingScaleValue 1.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "Included."@en .
+
+cod:Cod_BR_C16_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C16 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C16_StandardSetting ;
+    hrai:codingScaleValue 0.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "Not directly included within the law."@en .
+
+cod:Cod_BR_C17_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C17 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C17_Auditing ;
+    hrai:codingScaleValue 1.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "Audit to be completed by a competent authority"@en .
+
+cod:Cod_BR_C18_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C18 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C18_TechnicalExpertise ;
+    hrai:codingScaleValue 0.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "No new center of expertise"@en .
+
+cod:Cod_BR_C19_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C19 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C19_InternationalCooperation ;
+    hrai:codingScaleValue 1.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "Aligned with some definitions set by international stakeholders"@en .
+
+cod:Cod_BR_C20_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C20 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C20_CivilSocietyInclusion ;
+    hrai:codingScaleValue 3.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "higher level of inclusion of civil society"@en .
+
+cod:Cod_BR_C21_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C21 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C21_PrivateSectorInclusion ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "Inclusion of private stakeholders"@en .
+
+cod:Cod_BR_C22_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C22 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C22_ExAnte ;
+    hrai:codingScaleValue 3.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "High level of ex ante requirements."@en .
+
+cod:Cod_BR_C23_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C23 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C23_ExPost ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "Medium level of ex post remedies."@en .
+
+cod:Cod_BR_C24_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C24 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C24_TechnologyFocused ;
+    hrai:codingScaleValue 1.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "Targets, as a secondary regulatory layer, GPAI"@en .
+
+cod:Cod_BR_C25_Autores a hrai:CriterionCoding ;
+    rdfs:label "BR · C25 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C25_ApplicationFocused ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "Primarily targets context or application based AI"@en .
+
+cod:Cod_UE_C01_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C01 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C01_LawAdoption ;
+    hrai:codingScaleValue 3.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "adopted by the EU in July 2024"@en .
+
+cod:Cod_UE_C02_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C02 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C02_NoveltyOfLegalRegime ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "New law."@en .
+
+cod:Cod_UE_C03_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C03 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C03_DigitalLegalMaturity ;
+    hrai:codingScaleValue 3.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "Very mature landscape (GDPR, DMA, DSA, Chips Act)"@en .
+
+cod:Cod_UE_C04_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C04 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C04_AppliesToGenerativeAI ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "Applies to GPAI systems, models, and models with systemic risk."@en .
+
+cod:Cod_UE_C05_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C05 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C05_Industry ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "Law targets industry."@en .
+
+cod:Cod_UE_C06_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C06 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C06_Government ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "Includes government and federal agencies."@en .
+
+cod:Cod_UE_C07_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C07 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C07_Individuals ;
+    hrai:codingScaleValue 0.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "Does not directly target individuals."@en .
+
+cod:Cod_UE_C08_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C08 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C08_ContinuedReporting ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "Serious AI incidents need to be reported"@en .
+
+cod:Cod_UE_C09_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C09 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C09_ThirdPartyAudits ;
+    hrai:codingScaleValue 1.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "does not explicitly mention third-party audits"@en .
+
+cod:Cod_UE_C10_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C10 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C10_ExistingOrNewAgency ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "new EU level regulator, the EU AI Office"@en .
+
+cod:Cod_UE_C11_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C11 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C11_Liability ;
+    hrai:codingScaleValue 0.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "Not directly covered in the EU AI Act"@en .
+
+cod:Cod_UE_C12_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C12 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C12_RegulatorySandboxes ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "Art. 57: at least one AI regulatory sandbox"@en .
+
+cod:Cod_UE_C13_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C13 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C13_CriminalCharges ;
+    hrai:codingScaleValue 0.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "No mention of charges"@en .
+
+cod:Cod_UE_C14_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C14 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C14_Fines ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "up to 35 000 000 EUR or 7%"@en .
+
+cod:Cod_UE_C15_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C15 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C15_TemporaryInjunctions ;
+    hrai:codingScaleValue 1.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "Included."@en .
+
+cod:Cod_UE_C16_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C16 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C16_StandardSetting ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "CEN, CENELEC and ETSI standards"@en .
+
+cod:Cod_UE_C17_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C17 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C17_Auditing ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "access to source code; periodic audits by notified bodies"@en .
+
+cod:Cod_UE_C18_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C18 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C18_TechnicalExpertise ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "JRC, AI Office, scientific panel"@en .
+
+cod:Cod_UE_C19_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C19 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C19_InternationalCooperation ;
+    hrai:codingScaleValue 1.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "definition aligned with that of the OECD"@en .
+
+cod:Cod_UE_C20_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C20 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C20_CivilSocietyInclusion ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "Inclusion of civil society through the AI HLG"@en .
+
+cod:Cod_UE_C21_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C21 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C21_PrivateSectorInclusion ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "Inclusion of private sector through the AI HLG"@en .
+
+cod:Cod_UE_C22_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C22 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C22_ExAnte ;
+    hrai:codingScaleValue 3.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "High level of ex ante requirements."@en .
+
+cod:Cod_UE_C23_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C23 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C23_ExPost ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "Medium level of ex post remedies."@en .
+
+cod:Cod_UE_C24_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C24 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C24_TechnologyFocused ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "Targeting GPAI systems, models, and models with systemic risk."@en .
+
+cod:Cod_UE_C25_Autores a hrai:CriterionCoding ;
+    rdfs:label "UE · C25 segundo os autores do paper"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    rdfs:comment "Valor descritivo dos autores; conversão para a escala aprovada feita pela sessão."@pt ;
+    hrai:codingCoder cod:AutoresAlanoca2025 ;
+    hrai:codingCriterion comp:C25_ApplicationFocused ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "Risk classification takes into account most sensitive applications."@en .
+
+cod:Lote_Codificacoes a hrai:ExtractionBatch ;
+    rdfs:label "Lote: codificações de Brasil e UE (escalas aprovadas, D-02)"@pt ;
+    hrai:extractionContainsCandidate cod:Candidate_Cod_BR_C01,
+        cod:Candidate_Cod_BR_C02,
+        cod:Candidate_Cod_BR_C03,
+        cod:Candidate_Cod_BR_C04,
+        cod:Candidate_Cod_BR_C05,
+        cod:Candidate_Cod_BR_C06,
+        cod:Candidate_Cod_BR_C07,
+        cod:Candidate_Cod_BR_C08,
+        cod:Candidate_Cod_BR_C09,
+        cod:Candidate_Cod_BR_C10,
+        cod:Candidate_Cod_BR_C11,
+        cod:Candidate_Cod_BR_C12,
+        cod:Candidate_Cod_BR_C13,
+        cod:Candidate_Cod_BR_C14,
+        cod:Candidate_Cod_BR_C15,
+        cod:Candidate_Cod_BR_C16,
+        cod:Candidate_Cod_BR_C17,
+        cod:Candidate_Cod_BR_C18,
+        cod:Candidate_Cod_BR_C19,
+        cod:Candidate_Cod_BR_C20,
+        cod:Candidate_Cod_BR_C21,
+        cod:Candidate_Cod_BR_C22,
+        cod:Candidate_Cod_BR_C23,
+        cod:Candidate_Cod_BR_C24,
+        cod:Candidate_Cod_BR_C25,
+        cod:Candidate_Cod_BR_E1,
+        cod:Candidate_Cod_UE_C01,
+        cod:Candidate_Cod_UE_C02,
+        cod:Candidate_Cod_UE_C03,
+        cod:Candidate_Cod_UE_C04,
+        cod:Candidate_Cod_UE_C05,
+        cod:Candidate_Cod_UE_C06,
+        cod:Candidate_Cod_UE_C07,
+        cod:Candidate_Cod_UE_C08,
+        cod:Candidate_Cod_UE_C09,
+        cod:Candidate_Cod_UE_C10,
+        cod:Candidate_Cod_UE_C11,
+        cod:Candidate_Cod_UE_C12,
+        cod:Candidate_Cod_UE_C13,
+        cod:Candidate_Cod_UE_C14,
+        cod:Candidate_Cod_UE_C15,
+        cod:Candidate_Cod_UE_C16,
+        cod:Candidate_Cod_UE_C17,
+        cod:Candidate_Cod_UE_C18,
+        cod:Candidate_Cod_UE_C19,
+        cod:Candidate_Cod_UE_C20,
+        cod:Candidate_Cod_UE_C21,
+        cod:Candidate_Cod_UE_C22,
+        cod:Candidate_Cod_UE_C23,
+        cod:Candidate_Cod_UE_C24,
+        cod:Candidate_Cod_UE_C25,
+        cod:Candidate_Cod_UE_E1 .
+
+cod:Candidate_Cod_BR_C01 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C01"@pt ;
+    dcterms:subject cod:Cod_BR_C01 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C02 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C02"@pt ;
+    dcterms:subject cod:Cod_BR_C02 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C03 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C03"@pt ;
+    dcterms:subject cod:Cod_BR_C03 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C04 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C04"@pt ;
+    dcterms:subject cod:Cod_BR_C04 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C05 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C05"@pt ;
+    dcterms:subject cod:Cod_BR_C05 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C06 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C06"@pt ;
+    dcterms:subject cod:Cod_BR_C06 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C07 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C07"@pt ;
+    dcterms:subject cod:Cod_BR_C07 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C08 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C08"@pt ;
+    dcterms:subject cod:Cod_BR_C08 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C09 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C09"@pt ;
+    dcterms:subject cod:Cod_BR_C09 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C10 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C10"@pt ;
+    dcterms:subject cod:Cod_BR_C10 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C11 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C11"@pt ;
+    dcterms:subject cod:Cod_BR_C11 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C12 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C12"@pt ;
+    dcterms:subject cod:Cod_BR_C12 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C13 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C13"@pt ;
+    dcterms:subject cod:Cod_BR_C13 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C14 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C14"@pt ;
+    dcterms:subject cod:Cod_BR_C14 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C15 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C15"@pt ;
+    dcterms:subject cod:Cod_BR_C15 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C16 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C16"@pt ;
+    dcterms:subject cod:Cod_BR_C16 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C17 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C17"@pt ;
+    dcterms:subject cod:Cod_BR_C17 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C18 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C18"@pt ;
+    dcterms:subject cod:Cod_BR_C18 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C19 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C19"@pt ;
+    dcterms:subject cod:Cod_BR_C19 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C20 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C20"@pt ;
+    dcterms:subject cod:Cod_BR_C20 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C21 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C21"@pt ;
+    dcterms:subject cod:Cod_BR_C21 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C22 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C22"@pt ;
+    dcterms:subject cod:Cod_BR_C22 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C23 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C23"@pt ;
+    dcterms:subject cod:Cod_BR_C23 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C24 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C24"@pt ;
+    dcterms:subject cod:Cod_BR_C24 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_C25 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_C25"@pt ;
+    dcterms:subject cod:Cod_BR_C25 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_BR_E1 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_BR_E1"@pt ;
+    dcterms:subject cod:Cod_BR_E1 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C01 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C01"@pt ;
+    dcterms:subject cod:Cod_UE_C01 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C02 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C02"@pt ;
+    dcterms:subject cod:Cod_UE_C02 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C03 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C03"@pt ;
+    dcterms:subject cod:Cod_UE_C03 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C04 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C04"@pt ;
+    dcterms:subject cod:Cod_UE_C04 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C05 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C05"@pt ;
+    dcterms:subject cod:Cod_UE_C05 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C06 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C06"@pt ;
+    dcterms:subject cod:Cod_UE_C06 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C07 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C07"@pt ;
+    dcterms:subject cod:Cod_UE_C07 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C08 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C08"@pt ;
+    dcterms:subject cod:Cod_UE_C08 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C09 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C09"@pt ;
+    dcterms:subject cod:Cod_UE_C09 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C10 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C10"@pt ;
+    dcterms:subject cod:Cod_UE_C10 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C11 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C11"@pt ;
+    dcterms:subject cod:Cod_UE_C11 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C12 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C12"@pt ;
+    dcterms:subject cod:Cod_UE_C12 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C13 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C13"@pt ;
+    dcterms:subject cod:Cod_UE_C13 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C14 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C14"@pt ;
+    dcterms:subject cod:Cod_UE_C14 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C15 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C15"@pt ;
+    dcterms:subject cod:Cod_UE_C15 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C16 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C16"@pt ;
+    dcterms:subject cod:Cod_UE_C16 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C17 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C17"@pt ;
+    dcterms:subject cod:Cod_UE_C17 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C18 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C18"@pt ;
+    dcterms:subject cod:Cod_UE_C18 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C19 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C19"@pt ;
+    dcterms:subject cod:Cod_UE_C19 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C20 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C20"@pt ;
+    dcterms:subject cod:Cod_UE_C20 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C21 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C21"@pt ;
+    dcterms:subject cod:Cod_UE_C21 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C22 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C22"@pt ;
+    dcterms:subject cod:Cod_UE_C22 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C23 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C23"@pt ;
+    dcterms:subject cod:Cod_UE_C23 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C24 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C24"@pt ;
+    dcterms:subject cod:Cod_UE_C24 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_C25 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_C25"@pt ;
+    dcterms:subject cod:Cod_UE_C25 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Candidate_Cod_UE_E1 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: codificação Cod_UE_E1"@pt ;
+    dcterms:subject cod:Cod_UE_E1 ;
+    hrai:candidateProducedBy cod:SessaoLoop .
+
+cod:Cod_BR_C01 a hrai:CriterionCoding ;
+    rdfs:label "BR · C01 = 2 (aprovada em uma casa)"@pt ;
+    rdfs:comment "Aprovado pelo Senado (10/12/2024), em tramitação na Câmara; o status vem da versão, não de um artigo."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C01_LawAdoption ;
+    hrai:codingJustifiedBy pl:Art_2024_001 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "aprovada em uma casa"@pt .
+
+cod:Cod_BR_C02 a hrai:CriterionCoding ;
+    rdfs:label "BR · C02 = 2 (lei nova específica para IA)"@pt ;
+    rdfs:comment "Lei nova dedicada à governança de sistemas de IA."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C02_NoveltyOfLegalRegime ;
+    hrai:codingJustifiedBy pl:Art_2024_001 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "lei nova específica para IA"@pt .
+
+cod:Cod_BR_C03 a hrai:CriterionCoding ;
+    rdfs:label "BR · C03 = 1 (emergente)"@pt ;
+    rdfs:comment "O art. 1 articula a lei com a LGPD, a Política Nacional do Meio Ambiente e a Lei de Direitos Autorais; ecossistema digital ainda em formação."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C03_DigitalLegalMaturity ;
+    hrai:codingJustifiedBy pl:Art_2024_001 ;
+    hrai:codingScaleValue 1.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "emergente"@pt .
+
+cod:Cod_BR_C04 a hrai:CriterionCoding ;
+    rdfs:label "BR · C04 = 2 (regras específicas)"@pt ;
+    rdfs:comment "Seção própria para IA de propósito geral e generativa."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C04_AppliesToGenerativeAI ;
+    hrai:codingJustifiedBy pl:Art_2024_029,
+        pl:Art_2024_030,
+        pl:Art_2024_032 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "regras específicas"@pt .
+
+cod:Cod_BR_C05 a hrai:CriterionCoding ;
+    rdfs:label "BR · C05 = 2 (alvo principal)"@pt ;
+    rdfs:comment "Obrigações dos agentes de IA (desenvolvedores e aplicadores)."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C05_Industry ;
+    hrai:codingJustifiedBy pl:Art_2024_017,
+        pl:Art_2024_018 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "alvo principal"@pt .
+
+cod:Cod_BR_C06 a hrai:CriterionCoding ;
+    rdfs:label "BR · C06 = 2 (alvo principal)"@pt ;
+    rdfs:comment "Seção própria de medidas de governança aplicadas pelo poder público."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C06_Government ;
+    hrai:codingJustifiedBy pl:Art_2024_022,
+        pl:Art_2024_023,
+        pl:Art_2024_024 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "alvo principal"@pt .
+
+cod:Cod_BR_C07 a hrai:CriterionCoding ;
+    rdfs:label "BR · C07 = 0 (não visa)"@pt ;
+    rdfs:comment "O art. 1, § 1º, I, exclui o uso por pessoa natural para fim exclusivamente particular e não econômico."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C07_Individuals ;
+    hrai:codingJustifiedBy pl:Art_2024_001 ;
+    hrai:codingScaleValue 0.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "não visa"@pt .
+
+cod:Cod_BR_C08 a hrai:CriterionCoding ;
+    rdfs:label "BR · C08 = 2 (previsto com regra operacional)"@pt ;
+    rdfs:comment "Comunicação de incidente grave à autoridade setorial."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C08_ContinuedReporting ;
+    hrai:codingJustifiedBy pl:Art_2024_042 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "previsto com regra operacional"@pt .
+
+cod:Cod_BR_C09 a hrai:CriterionCoding ;
+    rdfs:label "BR · C09 = 1 (previsto de forma genérica)"@pt ;
+    rdfs:comment "Acreditação de organismos de avaliação de conformidade, como faculdade, sem regra operacional na lei."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C09_ThirdPartyAudits ;
+    hrai:codingJustifiedBy pl:Art_2024_034 ;
+    hrai:codingScaleValue 1.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "previsto de forma genérica"@pt .
+
+cod:Cod_BR_C10 a hrai:CriterionCoding ;
+    rdfs:label "BR · C10 = 1 (sistema que coordena as existentes)"@pt ;
+    rdfs:comment "SIA coordenado pela ANPD com as autoridades setoriais existentes."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C10_ExistingOrNewAgency ;
+    hrai:codingJustifiedBy pl:Art_2024_045,
+        pl:Art_2024_046 ;
+    hrai:codingScaleValue 1.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "sistema que coordena as existentes"@pt .
+
+cod:Cod_BR_C11 a hrai:CriterionCoding ;
+    rdfs:label "BR · C11 = 2 (previsto com regra operacional)"@pt ;
+    rdfs:comment "Responsabilidade civil pelo CDC e pelo Código Civil, com inversão do ônus da prova."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C11_Liability ;
+    hrai:codingJustifiedBy pl:Art_2024_035,
+        pl:Art_2024_036,
+        pl:Art_2024_037 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "previsto com regra operacional"@pt .
+
+cod:Cod_BR_C12 a hrai:CriterionCoding ;
+    rdfs:label "BR · C12 = 2 (previsto com regra operacional)"@pt ;
+    rdfs:comment "Ambiente regulatório experimental (sandbox) com regras de funcionamento."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C12_RegulatorySandboxes ;
+    hrai:codingJustifiedBy pl:Art_2024_055,
+        pl:Art_2024_056,
+        pl:Art_2024_057 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "previsto com regra operacional"@pt .
+
+cod:Cod_BR_C13 a hrai:CriterionCoding ;
+    rdfs:label "BR · C13 = 0 (ausente)"@pt ;
+    rdfs:comment "Só sanções administrativas no art. 50; nenhuma sanção penal."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C13_CriminalCharges ;
+    hrai:codingJustifiedBy pl:Art_2024_050 ;
+    hrai:codingScaleValue 0.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "ausente"@pt .
+
+cod:Cod_BR_C14 a hrai:CriterionCoding ;
+    rdfs:label "BR · C14 = 2 (previstas com teto definido)"@pt ;
+    rdfs:comment "Multa limitada a R$ 50 milhões por infração ou 2% do faturamento."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C14_Fines ;
+    hrai:codingJustifiedBy pl:Art_2024_050 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "previstas com teto definido"@pt .
+
+cod:Cod_BR_C15 a hrai:CriterionCoding ;
+    rdfs:label "BR · C15 = 2 (previsto com regra operacional)"@pt ;
+    rdfs:comment "Suspensão parcial ou total, temporária ou definitiva, do desenvolvimento, fornecimento ou operação (art. 50, V)."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C15_TemporaryInjunctions ;
+    hrai:codingJustifiedBy pl:Art_2024_050 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "previsto com regra operacional"@pt .
+
+cod:Cod_BR_C16 a hrai:CriterionCoding ;
+    rdfs:label "BR · C16 = 1 (previsto de forma genérica)"@pt ;
+    rdfs:comment "Padrões mínimos de transparência para o setor público federal, a cargo do Executivo; sem regime geral de normas técnicas."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C16_StandardSetting ;
+    hrai:codingJustifiedBy pl:Art_2024_024 ;
+    hrai:codingScaleValue 1.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "previsto de forma genérica"@pt .
+
+cod:Cod_BR_C17 a hrai:CriterionCoding ;
+    rdfs:label "BR · C17 = 2 (previsto com regra operacional)"@pt ;
+    rdfs:comment "A autoridade competente realiza ou determina auditorias de sistemas de alto risco (art. 49, VII)."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C17_Auditing ;
+    hrai:codingJustifiedBy pl:Art_2024_049 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "previsto com regra operacional"@pt .
+
+cod:Cod_BR_C18 a hrai:CriterionCoding ;
+    rdfs:label "BR · C18 = 1 (previsto de forma genérica)"@pt ;
+    rdfs:comment "Comitê de Especialistas e Cientistas de IA (Cecia), com composição e funcionamento definidos por regulamento."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C18_TechnicalExpertise ;
+    hrai:codingJustifiedBy pl:Art_2024_054 ;
+    hrai:codingScaleValue 1.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "previsto de forma genérica"@pt .
+
+cod:Cod_BR_C19 a hrai:CriterionCoding ;
+    rdfs:label "BR · C19 = 1 (alinha definições)"@pt ;
+    rdfs:comment "Definições alinhadas a referências internacionais e diretriz de cooperação internacional (art. 68, VII)."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C19_InternationalCooperation ;
+    hrai:codingJustifiedBy pl:Art_2024_004,
+        pl:Art_2024_068 ;
+    hrai:codingScaleValue 1.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "alinha definições"@pt .
+
+cod:Cod_BR_C20 a hrai:CriterionCoding ;
+    rdfs:label "BR · C20 = 2 (média)"@pt ;
+    rdfs:comment "Indicador indireto: o critério mede a consulta no processo legislativo, que não está no texto; o Cria prevê cooperação com a sociedade civil."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C20_CivilSocietyInclusion ;
+    hrai:codingJustifiedBy pl:Art_2024_053 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "média"@pt .
+
+cod:Cod_BR_C21 a hrai:CriterionCoding ;
+    rdfs:label "BR · C21 = 2 (média)"@pt ;
+    rdfs:comment "Indicador indireto: códigos de boas práticas e autorregulação pelos agentes; Cria."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C21_PrivateSectorInclusion ;
+    hrai:codingJustifiedBy pl:Art_2024_040,
+        pl:Art_2024_041,
+        pl:Art_2024_053 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "média"@pt .
+
+cod:Cod_BR_C22 a hrai:CriterionCoding ;
+    rdfs:label "BR · C22 = 3 (alto)"@pt ;
+    rdfs:comment "Avaliação preliminar e avaliação de impacto algorítmico antes da introdução no mercado."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C22_ExAnte ;
+    hrai:codingJustifiedBy pl:Art_2024_012,
+        pl:Art_2024_025,
+        pl:Art_2024_026 ;
+    hrai:codingScaleValue 3.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "alto"@pt .
+
+cod:Cod_BR_C23 a hrai:CriterionCoding ;
+    rdfs:label "BR · C23 = 3 (alto)"@pt ;
+    rdfs:comment "Direitos de explicação, contestação e revisão humana, mais regime de responsabilidade civil."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C23_ExPost ;
+    hrai:codingJustifiedBy pl:Art_2024_006,
+        pl:Art_2024_035,
+        pl:Art_2024_036,
+        pl:Art_2024_037 ;
+    hrai:codingScaleValue 3.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "alto"@pt .
+
+cod:Cod_BR_C24 a hrai:CriterionCoding ;
+    rdfs:label "BR · C24 = 1 (camada secundária)"@pt ;
+    rdfs:comment "IA de propósito geral como camada secundária, numa seção de três artigos."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C24_TechnologyFocused ;
+    hrai:codingJustifiedBy pl:Art_2024_029,
+        pl:Art_2024_030 ;
+    hrai:codingScaleValue 1.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "camada secundária"@pt .
+
+cod:Cod_BR_C25 a hrai:CriterionCoding ;
+    rdfs:label "BR · C25 = 2 (camada principal)"@pt ;
+    rdfs:comment "Classificação de alto risco por finalidade e contexto de uso."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C25_ApplicationFocused ;
+    hrai:codingJustifiedBy pl:Art_2024_014 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "camada principal"@pt .
+
+cod:Cod_BR_E1 a hrai:CriterionCoding ;
+    rdfs:label "BR · E1 = 3 (lei ou projeto de lei)"@pt ;
+    rdfs:comment "Projeto de lei."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:E1_LegalForm ;
+    hrai:codingJustifiedBy pl:Art_2024_001 ;
+    hrai:codingScaleValue 3.0 ;
+    hrai:codingSubject pl:Versao_2024 ;
+    hrai:codingValueLabel "lei ou projeto de lei"@pt .
+
+cod:Cod_UE_C01 a hrai:CriterionCoding ;
+    rdfs:label "UE · C01 = 3 (adotada)"@pt ;
+    rdfs:comment "Regulamento publicado e em vigor, com aplicação escalonada."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C01_LawAdoption ;
+    hrai:codingJustifiedBy eu:Art_113 ;
+    hrai:codingScaleValue 3.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "adotada"@pt .
+
+cod:Cod_UE_C02 a hrai:CriterionCoding ;
+    rdfs:label "UE · C02 = 2 (lei nova específica para IA)"@pt ;
+    rdfs:comment "Regulamento novo dedicado à IA."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C02_NoveltyOfLegalRegime ;
+    hrai:codingJustifiedBy eu:Art_001 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "lei nova específica para IA"@pt .
+
+cod:Cod_UE_C03 a hrai:CriterionCoding ;
+    rdfs:label "UE · C03 = 3 (maduro)"@pt ;
+    rdfs:comment "O art. 2 articula o regulamento com o RGPD e outros atos do mercado digital; ecossistema maduro."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C03_DigitalLegalMaturity ;
+    hrai:codingJustifiedBy eu:Art_002 ;
+    hrai:codingScaleValue 3.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "maduro"@pt .
+
+cod:Cod_UE_C04 a hrai:CriterionCoding ;
+    rdfs:label "UE · C04 = 2 (regras específicas)"@pt ;
+    rdfs:comment "Capítulo próprio para modelos de propósito geral, inclusive com risco sistêmico."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C04_AppliesToGenerativeAI ;
+    hrai:codingJustifiedBy eu:Art_051,
+        eu:Art_053,
+        eu:Art_055 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "regras específicas"@pt .
+
+cod:Cod_UE_C05 a hrai:CriterionCoding ;
+    rdfs:label "UE · C05 = 2 (alvo principal)"@pt ;
+    rdfs:comment "Obrigações dos fornecedores de sistemas de alto risco."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C05_Industry ;
+    hrai:codingJustifiedBy eu:Art_016 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "alvo principal"@pt .
+
+cod:Cod_UE_C06 a hrai:CriterionCoding ;
+    rdfs:label "UE · C06 = 2 (alvo principal)"@pt ;
+    rdfs:comment "Autoridades públicas como responsáveis pela implantação; avaliação de impacto sobre direitos fundamentais para organismos públicos."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C06_Government ;
+    hrai:codingJustifiedBy eu:Art_002,
+        eu:Art_027 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "alvo principal"@pt .
+
+cod:Cod_UE_C07 a hrai:CriterionCoding ;
+    rdfs:label "UE · C07 = 0 (não visa)"@pt ;
+    rdfs:comment "O art. 2, n.º 10, exclui pessoas singulares em atividade puramente pessoal e não profissional."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C07_Individuals ;
+    hrai:codingJustifiedBy eu:Art_002 ;
+    hrai:codingScaleValue 0.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "não visa"@pt .
+
+cod:Cod_UE_C08 a hrai:CriterionCoding ;
+    rdfs:label "UE · C08 = 2 (previsto com regra operacional)"@pt ;
+    rdfs:comment "Acompanhamento pós-comercialização e comunicação de incidentes graves."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C08_ContinuedReporting ;
+    hrai:codingJustifiedBy eu:Art_072,
+        eu:Art_073 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "previsto com regra operacional"@pt .
+
+cod:Cod_UE_C09 a hrai:CriterionCoding ;
+    rdfs:label "UE · C09 = 2 (previsto com regra operacional)"@pt ;
+    rdfs:comment "Avaliação da conformidade com intervenção de organismo notificado (terceiro) nos casos do Anexo VII."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C09_ThirdPartyAudits ;
+    hrai:codingJustifiedBy eu:Art_043 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "previsto com regra operacional"@pt .
+
+cod:Cod_UE_C10 a hrai:CriterionCoding ;
+    rdfs:label "UE · C10 = 2 (agência nova)"@pt ;
+    rdfs:comment "Serviço para a IA (AI Office) criado na Comissão, ao lado das autoridades nacionais."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C10_ExistingOrNewAgency ;
+    hrai:codingJustifiedBy eu:Art_064,
+        eu:Art_070 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "agência nova"@pt .
+
+cod:Cod_UE_C11 a hrai:CriterionCoding ;
+    rdfs:label "UE · C11 = 0 (ausente)"@pt ;
+    rdfs:comment "O regulamento não trata de responsabilidade civil; ausência verificada nos 113 artigos extraídos."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C11_Liability ;
+    hrai:codingJustifiedBy eu:Art_002 ;
+    hrai:codingScaleValue 0.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "ausente"@pt .
+
+cod:Cod_UE_C12 a hrai:CriterionCoding ;
+    rdfs:label "UE · C12 = 2 (previsto com regra operacional)"@pt ;
+    rdfs:comment "Cada Estado-membro cria ao menos um sandbox regulatório."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C12_RegulatorySandboxes ;
+    hrai:codingJustifiedBy eu:Art_057 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "previsto com regra operacional"@pt .
+
+cod:Cod_UE_C13 a hrai:CriterionCoding ;
+    rdfs:label "UE · C13 = 0 (ausente)"@pt ;
+    rdfs:comment "Sanções administrativas; nenhuma sanção penal prevista no regulamento."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C13_CriminalCharges ;
+    hrai:codingJustifiedBy eu:Art_099 ;
+    hrai:codingScaleValue 0.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "ausente"@pt .
+
+cod:Cod_UE_C14 a hrai:CriterionCoding ;
+    rdfs:label "UE · C14 = 2 (previstas com teto definido)"@pt ;
+    rdfs:comment "Coimas até 35 milhões de euros ou 7% do volume de negócios mundial."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C14_Fines ;
+    hrai:codingJustifiedBy eu:Art_099 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "previstas com teto definido"@pt .
+
+cod:Cod_UE_C15 a hrai:CriterionCoding ;
+    rdfs:label "UE · C15 = 2 (previsto com regra operacional)"@pt ;
+    rdfs:comment "A autoridade de fiscalização pode exigir retirada ou recolha do sistema, com prazo definido."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C15_TemporaryInjunctions ;
+    hrai:codingJustifiedBy eu:Art_079 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "previsto com regra operacional"@pt .
+
+cod:Cod_UE_C16 a hrai:CriterionCoding ;
+    rdfs:label "UE · C16 = 2 (previsto com regra operacional)"@pt ;
+    rdfs:comment "Normas harmonizadas publicadas no Jornal Oficial, com presunção de conformidade."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C16_StandardSetting ;
+    hrai:codingJustifiedBy eu:Art_040 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "previsto com regra operacional"@pt .
+
+cod:Cod_UE_C17 a hrai:CriterionCoding ;
+    rdfs:label "UE · C17 = 2 (previsto com regra operacional)"@pt ;
+    rdfs:comment "Acesso da autoridade de fiscalização ao código-fonte sob condições definidas."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C17_Auditing ;
+    hrai:codingJustifiedBy eu:Art_074 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "previsto com regra operacional"@pt .
+
+cod:Cod_UE_C18 a hrai:CriterionCoding ;
+    rdfs:label "UE · C18 = 2 (previsto com regra operacional)"@pt ;
+    rdfs:comment "Painel científico de peritos independentes."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C18_TechnicalExpertise ;
+    hrai:codingJustifiedBy eu:Art_068 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "previsto com regra operacional"@pt .
+
+cod:Cod_UE_C19 a hrai:CriterionCoding ;
+    rdfs:label "UE · C19 = 1 (alinha definições)"@pt ;
+    rdfs:comment "Definição de sistema de IA alinhada à da OCDE."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C19_InternationalCooperation ;
+    hrai:codingJustifiedBy eu:Art_003 ;
+    hrai:codingScaleValue 1.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "alinha definições"@pt .
+
+cod:Cod_UE_C20 a hrai:CriterionCoding ;
+    rdfs:label "UE · C20 = 2 (média)"@pt ;
+    rdfs:comment "Indicador indireto: fórum consultivo com sociedade civil, indústria e academia."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C20_CivilSocietyInclusion ;
+    hrai:codingJustifiedBy eu:Art_067 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "média"@pt .
+
+cod:Cod_UE_C21 a hrai:CriterionCoding ;
+    rdfs:label "UE · C21 = 2 (média)"@pt ;
+    rdfs:comment "Indicador indireto: fórum consultivo com indústria, startups e PME."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C21_PrivateSectorInclusion ;
+    hrai:codingJustifiedBy eu:Art_067 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "média"@pt .
+
+cod:Cod_UE_C22 a hrai:CriterionCoding ;
+    rdfs:label "UE · C22 = 3 (alto)"@pt ;
+    rdfs:comment "Classificação de alto risco e avaliação da conformidade antes da colocação no mercado."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C22_ExAnte ;
+    hrai:codingJustifiedBy eu:Art_006,
+        eu:Art_043 ;
+    hrai:codingScaleValue 3.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "alto"@pt .
+
+cod:Cod_UE_C23 a hrai:CriterionCoding ;
+    rdfs:label "UE · C23 = 2 (médio)"@pt ;
+    rdfs:comment "Direito de apresentar reclamação e direito a explicação de decisões individuais."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C23_ExPost ;
+    hrai:codingJustifiedBy eu:Art_085,
+        eu:Art_086 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "médio"@pt .
+
+cod:Cod_UE_C24 a hrai:CriterionCoding ;
+    rdfs:label "UE · C24 = 2 (camada principal)"@pt ;
+    rdfs:comment "Capítulo próprio para modelos de propósito geral e risco sistêmico."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C24_TechnologyFocused ;
+    hrai:codingJustifiedBy eu:Art_051,
+        eu:Art_053,
+        eu:Art_055 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "camada principal"@pt .
+
+cod:Cod_UE_C25 a hrai:CriterionCoding ;
+    rdfs:label "UE · C25 = 2 (camada principal)"@pt ;
+    rdfs:comment "Classificação por uso, com o Anexo III."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:C25_ApplicationFocused ;
+    hrai:codingJustifiedBy eu:Art_006 ;
+    hrai:codingScaleValue 2.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "camada principal"@pt .
+
+cod:Cod_UE_E1 a hrai:CriterionCoding ;
+    rdfs:label "UE · E1 = 3 (lei ou projeto de lei)"@pt ;
+    rdfs:comment "Regulamento (lei vinculante)."@pt ;
+    hrai:codingCoder cod:SessaoLoop ;
+    hrai:codingCriterion comp:E1_LegalForm ;
+    hrai:codingJustifiedBy eu:Art_113 ;
+    hrai:codingScaleValue 3.0 ;
+    hrai:codingSubject eu:AIAct_2024 ;
+    hrai:codingValueLabel "lei ou projeto de lei"@pt .
+
+cod:AutoresAlanoca2025 rdfs:label "Alanoca, Gur-Arieh, Zick e Klyman (2025), Tabelas 3-4 (UE) e 9-10 (Brasil)"@pt ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> .
+
+cod:SessaoLoop a hrai:MonitoringAgent ;
+    rdfs:label "Sessão do loop ESP-ONT-02 (Claude Code, leitura assistida por LLM dos artigos no grafo)"@pt .
+

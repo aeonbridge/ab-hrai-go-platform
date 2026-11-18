@@ -1,0 +1,9 @@
+# V-08: codificação da sessão sem dispositivo que a justifique. Aceite: zero linhas.
+# As codificações descritivas dos autores do paper (fonte: o paper) ficam fora: servem à concordância (V-09).
+PREFIX hrai: <https://hrai-go.aeonbridge.io/ontology/regulatory#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+SELECT ?c WHERE {
+  ?c a hrai:CriterionCoding .
+  FILTER NOT EXISTS { ?c dcterms:source ?paper }
+  FILTER NOT EXISTS { ?c hrai:codingJustifiedBy ?d . ?d a hrai:LegalProvision }
+}

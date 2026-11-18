@@ -319,6 +319,21 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
   raciocinador inferiu, com a regra (ajuda o "por quê?" da V-14). CI confere que as páginas batem com o grafo.
 - `tests/test_iris.py`: três IRIs sorteados e dois fixos caem na âncora certa (V-24); inferências mostram a regra.
 
+### V-08 e V-09 · codificações de Brasil e UE e concordância com os autores — 17/11/2026
+
+- `scripts/ontologia/codificar.py` → `ontologies/comparativo/codificacoes/BR_UE_codificacoes.ttl`: 52 codificações da
+  sessão (Brasil, texto do Senado de 2024, e UE, AI Act; 25 critérios mais E1), cada uma com valor e rótulo da escala
+  aprovada (D-02) e os artigos que a justificam; candidatas pendentes de revisão. Ao lado, as codificações dos autores
+  do paper (Tabelas 3-4 e 9-10), como escritas, convertidas para a escala pela sessão.
+- `docs/especificacoes/ESP-ONT-02/concordancia-codificacoes.md`: **Brasil 17 de 25 (68%), UE 23 de 25 (92%)**. Cada
+  divergência foi resolvida contra o texto primário, com o artigo. Divergências do Brasil, por exemplo: governo como alvo
+  principal (arts. 22 a 24), uso pessoal excluído (art. 1, § 1º, I), auditoria pela autoridade (art. 49, VII), Cecia
+  (art. 54, tese C04), ex post alto (arts. 6, 35 a 37).
+- Consulta de aceite `V08_codificacoes_sem_evidencia.rq` = 0; PC5 responde (130 linhas). Limite declarado: C20 e C21
+  medem a consulta no processo legislativo, que não está nos textos; foram codificados por indicador indireto (Cria, fórum
+  consultivo), anotado em cada valor.
+- R28 (perfil "regulação horizontal por risco") só dispara depois da revisão humana das codificações (D-13).
+
 ## Aguardando decisão
 
 | Id | Decisão | Quem | Bloqueia |
@@ -335,6 +350,7 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
 | D-10 | Declarar os escopos de avaliação de cobertura (`CoverageAssessment`: jurisdição, snapshot, área) para a PC4 valer | autor | PC4, QN3 |
 | D-11 | ~~resposta inicial~~ **aprovada em 17/11/2026, sujeita a mudanças** (`decisoes.json`) | autor | — |
 | D-12 | Textos oficiais chineses que faltam (leis de cibersegurança, dados e informação pessoal; regras de algoritmos e de síntese profunda na íntegra) | autor | comparações com a China ainda "não codificado" |
+| D-13 | Revisar as 52 codificações (`ontologies/comparativo/codificacoes/`), em especial as 10 divergências com os autores; aprovadas, R28 passa a derivar o perfil de desenho | autor | R28, comparação na mesma régua (M5) |
 | D-06 | PDF da "Análise Comparativa" no repositório (hoje as teses vêm de resumo) | autor | rastreabilidade das teses |
 
 ## Checklist V-01 a V-31
@@ -350,8 +366,8 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | V-05 | ✅ | TBox 1.2.0, R24–R26 (núcleo), R28 (comparativo), R29–R30 (SCSE); I-1 a I-4 em `tests/test_invariantes.py` |
 | V-06 | ✅ | `tests/test_comparativo.py`: 25 critérios com definições originais conferidas no PDF, E1–E7 com crédito e DOI |
 | V-07 | ✅ | escalas aprovadas pelo autor (D-02), `ApprovalDecision` em `decisoes_autor.ttl`; níveis no módulo comparativo |
-| V-08 | ⬜ | escalas aprovadas; falta codificar BR e UE nos 25 critérios com dispositivo de origem |
-| V-09 | ⬜ | registrar codificações dos autores do paper e publicar concordância (após D-02) |
+| V-08 | ✅ | BR e UE codificados nos 25 critérios (+E1), cada valor com dispositivo; `V08_codificacoes_sem_evidencia.rq` = 0; revisão humana em D-13 |
+| V-09 | ✅ | concordância por critério publicada (`concordancia-codificacoes.md`): BR 68%, UE 92%; divergências resolvidas contra o texto primário |
 | V-10 | ✅ | 18 correspondências revisadas (D-03); sem correspondência pendente; R26 infere 13 transposições |
 | V-11 | 🟡 | indicadores do Brasil com fonte e ano-base (teste); PC3 responde (8 linhas: "indicador sem limiar"); PC4 sem `CoverageAssessment`; falta revisão (D-03) e limiar (D-09) |
 | V-12 | ✅ | `consultas.py --check` e `tests/test_consultas.py` no CI; cada PC testada sobre fixture |
