@@ -1,0 +1,328 @@
+# =============================================================================
+# SCSE · conselho do cenário GOV-BR-001 (ESP-ONT-02, RF-13)
+#
+# Estratos, assentos, cadeiras vazias, tensões-semente e ramos de cenário que a câmara e o mural exibem.
+# Este arquivo é a fonte desses elementos: web/assets/modelo.js deve ser gerado dele (item 8 do loop).
+# Camada de deliberação (SCSE), nunca instância de fonte: não vai para ontologies/regulatory/instances (I-2).
+# As ligações semente -> afirmação e ramo -> instrumento são PROPOSTA pendente de revisão humana.
+# =============================================================================
+@prefix scse: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#> .
+@prefix hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
+@prefix gov:  <https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#> .
+@prefix a1:   <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/claims/a1#> .
+@prefix pbia: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001> a owl:Ontology ;
+    rdfs:label "Conselho e tensões do cenário GOV-BR-001"@pt ;
+    owl:imports <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse> .
+
+gov:GOV_BR_001 a owl:NamedIndividual , scse:ScenarioDefinition ;
+    rdfs:label "GOV-BR-001: modelo brasileiro de governança de IA"@pt ;
+    scse:scenarioId "GOV-BR-001" ;
+    scse:instantiatesCouncil gov:Conselho .
+
+gov:Conselho a owl:NamedIndividual , scse:ShadowCouncil ;
+    rdfs:label "Shadow Council do cenário GOV-BR-001"@pt .
+
+
+gov:Estrato_Regulators a owl:NamedIndividual , scse:StakeholderStratum ;
+    rdfs:label "Reguladores / fiscalização"@pt ;
+    skos:notation "regulators" ;
+    hrai:displayKey "strata:regulators" .
+gov:Conselho scse:coversStratum gov:Estrato_Regulators .
+
+gov:Assento_Regulators_1 a owl:NamedIndividual , scse:CouncilSeat ;
+    rdfs:label "Assento 1 de Reguladores / fiscalização"@pt ;
+    scse:hasStratum gov:Estrato_Regulators ;
+    scse:seatJustification "Assento sintético do estrato, com perspectiva documentada; não representa pessoa nem grupo real." .
+gov:Conselho scse:hasSeat gov:Assento_Regulators_1 .
+
+gov:Assento_Regulators_2 a owl:NamedIndividual , scse:CouncilSeat ;
+    rdfs:label "Assento 2 de Reguladores / fiscalização"@pt ;
+    scse:hasStratum gov:Estrato_Regulators ;
+    scse:seatJustification "Assento sintético do estrato, com perspectiva documentada; não representa pessoa nem grupo real." .
+gov:Conselho scse:hasSeat gov:Assento_Regulators_2 .
+
+gov:Assento_Regulators_3 a owl:NamedIndividual , scse:CouncilSeat ;
+    rdfs:label "Assento 3 de Reguladores / fiscalização"@pt ;
+    scse:hasStratum gov:Estrato_Regulators ;
+    scse:seatJustification "Assento sintético do estrato, com perspectiva documentada; não representa pessoa nem grupo real." .
+gov:Conselho scse:hasSeat gov:Assento_Regulators_3 .
+
+gov:Estrato_PublicOperators a owl:NamedIndividual , scse:StakeholderStratum ;
+    rdfs:label "Poder público operador"@pt ;
+    skos:notation "publicOperators" ;
+    hrai:displayKey "strata:publicOperators" .
+gov:Conselho scse:coversStratum gov:Estrato_PublicOperators .
+
+gov:Assento_PublicOperators_1 a owl:NamedIndividual , scse:CouncilSeat ;
+    rdfs:label "Assento 1 de Poder público operador"@pt ;
+    scse:hasStratum gov:Estrato_PublicOperators ;
+    scse:seatJustification "Assento sintético do estrato, com perspectiva documentada; não representa pessoa nem grupo real." .
+gov:Conselho scse:hasSeat gov:Assento_PublicOperators_1 .
+
+gov:Assento_PublicOperators_2 a owl:NamedIndividual , scse:CouncilSeat ;
+    rdfs:label "Assento 2 de Poder público operador"@pt ;
+    scse:hasStratum gov:Estrato_PublicOperators ;
+    scse:seatJustification "Assento sintético do estrato, com perspectiva documentada; não representa pessoa nem grupo real." .
+gov:Conselho scse:hasSeat gov:Assento_PublicOperators_2 .
+
+gov:Estrato_Business a owl:NamedIndividual , scse:StakeholderStratum ;
+    rdfs:label "Empresas / startups"@pt ;
+    skos:notation "business" ;
+    hrai:displayKey "strata:business" .
+gov:Conselho scse:coversStratum gov:Estrato_Business .
+
+gov:Assento_Business_1 a owl:NamedIndividual , scse:CouncilSeat ;
+    rdfs:label "Assento 1 de Empresas / startups"@pt ;
+    scse:hasStratum gov:Estrato_Business ;
+    scse:seatJustification "Assento sintético do estrato, com perspectiva documentada; não representa pessoa nem grupo real." .
+gov:Conselho scse:hasSeat gov:Assento_Business_1 .
+
+gov:Assento_Business_2 a owl:NamedIndividual , scse:CouncilSeat ;
+    rdfs:label "Assento 2 de Empresas / startups"@pt ;
+    scse:hasStratum gov:Estrato_Business ;
+    scse:seatJustification "Assento sintético do estrato, com perspectiva documentada; não representa pessoa nem grupo real." .
+gov:Conselho scse:hasSeat gov:Assento_Business_2 .
+
+gov:Assento_Business_3 a owl:NamedIndividual , scse:CouncilSeat ;
+    rdfs:label "Assento 3 de Empresas / startups"@pt ;
+    scse:hasStratum gov:Estrato_Business ;
+    scse:seatJustification "Assento sintético do estrato, com perspectiva documentada; não representa pessoa nem grupo real." .
+gov:Conselho scse:hasSeat gov:Assento_Business_3 .
+
+gov:Estrato_Research a owl:NamedIndividual , scse:StakeholderStratum ;
+    rdfs:label "Pesquisa interdisciplinar"@pt ;
+    skos:notation "research" ;
+    hrai:displayKey "strata:research" .
+gov:Conselho scse:coversStratum gov:Estrato_Research .
+
+gov:Assento_Research_1 a owl:NamedIndividual , scse:CouncilSeat ;
+    rdfs:label "Assento 1 de Pesquisa interdisciplinar"@pt ;
+    scse:hasStratum gov:Estrato_Research ;
+    scse:seatJustification "Assento sintético do estrato, com perspectiva documentada; não representa pessoa nem grupo real." .
+gov:Conselho scse:hasSeat gov:Assento_Research_1 .
+
+gov:Assento_Research_2 a owl:NamedIndividual , scse:CouncilSeat ;
+    rdfs:label "Assento 2 de Pesquisa interdisciplinar"@pt ;
+    scse:hasStratum gov:Estrato_Research ;
+    scse:seatJustification "Assento sintético do estrato, com perspectiva documentada; não representa pessoa nem grupo real." .
+gov:Conselho scse:hasSeat gov:Assento_Research_2 .
+
+gov:Assento_Research_3 a owl:NamedIndividual , scse:CouncilSeat ;
+    rdfs:label "Assento 3 de Pesquisa interdisciplinar"@pt ;
+    scse:hasStratum gov:Estrato_Research ;
+    scse:seatJustification "Assento sintético do estrato, com perspectiva documentada; não representa pessoa nem grupo real." .
+gov:Conselho scse:hasSeat gov:Assento_Research_3 .
+
+gov:Estrato_CivilSociety a owl:NamedIndividual , scse:StakeholderStratum ;
+    rdfs:label "Sociedade civil e direitos"@pt ;
+    skos:notation "civilSociety" ;
+    hrai:displayKey "strata:civilSociety" .
+gov:Conselho scse:coversStratum gov:Estrato_CivilSociety .
+
+gov:Assento_CivilSociety_1 a owl:NamedIndividual , scse:CouncilSeat ;
+    rdfs:label "Assento 1 de Sociedade civil e direitos"@pt ;
+    scse:hasStratum gov:Estrato_CivilSociety ;
+    scse:seatJustification "Assento sintético do estrato, com perspectiva documentada; não representa pessoa nem grupo real." .
+gov:Conselho scse:hasSeat gov:Assento_CivilSociety_1 .
+
+gov:Assento_CivilSociety_2 a owl:NamedIndividual , scse:CouncilSeat ;
+    rdfs:label "Assento 2 de Sociedade civil e direitos"@pt ;
+    scse:hasStratum gov:Estrato_CivilSociety ;
+    scse:seatJustification "Assento sintético do estrato, com perspectiva documentada; não representa pessoa nem grupo real." .
+gov:Conselho scse:hasSeat gov:Assento_CivilSociety_2 .
+
+gov:Assento_CivilSociety_3 a owl:NamedIndividual , scse:CouncilSeat ;
+    rdfs:label "Assento 3 de Sociedade civil e direitos"@pt ;
+    scse:hasStratum gov:Estrato_CivilSociety ;
+    scse:seatJustification "Assento sintético do estrato, com perspectiva documentada; não representa pessoa nem grupo real." .
+gov:Conselho scse:hasSeat gov:Assento_CivilSociety_3 .
+
+gov:Estrato_Workers a owl:NamedIndividual , scse:StakeholderStratum ;
+    rdfs:label "Trabalhadores / profissões"@pt ;
+    skos:notation "workers" ;
+    hrai:displayKey "strata:workers" .
+gov:Conselho scse:coversStratum gov:Estrato_Workers .
+
+gov:Assento_Workers_1 a owl:NamedIndividual , scse:CouncilSeat ;
+    rdfs:label "Assento 1 de Trabalhadores / profissões"@pt ;
+    scse:hasStratum gov:Estrato_Workers ;
+    scse:seatJustification "Assento sintético do estrato, com perspectiva documentada; não representa pessoa nem grupo real." .
+gov:Conselho scse:hasSeat gov:Assento_Workers_1 .
+
+gov:Assento_Workers_2 a owl:NamedIndividual , scse:CouncilSeat ;
+    rdfs:label "Assento 2 de Trabalhadores / profissões"@pt ;
+    scse:hasStratum gov:Estrato_Workers ;
+    scse:seatJustification "Assento sintético do estrato, com perspectiva documentada; não representa pessoa nem grupo real." .
+gov:Conselho scse:hasSeat gov:Assento_Workers_2 .
+
+gov:Estrato_AffectedGroups a owl:NamedIndividual , scse:StakeholderStratum ;
+    rdfs:label "Grupos diretamente afetados"@pt ;
+    skos:notation "affectedGroups" ;
+    hrai:displayKey "strata:affectedGroups" .
+gov:Conselho scse:coversStratum gov:Estrato_AffectedGroups .
+
+gov:Assento_AffectedGroups_1 a owl:NamedIndividual , scse:CouncilSeat ;
+    rdfs:label "Assento 1 de Grupos diretamente afetados"@pt ;
+    scse:hasStratum gov:Estrato_AffectedGroups ;
+    scse:seatJustification "Assento sintético do estrato, com perspectiva documentada; não representa pessoa nem grupo real." .
+gov:Conselho scse:hasSeat gov:Assento_AffectedGroups_1 .
+
+gov:Assento_AffectedGroups_2 a owl:NamedIndividual , scse:CouncilSeat ;
+    rdfs:label "Assento 2 de Grupos diretamente afetados"@pt ;
+    scse:hasStratum gov:Estrato_AffectedGroups ;
+    scse:seatJustification "Assento sintético do estrato, com perspectiva documentada; não representa pessoa nem grupo real." .
+gov:Conselho scse:hasSeat gov:Assento_AffectedGroups_2 .
+
+gov:Estrato_Infrastructure a owl:NamedIndividual , scse:StakeholderStratum ;
+    rdfs:label "Infraestrutura / ambiente"@pt ;
+    skos:notation "infrastructure" ;
+    hrai:displayKey "strata:infrastructure" .
+gov:Conselho scse:coversStratum gov:Estrato_Infrastructure .
+
+gov:Assento_Infrastructure_1 a owl:NamedIndividual , scse:CouncilSeat ;
+    rdfs:label "Assento 1 de Infraestrutura / ambiente"@pt ;
+    scse:hasStratum gov:Estrato_Infrastructure ;
+    scse:seatJustification "Assento sintético do estrato, com perspectiva documentada; não representa pessoa nem grupo real." .
+gov:Conselho scse:hasSeat gov:Assento_Infrastructure_1 .
+
+gov:Assento_Infrastructure_2 a owl:NamedIndividual , scse:CouncilSeat ;
+    rdfs:label "Assento 2 de Infraestrutura / ambiente"@pt ;
+    scse:hasStratum gov:Estrato_Infrastructure ;
+    scse:seatJustification "Assento sintético do estrato, com perspectiva documentada; não representa pessoa nem grupo real." .
+gov:Conselho scse:hasSeat gov:Assento_Infrastructure_2 .
+
+gov:CadeiraVazia_Povos_indigenas_e_comunidades_tradicionais a owl:NamedIndividual , scse:CoverageGap ;
+    rdfs:label "Povos indígenas e comunidades tradicionais"@pt ;
+    rdfs:comment "Sem fonte documental no pacote; não simulado para não inventar posição."@pt ;
+    hrai:displayKey "unrep:Povos indígenas e comunidades tradicionais" .
+gov:Conselho scse:hasCoverageGap gov:CadeiraVazia_Povos_indigenas_e_comunidades_tradicionais .
+
+gov:CadeiraVazia_Judiciario_Ministerio_Publico_e_TCU a owl:NamedIndividual , scse:CoverageGap ;
+    rdfs:label "Judiciário, Ministério Público e TCU"@pt ;
+    rdfs:comment "Sem fonte de posição no pacote; só aparecem como traço de contexto (CF-13)."@pt ;
+    hrai:displayKey "unrep:Judiciário, Ministério Público e TCU" .
+gov:Conselho scse:hasCoverageGap gov:CadeiraVazia_Judiciario_Ministerio_Publico_e_TCU .
+
+gov:CadeiraVazia_Congresso_Nacional a owl:NamedIndividual , scse:CoverageGap ;
+    rdfs:label "Congresso Nacional"@pt ;
+    rdfs:comment "O PL está nas mãos do Legislativo, cuja posição não foi documentada no pacote."@pt ;
+    hrai:displayKey "unrep:Congresso Nacional" .
+gov:Conselho scse:hasCoverageGap gov:CadeiraVazia_Congresso_Nacional .
+
+gov:CadeiraVazia_Seguranca_publica_e_defesa a owl:NamedIndividual , scse:CoverageGap ;
+    rdfs:label "Segurança pública e defesa"@pt ;
+    rdfs:comment "Sem fonte de posição no pacote."@pt ;
+    hrai:displayKey "unrep:Segurança pública e defesa" .
+gov:Conselho scse:hasCoverageGap gov:CadeiraVazia_Seguranca_publica_e_defesa .
+
+gov:CadeiraVazia_Setores_regulados_financeiro_saude_telecomunicacoes a owl:NamedIndividual , scse:CoverageGap ;
+    rdfs:label "Setores regulados (financeiro, saúde, telecomunicações)"@pt ;
+    rdfs:comment "Sem fonte de posição no pacote."@pt ;
+    hrai:displayKey "unrep:Setores regulados (financeiro, saúde, telecomunicações)" .
+gov:Conselho scse:hasCoverageGap gov:CadeiraVazia_Setores_regulados_financeiro_saude_telecomunicacoes .
+
+gov:CadeiraVazia_Agronegocio a owl:NamedIndividual , scse:CoverageGap ;
+    rdfs:label "Agronegócio"@pt ;
+    rdfs:comment "Sem fonte de posição no pacote."@pt ;
+    hrai:displayKey "unrep:Agronegócio" .
+gov:Conselho scse:hasCoverageGap gov:CadeiraVazia_Agronegocio .
+
+gov:Semente_T1 a owl:NamedIndividual , scse:PolicyTension ;
+    rdfs:label "Continuidade do plano × supervisão e avaliação"@pt ;
+    skos:notation "T1" ;
+    scse:tensionDescription "Se o orçamento pós-2028 encolher, o que se protege primeiro: infraestrutura e pesquisa, ou a capacidade de supervisionar e avaliar?"@pt ;
+    scse:tensionBetweenStrata gov:Estrato_Research , gov:Estrato_Regulators ;
+    hrai:hasPolicyClaim a1:C07 ;
+    skos:editorialNote "Ligação às afirmações: proposta pendente de revisão humana."@pt ;
+    hrai:displayKey "seeds:T1" .
+
+gov:Semente_T2 a owl:NamedIndividual , scse:PolicyTension ;
+    rdfs:label "Soberania computacional × custo e energia"@pt ;
+    skos:notation "T2" ;
+    scse:tensionDescription "Reduzir a dependência de nuvem estrangeira exige capacidade nacional, energia e chips, com custo para quem usa IA hoje."@pt ;
+    scse:tensionBetweenStrata gov:Estrato_Infrastructure , gov:Estrato_Business ;
+    hrai:hasPolicyClaim a1:C08 , a1:C11 , a1:C12 ;
+    skos:editorialNote "Ligação às afirmações: proposta pendente de revisão humana."@pt ;
+    hrai:displayKey "seeds:T2" .
+
+gov:Semente_T3 a owl:NamedIndividual , scse:PolicyTension ;
+    rdfs:label "Difusão da IA × emprego e desigualdade regional"@pt ;
+    skos:notation "T3" ;
+    scse:tensionDescription "Adoção rápida e ganho de produtividade de um lado; ocupações expostas e requalificação desigual entre regiões do outro."@pt ;
+    scse:tensionBetweenStrata gov:Estrato_Workers , gov:Estrato_Business ;
+    hrai:hasPolicyClaim a1:C03 ;
+    skos:editorialNote "Ligação às afirmações: proposta pendente de revisão humana."@pt ;
+    hrai:displayKey "seeds:T3" .
+
+gov:Semente_T4 a owl:NamedIndividual , scse:PolicyTension ;
+    rdfs:label "Direitos × custo de conformidade"@pt ;
+    skos:notation "T4" ;
+    scse:tensionDescription "Avaliação de impacto e transparência algorítmica de um lado; a carga de documentação para PMEs e startups do outro."@pt ;
+    scse:tensionBetweenStrata gov:Estrato_CivilSociety , gov:Estrato_Business ;
+    hrai:hasPolicyClaim a1:C01 , a1:K01 , a1:C02 ;
+    skos:editorialNote "Ligação às afirmações: proposta pendente de revisão humana."@pt ;
+    hrai:displayKey "seeds:T4" .
+
+gov:Semente_T5 a owl:NamedIndividual , scse:PolicyTension ;
+    rdfs:label "Auditoria × capacidade de fiscalizar"@pt ;
+    skos:notation "T5" ;
+    scse:tensionDescription "Exigir auditoria em todo sistema público de alto impacto depende de quem consegue fiscalizar e de quantos sistemas já estão em produção."@pt ;
+    scse:tensionBetweenStrata gov:Estrato_Regulators , gov:Estrato_PublicOperators ;
+    hrai:hasPolicyClaim a1:C04 , a1:C07 ;
+    skos:editorialNote "Ligação às afirmações: proposta pendente de revisão humana."@pt ;
+    hrai:displayKey "seeds:T5" .
+
+gov:Semente_T6 a owl:NamedIndividual , scse:PolicyTension ;
+    rdfs:label "Eficiência × contestação humana"@pt ;
+    skos:notation "T6" ;
+    scse:tensionDescription "A triagem automática acelera o atendimento; o cidadão precisa entender e contestar uma negativa."@pt ;
+    scse:tensionBetweenStrata gov:Estrato_PublicOperators , gov:Estrato_AffectedGroups ;
+    hrai:hasPolicyClaim a1:C05 , a1:K05 , a1:K09 ;
+    skos:editorialNote "Ligação às afirmações: proposta pendente de revisão humana."@pt ;
+    hrai:displayKey "seeds:T6" .
+
+gov:Ramo_Pl2338Approved a owl:NamedIndividual , scse:ScenarioBranch ;
+    rdfs:label "A Câmara aprova o PL 2338 sem alterações relevantes ao texto do Senado."@pt ;
+    skos:notation "pl2338-approved" ;
+    scse:assumption "A Câmara aprova o PL 2338 sem alterações relevantes ao texto do Senado." ;
+    scse:branchDerivedFrom gov:GOV_BR_001 ;
+    scse:branchConcernsInstrument pbia:PL_2338_2023 ;
+    skos:editorialNote "Ligação ao instrumento: proposta pendente de revisão humana."@pt ;
+    hrai:displayKey "branches:pl2338-approved" .
+gov:GOV_BR_001 scse:hasBranch gov:Ramo_Pl2338Approved .
+
+gov:Ramo_Pl2338Stalled a owl:NamedIndividual , scse:ScenarioBranch ;
+    rdfs:label "O PL 2338 não é votado em 2027 e o Brasil segue sem marco legal geral."@pt ;
+    skos:notation "pl2338-stalled" ;
+    scse:assumption "O PL 2338 não é votado em 2027 e o Brasil segue sem marco legal geral." ;
+    scse:branchDerivedFrom gov:GOV_BR_001 ;
+    scse:branchConcernsInstrument pbia:PL_2338_2023 ;
+    skos:editorialNote "Ligação ao instrumento: proposta pendente de revisão humana."@pt ;
+    hrai:displayKey "branches:pl2338-stalled" .
+gov:GOV_BR_001 scse:hasBranch gov:Ramo_Pl2338Stalled .
+
+gov:Ramo_PbiaFundingCut a owl:NamedIndividual , scse:ScenarioBranch ;
+    rdfs:label "O financiamento do PBIA cai pela metade a partir de 2027."@pt ;
+    skos:notation "pbia-funding-cut" ;
+    scse:assumption "O financiamento do PBIA cai pela metade a partir de 2027." ;
+    scse:branchDerivedFrom gov:GOV_BR_001 ;
+    scse:branchConcernsInstrument pbia:PBIA_Plan ;
+    skos:editorialNote "Ligação ao instrumento: proposta pendente de revisão humana."@pt ;
+    hrai:displayKey "branches:pbia-funding-cut" .
+gov:GOV_BR_001 scse:hasBranch gov:Ramo_PbiaFundingCut .
+
+gov:Ramo_NewGovernmentPriorities a owl:NamedIndividual , scse:ScenarioBranch ;
+    rdfs:label "O governo empossado em 2027 redefine as prioridades e a coordenação institucional da IA."@pt ;
+    skos:notation "new-government-priorities" ;
+    scse:assumption "O governo empossado em 2027 redefine as prioridades e a coordenação institucional da IA." ;
+    scse:branchDerivedFrom gov:GOV_BR_001 ;
+    scse:branchConcernsInstrument pbia:PBIA_Plan ;
+    skos:editorialNote "Ligação ao instrumento: proposta pendente de revisão humana."@pt ;
+    hrai:displayKey "branches:new-government-priorities" .
+gov:GOV_BR_001 scse:hasBranch gov:Ramo_NewGovernmentPriorities .

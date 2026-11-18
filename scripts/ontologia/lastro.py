@@ -35,7 +35,8 @@ ROOT = Path(__file__).resolve().parents[2]
 MODELO = ROOT / "web/assets/modelo.js"
 OUT = ROOT / "web/assets/lastro.js"
 ALIGNMENTS = ROOT / "ontologies/regulatory/alinhamentos"
-INSTANCES = ["ontologies/regulatory/instances/**/*.ttl", "ontologies/scse/*.ttl", "ontologies/comparativo/*.ttl"]
+INSTANCES = ["ontologies/regulatory/instances/**/*.ttl", "ontologies/scse/**/*.ttl", "ontologies/comparativo/*.ttl",
+             "ontologies/regulatory/afirmacoes/*.ttl"]
 DISPLAY_KEY = rdflib.URIRef("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#displayKey")
 GM_NS = "https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#"
 

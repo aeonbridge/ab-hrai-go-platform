@@ -1,0 +1,9 @@
+# V-16 (RT-VIS-03) / RF-13: tensões-semente da SCSE sem ligação a afirmação do núcleo.
+# Aceite: zero linhas. Uma semente só conta como ligada se a afirmação existir como hrai:PolicyClaim.
+PREFIX scse: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#>
+PREFIX hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?semente ?id WHERE {
+  ?semente a scse:PolicyTension ; skos:notation ?id .
+  FILTER NOT EXISTS { ?semente hrai:hasPolicyClaim ?c . ?c a hrai:PolicyClaim . }
+}

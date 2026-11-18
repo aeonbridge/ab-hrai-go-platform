@@ -1,12 +1,12 @@
 /* Gerado por scripts/ontologia/lastro.py. Não editar à mão.
    Elementos exibidos com e sem lastro na ontologia (RF-12); usado no selo das fichas e no slide (RF-15). */
 window.HRAIGO_LASTRO = {
- "comLastro": 33,
+ "comLastro": 57,
  "conjuntos": {
   "branches": {
-   "comLastro": 0,
+   "comLastro": 4,
    "rotulo": "Ramos de cenário",
-   "semLastro": 4,
+   "semLastro": 0,
    "total": 4
   },
   "components": {
@@ -22,15 +22,15 @@ window.HRAIGO_LASTRO = {
    "total": 14
   },
   "seeds": {
-   "comLastro": 0,
+   "comLastro": 6,
    "rotulo": "Tensões-semente",
-   "semLastro": 6,
+   "semLastro": 0,
    "total": 6
   },
   "strata": {
-   "comLastro": 0,
+   "comLastro": 8,
    "rotulo": "Estratos do conselho",
-   "semLastro": 8,
+   "semLastro": 0,
    "total": 8
   },
   "topics": {
@@ -40,13 +40,37 @@ window.HRAIGO_LASTRO = {
    "total": 28
   },
   "unrep": {
-   "comLastro": 0,
+   "comLastro": 6,
    "rotulo": "Cadeiras vazias",
-   "semLastro": 6,
+   "semLastro": 0,
    "total": 6
   }
  },
  "itens": {
+  "branches:new-government-priorities": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_NewGovernmentPriorities"
+   ]
+  },
+  "branches:pbia-funding-cut": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_PbiaFundingCut"
+   ]
+  },
+  "branches:pl2338-approved": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_Pl2338Approved"
+   ]
+  },
+  "branches:pl2338-stalled": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_Pl2338Stalled"
+   ]
+  },
   "components:GM-02": {
    "estado": "exato",
    "iris": [
@@ -106,6 +130,90 @@ window.HRAIGO_LASTRO = {
    "estado": "proximo",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis4_BusinessInnovation"
+   ]
+  },
+  "seeds:T1": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T1"
+   ]
+  },
+  "seeds:T2": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T2"
+   ]
+  },
+  "seeds:T3": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T3"
+   ]
+  },
+  "seeds:T4": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T4"
+   ]
+  },
+  "seeds:T5": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T5"
+   ]
+  },
+  "seeds:T6": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T6"
+   ]
+  },
+  "strata:affectedGroups": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_AffectedGroups"
+   ]
+  },
+  "strata:business": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_Business"
+   ]
+  },
+  "strata:civilSociety": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_CivilSociety"
+   ]
+  },
+  "strata:infrastructure": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_Infrastructure"
+   ]
+  },
+  "strata:publicOperators": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_PublicOperators"
+   ]
+  },
+  "strata:regulators": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_Regulators"
+   ]
+  },
+  "strata:research": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_Research"
+   ]
+  },
+  "strata:workers": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_Workers"
    ]
   },
   "topics:children-vulnerable": {
@@ -275,8 +383,44 @@ window.HRAIGO_LASTRO = {
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_WorkforceSkills"
    ]
+  },
+  "unrep:Agronegócio": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#CadeiraVazia_Agronegocio"
+   ]
+  },
+  "unrep:Congresso Nacional": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#CadeiraVazia_Congresso_Nacional"
+   ]
+  },
+  "unrep:Judiciário, Ministério Público e TCU": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#CadeiraVazia_Judiciario_Ministerio_Publico_e_TCU"
+   ]
+  },
+  "unrep:Povos indígenas e comunidades tradicionais": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#CadeiraVazia_Povos_indigenas_e_comunidades_tradicionais"
+   ]
+  },
+  "unrep:Segurança pública e defesa": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#CadeiraVazia_Seguranca_publica_e_defesa"
+   ]
+  },
+  "unrep:Setores regulados (financeiro, saúde, telecomunicações)": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#CadeiraVazia_Setores_regulados_financeiro_saude_telecomunicacoes"
+   ]
   }
  },
- "semLastro": 55,
+ "semLastro": 31,
  "total": 88
 };

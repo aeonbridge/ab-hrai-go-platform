@@ -84,6 +84,19 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
   `modelo.js` ainda não é gerado do esquema; a geração é o item 8.
 - **Comandos**: protocolo com exit 0; pytest (módulos, lastro, invariantes, comparativo, nomenclatura) → 35 passed.
 
+### Item 6 · RF-13 tensões, estratos, assentos e cenários na SCSE — 17/11/2026
+
+- **O que mudou**
+  - `ontologies/scse/conselho/GOV-BR-001.ttl` (fonte nova): 8 estratos, 20 assentos, 6 cadeiras vazias com motivo,
+    6 tensões-semente ligadas a afirmações do núcleo (T1→C07; T2→C08, C11, C12; T3→C03; T4→C01, K01, C02;
+    T5→C04, C07; T6→C05, K05, K09) e 4 ramos ligados ao PL 2338 ou ao PBIA. Ligações marcadas como proposta.
+  - SCSE: propriedades `tensionBetweenStrata` e `branchConcernsInstrument`.
+  - `ontologies/consultas/V16_sementes_sem_ligacao.rq`: zero linhas.
+  - Contador: 57 com lastro, 31 sem lastro, de 88 (estratos, tensões, ramos e cadeiras vazias completos).
+- **Aceite RF-13**: parcial. Cada semente aponta para as afirmações (consulta V-16 = 0). "Câmara e mural leem tensões
+  da SCSE" depende de gerar `modelo.js` do grafo (item 8).
+- **Comandos**: protocolo com exit 0; pytest → 38 passed.
+
 ## Aguardando decisão
 
 | Id | Decisão | Quem | Bloqueia |
@@ -91,7 +104,7 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
 | D-01 | RF-02, China: incluir fontes primárias ou retirar da comparação | autor | V-03, item 11 (parte) |
 | D-02 | E4: aprovar as escalas dos 25 critérios; proposta pronta em `escalas-E4-proposta.md` | autor | V-07, codificações (item 11), R28 |
 | D-03 | Revisão das extrações (dispositivos, correspondências BR↔UE, codificações, indicadores) e do mapeamento das 29 áreas para NIST, AI Act e critérios (`areas.json`) | revisor humano | V-08 a V-11 |
-| D-04 | Alinhamento A1: os 5 componentes "próximos" (GM-15, GM-17, GM-19, GM-20, GM-22) e as teses do anexo | autor | contador sem lastro |
+| D-04 | Alinhamento A1: os 5 componentes "próximos" (GM-15, GM-17, GM-19, GM-20, GM-22) e as teses do anexo; ligações semente→afirmação e ramo→instrumento (`conselho/GOV-BR-001.ttl`) | autor | contador sem lastro |
 | D-05 | RNF-01: domínio dos IRIs (w3id.org ou GitHub Pages) | autor | V-24 |
 | D-06 | PDF da "Análise Comparativa" no repositório (hoje as teses vêm de resumo) | autor | rastreabilidade das teses |
 
@@ -115,8 +128,8 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | V-12 | ⬜ | item 7 |
 | V-13 | ✅ | `test_rnf02_full_graph_reasons_under_five_seconds` no CI: 0,12 s para 5105 triplas |
 | V-14 | ⬜ | item 8 |
-| V-15 | 🟡 | contador publicado e protegido no CI: 55 sem lastro de 88 (áreas 28/28 desde o item 5); meta zero no item 8 |
-| V-16 | ⬜ | item 6 |
+| V-15 | 🟡 | contador publicado e protegido no CI: 31 sem lastro de 88 (faltam 17 componentes e 14 traços de contexto); meta zero no item 8 |
+| V-16 | ✅ | `ontologies/consultas/V16_sementes_sem_ligacao.rq` = 0 linhas (`tests/test_conselho.py`, CI) |
 | V-17 | 🟡 | `afirmacoes.py` classifica as 12 teses (6/4/2); falta recálculo no CI e C04 (item 10) |
 | V-18 | 🟡 | celular participante com Minhas escolhas, Mesa e Agora já existe; falta teste de toque (item 15) |
 | V-19 | 🟡 | ficha em torre, assento, arco, cúpula, pessoa e mesa; "por quê?" até a fonte no item 8 |

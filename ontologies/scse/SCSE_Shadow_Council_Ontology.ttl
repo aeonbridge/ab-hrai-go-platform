@@ -283,6 +283,11 @@ scse:blindSpots a owl:DatatypeProperty ;
     rdfs:domain scse:PerspectiveCharter ;
     rdfs:range xsd:string .
 
+scse:branchConcernsInstrument a owl:ObjectProperty ;
+    rdfs:label "branchConcernsInstrument"@en ;
+    rdfs:comment "Instrument (legal or policy) whose counterfactual change the branch explores."@en ;
+    rdfs:domain scse:ScenarioBranch .
+
 scse:branchDerivedFrom a owl:ObjectProperty ;
     rdfs:label "branchDerivedFrom"@en ;
     rdfs:comment "The base scenario from which a branch derives."@en ;
@@ -788,6 +793,12 @@ scse:systemRole a owl:DatatypeProperty ;
     rdfs:comment "Provider, deployer, operator or another role."@en ;
     rdfs:domain scse:SolutionArtifact ;
     rdfs:range xsd:string .
+
+scse:tensionBetweenStrata a owl:ObjectProperty ;
+    rdfs:label "tensionBetweenStrata"@en ;
+    rdfs:comment "Strata of the council whose perspectives pull in opposite directions in this tension."@en ;
+    rdfs:domain scse:PolicyTension ;
+    rdfs:range scse:StakeholderStratum .
 
 scse:tensionDescription a owl:DatatypeProperty ;
     rdfs:label "tensionDescription"@en ;
@@ -1406,11 +1417,6 @@ scse:PendingSourceVerification a owl:NamedIndividual,
     rdfs:label "PendingSourceVerification"@en ;
     rdfs:comment "Source pending verification"@en .
 
-scse:PolicyTension a owl:Class ;
-    rdfs:label "PolicyTension"@en ;
-    rdfs:comment "Claimed conflict or trade-off among policy objectives requiring examination."@en ;
-    rdfs:subClassOf hrai:RegulatoryTension .
-
 scse:ProposedStatus a owl:NamedIndividual,
         hrai:LegalStatus ;
     rdfs:label "ProposedStatus"@en ;
@@ -1445,9 +1451,10 @@ scse:NationalContextSnapshot a owl:Class ;
     rdfs:label "NationalContextSnapshot"@en ;
     rdfs:comment "Temporal capture of national and institutional indicators used by a scenario."@en .
 
-scse:ScenarioBranch a owl:Class ;
-    rdfs:label "ScenarioBranch"@en ;
-    rdfs:comment "Controlled intervention, patch and assumptions applied to a base scenario."@en .
+scse:PolicyTension a owl:Class ;
+    rdfs:label "PolicyTension"@en ;
+    rdfs:comment "Claimed conflict or trade-off among policy objectives requiring examination."@en ;
+    rdfs:subClassOf hrai:RegulatoryTension .
 
 scse:WorldSnapshot a owl:Class ;
     rdfs:label "WorldSnapshot"@en ;
@@ -1467,9 +1474,9 @@ scse:RegulatorySnapshot a owl:Class ;
     rdfs:comment "As-of collection of versioned legal provision states and source material."@en ;
     owl:disjointWith scse:NationalContextSnapshot .
 
-scse:StakeholderStratum a owl:Class ;
-    rdfs:label "StakeholderStratum"@en ;
-    rdfs:comment "Documented perspective category used for synthetic council coverage, not a human probability sample."@en .
+scse:ScenarioBranch a owl:Class ;
+    rdfs:label "ScenarioBranch"@en ;
+    rdfs:comment "Controlled intervention, patch and assumptions applied to a base scenario."@en .
 
 scse:CouncilSeat a owl:Class ;
     rdfs:label "CouncilSeat"@en ;
@@ -1480,6 +1487,10 @@ scse:SourceDocument a owl:Class ;
     rdfs:comment "Document or official source referenced by legal or empirical statements."@en ;
     rdfs:subClassOf prov:Entity ;
     owl:disjointWith scse:EvidenceRecord .
+
+scse:StakeholderStratum a owl:Class ;
+    rdfs:label "StakeholderStratum"@en ;
+    rdfs:comment "Documented perspective category used for synthetic council coverage, not a human probability sample."@en .
 
 scse:FindingStatus a owl:Class ;
     rdfs:label "FindingStatus"@en ;

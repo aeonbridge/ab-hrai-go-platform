@@ -28,6 +28,15 @@ A versão 1.0.0 usava o namespace provisório `example.org` e redeclarava classe
 e as regras `R29a_SyntheticSupport` / `R29b_SyntheticChallenge` (apoio sintético nunca conta como humano) e
 `R30_DivergentAlternative` (apoio e contestação vindos de estratos diferentes).
 
+## Conselho do cenário GOV-BR-001 (RF-13)
+
+`conselho/GOV-BR-001.ttl` é a fonte dos elementos de deliberação que a câmara e o mural exibem: os 8 estratos e os
+20 assentos, as 6 cadeiras vazias (`CoverageGap`, com o motivo), as 6 tensões-semente (`PolicyTension`, ligadas por
+`hrai:hasPolicyClaim` às afirmações do núcleo e por `tensionBetweenStrata` aos estratos) e os 4 ramos de cenário
+(`ScenarioBranch`, ligados ao instrumento por `branchConcernsInstrument`). Cada elemento declara `hrai:displayKey`.
+As ligações às afirmações e aos instrumentos são proposta pendente de revisão. Consulta de aceite:
+`ontologies/consultas/V16_sementes_sem_ligacao.rq` (zero linhas).
+
 ## Arquivos
 
 - `SCSE_Shadow_Council_Ontology.ttl`: ontologia OWL 2 em Turtle, com as regras SWRL (R01–R09, R29a, R29b, R30) serializadas em RDF.
