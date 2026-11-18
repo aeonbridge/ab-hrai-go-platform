@@ -24,12 +24,12 @@
       "mensagem": "D03 -revisado e ok",
       "decisao": "Aprovar as extrações revisadas: textos do PL 2338 (2023 e 2024), AI Act, princípios do Reino Unido, funções do NIST, indicadores de capacidade e exposição, as 18 correspondências BR × UE e o mapeamento das 29 áreas.",
       "lotes": [
-        "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338#Lote_PL2338_Textos",
-        "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/eu/aiact#Lote_Extracao",
-        "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Lote_Extracao",
-        "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#Lote_Extracao",
-        "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Lote_Capacidade",
-        "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Lote_Correspondencias"
+        "https://hrai-go.aeonbridge.io/data/regulatory/br/pl2338#Lote_PL2338_Textos",
+        "https://hrai-go.aeonbridge.io/data/regulatory/eu/aiact#Lote_Extracao",
+        "https://hrai-go.aeonbridge.io/data/regulatory/uk/whitepaper#Lote_Extracao",
+        "https://hrai-go.aeonbridge.io/data/regulatory/us/nist#Lote_Extracao",
+        "https://hrai-go.aeonbridge.io/data/regulatory/br/capacidade#Lote_Capacidade",
+        "https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Lote_Correspondencias"
       ],
       "correspondencias": true,
       "mapeamentoAreas": true
@@ -42,21 +42,21 @@
       "lotes": [],
       "correspondencias": false,
       "aprovados": [
-        "https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#GM-15",
-        "https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#GM-17",
-        "https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#GM-19",
-        "https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#GM-20",
-        "https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#GM-22",
-        "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T1",
-        "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T2",
-        "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T3",
-        "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T4",
-        "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T5",
-        "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T6",
-        "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_Pl2338Approved",
-        "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_Pl2338Stalled",
-        "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_PbiaFundingCut",
-        "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_NewGovernmentPriorities"
+        "https://hrai-go.aeonbridge.io/data/governance/br#GM-15",
+        "https://hrai-go.aeonbridge.io/data/governance/br#GM-17",
+        "https://hrai-go.aeonbridge.io/data/governance/br#GM-19",
+        "https://hrai-go.aeonbridge.io/data/governance/br#GM-20",
+        "https://hrai-go.aeonbridge.io/data/governance/br#GM-22",
+        "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Semente_T1",
+        "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Semente_T2",
+        "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Semente_T3",
+        "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Semente_T4",
+        "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Semente_T5",
+        "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Semente_T6",
+        "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Ramo_Pl2338Approved",
+        "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Ramo_Pl2338Stalled",
+        "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Ramo_PbiaFundingCut",
+        "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Ramo_NewGovernmentPriorities"
       ]
     },
     {
@@ -65,7 +65,7 @@
       "mensagem": "D-07-revisado, ok",
       "decisao": "Aprovar as sementes do cenário GOV-BR-001 (22 componentes e 14 traços de contexto derivados dos documentos-semente), revisadas pelo autor.",
       "lotes": [
-        "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Lote_Sementes_GOV_BR_001"
+        "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Lote_Sementes_GOV_BR_001"
       ],
       "correspondencias": false
     },
@@ -86,8 +86,8 @@
       "correspondencias": false,
       "valores": [
         {
-          "sujeito": "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Ind_GovernanceBudgetShare",
-          "propriedade": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#hasLowerAlertThreshold",
+          "sujeito": "https://hrai-go.aeonbridge.io/data/regulatory/br/capacidade#Ind_GovernanceBudgetShare",
+          "propriedade": "https://hrai-go.aeonbridge.io/ontology/regulatory#hasLowerAlertThreshold",
           "valor": "5.0"
         }
       ]
@@ -97,6 +97,24 @@
       "data": "2026-11-17T22:41:00-03:00",
       "mensagem": "D-05a: 'hrai-go.aeonbridge.io'",
       "decisao": "IRIs resolvíveis no subdomínio hrai-go.aeonbridge.io (registro CNAME para a publicação).",
+      "lotes": [],
+      "correspondencias": false
+    },
+    {
+      "id": "D-11",
+      "data": "2026-11-17T22:48:00-03:00",
+      "mensagem": "D-11 APROVADO MAS PODE SOFRER MUDANCAS",
+      "decisao": "Aprovar a resposta inicial às perguntas norteadoras (8 especificidades da QN1, 2 itens da QN2, 2 da QN3), sujeita a mudanças a cada nova versão do corpus ou nova decisão.",
+      "lotes": [
+        "https://hrai-go.aeonbridge.io/data/regulatory/respostas#Lote_Respostas"
+      ],
+      "correspondencias": false
+    },
+    {
+      "id": "D-01b",
+      "data": "2026-11-17T22:48:30-03:00",
+      "mensagem": "DEIXE CHINA DE FORA PARA VALIDARMOS INCLUSIVE NO FUTURO COMO ADICIONAR NOVAS E O IMPACTO",
+      "decisao": "Revê a D-01: a China fica fora da comparação por ora. A extração fica em ontologies/regulatory/em-espera/cn/ para validar, no futuro, a inclusão de uma nova jurisdição e o seu impacto.",
       "lotes": [],
       "correspondencias": false
     }

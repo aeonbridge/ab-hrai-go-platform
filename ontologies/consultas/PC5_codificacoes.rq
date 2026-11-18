@@ -1,8 +1,8 @@
 # PC5 (QN1): Como cada modelo se classifica nos critérios da taxonomia, e com que evidência? Uma linha por codificação:
 # versão codificada, critério, valor na escala aprovada, dispositivo que justifica e revisão.
-PREFIX hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#>
-PREFIX scse: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#>
-PREFIX comp: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#>
+PREFIX hrai: <https://hrai-go.aeonbridge.io/ontology/regulatory#>
+PREFIX scse: <https://hrai-go.aeonbridge.io/ontology/scse#>
+PREFIX comp: <https://hrai-go.aeonbridge.io/ontology/comparativo#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX prov: <http://www.w3.org/ns/prov#>

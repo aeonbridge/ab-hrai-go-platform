@@ -25,13 +25,13 @@ from rdflib.collection import Collection
 from rdflib.compare import isomorphic
 
 ROOT = Path(__file__).resolve().parents[1] / "ontologies" / "regulatory"
-H = Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
+H = Namespace("https://hrai-go.aeonbridge.io/ontology/regulatory#")
 SW = Namespace("http://www.w3.org/2003/11/swrl#")
 SWRLB = Namespace("http://www.w3.org/2003/11/swrlb#")
 SCHEMA = Namespace("https://schema.org/")
 FOAF = Namespace("http://xmlns.com/foaf/0.1/")
 DCTERMS = Namespace("http://purl.org/dc/terms/")
-PBIA = Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#")
+PBIA = Namespace("https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#")
 
 TBOX = Graph().parse(ROOT / "HRAI_GO_Regulatory_General.ttl", format="turtle")
 

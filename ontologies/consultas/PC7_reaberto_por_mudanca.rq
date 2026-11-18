@@ -1,9 +1,9 @@
 # PC7: Quando um texto muda, o que é reaberto? Evento de mudança e o que ele potencialmente afeta: dispositivos,
 # requisitos, avaliações e aplicações (R10 a R13); e, ligados à versão anterior do mesmo instrumento, codificações
 # (E5), especificidades da QN1 e afirmações cuja evidência cita dispositivo dessa versão (M10 do RT-VIS-03).
-PREFIX hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#>
-PREFIX scse: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#>
-PREFIX comp: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#>
+PREFIX hrai: <https://hrai-go.aeonbridge.io/ontology/regulatory#>
+PREFIX scse: <https://hrai-go.aeonbridge.io/ontology/scse#>
+PREFIX comp: <https://hrai-go.aeonbridge.io/ontology/comparativo#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX prov: <http://www.w3.org/ns/prov#>

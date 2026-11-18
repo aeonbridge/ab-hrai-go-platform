@@ -9,7 +9,7 @@ import rdflib
 from rdflib.namespace import RDF
 
 ROOT = Path(__file__).resolve().parents[1]
-H = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
+H = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/regulatory#")
 OUT = ROOT / "ontologies/regulatory/decisoes/decisoes_autor.ttl"
 LOG = json.loads((ROOT / "docs/especificacoes/ESP-ONT-02/decisoes.json").read_text(encoding="utf-8"))
 
@@ -28,5 +28,6 @@ def test_decisions_match_the_log_and_quote_the_message():
 def test_only_logged_batches_are_reviewed():
     g = rdflib.Graph().parse(OUT)
     reviewed = {str(c) for c in g.subjects(H.hasReviewDecision, None)}
-    assert not any("/respostas#" in c or "/cn/china#" in c for c in reviewed)  # D-11 and D-12 still pending
+    assert not any("/cn/china#" in c for c in reviewed)  # China on hold (D-01b)
+    assert any("/respostas#" in c for c in reviewed)  # D-11 approved the initial answer
     assert any("/sementes#" in c for c in reviewed)  # D-07 approved the seeds

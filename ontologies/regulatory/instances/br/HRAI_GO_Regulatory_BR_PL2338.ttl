@@ -1,16 +1,16 @@
 # Gerado por scripts/ontologia/extrair_pl2338.py. Não editar à mão.
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
+@prefix hrai: <https://hrai-go.aeonbridge.io/ontology/regulatory#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix pbia: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#> .
-@prefix pl: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338#> .
+@prefix pbia: <https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#> .
+@prefix pl: <https://hrai-go.aeonbridge.io/data/regulatory/br/pl2338#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 pbia:Brazil a hrai:Jurisdiction .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338> a owl:Ontology ;
+<https://hrai-go.aeonbridge.io/data/regulatory/br/pl2338> a owl:Ontology ;
     rdfs:label "PL 2338/2023: textos de 2023 e de 2024 com os artigos (extração de fonte primária)"@pt ;
     rdfs:comment "Gerado por scripts/ontologia/extrair_pl2338.py (pdftotext + expressões regulares, sem LLM). Candidato pendente de revisão humana. Método: docs/especificacoes/ESP-ONT-02/METODO_EXTRACAO.md."@pt .
 

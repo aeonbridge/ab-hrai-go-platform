@@ -1,14 +1,14 @@
 # Gerado por scripts/ontologia/extrair_internacional.py. Não editar à mão.
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
+@prefix hrai: <https://hrai-go.aeonbridge.io/ontology/regulatory#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix uk: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#> .
+@prefix uk: <https://hrai-go.aeonbridge.io/data/regulatory/uk/whitepaper#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper> a owl:Ontology ;
+<https://hrai-go.aeonbridge.io/data/regulatory/uk/whitepaper> a owl:Ontology ;
     rdfs:label "Reino Unido: white paper 'A pro-innovation approach to AI regulation' e os cinco princípios"@pt ;
     rdfs:comment "Gerado por scripts/ontologia/extrair_internacional.py (pdftotext + expressões regulares, sem LLM). Candidato pendente de revisão humana. Método: METODO_EXTRACAO.md."@pt .
 

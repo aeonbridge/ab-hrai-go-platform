@@ -7,8 +7,8 @@ import rdflib
 from rdflib.namespace import RDF
 
 ROOT = Path(__file__).resolve().parents[1]
-H = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
-CAP = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#")
+H = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/regulatory#")
+CAP = rdflib.Namespace("https://hrai-go.aeonbridge.io/data/regulatory/br/capacidade#")
 
 
 def instances():

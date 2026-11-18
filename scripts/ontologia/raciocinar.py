@@ -32,7 +32,7 @@ from rdflib.collection import Collection
 RAIZ = Path(__file__).resolve().parents[2]
 TBOX = RAIZ / "ontologies/regulatory/HRAI_GO_Regulatory_General.ttl"
 ABOX_PBIA = RAIZ / "ontologies/regulatory/instances/br/HRAI_GO_Regulatory_BR_PBIA_2025.ttl"
-H = Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
+H = Namespace("https://hrai-go.aeonbridge.io/ontology/regulatory#")
 SWRL = Namespace("http://www.w3.org/2003/11/swrl#")
 SWRLB = Namespace("http://www.w3.org/2003/11/swrlb#")
 PROV = Namespace("http://www.w3.org/ns/prov#")

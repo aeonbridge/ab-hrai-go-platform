@@ -33,7 +33,7 @@ import consultas  # noqa: E402
 ROOT = Path(__file__).resolve().parents[2]
 MD = ROOT / "docs/relatorios/perguntas-norteadoras/relatorio-QN.md"
 JS = ROOT / "web/assets/respostas.js"
-H = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
+H = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/regulatory#")
 DIM = {"NationalContextDimension": "contexto nacional", "InstalledCapacityDimension": "capacidade instalada",
        "RiskExposureDimension": "exposição a risco", "StrategicObjectiveDimension": "objetivo estratégico"}
 DIF = {"BrazilOnlyDifference": "exclusiva do Brasil", "AbsentInBrazilDifference": "ausente no Brasil",
@@ -52,6 +52,13 @@ def state(g, x) -> str:
     return "sem evidência no corpus"
 
 
+def decision(g, x) -> str:
+    """Human decision on an item: through its candidate's review (decisoes.json) or 'pendente'."""
+    ids = sorted({str(d).split("#")[-1].replace("_", "-") for c in g.subjects(DCTERMS.subject, x)
+                  for d in g.objects(c, H.hasReviewDecision) if (d, RDF.type, H.ApprovalDecision) in g})
+    return f"aprovada pelo autor ({', '.join(ids)}), sujeita a mudanças" if ids else "pendente"
+
+
 def collect(g) -> dict:
     out = {"QN1": [], "QN2": [], "QN3": [], "achados": []}
     for s in sorted(g.subjects(RDF.type, H.NationalSpecificity), key=str):
@@ -66,7 +73,7 @@ def collect(g) -> dict:
                            "tipo": DIF.get(str(g.value(s, H.differenceType)).split("#")[-1], ""),
                            "evidencia": sorted(label(g, e) for e in g.objects(s, H.specificityGroundedIn)),
                            "comparacoes": sorted(comps, key=lambda c: c["jurisdicao"]),
-                           "decisao": "pendente" if g.value(s, H.specificityReview) is None else "registrada"})
+                           "decisao": decision(g, s)})
     for x in sorted(g.subjects(H.answersGuidingQuestion, None), key=str):
         qn = str(g.value(x, H.answersGuidingQuestion))
         if qn not in ("QN2", "QN3", "achado"):
@@ -75,7 +82,7 @@ def collect(g) -> dict:
         item = {"id": str(x).split("#")[-1], "item": label(g, x), "estado": state(g, x),
                 "especificidades": sorted(label(g, s) for s in g.objects(x, H.groundedInSpecificity)),
                 "escopo": str(g.value(x, H.answerScope) or ""), "cita": cites,
-                "decisao": "pendente"}
+                "decisao": decision(g, x)}
         out["achados" if qn == "achado" else qn].append(item)
     return out
 
@@ -84,7 +91,8 @@ def render_md(d: dict) -> str:
     L = ["# Resposta inicial às perguntas norteadoras", "",
          "HRAI-GO (Human-centred Regulatory AI, Governance Observatory). Relatório gerado pela plataforma a partir do grafo "
          "(`scripts/ontologia/relatorio_qn.py`), seções na ordem QN1, QN2, QN3 (RT-VIS-03, seção 7.5).", "",
-         "> **Resposta inicial.** Nenhum item está publicado: todos aguardam decisão humana registrada (V-29). A detecção desta "
+         "> **Resposta inicial.** Cada item mostra a decisão humana registrada (V-29); itens aprovados continuam sujeitos a mudança "
+         "a cada nova versão do corpus. A detecção desta "
          "primeira execução foi feita pela sessão do loop sobre o grafo, item a item, porque as codificações nos 25 critérios "
          "esperam as escalas aprovadas (D-02). Comparação sem valor equivalente no corpus aparece como \"não codificado\", "
          "nunca como \"não tem\". Método: `docs/especificacoes/ESP-ONT-02/METODO_EXTRACAO.md`; passo M5 do RT-VIS-03.", "",

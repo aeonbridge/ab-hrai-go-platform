@@ -1,14 +1,14 @@
 # Gerado por scripts/ontologia/extrair_internacional.py. Não editar à mão.
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
+@prefix hrai: <https://hrai-go.aeonbridge.io/ontology/regulatory#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix us: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#> .
+@prefix us: <https://hrai-go.aeonbridge.io/data/regulatory/us/nist#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist> a owl:Ontology ;
+<https://hrai-go.aeonbridge.io/data/regulatory/us/nist> a owl:Ontology ;
     rdfs:label "EUA: NIST AI Risk Management Framework 1.0 e as quatro funções"@pt ;
     rdfs:comment "Gerado por scripts/ontologia/extrair_internacional.py (pdftotext + expressões regulares, sem LLM). Candidato pendente de revisão humana. Método: METODO_EXTRACAO.md."@pt .
 
@@ -58,7 +58,7 @@ us:Function_Govern a hrai:PolicyInstrument ;
     rdfs:label "GOVERN"@en ;
     dcterms:description "GOVERN is a cross-cutting function that is infused throughout AI risk management and enables the other functions of the process. Aspects of GOVERN, especially those related to compliance or evaluation, should be integrated into each of the other functions."@en ;
     dcterms:isPartOf us:AIRMF_1_0 ;
-    skos:closeMatch <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#NIST_Govern> ;
+    skos:closeMatch <https://hrai-go.aeonbridge.io/ontology/comparativo#NIST_Govern> ;
     prov:wasDerivedFrom us:Snapshot_AIRMF ;
     hrai:policyInstrumentInJurisdiction us:UnitedStates .
 
@@ -66,7 +66,7 @@ us:Function_Manage a hrai:PolicyInstrument ;
     rdfs:label "MANAGE"@en ;
     dcterms:description "The MANAGE function entails allocating risk resources to mapped and measured risks on a regular basis and as defined by the GOVERN function. Risk treatment comprises plans to respond to, recover from, and communicate about incidents or events."@en ;
     dcterms:isPartOf us:AIRMF_1_0 ;
-    skos:closeMatch <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#NIST_Manage> ;
+    skos:closeMatch <https://hrai-go.aeonbridge.io/ontology/comparativo#NIST_Manage> ;
     prov:wasDerivedFrom us:Snapshot_AIRMF ;
     hrai:policyInstrumentInJurisdiction us:UnitedStates .
 
@@ -74,7 +74,7 @@ us:Function_Map a hrai:PolicyInstrument ;
     rdfs:label "MAP"@en ;
     dcterms:description "The MAP function establishes the context to frame risks related to an AI system. The AI lifecycle consists of many interdependent activities involving a diverse set of actors (See Figure 3)."@en ;
     dcterms:isPartOf us:AIRMF_1_0 ;
-    skos:closeMatch <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#NIST_Map> ;
+    skos:closeMatch <https://hrai-go.aeonbridge.io/ontology/comparativo#NIST_Map> ;
     prov:wasDerivedFrom us:Snapshot_AIRMF ;
     hrai:policyInstrumentInJurisdiction us:UnitedStates .
 
@@ -82,7 +82,7 @@ us:Function_Measure a hrai:PolicyInstrument ;
     rdfs:label "MEASURE"@en ;
     dcterms:description "The MEASURE function employs quantitative, qualitative, or mixed-method tools, techniques, and methodologies to analyze, assess, benchmark, and monitor AI risk and related impacts. It uses knowledge relevant to AI risks identified in the MAP function and informs the MANAGE function."@en ;
     dcterms:isPartOf us:AIRMF_1_0 ;
-    skos:closeMatch <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#NIST_Measure> ;
+    skos:closeMatch <https://hrai-go.aeonbridge.io/ontology/comparativo#NIST_Measure> ;
     prov:wasDerivedFrom us:Snapshot_AIRMF ;
     hrai:policyInstrumentInJurisdiction us:UnitedStates .
 

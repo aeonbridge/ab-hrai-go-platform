@@ -39,9 +39,9 @@ SOURCES = ["ontologies/regulatory/HRAI_GO_Regulatory_General.ttl", "ontologies/r
            "ontologies/comparativo/HRAI_GO_Comparativo.ttl", "ontologies/scse/SCSE_Shadow_Council_Ontology.ttl",
            "ontologies/scse/conselho/*.ttl", "ontologies/regulatory/instances/**/*.ttl",
            "ontologies/regulatory/afirmacoes/*.ttl", "ontologies/regulatory/decisoes/*.ttl"]
-H = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
-S = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#")
-SEED_NS = "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#"
+H = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/regulatory#")
+S = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/scse#")
+SEED_NS = "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#"
 HEADER = ("/* Gerado por scripts/ontologia/build_modelo.py a partir do grafo. Não editar à mão (RF-09).\n"
           "   Componentes e traços: sementes (ontologies/regulatory/sementes); áreas: módulo comparativo;\n"
           "   estratos, tensões, ramos e cadeiras vazias: SCSE (ontologies/scse/conselho). */\n")

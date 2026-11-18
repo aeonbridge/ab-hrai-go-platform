@@ -1,4 +1,4 @@
-"""RF-02 / D-01: China enters the corpus with secondary sources, flagged as such (V-03)."""
+"""RF-02 / D-01, D-01b: China extracted (secondary sources, flagged) but kept ON HOLD, out of the comparison."""
 
 import hashlib
 import shutil
@@ -11,9 +11,9 @@ import rdflib
 from rdflib.namespace import DCTERMS, PROV, RDF, SKOS
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "ontologies/regulatory/instances/cn/HRAI_GO_Regulatory_CN.ttl"
-H = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
-CN = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#")
+OUT = ROOT / "ontologies/regulatory/em-espera/cn/HRAI_GO_Regulatory_CN.ttl"
+H = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/regulatory#")
+CN = rdflib.Namespace("https://hrai-go.aeonbridge.io/data/regulatory/cn/china#")
 
 
 @pytest.fixture(scope="module")
@@ -38,6 +38,16 @@ def test_non_binding_and_draft_instruments_are_not_shown_as_law(g):
     assert (CN.DigitalVirtualHumanDraft, RDF.type, H.LegislativeProposal) in g
     assert (CN.GenerativeAIMeasures, RDF.type, H.EnactedLegalInstrument) in g
     assert not set(g.subjects(RDF.type, H.ReviewDecision))
+
+
+def test_china_is_on_hold_and_out_of_the_comparison():
+    """D-01b: nothing on China is loaded by the pipelines until the file moves to instances/."""
+    assert not (ROOT / "ontologies/regulatory/instances/cn").exists()
+    answers = (ROOT / "ontologies/regulatory/respostas/QN_respostas.ttl").read_text(encoding="utf-8")
+    assert "/cn/china#" not in answers
+    sys.path.insert(0, str(ROOT / "scripts/ontologia"))
+    import consultas
+    assert not any("em-espera" in str(f) for f in consultas.files())
 
 
 @pytest.mark.skipif(shutil.which("pdftotext") is None, reason="pdftotext not installed")

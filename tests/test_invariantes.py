@@ -16,8 +16,8 @@ import raciocinar  # noqa: E402
 CORE = ROOT / "ontologies/regulatory/HRAI_GO_Regulatory_General.ttl"
 SCSE = ROOT / "ontologies/scse/SCSE_Shadow_Council_Ontology.ttl"
 COMP = ROOT / "ontologies/comparativo/HRAI_GO_Comparativo.ttl"
-H = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
-S = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#")
+H = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/regulatory#")
+S = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/scse#")
 SW = rdflib.Namespace("http://www.w3.org/2003/11/swrl#")
 EX = "http://example.test/fixture#"
 

@@ -13,7 +13,7 @@ import rdflib
 from rdflib.namespace import DCTERMS, RDF, SKOS
 
 ROOT = Path(__file__).resolve().parents[1]
-H = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
+H = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/regulatory#")
 INST = ROOT / "ontologies/regulatory/instances"
 COR = ROOT / "ontologies/regulatory/correspondencias/BR_UE_PL2338_AIAct.ttl"
 

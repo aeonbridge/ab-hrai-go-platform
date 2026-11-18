@@ -1,14 +1,14 @@
 # Gerado por scripts/ontologia/extrair_china.py. Não editar à mão. Fontes secundárias.
-@prefix cn: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#> .
+@prefix cn: <https://hrai-go.aeonbridge.io/data/regulatory/cn/china#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
+@prefix hrai: <https://hrai-go.aeonbridge.io/ontology/regulatory#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china> a owl:Ontology ;
+<https://hrai-go.aeonbridge.io/data/regulatory/cn/china> a owl:Ontology ;
     rdfs:label "China: instrumentos e autoridades de governança de IA, segundo fontes secundárias"@pt ;
     rdfs:comment "Gerado por scripts/ontologia/extrair_china.py. Decisão D-01 (autor, 17/11/2026): incluir a China. Fonte secundária: não há texto oficial chinês no corpus. Lista transcrita das imagens do overview pela sessão do loop (LLM); presença no relatório da Law Library of Congress conferida automaticamente."@pt .
 

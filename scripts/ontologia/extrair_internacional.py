@@ -37,10 +37,10 @@ from rdflib.compare import isomorphic
 from rdflib.namespace import DCTERMS, OWL, PROV, RDF, RDFS, SKOS, XSD
 
 ROOT = Path(__file__).resolve().parents[2]
-H = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
-PBIA = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#")
+H = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/regulatory#")
+PBIA = rdflib.Namespace("https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#")
 REPO = "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/"
-DATA = "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/"
+DATA = "https://hrai-go.aeonbridge.io/data/regulatory/"
 
 EU_PDF = "docs/ai-regulations/eu/OJ_L_202401689_EN_TXT.pdf"
 UK_PDF = "docs/ai-regulations/uk/a-pro-innovation-approach-to-ai-regulation-amended-web-ready.pdf"
@@ -243,7 +243,7 @@ def build_us() -> rdflib.Graph:
         g.add((x, PROV.wasDerivedFrom, snap))
         if i >= 0:
             g.add((x, DCTERMS.description, Literal(sentences(raw[i:i + 900], 2), lang="en")))
-        g.add((x, SKOS.closeMatch, URIRef("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#NIST_" + name)))
+        g.add((x, SKOS.closeMatch, URIRef("https://hrai-go.aeonbridge.io/ontology/comparativo#NIST_" + name)))
         candidate(g, ns, agent, batch, snap, x, f"função {name.upper()}")
     candidate(g, ns, agent, batch, snap, rmf, "NIST AI RMF 1.0")
     return g

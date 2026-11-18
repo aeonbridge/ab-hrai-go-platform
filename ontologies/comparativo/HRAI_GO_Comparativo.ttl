@@ -1,6 +1,6 @@
-@prefix comp: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#> .
+@prefix comp: <https://hrai-go.aeonbridge.io/ontology/comparativo#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
+@prefix hrai: <https://hrai-go.aeonbridge.io/ontology/regulatory#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -9,18 +9,18 @@
 @prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo> a owl:Ontology ;
+<https://hrai-go.aeonbridge.io/ontology/comparativo> a owl:Ontology ;
     dcterms:description "Módulo comparativo do HRAI-GO (Human-centred Regulatory AI, Governance Observatory): as 12 categorias e os 25 critérios de Alanoca et al. (2025), com as definições originais, e as extensões declaradas E1 a E7 (ESP-ONT-02, RF-16). As escalas dos critérios (E4) aguardam aprovação humana."@pt ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     dcterms:title "HRAI-GO comparative module: base taxonomy and declared extensions"@en ;
-    owl:imports <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> ;
-    owl:versionIRI <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo/1.0.0> ;
+    owl:imports <https://hrai-go.aeonbridge.io/ontology/regulatory> ;
+    owl:versionIRI <https://hrai-go.aeonbridge.io/ontology/comparativo/1.0.0> ;
     owl:versionInfo "1.0.0" .
 
 comp:Area_ChildrenVulnerable a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "children-vulnerable" ;
@@ -35,7 +35,7 @@ comp:Area_ChildrenVulnerable a owl:NamedIndividual,
 comp:Area_ComputeInfrastructure a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "compute-infrastructure" ;
@@ -47,7 +47,7 @@ comp:Area_ComputeInfrastructure a owl:NamedIndividual,
 comp:Area_CopyrightIp a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "copyright-ip" ;
@@ -60,7 +60,7 @@ comp:Area_CopyrightIp a owl:NamedIndividual,
 comp:Area_DataGovernance a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "data-governance" ;
@@ -75,7 +75,7 @@ comp:Area_DataGovernance a owl:NamedIndividual,
 comp:Area_DataSovereignty a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "data-sovereignty" ;
@@ -87,7 +87,7 @@ comp:Area_DataSovereignty a owl:NamedIndividual,
 comp:Area_EnergyEnvironment a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "energy-environment" ;
@@ -101,7 +101,7 @@ comp:Area_EnergyEnvironment a owl:NamedIndividual,
 comp:Area_EnforcementCapacity a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "enforcement-capacity" ;
@@ -117,7 +117,7 @@ comp:Area_EnforcementCapacity a owl:NamedIndividual,
 comp:Area_FundingContinuity a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "funding-continuity" ;
@@ -130,7 +130,7 @@ comp:Area_FundingContinuity a owl:NamedIndividual,
 comp:Area_GenerativeGpai a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "generative-gpai" ;
@@ -146,7 +146,7 @@ comp:Area_GenerativeGpai a owl:NamedIndividual,
 comp:Area_ImpactAssessment a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "impact-assessment" ;
@@ -162,7 +162,7 @@ comp:Area_ImpactAssessment a owl:NamedIndividual,
 comp:Area_InfoIntegrity a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "info-integrity" ;
@@ -177,7 +177,7 @@ comp:Area_InfoIntegrity a owl:NamedIndividual,
 comp:Area_InnovationSandbox a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "innovation-sandbox" ;
@@ -190,7 +190,7 @@ comp:Area_InnovationSandbox a owl:NamedIndividual,
 comp:Area_InternationalAlignment a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "international-alignment" ;
@@ -203,7 +203,7 @@ comp:Area_InternationalAlignment a owl:NamedIndividual,
 comp:Area_LaborRelations a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "labor-relations" ;
@@ -217,7 +217,7 @@ comp:Area_LaborRelations a owl:NamedIndividual,
 comp:Area_LanguageCulture a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "language-culture" ;
@@ -230,7 +230,7 @@ comp:Area_LanguageCulture a owl:NamedIndividual,
 comp:Area_Liability a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "liability" ;
@@ -244,7 +244,7 @@ comp:Area_Liability a owl:NamedIndividual,
 comp:Area_MonitoringLearning a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "monitoring-learning" ;
@@ -259,7 +259,7 @@ comp:Area_MonitoringLearning a owl:NamedIndividual,
 comp:Area_OpenSourceScience a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "open-source-science" ;
@@ -272,7 +272,7 @@ comp:Area_OpenSourceScience a owl:NamedIndividual,
 comp:Area_OversightInstitutions a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "oversight-institutions" ;
@@ -287,7 +287,7 @@ comp:Area_OversightInstitutions a owl:NamedIndividual,
 comp:Area_Participation a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "participation" ;
@@ -303,7 +303,7 @@ comp:Area_Participation a owl:NamedIndividual,
 comp:Area_PublicSectorUse a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "public-sector-use" ;
@@ -317,7 +317,7 @@ comp:Area_PublicSectorUse a owl:NamedIndividual,
 comp:Area_RegionalInequality a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "regional-inequality" ;
@@ -330,7 +330,7 @@ comp:Area_RegionalInequality a owl:NamedIndividual,
 comp:Area_RightsRedress a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "rights-redress" ;
@@ -344,7 +344,7 @@ comp:Area_RightsRedress a owl:NamedIndividual,
 comp:Area_RiskClassification a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "risk-classification" ;
@@ -360,7 +360,7 @@ comp:Area_RiskClassification a owl:NamedIndividual,
 comp:Area_SecurityDefense a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "security-defense" ;
@@ -375,7 +375,7 @@ comp:Area_SecurityDefense a owl:NamedIndividual,
 comp:Area_SmeCompetition a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "sme-competition" ;
@@ -388,7 +388,7 @@ comp:Area_SmeCompetition a owl:NamedIndividual,
 comp:Area_StandardsCertification a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "standards-certification" ;
@@ -402,7 +402,7 @@ comp:Area_StandardsCertification a owl:NamedIndividual,
 comp:Area_Transparency a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "transparency" ;
@@ -418,7 +418,7 @@ comp:Area_Transparency a owl:NamedIndividual,
 comp:Area_WorkforceSkills a owl:NamedIndividual,
         skos:Concept,
         hrai:SubstantiveArea ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_03> ;
     skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026)."@pt ;
     skos:inScheme comp:AreasSubstantivas ;
     skos:notation "workforce-skills" ;
@@ -1263,7 +1263,7 @@ comp:AIAct_ChapterIX a owl:NamedIndividual,
 
 comp:C02_NoveltyOfLegalRegime a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Lei nova ou adaptada"@pt ;
     skos:broader comp:Cat_Novelty ;
@@ -1275,7 +1275,7 @@ comp:C02_NoveltyOfLegalRegime a skos:Concept,
 
 comp:C13_CriminalCharges a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Sanções penais"@pt ;
     skos:broader comp:Cat_Sanctions ;
@@ -1287,7 +1287,7 @@ comp:C13_CriminalCharges a skos:Concept,
 
 comp:C14_Fines a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Multas"@pt ;
     skos:broader comp:Cat_Sanctions ;
@@ -1299,7 +1299,7 @@ comp:C14_Fines a skos:Concept,
 
 comp:C15_TemporaryInjunctions a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Injunções temporárias"@pt ;
     skos:broader comp:Cat_Sanctions ;
@@ -1334,7 +1334,7 @@ comp:Cat_Sanctions a skos:Concept ;
 
 comp:E3_SubstantiveCoverage a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     rdfs:seeAlso <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Substantive coverage"@en ;
     skos:definition "Áreas substantivas cobertas (as 28 áreas da câmara mais IA generativa e modelos de propósito geral), ligadas aos critérios quando houver relação."@pt ;
@@ -1352,7 +1352,7 @@ comp:AIAct_ChapterV a owl:NamedIndividual,
 
 comp:C01_LawAdoption a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Adoção como lei"@pt ;
     skos:broader comp:Cat_Status ;
@@ -1364,7 +1364,7 @@ comp:C01_LawAdoption a skos:Concept,
 
 comp:C06_Government a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Governo"@pt ;
     skos:broader comp:Cat_Reach ;
@@ -1376,7 +1376,7 @@ comp:C06_Government a skos:Concept,
 
 comp:C07_Individuals a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Indivíduos"@pt ;
     skos:broader comp:Cat_Reach ;
@@ -1388,7 +1388,7 @@ comp:C07_Individuals a skos:Concept,
 
 comp:C09_ThirdPartyAudits a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Auditoria de terceiros"@pt ;
     skos:broader comp:Cat_Enforcement ;
@@ -1400,7 +1400,7 @@ comp:C09_ThirdPartyAudits a skos:Concept,
 
 comp:C11_Liability a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Responsabilização"@pt ;
     skos:broader comp:Cat_Enforcement ;
@@ -1412,7 +1412,7 @@ comp:C11_Liability a skos:Concept,
 
 comp:C12_RegulatorySandboxes a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Sandbox regulatório"@pt ;
     skos:broader comp:Cat_Enforcement ;
@@ -1424,7 +1424,7 @@ comp:C12_RegulatorySandboxes a skos:Concept,
 
 comp:C16_StandardSetting a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Definição de padrões"@pt ;
     skos:broader comp:Cat_Operationalization ;
@@ -1436,7 +1436,7 @@ comp:C16_StandardSetting a skos:Concept,
 
 comp:C17_Auditing a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Auditoria"@pt ;
     skos:broader comp:Cat_Operationalization ;
@@ -1448,7 +1448,7 @@ comp:C17_Auditing a skos:Concept,
 
 comp:C19_InternationalCooperation a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Alinhamento a marcos globais"@pt ;
     skos:broader comp:Cat_InternationalCooperation ;
@@ -1460,7 +1460,7 @@ comp:C19_InternationalCooperation a skos:Concept,
 
 comp:C24_TechnologyFocused a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Tecnologia"@pt ;
     skos:broader comp:Cat_RegulationLayer ;
@@ -1474,7 +1474,7 @@ comp:var_R28_HorizontalRiskBasedProfile_v a swrl:Variable .
 
 comp:C03_DigitalLegalMaturity a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Maturidade do ecossistema regulatório relevante para IA"@pt ;
     skos:broader comp:Cat_DigitalLegalMaturity ;
@@ -1486,7 +1486,7 @@ comp:C03_DigitalLegalMaturity a skos:Concept,
 
 comp:C04_AppliesToGenerativeAI a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Aplica-se a IA generativa/GPAI"@pt ;
     skos:broader comp:Cat_Scope ;
@@ -1499,7 +1499,7 @@ comp:C04_AppliesToGenerativeAI a skos:Concept,
 
 comp:C05_Industry a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Indústria"@pt ;
     skos:broader comp:Cat_Reach ;
@@ -1511,7 +1511,7 @@ comp:C05_Industry a skos:Concept,
 
 comp:C08_ContinuedReporting a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Relatórios contínuos"@pt ;
     skos:broader comp:Cat_Enforcement ;
@@ -1523,7 +1523,7 @@ comp:C08_ContinuedReporting a skos:Concept,
 
 comp:C10_ExistingOrNewAgency a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Agência existente ou nova"@pt ;
     skos:broader comp:Cat_Enforcement ;
@@ -1535,7 +1535,7 @@ comp:C10_ExistingOrNewAgency a skos:Concept,
 
 comp:C18_TechnicalExpertise a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Expertise técnica"@pt ;
     skos:broader comp:Cat_Operationalization ;
@@ -1547,7 +1547,7 @@ comp:C18_TechnicalExpertise a skos:Concept,
 
 comp:C20_CivilSocietyInclusion a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Inclusão da sociedade civil"@pt ;
     skos:broader comp:Cat_StakeholderConsultation ;
@@ -1559,7 +1559,7 @@ comp:C20_CivilSocietyInclusion a skos:Concept,
 
 comp:C21_PrivateSectorInclusion a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Inclusão do setor privado"@pt ;
     skos:broader comp:Cat_StakeholderConsultation ;
@@ -1571,7 +1571,7 @@ comp:C21_PrivateSectorInclusion a skos:Concept,
 
 comp:C23_ExPost a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Ex post"@pt ;
     skos:broader comp:Cat_RegulatoryApproach ;
@@ -1583,7 +1583,7 @@ comp:C23_ExPost a skos:Concept,
 
 comp:C25_ApplicationFocused a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Aplicação"@pt ;
     skos:broader comp:Cat_RegulationLayer ;
@@ -1603,7 +1603,7 @@ comp:Cat_Enforcement a skos:Concept ;
 
 comp:E1_LegalForm a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     rdfs:seeAlso <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Legal form"@en ;
     skos:definition "Amplia o critério Status para instrumentos não vinculantes: lei, projeto de lei, plano, princípios não estatutários e guia voluntário."@pt ;
@@ -1617,7 +1617,7 @@ comp:E1_LegalForm a skos:Concept,
 
 comp:E6_ImplementationCapacity a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     rdfs:seeAlso <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Implementation capacity"@en ;
     skos:definition "Orçamento e pessoal disponíveis para supervisionar e implementar o instrumento."@pt ;
@@ -1631,7 +1631,7 @@ comp:E6_ImplementationCapacity a skos:Concept,
 
 comp:E7_ImplementationParticipation a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     rdfs:seeAlso <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Participation in implementation"@en ;
     skos:definition "Participação de pessoas e grupos na implementação e na padronização, além da consulta no processo legislativo."@pt ;
@@ -1653,7 +1653,7 @@ comp:NistFunction a owl:Class ;
 
 comp:C22_ExAnte a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Ex ante"@pt ;
     skos:broader comp:Cat_RegulatoryApproach ;
@@ -1679,7 +1679,7 @@ comp:AIAct_ChapterIII a owl:NamedIndividual,
 
 comp:E2_PrimaryObjective a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
-    dcterms:isReferencedBy <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02> ;
+    dcterms:isReferencedBy <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#D_02> ;
     rdfs:seeAlso <https://doi.org/10.1145/3715275.3732059> ;
     skos:altLabel "Primary objective"@en ;
     skos:definition "Objetivo que o instrumento declara como principal: direitos, inovação, desenvolvimento e soberania, ou segurança."@pt ;

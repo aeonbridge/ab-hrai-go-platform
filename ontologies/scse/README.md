@@ -3,11 +3,11 @@
 Módulo de deliberação do **HRAI-GO (Human-centred Regulatory AI, Governance Observatory)**: tensões de deliberação,
 conselho, estratos, assentos, rodadas, posições, cenários e decisões.
 
-**Versão:** 1.2.0 · **Namespace:** `https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#`
+**Versão:** 1.2.0 · **Namespace:** `https://hrai-go.aeonbridge.io/ontology/scse#`
 
 ## Relação com o núcleo regulatório (RF-17)
 
-- Importa o núcleo (`owl:imports <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory>`) e usa as
+- Importa o núcleo (`owl:imports <https://hrai-go.aeonbridge.io/ontology/regulatory>`) e usa as
   classes dele, sem redeclará-las: `LegalProvision`, `NormativeRequirement`, `LegalStatus`, `LegalException`,
   `Jurisdiction`, `ComplianceAssessment`, `PolicyAlternative`, `PolicyObjective` e a propriedade `claimText`.
 - Termos com o mesmo nome e sentido diferente ficaram aqui com nome próprio: `provisionStateHasStatus` (status de um
@@ -48,3 +48,5 @@ Os indivíduos do namespace `scse/example#` são ilustrações sintéticas, não
 
 `python3 -m pytest -q tests/test_modulos.py`: nenhum termo declarado nos dois módulos, importação do núcleo, classes de
 deliberação com equivalência e as regras do SCSE disparando sobre o núcleo importado.
+
+**IRIs:** desde 17/11/2026 sob `https://hrai-go.aeonbridge.io/` (decisões D-05 e D-05a); antes, sob `https://github.com/aeonbridge/ab-hrai-go-platform/`. IRIs resolvíveis no navegador quando a publicação no subdomínio estiver ativa (RNF-01).

@@ -288,11 +288,24 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
   `.../data/*` pelo subdomínio e publicar páginas de resolução por IRI. Sem o DNS, ativar o domínio no GitHub Pages
   derrubaria o site atual, por isso fica aguardando o apontamento.
 
+### IRIs em `hrai-go.aeonbridge.io`; D-11 aprovada; China em espera (D-01b) — 17/11/2026
+
+- **Namespaces trocados** (D-05a, CNAME criado pelo autor): `https://github.com/aeonbridge/ab-hrai-go-platform/ontology/...`
+  e `.../data/...` viraram `https://hrai-go.aeonbridge.io/ontology/...` e `.../data/...` em 75 arquivos (ontologias,
+  consultas, scripts, testes, artefatos gerados). Links de arquivo (`/blob/main/`) não mudam. O relatório RT-ONT-01 e o
+  protótipo antigo ficam com os IRIs da época. Falta publicar as páginas de resolução e ativar o domínio no GitHub Pages.
+- **D-11**: resposta inicial às perguntas norteadoras aprovada pelo autor, sujeita a mudanças; o relatório mostra
+  "aprovada pelo autor (D-11), sujeita a mudanças" em cada item.
+- **D-01b**: a China sai da comparação por ora, para validar no futuro a inclusão de uma nova jurisdição e o impacto.
+  A extração fica em `ontologies/regulatory/em-espera/cn/` (nenhum pipeline carrega); as especificidades voltam a
+  comparar só com UE, Reino Unido e EUA (PC9: 42 linhas). Para incluir: mover para `instances/cn/`, gerar o gêmeo OWL
+  e rodar o CI; a consulta V30 lista o que precisa de comparação e o monitoramento mostra o que reabre.
+
 ## Aguardando decisão
 
 | Id | Decisão | Quem | Bloqueia |
 |---|---|---|---|
-| D-01 | ~~China~~ **resolvida em 17/11/2026**: incluída com fontes secundárias | autor | — |
+| D-01 | ~~China~~ resolvida em 17/11/2026 e revista pela D-01b: **fora da comparação, em espera** | autor | — |
 | D-02 | ~~escalas da E4 aprovadas~~ **resolvida em 17/11/2026** (`decisoes.json`) | autor | — |
 | D-03 | ~~extrações e correspondências revisadas~~ **resolvida em 17/11/2026** (`decisoes.json`) | autor | — |
 | D-04 | ~~alinhamentos e ligações aprovados~~ **resolvida em 17/11/2026** (`decisoes.json`) | autor | — |
@@ -302,8 +315,8 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
 | D-08 | Conferir a localização do parágrafo sobre micro e pequenas empresas e startups no texto de 2023 (art. 32 na extração; art. 33 no rótulo da evidência) | autor | rótulo de `a1:Ev_PL_Art33PU` |
 | D-09 | ~~limiar~~ **resolvida em 17/11/2026: 5% do plano** (`decisoes.json`) | autor | — |
 | D-10 | Declarar os escopos de avaliação de cobertura (`CoverageAssessment`: jurisdição, snapshot, área) para a PC4 valer | autor | PC4, QN3 |
-| D-11 | Decidir cada item da resposta inicial (8 especificidades da QN1, 2 itens da QN2, 2 da QN3, 1 achado) em `docs/relatorios/perguntas-norteadoras/relatorio-QN.md` | autor | V-26, V-29 |
-| D-12 | Incluir textos oficiais chineses (CAC, Assembleia Popular Nacional) para substituir as fontes secundárias | autor | comparações com a China "não codificado" |
+| D-11 | ~~resposta inicial~~ **aprovada em 17/11/2026, sujeita a mudanças** (`decisoes.json`) | autor | — |
+| D-12 | Quando quiser validar a inclusão de nova jurisdição: tirar a China de `em-espera/` (de preferência com texto oficial chinês) e medir o impacto | autor | — |
 | D-06 | PDF da "Análise Comparativa" no repositório (hoje as teses vêm de resumo) | autor | rastreabilidade das teses |
 
 ## Checklist V-01 a V-31
@@ -314,7 +327,7 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 |---|---|---|
 | V-01 | 🟡 | nome completo no README e relatórios (`tests/test_nomenclatura.py`); conferir site e `dcterms:title` |
 | V-02 | ✅ | `SourceSnapshot` com SHA-256 conferido para PBIA, PL 2023, PL 2024, AI Act, white paper e análise de impacto do Reino Unido, NIST AI RMF (`tests/test_internacional.py`) |
-| V-03 | ✅ | decisão D-01 registrada (China incluída com fontes secundárias marcadas); nenhuma jurisdição sem snapshot com SHA-256 (`tests/test_china.py`, `tests/test_internacional.py`) |
+| V-03 | ✅ | decisão registrada (D-01, revista pela D-01b: China em espera, fora da comparação); nenhuma jurisdição exibida sem snapshot com SHA-256 (`tests/test_internacional.py`) |
 | V-04 | ✅ | `tests/test_modulos.py` no CI (`validate-regulatory.yml`); item 2 |
 | V-05 | ✅ | TBox 1.2.0, R24–R26 (núcleo), R28 (comparativo), R29–R30 (SCSE); I-1 a I-4 em `tests/test_invariantes.py` |
 | V-06 | ✅ | `tests/test_comparativo.py`: 25 critérios com definições originais conferidas no PDF, E1–E7 com crédito e DOI |
@@ -337,9 +350,9 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | V-23 | ✅ | texto do Senado como nova versão reabre dispositivos, requisitos e afirmações (`tests/test_monitoramento.py`); codificações e especificidades entram na mesma consulta quando existirem |
 | V-24 | ⏸ | domínio e caminho decididos (`hrai-go.aeonbridge.io`); falta o CNAME no DNS, depois a troca dos namespaces |
 | V-25 | ⬜ | item 15 |
-| V-26 | 🟡 | relatório gerado pela plataforma (`relatorio-QN.md`), seções QN1, QN2, QN3; "publicado" depende das decisões (D-11) |
+| V-26 | ✅ | relatório gerado pela plataforma (`relatorio-QN.md`), seções QN1, QN2, QN3, aprovado pelo autor (D-11, sujeito a mudanças) |
 | V-27 | ✅ | PC9 responde; `V27_especificidades_sem_evidencia.rq` = 0 |
 | V-28 | ✅ | `V28_itens_sem_especificidade.rq` = 0 |
-| V-29 | ⏸ | 8 especificidades e 4 itens aguardam decisão humana (D-11) |
+| V-29 | ✅ | os 12 itens têm decisão humana registrada (D-11) |
 | V-30 | ✅ | `V30_especificidades_incompletas.rq` = 0: dimensão, tipo e comparação com UE, Reino Unido e EUA em todas |
 | V-31 | ✅ | `tests/test_identificacao_ao_vivo.py`; migração aplicada no Supabase em 17/11/2026 (rejeição por `respostas_nome_check` confirmada); commit 285407a |

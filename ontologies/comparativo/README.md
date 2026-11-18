@@ -3,7 +3,7 @@
 Parte do **HRAI-GO (Human-centred Regulatory AI, Governance Observatory)**. Classifica os instrumentos para comparação
 entre jurisdições (ESP-ONT-02, RF-16; RT-VIS-03, passo M3).
 
-**Versão:** 1.0.0 · **Namespace:** `https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#` ·
+**Versão:** 1.0.0 · **Namespace:** `https://hrai-go.aeonbridge.io/ontology/comparativo#` ·
 importa o núcleo regulatório.
 
 ## Conteúdo
@@ -32,3 +32,5 @@ python3 scripts/ontologia/build_comparativo.py           # gera .ttl e .owl
 python3 scripts/ontologia/build_comparativo.py --check   # falha se estiverem desatualizados
 python3 -m pytest -q tests/test_comparativo.py
 ```
+
+**IRIs:** desde 17/11/2026 sob `https://hrai-go.aeonbridge.io/` (decisões D-05 e D-05a); antes, sob `https://github.com/aeonbridge/ab-hrai-go-platform/`. IRIs resolvíveis no navegador quando a publicação no subdomínio estiver ativa (RNF-01).

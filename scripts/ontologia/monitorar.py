@@ -29,7 +29,7 @@ import consultas  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "web/assets/monitoramento.js"
-H = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
+H = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/regulatory#")
 ORDER = ["dispositivo", "requisito", "avaliação", "aplicação", "codificação", "especificidade", "afirmação"]
 
 

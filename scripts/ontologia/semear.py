@@ -39,11 +39,11 @@ SCENARIO = ROOT / "scenarios/governanca-brasil/GOV-BR-001.json"
 ALIGN = ROOT / "ontologies/regulatory/alinhamentos/camara_GM_para_PBIA.ttl"
 OUT = ROOT / "ontologies/regulatory/sementes/GOV-BR-001_sementes.ttl"
 
-H = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
-SEM = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#")
-COMP = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#")
-PBIA = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#")
-GM = "https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#"
+H = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/regulatory#")
+SEM = rdflib.Namespace("https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#")
+COMP = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/comparativo#")
+PBIA = rdflib.Namespace("https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#")
+GM = "https://hrai-go.aeonbridge.io/data/governance/br#"
 REPO = "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/"
 FICTIONAL_PREFIX = "BRF-"  # "Brasil fictício" world pack: not a real source
 

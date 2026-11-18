@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts/ontologia"))
 import consultas  # noqa: E402
 
-H = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
+H = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/regulatory#")
 MD = ROOT / "docs/relatorios/perguntas-norteadoras/relatorio-QN.md"
 
 
@@ -32,13 +32,14 @@ def test_acceptance_queries_return_nothing():
 def test_report_order_and_initial_mark():
     md = MD.read_text(encoding="utf-8")
     assert md.index("## QN1.") < md.index("## QN2.") < md.index("## QN3.")
-    assert "Resposta inicial" in md and "aguardam decisão humana" in md
+    assert "Resposta inicial" in md and "decisão humana registrada" in md
+    assert "aprovada pelo autor (D-11), sujeita a mudanças" in md
     assert "não codificado" in md
 
 
-def test_nothing_is_decided_and_no_fictional_trait_grounds_a_specificity():
+def test_decisions_come_from_the_author_and_no_fictional_trait_grounds_a_specificity():
     g = consultas.reasoned_graph()
-    assert not list(g.subject_objects(H.specificityReview))
+    assert not list(g.subject_objects(H.specificityReview))  # approval comes through the candidates (decisoes.json)
     for s in g.subjects(RDF.type, H.NationalSpecificity):
         for e in g.objects(s, H.specificityGroundedIn):
             real = g.value(e, H.seedHasRealSource)

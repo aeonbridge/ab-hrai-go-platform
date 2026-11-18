@@ -5,12 +5,6 @@ window.HRAIGO_RESPOSTAS = {
    "comparacoes": [
     {
      "fonte": "",
-     "jurisdicao": "China",
-     "naoCodificado": true,
-     "valor": "não codificado: o Plano de Desenvolvimento de IA de Nova Geração (2017) aparece em fonte secundária, sem orçamento de computação informado"
-    },
-    {
-     "fonte": "",
      "jurisdicao": "Estados Unidos da América",
      "naoCodificado": true,
      "valor": "não codificado: o instrumento da jurisdição no corpus não é plano de investimento (E1) e o plano equivalente não está no corpus"
@@ -28,7 +22,7 @@ window.HRAIGO_RESPOSTAS = {
      "valor": "não codificado: o instrumento da jurisdição no corpus não é plano de investimento (E1) e o plano equivalente não está no corpus"
     }
    ],
-   "decisao": "pendente",
+   "decisao": "aprovada pelo autor (D-11), sujeita a mudanças",
    "dimensao": "objetivo estratégico",
    "especificidade": "Soberania computacional com orçamento público: Nuvem Soberana (R$ 1 bilhão) e supercomputador de IA no PBIA",
    "evidencia": [
@@ -42,12 +36,6 @@ window.HRAIGO_RESPOSTAS = {
    "comparacoes": [
     {
      "fonte": "",
-     "jurisdicao": "China",
-     "naoCodificado": true,
-     "valor": "não codificado: a China só tem fontes secundárias no corpus (Regulations.AI 2026, Law Library of Congress 2023)"
-    },
-    {
-     "fonte": "",
      "jurisdicao": "Estados Unidos da América",
      "naoCodificado": true,
      "valor": "não codificado: o instrumento da jurisdição no corpus não é plano de investimento (E1) e o plano equivalente não está no corpus"
@@ -65,7 +53,7 @@ window.HRAIGO_RESPOSTAS = {
      "valor": "não codificado: o instrumento da jurisdição no corpus não é plano de investimento (E1) e o plano equivalente não está no corpus"
     }
    ],
-   "decisao": "pendente",
+   "decisao": "aprovada pelo autor (D-11), sujeita a mudanças",
    "dimensao": "objetivo estratégico",
    "especificidade": "Modelos de linguagem em português com dados nacionais, para o português do Brasil em escala continental",
    "evidencia": [
@@ -79,12 +67,6 @@ window.HRAIGO_RESPOSTAS = {
    "comparacoes": [
     {
      "fonte": "",
-     "jurisdicao": "China",
-     "naoCodificado": true,
-     "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
-    },
-    {
-     "fonte": "",
      "jurisdicao": "Estados Unidos da América",
      "naoCodificado": true,
      "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
@@ -102,7 +84,7 @@ window.HRAIGO_RESPOSTAS = {
      "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
     }
    ],
-   "decisao": "pendente",
+   "decisao": "aprovada pelo autor (D-11), sujeita a mudanças",
    "dimensao": "contexto nacional",
    "especificidade": "Matriz elétrica majoritariamente renovável: 89,2% em 2023, segundo o PBIA (citando a EPE)",
    "evidencia": [
@@ -115,12 +97,6 @@ window.HRAIGO_RESPOSTAS = {
    "comparacoes": [
     {
      "fonte": "",
-     "jurisdicao": "China",
-     "naoCodificado": true,
-     "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
-    },
-    {
-     "fonte": "",
      "jurisdicao": "Estados Unidos da América",
      "naoCodificado": true,
      "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
@@ -138,7 +114,7 @@ window.HRAIGO_RESPOSTAS = {
      "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
     }
    ],
-   "decisao": "pendente",
+   "decisao": "aprovada pelo autor (D-11), sujeita a mudanças",
    "dimensao": "capacidade instalada",
    "especificidade": "Orçamento de governança pequeno: 0,45% do PBIA (R$ 103,25 milhões de R$ 23,03 bilhões) no Eixo 5",
    "evidencia": [
@@ -151,12 +127,6 @@ window.HRAIGO_RESPOSTAS = {
    "comparacoes": [
     {
      "fonte": "",
-     "jurisdicao": "China",
-     "naoCodificado": true,
-     "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
-    },
-    {
-     "fonte": "",
      "jurisdicao": "Estados Unidos da América",
      "naoCodificado": true,
      "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
@@ -174,7 +144,7 @@ window.HRAIGO_RESPOSTAS = {
      "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
     }
    ],
-   "decisao": "pendente",
+   "decisao": "aprovada pelo autor (D-11), sujeita a mudanças",
    "dimensao": "capacidade instalada",
    "especificidade": "Déficit estimado de 530 mil profissionais de TIC entre 2021 e 2025, segundo o PBIA",
    "evidencia": [
@@ -187,12 +157,6 @@ window.HRAIGO_RESPOSTAS = {
    "comparacoes": [
     {
      "fonte": "",
-     "jurisdicao": "China",
-     "naoCodificado": true,
-     "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
-    },
-    {
-     "fonte": "",
      "jurisdicao": "Estados Unidos da América",
      "naoCodificado": true,
      "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
@@ -210,7 +174,7 @@ window.HRAIGO_RESPOSTAS = {
      "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
     }
    ],
-   "decisao": "pendente",
+   "decisao": "aprovada pelo autor (D-11), sujeita a mudanças",
    "dimensao": "exposição a risco",
    "especificidade": "Dados de saúde em escala sob guarda do Estado (SUS): ativo e exposição de dados sensíveis",
    "evidencia": [
@@ -222,12 +186,6 @@ window.HRAIGO_RESPOSTAS = {
   },
   {
    "comparacoes": [
-    {
-     "fonte": "Regulations.AI, China AI Regulation Overview (RAI-CN-NA-SUMMARY-2026), gerado em 17/11/2026",
-     "jurisdicao": "China",
-     "naoCodificado": false,
-     "valor": "supervisão centralizada pela Administração do Ciberespaço (CAC) com ministérios setoriais, segundo fonte secundária"
-    },
     {
      "fonte": "",
      "jurisdicao": "Estados Unidos da América",
@@ -247,7 +205,7 @@ window.HRAIGO_RESPOSTAS = {
      "valor": "art. 70 do AI Act: cada Estado-membro designa autoridades nacionais competentes, sob coordenação europeia"
     }
    ],
-   "decisao": "pendente",
+   "decisao": "aprovada pelo autor (D-11), sujeita a mudanças",
    "dimensao": "capacidade instalada",
    "especificidade": "Supervisão por um sistema que coordena reguladores existentes (SIA, coordenado pela ANPD), com orçamento de governança pequeno",
    "evidencia": [
@@ -259,12 +217,6 @@ window.HRAIGO_RESPOSTAS = {
   },
   {
    "comparacoes": [
-    {
-     "fonte": "",
-     "jurisdicao": "China",
-     "naoCodificado": true,
-     "valor": "não codificado: a China só tem fontes secundárias no corpus (Regulations.AI 2026, Law Library of Congress 2023)"
-    },
     {
      "fonte": "",
      "jurisdicao": "Estados Unidos da América",
@@ -284,7 +236,7 @@ window.HRAIGO_RESPOSTAS = {
      "valor": "não codificado: o AI Act não trata de responsabilidade civil e a diretiva de responsabilidade não está no corpus; ausência exige avaliação de cobertura (D-10)"
     }
    ],
-   "decisao": "pendente",
+   "decisao": "aprovada pelo autor (D-11), sujeita a mudanças",
    "dimensao": "contexto nacional",
    "especificidade": "Responsabilidade civil por danos de IA pelas regras do Código de Defesa do Consumidor e do Código Civil, com inversão do ônus da prova",
    "evidencia": [
@@ -302,7 +254,7 @@ window.HRAIGO_RESPOSTAS = {
     "Avaliação de impacto algorítmico de sistemas de alto risco (art. 25)",
     "PL 2338 (Senado, 2024) art. 25 × AI Act art. 27: adaptado"
    ],
-   "decisao": "pendente",
+   "decisao": "aprovada pelo autor (D-11), sujeita a mudanças",
    "escopo": "texto do Senado de 2024 e indicador do PBIA; sem limiar aprovado (D-09)",
    "especificidades": [
     "Déficit estimado de 530 mil profissionais de TIC entre 2021 e 2025, segundo o PBIA"
@@ -316,7 +268,7 @@ window.HRAIGO_RESPOSTAS = {
     "Acreditação de organismos de avaliação de conformidade (art. 34)",
     "Supervisão, fiscalização e sanção pela autoridade competente (art. 49)"
    ],
-   "decisao": "pendente",
+   "decisao": "aprovada pelo autor (D-11), sujeita a mudanças",
    "escopo": "texto do Senado de 2024 e Tabela 2 do PBIA; limiar aprovado pelo autor: 5% do plano (D-09), e o Eixo 5 tem 0,45%",
    "especificidades": [
     "Orçamento de governança pequeno: 0,45% do PBIA (R$ 103,25 milhões de R$ 23,03 bilhões) no Eixo 5",
@@ -333,7 +285,7 @@ window.HRAIGO_RESPOSTAS = {
     "Art. 45 · O Poder Executivo é autorizado a estabelecer o Sistema Nacional de Regulação e Governança de Inteligência Artificial (SIA).",
     "Parcela do PBIA destinada ao Eixo 5, Apoio ao Processo Regulatório e de Governança da IA"
    ],
-   "decisao": "pendente",
+   "decisao": "aprovada pelo autor (D-11), sujeita a mudanças",
    "escopo": "leitura dos arts. 45 a 49 do texto do Senado de 2024; sem avaliação de cobertura aprovada (D-10)",
    "especificidades": [
     "Orçamento de governança pequeno: 0,45% do PBIA (R$ 103,25 milhões de R$ 23,03 bilhões) no Eixo 5",
@@ -347,7 +299,7 @@ window.HRAIGO_RESPOSTAS = {
    "cita": [
     "Volume de dados de saúde sob guarda do SUS (exposição de dados sensíveis em uso estatal)"
    ],
-   "decisao": "pendente",
+   "decisao": "aprovada pelo autor (D-11), sujeita a mudanças",
    "escopo": "busca no texto do Senado de 2024: 'treinamento' aparece só em definições, IA de propósito geral, Cade e direitos autorais; sem avaliação de cobertura aprovada (D-10)",
    "especificidades": [
     "Dados de saúde em escala sob guarda do Estado (SUS): ativo e exposição de dados sensíveis"

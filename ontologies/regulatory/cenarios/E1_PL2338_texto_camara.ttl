@@ -8,9 +8,9 @@
 # A aplicação usada (Prova de Vida, Banco do Brasil) vem da instância do PBIA
 # (Tabela 1) apenas como exemplo de alvo; nenhuma avaliação real foi feita.
 # =============================================================================
-@prefix e1:      <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/cenario-e1#> .
-@prefix pbia:    <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#> .
-@prefix hrai:    <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
+@prefix e1:      <https://hrai-go.aeonbridge.io/data/regulatory/br/cenario-e1#> .
+@prefix pbia:    <https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#> .
+@prefix hrai:    <https://hrai-go.aeonbridge.io/ontology/regulatory#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 @prefix prov:    <http://www.w3.org/ns/prov#> .

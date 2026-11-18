@@ -27,11 +27,11 @@ from rdflib.namespace import DCTERMS, OWL, RDF, RDFS
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "ontologies/regulatory/correspondencias/BR_UE_PL2338_AIAct.ttl"
-H = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
-COR = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#")
-PL = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338#")
-EU = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/eu/aiact#")
-COMP = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#")
+H = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/regulatory#")
+COR = rdflib.Namespace("https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#")
+PL = rdflib.Namespace("https://hrai-go.aeonbridge.io/data/regulatory/br/pl2338#")
+EU = rdflib.Namespace("https://hrai-go.aeonbridge.io/data/regulatory/eu/aiact#")
+COMP = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/comparativo#")
 TYPE = {"equivalente": H.EquivalentCorrespondence, "adaptado": H.AdaptedCorrespondence,
         "parcial": H.PartialCorrespondence, "divergente": H.DivergentCorrespondence}
 

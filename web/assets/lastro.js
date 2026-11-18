@@ -50,550 +50,550 @@ window.HRAIGO_LASTRO = {
   "branches:new-government-priorities": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_NewGovernmentPriorities"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Ramo_NewGovernmentPriorities"
    ]
   },
   "branches:pbia-funding-cut": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_PbiaFundingCut"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Ramo_PbiaFundingCut"
    ]
   },
   "branches:pl2338-approved": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_Pl2338Approved"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Ramo_Pl2338Approved"
    ]
   },
   "branches:pl2338-stalled": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_Pl2338Stalled"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Ramo_Pl2338Stalled"
    ]
   },
   "components:GM-01": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_01"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Componente_GM_01"
    ]
   },
   "components:GM-02": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Plan",
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_02"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#PBIA_Plan",
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Componente_GM_02"
    ]
   },
   "components:GM-03": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Law_13709_2018_LGPD",
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_03"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#Law_13709_2018_LGPD",
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Componente_GM_03"
    ]
   },
   "components:GM-04": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PL_2338_2023",
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_04"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#PL_2338_2023",
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Componente_GM_04"
    ]
   },
   "components:GM-05": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_05"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Componente_GM_05"
    ]
   },
   "components:GM-06": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_06"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Componente_GM_06"
    ]
   },
   "components:GM-07": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_07"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Componente_GM_07"
    ]
   },
   "components:GM-08": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_08"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Componente_GM_08"
    ]
   },
   "components:GM-09": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_09"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Componente_GM_09"
    ]
   },
   "components:GM-10": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_10"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Componente_GM_10"
    ]
   },
   "components:GM-11": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_11"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Componente_GM_11"
    ]
   },
   "components:GM-12": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_12"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Componente_GM_12"
    ]
   },
   "components:GM-13": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_13"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Componente_GM_13"
    ]
   },
   "components:GM-14": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_14"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Componente_GM_14"
    ]
   },
   "components:GM-15": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_15"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Componente_GM_15"
    ],
    "proximo": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_GovernanceByCITDigital"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#PBIA_GovernanceByCITDigital"
    ]
   },
   "components:GM-16": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_16"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Componente_GM_16"
    ]
   },
   "components:GM-17": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_17"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Componente_GM_17"
    ],
    "proximo": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action01_AISupercomputer",
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action27_SovereignCloud"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#Action01_AISupercomputer",
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#Action27_SovereignCloud"
    ]
   },
   "components:GM-18": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action09_PortugueseLLM",
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_18"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#Action09_PortugueseLLM",
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Componente_GM_18"
    ]
   },
   "components:GM-19": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_19"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Componente_GM_19"
    ],
    "proximo": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis2_DiffusionTraining"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#PBIA_Axis2_DiffusionTraining"
    ]
   },
   "components:GM-20": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_20"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Componente_GM_20"
    ],
    "proximo": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis3_PublicServices"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#PBIA_Axis3_PublicServices"
    ]
   },
   "components:GM-21": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action51_AlgorithmicTransparencyCentre",
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_21"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#Action51_AlgorithmicTransparencyCentre",
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Componente_GM_21"
    ]
   },
   "components:GM-22": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_22"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Componente_GM_22"
    ],
    "proximo": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis4_BusinessInnovation"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#PBIA_Axis4_BusinessInnovation"
    ]
   },
   "features:CF-01": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_01"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Traco_CF_01"
    ]
   },
   "features:CF-02": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_02"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Traco_CF_02"
    ]
   },
   "features:CF-03": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_03"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Traco_CF_03"
    ]
   },
   "features:CF-04": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_04"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Traco_CF_04"
    ]
   },
   "features:CF-05": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_05"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Traco_CF_05"
    ]
   },
   "features:CF-06": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_06"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Traco_CF_06"
    ]
   },
   "features:CF-07": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_07"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Traco_CF_07"
    ]
   },
   "features:CF-08": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_08"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Traco_CF_08"
    ]
   },
   "features:CF-09": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_09"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Traco_CF_09"
    ]
   },
   "features:CF-10": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_10"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Traco_CF_10"
    ]
   },
   "features:CF-11": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_11"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Traco_CF_11"
    ]
   },
   "features:CF-12": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_12"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Traco_CF_12"
    ]
   },
   "features:CF-13": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_13"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Traco_CF_13"
    ]
   },
   "features:CF-14": {
    "estado": "semente revisada",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_14"
+    "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Traco_CF_14"
    ]
   },
   "seeds:T1": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T1"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Semente_T1"
    ]
   },
   "seeds:T2": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T2"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Semente_T2"
    ]
   },
   "seeds:T3": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T3"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Semente_T3"
    ]
   },
   "seeds:T4": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T4"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Semente_T4"
    ]
   },
   "seeds:T5": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T5"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Semente_T5"
    ]
   },
   "seeds:T6": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T6"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Semente_T6"
    ]
   },
   "strata:affectedGroups": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_AffectedGroups"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Estrato_AffectedGroups"
    ]
   },
   "strata:business": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_Business"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Estrato_Business"
    ]
   },
   "strata:civilSociety": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_CivilSociety"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Estrato_CivilSociety"
    ]
   },
   "strata:infrastructure": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_Infrastructure"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Estrato_Infrastructure"
    ]
   },
   "strata:publicOperators": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_PublicOperators"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Estrato_PublicOperators"
    ]
   },
   "strata:regulators": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_Regulators"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Estrato_Regulators"
    ]
   },
   "strata:research": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_Research"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Estrato_Research"
    ]
   },
   "strata:workers": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_Workers"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Estrato_Workers"
    ]
   },
   "topics:children-vulnerable": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_ChildrenVulnerable"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_ChildrenVulnerable"
    ]
   },
   "topics:compute-infrastructure": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_ComputeInfrastructure"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_ComputeInfrastructure"
    ]
   },
   "topics:copyright-ip": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_CopyrightIp"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_CopyrightIp"
    ]
   },
   "topics:data-governance": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_DataGovernance"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_DataGovernance"
    ]
   },
   "topics:data-sovereignty": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_DataSovereignty"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_DataSovereignty"
    ]
   },
   "topics:energy-environment": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_EnergyEnvironment"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_EnergyEnvironment"
    ]
   },
   "topics:enforcement-capacity": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_EnforcementCapacity"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_EnforcementCapacity"
    ]
   },
   "topics:funding-continuity": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_FundingContinuity"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_FundingContinuity"
    ]
   },
   "topics:impact-assessment": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_ImpactAssessment"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_ImpactAssessment"
    ]
   },
   "topics:info-integrity": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_InfoIntegrity"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_InfoIntegrity"
    ]
   },
   "topics:innovation-sandbox": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_InnovationSandbox"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_InnovationSandbox"
    ]
   },
   "topics:international-alignment": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_InternationalAlignment"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_InternationalAlignment"
    ]
   },
   "topics:labor-relations": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_LaborRelations"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_LaborRelations"
    ]
   },
   "topics:language-culture": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_LanguageCulture"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_LanguageCulture"
    ]
   },
   "topics:liability": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_Liability"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_Liability"
    ]
   },
   "topics:monitoring-learning": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_MonitoringLearning"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_MonitoringLearning"
    ]
   },
   "topics:open-source-science": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_OpenSourceScience"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_OpenSourceScience"
    ]
   },
   "topics:oversight-institutions": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_OversightInstitutions"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_OversightInstitutions"
    ]
   },
   "topics:participation": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_Participation"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_Participation"
    ]
   },
   "topics:public-sector-use": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_PublicSectorUse"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_PublicSectorUse"
    ]
   },
   "topics:regional-inequality": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RegionalInequality"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_RegionalInequality"
    ]
   },
   "topics:rights-redress": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RightsRedress"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_RightsRedress"
    ]
   },
   "topics:risk-classification": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RiskClassification"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_RiskClassification"
    ]
   },
   "topics:security-defense": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_SecurityDefense"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_SecurityDefense"
    ]
   },
   "topics:sme-competition": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_SmeCompetition"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_SmeCompetition"
    ]
   },
   "topics:standards-certification": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_StandardsCertification"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_StandardsCertification"
    ]
   },
   "topics:transparency": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_Transparency"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_Transparency"
    ]
   },
   "topics:workforce-skills": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_WorkforceSkills"
+    "https://hrai-go.aeonbridge.io/ontology/comparativo#Area_WorkforceSkills"
    ]
   },
   "unrep:Agronegócio": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#CadeiraVazia_Agronegocio"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#CadeiraVazia_Agronegocio"
    ]
   },
   "unrep:Congresso Nacional": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#CadeiraVazia_Congresso_Nacional"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#CadeiraVazia_Congresso_Nacional"
    ]
   },
   "unrep:Judiciário, Ministério Público e TCU": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#CadeiraVazia_Judiciario_Ministerio_Publico_e_TCU"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#CadeiraVazia_Judiciario_Ministerio_Publico_e_TCU"
    ]
   },
   "unrep:Povos indígenas e comunidades tradicionais": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#CadeiraVazia_Povos_indigenas_e_comunidades_tradicionais"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#CadeiraVazia_Povos_indigenas_e_comunidades_tradicionais"
    ]
   },
   "unrep:Segurança pública e defesa": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#CadeiraVazia_Seguranca_publica_e_defesa"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#CadeiraVazia_Seguranca_publica_e_defesa"
    ]
   },
   "unrep:Setores regulados (financeiro, saúde, telecomunicações)": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#CadeiraVazia_Setores_regulados_financeiro_saude_telecomunicacoes"
+    "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#CadeiraVazia_Setores_regulados_financeiro_saude_telecomunicacoes"
    ]
   }
  },

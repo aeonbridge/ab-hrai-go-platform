@@ -29,8 +29,8 @@ from rdflib.namespace import OWL, PROV, RDF, RDFS, XSD
 ROOT = Path(__file__).resolve().parents[2]
 LOG = ROOT / "docs/especificacoes/ESP-ONT-02/decisoes.json"
 OUT = ROOT / "ontologies/regulatory/decisoes/decisoes_autor.ttl"
-H = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
-DEC = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#")
+H = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/regulatory#")
+DEC = rdflib.Namespace("https://hrai-go.aeonbridge.io/data/regulatory/decisoes#")
 
 
 def graph_of_batches() -> rdflib.Graph:

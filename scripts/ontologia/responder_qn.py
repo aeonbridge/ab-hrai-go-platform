@@ -34,23 +34,21 @@ from rdflib.namespace import DCTERMS, OWL, PROV, RDF, RDFS
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "ontologies/regulatory/respostas/QN_respostas.ttl"
-H = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
-R = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/respostas#")
-D = "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/"
+H = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/regulatory#")
+R = rdflib.Namespace("https://hrai-go.aeonbridge.io/data/regulatory/respostas#")
+D = "https://hrai-go.aeonbridge.io/data/regulatory/"
 PBIA, PL, CAP = rdflib.Namespace(D + "br/pbia#"), rdflib.Namespace(D + "br/pl2338#"), rdflib.Namespace(D + "br/capacidade#")
 EU, UK, US = rdflib.Namespace(D + "eu/aiact#"), rdflib.Namespace(D + "uk/whitepaper#"), rdflib.Namespace(D + "us/nist#")
 SEM = rdflib.Namespace(D + "br/sementes#")
-CNN = rdflib.Namespace(D + "cn/china#")
 COR = rdflib.Namespace(D + "correspondencias/br-ue#")
-COMP = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#")
+COMP = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/comparativo#")
 
 DIM = {"contexto": H.NationalContextDimension, "capacidade": H.InstalledCapacityDimension,
        "exposicao": H.RiskExposureDimension, "objetivo": H.StrategicObjectiveDimension}
 DIF = {"exclusiva": H.BrazilOnlyDifference, "ausente": H.AbsentInBrazilDifference,
        "intensidade": H.IntensityDifference, "contexto": H.ContextDifference}
 JUR = {"UE": (PBIA.EuropeanUnion, EU.Snapshot_AIAct), "Reino Unido": (UK.UnitedKingdom, UK.Snapshot_WhitePaper),
-       "EUA": (US.UnitedStates, US.Snapshot_AIRMF), "China": (CNN.China, CNN.Snapshot_Overview)}
-CN_SECONDARY = "não codificado: a China só tem fontes secundárias no corpus (Regulations.AI 2026, Law Library of Congress 2023)"
+       "EUA": (US.UnitedStates, US.Snapshot_AIRMF)}
 NOT_A_PLAN = "não codificado: o instrumento da jurisdição no corpus não é plano de investimento (E1) e o plano equivalente não está no corpus"
 NO_INDICATOR = "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
 
@@ -58,11 +56,10 @@ NO_INDICATOR = "não codificado: o corpus não traz indicador equivalente para e
 SPECIFICITIES = [
     ("S1_SoberaniaComputacional", "Soberania computacional com orçamento público: Nuvem Soberana (R$ 1 bilhão) e supercomputador de IA no PBIA",
      "objetivo", "exclusiva", [PBIA.Action27_SovereignCloud, PBIA.Action01_AISupercomputer],
-     {**{j: (NOT_A_PLAN, False) for j in JUR},
-      "China": ("não codificado: o Plano de Desenvolvimento de IA de Nova Geração (2017) aparece em fonte secundária, sem orçamento de computação informado", False)}),
+     {j: (NOT_A_PLAN, False) for j in JUR}),
     ("S2_LinguaPortuguesa", "Modelos de linguagem em português com dados nacionais, para o português do Brasil em escala continental",
      "objetivo", "exclusiva", [PBIA.Action09_PortugueseLLM, SEM.Traco_CF_03],
-     {**{j: (NOT_A_PLAN, False) for j in JUR}, "China": (CN_SECONDARY, False)}),
+     {j: (NOT_A_PLAN, False) for j in JUR}),
     ("S3_MatrizRenovavel", "Matriz elétrica majoritariamente renovável: 89,2% em 2023, segundo o PBIA (citando a EPE)",
      "contexto", "contexto", [PBIA.Ind_RenewableShareElectricityMatrix2023],
      {j: (NO_INDICATOR, False) for j in JUR}),
@@ -79,14 +76,12 @@ SPECIFICITIES = [
      "capacidade", "intensidade", [PL.Art_2024_045, CAP.Ind_GovernanceBudgetShare],
      {"UE": ("art. 70 do AI Act: cada Estado-membro designa autoridades nacionais competentes, sob coordenação europeia", True),
       "Reino Unido": ("princípios não estatutários aplicados pelos reguladores existentes, sem autoridade nova", True),
-      "EUA": ("não codificado: o NIST AI RMF é guia voluntário e não cria autoridade", False),
-      "China": ("supervisão centralizada pela Administração do Ciberespaço (CAC) com ministérios setoriais, segundo fonte secundária", True)}),
+      "EUA": ("não codificado: o NIST AI RMF é guia voluntário e não cria autoridade", False)}),
     ("S8_ResponsabilidadeCivil", "Responsabilidade civil por danos de IA pelas regras do Código de Defesa do Consumidor e do Código Civil, com inversão do ônus da prova",
      "contexto", "exclusiva", [PL.Art_2024_035, PL.Art_2024_036, PL.Art_2024_037],
      {"UE": ("não codificado: o AI Act não trata de responsabilidade civil e a diretiva de responsabilidade não está no corpus; ausência exige avaliação de cobertura (D-10)", False),
       "Reino Unido": ("não codificado: o white paper deixa a responsabilidade ao direito existente; sem avaliação de cobertura", False),
-      "EUA": ("não codificado: guia voluntário", False),
-      "China": (CN_SECONDARY, False)}),
+      "EUA": ("não codificado: guia voluntário", False)}),
 ]
 
 # QN2 and QN3: id, question, label, specificities it rests on, graph individuals it cites, scope

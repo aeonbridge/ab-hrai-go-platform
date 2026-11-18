@@ -10,8 +10,8 @@ from rdflib.namespace import RDF, SKOS
 
 ROOT = Path(__file__).resolve().parents[1]
 CONSELHO = ROOT / "ontologies/scse/conselho/GOV-BR-001.ttl"
-S = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#")
-H = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
+S = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/scse#")
+H = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/regulatory#")
 MODELO = json.loads(re.search(r"window\.HRAIGO_MODELO\s*=\s*(\{.*\})\s*;?\s*$",
                               (ROOT / "web/assets/modelo.js").read_text(encoding="utf-8"), re.S).group(1))
 
@@ -35,7 +35,7 @@ def test_v16_no_seed_without_claim():
 
 def test_council_matches_what_the_chamber_shows():
     g = graph()
-    gov = "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#"
+    gov = "https://hrai-go.aeonbridge.io/data/scse/gov-br-001#"
     by = lambda cls: {str(g.value(x, SKOS.notation) or g.value(x, rdflib.RDFS.label))  # noqa: E731
                       for x in g.subjects(RDF.type, cls) if str(x).startswith(gov)}
     assert by(S.StakeholderStratum) == {s["id"] for s in MODELO["strata"]}

@@ -1,16 +1,16 @@
 # Gerado por scripts/ontologia/semear.py. Não editar à mão.
 # Método: docs/especificacoes/ESP-ONT-02/METODO_EXTRACAO.md. Sementes pendentes de revisão humana.
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
+@prefix hrai: <https://hrai-go.aeonbridge.io/ontology/regulatory#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix pbia: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#> .
+@prefix pbia: <https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix sem: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#> .
+@prefix sem: <https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes> a owl:Ontology ;
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes> a owl:Ontology ;
     rdfs:label "Sementes do cenário GOV-BR-001: elementos da câmara derivados de documentos-semente"@pt ;
     rdfs:comment "Gerado por scripts/ontologia/semear.py (determinístico). Método: docs/especificacoes/ESP-ONT-02/METODO_EXTRACAO.md. Tudo aqui é semente pendente de revisão humana; nada é fonte primária."@pt .
 
@@ -279,11 +279,11 @@ sem:Componente_GM_01 a owl:NamedIndividual,
     skos:notation "GM-01" ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-01" ;
-    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_InternationalAlignment>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_OversightInstitutions>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_PublicSectorUse>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_SecurityDefense>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_WorkforceSkills> ;
+    hrai:seedArea <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_InternationalAlignment>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_OversightInstitutions>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_PublicSectorUse>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_SecurityDefense>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_WorkforceSkills> ;
     hrai:seedBasis "documentado" ;
     hrai:seedKind "instrument" ;
     hrai:seedLegalStatus "policy" ;
@@ -303,12 +303,12 @@ sem:Componente_GM_02 a owl:NamedIndividual,
     skos:notation "GM-02" ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-02" ;
-    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_ComputeInfrastructure>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_FundingContinuity>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_OversightInstitutions>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_PublicSectorUse>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_SmeCompetition>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_WorkforceSkills> ;
+    hrai:seedArea <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_ComputeInfrastructure>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_FundingContinuity>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_OversightInstitutions>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_PublicSectorUse>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_SmeCompetition>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_WorkforceSkills> ;
     hrai:seedBasis "documentado" ;
     hrai:seedKind "instrument" ;
     hrai:seedLegalStatus "policy" ;
@@ -327,9 +327,9 @@ sem:Componente_GM_03 a owl:NamedIndividual,
     skos:notation "GM-03" ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-03" ;
-    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_DataGovernance>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RightsRedress>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_Transparency> ;
+    hrai:seedArea <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_DataGovernance>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_RightsRedress>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_Transparency> ;
     hrai:seedBasis "documentado" ;
     hrai:seedKind "instrument" ;
     hrai:seedLegalStatus "effective" ;
@@ -349,13 +349,13 @@ sem:Componente_GM_04 a owl:NamedIndividual,
     skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-04" ;
-    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_CopyrightIp>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_LaborRelations>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_Liability>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_OversightInstitutions>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RightsRedress>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RiskClassification>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_SecurityDefense> ;
+    hrai:seedArea <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_CopyrightIp>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_LaborRelations>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_Liability>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_OversightInstitutions>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_RightsRedress>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_RiskClassification>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_SecurityDefense> ;
     hrai:seedBasis "documentado" ;
     hrai:seedKind "instrument" ;
     hrai:seedLegalStatus "proposed" ;
@@ -374,8 +374,8 @@ sem:Componente_GM_05 a owl:NamedIndividual,
     skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-05" ;
-    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_EnforcementCapacity>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_OversightInstitutions> ;
+    hrai:seedArea <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_EnforcementCapacity>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_OversightInstitutions> ;
     hrai:seedBasis "documentado" ;
     hrai:seedKind "institution" ;
     hrai:seedLegalStatus "proposed" ;
@@ -393,7 +393,7 @@ sem:Componente_GM_06 a owl:NamedIndividual,
     skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-06" ;
-    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RiskClassification> ;
+    hrai:seedArea <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_RiskClassification> ;
     hrai:seedBasis "documentado" ;
     hrai:seedKind "mechanism" ;
     hrai:seedLegalStatus "proposed" ;
@@ -412,8 +412,8 @@ sem:Componente_GM_07 a owl:NamedIndividual,
     skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-07" ;
-    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RightsRedress>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RiskClassification> ;
+    hrai:seedArea <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_RightsRedress>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_RiskClassification> ;
     hrai:seedBasis "documentado" ;
     hrai:seedKind "mechanism" ;
     hrai:seedLegalStatus "proposed" ;
@@ -431,7 +431,7 @@ sem:Componente_GM_08 a owl:NamedIndividual,
     skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-08" ;
-    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_CopyrightIp> ;
+    hrai:seedArea <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_CopyrightIp> ;
     hrai:seedBasis "documentado" ;
     hrai:seedKind "mechanism" ;
     hrai:seedLegalStatus "proposed" ;
@@ -449,8 +449,8 @@ sem:Componente_GM_09 a owl:NamedIndividual,
     skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-09" ;
-    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_LaborRelations>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_SecurityDefense> ;
+    hrai:seedArea <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_LaborRelations>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_SecurityDefense> ;
     hrai:seedBasis "documentado" ;
     hrai:seedKind "mechanism" ;
     hrai:seedLegalStatus "proposed" ;
@@ -469,9 +469,9 @@ sem:Componente_GM_10 a owl:NamedIndividual,
     skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-10" ;
-    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_ImpactAssessment>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RightsRedress>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_Transparency> ;
+    hrai:seedArea <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_ImpactAssessment>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_RightsRedress>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_Transparency> ;
     hrai:seedBasis "documentado" ;
     hrai:seedKind "mechanism" ;
     hrai:seedLegalStatus "proposed" ;
@@ -490,7 +490,7 @@ sem:Componente_GM_11 a owl:NamedIndividual,
     skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-11" ;
-    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_Liability> ;
+    hrai:seedArea <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_Liability> ;
     hrai:seedBasis "documentado" ;
     hrai:seedKind "mechanism" ;
     hrai:seedLegalStatus "proposed" ;
@@ -509,7 +509,7 @@ sem:Componente_GM_12 a owl:NamedIndividual,
     skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-12" ;
-    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_InnovationSandbox> ;
+    hrai:seedArea <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_InnovationSandbox> ;
     hrai:seedBasis "documentado" ;
     hrai:seedKind "mechanism" ;
     hrai:seedLegalStatus "proposed" ;
@@ -526,9 +526,9 @@ sem:Componente_GM_13 a owl:NamedIndividual,
     skos:notation "GM-13" ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-13" ;
-    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_DataGovernance>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_EnforcementCapacity>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RightsRedress> ;
+    hrai:seedArea <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_DataGovernance>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_EnforcementCapacity>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_RightsRedress> ;
     hrai:seedBasis "documentado" ;
     hrai:seedKind "institution" ;
     hrai:seedLegalStatus "effective" ;
@@ -546,8 +546,8 @@ sem:Componente_GM_14 a owl:NamedIndividual,
     skos:notation "GM-14" ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-14" ;
-    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_EnforcementCapacity>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_OversightInstitutions> ;
+    hrai:seedArea <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_EnforcementCapacity>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_OversightInstitutions> ;
     hrai:seedBasis "documentado" ;
     hrai:seedKind "institution" ;
     hrai:seedLegalStatus "effective" ;
@@ -564,8 +564,8 @@ sem:Componente_GM_15 a owl:NamedIndividual,
     skos:notation "GM-15" ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-15" ;
-    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_MonitoringLearning>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_OversightInstitutions> ;
+    hrai:seedArea <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_MonitoringLearning>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_OversightInstitutions> ;
     hrai:seedBasis "documentado" ;
     hrai:seedKind "institution" ;
     hrai:seedLegalStatus "policy" ;
@@ -582,8 +582,8 @@ sem:Componente_GM_16 a owl:NamedIndividual,
     skos:notation "GM-16" ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-16" ;
-    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_MonitoringLearning>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_Transparency> ;
+    hrai:seedArea <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_MonitoringLearning>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_Transparency> ;
     hrai:seedBasis "documentado" ;
     hrai:seedKind "metric" ;
     hrai:seedLegalStatus "policy" ;
@@ -602,8 +602,8 @@ sem:Componente_GM_17 a owl:NamedIndividual,
     skos:notation "GM-17" ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-17" ;
-    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_ComputeInfrastructure>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_DataSovereignty> ;
+    hrai:seedArea <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_ComputeInfrastructure>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_DataSovereignty> ;
     hrai:seedBasis "documentado" ;
     hrai:seedKind "resource" ;
     hrai:seedLegalStatus "policy" ;
@@ -621,8 +621,8 @@ sem:Componente_GM_18 a owl:NamedIndividual,
     skos:notation "GM-18" ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-18" ;
-    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_ComputeInfrastructure>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_LanguageCulture> ;
+    hrai:seedArea <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_ComputeInfrastructure>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_LanguageCulture> ;
     hrai:seedBasis "documentado" ;
     hrai:seedKind "resource" ;
     hrai:seedLegalStatus "policy" ;
@@ -642,8 +642,8 @@ sem:Componente_GM_19 a owl:NamedIndividual,
     skos:notation "GM-19" ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-19" ;
-    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_PublicSectorUse>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_WorkforceSkills> ;
+    hrai:seedArea <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_PublicSectorUse>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_WorkforceSkills> ;
     hrai:seedBasis "documentado" ;
     hrai:seedKind "resource" ;
     hrai:seedLegalStatus "policy" ;
@@ -662,7 +662,7 @@ sem:Componente_GM_20 a owl:NamedIndividual,
     skos:notation "GM-20" ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-20" ;
-    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_PublicSectorUse> ;
+    hrai:seedArea <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_PublicSectorUse> ;
     hrai:seedBasis "documentado" ;
     hrai:seedKind "resource" ;
     hrai:seedLegalStatus "policy" ;
@@ -680,8 +680,8 @@ sem:Componente_GM_21 a owl:NamedIndividual,
     skos:notation "GM-21" ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-21" ;
-    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_OpenSourceScience>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_Transparency> ;
+    hrai:seedArea <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_OpenSourceScience>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_Transparency> ;
     hrai:seedBasis "documentado" ;
     hrai:seedKind "institution" ;
     hrai:seedLegalStatus "policy" ;
@@ -699,8 +699,8 @@ sem:Componente_GM_22 a owl:NamedIndividual,
     skos:notation "GM-22" ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-22" ;
-    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_FundingContinuity>,
-        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_SmeCompetition> ;
+    hrai:seedArea <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_FundingContinuity>,
+        <https://hrai-go.aeonbridge.io/ontology/comparativo#Area_SmeCompetition> ;
     hrai:seedBasis "documentado" ;
     hrai:seedKind "resource" ;
     hrai:seedLegalStatus "policy" ;

@@ -9,8 +9,8 @@ from rdflib.namespace import OWL, RDF
 ROOT = Path(__file__).resolve().parents[1]
 CORE = ROOT / "ontologies/regulatory/HRAI_GO_Regulatory_General.ttl"
 SCSE = ROOT / "ontologies/scse/SCSE_Shadow_Council_Ontology.ttl"
-CORE_IRI = "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory"
-SCSE_NS = "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#"
+CORE_IRI = "https://hrai-go.aeonbridge.io/ontology/regulatory"
+SCSE_NS = "https://hrai-go.aeonbridge.io/ontology/scse#"
 CORE_NS = CORE_IRI + "#"
 DECLARED = (OWL.Class, OWL.ObjectProperty, OWL.DatatypeProperty, OWL.AnnotationProperty)
 

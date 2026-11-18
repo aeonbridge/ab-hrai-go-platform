@@ -1,4 +1,4 @@
 # V-28: item da QN2 ou da QN3 que não cita a especificidade da QN1 em que se apoia. Aceite: zero linhas.
-PREFIX hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#>
+PREFIX hrai: <https://hrai-go.aeonbridge.io/ontology/regulatory#>
 SELECT ?item WHERE { ?item hrai:answersGuidingQuestion ?qn . FILTER (str(?qn) IN ("QN2", "QN3"))
   FILTER NOT EXISTS { ?item hrai:groundedInSpecificity ?s . ?s a hrai:NationalSpecificity } }

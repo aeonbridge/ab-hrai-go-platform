@@ -1,14 +1,14 @@
 # Gerado por scripts/ontologia/extrair_internacional.py. Não editar à mão.
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix eu: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/eu/aiact#> .
-@prefix hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
+@prefix eu: <https://hrai-go.aeonbridge.io/data/regulatory/eu/aiact#> .
+@prefix hrai: <https://hrai-go.aeonbridge.io/ontology/regulatory#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix pbia: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#> .
+@prefix pbia: <https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/eu/aiact> a owl:Ontology ;
+<https://hrai-go.aeonbridge.io/data/regulatory/eu/aiact> a owl:Ontology ;
     rdfs:label "UE: AI Act, Regulamento (UE) 2024/1689, com os artigos (extração de fonte primária)"@pt ;
     rdfs:comment "Gerado por scripts/ontologia/extrair_internacional.py (pdftotext + expressões regulares, sem LLM). Candidato pendente de revisão humana. Método: METODO_EXTRACAO.md."@pt .
 

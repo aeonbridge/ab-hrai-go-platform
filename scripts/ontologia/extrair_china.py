@@ -12,7 +12,13 @@ The corpus has two SECONDARY sources on China and no official Chinese text:
 Everything enters as a pending candidate flagged as secondary-source; an instrument is never shown as
 verified against an official text. Adding the official texts (CAC, NPC) is recorded as pending.
 
-Output: ontologies/regulatory/instances/cn/HRAI_GO_Regulatory_CN.ttl
+Output: ontologies/regulatory/em-espera/cn/HRAI_GO_Regulatory_CN.ttl
+
+ON HOLD (decision D-01b, 17/11/2026): China stays OUT of the comparison for now, so that adding a new
+jurisdiction, and measuring its impact, can be validated later. The file is generated in em-espera/,
+which no pipeline loads. To add China: move it to ontologies/regulatory/instances/cn/, run
+scripts/build_regulatory_instances.py and the CI; acceptance query V30 then lists every QN1
+specificity that needs a comparison with China, and the monitoring shows what is reopened.
 
 Usage:
   python3 scripts/ontologia/extrair_china.py           # regenerate (needs pdftotext)
@@ -35,9 +41,9 @@ from rdflib.compare import isomorphic
 from rdflib.namespace import DCTERMS, OWL, PROV, RDF, RDFS, SKOS, XSD
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "ontologies/regulatory/instances/cn/HRAI_GO_Regulatory_CN.ttl"
-H = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
-CN = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/cn/china#")
+OUT = ROOT / "ontologies/regulatory/em-espera/cn/HRAI_GO_Regulatory_CN.ttl"
+H = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/regulatory#")
+CN = rdflib.Namespace("https://hrai-go.aeonbridge.io/data/regulatory/cn/china#")
 REPO = "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/"
 OVERVIEW = "docs/ai-regulations/ch/China-china-ai-regulation-overview.pdf"
 LOC = "docs/ai-regulations/ch/service-ll-llglrd-2023555933-2023555933.pdf"

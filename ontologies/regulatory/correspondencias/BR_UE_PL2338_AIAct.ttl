@@ -1,14 +1,14 @@
 # Gerado por scripts/ontologia/correspondencias.py. Não editar à mão.
-@prefix comp: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#> .
-@prefix cor: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#> .
+@prefix comp: <https://hrai-go.aeonbridge.io/ontology/comparativo#> .
+@prefix cor: <https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix eu: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/eu/aiact#> .
-@prefix hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
+@prefix eu: <https://hrai-go.aeonbridge.io/data/regulatory/eu/aiact#> .
+@prefix hrai: <https://hrai-go.aeonbridge.io/ontology/regulatory#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix pl: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338#> .
+@prefix pl: <https://hrai-go.aeonbridge.io/data/regulatory/br/pl2338#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue> a owl:Ontology ;
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue> a owl:Ontology ;
     rdfs:label "Correspondências BR (PL 2338, texto do Senado) × UE (AI Act): candidatas"@pt ;
     rdfs:comment "Gerado por scripts/ontologia/correspondencias.py. Julgamento de leitura (análise assistida por LLM), pendente de revisão humana; sem revisão, R26 não infere transposição."@pt .
 

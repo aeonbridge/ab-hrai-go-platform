@@ -1,178 +1,178 @@
 # Gerado por scripts/ontologia/registrar_decisoes.py a partir de decisoes.json. Decisões do autor.
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix dec: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#> .
-@prefix hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
+@prefix dec: <https://hrai-go.aeonbridge.io/data/regulatory/decisoes#> .
+@prefix hrai: <https://hrai-go.aeonbridge.io/ontology/regulatory#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#GM-15> dcterms:isReferencedBy dec:D_04 .
+<https://hrai-go.aeonbridge.io/data/governance/br#GM-15> dcterms:isReferencedBy dec:D_04 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#GM-17> dcterms:isReferencedBy dec:D_04 .
+<https://hrai-go.aeonbridge.io/data/governance/br#GM-17> dcterms:isReferencedBy dec:D_04 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#GM-19> dcterms:isReferencedBy dec:D_04 .
+<https://hrai-go.aeonbridge.io/data/governance/br#GM-19> dcterms:isReferencedBy dec:D_04 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#GM-20> dcterms:isReferencedBy dec:D_04 .
+<https://hrai-go.aeonbridge.io/data/governance/br#GM-20> dcterms:isReferencedBy dec:D_04 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#GM-22> dcterms:isReferencedBy dec:D_04 .
+<https://hrai-go.aeonbridge.io/data/governance/br#GM-22> dcterms:isReferencedBy dec:D_04 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Candidate_Indicadores> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/capacidade#Candidate_Indicadores> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Candidate_Requisitos> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/capacidade#Candidate_Requisitos> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Ind_GovernanceBudgetShare> dcterms:isReferencedBy dec:D_09 ;
+<https://hrai-go.aeonbridge.io/data/regulatory/br/capacidade#Ind_GovernanceBudgetShare> dcterms:isReferencedBy dec:D_09 ;
     hrai:hasLowerAlertThreshold 5.0 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338#Candidate_2023> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/pl2338#Candidate_2023> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338#Candidate_2024> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/pl2338#Candidate_2024> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_01> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_CF_01> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_02> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_CF_02> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_03> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_CF_03> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_04> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_CF_04> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_05> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_CF_05> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_06> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_CF_06> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_07> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_CF_07> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_08> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_CF_08> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_09> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_CF_09> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_10> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_CF_10> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_11> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_CF_11> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_12> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_CF_12> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_13> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_CF_13> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_14> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_CF_14> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_01> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_GM_01> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_02> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_GM_02> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_03> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_GM_03> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_04> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_GM_04> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_05> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_GM_05> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_06> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_GM_06> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_07> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_GM_07> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_08> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_GM_08> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_09> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_GM_09> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_10> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_GM_10> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_11> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_GM_11> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_12> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_GM_12> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_13> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_GM_13> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_14> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_GM_14> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_15> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_GM_15> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_16> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_GM_16> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_17> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_GM_17> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_18> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_GM_18> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_19> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_GM_19> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_20> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_GM_20> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_21> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_GM_21> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_22> hrai:hasReviewDecision dec:D_07 .
+<https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Candidate_GM_22> hrai:hasReviewDecision dec:D_07 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR006_EU086> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR006_EU086> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR008_EU014> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR008_EU014> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR012_EU006> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR012_EU006> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR013_EU005> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR013_EU005> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR014_EU006> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR014_EU006> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR017_EU009> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR017_EU009> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR019_EU050> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR019_EU050> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR025_EU027> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR025_EU027> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR029_EU053> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR029_EU053> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR030_EU055> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR030_EU055> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR042_EU073> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR042_EU073> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR044_EU071> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR044_EU071> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR045_EU070> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR045_EU070> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR050_EU099> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR050_EU099> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR054_EU068> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR054_EU068> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR055_EU057> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR055_EU057> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR062_EU053> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR062_EU053> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR067_EU062> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR067_EU062> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Corr_BR006_EU086> hrai:correspondenceReview dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Corr_BR006_EU086> hrai:correspondenceReview dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Corr_BR008_EU014> hrai:correspondenceReview dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Corr_BR008_EU014> hrai:correspondenceReview dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Corr_BR012_EU006> hrai:correspondenceReview dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Corr_BR012_EU006> hrai:correspondenceReview dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Corr_BR013_EU005> hrai:correspondenceReview dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Corr_BR013_EU005> hrai:correspondenceReview dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Corr_BR014_EU006> hrai:correspondenceReview dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Corr_BR014_EU006> hrai:correspondenceReview dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Corr_BR017_EU009> hrai:correspondenceReview dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Corr_BR017_EU009> hrai:correspondenceReview dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Corr_BR019_EU050> hrai:correspondenceReview dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Corr_BR019_EU050> hrai:correspondenceReview dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Corr_BR025_EU027> hrai:correspondenceReview dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Corr_BR025_EU027> hrai:correspondenceReview dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Corr_BR029_EU053> hrai:correspondenceReview dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Corr_BR029_EU053> hrai:correspondenceReview dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Corr_BR030_EU055> hrai:correspondenceReview dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Corr_BR030_EU055> hrai:correspondenceReview dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Corr_BR042_EU073> hrai:correspondenceReview dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Corr_BR042_EU073> hrai:correspondenceReview dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Corr_BR044_EU071> hrai:correspondenceReview dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Corr_BR044_EU071> hrai:correspondenceReview dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Corr_BR045_EU070> hrai:correspondenceReview dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Corr_BR045_EU070> hrai:correspondenceReview dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Corr_BR050_EU099> hrai:correspondenceReview dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Corr_BR050_EU099> hrai:correspondenceReview dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Corr_BR054_EU068> hrai:correspondenceReview dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Corr_BR054_EU068> hrai:correspondenceReview dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Corr_BR055_EU057> hrai:correspondenceReview dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Corr_BR055_EU057> hrai:correspondenceReview dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Corr_BR062_EU053> hrai:correspondenceReview dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Corr_BR062_EU053> hrai:correspondenceReview dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Corr_BR067_EU062> hrai:correspondenceReview dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/correspondencias/br-ue#Corr_BR067_EU062> hrai:correspondenceReview dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes> a owl:Ontology ;
+<https://hrai-go.aeonbridge.io/data/regulatory/decisoes> a owl:Ontology ;
     rdfs:label "Decisões humanas do autor (transcritas de decisoes.json)"@pt .
 
 dec:D_01 a hrai:ApprovalDecision ;
@@ -180,6 +180,13 @@ dec:D_01 a hrai:ApprovalDecision ;
     prov:wasAttributedTo dec:Autor ;
     hrai:approvalRecordedAt "2026-11-17T22:31:00-03:00"^^xsd:dateTime ;
     hrai:approvedReason "Mensagem do autor: \"D-01 adicionado\"" ;
+    hrai:reviewDecisionBy dec:Autor .
+
+dec:D_01b a hrai:ApprovalDecision ;
+    rdfs:label "D-01b: Revê a D-01: a China fica fora da comparação por ora. A extração fica em ontologies/regulatory/em-espera/cn/ para validar, no futuro, a inclusão de uma nova jurisdição e o seu impacto."@pt ;
+    prov:wasAttributedTo dec:Autor ;
+    hrai:approvalRecordedAt "2026-11-17T22:48:30-03:00"^^xsd:dateTime ;
+    hrai:approvedReason "Mensagem do autor: \"DEIXE CHINA DE FORA PARA VALIDARMOS INCLUSIVE NO FUTURO COMO ADICIONAR NOVAS E O IMPACTO\"" ;
     hrai:reviewDecisionBy dec:Autor .
 
 dec:D_02 a hrai:ApprovalDecision ;
@@ -203,55 +210,86 @@ dec:D_05a a hrai:ApprovalDecision ;
     hrai:approvedReason "Mensagem do autor: \"D-05a: 'hrai-go.aeonbridge.io'\"" ;
     hrai:reviewDecisionBy dec:Autor .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/eu/aiact#Candidate_AIAct_2024> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/eu/aiact#Candidate_AIAct_2024> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Candidate_Principio_1> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/respostas#Candidate_Q2_AvaliacaoImpactoSemProfissionais> hrai:hasReviewDecision dec:D_11 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Candidate_Principio_2> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/respostas#Candidate_Q2_SupervisaoSemOrcamento> hrai:hasReviewDecision dec:D_11 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Candidate_Principio_3> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/respostas#Candidate_Q3_AutoridadeComOrcamentoProprio> hrai:hasReviewDecision dec:D_11 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Candidate_Principio_4> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/respostas#Candidate_Q3_DadosSUSTreinamento> hrai:hasReviewDecision dec:D_11 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Candidate_Principio_5> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/respostas#Candidate_S1_SoberaniaComputacional> hrai:hasReviewDecision dec:D_11 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Candidate_WhitePaper2023> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/respostas#Candidate_S2_LinguaPortuguesa> hrai:hasReviewDecision dec:D_11 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#Candidate_AIRMF_1_0> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/respostas#Candidate_S3_MatrizRenovavel> hrai:hasReviewDecision dec:D_11 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#Candidate_Function_Govern> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/respostas#Candidate_S4_OrcamentoGovernanca> hrai:hasReviewDecision dec:D_11 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#Candidate_Function_Manage> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/respostas#Candidate_S5_ProfissionaisTIC> hrai:hasReviewDecision dec:D_11 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#Candidate_Function_Map> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/respostas#Candidate_S6_DadosSaudeSUS> hrai:hasReviewDecision dec:D_11 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#Candidate_Function_Measure> hrai:hasReviewDecision dec:D_03 .
+<https://hrai-go.aeonbridge.io/data/regulatory/respostas#Candidate_S7_SupervisaoPorSistema> hrai:hasReviewDecision dec:D_11 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_NewGovernmentPriorities> dcterms:isReferencedBy dec:D_04 .
+<https://hrai-go.aeonbridge.io/data/regulatory/respostas#Candidate_S8_ResponsabilidadeCivil> hrai:hasReviewDecision dec:D_11 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_PbiaFundingCut> dcterms:isReferencedBy dec:D_04 .
+<https://hrai-go.aeonbridge.io/data/regulatory/uk/whitepaper#Candidate_Principio_1> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_Pl2338Approved> dcterms:isReferencedBy dec:D_04 .
+<https://hrai-go.aeonbridge.io/data/regulatory/uk/whitepaper#Candidate_Principio_2> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_Pl2338Stalled> dcterms:isReferencedBy dec:D_04 .
+<https://hrai-go.aeonbridge.io/data/regulatory/uk/whitepaper#Candidate_Principio_3> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T1> dcterms:isReferencedBy dec:D_04 .
+<https://hrai-go.aeonbridge.io/data/regulatory/uk/whitepaper#Candidate_Principio_4> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T2> dcterms:isReferencedBy dec:D_04 .
+<https://hrai-go.aeonbridge.io/data/regulatory/uk/whitepaper#Candidate_Principio_5> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T3> dcterms:isReferencedBy dec:D_04 .
+<https://hrai-go.aeonbridge.io/data/regulatory/uk/whitepaper#Candidate_WhitePaper2023> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T4> dcterms:isReferencedBy dec:D_04 .
+<https://hrai-go.aeonbridge.io/data/regulatory/us/nist#Candidate_AIRMF_1_0> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T5> dcterms:isReferencedBy dec:D_04 .
+<https://hrai-go.aeonbridge.io/data/regulatory/us/nist#Candidate_Function_Govern> hrai:hasReviewDecision dec:D_03 .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T6> dcterms:isReferencedBy dec:D_04 .
+<https://hrai-go.aeonbridge.io/data/regulatory/us/nist#Candidate_Function_Manage> hrai:hasReviewDecision dec:D_03 .
+
+<https://hrai-go.aeonbridge.io/data/regulatory/us/nist#Candidate_Function_Map> hrai:hasReviewDecision dec:D_03 .
+
+<https://hrai-go.aeonbridge.io/data/regulatory/us/nist#Candidate_Function_Measure> hrai:hasReviewDecision dec:D_03 .
+
+<https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Ramo_NewGovernmentPriorities> dcterms:isReferencedBy dec:D_04 .
+
+<https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Ramo_PbiaFundingCut> dcterms:isReferencedBy dec:D_04 .
+
+<https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Ramo_Pl2338Approved> dcterms:isReferencedBy dec:D_04 .
+
+<https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Ramo_Pl2338Stalled> dcterms:isReferencedBy dec:D_04 .
+
+<https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Semente_T1> dcterms:isReferencedBy dec:D_04 .
+
+<https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Semente_T2> dcterms:isReferencedBy dec:D_04 .
+
+<https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Semente_T3> dcterms:isReferencedBy dec:D_04 .
+
+<https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Semente_T4> dcterms:isReferencedBy dec:D_04 .
+
+<https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Semente_T5> dcterms:isReferencedBy dec:D_04 .
+
+<https://hrai-go.aeonbridge.io/data/scse/gov-br-001#Semente_T6> dcterms:isReferencedBy dec:D_04 .
 
 dec:D_09 a hrai:ApprovalDecision ;
     rdfs:label "D-09: Limiar inferior de alerta para o orçamento de governança e apoio regulatório (Eixo 5 do PBIA): 5% do plano. Sem limiar para profissionais técnicos por enquanto."@pt ;
     prov:wasAttributedTo dec:Autor ;
     hrai:approvalRecordedAt "2026-11-17T22:41:00-03:00"^^xsd:dateTime ;
     hrai:approvedReason "Mensagem do autor: \"D-09-ok; limiar escolhido: '5% do plano'\"" ;
+    hrai:reviewDecisionBy dec:Autor .
+
+dec:D_11 a hrai:ApprovalDecision ;
+    rdfs:label "D-11: Aprovar a resposta inicial às perguntas norteadoras (8 especificidades da QN1, 2 itens da QN2, 2 da QN3), sujeita a mudanças a cada nova versão do corpus ou nova decisão."@pt ;
+    prov:wasAttributedTo dec:Autor ;
+    hrai:approvalRecordedAt "2026-11-17T22:48:00-03:00"^^xsd:dateTime ;
+    hrai:approvedReason "Mensagem do autor: \"D-11 APROVADO MAS PODE SOFRER MUDANCAS\"" ;
     hrai:reviewDecisionBy dec:Autor .
 
 dec:D_04 a hrai:ApprovalDecision ;

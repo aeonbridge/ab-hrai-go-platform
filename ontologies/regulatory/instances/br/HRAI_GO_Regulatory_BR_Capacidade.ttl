@@ -5,18 +5,18 @@
 # Tudo é candidato pendente de revisão humana. Nenhum limiar de alerta é fixado aqui: limiar é escolha normativa
 # (decisão D-09 no PROGRESSO.md). Sem limiar, R25 não sinaliza nada, e a PC3 mostra "indicador sem limiar".
 # =============================================================================
-@prefix hrai:    <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
-@prefix pbia:    <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#> .
-@prefix pl:      <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338#> .
-@prefix cap:     <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#> .
-@prefix comp:    <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#> .
+@prefix hrai:    <https://hrai-go.aeonbridge.io/ontology/regulatory#> .
+@prefix pbia:    <https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#> .
+@prefix pl:      <https://hrai-go.aeonbridge.io/data/regulatory/br/pl2338#> .
+@prefix cap:     <https://hrai-go.aeonbridge.io/data/regulatory/br/capacidade#> .
+@prefix comp:    <https://hrai-go.aeonbridge.io/ontology/comparativo#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 @prefix prov:    <http://www.w3.org/ns/prov#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade> a owl:Ontology ;
+<https://hrai-go.aeonbridge.io/data/regulatory/br/capacidade> a owl:Ontology ;
     rdfs:label "Brasil: indicadores de capacidade e exposição e requisitos que pressupõem capacidade"@pt .
 
 # ---------- tipos repetidos para validar este arquivo isoladamente (mesmas afirmações das outras instâncias) ----------

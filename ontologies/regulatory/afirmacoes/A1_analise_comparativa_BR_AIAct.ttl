@@ -10,9 +10,9 @@
 # O PDF da análise não está no repositório: as teses vêm do resumo fornecido pelo usuário (2026-11-17).
 # Afirmações sem evidência no corpus ficam sem claimSupportedByEvidence: são hipóteses a testar.
 # =============================================================================
-@prefix a1:   <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/claims/a1#> .
-@prefix pbia: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#> .
-@prefix hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
+@prefix a1:   <https://hrai-go.aeonbridge.io/data/regulatory/claims/a1#> .
+@prefix pbia: <https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#> .
+@prefix hrai: <https://hrai-go.aeonbridge.io/ontology/regulatory#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
@@ -100,7 +100,7 @@ a1:C12 a hrai:PolicyClaim ; rdfs:label "A expansão do supercomputador Santos Du
 # ---------- ligação ao texto primário do PL 2338 (RF-01, item 10 do loop, 17/11/2026) ----------
 # As evidências acima foram escritas a partir do resumo da análise; aqui cada uma aponta o artigo extraído do PDF
 # (ontologies/regulatory/instances/br/HRAI_GO_Regulatory_BR_PL2338.ttl). Ligação proposta, pendente de revisão.
-@prefix pl:      <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338#> .
+@prefix pl:      <https://hrai-go.aeonbridge.io/data/regulatory/br/pl2338#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 a1:Ev_PL_Art14 dcterms:references pl:Art_2023_014 .
 a1:Ev_PL_Arts13a18 dcterms:references pl:Art_2023_013 , pl:Art_2023_014 , pl:Art_2023_015 , pl:Art_2023_016 , pl:Art_2023_017 , pl:Art_2023_018 .

@@ -96,7 +96,7 @@ class WorldSnapshot:
 
     def as_document(self) -> dict:
         doc = {
-            "@context": {"scse": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#"},
+            "@context": {"scse": "https://hrai-go.aeonbridge.io/ontology/scse#"},
             "@type": "scse:WorldSnapshot",
             "snapshotHash": self.snapshot_hash,
             "scenario": self.scenario,

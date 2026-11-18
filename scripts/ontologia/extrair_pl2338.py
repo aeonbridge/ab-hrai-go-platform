@@ -39,9 +39,9 @@ from rdflib.namespace import DCTERMS, PROV, RDF, RDFS, SKOS, XSD
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "ontologies/regulatory/instances/br/HRAI_GO_Regulatory_BR_PL2338.ttl"
-H = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
-PL = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338#")
-PBIA = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#")
+H = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/regulatory#")
+PL = rdflib.Namespace("https://hrai-go.aeonbridge.io/data/regulatory/br/pl2338#")
+PBIA = rdflib.Namespace("https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#")
 REPO = "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/"
 
 VERSIONS = [

@@ -1,4 +1,4 @@
-@prefix hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
+@prefix hrai: <https://hrai-go.aeonbridge.io/ontology/regulatory#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -8,12 +8,12 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> rdf:type owl:Ontology .
-<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> owl:versionIRI <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory/1.2.0> .
-<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> owl:priorVersion <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory/1.0.0> .
-<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> owl:versionInfo "1.2.0" .
-<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> dcterms:title "HRAI-GO General Regulatory Intelligence Ontology"@en .
-<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> rdfs:comment "Canonical legal, policy and national-context model. OWL/SWRL do not certify legal applicability, review, validity or compliance."@en .
+<https://hrai-go.aeonbridge.io/ontology/regulatory> rdf:type owl:Ontology .
+<https://hrai-go.aeonbridge.io/ontology/regulatory> owl:versionIRI <https://hrai-go.aeonbridge.io/ontology/regulatory/1.2.0> .
+<https://hrai-go.aeonbridge.io/ontology/regulatory> owl:priorVersion <https://hrai-go.aeonbridge.io/ontology/regulatory/1.0.0> .
+<https://hrai-go.aeonbridge.io/ontology/regulatory> owl:versionInfo "1.2.0" .
+<https://hrai-go.aeonbridge.io/ontology/regulatory> dcterms:title "HRAI-GO General Regulatory Intelligence Ontology"@en .
+<https://hrai-go.aeonbridge.io/ontology/regulatory> rdfs:comment "Canonical legal, policy and national-context model. OWL/SWRL do not certify legal applicability, review, validity or compliance."@en .
 hrai:Jurisdiction rdf:type owl:Class .
 hrai:Jurisdiction rdfs:label "Jurisdiction"@en .
 hrai:LegalInstrument rdf:type owl:Class .

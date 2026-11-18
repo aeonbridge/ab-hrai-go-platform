@@ -1,7 +1,7 @@
 # HRAI-GO Regulatory General Ontology SWRL (v1.1.0)
 # Expressions below are standalone SWRLTab-style rules; names are comments.
 # No rule certifies legal applicability, enactment, or application compliance.
-Prefix: hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#>
+Prefix: hrai: <https://hrai-go.aeonbridge.io/ontology/regulatory#>
 Prefix: swrlb: <http://www.w3.org/2003/11/swrlb#>
 
 # R01_ProvisionJurisdictionOrigin: Jurisdictional origin, not enforceability.

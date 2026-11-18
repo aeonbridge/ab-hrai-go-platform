@@ -106,7 +106,7 @@ Extensão **aditiva**: nenhum termo da 1.0.0 foi removido ou renomeado, e todas 
 SWRL é monotônico e de mundo aberto: nenhuma regra pode concluir que um impacto *não* foi avaliado. A lista de pendências é uma consulta de mundo fechado feita pela plataforma, fora do raciocínio:
 
 ```sparql
-PREFIX hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#>
+PREFIX hrai: <https://hrai-go.aeonbridge.io/ontology/regulatory#>
 SELECT ?assessment ?event WHERE {
   ?assessment hrai:assessmentNeedsReviewDueTo ?event .
   FILTER NOT EXISTS { ?assessment hrai:assessmentImpactEvaluatedFor ?event }
@@ -143,3 +143,5 @@ O teste `tests/verify_regulatory_ontology.py` verifica parsing RDF, isomorfismo 
 O teste estrutural **não equivale** a execução de SWRL em reasoner como Drools, Pellet ou outro mecanismo compatível.
 
 O teste `tests/verify_regulatory_instances.py` valida cada ABox: isomorfismo Turtle/RDF-XML, existência dos termos `hrai:` na TBox, `rdfs:domain`/`rdfs:range`, tipos de literais, disjunção `LegislativeProposal`/`EnactedLegalInstrument` e ausência de `assessmentHasStatus`. Ele também executa as 18 regras SWRL serializadas na TBox com um interpretador simples de encadeamento progressivo e confere as inferências esperadas (R03-R08, R15-R17). Assim como o teste da TBox, isso é um teste estrutural, não substitui um reasoner.
+
+**IRIs:** desde 17/11/2026 sob `https://hrai-go.aeonbridge.io/` (decisões D-05 e D-05a); antes, sob `https://github.com/aeonbridge/ab-hrai-go-platform/`. IRIs resolvíveis no navegador quando a publicação no subdomínio estiver ativa (RNF-01).

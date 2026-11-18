@@ -1,8 +1,8 @@
 # PC2 (QN2): Que dispositivos do Brasil correspondem, adaptam ou divergem do AI Act, e qual especificidade explica ou
 # contraria cada divergência? Uma linha por correspondência; a especificidade vem de groundedInSpecificity.
-PREFIX hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#>
-PREFIX scse: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#>
-PREFIX comp: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#>
+PREFIX hrai: <https://hrai-go.aeonbridge.io/ontology/regulatory#>
+PREFIX scse: <https://hrai-go.aeonbridge.io/ontology/scse#>
+PREFIX comp: <https://hrai-go.aeonbridge.io/ontology/comparativo#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX prov: <http://www.w3.org/ns/prov#>

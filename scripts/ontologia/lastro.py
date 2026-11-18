@@ -39,10 +39,10 @@ ALIGNMENTS = ROOT / "ontologies/regulatory/alinhamentos"
 INSTANCES = ["ontologies/regulatory/instances/**/*.ttl", "ontologies/scse/**/*.ttl", "ontologies/comparativo/*.ttl",
              "ontologies/regulatory/afirmacoes/*.ttl", "ontologies/regulatory/sementes/*.ttl",
              "ontologies/regulatory/decisoes/*.ttl"]
-SEED_NS = "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#"
-H_REVIEW = rdflib.URIRef("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#hasReviewDecision")
-DISPLAY_KEY = rdflib.URIRef("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#displayKey")
-GM_NS = "https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#"
+SEED_NS = "https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#"
+H_REVIEW = rdflib.URIRef("https://hrai-go.aeonbridge.io/ontology/regulatory#hasReviewDecision")
+DISPLAY_KEY = rdflib.URIRef("https://hrai-go.aeonbridge.io/ontology/regulatory#displayKey")
+GM_NS = "https://hrai-go.aeonbridge.io/data/governance/br#"
 
 # The seven displayed sets (ESP-ONT-02, chapter "Fonte única") and how each element is keyed.
 SETS = {

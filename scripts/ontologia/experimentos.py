@@ -121,8 +121,8 @@ def main():
         "V1_E1": verificar_ponto_fixo(rz1), "V2_E1": verificar_seguranca(rz1), "V2_E0": verificar_seguranca(rz0),
         "A1": alinhamento(rzA),
     }
-    PB = "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#"
-    EX = "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/cenario-e1#"
+    PB = "https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#"
+    EX = "https://hrai-go.aeonbridge.io/data/regulatory/br/cenario-e1#"
     alvo = (URIRef(PB + "App_BBProvaDeVida"), H.applicationPotentiallyImpactedBy, URIRef(EX + "Mudanca_TextoCamara"))
     dados["E1_cadeia"] = caminho(rz1, alvo)
     dados["E1_inferencias_cenario"] = [[rz1.justificativa[t]["regra"]] + [rz1.curto(x) for x in t] for t in rz1.justificativa

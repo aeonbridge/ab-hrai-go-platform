@@ -8,7 +8,7 @@ ttl = Graph().parse(root / "HRAI_GO_Regulatory_General.ttl", format="turtle")
 owl = Graph().parse(root / "HRAI_GO_Regulatory_General.owl", format="xml")
 assert isomorphic(ttl, owl), "Turtle and RDF/XML graphs differ"
 
-H = Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
+H = Namespace("https://hrai-go.aeonbridge.io/ontology/regulatory#")
 SW = Namespace("http://www.w3.org/2003/11/swrl#")
 
 mandatory = ["Jurisdiction", "LegalInstrument", "LegislativeProposal", "LegalProvision", "NormativeRequirement",

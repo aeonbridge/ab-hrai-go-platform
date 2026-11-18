@@ -23,8 +23,8 @@
 #    a fonte primária de cada número está em hrai:hasIndicatorMethod.
 # =============================================================================
 
-@prefix pbia:    <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#> .
-@prefix hrai:    <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
+@prefix pbia:    <https://hrai-go.aeonbridge.io/data/regulatory/br/pbia#> .
+@prefix hrai:    <https://hrai-go.aeonbridge.io/ontology/regulatory#> .
 @prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
@@ -33,9 +33,9 @@
 @prefix prov:    <http://www.w3.org/ns/prov#> .
 @prefix schema:  <https://schema.org/> .
 
-<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia>
+<https://hrai-go.aeonbridge.io/data/regulatory/br/pbia>
     a owl:Ontology ;
-    owl:imports <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> ;
+    owl:imports <https://hrai-go.aeonbridge.io/ontology/regulatory> ;
     owl:versionInfo "1.0.0" ;
     dcterms:title "HRAI-GO ABox — Plano Brasileiro de Inteligência Artificial (PBIA) 2024-2028"@pt ;
     dcterms:created "2026-11-11"^^xsd:date ;

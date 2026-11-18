@@ -11,9 +11,9 @@ sys.path.insert(0, str(ROOT / "scripts/ontologia"))
 import raciocinar  # noqa: E402
 
 Q = ROOT / "ontologies/consultas"
-H = "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#"
-S = "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#"
-C = "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#"
+H = "https://hrai-go.aeonbridge.io/ontology/regulatory#"
+S = "https://hrai-go.aeonbridge.io/ontology/scse#"
+C = "https://hrai-go.aeonbridge.io/ontology/comparativo#"
 
 FIXTURE = f"""
 @prefix hrai: <{H}> . @prefix scse: <{S}> . @prefix comp: <{C}> . @prefix ex: <http://example.test/q#> .
