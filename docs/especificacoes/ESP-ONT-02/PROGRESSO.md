@@ -192,6 +192,21 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
   as codificações descritivas dos autores do paper para a concordância (V-09).
 - **Comandos**: protocolo com exit 0 (5 arquivos de instância validados); pytest → todos passam.
 
+### Item 12 · RF-07 indicadores de capacidade e exposição — 17/11/2026
+
+- **O que mudou**
+  - Núcleo: `hrai:baseYear` (ano ou período como a fonte informa; "não informado na fonte" quando não informa).
+  - `instances/br/HRAI_GO_Regulatory_BR_Capacidade.ttl` (candidato): ano-base dos 16 indicadores do PBIA (7 com ano
+    na fonte, 9 sem); orçamento de governança do Eixo 5 (R$ 103,25 milhões, 0,45% dos R$ 23,03 bilhões, conferido na
+    Tabela 2); exposição qualitativa dos dados de saúde do SUS; três requisitos do texto do Senado que pressupõem
+    capacidade (arts. 25, 34 e 49), ligados à capacidade de orçamento e de profissionais técnicos.
+  - PC3 ganhou o caso "indicador sem limiar": com indicador e sem limiar aprovado, não há sinal, há falta de critério.
+    PC3: 8 linhas. PC4 continua em zero: exige `CoverageAssessment` (escopo declarado), que é decisão de método.
+  - Nenhum limiar fixado pela sessão (teste); proposta de limiar vai para a fila (D-09).
+- **"Os mesmos para todas as jurisdições"**: o corpus não traz indicadores equivalentes de UE, Reino Unido e EUA
+  (orçamento de supervisão, profissionais); nas comparações eles aparecem como "não codificado" (item 16).
+- **Comandos**: protocolo com exit 0 (6 arquivos de instância validados); pytest → 179 passed.
+
 ## Aguardando decisão
 
 | Id | Decisão | Quem | Bloqueia |
@@ -203,6 +218,8 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
 | D-05 | RNF-01: domínio dos IRIs (w3id.org ou GitHub Pages) | autor | V-24 |
 | D-07 | Revisar as 31 sementes (`ontologies/regulatory/sementes/GOV-BR-001_sementes.ttl`): confirmar, corrigir ou retirar; 9 traços de contexto sem fonte real | autor | selo "semente" vira revisado |
 | D-08 | Conferir a localização do parágrafo sobre micro e pequenas empresas e startups no texto de 2023 (art. 32 na extração; art. 33 no rótulo da evidência) | autor | rótulo de `a1:Ev_PL_Art33PU` |
+| D-09 | Limiar inferior de alerta para o orçamento de governança (hoje 0,45% do PBIA) e para profissionais técnicos; sem limiar, R25 não sinaliza | autor | PC3 "abaixo do limiar" |
+| D-10 | Declarar os escopos de avaliação de cobertura (`CoverageAssessment`: jurisdição, snapshot, área) para a PC4 valer | autor | PC4, QN3 |
 | D-06 | PDF da "Análise Comparativa" no repositório (hoje as teses vêm de resumo) | autor | rastreabilidade das teses |
 
 ## Checklist V-01 a V-31
@@ -221,7 +238,7 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | V-08 | ⏸ | depende das escalas da E4 (D-02) |
 | V-09 | ⬜ | registrar codificações dos autores do paper e publicar concordância (após D-02) |
 | V-10 | ⏸ | 18 correspondências BR × UE candidatas (PC2 responde); falta revisão humana (D-03) |
-| V-11 | ⬜ | item 12 |
+| V-11 | 🟡 | indicadores do Brasil com fonte e ano-base (teste); PC3 responde (8 linhas: "indicador sem limiar"); PC4 sem `CoverageAssessment`; falta revisão (D-03) e limiar (D-09) |
 | V-12 | ✅ | `consultas.py --check` e `tests/test_consultas.py` no CI; cada PC testada sobre fixture |
 | V-13 | ✅ | `test_rnf02_full_graph_reasons_under_five_seconds` no CI: 0,12 s para 5105 triplas |
 | V-14 | 🟡 | ficha da área mostra o "Por quê?" da força com os componentes; cadeia de regras SWRL até a fonte na interface fica para quando houver inferência exibida de fonte primária (itens 11–12) |

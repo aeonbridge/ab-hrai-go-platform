@@ -2176,3 +2176,10 @@ hrai:seedArea rdf:type owl:AnnotationProperty .
 hrai:seedArea rdfs:comment "Substantive area the seed document links the element to (chamber topic)."@en .
 hrai:displayOrder rdf:type owl:AnnotationProperty .
 hrai:displayOrder rdfs:comment "Position of the element in the chamber layout (1-based); presentation only."@en .
+
+# v1.2.0 (RF-07): base year of an indicator, as stated by the source.
+hrai:baseYear rdf:type owl:DatatypeProperty .
+hrai:baseYear rdfs:label "baseYear"@en .
+hrai:baseYear rdfs:comment "Base year or period of the indicator value as stated by the source (for example '2023' or '2021-2025'); 'não informado na fonte' when the source gives none. Never inferred."@en .
+hrai:baseYear rdfs:domain hrai:ContextIndicator .
+hrai:baseYear rdfs:range xsd:string .

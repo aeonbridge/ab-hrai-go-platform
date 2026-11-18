@@ -73,7 +73,7 @@ def test_each_question_answers_on_fixture(tmp_path):
     assert pc1 == {("Saude", "vigente"), ("Energia", "proposta"), ("Computacao", "plano")}
     pc2 = rows(g, "PC2")
     assert len(pc2) == 1 and pc2[0]["transposto"] == "true" and pc2[0]["especificidade"].endswith("#esp")
-    assert {r["situacao"] for r in rows(g, "PC3")} == {"abaixo do limiar", "sem indicador"}
+    assert {r["situacao"] for r in rows(g, "PC3")} == {"abaixo do limiar", "sem indicador"}  # fixture: all indicators have thresholds
     pc4 = rows(g, "PC4")
     assert len(pc4) == 1 and pc4[0]["area"].endswith("#Criancas")
     assert rows(g, "PC5")[0]["notacao"] == "C22"

@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rdf:RDF
-  xmlns:owl="http://www.w3.org/2002/07/owl#"
-  xmlns:hrai="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#"
-  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-  xmlns:prov="http://www.w3.org/ns/prov#"
   xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:hrai="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:prov="http://www.w3.org/ns/prov#"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 >
-  <owl:Ontology rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist">
-    <rdfs:label xml:lang="pt">EUA: NIST AI Risk Management Framework 1.0 e as quatro funções</rdfs:label>
-    <rdfs:comment xml:lang="pt">Gerado por scripts/ontologia/extrair_internacional.py (pdftotext + expressões regulares, sem LLM). Candidato pendente de revisão humana. Método: METODO_EXTRACAO.md.</rdfs:comment>
-  </owl:Ontology>
   <hrai:ExtractionBatch rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#Lote_Extracao">
     <rdfs:label xml:lang="pt">Lote de extração: EUA: NIST AI Risk Management Framework 1.0 e as quatro funções</rdfs:label>
     <hrai:extractionContainsCandidate>
@@ -55,6 +51,10 @@
       </hrai:CandidateAssertion>
     </hrai:extractionContainsCandidate>
   </hrai:ExtractionBatch>
+  <owl:Ontology rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist">
+    <rdfs:label xml:lang="pt">EUA: NIST AI Risk Management Framework 1.0 e as quatro funções</rdfs:label>
+    <rdfs:comment xml:lang="pt">Gerado por scripts/ontologia/extrair_internacional.py (pdftotext + expressões regulares, sem LLM). Candidato pendente de revisão humana. Método: METODO_EXTRACAO.md.</rdfs:comment>
+  </owl:Ontology>
   <hrai:SourceSnapshot rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#Snapshot_AIRMF">
     <rdfs:label>NIST AI 100-1, Artificial Intelligence Risk Management Framework (AI RMF 1.0), January 2023</rdfs:label>
     <hrai:snapshotOfSource>
@@ -66,9 +66,6 @@
     <hrai:snapshotSHA256>7576edb531d9848825814ee88e28b1795d3a84b435b4b797d3670eafdc4a89f1</hrai:snapshotSHA256>
     <hrai:snapshotURI rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/docs/ai-regulations/us/NIST.AI.100-1.pdf</hrai:snapshotURI>
   </hrai:SourceSnapshot>
-  <hrai:Jurisdiction rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#UnitedStates">
-    <rdfs:label xml:lang="pt">Estados Unidos da América</rdfs:label>
-  </hrai:Jurisdiction>
   <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#Function_Measure">
     <rdfs:label xml:lang="en">MEASURE</rdfs:label>
     <dcterms:description xml:lang="en">The MEASURE function employs quantitative, qualitative, or mixed-method tools, techniques, and methodologies to analyze, assess, benchmark, and monitor AI risk and related impacts. It uses knowledge relevant to AI risks identified in the MAP function and informs the MANAGE function.</dcterms:description>
@@ -82,18 +79,11 @@
     </dcterms:isPartOf>
     <skos:closeMatch rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#NIST_Measure"/>
     <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#Snapshot_AIRMF"/>
-    <hrai:policyInstrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#UnitedStates"/>
-  </hrai:PolicyInstrument>
-  <hrai:MonitoringAgent rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#ExtratorDeTexto">
-    <rdfs:label xml:lang="pt">Extrator de texto (scripts/ontologia/extrair_internacional.py, determinístico)</rdfs:label>
-  </hrai:MonitoringAgent>
-  <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#Function_Manage">
-    <rdfs:label xml:lang="en">MANAGE</rdfs:label>
-    <dcterms:description xml:lang="en">The MANAGE function entails allocating risk resources to mapped and measured risks on a regular basis and as defined by the GOVERN function. Risk treatment comprises plans to respond to, recover from, and communicate about incidents or events.</dcterms:description>
-    <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#AIRMF_1_0"/>
-    <skos:closeMatch rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#NIST_Manage"/>
-    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#Snapshot_AIRMF"/>
-    <hrai:policyInstrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#UnitedStates"/>
+    <hrai:policyInstrumentInJurisdiction>
+      <hrai:Jurisdiction rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#UnitedStates">
+        <rdfs:label xml:lang="pt">Estados Unidos da América</rdfs:label>
+      </hrai:Jurisdiction>
+    </hrai:policyInstrumentInJurisdiction>
   </hrai:PolicyInstrument>
   <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#Function_Govern">
     <rdfs:label xml:lang="en">GOVERN</rdfs:label>
@@ -111,4 +101,15 @@
     <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#Snapshot_AIRMF"/>
     <hrai:policyInstrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#UnitedStates"/>
   </hrai:PolicyInstrument>
+  <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#Function_Manage">
+    <rdfs:label xml:lang="en">MANAGE</rdfs:label>
+    <dcterms:description xml:lang="en">The MANAGE function entails allocating risk resources to mapped and measured risks on a regular basis and as defined by the GOVERN function. Risk treatment comprises plans to respond to, recover from, and communicate about incidents or events.</dcterms:description>
+    <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#AIRMF_1_0"/>
+    <skos:closeMatch rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#NIST_Manage"/>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#Snapshot_AIRMF"/>
+    <hrai:policyInstrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#UnitedStates"/>
+  </hrai:PolicyInstrument>
+  <hrai:MonitoringAgent rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#ExtratorDeTexto">
+    <rdfs:label xml:lang="pt">Extrator de texto (scripts/ontologia/extrair_internacional.py, determinístico)</rdfs:label>
+  </hrai:MonitoringAgent>
 </rdf:RDF>

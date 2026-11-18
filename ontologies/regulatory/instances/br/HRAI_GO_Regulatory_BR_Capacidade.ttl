@@ -1,0 +1,104 @@
+# =============================================================================
+# Brasil: capacidade e exposição (ESP-ONT-02, RF-07; PC3 e PC4)
+#
+# Extração de fonte primária (PBIA VN 8 e PL 2338, texto do Senado), feita pela sessão do loop em 17/11/2026.
+# Tudo é candidato pendente de revisão humana. Nenhum limiar de alerta é fixado aqui: limiar é escolha normativa
+# (decisão D-09 no PROGRESSO.md). Sem limiar, R25 não sinaliza nada, e a PC3 mostra "indicador sem limiar".
+# =============================================================================
+@prefix hrai:    <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
+@prefix pbia:    <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#> .
+@prefix pl:      <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338#> .
+@prefix cap:     <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#> .
+@prefix comp:    <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade> a owl:Ontology ;
+    rdfs:label "Brasil: indicadores de capacidade e exposição e requisitos que pressupõem capacidade"@pt .
+
+# ---------- tipos repetidos para validar este arquivo isoladamente (mesmas afirmações das outras instâncias) ----------
+pbia:Brazil a hrai:Jurisdiction .
+pbia:Snapshot_PBIA_VN8 a hrai:SourceSnapshot .
+pl:Snapshot_2024 a hrai:SourceSnapshot .
+comp:Area_DataGovernance a hrai:SubstantiveArea .
+pl:Art_2024_025 a hrai:LegalProvision .
+pl:Art_2024_034 a hrai:LegalProvision .
+pl:Art_2024_049 a hrai:LegalProvision .
+
+# ---------- ano-base dos indicadores do PBIA (como a fonte informa; nada é inferido) ----------
+pbia:Ind_RenewableShareElectricityMatrix2023 a hrai:ContextIndicator ; hrai:baseYear "2023" .
+pbia:Ind_PublicBodiesUsingAI2023 a hrai:ContextIndicator ; hrai:baseYear "2023" .
+pbia:Ind_ICTTalentDeficit2021_2025 a hrai:ContextIndicator ; hrai:baseYear "2021-2025" .
+pbia:Ind_StartupFunding2019_2023 a hrai:ContextIndicator ; hrai:baseYear "2019-2023" .
+pbia:Ind_IndustryAIDisruptionPerception2021 a hrai:ContextIndicator ; hrai:baseYear "2021" .
+pbia:Ind_ManufacturingProductivityChange2001_2021 a hrai:ContextIndicator ; hrai:baseYear "2001-2021" .
+pbia:Ind_DataCenterLoadProjection2037 a hrai:ContextIndicator ; hrai:baseYear "projeção até 2037" .
+pbia:Ind_RenewableShareEnergyMatrix_Axis4 a hrai:ContextIndicator ; hrai:baseYear "não informado na fonte" .
+pbia:Ind_PegasoSupercomputerPerformance a hrai:ContextIndicator ; hrai:baseYear "não informado na fonte" .
+pbia:Ind_SantosDumontSupercomputerPerformance a hrai:ContextIndicator ; hrai:baseYear "não informado na fonte" .
+pbia:Ind_SinapadComputePower a hrai:ContextIndicator ; hrai:baseYear "não informado na fonte" .
+pbia:Ind_DataCentersInOperation a hrai:ContextIndicator ; hrai:baseYear "não informado na fonte" .
+pbia:Ind_OpenDataBases a hrai:ContextIndicator ; hrai:baseYear "não informado na fonte" .
+pbia:Ind_STEMGraduatesShare a hrai:ContextIndicator ; hrai:baseYear "não informado na fonte" .
+pbia:Ind_PISAMathBelowBasic a hrai:ContextIndicator ; hrai:baseYear "não informado na fonte" .
+pbia:Ind_CompaniesUsingAI a hrai:ContextIndicator ; hrai:baseYear "não informado na fonte" .
+
+# ---------- capacidade: orçamento de governança e supervisão (PBIA, Tabela 2) ----------
+cap:Ind_GovernanceBudgetShare a hrai:ContextIndicator ;
+    rdfs:label "Parcela do PBIA destinada ao Eixo 5, Apoio ao Processo Regulatório e de Governança da IA"@pt ;
+    hrai:hasNumericValue "0.45"^^xsd:decimal ; hrai:numericUnit "percent" ; hrai:baseYear "2024-2028" ;
+    hrai:hasIndicatorMethod "R$ 103,25 milhões / R$ 23,03 bilhões (Tabela 2 do PBIA, investimentos previstos 2024-2028)" ;
+    hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
+    hrai:indicatorSource pbia:Snapshot_PBIA_VN8 .
+cap:Ind_GovernanceBudgetAmount a hrai:ContextIndicator ;
+    rdfs:label "Investimento previsto no Eixo 5 do PBIA (governança e apoio regulatório)"@pt ;
+    hrai:hasNumericValue "103.25"^^xsd:decimal ; hrai:numericUnit "million BRL" ; hrai:baseYear "2024-2028" ;
+    hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
+    hrai:indicatorSource pbia:Snapshot_PBIA_VN8 .
+
+# ---------- exposição: dados de saúde em escala sob guarda do Estado ----------
+cap:Exp_HealthDataSUS a hrai:RiskExposureIndicator ;
+    rdfs:label "Volume de dados de saúde sob guarda do SUS (exposição de dados sensíveis em uso estatal)"@pt ;
+    hrai:hasIndicatorMethod "qualitativo: o PBIA descreve o SUS como um dos maiores sistemas públicos de saúde, com grande volume de dados; sem valor numérico na fonte" ;
+    hrai:baseYear "não informado na fonte" ;
+    hrai:exposureConcernsFunction comp:Area_DataGovernance ;
+    hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
+    hrai:indicatorSource pbia:Snapshot_PBIA_VN8 .
+
+# ---------- requisitos do PL que pressupõem capacidade (texto do Senado, 2024) ----------
+cap:Cap_SupervisionBudget a hrai:CapacityRequirement ;
+    rdfs:label "Orçamento para supervisão e governança da IA"@pt ;
+    hrai:capacityMeasuredBy cap:Ind_GovernanceBudgetShare , cap:Ind_GovernanceBudgetAmount .
+cap:Cap_TechnicalWorkforce a hrai:CapacityRequirement ;
+    rdfs:label "Profissionais técnicos para avaliar e auditar sistemas de IA"@pt ;
+    hrai:capacityMeasuredBy pbia:Ind_ICTTalentDeficit2021_2025 , pbia:Ind_STEMGraduatesShare .
+cap:Req_AlgorithmicImpactAssessment a hrai:NormativeRequirement ;
+    rdfs:label "Avaliação de impacto algorítmico de sistemas de alto risco (art. 25)"@pt ;
+    hrai:derivedFromProvision pl:Art_2024_025 ;
+    hrai:requirementAssumesCapacity cap:Cap_TechnicalWorkforce .
+cap:Req_ConformityAccreditation a hrai:NormativeRequirement ;
+    rdfs:label "Acreditação de organismos de avaliação de conformidade (art. 34)"@pt ;
+    hrai:derivedFromProvision pl:Art_2024_034 ;
+    hrai:requirementAssumesCapacity cap:Cap_TechnicalWorkforce , cap:Cap_SupervisionBudget .
+cap:Req_CompetentAuthoritySupervision a hrai:NormativeRequirement ;
+    rdfs:label "Supervisão, fiscalização e sanção pela autoridade competente (art. 49)"@pt ;
+    hrai:derivedFromProvision pl:Art_2024_049 ;
+    hrai:requirementAssumesCapacity cap:Cap_SupervisionBudget .
+
+# ---------- registro de extração ----------
+cap:ExtratorSessao a hrai:MonitoringAgent ;
+    rdfs:label "Sessão do loop ESP-ONT-02 (Claude Code, extração assistida por LLM, conferida no PDF)"@pt .
+cap:Lote_Capacidade a hrai:ExtractionBatch ;
+    rdfs:label "Lote: capacidade e exposição do Brasil (RF-07)"@pt ;
+    hrai:extractionContainsCandidate cap:Candidate_Indicadores , cap:Candidate_Requisitos .
+cap:Candidate_Indicadores a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: indicadores de capacidade e exposição e anos-base do PBIA"@pt ;
+    hrai:candidateFromSnapshot pbia:Snapshot_PBIA_VN8 ;
+    hrai:candidateProducedBy cap:ExtratorSessao .
+cap:Candidate_Requisitos a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: requisitos do PL que pressupõem capacidade (arts. 25, 34 e 49 do texto do Senado)"@pt ;
+    hrai:candidateFromSnapshot pl:Snapshot_2024 ;
+    hrai:candidateProducedBy cap:ExtratorSessao .

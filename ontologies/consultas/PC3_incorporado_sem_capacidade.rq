@@ -1,5 +1,6 @@
 # PC3 (QN2): O que o Brasil incorporou que pressupõe capacidade que o contexto não tem? Requisitos com risco de
-# capacidade (R25b), com o indicador; e requisitos cuja capacidade não tem indicador ("sem indicador").
+# capacidade (R25b), com o indicador; requisitos cuja capacidade tem indicador mas nenhum limiar aprovado
+# ("indicador sem limiar": não é sinal, é falta de critério); e requisitos sem indicador ("sem indicador").
 PREFIX hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#>
 PREFIX scse: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#>
 PREFIX comp: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#>
@@ -10,6 +11,10 @@ SELECT ?requisito ?capacidade ?indicador ?situacao WHERE {
   { ?requisito hrai:requirementHasCapacityRisk ?indicador .
     OPTIONAL { ?requisito hrai:requirementAssumesCapacity ?capacidade . ?capacidade hrai:capacityMeasuredBy ?indicador }
     BIND("abaixo do limiar" AS ?situacao) }
+  UNION
+  { ?requisito hrai:requirementAssumesCapacity ?capacidade . ?capacidade hrai:capacityMeasuredBy ?indicador .
+    FILTER NOT EXISTS { ?indicador hrai:hasLowerAlertThreshold ?t }
+    BIND("indicador sem limiar" AS ?situacao) }
   UNION
   { ?requisito hrai:requirementAssumesCapacity ?capacidade .
     FILTER NOT EXISTS { ?capacidade hrai:capacityMeasuredBy ?i }

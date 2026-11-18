@@ -1,88 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rdf:RDF
-  xmlns:schema="https://schema.org/"
-  xmlns:hrai="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#"
   xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:hrai="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#"
+  xmlns:schema="https://schema.org/"
   xmlns:owl="http://www.w3.org/2002/07/owl#"
   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
   xmlns:prov="http://www.w3.org/ns/prov#"
 >
-  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Consecti">
-    <rdf:type rdf:resource="https://schema.org/Organization"/>
-    <rdfs:label xml:lang="pt">Conselho Nacional de Secretários Estaduais para Assuntos de CT&amp;I (Consecti)</rdfs:label>
-    <schema:memberOf>
-      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT">
-        <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
-        <rdfs:label xml:lang="pt">Conselho Nacional de Ciência e Tecnologia (CCT)</rdfs:label>
-        <rdfs:comment xml:lang="pt">Orientação estratégica do PBIA. Composição (I) ministros de Estado, (II) representantes dos produtores e usuários de C&amp;T — pessoas físicas, não instanciadas — e (III) entidades de ensino, pesquisa, ciência e tecnologia.</rdfs:comment>
-      </hrai:Stakeholder>
-    </schema:memberOf>
-  </hrai:Stakeholder>
-  <hrai:RegulatoryChangeEvent rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Change_PBIA_VN8_Captured">
-    <rdfs:label xml:lang="pt">Captura da versão VN 8 do PBIA</rdfs:label>
-    <hrai:changeObservedInSnapshot>
-      <hrai:SourceSnapshot rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8">
-        <rdfs:label xml:lang="pt">PBIA — versão VN 8 (edição para o período de defeso eleitoral), PDF 108 páginas</rdfs:label>
-        <hrai:snapshotOfSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Source_PBIA"/>
-        <hrai:snapshotURI rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/docs/ai-regulations/br/000149%20-%20CGEE%20Plano%20Brasileiro%20de%20Intelig%C3%AAncia%20Artificial%20(VN)%208%20Defeso%20Eleitoral.pdf</hrai:snapshotURI>
-        <hrai:snapshotSHA256>b654240701e7be87578e6dc505244366d35b8cadeeb01727ae12b091ef3e46f5</hrai:snapshotSHA256>
-        <hrai:sourcePublishedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-07-17T10:42:03-03:00</hrai:sourcePublishedAt>
-        <hrai:sourceCapturedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-11T23:02:00-03:00</hrai:sourceCapturedAt>
-        <rdfs:comment xml:lang="pt">sourcePublishedAt corresponde ao CreationDate do PDF (Adobe InDesign). A ficha catalográfica do documento indica ano de publicação 2025.</rdfs:comment>
-      </hrai:SourceSnapshot>
-    </hrai:changeObservedInSnapshot>
-    <hrai:changeDetectedBy>
-      <hrai:MonitoringAgent rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Agent_DocumentExtraction">
-        <rdfs:label xml:lang="pt">Agente de extração documental HRAI-GO (Claude Code, extração assistida por LLM)</rdfs:label>
-      </hrai:MonitoringAgent>
-    </hrai:changeDetectedBy>
-    <hrai:changeDetectedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-11T23:02:00-03:00</hrai:changeDetectedAt>
-    <hrai:changeRecordedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-11T23:02:00-03:00</hrai:changeRecordedAt>
-    <hrai:changeDescription xml:lang="pt">Primeira ingestão do PBIA no grafo. Não há versão anterior registrada para comparação (diff).</hrai:changeDescription>
-  </hrai:RegulatoryChangeEvent>
-  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_PlataformaAcolhimento">
-    <schema:provider>
-      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_WideLabs">
-        <rdf:type rdf:resource="https://schema.org/Corporation"/>
-        <rdfs:label xml:lang="pt">WideLabs</rdfs:label>
-      </hrai:Stakeholder>
-    </schema:provider>
-    <rdfs:label xml:lang="pt">Plataforma Acolhimento (WideLabs)</rdfs:label>
-    <hrai:applicationInJurisdiction>
-      <hrai:Jurisdiction rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil">
-        <rdfs:label xml:lang="pt">Brasil</rdfs:label>
-        <rdfs:label xml:lang="en">Brazil</rdfs:label>
-        <hrai:hasNationalContext rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIContext_PBIA"/>
-        <hrai:hasRegulatoryModel rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIRegulatoryModel_PBIA"/>
-      </hrai:Jurisdiction>
-    </hrai:applicationInJurisdiction>
-  </hrai:AIApplication>
-  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_BatimentosFlorestaAmazonica">
-    <schema:provider>
-      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Stefanini">
-        <rdf:type rdf:resource="https://schema.org/Corporation"/>
-        <rdfs:label xml:lang="pt">Stefanini</rdfs:label>
-      </hrai:Stakeholder>
-    </schema:provider>
-    <rdfs:label xml:lang="pt">Batimentos cardíacos da Floresta Amazônica - IA (Stefanini)</rdfs:label>
-    <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
-  </hrai:AIApplication>
-  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_CaixaOtimizacaoSFH">
-    <schema:provider>
-      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Caixa">
-        <rdf:type rdf:resource="https://schema.org/Corporation"/>
-        <rdfs:label xml:lang="pt">Caixa Econômica Federal</rdfs:label>
-      </hrai:Stakeholder>
-    </schema:provider>
-    <rdfs:label xml:lang="pt">Otimização do Sistema Financeiro de Habitação (Caixa Econômica Federal)</rdfs:label>
-    <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
-  </hrai:AIApplication>
-  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_PegasoSupercomputerPerformance">
-    <rdfs:label xml:lang="pt">Desempenho do supercomputador Pégaso (Petrobras)</rdfs:label>
-    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">42</hrai:hasNumericValue>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_SinapadComputePower">
+    <rdfs:label xml:lang="pt">Poder computacional total do Sinapad</rdfs:label>
+    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">6.2</hrai:hasNumericValue>
     <hrai:numericUnit>PFlop/s</hrai:numericUnit>
-    <hrai:hasIndicatorMethod xml:lang="pt">TOP500 (2024), citado no PBIA, p. 34: mais potente da América Latina, 56º no ranking mundial.</hrai:hasIndicatorMethod>
+    <hrai:hasIndicatorMethod xml:lang="pt">PBIA, Eixo 1, p. 34 (valor aproximado).</hrai:hasIndicatorMethod>
     <hrai:indicatorMeasuredFor>
       <hrai:NationalContext rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIContext_PBIA">
         <rdfs:label xml:lang="pt">Contexto nacional de IA no Brasil segundo o PBIA (diagnósticos 'Onde estamos?')</rdfs:label>
@@ -96,21 +26,29 @@
         <rdfs:label xml:lang="pt">Infraestrutura computacional</rdfs:label>
       </hrai:ContextDimension>
     </hrai:indicatorMeasuresDimension>
-    <hrai:indicatorSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+    <hrai:indicatorSource>
+      <hrai:SourceSnapshot rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8">
+        <rdfs:label xml:lang="pt">PBIA — versão VN 8 (edição para o período de defeso eleitoral), PDF 108 páginas</rdfs:label>
+        <hrai:snapshotOfSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Source_PBIA"/>
+        <hrai:snapshotURI rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/docs/ai-regulations/br/000149%20-%20CGEE%20Plano%20Brasileiro%20de%20Intelig%C3%AAncia%20Artificial%20(VN)%208%20Defeso%20Eleitoral.pdf</hrai:snapshotURI>
+        <hrai:snapshotSHA256>b654240701e7be87578e6dc505244366d35b8cadeeb01727ae12b091ef3e46f5</hrai:snapshotSHA256>
+        <hrai:sourcePublishedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-07-17T10:42:03-03:00</hrai:sourcePublishedAt>
+        <hrai:sourceCapturedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-11T23:02:00-03:00</hrai:sourceCapturedAt>
+        <rdfs:comment xml:lang="pt">sourcePublishedAt corresponde ao CreationDate do PDF (Adobe InDesign). A ficha catalográfica do documento indica ano de publicação 2025.</rdfs:comment>
+      </hrai:SourceSnapshot>
+    </hrai:indicatorSource>
   </hrai:ContextIndicator>
-  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_ICTTalentDeficit2021_2025">
-    <rdfs:label xml:lang="pt">Déficit estimado de profissionais de TIC (2021-2025)</rdfs:label>
-    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">530000</hrai:hasNumericValue>
-    <hrai:numericUnit>professionals</hrai:numericUnit>
-    <hrai:hasIndicatorMethod xml:lang="pt">BRASSCOM (2021), citado no PBIA, p. 37; demanda projetada de 800 mil novos talentos.</hrai:hasIndicatorMethod>
-    <hrai:indicatorMeasuredFor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIContext_PBIA"/>
-    <hrai:indicatorMeasuresDimension>
-      <hrai:ContextDimension rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Dim_SkillsEducation">
-        <rdfs:label xml:lang="pt">Formação, capacitação e educação</rdfs:label>
-      </hrai:ContextDimension>
-    </hrai:indicatorMeasuresDimension>
-    <hrai:indicatorSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
-  </hrai:ContextIndicator>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Andifes">
+    <rdf:type rdf:resource="https://schema.org/Organization"/>
+    <rdfs:label xml:lang="pt">Associação Nacional dos Dirigentes das Instituições Federais de Ensino Superior (Andifes)</rdfs:label>
+    <schema:memberOf>
+      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT">
+        <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
+        <rdfs:label xml:lang="pt">Conselho Nacional de Ciência e Tecnologia (CCT)</rdfs:label>
+        <rdfs:comment xml:lang="pt">Orientação estratégica do PBIA. Composição (I) ministros de Estado, (II) representantes dos produtores e usuários de C&amp;T — pessoas físicas, não instanciadas — e (III) entidades de ensino, pesquisa, ciência e tecnologia.</rdfs:comment>
+      </hrai:Stakeholder>
+    </schema:memberOf>
+  </hrai:Stakeholder>
   <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_ApoIAStartupsEducacao">
     <schema:provider>
       <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_OpenAI">
@@ -125,111 +63,74 @@
       </hrai:Stakeholder>
     </schema:provider>
     <rdfs:label xml:lang="pt">ApoIA Startups - Educação (OpenAI e Fundação Lemann)</rdfs:label>
-    <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
+    <hrai:applicationInJurisdiction>
+      <hrai:Jurisdiction rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil">
+        <rdfs:label xml:lang="pt">Brasil</rdfs:label>
+        <rdfs:label xml:lang="en">Brazil</rdfs:label>
+        <hrai:hasNationalContext rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIContext_PBIA"/>
+        <hrai:hasRegulatoryModel rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIRegulatoryModel_PBIA"/>
+      </hrai:Jurisdiction>
+    </hrai:applicationInJurisdiction>
   </hrai:AIApplication>
-  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_BBMenosFraudes">
+  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_StefaniniCombateFraude">
     <schema:provider>
-      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_BancoDoBrasil">
+      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Stefanini">
         <rdf:type rdf:resource="https://schema.org/Corporation"/>
-        <rdfs:label xml:lang="pt">Banco do Brasil</rdfs:label>
+        <rdfs:label xml:lang="pt">Stefanini</rdfs:label>
       </hrai:Stakeholder>
     </schema:provider>
-    <rdfs:label xml:lang="pt">Menos fraudes em transações (Banco do Brasil)</rdfs:label>
+    <rdfs:label xml:lang="pt">Combate a fraude financeira (Stefanini)</rdfs:label>
     <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
   </hrai:AIApplication>
-  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MD">
-    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
-    <rdfs:label xml:lang="pt">Ministério da Defesa</rdfs:label>
-    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
-  </hrai:Stakeholder>
-  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MS">
-    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
-    <rdfs:label xml:lang="pt">Ministério da Saúde</rdfs:label>
-    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
-  </hrai:Stakeholder>
-  <hrai:ExtractionBatch rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Batch_PBIA_20261111">
-    <rdfs:label xml:lang="pt">Lote de extração PBIA — 2026-11-11</rdfs:label>
-    <hrai:extractionContainsCandidate>
-      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Candidate_PolicyInstruments">
-        <rdfs:label xml:lang="pt">Candidato: PBIA, eixos, programas, ações e orçamentos (Seções 3 e Anexo 2)</rdfs:label>
-        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
-        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Agent_DocumentExtraction"/>
-      </hrai:CandidateAssertion>
-    </hrai:extractionContainsCandidate>
-    <hrai:extractionContainsCandidate>
-      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Candidate_NationalContext">
-        <rdfs:label xml:lang="pt">Candidato: contexto nacional e indicadores (Seções 1 e 3.4 — 'Onde estamos?')</rdfs:label>
-        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
-        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Agent_DocumentExtraction"/>
-      </hrai:CandidateAssertion>
-    </hrai:extractionContainsCandidate>
-    <hrai:extractionContainsCandidate>
-      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Candidate_TensionsGapsClaims">
-        <rdfs:label xml:lang="pt">Candidato: tensões, lacunas e afirmações de política (Seções 1, 2 e 3.4.5)</rdfs:label>
-        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
-        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Agent_DocumentExtraction"/>
-      </hrai:CandidateAssertion>
-    </hrai:extractionContainsCandidate>
-    <hrai:extractionContainsCandidate>
-      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Candidate_LegalReferences">
-        <rdfs:label xml:lang="pt">Candidato: normas e proposta legislativa citadas (Seção 3.4.5, nota 2 e nota 10)</rdfs:label>
-        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
-        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Agent_DocumentExtraction"/>
-      </hrai:CandidateAssertion>
-    </hrai:extractionContainsCandidate>
-    <hrai:extractionContainsCandidate>
-      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Candidate_Deliberation">
-        <rdfs:label xml:lang="pt">Candidato: processo participativo de elaboração do PBIA (Introdução)</rdfs:label>
-        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
-        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Agent_DocumentExtraction"/>
-      </hrai:CandidateAssertion>
-    </hrai:extractionContainsCandidate>
-    <hrai:extractionContainsCandidate>
-      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Candidate_AIApplications">
-        <rdfs:label xml:lang="pt">Candidato: iniciativas de IA de empresas no Brasil (Tabela 1)</rdfs:label>
-        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
-        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Agent_DocumentExtraction"/>
-      </hrai:CandidateAssertion>
-    </hrai:extractionContainsCandidate>
-  </hrai:ExtractionBatch>
-  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_BBProvaDeVida">
-    <schema:provider rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_BancoDoBrasil"/>
-    <rdfs:label xml:lang="pt">Prova de Vida (Banco do Brasil)</rdfs:label>
-    <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
-  </hrai:AIApplication>
-  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_SinapadComputePower">
-    <rdfs:label xml:lang="pt">Poder computacional total do Sinapad</rdfs:label>
-    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">6.2</hrai:hasNumericValue>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_StartupFunding2019_2023">
+    <rdfs:label xml:lang="pt">Capital levantado por startups brasileiras (2019-2023)</rdfs:label>
+    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">17.6</hrai:hasNumericValue>
+    <hrai:numericUnit>billion USD</hrai:numericUnit>
+    <hrai:hasIndicatorMethod xml:lang="pt">Google for Startups (2024), citado no PBIA, p. 41. O Brasil abriga 30% das startups Deep Tech da América Latina e Caribe; IA representa 16% delas.</hrai:hasIndicatorMethod>
+    <hrai:indicatorMeasuredFor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIContext_PBIA"/>
+    <hrai:indicatorMeasuresDimension>
+      <hrai:ContextDimension rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Dim_BusinessAdoption">
+        <rdfs:label xml:lang="pt">Adoção de IA e inovação empresarial</rdfs:label>
+      </hrai:ContextDimension>
+    </hrai:indicatorMeasuresDimension>
+    <hrai:indicatorSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+  </hrai:ContextIndicator>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_OpenDataBases">
+    <rdfs:label xml:lang="pt">Bases abertas no Portal Brasileiro de Dados Abertos</rdfs:label>
+    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">13000</hrai:hasNumericValue>
+    <hrai:numericUnit>datasets (lower bound)</hrai:numericUnit>
+    <hrai:hasIndicatorMethod xml:lang="pt">Brasil (2025), citado no PBIA, p. 34: mais de 13 mil bases de 264 organizações.</hrai:hasIndicatorMethod>
+    <hrai:indicatorMeasuredFor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIContext_PBIA"/>
+    <hrai:indicatorMeasuresDimension>
+      <hrai:ContextDimension rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Dim_DataEcosystem">
+        <rdfs:label xml:lang="pt">Ecossistema de dados</rdfs:label>
+      </hrai:ContextDimension>
+    </hrai:indicatorMeasuresDimension>
+    <hrai:indicatorSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+  </hrai:ContextIndicator>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_PegasoSupercomputerPerformance">
+    <rdfs:label xml:lang="pt">Desempenho do supercomputador Pégaso (Petrobras)</rdfs:label>
+    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">42</hrai:hasNumericValue>
     <hrai:numericUnit>PFlop/s</hrai:numericUnit>
-    <hrai:hasIndicatorMethod xml:lang="pt">PBIA, Eixo 1, p. 34 (valor aproximado).</hrai:hasIndicatorMethod>
+    <hrai:hasIndicatorMethod xml:lang="pt">TOP500 (2024), citado no PBIA, p. 34: mais potente da América Latina, 56º no ranking mundial.</hrai:hasIndicatorMethod>
     <hrai:indicatorMeasuredFor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIContext_PBIA"/>
     <hrai:indicatorMeasuresDimension rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Dim_ComputeInfrastructure"/>
     <hrai:indicatorSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
   </hrai:ContextIndicator>
-  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_BERTimbau">
-    <schema:provider>
-      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_NeuralMind">
-        <rdf:type rdf:resource="https://schema.org/Corporation"/>
-        <rdfs:label xml:lang="pt">NeuralMind</rdfs:label>
-      </hrai:Stakeholder>
-    </schema:provider>
-    <rdfs:label xml:lang="pt">BERTimbau (NeuralMind)</rdfs:label>
-    <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
-  </hrai:AIApplication>
-  <owl:Ontology rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia">
-    <owl:imports rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory"/>
-    <owl:versionInfo>1.0.0</owl:versionInfo>
-    <dcterms:title xml:lang="pt">HRAI-GO ABox — Plano Brasileiro de Inteligência Artificial (PBIA) 2024-2028</dcterms:title>
-    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-11-11</dcterms:created>
-    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
-    <rdfs:comment xml:lang="pt">Instâncias candidatas extraídas do PBIA. Não certificam aplicabilidade jurídica, vigência ou conformidade. Pendentes de revisão humana.</rdfs:comment>
-  </owl:Ontology>
-  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MME">
-    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
-    <rdfs:label xml:lang="pt">Ministério de Minas e Energia (MME)</rdfs:label>
-    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
-    <rdfs:comment xml:lang="pt">Fonte da projeção de 2,5 GW de carga de data centers até 2037.</rdfs:comment>
-  </hrai:Stakeholder>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_RenewableShareEnergyMatrix_Axis4">
+    <rdfs:label xml:lang="pt">Participação de fontes renováveis na 'matriz energética' citada no Eixo 4</rdfs:label>
+    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">83</hrai:hasNumericValue>
+    <hrai:numericUnit>percent</hrai:numericUnit>
+    <hrai:hasIndicatorMethod xml:lang="pt">PBIA, Eixo 4 'Onde estamos?', p. 41; ano e fonte primária não informados.</hrai:hasIndicatorMethod>
+    <hrai:indicatorMeasuredFor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIContext_PBIA"/>
+    <hrai:indicatorMeasuresDimension>
+      <hrai:ContextDimension rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Dim_EnergySustainability">
+        <rdfs:label xml:lang="pt">Energia e sustentabilidade</rdfs:label>
+      </hrai:ContextDimension>
+    </hrai:indicatorMeasuresDimension>
+    <hrai:indicatorSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+    <rdfs:comment xml:lang="pt">Atenção à curadoria: valor diverge dos 89,2% (matriz elétrica, 2023) do Eixo 1. Pode ser outro ano ou outro recorte; requer verificação na fonte primária antes de uso analítico.</rdfs:comment>
+  </hrai:ContextIndicator>
   <hrai:Deliberation rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Delib_PBIAElaboration2024">
     <hrai:deliberationIncludesStakeholder rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
     <hrai:deliberationIncludesStakeholder>
@@ -514,45 +415,105 @@
     </prov:wasDerivedFrom>
     <rdfs:comment xml:lang="pt">Quatro meses de trabalho: duas reuniões do CCT (38 documentos, mais de 300 propostas), seis oficinas temáticas (cerca de 300 participantes), mais de 30 reuniões bilaterais, 117 instituições públicas, privadas e da sociedade civil. GT coordenado pela Sexec/MCTI (Portaria MCTI 8.251/2024).</rdfs:comment>
   </hrai:Deliberation>
-  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MIDR">
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MMA">
     <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
-    <rdfs:label xml:lang="pt">Ministério da Integração e do Desenvolvimento Regional (MIDR)</rdfs:label>
+    <rdfs:label xml:lang="pt">Ministério do Meio Ambiente e Mudança do Clima (MMA)</rdfs:label>
     <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
   </hrai:Stakeholder>
-  <hrai:EnactedLegalInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#EU_AIAct">
-    <rdfs:label xml:lang="pt">Regulamento europeu sobre inteligência artificial (AI Act)</rdfs:label>
-    <hrai:instrumentIdentifier>EU AI Act</hrai:instrumentIdentifier>
-    <hrai:instrumentInJurisdiction>
-      <hrai:Jurisdiction rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#EuropeanUnion">
-        <rdfs:label xml:lang="pt">União Europeia</rdfs:label>
-        <rdfs:label xml:lang="en">European Union</rdfs:label>
-        <rdfs:comment xml:lang="pt">Registrada apenas porque o PBIA cita o AI Act como referência de governança (Seção 4, nota 9).</rdfs:comment>
-      </hrai:Jurisdiction>
-    </hrai:instrumentInJurisdiction>
-    <rdfs:comment xml:lang="pt">Citado como exemplo internacional de governança (Scientific Panel e Advisory Forum). Sem aplicabilidade presumida ao Brasil.</rdfs:comment>
-  </hrai:EnactedLegalInstrument>
-  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Confap">
+  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_MonitoramentoAmazonia">
+    <schema:provider rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_OpenAI"/>
+    <schema:provider>
+      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_UFAM">
+        <rdf:type rdf:resource="https://schema.org/CollegeOrUniversity"/>
+        <rdfs:label xml:lang="pt">Universidade Federal do Amazonas (UFAM)</rdfs:label>
+      </hrai:Stakeholder>
+    </schema:provider>
+    <rdfs:label xml:lang="pt">Monitoramento da Amazônia (OpenAI e UFAM)</rdfs:label>
+    <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
+  </hrai:AIApplication>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_IndustryAIDisruptionPerception2021">
+    <rdfs:label xml:lang="pt">Empresas industriais que percebem a IA como disruptiva em seus setores</rdfs:label>
+    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">76</hrai:hasNumericValue>
+    <hrai:numericUnit>percent</hrai:numericUnit>
+    <hrai:hasIndicatorMethod xml:lang="pt">Embrapii (2021), amostra de 164 empresas industriais, citado no PBIA, p. 23. 95% teriam interesse em P&amp;D em IA com centros de pesquisa.</hrai:hasIndicatorMethod>
+    <hrai:indicatorMeasuredFor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIContext_PBIA"/>
+    <hrai:indicatorMeasuresDimension rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Dim_BusinessAdoption"/>
+    <hrai:indicatorSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+  </hrai:ContextIndicator>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_ANPG">
     <rdf:type rdf:resource="https://schema.org/Organization"/>
-    <rdfs:label xml:lang="pt">Conselho Nacional das Fundações Estaduais de Amparo à Pesquisa (Confap)</rdfs:label>
+    <rdfs:label xml:lang="pt">Associação Nacional de Pós-Graduandos (ANPG)</rdfs:label>
     <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
   </hrai:Stakeholder>
-  <hrai:RegulatoryTension rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Tension_TalentMigrationAcademiaIndustry">
-    <rdfs:label xml:lang="pt">Migração de talentos da academia para a indústria: competitividade versus capacidade de pesquisa e formação</rdfs:label>
-    <hrai:tensionInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
-    <hrai:tensionInvolvesObjective>
-      <hrai:PolicyObjective rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Obj_TechVanguardComputeInfrastructure">
-        <rdfs:label xml:lang="pt">Posicionar o Brasil na vanguarda tecnológica com infraestrutura computacional para IA</rdfs:label>
-      </hrai:PolicyObjective>
-    </hrai:tensionInvolvesObjective>
-    <hrai:hasPolicyClaim>
-      <hrai:PolicyClaim rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Claim_TalentMigrationContradiction">
-        <rdfs:label xml:lang="pt">A migração de talentos para a indústria é desejável e preocupante ao mesmo tempo</rdfs:label>
-        <hrai:claimText xml:lang="pt">A migração de talentos da academia para a indústria é desejável do ponto de vista da competitividade, mas pode ameaçar a capacidade da academia de inovar e formar a próxima geração de pesquisadores.</hrai:claimText>
-        <hrai:claimSupportedByEvidence rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Sec1"/>
-      </hrai:PolicyClaim>
-    </hrai:hasPolicyClaim>
-    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Sec1"/>
-  </hrai:RegulatoryTension>
+  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_ChatGPTNavesConhecimento">
+    <schema:provider rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_OpenAI"/>
+    <schema:provider>
+      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_RioCityHall">
+        <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
+        <rdfs:label xml:lang="pt">Prefeitura do Rio de Janeiro</rdfs:label>
+      </hrai:Stakeholder>
+    </schema:provider>
+    <rdfs:label xml:lang="pt">ChatGPT4 nas Naves do Conhecimento (OpenAI e Prefeitura do Rio)</rdfs:label>
+    <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
+  </hrai:AIApplication>
+  <owl:Ontology rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia">
+    <owl:imports rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory"/>
+    <owl:versionInfo>1.0.0</owl:versionInfo>
+    <dcterms:title xml:lang="pt">HRAI-GO ABox — Plano Brasileiro de Inteligência Artificial (PBIA) 2024-2028</dcterms:title>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-11-11</dcterms:created>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+    <rdfs:comment xml:lang="pt">Instâncias candidatas extraídas do PBIA. Não certificam aplicabilidade jurídica, vigência ou conformidade. Pendentes de revisão humana.</rdfs:comment>
+  </owl:Ontology>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MS">
+    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
+    <rdfs:label xml:lang="pt">Ministério da Saúde</rdfs:label>
+    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
+  </hrai:Stakeholder>
+  <hrai:ExtractionBatch rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Batch_PBIA_20261111">
+    <rdfs:label xml:lang="pt">Lote de extração PBIA — 2026-11-11</rdfs:label>
+    <hrai:extractionContainsCandidate>
+      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Candidate_PolicyInstruments">
+        <rdfs:label xml:lang="pt">Candidato: PBIA, eixos, programas, ações e orçamentos (Seções 3 e Anexo 2)</rdfs:label>
+        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Agent_DocumentExtraction"/>
+      </hrai:CandidateAssertion>
+    </hrai:extractionContainsCandidate>
+    <hrai:extractionContainsCandidate>
+      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Candidate_NationalContext">
+        <rdfs:label xml:lang="pt">Candidato: contexto nacional e indicadores (Seções 1 e 3.4 — 'Onde estamos?')</rdfs:label>
+        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Agent_DocumentExtraction"/>
+      </hrai:CandidateAssertion>
+    </hrai:extractionContainsCandidate>
+    <hrai:extractionContainsCandidate>
+      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Candidate_TensionsGapsClaims">
+        <rdfs:label xml:lang="pt">Candidato: tensões, lacunas e afirmações de política (Seções 1, 2 e 3.4.5)</rdfs:label>
+        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Agent_DocumentExtraction"/>
+      </hrai:CandidateAssertion>
+    </hrai:extractionContainsCandidate>
+    <hrai:extractionContainsCandidate>
+      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Candidate_LegalReferences">
+        <rdfs:label xml:lang="pt">Candidato: normas e proposta legislativa citadas (Seção 3.4.5, nota 2 e nota 10)</rdfs:label>
+        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Agent_DocumentExtraction"/>
+      </hrai:CandidateAssertion>
+    </hrai:extractionContainsCandidate>
+    <hrai:extractionContainsCandidate>
+      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Candidate_Deliberation">
+        <rdfs:label xml:lang="pt">Candidato: processo participativo de elaboração do PBIA (Introdução)</rdfs:label>
+        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Agent_DocumentExtraction"/>
+      </hrai:CandidateAssertion>
+    </hrai:extractionContainsCandidate>
+    <hrai:extractionContainsCandidate>
+      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Candidate_AIApplications">
+        <rdfs:label xml:lang="pt">Candidato: iniciativas de IA de empresas no Brasil (Tabela 1)</rdfs:label>
+        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Agent_DocumentExtraction"/>
+      </hrai:CandidateAssertion>
+    </hrai:extractionContainsCandidate>
+  </hrai:ExtractionBatch>
   <hrai:PolicyImpactAssessment rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Assess_PBIADiagnostic">
     <rdfs:label xml:lang="pt">Diagnóstico do próprio PBIA ('Onde estamos?') que fundamenta a abordagem dual</rdfs:label>
     <hrai:assessesPolicyAlternative rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Alt_DualApproachImmediateAndStructural"/>
@@ -643,127 +604,37 @@
     <hrai:impactAssessmentIdentifiesTension rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Tension_ComputeExpansionVsEnergyWater"/>
     <rdfs:comment xml:lang="pt">Autoavaliação do formulador do plano, não avaliação independente de impacto.</rdfs:comment>
   </hrai:PolicyImpactAssessment>
-  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_ChatGPTNavesConhecimento">
-    <schema:provider rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_OpenAI"/>
+  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_CaixaHabitacao">
     <schema:provider>
-      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_RioCityHall">
-        <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
-        <rdfs:label xml:lang="pt">Prefeitura do Rio de Janeiro</rdfs:label>
+      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Caixa">
+        <rdf:type rdf:resource="https://schema.org/Corporation"/>
+        <rdfs:label xml:lang="pt">Caixa Econômica Federal</rdfs:label>
       </hrai:Stakeholder>
     </schema:provider>
-    <rdfs:label xml:lang="pt">ChatGPT4 nas Naves do Conhecimento (OpenAI e Prefeitura do Rio)</rdfs:label>
+    <rdfs:label xml:lang="pt">IA para Solução de Habitação da Caixa (Caixa Econômica Federal)</rdfs:label>
     <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
   </hrai:AIApplication>
-  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_OpenDataBases">
-    <rdfs:label xml:lang="pt">Bases abertas no Portal Brasileiro de Dados Abertos</rdfs:label>
-    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">13000</hrai:hasNumericValue>
-    <hrai:numericUnit>datasets (lower bound)</hrai:numericUnit>
-    <hrai:hasIndicatorMethod xml:lang="pt">Brasil (2025), citado no PBIA, p. 34: mais de 13 mil bases de 264 organizações.</hrai:hasIndicatorMethod>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_ICTTalentDeficit2021_2025">
+    <rdfs:label xml:lang="pt">Déficit estimado de profissionais de TIC (2021-2025)</rdfs:label>
+    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">530000</hrai:hasNumericValue>
+    <hrai:numericUnit>professionals</hrai:numericUnit>
+    <hrai:hasIndicatorMethod xml:lang="pt">BRASSCOM (2021), citado no PBIA, p. 37; demanda projetada de 800 mil novos talentos.</hrai:hasIndicatorMethod>
     <hrai:indicatorMeasuredFor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIContext_PBIA"/>
     <hrai:indicatorMeasuresDimension>
-      <hrai:ContextDimension rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Dim_DataEcosystem">
-        <rdfs:label xml:lang="pt">Ecossistema de dados</rdfs:label>
+      <hrai:ContextDimension rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Dim_SkillsEducation">
+        <rdfs:label xml:lang="pt">Formação, capacitação e educação</rdfs:label>
       </hrai:ContextDimension>
     </hrai:indicatorMeasuresDimension>
     <hrai:indicatorSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
   </hrai:ContextIndicator>
-  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Abruc">
-    <rdf:type rdf:resource="https://schema.org/Organization"/>
-    <rdfs:label xml:lang="pt">Associação Brasileira das Instituições Comunitárias de Educação Superior (Abruc)</rdfs:label>
-    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
-  </hrai:Stakeholder>
+  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_BatimentosFlorestaAmazonica">
+    <schema:provider rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Stefanini"/>
+    <rdfs:label xml:lang="pt">Batimentos cardíacos da Floresta Amazônica - IA (Stefanini)</rdfs:label>
+    <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
+  </hrai:AIApplication>
   <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MPO">
     <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
     <rdfs:label xml:lang="pt">Ministério do Planejamento e Orçamento (MPO)</rdfs:label>
-    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
-  </hrai:Stakeholder>
-  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_SantosDumontSupercomputerPerformance">
-    <rdfs:label xml:lang="pt">Capacidade combinada do supercomputador Santos Dumont (LNCC)</rdfs:label>
-    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">5.1</hrai:hasNumericValue>
-    <hrai:numericUnit>PFlop/s</hrai:numericUnit>
-    <hrai:hasIndicatorMethod xml:lang="pt">TOP500 (2024), citado no PBIA, p. 34; soma das três arquiteturas.</hrai:hasIndicatorMethod>
-    <hrai:indicatorMeasuredFor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIContext_PBIA"/>
-    <hrai:indicatorMeasuresDimension rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Dim_ComputeInfrastructure"/>
-    <hrai:indicatorSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
-  </hrai:ContextIndicator>
-  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_RenewableShareEnergyMatrix_Axis4">
-    <rdfs:label xml:lang="pt">Participação de fontes renováveis na 'matriz energética' citada no Eixo 4</rdfs:label>
-    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">83</hrai:hasNumericValue>
-    <hrai:numericUnit>percent</hrai:numericUnit>
-    <hrai:hasIndicatorMethod xml:lang="pt">PBIA, Eixo 4 'Onde estamos?', p. 41; ano e fonte primária não informados.</hrai:hasIndicatorMethod>
-    <hrai:indicatorMeasuredFor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIContext_PBIA"/>
-    <hrai:indicatorMeasuresDimension>
-      <hrai:ContextDimension rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Dim_EnergySustainability">
-        <rdfs:label xml:lang="pt">Energia e sustentabilidade</rdfs:label>
-      </hrai:ContextDimension>
-    </hrai:indicatorMeasuresDimension>
-    <hrai:indicatorSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
-    <rdfs:comment xml:lang="pt">Atenção à curadoria: valor diverge dos 89,2% (matriz elétrica, 2023) do Eixo 1. Pode ser outro ano ou outro recorte; requer verificação na fonte primária antes de uso analítico.</rdfs:comment>
-  </hrai:ContextIndicator>
-  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_MonitoramentoAmazonia">
-    <schema:provider rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_OpenAI"/>
-    <schema:provider>
-      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_UFAM">
-        <rdf:type rdf:resource="https://schema.org/CollegeOrUniversity"/>
-        <rdfs:label xml:lang="pt">Universidade Federal do Amazonas (UFAM)</rdfs:label>
-      </hrai:Stakeholder>
-    </schema:provider>
-    <rdfs:label xml:lang="pt">Monitoramento da Amazônia (OpenAI e UFAM)</rdfs:label>
-    <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
-  </hrai:AIApplication>
-  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_PISAMathBelowBasic">
-    <rdfs:label xml:lang="pt">Estudantes sem conhecimentos básicos de matemática (Pisa)</rdfs:label>
-    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">68</hrai:hasNumericValue>
-    <hrai:numericUnit>percent</hrai:numericUnit>
-    <hrai:hasIndicatorMethod xml:lang="pt">ABC (2023), citado no PBIA, p. 37.</hrai:hasIndicatorMethod>
-    <hrai:indicatorMeasuredFor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIContext_PBIA"/>
-    <hrai:indicatorMeasuresDimension rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Dim_SkillsEducation"/>
-    <hrai:indicatorSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
-  </hrai:ContextIndicator>
-  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_ManufacturingProductivityChange2001_2021">
-    <rdfs:label xml:lang="pt">Variação da produtividade do trabalho na indústria de transformação (2001-2021)</rdfs:label>
-    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-24</hrai:hasNumericValue>
-    <hrai:numericUnit>percent</hrai:numericUnit>
-    <hrai:hasIndicatorMethod xml:lang="pt">CNI (2022), citado no PBIA, p. 23.</hrai:hasIndicatorMethod>
-    <hrai:indicatorMeasuredFor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIContext_PBIA"/>
-    <hrai:indicatorMeasuresDimension>
-      <hrai:ContextDimension rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Dim_Productivity">
-        <rdfs:label xml:lang="pt">Produtividade</rdfs:label>
-      </hrai:ContextDimension>
-    </hrai:indicatorMeasuresDimension>
-    <hrai:indicatorSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
-  </hrai:ContextIndicator>
-  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_WideJuridico">
-    <schema:provider rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_WideLabs"/>
-    <rdfs:label xml:lang="pt">Wide Jurídico (WideLabs)</rdfs:label>
-    <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
-  </hrai:AIApplication>
-  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Ibrachics">
-    <rdf:type rdf:resource="https://schema.org/Organization"/>
-    <rdfs:label xml:lang="pt">Instituto Brasileiro de Cidades Humanas, Inteligentes, Criativas e Sustentáveis (Ibrachics)</rdfs:label>
-    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
-  </hrai:Stakeholder>
-  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_IndustryAIDisruptionPerception2021">
-    <rdfs:label xml:lang="pt">Empresas industriais que percebem a IA como disruptiva em seus setores</rdfs:label>
-    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">76</hrai:hasNumericValue>
-    <hrai:numericUnit>percent</hrai:numericUnit>
-    <hrai:hasIndicatorMethod xml:lang="pt">Embrapii (2021), amostra de 164 empresas industriais, citado no PBIA, p. 23. 95% teriam interesse em P&amp;D em IA com centros de pesquisa.</hrai:hasIndicatorMethod>
-    <hrai:indicatorMeasuredFor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIContext_PBIA"/>
-    <hrai:indicatorMeasuresDimension>
-      <hrai:ContextDimension rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Dim_BusinessAdoption">
-        <rdfs:label xml:lang="pt">Adoção de IA e inovação empresarial</rdfs:label>
-      </hrai:ContextDimension>
-    </hrai:indicatorMeasuresDimension>
-    <hrai:indicatorSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
-  </hrai:ContextIndicator>
-  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_StefaniniCombateFraude">
-    <schema:provider rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Stefanini"/>
-    <rdfs:label xml:lang="pt">Combate a fraude financeira (Stefanini)</rdfs:label>
-    <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
-  </hrai:AIApplication>
-  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_AGU">
-    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
-    <rdfs:label xml:lang="pt">Advocacia-Geral da União (AGU)</rdfs:label>
     <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
   </hrai:Stakeholder>
   <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_StefaniniIndustriaAco">
@@ -771,39 +642,31 @@
     <rdfs:label xml:lang="pt">IA na indústria do aço (Stefanini)</rdfs:label>
     <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
   </hrai:AIApplication>
-  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_CaixaHabitacao">
-    <schema:provider rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Caixa"/>
-    <rdfs:label xml:lang="pt">IA para Solução de Habitação da Caixa (Caixa Econômica Federal)</rdfs:label>
+  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_BBPequenoNegocioIA">
+    <schema:provider>
+      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_BancoDoBrasil">
+        <rdf:type rdf:resource="https://schema.org/Corporation"/>
+        <rdfs:label xml:lang="pt">Banco do Brasil</rdfs:label>
+      </hrai:Stakeholder>
+    </schema:provider>
+    <rdfs:label xml:lang="pt">Pequeno Negócio + IA (Banco do Brasil)</rdfs:label>
     <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
   </hrai:AIApplication>
-  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_StartupFunding2019_2023">
-    <rdfs:label xml:lang="pt">Capital levantado por startups brasileiras (2019-2023)</rdfs:label>
-    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">17.6</hrai:hasNumericValue>
-    <hrai:numericUnit>billion USD</hrai:numericUnit>
-    <hrai:hasIndicatorMethod xml:lang="pt">Google for Startups (2024), citado no PBIA, p. 41. O Brasil abriga 30% das startups Deep Tech da América Latina e Caribe; IA representa 16% delas.</hrai:hasIndicatorMethod>
-    <hrai:indicatorMeasuredFor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIContext_PBIA"/>
-    <hrai:indicatorMeasuresDimension rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Dim_BusinessAdoption"/>
-    <hrai:indicatorSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
-  </hrai:ContextIndicator>
-  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MAPA">
-    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
-    <rdfs:label xml:lang="pt">Ministério da Agricultura e Pecuária (MAPA)</rdfs:label>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Abruem">
+    <rdf:type rdf:resource="https://schema.org/Organization"/>
+    <rdfs:label xml:lang="pt">Associação Brasileira dos Reitores das Universidades Estaduais e Municipais (Abruem)</rdfs:label>
     <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
   </hrai:Stakeholder>
-  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_SecretariaGeral">
-    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
-    <rdfs:label xml:lang="pt">Secretaria-Geral da Presidência da República</rdfs:label>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Ibrachics">
+    <rdf:type rdf:resource="https://schema.org/Organization"/>
+    <rdfs:label xml:lang="pt">Instituto Brasileiro de Cidades Humanas, Inteligentes, Criativas e Sustentáveis (Ibrachics)</rdfs:label>
     <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
   </hrai:Stakeholder>
-  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_DataCenterLoadProjection2037">
-    <rdfs:label xml:lang="pt">Projeção de carga de novos data centers até 2037 (SP, RS e CE)</rdfs:label>
-    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.5</hrai:hasNumericValue>
-    <hrai:numericUnit>GW</hrai:numericUnit>
-    <hrai:hasIndicatorMethod xml:lang="pt">MME (Brasil, 2024b), citado no PBIA, p. 34. Projeção: crescimento de 600% sobre a carga atual, considerando apenas novos projetos nos três principais polos.</hrai:hasIndicatorMethod>
-    <hrai:indicatorMeasuredFor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIContext_PBIA"/>
-    <hrai:indicatorMeasuresDimension rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Dim_EnergySustainability"/>
-    <hrai:indicatorSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
-  </hrai:ContextIndicator>
+  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_BBMenosFraudes">
+    <schema:provider rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_BancoDoBrasil"/>
+    <rdfs:label xml:lang="pt">Menos fraudes em transações (Banco do Brasil)</rdfs:label>
+    <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
+  </hrai:AIApplication>
   <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_CombateDesinformacao">
     <schema:provider rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_OpenAI"/>
     <schema:provider>
@@ -821,24 +684,171 @@
     <rdfs:label xml:lang="pt">Combate à desinformação (OpenAI, UFBA e FGV-RJ)</rdfs:label>
     <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
   </hrai:AIApplication>
-  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_BBPequenoNegocioIA">
-    <schema:provider rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_BancoDoBrasil"/>
-    <rdfs:label xml:lang="pt">Pequeno Negócio + IA (Banco do Brasil)</rdfs:label>
-    <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
-  </hrai:AIApplication>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_ManufacturingProductivityChange2001_2021">
+    <rdfs:label xml:lang="pt">Variação da produtividade do trabalho na indústria de transformação (2001-2021)</rdfs:label>
+    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-24</hrai:hasNumericValue>
+    <hrai:numericUnit>percent</hrai:numericUnit>
+    <hrai:hasIndicatorMethod xml:lang="pt">CNI (2022), citado no PBIA, p. 23.</hrai:hasIndicatorMethod>
+    <hrai:indicatorMeasuredFor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIContext_PBIA"/>
+    <hrai:indicatorMeasuresDimension>
+      <hrai:ContextDimension rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Dim_Productivity">
+        <rdfs:label xml:lang="pt">Produtividade</rdfs:label>
+      </hrai:ContextDimension>
+    </hrai:indicatorMeasuresDimension>
+    <hrai:indicatorSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+  </hrai:ContextIndicator>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MAPA">
+    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
+    <rdfs:label xml:lang="pt">Ministério da Agricultura e Pecuária (MAPA)</rdfs:label>
+    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
+  </hrai:Stakeholder>
   <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Conif">
     <rdf:type rdf:resource="https://schema.org/Organization"/>
     <rdfs:label xml:lang="pt">Conselho Nacional das Instituições da Rede Federal de Educação Profissional, Científica e Tecnológica (Conif)</rdfs:label>
     <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
   </hrai:Stakeholder>
-  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_ProjetoLibras">
+  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_WideJuridico">
     <schema:provider>
-      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Lenovo">
+      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_WideLabs">
         <rdf:type rdf:resource="https://schema.org/Corporation"/>
-        <rdfs:label xml:lang="pt">Lenovo</rdfs:label>
+        <rdfs:label xml:lang="pt">WideLabs</rdfs:label>
       </hrai:Stakeholder>
     </schema:provider>
-    <rdfs:label xml:lang="pt">Projeto Libras (Lenovo)</rdfs:label>
+    <rdfs:label xml:lang="pt">Wide Jurídico (WideLabs)</rdfs:label>
+    <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
+  </hrai:AIApplication>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_AGU">
+    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
+    <rdfs:label xml:lang="pt">Advocacia-Geral da União (AGU)</rdfs:label>
+    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
+  </hrai:Stakeholder>
+  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_BBProvaDeVida">
+    <schema:provider rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_BancoDoBrasil"/>
+    <rdfs:label xml:lang="pt">Prova de Vida (Banco do Brasil)</rdfs:label>
+    <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
+  </hrai:AIApplication>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MME">
+    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
+    <rdfs:label xml:lang="pt">Ministério de Minas e Energia (MME)</rdfs:label>
+    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
+    <rdfs:comment xml:lang="pt">Fonte da projeção de 2,5 GW de carga de data centers até 2037.</rdfs:comment>
+  </hrai:Stakeholder>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Consecti">
+    <rdf:type rdf:resource="https://schema.org/Organization"/>
+    <rdfs:label xml:lang="pt">Conselho Nacional de Secretários Estaduais para Assuntos de CT&amp;I (Consecti)</rdfs:label>
+    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
+  </hrai:Stakeholder>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_DataCenterLoadProjection2037">
+    <rdfs:label xml:lang="pt">Projeção de carga de novos data centers até 2037 (SP, RS e CE)</rdfs:label>
+    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.5</hrai:hasNumericValue>
+    <hrai:numericUnit>GW</hrai:numericUnit>
+    <hrai:hasIndicatorMethod xml:lang="pt">MME (Brasil, 2024b), citado no PBIA, p. 34. Projeção: crescimento de 600% sobre a carga atual, considerando apenas novos projetos nos três principais polos.</hrai:hasIndicatorMethod>
+    <hrai:indicatorMeasuredFor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIContext_PBIA"/>
+    <hrai:indicatorMeasuresDimension rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Dim_EnergySustainability"/>
+    <hrai:indicatorSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+  </hrai:ContextIndicator>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_PISAMathBelowBasic">
+    <rdfs:label xml:lang="pt">Estudantes sem conhecimentos básicos de matemática (Pisa)</rdfs:label>
+    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">68</hrai:hasNumericValue>
+    <hrai:numericUnit>percent</hrai:numericUnit>
+    <hrai:hasIndicatorMethod xml:lang="pt">ABC (2023), citado no PBIA, p. 37.</hrai:hasIndicatorMethod>
+    <hrai:indicatorMeasuredFor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIContext_PBIA"/>
+    <hrai:indicatorMeasuresDimension rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Dim_SkillsEducation"/>
+    <hrai:indicatorSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+  </hrai:ContextIndicator>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_SecretariaGeral">
+    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
+    <rdfs:label xml:lang="pt">Secretaria-Geral da Presidência da República</rdfs:label>
+    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
+  </hrai:Stakeholder>
+  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_CaixaOtimizacaoSFH">
+    <schema:provider rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Caixa"/>
+    <rdfs:label xml:lang="pt">Otimização do Sistema Financeiro de Habitação (Caixa Econômica Federal)</rdfs:label>
+    <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
+  </hrai:AIApplication>
+  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_PlataformaAcolhimento">
+    <schema:provider rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_WideLabs"/>
+    <rdfs:label xml:lang="pt">Plataforma Acolhimento (WideLabs)</rdfs:label>
+    <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
+  </hrai:AIApplication>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Abruc">
+    <rdf:type rdf:resource="https://schema.org/Organization"/>
+    <rdfs:label xml:lang="pt">Associação Brasileira das Instituições Comunitárias de Educação Superior (Abruc)</rdfs:label>
+    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
+  </hrai:Stakeholder>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_SantosDumontSupercomputerPerformance">
+    <rdfs:label xml:lang="pt">Capacidade combinada do supercomputador Santos Dumont (LNCC)</rdfs:label>
+    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">5.1</hrai:hasNumericValue>
+    <hrai:numericUnit>PFlop/s</hrai:numericUnit>
+    <hrai:hasIndicatorMethod xml:lang="pt">TOP500 (2024), citado no PBIA, p. 34; soma das três arquiteturas.</hrai:hasIndicatorMethod>
+    <hrai:indicatorMeasuredFor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIContext_PBIA"/>
+    <hrai:indicatorMeasuresDimension rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Dim_ComputeInfrastructure"/>
+    <hrai:indicatorSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+  </hrai:ContextIndicator>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MD">
+    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
+    <rdfs:label xml:lang="pt">Ministério da Defesa</rdfs:label>
+    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
+  </hrai:Stakeholder>
+  <hrai:RegulatoryTension rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Tension_TalentMigrationAcademiaIndustry">
+    <rdfs:label xml:lang="pt">Migração de talentos da academia para a indústria: competitividade versus capacidade de pesquisa e formação</rdfs:label>
+    <hrai:tensionInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
+    <hrai:tensionInvolvesObjective>
+      <hrai:PolicyObjective rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Obj_TechVanguardComputeInfrastructure">
+        <rdfs:label xml:lang="pt">Posicionar o Brasil na vanguarda tecnológica com infraestrutura computacional para IA</rdfs:label>
+      </hrai:PolicyObjective>
+    </hrai:tensionInvolvesObjective>
+    <hrai:hasPolicyClaim>
+      <hrai:PolicyClaim rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Claim_TalentMigrationContradiction">
+        <rdfs:label xml:lang="pt">A migração de talentos para a indústria é desejável e preocupante ao mesmo tempo</rdfs:label>
+        <hrai:claimText xml:lang="pt">A migração de talentos da academia para a indústria é desejável do ponto de vista da competitividade, mas pode ameaçar a capacidade da academia de inovar e formar a próxima geração de pesquisadores.</hrai:claimText>
+        <hrai:claimSupportedByEvidence rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Sec1"/>
+      </hrai:PolicyClaim>
+    </hrai:hasPolicyClaim>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Sec1"/>
+  </hrai:RegulatoryTension>
+  <hrai:RegulatoryChangeEvent rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Change_PBIA_VN8_Captured">
+    <rdfs:label xml:lang="pt">Captura da versão VN 8 do PBIA</rdfs:label>
+    <hrai:changeObservedInSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+    <hrai:changeDetectedBy>
+      <hrai:MonitoringAgent rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Agent_DocumentExtraction">
+        <rdfs:label xml:lang="pt">Agente de extração documental HRAI-GO (Claude Code, extração assistida por LLM)</rdfs:label>
+      </hrai:MonitoringAgent>
+    </hrai:changeDetectedBy>
+    <hrai:changeDetectedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-11T23:02:00-03:00</hrai:changeDetectedAt>
+    <hrai:changeRecordedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-11T23:02:00-03:00</hrai:changeRecordedAt>
+    <hrai:changeDescription xml:lang="pt">Primeira ingestão do PBIA no grafo. Não há versão anterior registrada para comparação (diff).</hrai:changeDescription>
+  </hrai:RegulatoryChangeEvent>
+  <hrai:EnactedLegalInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#EU_AIAct">
+    <rdfs:label xml:lang="pt">Regulamento europeu sobre inteligência artificial (AI Act)</rdfs:label>
+    <hrai:instrumentIdentifier>EU AI Act</hrai:instrumentIdentifier>
+    <hrai:instrumentInJurisdiction>
+      <hrai:Jurisdiction rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#EuropeanUnion">
+        <rdfs:label xml:lang="pt">União Europeia</rdfs:label>
+        <rdfs:label xml:lang="en">European Union</rdfs:label>
+        <rdfs:comment xml:lang="pt">Registrada apenas porque o PBIA cita o AI Act como referência de governança (Seção 4, nota 9).</rdfs:comment>
+      </hrai:Jurisdiction>
+    </hrai:instrumentInJurisdiction>
+    <rdfs:comment xml:lang="pt">Citado como exemplo internacional de governança (Scientific Panel e Advisory Forum). Sem aplicabilidade presumida ao Brasil.</rdfs:comment>
+  </hrai:EnactedLegalInstrument>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MIDR">
+    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
+    <rdfs:label xml:lang="pt">Ministério da Integração e do Desenvolvimento Regional (MIDR)</rdfs:label>
+    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
+  </hrai:Stakeholder>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Confap">
+    <rdf:type rdf:resource="https://schema.org/Organization"/>
+    <rdfs:label xml:lang="pt">Conselho Nacional das Fundações Estaduais de Amparo à Pesquisa (Confap)</rdfs:label>
+    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
+  </hrai:Stakeholder>
+  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_BERTimbau">
+    <schema:provider>
+      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_NeuralMind">
+        <rdf:type rdf:resource="https://schema.org/Corporation"/>
+        <rdfs:label xml:lang="pt">NeuralMind</rdfs:label>
+      </hrai:Stakeholder>
+    </schema:provider>
+    <rdfs:label xml:lang="pt">BERTimbau (NeuralMind)</rdfs:label>
     <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
   </hrai:AIApplication>
   <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_MaritalkAI">
@@ -851,153 +861,34 @@
     <rdfs:label xml:lang="pt">Maritalk AI (Maritaca AI)</rdfs:label>
     <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
   </hrai:AIApplication>
-  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MMA">
-    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
-    <rdfs:label xml:lang="pt">Ministério do Meio Ambiente e Mudança do Clima (MMA)</rdfs:label>
-    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
-  </hrai:Stakeholder>
+  <hrai:AIApplication rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#App_ProjetoLibras">
+    <schema:provider>
+      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Lenovo">
+        <rdf:type rdf:resource="https://schema.org/Corporation"/>
+        <rdfs:label xml:lang="pt">Lenovo</rdfs:label>
+      </hrai:Stakeholder>
+    </schema:provider>
+    <rdfs:label xml:lang="pt">Projeto Libras (Lenovo)</rdfs:label>
+    <hrai:applicationInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
+  </hrai:AIApplication>
   <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_SBPC">
     <rdf:type rdf:resource="https://schema.org/Organization"/>
     <rdfs:label xml:lang="pt">Sociedade Brasileira para o Progresso da Ciência (SBPC)</rdfs:label>
     <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
   </hrai:Stakeholder>
-  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_ANPG">
-    <rdf:type rdf:resource="https://schema.org/Organization"/>
-    <rdfs:label xml:lang="pt">Associação Nacional de Pós-Graduandos (ANPG)</rdfs:label>
-    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
-  </hrai:Stakeholder>
-  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Abruem">
-    <rdf:type rdf:resource="https://schema.org/Organization"/>
-    <rdfs:label xml:lang="pt">Associação Brasileira dos Reitores das Universidades Estaduais e Municipais (Abruem)</rdfs:label>
-    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
-  </hrai:Stakeholder>
-  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Andifes">
-    <rdf:type rdf:resource="https://schema.org/Organization"/>
-    <rdfs:label xml:lang="pt">Associação Nacional dos Dirigentes das Instituições Federais de Ensino Superior (Andifes)</rdfs:label>
-    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
-  </hrai:Stakeholder>
-  <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action54_InternationalDebateNetwork">
-    <rdfs:label xml:lang="pt">Ação 54 — Rede de apoio à participação do Brasil no debate internacional</rdfs:label>
-    <dcterms:isPartOf>
-      <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Prog5B_AIGovernanceSupport">
-        <rdfs:label xml:lang="pt">Programa de Apoio à Governança da IA</rdfs:label>
-        <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis5_RegulatoryGovernanceSupport"/>
-        <dcterms:hasPart rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action52_BrazilianAIObservatory"/>
-        <dcterms:hasPart rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action53_AIGovernanceSupportNetwork"/>
-        <dcterms:hasPart rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action54_InternationalDebateNetwork"/>
-      </hrai:PolicyInstrument>
-    </dcterms:isPartOf>
-    <schema:amount>
-      <schema:MonetaryAmount rdf:nodeID="na01223f56e2f4c3393f40d2d374968dbb12">
-        <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">25000000</schema:value>
-        <schema:currency>BRL</schema:currency>
-      </schema:MonetaryAmount>
-    </schema:amount>
-    <prov:wasDerivedFrom>
-      <hrai:Evidence rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Annex2">
-        <rdfs:label xml:lang="pt">PBIA, Anexo 2 — Ações estruturantes (p. 67-91)</rdfs:label>
-        <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
-      </hrai:Evidence>
-    </prov:wasDerivedFrom>
-    <rdfs:comment xml:lang="pt">Meta: estruturação da rede em 12 meses. Fonte: FNDCT não reembolsável.</rdfs:comment>
-  </hrai:PolicyInstrument>
-  <hrai:PolicyClaim rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Claim_SovereigntyCooperationBalance">
-    <rdfs:label xml:lang="pt">É preciso equilibrar proteção dos interesses nacionais e colaborações internacionais mutuamente benéficas</rdfs:label>
-    <hrai:claimText xml:lang="pt">Deve-se buscar um equilíbrio entre a proteção dos interesses nacionais e a participação em colaborações internacionais mutuamente benéficas, com atenção a países da África e da América Latina.</hrai:claimText>
-    <hrai:claimSupportedByEvidence>
-      <hrai:Evidence rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Sec2">
-        <rdfs:label xml:lang="pt">PBIA, Seção 2 — O que é uma IA para o Bem de Todos? (p. 25-27)</rdfs:label>
-        <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
-      </hrai:Evidence>
-    </hrai:claimSupportedByEvidence>
-  </hrai:PolicyClaim>
-  <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action52_BrazilianAIObservatory">
-    <rdfs:label xml:lang="pt">Ação 52 — Observatório Brasileiro de IA (Obia)</rdfs:label>
-    <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Prog5B_AIGovernanceSupport"/>
-    <schema:amount>
-      <schema:MonetaryAmount rdf:nodeID="na01223f56e2f4c3393f40d2d374968dbb10">
-        <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">11750000</schema:value>
-        <schema:currency>BRL</schema:currency>
-      </schema:MonetaryAmount>
-    </schema:amount>
-    <schema:funder>
-      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CGIbr">
-        <rdf:type rdf:resource="https://schema.org/Organization"/>
-        <rdfs:label xml:lang="pt">Comitê Gestor da Internet no Brasil (CGI.br)</rdfs:label>
-      </hrai:Stakeholder>
-    </schema:funder>
-    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Annex2"/>
-    <rdfs:comment xml:lang="pt">Metas: lançamento em 30 dias; desenvolvimento contínuo de indicadores nas principais dimensões da IA. Fonte: FNDCT não reembolsável e CGI.br.</rdfs:comment>
-  </hrai:PolicyInstrument>
-  <hrai:LegislativeProposal rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PL_2338_2023">
-    <rdfs:label xml:lang="pt">Projeto de Lei 2338/2023 — marco regulatório da IA</rdfs:label>
-    <hrai:instrumentIdentifier>PL 2338/2023</hrai:instrumentIdentifier>
+  <hrai:EnactedLegalInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Decree_12308_2024">
+    <rdfs:label xml:lang="pt">Decreto 12.308/2024 — institui o CIT Digital</rdfs:label>
+    <hrai:instrumentIdentifier>Decreto 12.308/2024</hrai:instrumentIdentifier>
     <hrai:instrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
-    <hrai:proposalInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
-    <hrai:hasVersion>
-      <hrai:LegalInstrumentVersion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PL_2338_2023_AsCitedInPBIA">
-        <rdfs:label xml:lang="pt">PL 2338/2023 — estado conforme citado no PBIA</rdfs:label>
-        <hrai:versionOfInstrument rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PL_2338_2023"/>
-        <hrai:versionIdentifier>as-cited-in-PBIA-VN8</hrai:versionIdentifier>
-        <hrai:hasLegalStatus rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#ProposedLegalStatus"/>
-        <rdfs:comment xml:lang="pt">Estado válido para a data da fonte. Requer nova verificação no portal do Congresso antes de qualquer avaliação temporal.</rdfs:comment>
-      </hrai:LegalInstrumentVersion>
-    </hrai:hasVersion>
-    <prov:wasDerivedFrom>
-      <hrai:Evidence rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Sec3_4_5">
-        <rdfs:label xml:lang="pt">PBIA, Seção 3.4.5 — Eixo 5: Apoio ao processo regulatório e de governança (p. 42-44)</rdfs:label>
-        <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
-      </hrai:Evidence>
-    </prov:wasDerivedFrom>
-    <rdfs:comment xml:lang="pt">Segundo o PBIA, em tramitação no Congresso Nacional. Proposta não equivale a norma aprovada ou vigente.</rdfs:comment>
-    <dcterms:references>
-      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_NationalCongress">
-        <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
-        <rdfs:label xml:lang="pt">Congresso Nacional</rdfs:label>
-        <rdfs:comment xml:lang="pt">Instância de tramitação do PL 2338/2023.</rdfs:comment>
-      </hrai:Stakeholder>
-    </dcterms:references>
-  </hrai:LegislativeProposal>
-  <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action01_AISupercomputer">
-    <rdfs:label xml:lang="pt">Ação 1 — Supercomputador de IA (Top 5 mundial)</rdfs:label>
-    <dcterms:isPartOf>
-      <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis1_InfrastructureDevelopment">
-        <rdfs:label xml:lang="pt">PBIA — Eixo 1: Infraestrutura e desenvolvimento de IA</rdfs:label>
-        <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Plan"/>
-        <schema:amount>
-          <schema:MonetaryAmount rdf:nodeID="na01223f56e2f4c3393f40d2d374968dbb3">
-            <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">5790000000</schema:value>
-            <schema:currency>BRL</schema:currency>
-          </schema:MonetaryAmount>
-        </schema:amount>
-        <rdfs:comment xml:lang="pt">25,2% do total. Programas: Infraestrutura para IA; Sustentabilidade e Energias Renováveis para IA; Ecossistema de Dados e Software para IA; P&amp;D em IA.</rdfs:comment>
-      </hrai:PolicyInstrument>
-    </dcterms:isPartOf>
-    <schema:amount>
-      <schema:MonetaryAmount rdf:nodeID="na01223f56e2f4c3393f40d2d374968dbb13">
-        <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1800000000</schema:value>
-        <schema:currency>BRL</schema:currency>
-      </schema:MonetaryAmount>
-    </schema:amount>
-    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Annex2"/>
-    <rdfs:comment xml:lang="pt">Meta: atualizar o Santos Dumont (LNCC) para figurar entre os cinco maiores da lista TOP500 em cinco anos. Fontes: FNDCT não reembolsável, Petrobras e Fapesp.</rdfs:comment>
-    <dcterms:references>
-      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_LNCC">
-        <rdf:type rdf:resource="https://schema.org/ResearchOrganization"/>
-        <rdfs:label xml:lang="pt">Laboratório Nacional de Computação Científica (LNCC)</rdfs:label>
-        <rdfs:comment xml:lang="pt">Opera o supercomputador Santos Dumont, alvo da Ação 1.</rdfs:comment>
-      </hrai:Stakeholder>
-    </dcterms:references>
-    <schema:funder rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Petrobras"/>
-    <schema:funder>
-      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Fapesp">
-        <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
-        <rdfs:label xml:lang="pt">Fundação de Amparo à Pesquisa do Estado de São Paulo (Fapesp)</rdfs:label>
-      </hrai:Stakeholder>
-    </schema:funder>
-  </hrai:PolicyInstrument>
-  <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis4_BusinessInnovation">
-    <rdfs:label xml:lang="pt">PBIA — Eixo 4: IA para inovação empresarial</rdfs:label>
+  </hrai:EnactedLegalInstrument>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_SGD_MGI">
+    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
+    <rdfs:label xml:lang="pt">Secretaria de Governo Digital (SGD/MGI)</rdfs:label>
+    <schema:parentOrganization rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MGI"/>
+    <rdfs:comment xml:lang="pt">Coordena o Núcleo de IA do Governo Federal e responde pelas cinco ações do Eixo 3 a ele vinculadas.</rdfs:comment>
+  </hrai:Stakeholder>
+  <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis1_InfrastructureDevelopment">
+    <rdfs:label xml:lang="pt">PBIA — Eixo 1: Infraestrutura e desenvolvimento de IA</rdfs:label>
     <dcterms:isPartOf>
       <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Plan">
         <rdfs:label xml:lang="pt">Plano Brasileiro de Inteligência Artificial (PBIA) 2024-2028 — 'IA para o Bem de Todos'</rdfs:label>
@@ -1012,7 +903,7 @@
         <dcterms:hasPart rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis4_BusinessInnovation"/>
         <dcterms:hasPart rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis5_RegulatoryGovernanceSupport"/>
         <schema:amount>
-          <schema:MonetaryAmount rdf:nodeID="na01223f56e2f4c3393f40d2d374968dbb1">
+          <schema:MonetaryAmount rdf:nodeID="nb1de6cce0eff4a5e883d0fe26718b051b1">
             <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">23030000000</schema:value>
             <schema:currency>BRL</schema:currency>
           </schema:MonetaryAmount>
@@ -1039,113 +930,13 @@
       </hrai:PolicyInstrument>
     </dcterms:isPartOf>
     <schema:amount>
-      <schema:MonetaryAmount rdf:nodeID="na01223f56e2f4c3393f40d2d374968dbb6">
-        <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">13790000000</schema:value>
+      <schema:MonetaryAmount rdf:nodeID="nb1de6cce0eff4a5e883d0fe26718b051b3">
+        <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">5790000000</schema:value>
         <schema:currency>BRL</schema:currency>
       </schema:MonetaryAmount>
     </schema:amount>
-    <rdfs:comment xml:lang="pt">59,9% do total. Alinhado à Nova Indústria Brasil (Missão 4). Metas: 25% de adoção de IA pelas empresas em três anos; 40% em cinco anos.</rdfs:comment>
+    <rdfs:comment xml:lang="pt">25,2% do total. Programas: Infraestrutura para IA; Sustentabilidade e Energias Renováveis para IA; Ecossistema de Dados e Software para IA; P&amp;D em IA.</rdfs:comment>
   </hrai:PolicyInstrument>
-  <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action51_AlgorithmicTransparencyCentre">
-    <rdfs:label xml:lang="pt">Ação 51 — Centro Nacional de Transparência Algorítmica e IA Confiável</rdfs:label>
-    <dcterms:isPartOf>
-      <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Prog5A_RegulatoryFrameworkImprovement">
-        <rdfs:label xml:lang="pt">Programa de Apoio ao Aperfeiçoamento do Marco Regulatório para IA</rdfs:label>
-        <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis5_RegulatoryGovernanceSupport"/>
-        <dcterms:hasPart rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action50_ResponsibleAIGuides"/>
-        <dcterms:hasPart rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action51_AlgorithmicTransparencyCentre"/>
-        <rdfs:comment xml:lang="pt">Estudos de impacto, metodologias de avaliação de risco e centro nacional de transparência algorítmica.</rdfs:comment>
-      </hrai:PolicyInstrument>
-    </dcterms:isPartOf>
-    <schema:amount>
-      <schema:MonetaryAmount rdf:nodeID="na01223f56e2f4c3393f40d2d374968dbb9">
-        <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">40000000</schema:value>
-        <schema:currency>BRL</schema:currency>
-      </schema:MonetaryAmount>
-    </schema:amount>
-    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Annex2"/>
-    <rdfs:comment xml:lang="pt">Metas: estabelecimento do Centro em até 120 dias; estudo sobre riscos da IA e transparência algorítmica 6 meses após criação. Fonte: FNDCT não reembolsável.</rdfs:comment>
-  </hrai:PolicyInstrument>
-  <hrai:ContextDimension rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Dim_PublicSectorAdoption">
-    <rdfs:label xml:lang="pt">Adoção de IA no setor público</rdfs:label>
-  </hrai:ContextDimension>
-  <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis5_RegulatoryGovernanceSupport">
-    <rdfs:label xml:lang="pt">PBIA — Eixo 5: Apoio ao processo regulatório e de governança da IA</rdfs:label>
-    <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Plan"/>
-    <dcterms:hasPart rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Prog5A_RegulatoryFrameworkImprovement"/>
-    <dcterms:hasPart rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Prog5B_AIGovernanceSupport"/>
-    <schema:amount>
-      <schema:MonetaryAmount rdf:nodeID="na01223f56e2f4c3393f40d2d374968dbb7">
-        <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">103250000</schema:value>
-        <schema:currency>BRL</schema:currency>
-      </schema:MonetaryAmount>
-    </schema:amount>
-    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Sec3_4_5"/>
-    <rdfs:comment xml:lang="pt">0,4% do total. Busca consolidar arcabouço de governança de IA que promova a inovação, assegure o direito ao desenvolvimento, proteja direitos humanos, integridade da informação, direitos autorais e conexos, o trabalho e os trabalhadores.</rdfs:comment>
-  </hrai:PolicyInstrument>
-  <hrai:LegalSource rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Source_PBIA">
-    <rdfs:label xml:lang="pt">Publicação MCTI/CGEE — Plano Brasileiro de Inteligência Artificial</rdfs:label>
-    <hrai:sourceURI rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">urn:isbn:978-65-5775-097-1</hrai:sourceURI>
-    <rdfs:comment xml:lang="pt">Fonte documental de política pública (não é diário oficial). Os Anexos 1 e 2 são atualizados periodicamente pelo MCTI, segundo a nota 1 da Introdução.</rdfs:comment>
-  </hrai:LegalSource>
-  <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#FederalGovernmentAICore">
-    <rdfs:label xml:lang="pt">Núcleo de IA do Governo Federal</rdfs:label>
-    <dcterms:isPartOf>
-      <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis3_PublicServices">
-        <rdfs:label xml:lang="pt">PBIA — Eixo 3: IA para melhoria do serviço público</rdfs:label>
-        <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Plan"/>
-        <schema:amount>
-          <schema:MonetaryAmount rdf:nodeID="na01223f56e2f4c3393f40d2d374968dbb5">
-            <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1760000000</schema:value>
-            <schema:currency>BRL</schema:currency>
-          </schema:MonetaryAmount>
-        </schema:amount>
-        <rdfs:comment xml:lang="pt">7,6% do total. Metas: IA em 10 órgãos federais por ano e 20% dos servidores federais capacitados em três anos; 70% dos órgãos federais e 50% dos estaduais usando IA em cinco anos.</rdfs:comment>
-      </hrai:PolicyInstrument>
-    </dcterms:isPartOf>
-    <rdfs:comment xml:lang="pt">Coordenado pela Secretaria de Governo Digital (SGD/MGI); inicialmente composto por MGI, MCTI, Enap, Serpro e Dataprev. Responsabilidades: colaboração e padronização, aceleração da transformação digital, monitoramento do uso de IA no governo.</rdfs:comment>
-    <dcterms:contributor>
-      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_SGD_MGI">
-        <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
-        <rdfs:label xml:lang="pt">Secretaria de Governo Digital (SGD/MGI)</rdfs:label>
-        <schema:parentOrganization rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MGI"/>
-        <rdfs:comment xml:lang="pt">Coordena o Núcleo de IA do Governo Federal e responde pelas cinco ações do Eixo 3 a ele vinculadas.</rdfs:comment>
-      </hrai:Stakeholder>
-    </dcterms:contributor>
-    <dcterms:contributor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MGI"/>
-    <dcterms:contributor>
-      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MCTI">
-        <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
-        <rdfs:label xml:lang="pt">Ministério da Ciência, Tecnologia e Inovação (MCTI)</rdfs:label>
-        <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
-        <rdfs:comment xml:lang="pt">Coordena o PBIA e é coautor da publicação.</rdfs:comment>
-      </hrai:Stakeholder>
-    </dcterms:contributor>
-    <dcterms:contributor>
-      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Enap">
-        <rdf:type rdf:resource="https://schema.org/EducationalOrganization"/>
-        <rdfs:label xml:lang="pt">Escola Nacional de Administração Pública (Enap)</rdfs:label>
-      </hrai:Stakeholder>
-    </dcterms:contributor>
-    <dcterms:contributor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Serpro"/>
-    <dcterms:contributor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Dataprev"/>
-  </hrai:PolicyInstrument>
-  <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis2_DiffusionTraining">
-    <rdfs:label xml:lang="pt">PBIA — Eixo 2: Difusão, formação e capacitação em IA</rdfs:label>
-    <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Plan"/>
-    <schema:amount>
-      <schema:MonetaryAmount rdf:nodeID="na01223f56e2f4c3393f40d2d374968dbb4">
-        <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1150000000</schema:value>
-        <schema:currency>BRL</schema:currency>
-      </schema:MonetaryAmount>
-    </schema:amount>
-    <rdfs:comment xml:lang="pt">5,0% do total. Metas: 5.000 vagas de graduação e 190.000 profissionais capacitados em três anos; 230.000 profissionais e 85% da população adulta com conhecimento básico sobre IA em cinco anos.</rdfs:comment>
-  </hrai:PolicyInstrument>
-  <hrai:EnactedLegalInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Decree_12308_2024">
-    <rdfs:label xml:lang="pt">Decreto 12.308/2024 — institui o CIT Digital</rdfs:label>
-    <hrai:instrumentIdentifier>Decreto 12.308/2024</hrai:instrumentIdentifier>
-    <hrai:instrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
-  </hrai:EnactedLegalInstrument>
   <hrai:RegulatoryModel rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#BrazilAIRegulatoryModel_PBIA">
     <rdfs:label xml:lang="pt">Modelo brasileiro de política e governança de IA descrito no PBIA ('IA para o Bem de Todos')</rdfs:label>
     <hrai:adoptedByJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
@@ -1155,7 +946,7 @@
         <rdfs:label xml:lang="pt">PBIA — Ações de impacto imediato (Anexo 1)</rdfs:label>
         <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Plan"/>
         <schema:amount>
-          <schema:MonetaryAmount rdf:nodeID="na01223f56e2f4c3393f40d2d374968dbb2">
+          <schema:MonetaryAmount rdf:nodeID="nb1de6cce0eff4a5e883d0fe26718b051b2">
             <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">435040000</schema:value>
             <schema:currency>BRL</schema:currency>
           </schema:MonetaryAmount>
@@ -1164,18 +955,85 @@
       </hrai:PolicyInstrument>
     </hrai:usesPolicyInstrument>
     <hrai:usesPolicyInstrument rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis1_InfrastructureDevelopment"/>
-    <hrai:usesPolicyInstrument rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis2_DiffusionTraining"/>
-    <hrai:usesPolicyInstrument rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis3_PublicServices"/>
-    <hrai:usesPolicyInstrument rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis4_BusinessInnovation"/>
-    <hrai:usesPolicyInstrument rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis5_RegulatoryGovernanceSupport"/>
-    <hrai:usesPolicyInstrument rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Prog5A_RegulatoryFrameworkImprovement"/>
-    <hrai:usesPolicyInstrument rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Prog5B_AIGovernanceSupport"/>
+    <hrai:usesPolicyInstrument>
+      <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis2_DiffusionTraining">
+        <rdfs:label xml:lang="pt">PBIA — Eixo 2: Difusão, formação e capacitação em IA</rdfs:label>
+        <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Plan"/>
+        <schema:amount>
+          <schema:MonetaryAmount rdf:nodeID="nb1de6cce0eff4a5e883d0fe26718b051b4">
+            <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1150000000</schema:value>
+            <schema:currency>BRL</schema:currency>
+          </schema:MonetaryAmount>
+        </schema:amount>
+        <rdfs:comment xml:lang="pt">5,0% do total. Metas: 5.000 vagas de graduação e 190.000 profissionais capacitados em três anos; 230.000 profissionais e 85% da população adulta com conhecimento básico sobre IA em cinco anos.</rdfs:comment>
+      </hrai:PolicyInstrument>
+    </hrai:usesPolicyInstrument>
+    <hrai:usesPolicyInstrument>
+      <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis3_PublicServices">
+        <rdfs:label xml:lang="pt">PBIA — Eixo 3: IA para melhoria do serviço público</rdfs:label>
+        <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Plan"/>
+        <schema:amount>
+          <schema:MonetaryAmount rdf:nodeID="nb1de6cce0eff4a5e883d0fe26718b051b5">
+            <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1760000000</schema:value>
+            <schema:currency>BRL</schema:currency>
+          </schema:MonetaryAmount>
+        </schema:amount>
+        <rdfs:comment xml:lang="pt">7,6% do total. Metas: IA em 10 órgãos federais por ano e 20% dos servidores federais capacitados em três anos; 70% dos órgãos federais e 50% dos estaduais usando IA em cinco anos.</rdfs:comment>
+      </hrai:PolicyInstrument>
+    </hrai:usesPolicyInstrument>
+    <hrai:usesPolicyInstrument>
+      <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis4_BusinessInnovation">
+        <rdfs:label xml:lang="pt">PBIA — Eixo 4: IA para inovação empresarial</rdfs:label>
+        <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Plan"/>
+        <schema:amount>
+          <schema:MonetaryAmount rdf:nodeID="nb1de6cce0eff4a5e883d0fe26718b051b6">
+            <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">13790000000</schema:value>
+            <schema:currency>BRL</schema:currency>
+          </schema:MonetaryAmount>
+        </schema:amount>
+        <rdfs:comment xml:lang="pt">59,9% do total. Alinhado à Nova Indústria Brasil (Missão 4). Metas: 25% de adoção de IA pelas empresas em três anos; 40% em cinco anos.</rdfs:comment>
+      </hrai:PolicyInstrument>
+    </hrai:usesPolicyInstrument>
+    <hrai:usesPolicyInstrument>
+      <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis5_RegulatoryGovernanceSupport">
+        <rdfs:label xml:lang="pt">PBIA — Eixo 5: Apoio ao processo regulatório e de governança da IA</rdfs:label>
+        <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Plan"/>
+        <dcterms:hasPart rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Prog5A_RegulatoryFrameworkImprovement"/>
+        <dcterms:hasPart rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Prog5B_AIGovernanceSupport"/>
+        <schema:amount>
+          <schema:MonetaryAmount rdf:nodeID="nb1de6cce0eff4a5e883d0fe26718b051b7">
+            <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">103250000</schema:value>
+            <schema:currency>BRL</schema:currency>
+          </schema:MonetaryAmount>
+        </schema:amount>
+        <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Sec3_4_5"/>
+        <rdfs:comment xml:lang="pt">0,4% do total. Busca consolidar arcabouço de governança de IA que promova a inovação, assegure o direito ao desenvolvimento, proteja direitos humanos, integridade da informação, direitos autorais e conexos, o trabalho e os trabalhadores.</rdfs:comment>
+      </hrai:PolicyInstrument>
+    </hrai:usesPolicyInstrument>
+    <hrai:usesPolicyInstrument>
+      <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Prog5A_RegulatoryFrameworkImprovement">
+        <rdfs:label xml:lang="pt">Programa de Apoio ao Aperfeiçoamento do Marco Regulatório para IA</rdfs:label>
+        <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis5_RegulatoryGovernanceSupport"/>
+        <dcterms:hasPart rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action50_ResponsibleAIGuides"/>
+        <dcterms:hasPart rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action51_AlgorithmicTransparencyCentre"/>
+        <rdfs:comment xml:lang="pt">Estudos de impacto, metodologias de avaliação de risco e centro nacional de transparência algorítmica.</rdfs:comment>
+      </hrai:PolicyInstrument>
+    </hrai:usesPolicyInstrument>
+    <hrai:usesPolicyInstrument>
+      <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Prog5B_AIGovernanceSupport">
+        <rdfs:label xml:lang="pt">Programa de Apoio à Governança da IA</rdfs:label>
+        <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis5_RegulatoryGovernanceSupport"/>
+        <dcterms:hasPart rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action52_BrazilianAIObservatory"/>
+        <dcterms:hasPart rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action53_AIGovernanceSupportNetwork"/>
+        <dcterms:hasPart rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action54_InternationalDebateNetwork"/>
+      </hrai:PolicyInstrument>
+    </hrai:usesPolicyInstrument>
     <hrai:usesPolicyInstrument>
       <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action50_ResponsibleAIGuides">
         <rdfs:label xml:lang="pt">Ação 50 — Guias Brasileiros de IA Responsável</rdfs:label>
         <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Prog5A_RegulatoryFrameworkImprovement"/>
         <schema:amount>
-          <schema:MonetaryAmount rdf:nodeID="na01223f56e2f4c3393f40d2d374968dbb8">
+          <schema:MonetaryAmount rdf:nodeID="nb1de6cce0eff4a5e883d0fe26718b051b8">
             <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">500000</schema:value>
             <schema:currency>BRL</schema:currency>
           </schema:MonetaryAmount>
@@ -1185,14 +1043,41 @@
         <rdfs:comment xml:lang="pt">Metas: Guia para IA Ética e Responsável em 3 meses; Guia de IA para o Setor Público em 6 meses; workshops periódicos. Instrumento de orientação (soft law), não vinculante.</rdfs:comment>
       </hrai:PolicyInstrument>
     </hrai:usesPolicyInstrument>
-    <hrai:usesPolicyInstrument rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action51_AlgorithmicTransparencyCentre"/>
-    <hrai:usesPolicyInstrument rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action52_BrazilianAIObservatory"/>
+    <hrai:usesPolicyInstrument>
+      <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action51_AlgorithmicTransparencyCentre">
+        <rdfs:label xml:lang="pt">Ação 51 — Centro Nacional de Transparência Algorítmica e IA Confiável</rdfs:label>
+        <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Prog5A_RegulatoryFrameworkImprovement"/>
+        <schema:amount>
+          <schema:MonetaryAmount rdf:nodeID="nb1de6cce0eff4a5e883d0fe26718b051b9">
+            <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">40000000</schema:value>
+            <schema:currency>BRL</schema:currency>
+          </schema:MonetaryAmount>
+        </schema:amount>
+        <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Annex2"/>
+        <rdfs:comment xml:lang="pt">Metas: estabelecimento do Centro em até 120 dias; estudo sobre riscos da IA e transparência algorítmica 6 meses após criação. Fonte: FNDCT não reembolsável.</rdfs:comment>
+      </hrai:PolicyInstrument>
+    </hrai:usesPolicyInstrument>
+    <hrai:usesPolicyInstrument>
+      <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action52_BrazilianAIObservatory">
+        <rdfs:label xml:lang="pt">Ação 52 — Observatório Brasileiro de IA (Obia)</rdfs:label>
+        <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Prog5B_AIGovernanceSupport"/>
+        <schema:amount>
+          <schema:MonetaryAmount rdf:nodeID="nb1de6cce0eff4a5e883d0fe26718b051b10">
+            <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">11750000</schema:value>
+            <schema:currency>BRL</schema:currency>
+          </schema:MonetaryAmount>
+        </schema:amount>
+        <schema:funder rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CGIbr"/>
+        <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Annex2"/>
+        <rdfs:comment xml:lang="pt">Metas: lançamento em 30 dias; desenvolvimento contínuo de indicadores nas principais dimensões da IA. Fonte: FNDCT não reembolsável e CGI.br.</rdfs:comment>
+      </hrai:PolicyInstrument>
+    </hrai:usesPolicyInstrument>
     <hrai:usesPolicyInstrument>
       <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action53_AIGovernanceSupportNetwork">
         <rdfs:label xml:lang="pt">Ação 53 — Rede de apoio à governança da IA no Brasil</rdfs:label>
         <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Prog5B_AIGovernanceSupport"/>
         <schema:amount>
-          <schema:MonetaryAmount rdf:nodeID="na01223f56e2f4c3393f40d2d374968dbb11">
+          <schema:MonetaryAmount rdf:nodeID="nb1de6cce0eff4a5e883d0fe26718b051b11">
             <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">26000000</schema:value>
             <schema:currency>BRL</schema:currency>
           </schema:MonetaryAmount>
@@ -1202,14 +1087,43 @@
         <schema:funder rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MEC"/>
       </hrai:PolicyInstrument>
     </hrai:usesPolicyInstrument>
-    <hrai:usesPolicyInstrument rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action54_InternationalDebateNetwork"/>
-    <hrai:usesPolicyInstrument rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action01_AISupercomputer"/>
+    <hrai:usesPolicyInstrument>
+      <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action54_InternationalDebateNetwork">
+        <rdfs:label xml:lang="pt">Ação 54 — Rede de apoio à participação do Brasil no debate internacional</rdfs:label>
+        <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Prog5B_AIGovernanceSupport"/>
+        <schema:amount>
+          <schema:MonetaryAmount rdf:nodeID="nb1de6cce0eff4a5e883d0fe26718b051b12">
+            <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">25000000</schema:value>
+            <schema:currency>BRL</schema:currency>
+          </schema:MonetaryAmount>
+        </schema:amount>
+        <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Annex2"/>
+        <rdfs:comment xml:lang="pt">Meta: estruturação da rede em 12 meses. Fonte: FNDCT não reembolsável.</rdfs:comment>
+      </hrai:PolicyInstrument>
+    </hrai:usesPolicyInstrument>
+    <hrai:usesPolicyInstrument>
+      <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action01_AISupercomputer">
+        <rdfs:label xml:lang="pt">Ação 1 — Supercomputador de IA (Top 5 mundial)</rdfs:label>
+        <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis1_InfrastructureDevelopment"/>
+        <schema:amount>
+          <schema:MonetaryAmount rdf:nodeID="nb1de6cce0eff4a5e883d0fe26718b051b13">
+            <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1800000000</schema:value>
+            <schema:currency>BRL</schema:currency>
+          </schema:MonetaryAmount>
+        </schema:amount>
+        <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Annex2"/>
+        <rdfs:comment xml:lang="pt">Meta: atualizar o Santos Dumont (LNCC) para figurar entre os cinco maiores da lista TOP500 em cinco anos. Fontes: FNDCT não reembolsável, Petrobras e Fapesp.</rdfs:comment>
+        <dcterms:references rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_LNCC"/>
+        <schema:funder rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Petrobras"/>
+        <schema:funder rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Fapesp"/>
+      </hrai:PolicyInstrument>
+    </hrai:usesPolicyInstrument>
     <hrai:usesPolicyInstrument>
       <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action09_PortugueseLLM">
         <rdfs:label xml:lang="pt">Ação 9 — IA baseada em dados nacionais (LLM em português)</rdfs:label>
         <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis1_InfrastructureDevelopment"/>
         <schema:amount>
-          <schema:MonetaryAmount rdf:nodeID="na01223f56e2f4c3393f40d2d374968dbb14">
+          <schema:MonetaryAmount rdf:nodeID="nb1de6cce0eff4a5e883d0fe26718b051b14">
             <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1100000000</schema:value>
             <schema:currency>BRL</schema:currency>
           </schema:MonetaryAmount>
@@ -1223,7 +1137,7 @@
         <rdfs:label xml:lang="pt">Ação 25 — Monitoramento do Desenvolvimento e Uso da IA no governo federal</rdfs:label>
         <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis3_PublicServices"/>
         <schema:amount>
-          <schema:MonetaryAmount rdf:nodeID="na01223f56e2f4c3393f40d2d374968dbb15">
+          <schema:MonetaryAmount rdf:nodeID="nb1de6cce0eff4a5e883d0fe26718b051b15">
             <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">4000000</schema:value>
             <schema:currency>BRL</schema:currency>
           </schema:MonetaryAmount>
@@ -1238,7 +1152,7 @@
         <rdfs:label xml:lang="pt">Ação 27 — Nuvem Soberana</rdfs:label>
         <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis3_PublicServices"/>
         <schema:amount>
-          <schema:MonetaryAmount rdf:nodeID="na01223f56e2f4c3393f40d2d374968dbb16">
+          <schema:MonetaryAmount rdf:nodeID="nb1de6cce0eff4a5e883d0fe26718b051b16">
             <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1000000000</schema:value>
             <schema:currency>BRL</schema:currency>
           </schema:MonetaryAmount>
@@ -1249,7 +1163,19 @@
         <schema:funder rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Dataprev"/>
       </hrai:PolicyInstrument>
     </hrai:usesPolicyInstrument>
-    <hrai:usesPolicyInstrument rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#FederalGovernmentAICore"/>
+    <hrai:usesPolicyInstrument>
+      <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#FederalGovernmentAICore">
+        <rdfs:label xml:lang="pt">Núcleo de IA do Governo Federal</rdfs:label>
+        <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis3_PublicServices"/>
+        <rdfs:comment xml:lang="pt">Coordenado pela Secretaria de Governo Digital (SGD/MGI); inicialmente composto por MGI, MCTI, Enap, Serpro e Dataprev. Responsabilidades: colaboração e padronização, aceleração da transformação digital, monitoramento do uso de IA no governo.</rdfs:comment>
+        <dcterms:contributor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_SGD_MGI"/>
+        <dcterms:contributor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MGI"/>
+        <dcterms:contributor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MCTI"/>
+        <dcterms:contributor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Enap"/>
+        <dcterms:contributor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Serpro"/>
+        <dcterms:contributor rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Dataprev"/>
+      </hrai:PolicyInstrument>
+    </hrai:usesPolicyInstrument>
     <hrai:usesPolicyInstrument>
       <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_GovernanceByCITDigital">
         <rdfs:label xml:lang="pt">Governança e monitoramento do PBIA pelo CIT Digital</rdfs:label>
@@ -1324,17 +1250,92 @@
     <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
     <rdfs:comment xml:lang="pt">Modelo orientado a fomento e capacidades (98% do orçamento em ações estruturantes), com apoio ao processo regulatório em curso (PL 2338/2023) e instrumentos de soft law (guias, observatório) enquanto não há lei específica.</rdfs:comment>
   </hrai:RegulatoryModel>
-  <hrai:EnactedLegalInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Law_13709_2018_LGPD">
-    <rdfs:label xml:lang="pt">Lei 13.709/2018 — Lei Geral de Proteção de Dados Pessoais (LGPD)</rdfs:label>
-    <hrai:instrumentIdentifier>Lei 13.709/2018</hrai:instrumentIdentifier>
+  <hrai:LegislativeProposal rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PL_2338_2023">
+    <rdfs:label xml:lang="pt">Projeto de Lei 2338/2023 — marco regulatório da IA</rdfs:label>
+    <hrai:instrumentIdentifier>PL 2338/2023</hrai:instrumentIdentifier>
     <hrai:instrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
-    <rdfs:comment xml:lang="pt">Citada pelo PBIA (premissa 08 e Eixo 5) como parâmetro de tratamento de dados pessoais. Número da lei não aparece no texto do PBIA; identificação pela sigla LGPD.</rdfs:comment>
-  </hrai:EnactedLegalInstrument>
+    <hrai:proposalInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
+    <hrai:hasVersion>
+      <hrai:LegalInstrumentVersion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PL_2338_2023_AsCitedInPBIA">
+        <rdfs:label xml:lang="pt">PL 2338/2023 — estado conforme citado no PBIA</rdfs:label>
+        <hrai:versionOfInstrument rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PL_2338_2023"/>
+        <hrai:versionIdentifier>as-cited-in-PBIA-VN8</hrai:versionIdentifier>
+        <hrai:hasLegalStatus rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#ProposedLegalStatus"/>
+        <rdfs:comment xml:lang="pt">Estado válido para a data da fonte. Requer nova verificação no portal do Congresso antes de qualquer avaliação temporal.</rdfs:comment>
+      </hrai:LegalInstrumentVersion>
+    </hrai:hasVersion>
+    <prov:wasDerivedFrom>
+      <hrai:Evidence rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Sec3_4_5">
+        <rdfs:label xml:lang="pt">PBIA, Seção 3.4.5 — Eixo 5: Apoio ao processo regulatório e de governança (p. 42-44)</rdfs:label>
+        <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+      </hrai:Evidence>
+    </prov:wasDerivedFrom>
+    <rdfs:comment xml:lang="pt">Segundo o PBIA, em tramitação no Congresso Nacional. Proposta não equivale a norma aprovada ou vigente.</rdfs:comment>
+    <dcterms:references>
+      <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_NationalCongress">
+        <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
+        <rdfs:label xml:lang="pt">Congresso Nacional</rdfs:label>
+        <rdfs:comment xml:lang="pt">Instância de tramitação do PL 2338/2023.</rdfs:comment>
+      </hrai:Stakeholder>
+    </dcterms:references>
+  </hrai:LegislativeProposal>
+  <hrai:PolicyClaim rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Claim_AgileRegulationWithoutInhibitingInnovation">
+    <rdfs:label xml:lang="pt">Marcos regulatórios ágeis devem proteger organizações e consumidores sem inibir a inovação</rdfs:label>
+    <hrai:claimText xml:lang="pt">O desenvolvimento acelerado da IA demanda marcos regulatórios ágeis que garantam seu uso ético e seguro, protegendo organizações e consumidores finais sem inibir a inovação.</hrai:claimText>
+    <hrai:claimSupportedByEvidence rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Sec1"/>
+  </hrai:PolicyClaim>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CITDigital">
+    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
+    <rdfs:label xml:lang="pt">Comitê Interministerial para a Transformação Digital (CIT Digital)</rdfs:label>
+    <dcterms:references rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Decree_12308_2024"/>
+    <rdfs:comment xml:lang="pt">Órgão colegiado consultivo; coordena a governança e o monitoramento do PBIA.</rdfs:comment>
+  </hrai:Stakeholder>
+  <hrai:Evidence rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Annex2">
+    <rdfs:label xml:lang="pt">PBIA, Anexo 2 — Ações estruturantes (p. 67-91)</rdfs:label>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+  </hrai:Evidence>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_LNCC">
+    <rdf:type rdf:resource="https://schema.org/ResearchOrganization"/>
+    <rdfs:label xml:lang="pt">Laboratório Nacional de Computação Científica (LNCC)</rdfs:label>
+    <rdfs:comment xml:lang="pt">Opera o supercomputador Santos Dumont, alvo da Ação 1.</rdfs:comment>
+  </hrai:Stakeholder>
+  <hrai:Evidence rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Sec2">
+    <rdfs:label xml:lang="pt">PBIA, Seção 2 — O que é uma IA para o Bem de Todos? (p. 25-27)</rdfs:label>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+  </hrai:Evidence>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MF">
+    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
+    <rdfs:label xml:lang="pt">Ministério da Fazenda</rdfs:label>
+    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
+  </hrai:Stakeholder>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MCTI">
+    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
+    <rdfs:label xml:lang="pt">Ministério da Ciência, Tecnologia e Inovação (MCTI)</rdfs:label>
+    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
+    <rdfs:comment xml:lang="pt">Coordena o PBIA e é coautor da publicação.</rdfs:comment>
+  </hrai:Stakeholder>
   <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_PresidencyOfTheRepublic">
     <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
     <rdfs:label xml:lang="pt">Presidência da República</rdfs:label>
     <rdfs:comment xml:lang="pt">Preside o CCT; demandou o PBIA ao CCT em 2024-03-07.</rdfs:comment>
   </hrai:Stakeholder>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_ABC">
+    <rdf:type rdf:resource="https://schema.org/Organization"/>
+    <rdfs:label xml:lang="pt">Academia Brasileira de Ciências (ABC)</rdfs:label>
+    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
+  </hrai:Stakeholder>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CGIbr">
+    <rdf:type rdf:resource="https://schema.org/Organization"/>
+    <rdfs:label xml:lang="pt">Comitê Gestor da Internet no Brasil (CGI.br)</rdfs:label>
+  </hrai:Stakeholder>
+  <hrai:PolicyClaim rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Claim_CleanMatrixCompetitiveAdvantage">
+    <rdfs:label xml:lang="pt">A matriz elétrica limpa é vantagem competitiva para IA sustentável</rdfs:label>
+    <hrai:claimText xml:lang="pt">A matriz elétrica predominantemente limpa e renovável do Brasil é um diferencial estratégico para o desenvolvimento de uma IA sustentável.</hrai:claimText>
+    <hrai:claimSupportedByEvidence rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Sec3"/>
+  </hrai:PolicyClaim>
+  <hrai:ContextDimension rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Dim_PublicSectorAdoption">
+    <rdfs:label xml:lang="pt">Adoção de IA no setor público</rdfs:label>
+  </hrai:ContextDimension>
   <hrai:PolicyClaim rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Claim_AIThreatensEmployment">
     <rdfs:label xml:lang="pt">A IA desafia estruturas tradicionais de emprego e suscita receio de desemprego tecnológico</rdfs:label>
     <hrai:claimText xml:lang="pt">Na educação e no trabalho, a IA desafia estruturas tradicionais de emprego, exigindo adaptação e requalificação; revoluções tecnológicas suscitam preocupações com o desemprego tecnológico.</hrai:claimText>
@@ -1347,61 +1348,59 @@
       </hrai:PolicyClaim>
     </hrai:challengedByClaim>
   </hrai:PolicyClaim>
+  <hrai:PolicyClaim rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Claim_AIIsNotPanacea">
+    <rdfs:label xml:lang="pt">A IA não é solução universal; o sucesso do PBIA depende de ações complementares</rdfs:label>
+    <hrai:claimText xml:lang="pt">A IA é uma ferramenta estratégica para gargalos específicos; o sucesso do PBIA depende de ações complementares em educação, infraestrutura digital e redução de disparidades regionais.</hrai:claimText>
+    <hrai:claimSupportedByEvidence rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Sec3"/>
+  </hrai:PolicyClaim>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Enap">
+    <rdf:type rdf:resource="https://schema.org/EducationalOrganization"/>
+    <rdfs:label xml:lang="pt">Escola Nacional de Administração Pública (Enap)</rdfs:label>
+  </hrai:Stakeholder>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MEC">
+    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
+    <rdfs:label xml:lang="pt">Ministério da Educação (MEC)</rdfs:label>
+    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
+  </hrai:Stakeholder>
   <hrai:PolicyClaim rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Claim_DataCentreGridOverloadRisk">
     <rdfs:label xml:lang="pt">Novos supercomputadores e data centers podem sobrecarregar o sistema elétrico nacional</rdfs:label>
     <hrai:claimText xml:lang="pt">O crescimento previsto de supercomputadores e data centers representa um desafio potencial de sobrecarga ao sistema elétrico nacional, exigindo planejamento e investimentos em eficiência energética.</hrai:claimText>
     <hrai:claimSupportedByEvidence rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Sec3"/>
   </hrai:PolicyClaim>
+  <hrai:EnactedLegalInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Law_13709_2018_LGPD">
+    <rdfs:label xml:lang="pt">Lei 13.709/2018 — Lei Geral de Proteção de Dados Pessoais (LGPD)</rdfs:label>
+    <hrai:instrumentIdentifier>Lei 13.709/2018</hrai:instrumentIdentifier>
+    <hrai:instrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
+    <rdfs:comment xml:lang="pt">Citada pelo PBIA (premissa 08 e Eixo 5) como parâmetro de tratamento de dados pessoais. Número da lei não aparece no texto do PBIA; identificação pela sigla LGPD.</rdfs:comment>
+  </hrai:EnactedLegalInstrument>
+  <hrai:LegalSource rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Source_PBIA">
+    <rdfs:label xml:lang="pt">Publicação MCTI/CGEE — Plano Brasileiro de Inteligência Artificial</rdfs:label>
+    <hrai:sourceURI rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">urn:isbn:978-65-5775-097-1</hrai:sourceURI>
+    <rdfs:comment xml:lang="pt">Fonte documental de política pública (não é diário oficial). Os Anexos 1 e 2 são atualizados periodicamente pelo MCTI, segundo a nota 1 da Introdução.</rdfs:comment>
+  </hrai:LegalSource>
+  <hrai:EnactedLegalInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Decree_10046_2019">
+    <rdfs:label xml:lang="pt">Decreto 10.046/2019 — compartilhamento de dados na administração pública federal</rdfs:label>
+    <hrai:instrumentIdentifier>Decreto 10.046/2019</hrai:instrumentIdentifier>
+    <hrai:instrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
+  </hrai:EnactedLegalInstrument>
+  <hrai:PolicyClaim rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Claim_SovereigntyCooperationBalance">
+    <rdfs:label xml:lang="pt">É preciso equilibrar proteção dos interesses nacionais e colaborações internacionais mutuamente benéficas</rdfs:label>
+    <hrai:claimText xml:lang="pt">Deve-se buscar um equilíbrio entre a proteção dos interesses nacionais e a participação em colaborações internacionais mutuamente benéficas, com atenção a países da África e da América Latina.</hrai:claimText>
+    <hrai:claimSupportedByEvidence rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Sec2"/>
+  </hrai:PolicyClaim>
+  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_Fapesp">
+    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
+    <rdfs:label xml:lang="pt">Fundação de Amparo à Pesquisa do Estado de São Paulo (Fapesp)</rdfs:label>
+  </hrai:Stakeholder>
   <hrai:EnactedLegalInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Law_12527_2011">
     <rdfs:label xml:lang="pt">Lei 12.527/2011 — Lei de Acesso à Informação</rdfs:label>
     <hrai:instrumentIdentifier>Lei 12.527/2011</hrai:instrumentIdentifier>
     <hrai:instrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
     <rdfs:comment xml:lang="pt">Citada pelo PBIA como base da transparência pública e da Política de Dados Abertos.</rdfs:comment>
   </hrai:EnactedLegalInstrument>
-  <hrai:PolicyClaim rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Claim_AIIsNotPanacea">
-    <rdfs:label xml:lang="pt">A IA não é solução universal; o sucesso do PBIA depende de ações complementares</rdfs:label>
-    <hrai:claimText xml:lang="pt">A IA é uma ferramenta estratégica para gargalos específicos; o sucesso do PBIA depende de ações complementares em educação, infraestrutura digital e redução de disparidades regionais.</hrai:claimText>
-    <hrai:claimSupportedByEvidence rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Sec3"/>
-  </hrai:PolicyClaim>
-  <hrai:PolicyClaim rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Claim_CleanMatrixCompetitiveAdvantage">
-    <rdfs:label xml:lang="pt">A matriz elétrica limpa é vantagem competitiva para IA sustentável</rdfs:label>
-    <hrai:claimText xml:lang="pt">A matriz elétrica predominantemente limpa e renovável do Brasil é um diferencial estratégico para o desenvolvimento de uma IA sustentável.</hrai:claimText>
-    <hrai:claimSupportedByEvidence rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Sec3"/>
-  </hrai:PolicyClaim>
-  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MEC">
-    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
-    <rdfs:label xml:lang="pt">Ministério da Educação (MEC)</rdfs:label>
-    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
-  </hrai:Stakeholder>
   <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CasaCivil">
     <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
     <rdfs:label xml:lang="pt">Casa Civil da Presidência da República</rdfs:label>
     <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
   </hrai:Stakeholder>
-  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_MF">
-    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
-    <rdfs:label xml:lang="pt">Ministério da Fazenda</rdfs:label>
-    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
-  </hrai:Stakeholder>
-  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CITDigital">
-    <rdf:type rdf:resource="https://schema.org/GovernmentOrganization"/>
-    <rdfs:label xml:lang="pt">Comitê Interministerial para a Transformação Digital (CIT Digital)</rdfs:label>
-    <dcterms:references rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Decree_12308_2024"/>
-    <rdfs:comment xml:lang="pt">Órgão colegiado consultivo; coordena a governança e o monitoramento do PBIA.</rdfs:comment>
-  </hrai:Stakeholder>
-  <hrai:Stakeholder rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_ABC">
-    <rdf:type rdf:resource="https://schema.org/Organization"/>
-    <rdfs:label xml:lang="pt">Academia Brasileira de Ciências (ABC)</rdfs:label>
-    <schema:memberOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#SH_CCT"/>
-  </hrai:Stakeholder>
-  <hrai:EnactedLegalInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Decree_10046_2019">
-    <rdfs:label xml:lang="pt">Decreto 10.046/2019 — compartilhamento de dados na administração pública federal</rdfs:label>
-    <hrai:instrumentIdentifier>Decreto 10.046/2019</hrai:instrumentIdentifier>
-    <hrai:instrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
-  </hrai:EnactedLegalInstrument>
-  <hrai:PolicyClaim rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Claim_AgileRegulationWithoutInhibitingInnovation">
-    <rdfs:label xml:lang="pt">Marcos regulatórios ágeis devem proteger organizações e consumidores sem inibir a inovação</rdfs:label>
-    <hrai:claimText xml:lang="pt">O desenvolvimento acelerado da IA demanda marcos regulatórios ágeis que garantam seu uso ético e seguro, protegendo organizações e consumidores finais sem inibir a inovação.</hrai:claimText>
-    <hrai:claimSupportedByEvidence rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Evidence_PBIA_Sec1"/>
-  </hrai:PolicyClaim>
 </rdf:RDF>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:hrai="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_CompaniesUsingAI">
+    <hrai:baseYear>não informado na fonte</hrai:baseYear>
+  </hrai:ContextIndicator>
+  <hrai:ExtractionBatch rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Lote_Capacidade">
+    <rdfs:label xml:lang="pt">Lote: capacidade e exposição do Brasil (RF-07)</rdfs:label>
+    <hrai:extractionContainsCandidate>
+      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Candidate_Indicadores">
+        <rdfs:label xml:lang="pt">Candidato: indicadores de capacidade e exposição e anos-base do PBIA</rdfs:label>
+        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#ExtratorSessao"/>
+      </hrai:CandidateAssertion>
+    </hrai:extractionContainsCandidate>
+    <hrai:extractionContainsCandidate>
+      <hrai:CandidateAssertion rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Candidate_Requisitos">
+        <rdfs:label xml:lang="pt">Candidato: requisitos do PL que pressupõem capacidade (arts. 25, 34 e 49 do texto do Senado)</rdfs:label>
+        <hrai:candidateFromSnapshot rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338#Snapshot_2024"/>
+        <hrai:candidateProducedBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#ExtratorSessao"/>
+      </hrai:CandidateAssertion>
+    </hrai:extractionContainsCandidate>
+  </hrai:ExtractionBatch>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_RenewableShareElectricityMatrix2023">
+    <hrai:baseYear>2023</hrai:baseYear>
+  </hrai:ContextIndicator>
+  <hrai:NormativeRequirement rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Req_AlgorithmicImpactAssessment">
+    <rdfs:label xml:lang="pt">Avaliação de impacto algorítmico de sistemas de alto risco (art. 25)</rdfs:label>
+    <hrai:derivedFromProvision>
+      <hrai:LegalProvision rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338#Art_2024_025"/>
+    </hrai:derivedFromProvision>
+    <hrai:requirementAssumesCapacity>
+      <hrai:CapacityRequirement rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Cap_TechnicalWorkforce">
+        <rdfs:label xml:lang="pt">Profissionais técnicos para avaliar e auditar sistemas de IA</rdfs:label>
+        <hrai:capacityMeasuredBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_ICTTalentDeficit2021_2025"/>
+        <hrai:capacityMeasuredBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_STEMGraduatesShare"/>
+      </hrai:CapacityRequirement>
+    </hrai:requirementAssumesCapacity>
+  </hrai:NormativeRequirement>
+  <hrai:NormativeRequirement rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Req_ConformityAccreditation">
+    <rdfs:label xml:lang="pt">Acreditação de organismos de avaliação de conformidade (art. 34)</rdfs:label>
+    <hrai:derivedFromProvision>
+      <hrai:LegalProvision rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338#Art_2024_034"/>
+    </hrai:derivedFromProvision>
+    <hrai:requirementAssumesCapacity rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Cap_TechnicalWorkforce"/>
+    <hrai:requirementAssumesCapacity>
+      <hrai:CapacityRequirement rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Cap_SupervisionBudget">
+        <rdfs:label xml:lang="pt">Orçamento para supervisão e governança da IA</rdfs:label>
+        <hrai:capacityMeasuredBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Ind_GovernanceBudgetShare"/>
+        <hrai:capacityMeasuredBy rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Ind_GovernanceBudgetAmount"/>
+      </hrai:CapacityRequirement>
+    </hrai:requirementAssumesCapacity>
+  </hrai:NormativeRequirement>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_ManufacturingProductivityChange2001_2021">
+    <hrai:baseYear>2001-2021</hrai:baseYear>
+  </hrai:ContextIndicator>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_RenewableShareEnergyMatrix_Axis4">
+    <hrai:baseYear>não informado na fonte</hrai:baseYear>
+  </hrai:ContextIndicator>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_DataCenterLoadProjection2037">
+    <hrai:baseYear>projeção até 2037</hrai:baseYear>
+  </hrai:ContextIndicator>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_PISAMathBelowBasic">
+    <hrai:baseYear>não informado na fonte</hrai:baseYear>
+  </hrai:ContextIndicator>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_StartupFunding2019_2023">
+    <hrai:baseYear>2019-2023</hrai:baseYear>
+  </hrai:ContextIndicator>
+  <hrai:RiskExposureIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Exp_HealthDataSUS">
+    <rdfs:label xml:lang="pt">Volume de dados de saúde sob guarda do SUS (exposição de dados sensíveis em uso estatal)</rdfs:label>
+    <hrai:hasIndicatorMethod>qualitativo: o PBIA descreve o SUS como um dos maiores sistemas públicos de saúde, com grande volume de dados; sem valor numérico na fonte</hrai:hasIndicatorMethod>
+    <hrai:baseYear>não informado na fonte</hrai:baseYear>
+    <hrai:exposureConcernsFunction>
+      <hrai:SubstantiveArea rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_DataGovernance"/>
+    </hrai:exposureConcernsFunction>
+    <hrai:indicatorRelevantToJurisdiction>
+      <hrai:Jurisdiction rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
+    </hrai:indicatorRelevantToJurisdiction>
+    <hrai:indicatorSource>
+      <hrai:SourceSnapshot rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+    </hrai:indicatorSource>
+  </hrai:RiskExposureIndicator>
+  <hrai:NormativeRequirement rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Req_CompetentAuthoritySupervision">
+    <rdfs:label xml:lang="pt">Supervisão, fiscalização e sanção pela autoridade competente (art. 49)</rdfs:label>
+    <hrai:derivedFromProvision>
+      <hrai:LegalProvision rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338#Art_2024_049"/>
+    </hrai:derivedFromProvision>
+    <hrai:requirementAssumesCapacity rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Cap_SupervisionBudget"/>
+  </hrai:NormativeRequirement>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_SinapadComputePower">
+    <hrai:baseYear>não informado na fonte</hrai:baseYear>
+  </hrai:ContextIndicator>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_IndustryAIDisruptionPerception2021">
+    <hrai:baseYear>2021</hrai:baseYear>
+  </hrai:ContextIndicator>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_SantosDumontSupercomputerPerformance">
+    <hrai:baseYear>não informado na fonte</hrai:baseYear>
+  </hrai:ContextIndicator>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_DataCentersInOperation">
+    <hrai:baseYear>não informado na fonte</hrai:baseYear>
+  </hrai:ContextIndicator>
+  <owl:Ontology rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade">
+    <rdfs:label xml:lang="pt">Brasil: indicadores de capacidade e exposição e requisitos que pressupõem capacidade</rdfs:label>
+  </owl:Ontology>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_OpenDataBases">
+    <hrai:baseYear>não informado na fonte</hrai:baseYear>
+  </hrai:ContextIndicator>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_PublicBodiesUsingAI2023">
+    <hrai:baseYear>2023</hrai:baseYear>
+  </hrai:ContextIndicator>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_PegasoSupercomputerPerformance">
+    <hrai:baseYear>não informado na fonte</hrai:baseYear>
+  </hrai:ContextIndicator>
+  <hrai:MonitoringAgent rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#ExtratorSessao">
+    <rdfs:label xml:lang="pt">Sessão do loop ESP-ONT-02 (Claude Code, extração assistida por LLM, conferida no PDF)</rdfs:label>
+  </hrai:MonitoringAgent>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_ICTTalentDeficit2021_2025">
+    <hrai:baseYear>2021-2025</hrai:baseYear>
+  </hrai:ContextIndicator>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Ind_GovernanceBudgetShare">
+    <rdfs:label xml:lang="pt">Parcela do PBIA destinada ao Eixo 5, Apoio ao Processo Regulatório e de Governança da IA</rdfs:label>
+    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.45</hrai:hasNumericValue>
+    <hrai:numericUnit>percent</hrai:numericUnit>
+    <hrai:baseYear>2024-2028</hrai:baseYear>
+    <hrai:hasIndicatorMethod>R$ 103,25 milhões / R$ 23,03 bilhões (Tabela 2 do PBIA, investimentos previstos 2024-2028)</hrai:hasIndicatorMethod>
+    <hrai:indicatorRelevantToJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
+    <hrai:indicatorSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+  </hrai:ContextIndicator>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Ind_STEMGraduatesShare">
+    <hrai:baseYear>não informado na fonte</hrai:baseYear>
+  </hrai:ContextIndicator>
+  <hrai:ContextIndicator rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Ind_GovernanceBudgetAmount">
+    <rdfs:label xml:lang="pt">Investimento previsto no Eixo 5 do PBIA (governança e apoio regulatório)</rdfs:label>
+    <hrai:hasNumericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">103.25</hrai:hasNumericValue>
+    <hrai:numericUnit>million BRL</hrai:numericUnit>
+    <hrai:baseYear>2024-2028</hrai:baseYear>
+    <hrai:indicatorRelevantToJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Brazil"/>
+    <hrai:indicatorSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Snapshot_PBIA_VN8"/>
+  </hrai:ContextIndicator>
+  <hrai:SourceSnapshot rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338#Snapshot_2024"/>
+</rdf:RDF>

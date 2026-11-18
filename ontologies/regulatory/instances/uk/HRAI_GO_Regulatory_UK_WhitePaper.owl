@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rdf:RDF
-  xmlns:owl="http://www.w3.org/2002/07/owl#"
-  xmlns:hrai="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#"
-  xmlns:dcterms="http://purl.org/dc/terms/"
-  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:hrai="https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#"
   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
   xmlns:prov="http://www.w3.org/ns/prov#"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 >
   <hrai:ExtractionBatch rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Lote_Extracao">
     <rdfs:label xml:lang="pt">Lote de extração: Reino Unido: white paper 'A pro-innovation approach to AI regulation' e os cinco princípios</rdfs:label>
@@ -63,9 +63,9 @@
     <rdfs:label xml:lang="pt">Reino Unido: white paper 'A pro-innovation approach to AI regulation' e os cinco princípios</rdfs:label>
     <rdfs:comment xml:lang="pt">Gerado por scripts/ontologia/extrair_internacional.py (pdftotext + expressões regulares, sem LLM). Candidato pendente de revisão humana. Método: METODO_EXTRACAO.md.</rdfs:comment>
   </owl:Ontology>
-  <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Principio_3">
-    <rdfs:label xml:lang="en">Fairness</rdfs:label>
-    <dcterms:description xml:lang="en">AI systems should not undermine the legal rights of individuals or organisations, discriminate unfairly against individuals or create unfair market outcomes.</dcterms:description>
+  <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Principio_4">
+    <rdfs:label xml:lang="en">Accountability and governance</rdfs:label>
+    <dcterms:description xml:lang="en">Governance measures should be in place to ensure effective oversight of the supply and use of AI systems, with clear lines of accountability established across the AI life cycle.</dcterms:description>
     <dcterms:isPartOf>
       <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#WhitePaper2023">
         <rdfs:label xml:lang="en">A pro-innovation approach to AI regulation (white paper, 2023)</rdfs:label>
@@ -75,7 +75,7 @@
         <hrai:policyInstrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#UnitedKingdom"/>
       </hrai:PolicyInstrument>
     </dcterms:isPartOf>
-    <skos:notation>3</skos:notation>
+    <skos:notation>4</skos:notation>
     <prov:wasDerivedFrom>
       <hrai:SourceSnapshot rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Snapshot_WhitePaper">
         <rdfs:label>A pro-innovation approach to AI regulation (white paper, March 2023, amended web version)</rdfs:label>
@@ -90,14 +90,14 @@
       </hrai:Jurisdiction>
     </hrai:policyInstrumentInJurisdiction>
   </hrai:PolicyInstrument>
-  <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Principio_5">
-    <rdfs:label xml:lang="en">Contestability and redress</rdfs:label>
-    <dcterms:description xml:lang="en">Where appropriate, users, impacted third parties and actors in the AI life cycle should be able to contest an AI decision or outcome that is harmful or creates material risk of harm.</dcterms:description>
-    <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#WhitePaper2023"/>
-    <skos:notation>5</skos:notation>
-    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Snapshot_WhitePaper"/>
-    <hrai:policyInstrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#UnitedKingdom"/>
-  </hrai:PolicyInstrument>
+  <hrai:LegalSource rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Fonte_ImpactAssessment">
+    <rdfs:label>UK Department for Science, Innovation and Technology</rdfs:label>
+    <hrai:sourceURI rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://www.gov.uk/government/publications/ai-regulation-a-pro-innovation-approach</hrai:sourceURI>
+  </hrai:LegalSource>
+  <hrai:LegalSource rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Fonte_WhitePaper">
+    <rdfs:label>UK Department for Science, Innovation and Technology</rdfs:label>
+    <hrai:sourceURI rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://www.gov.uk/government/publications/ai-regulation-a-pro-innovation-approach</hrai:sourceURI>
+  </hrai:LegalSource>
   <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Principio_1">
     <rdfs:label xml:lang="en">Safety, security and robustness</rdfs:label>
     <dcterms:description xml:lang="en">AI systems should function in a robust, secure and safe way throughout the AI life cycle, and risks should be continually identified, assessed and managed.</dcterms:description>
@@ -108,24 +108,15 @@
   </hrai:PolicyInstrument>
   <hrai:SourceSnapshot rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Snapshot_ImpactAssessment">
     <rdfs:label>UK Artificial Intelligence Regulation Impact Assessment (2023)</rdfs:label>
-    <hrai:snapshotOfSource>
-      <hrai:LegalSource rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Fonte_ImpactAssessment">
-        <rdfs:label>UK Department for Science, Innovation and Technology</rdfs:label>
-        <hrai:sourceURI rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://www.gov.uk/government/publications/ai-regulation-a-pro-innovation-approach</hrai:sourceURI>
-      </hrai:LegalSource>
-    </hrai:snapshotOfSource>
+    <hrai:snapshotOfSource rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Fonte_ImpactAssessment"/>
     <hrai:snapshotSHA256>c60009d0546482b80d2dbff1e667ca52953e8bc3767346b6db0ff08d4761f049</hrai:snapshotSHA256>
     <hrai:snapshotURI rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/docs/ai-regulations/uk/uk_ai_regulation_impact_assessment.pdf</hrai:snapshotURI>
   </hrai:SourceSnapshot>
-  <hrai:LegalSource rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Fonte_WhitePaper">
-    <rdfs:label>UK Department for Science, Innovation and Technology</rdfs:label>
-    <hrai:sourceURI rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://www.gov.uk/government/publications/ai-regulation-a-pro-innovation-approach</hrai:sourceURI>
-  </hrai:LegalSource>
-  <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Principio_4">
-    <rdfs:label xml:lang="en">Accountability and governance</rdfs:label>
-    <dcterms:description xml:lang="en">Governance measures should be in place to ensure effective oversight of the supply and use of AI systems, with clear lines of accountability established across the AI life cycle.</dcterms:description>
+  <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Principio_5">
+    <rdfs:label xml:lang="en">Contestability and redress</rdfs:label>
+    <dcterms:description xml:lang="en">Where appropriate, users, impacted third parties and actors in the AI life cycle should be able to contest an AI decision or outcome that is harmful or creates material risk of harm.</dcterms:description>
     <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#WhitePaper2023"/>
-    <skos:notation>4</skos:notation>
+    <skos:notation>5</skos:notation>
     <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Snapshot_WhitePaper"/>
     <hrai:policyInstrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#UnitedKingdom"/>
   </hrai:PolicyInstrument>
@@ -134,6 +125,14 @@
     <dcterms:description xml:lang="en">AI systems should be appropriately transparent and explainable.</dcterms:description>
     <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#WhitePaper2023"/>
     <skos:notation>2</skos:notation>
+    <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Snapshot_WhitePaper"/>
+    <hrai:policyInstrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#UnitedKingdom"/>
+  </hrai:PolicyInstrument>
+  <hrai:PolicyInstrument rdf:about="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Principio_3">
+    <rdfs:label xml:lang="en">Fairness</rdfs:label>
+    <dcterms:description xml:lang="en">AI systems should not undermine the legal rights of individuals or organisations, discriminate unfairly against individuals or create unfair market outcomes.</dcterms:description>
+    <dcterms:isPartOf rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#WhitePaper2023"/>
+    <skos:notation>3</skos:notation>
     <prov:wasDerivedFrom rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Snapshot_WhitePaper"/>
     <hrai:policyInstrumentInJurisdiction rdf:resource="https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#UnitedKingdom"/>
   </hrai:PolicyInstrument>

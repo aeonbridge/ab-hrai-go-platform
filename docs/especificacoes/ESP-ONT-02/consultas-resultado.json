@@ -29,7 +29,7 @@
    "indicador",
    "situacao"
   ],
-  "linhas": 0,
+  "linhas": 8,
   "pergunta": "QN2"
  },
  "PC4_exposicao_sem_cobertura": {
@@ -75,7 +75,7 @@
    "tipoAfetado",
    "afetado"
   ],
-  "linhas": 85,
+  "linhas": 88,
   "pergunta": "transversal"
  },
  "PC8_posicoes": {
