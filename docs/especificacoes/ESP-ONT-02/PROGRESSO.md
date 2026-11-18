@@ -207,6 +207,17 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
   (orçamento de supervisão, profissionais); nas comparações eles aparecem como "não codificado" (item 16).
 - **Comandos**: protocolo com exit 0 (6 arquivos de instância validados); pytest → 179 passed.
 
+### Item 13 · M10 monitoramento: o que uma mudança reabre — 17/11/2026
+
+- **O que mudou**
+  - PC7 ampliada: além de dispositivos, requisitos, avaliações e aplicações (R10 a R13), reabre codificações (E5),
+    especificidades da QN1 e afirmações cuja evidência cita dispositivo da versão anterior. PC7: 92 linhas.
+  - `scripts/ontologia/monitorar.py` gera `web/assets/monitoramento.js`; a página Monitoramento do site mostra
+    "Reaberto no grafo" acima do pulso normativo: o texto do Senado reabre 79 dispositivos, 3 requisitos e 4
+    afirmações (entre elas a C04); o evento ilustrativo do cenário E1 aparece marcado como ilustrativo.
+  - `tests/test_monitoramento.py` e `monitorar.py --check` no CI.
+- **Comandos**: protocolo com exit 0; pytest → todos passam.
+
 ## Aguardando decisão
 
 | Id | Decisão | Quem | Bloqueia |
@@ -250,7 +261,7 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | V-20 | ⬜ | item 14 |
 | V-21 | ⬜ | item 14 |
 | V-22 | ⬜ | item 14 |
-| V-23 | ⬜ | item 13 |
+| V-23 | ✅ | texto do Senado como nova versão reabre dispositivos, requisitos e afirmações (`tests/test_monitoramento.py`); codificações e especificidades entram na mesma consulta quando existirem |
 | V-24 | ⏸ | D-05 |
 | V-25 | ⬜ | item 15 |
 | V-26 | ⬜ | item 17 |

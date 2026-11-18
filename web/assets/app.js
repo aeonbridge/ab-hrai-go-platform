@@ -277,7 +277,16 @@ function renderMon() {
     linha.push(el("div", { class: "ev " + e[1] }, el("span", { class: "d" }, dataBR(e[0])), el("span", { class: "tr" }, el("i")),
       el("div", { class: "c" }, el("b", {}, e[2]), el("p", {}, e[3]), e[4] ? el("span", { class: "selo sint" }, "ontologia: " + e[4]) : null)));
   }
-  put($("#mon"), el("h1", {}, "Pulso normativo"),
+  /* Fila de reabertura gerada do grafo (PC7, scripts/ontologia/monitorar.py): o que cada mudança de texto reabre. */
+  const MON = window.HRAIGO_MONITOR || { eventos: [] };
+  const NOMES = { "dispositivo": "dispositivos", "requisito": "requisitos", "avaliação": "avaliações", "aplicação": "aplicações", "codificação": "codificações", "especificidade": "especificidades", "afirmação": "afirmações" };
+  const reaberto = MON.eventos.length ? el("section", { class: "reaberto" },
+    el("h2", {}, "Reaberto no grafo"),
+    el("p", { class: "apoio" }, "O que cada mudança de texto reabre, pelas regras R10 a R13 e pela versão anterior do instrumento. Nada vira fato: tudo vai para revisão humana."),
+    MON.eventos.map(e => el("div", { class: "ev-reab" }, el("b", {}, e.rotulo),
+      el("p", {}, Object.entries(e.reaberto).map(([k, n]) => n + " " + (n === 1 ? k : (NOMES[k] || k))).join(" · ")),
+      e.itens["afirmação"] ? el("p", { class: "nota" }, "Afirmações: " + e.itens["afirmação"].join("; ")) : null))) : null;
+  put($("#mon"), reaberto, el("h1", {}, "Pulso normativo"),
     el("p", { class: "apoio", style: "margin-top:10px" }, "Cada evento pode se tornar um RegulatoryChangeEvent na ontologia HRAI·GO e reabrir conclusões por regras SWRL, sempre com revisão humana antes de publicar."),
     el("div", { class: "filtros", role: "group", "aria-label": "Filtro" }, [["todos", "Tudo"], ["br", "Brasil"], ["mu", "Mundo"], ["fut", "Próximos marcos"]].map(([k, l]) => el("button", { "aria-pressed": String(f === k), onclick: () => { S.monF = k; renderMon(); } }, l))),
     linha, el("p", { class: "nota" }, "Datas de fontes secundárias consultadas em nov/2026; confirmar nas fontes oficiais."));
