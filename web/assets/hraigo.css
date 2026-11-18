@@ -203,3 +203,5 @@ textarea{width:100%;min-height:120px;border:1px solid var(--color-border-control
 .reaberto h2{margin:0 0 6px;font-size:20px}
 .ev-reab{margin-top:12px;padding-top:10px;border-top:1px solid var(--linha-forte)}
 .ev-reab p{margin:4px 0 0}
+/* alvos de toque de pelo menos 44 px no celular (RT-VIS-03, V-18) */
+.bt,.opcao,.mov{min-height:44px}

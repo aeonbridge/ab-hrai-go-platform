@@ -349,6 +349,19 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
 - Premissas P-06 a P-10 e P-12 registradas; `tests/test_sessao.py` no CI.
 - **Falta** (aceite humano): ensaio com pessoas e decisão registrada pela coordenação (V-20 a V-22).
 
+### Item 15 · interfaces: comparador, limites declarados, alvos de toque — 17/11/2026
+
+- `scripts/ontologia/build_comparador.py` → `web/comparador/index.html` (link "Comparador" no site): limites declarados no
+  topo; matriz dos 25 critérios e E1, Brasil × UE, com valor, rótulo, artigos (links para as páginas de IRI), estado
+  (candidata ou revisada) e concordância com os autores; dispositivos lado a lado com tipo e transposição; incorporado sem
+  capacidade (PC3); exposição sem cobertura com o motivo do zero (P-03); o que é próprio do Brasil (PC9).
+- Fichas da câmara terminam com os limites e link para o comparador (V-25).
+- Alvos de toque: CSS garante 44 px em botões, opções, abas, reações, chip "você" e fechar; avatares da câmara ganham
+  área de toque de 44 px sem mudar o desenho. **Medido no navegador** (390×844, modo participante, todas as abas da
+  gaveta): 42 controles, nenhum abaixo de 44 px.
+- Base de conhecimento: a seção "Conhecimento" do site e as páginas de IRI (`/ontology/...`, `/data/...`).
+- `tests/test_interface.py` no CI. Falta teste em aparelho real (V-18).
+
 ## Aguardando decisão
 
 Pendências com premissa provisória registrada em `PREMISSAS.md` seguem abertas para decisão do autor; a premissa só evita que o loop pare.
@@ -394,14 +407,14 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | V-15 | ✅ | `modelo.js` gerado do grafo (`build_modelo.py --check` no CI); contador = 0 sem lastro (88/88, 31 sementes) |
 | V-16 | ✅ | `ontologies/consultas/V16_sementes_sem_ligacao.rq` = 0 linhas (`tests/test_conselho.py`, CI) |
 | V-17 | ✅ | `tests/test_afirmacoes.py` no CI recalcula as 12 teses e compara com o estado gravado; C04 reavaliada contra o art. 54 do texto do Senado |
-| V-18 | 🟡 | celular participante com Minhas escolhas, Mesa e Agora já existe; falta teste de toque (item 15) |
+| V-18 | 🟡 | celular participante com Minhas escolhas, Mesa e Agora; alvos ≥ 44 px medidos no navegador (42 controles) e protegidos no CI; falta aparelho real |
 | V-19 | 🟡 | ficha com "De onde vem" em componente, área, estrato, tensão e cadeira vazia; falta teste em aparelho real |
 | V-20 | 🟡 | posição cega capturada (`q2r1`) e métrica de revisão; controle de rodadas pelo apresentador e ensaio real pendentes (P-06, P-10) |
 | V-21 | 🟡 | `sessao.py` gera o relatório com as quatro métricas; exercitado em ensaio simulado (P-10) |
 | V-22 | 🟡 | `DecisionRecord` gerado só a partir de `decisao.json` preenchido por pessoa; nenhum registrado ainda |
 | V-23 | ✅ | texto do Senado como nova versão reabre dispositivos, requisitos e afirmações (`tests/test_monitoramento.py`); codificações e especificidades entram na mesma consulta quando existirem |
 | V-24 | ✅ | IRIs sob `hrai-go.aeonbridge.io` com páginas de resolução geradas do grafo (`tests/test_iris.py`); HTTPS em emissão |
-| V-25 | ⬜ | item 15 |
+| V-25 | ✅ | limites declarados no topo do comparador e no fim de cada ficha da câmara (`tests/test_interface.py`) |
 | V-26 | ✅ | relatório gerado pela plataforma (`relatorio-QN.md`), seções QN1, QN2, QN3, aprovado pelo autor (D-11, sujeito a mudanças) |
 | V-27 | ✅ | PC9 responde; `V27_especificidades_sem_evidencia.rq` = 0 |
 | V-28 | ✅ | `V28_itens_sem_especificidade.rq` = 0 |

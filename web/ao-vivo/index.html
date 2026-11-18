@@ -89,6 +89,13 @@ body.semgl #semgl{display:grid} body.semgl #gl{display:none}
 #ficha details.proc dt{color:var(--color-text-secondary)}
 #ficha details.proc dd{margin:0;overflow-wrap:anywhere}
 #ficha details.proc a{color:var(--color-text-link)}
+/* alvos de toque de pelo menos 44 px no celular (RT-VIS-03, V-18) */
+.abas button,.reacoes button,#gaveta button,#ficha .fx,#voce,.chip.cta{min-height:44px;min-width:44px}
+html body.participante #voce{min-height:44px}
+.card .quem{min-height:44px;display:flex;align-items:center;gap:6px}
+/* avatares na câmara: área de toque de 44 px sem mudar o desenho (encolhem com a distância) */
+.pav{position:relative}.pav::before{content:"";position:absolute;left:50%;top:50%;width:44px;height:44px;transform:translate(-50%,-50%)}
+#ficha .limite{font-size:11.5px;color:var(--color-text-secondary);margin:12px 0 0;border-top:1px solid rgba(214,226,240,.15);padding-top:8px}
 #ficha .selo{font-size:12.5px;line-height:1.4;margin:10px 0 0;padding:7px 10px;border-radius:8px;border:1px solid}
 #ficha .selo code{font-size:11.5px}
 #ficha .selo.ok{color:#9FE3D9;border-color:rgba(56,194,180,.45);background:rgba(56,194,180,.08)}
@@ -794,7 +801,9 @@ rotulos.forEach(r => { if (r.tipo === "voce") return; r.el.addEventListener("cli
 let fichaAtual = null;
 function abrirFicha(f, ev) {
   const el = $("#ficha"); fichaAtual = f;
-  el.innerHTML = `<button class="fx" aria-label="Fechar">×</button>` + htmlFicha(f); el.classList.add("on");
+  el.innerHTML = `<button class="fx" aria-label="Fechar">×</button>` + htmlFicha(f)
+    + `<p class="limite">Limites: não é aconselhamento jurídico; perspectivas sintéticas não representam a população; lacunas valem só no escopo declarado. <a href="../comparador/">Ver todos</a></p>`;
+  el.classList.add("on");
   el.querySelector(".fx").onclick = fecharFicha;
   const fi = el.querySelector("[data-ident]");
   if (fi) {
