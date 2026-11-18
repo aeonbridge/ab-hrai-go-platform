@@ -63,5 +63,9 @@ jobs:
             echo "All compiled deliverables already match main."
           else
             git commit -m "build: publish compiled HRAI-GO and SCSE artifacts [skip ci]"
-            git push origin HEAD:main
+            # main may move while the build runs (another push); rebase the artifact commit and retry.
+            for attempt in 1 2 3; do
+              git push origin HEAD:main && break
+              git pull --rebase origin main
+            done
           fi
