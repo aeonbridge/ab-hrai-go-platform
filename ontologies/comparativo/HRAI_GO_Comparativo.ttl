@@ -12,7 +12,7 @@
 <https://hrai-go.aeonbridge.io/ontology/comparativo> a owl:Ontology ;
     dcterms:description "Módulo comparativo do HRAI-GO (Human-centred Regulatory AI, Governance Observatory): as 12 categorias e os 25 critérios de Alanoca et al. (2025), com as definições originais, e as extensões declaradas E1 a E7 (ESP-ONT-02, RF-16). As escalas dos critérios (E4) aguardam aprovação humana."@pt ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
-    dcterms:title "HRAI-GO comparative module: base taxonomy and declared extensions"@en ;
+    dcterms:title "HRAI-GO: Human-centred Regulatory AI, Governance Observatory — comparative module: base taxonomy and declared extensions"@en ;
     owl:imports <https://hrai-go.aeonbridge.io/ontology/regulatory> ;
     owl:versionIRI <https://hrai-go.aeonbridge.io/ontology/comparativo/1.0.0> ;
     owl:versionInfo "1.0.0" .

@@ -98,7 +98,7 @@ def build() -> rdflib.Graph:
     g.add((ont, OWL.imports, URIRef(BASE + "/regulatory")))
     g.add((ont, OWL.versionInfo, Literal("1.0.0")))
     g.add((ont, OWL.versionIRI, URIRef(BASE + "/comparativo/1.0.0")))
-    g.add((ont, DCTERMS.title, Literal("HRAI-GO comparative module: base taxonomy and declared extensions", lang="en")))
+    g.add((ont, DCTERMS.title, Literal("HRAI-GO: Human-centred Regulatory AI, Governance Observatory — comparative module: base taxonomy and declared extensions", lang="en")))
     g.add((ont, DCTERMS.description, Literal(
         "Módulo comparativo do HRAI-GO (Human-centred Regulatory AI, Governance Observatory): as 12 categorias e os 25 "
         "critérios de Alanoca et al. (2025), com as definições originais, e as extensões declaradas E1 a E7 (ESP-ONT-02, RF-16). "

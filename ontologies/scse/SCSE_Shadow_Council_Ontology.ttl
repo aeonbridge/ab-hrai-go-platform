@@ -12,7 +12,7 @@
 <https://hrai-go.aeonbridge.io/ontology/scse> a owl:Ontology ;
     dcterms:description "SCSE module of HRAI-GO (Human-centred Regulatory AI, Governance Observatory): deliberation, council, strata, seats, rounds, positions, scenarios and decisions. Imports the regulatory core instead of redeclaring its classes (ESP-ONT-02, RF-17). Includes synthetic illustration individuals and safe positive SWRL rules. No legal certification or population representativeness is implied."@en ;
     dcterms:source "SCSE Shadow Council Simulation Specification v1.0 and HRAI-GO conceptual proposal (user-provided documents)." ;
-    dcterms:title "Shadow Council Simulation Environment Ontology"@en ;
+    dcterms:title "HRAI-GO: Human-centred Regulatory AI, Governance Observatory — Shadow Council Simulation Environment Ontology"@en ;
     rdfs:comment "1.1.0: own namespace; imports the core; regulatory classes (LegalProvision, NormativeRequirement, LegalStatus, LegalException, Jurisdiction, ComplianceAssessment, PolicyAlternative, PolicyObjective) now come from the core; deliberation classes have their home here, with owl:equivalentClass to the legacy core classes kept for compatibility."@en,
         "1.2.0 (ESP-ONT-02, RF-03): DecisionRecord, position revision and alternative positions, stratum of a stakeholder; rules R29a/R29b (synthetic support never counts as human) and R30 (divergent alternative)."@en ;
     owl:imports <https://hrai-go.aeonbridge.io/ontology/regulatory> ;

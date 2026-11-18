@@ -12,7 +12,7 @@
 <https://hrai-go.aeonbridge.io/ontology/regulatory> owl:versionIRI <https://hrai-go.aeonbridge.io/ontology/regulatory/1.2.0> .
 <https://hrai-go.aeonbridge.io/ontology/regulatory> owl:priorVersion <https://hrai-go.aeonbridge.io/ontology/regulatory/1.0.0> .
 <https://hrai-go.aeonbridge.io/ontology/regulatory> owl:versionInfo "1.2.0" .
-<https://hrai-go.aeonbridge.io/ontology/regulatory> dcterms:title "HRAI-GO General Regulatory Intelligence Ontology"@en .
+<https://hrai-go.aeonbridge.io/ontology/regulatory> dcterms:title "HRAI-GO: Human-centred Regulatory AI, Governance Observatory — General Regulatory Intelligence Ontology"@en .
 <https://hrai-go.aeonbridge.io/ontology/regulatory> rdfs:comment "Canonical legal, policy and national-context model. OWL/SWRL do not certify legal applicability, review, validity or compliance."@en .
 hrai:Jurisdiction rdf:type owl:Class .
 hrai:Jurisdiction rdfs:label "Jurisdiction"@en .

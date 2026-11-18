@@ -390,7 +390,7 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 
 | Id | Estado | Evidência / observação |
 |---|---|---|
-| V-01 | 🟡 | nome completo no README e relatórios (`tests/test_nomenclatura.py`); conferir site e `dcterms:title` |
+| V-01 | ✅ | nome completo no cabeçalho e metadados do site, no README e no `dcterms:title` das três ontologias (núcleo, SCSE, comparativo); `tests/test_nomenclatura.py` |
 | V-02 | ✅ | `SourceSnapshot` com SHA-256 conferido para PBIA, PL 2023, PL 2024, AI Act, white paper e análise de impacto do Reino Unido, NIST AI RMF (`tests/test_internacional.py`) |
 | V-03 | ✅ | decisão registrada (D-01, revista pela D-01b: China em espera, fora da comparação); nenhuma jurisdição exibida sem snapshot com SHA-256 (`tests/test_internacional.py`) |
 | V-04 | ✅ | `tests/test_modulos.py` no CI (`validate-regulatory.yml`); item 2 |
@@ -400,10 +400,10 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | V-08 | ✅ | BR e UE codificados nos 25 critérios (+E1), cada valor com dispositivo; `V08_codificacoes_sem_evidencia.rq` = 0; revisão humana em D-13 |
 | V-09 | ✅ | concordância por critério publicada (`concordancia-codificacoes.md`): BR 68%, UE 92%; divergências resolvidas contra o texto primário |
 | V-10 | ✅ | 18 correspondências revisadas (D-03); sem correspondência pendente; R26 infere 13 transposições |
-| V-11 | 🟡 | indicadores do Brasil com fonte e ano-base (teste); PC3 responde (8 linhas: "indicador sem limiar"); PC4 sem `CoverageAssessment`; falta revisão (D-03) e limiar (D-09) |
+| V-11 | 🟡 | indicadores com fonte e ano-base, revisados (D-03); limiar de 5% aprovado (D-09): PC3 mostra "abaixo do limiar" para supervisão e acreditação; PC4 em zero por falta de escopo de cobertura (premissa P-03) |
 | V-12 | ✅ | `consultas.py --check` e `tests/test_consultas.py` no CI; cada PC testada sobre fixture |
 | V-13 | ✅ | `test_rnf02_full_graph_reasons_under_five_seconds` no CI: 0,12 s para 5105 triplas |
-| V-14 | 🟡 | ficha da área mostra o "Por quê?" da força com os componentes; cadeia de regras SWRL até a fonte na interface fica para quando houver inferência exibida de fonte primária (itens 11–12) |
+| V-14 | ✅ | páginas de IRI mostram cada inferência com a regra que a produziu e os fatos ligados à captura da fonte (`provisionDocumentedIn`, `wasDerivedFrom`); fichas da câmara com "Por quê?" e "De onde vem" (`tests/test_iris.py`) |
 | V-15 | ✅ | `modelo.js` gerado do grafo (`build_modelo.py --check` no CI); contador = 0 sem lastro (88/88, 31 sementes) |
 | V-16 | ✅ | `ontologies/consultas/V16_sementes_sem_ligacao.rq` = 0 linhas (`tests/test_conselho.py`, CI) |
 | V-17 | ✅ | `tests/test_afirmacoes.py` no CI recalcula as 12 teses e compara com o estado gravado; C04 reavaliada contra o art. 54 do texto do Senado |
