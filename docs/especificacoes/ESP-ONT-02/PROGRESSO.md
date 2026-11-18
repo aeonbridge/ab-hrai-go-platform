@@ -173,13 +173,32 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
   - Apêndice de afirmações da ESP-ONT-02 regenerado e PDF recompilado.
 - **Comandos**: protocolo com exit 0; pytest → todos passam.
 
+### Item 11 · RF-04 / RF-06 / RF-14 instâncias UE, Reino Unido e EUA; correspondências — 17/11/2026
+
+- **O que mudou**
+  - `scripts/ontologia/extrair_internacional.py` (pdftotext + expressões regulares, sem LLM):
+    - UE: AI Act (Regulamento 2024/1689) como norma vigente, versão de 12/07/2024 e os **113 artigos** com título,
+      capítulo, seção e texto integral;
+    - Reino Unido: white paper de 2023 como instrumento não estatutário (E1), com a frase "will not put these
+      principles on a statutory footing initially" e os **5 princípios** com a definição literal; análise de impacto
+      capturada como snapshot;
+    - EUA: NIST AI RMF 1.0 como guia voluntário (E1), com as **4 funções** e a definição literal.
+    Cada documento com `SourceSnapshot` (SHA-256 conferido no teste) e candidato pendente.
+  - `scripts/ontologia/correspondencias.py`: **18 correspondências** candidatas entre o texto do Senado e o AI Act
+    (13 adaptadas, 4 parciais, 1 divergente), cada uma com a justificativa e a área. É julgamento de leitura (análise
+    assistida por LLM), não extração; sem revisão humana, R26 não infere transposição (testado). PC2: 18 linhas.
+  - CI confere que extração e correspondências são reprodutíveis.
+- **Fica para depois**: codificações nos 25 critérios (V-08) dependem das escalas aprovadas (D-02); registrar ao lado
+  as codificações descritivas dos autores do paper para a concordância (V-09).
+- **Comandos**: protocolo com exit 0 (5 arquivos de instância validados); pytest → todos passam.
+
 ## Aguardando decisão
 
 | Id | Decisão | Quem | Bloqueia |
 |---|---|---|---|
 | D-01 | RF-02, China: incluir fontes primárias ou retirar da comparação | autor | V-03, item 11 (parte) |
 | D-02 | E4: aprovar as escalas dos 25 critérios; proposta pronta em `escalas-E4-proposta.md` | autor | V-07, codificações (item 11), R28 |
-| D-03 | Revisão das extrações (dispositivos, correspondências BR↔UE, codificações, indicadores) e do mapeamento das 29 áreas para NIST, AI Act e critérios (`areas.json`) | revisor humano | V-08 a V-11 |
+| D-03 | Revisão das extrações (dispositivos do PL, do AI Act, princípios do Reino Unido, funções do NIST; 18 correspondências BR↔UE em `correspondencias/`; codificações, indicadores) e do mapeamento das 29 áreas para NIST, AI Act e critérios (`areas.json`) | revisor humano | V-08 a V-11 |
 | D-04 | Alinhamento A1: os 5 componentes "próximos" (GM-15, GM-17, GM-19, GM-20, GM-22) e as teses do anexo; ligações semente→afirmação e ramo→instrumento (`conselho/GOV-BR-001.ttl`) | autor | contador sem lastro |
 | D-05 | RNF-01: domínio dos IRIs (w3id.org ou GitHub Pages) | autor | V-24 |
 | D-07 | Revisar as 31 sementes (`ontologies/regulatory/sementes/GOV-BR-001_sementes.ttl`): confirmar, corrigir ou retirar; 9 traços de contexto sem fonte real | autor | selo "semente" vira revisado |
@@ -193,15 +212,15 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | Id | Estado | Evidência / observação |
 |---|---|---|
 | V-01 | 🟡 | nome completo no README e relatórios (`tests/test_nomenclatura.py`); conferir site e `dcterms:title` |
-| V-02 | 🟡 | `SourceSnapshot` com SHA-256 no grafo: PBIA, PL 2023, PL 2024; faltam UE, Reino Unido e EUA (item 11) |
+| V-02 | ✅ | `SourceSnapshot` com SHA-256 conferido para PBIA, PL 2023, PL 2024, AI Act, white paper e análise de impacto do Reino Unido, NIST AI RMF (`tests/test_internacional.py`) |
 | V-03 | ⏸ | D-01 |
 | V-04 | ✅ | `tests/test_modulos.py` no CI (`validate-regulatory.yml`); item 2 |
 | V-05 | ✅ | TBox 1.2.0, R24–R26 (núcleo), R28 (comparativo), R29–R30 (SCSE); I-1 a I-4 em `tests/test_invariantes.py` |
 | V-06 | ✅ | `tests/test_comparativo.py`: 25 critérios com definições originais conferidas no PDF, E1–E7 com crédito e DOI |
 | V-07 | ⏸ | D-02 |
-| V-08 | ⬜ | item 11 |
-| V-09 | ⬜ | item 11 |
-| V-10 | ⬜ | item 11 |
+| V-08 | ⏸ | depende das escalas da E4 (D-02) |
+| V-09 | ⬜ | registrar codificações dos autores do paper e publicar concordância (após D-02) |
+| V-10 | ⏸ | 18 correspondências BR × UE candidatas (PC2 responde); falta revisão humana (D-03) |
 | V-11 | ⬜ | item 12 |
 | V-12 | ✅ | `consultas.py --check` e `tests/test_consultas.py` no CI; cada PC testada sobre fixture |
 | V-13 | ✅ | `test_rnf02_full_graph_reasons_under_five_seconds` no CI: 0,12 s para 5105 triplas |

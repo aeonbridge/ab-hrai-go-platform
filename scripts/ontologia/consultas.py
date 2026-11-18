@@ -34,7 +34,8 @@ RESULT = ROOT / "docs/especificacoes/ESP-ONT-02/consultas-resultado.json"
 SOURCES = ["ontologies/regulatory/HRAI_GO_Regulatory_General.ttl", "ontologies/scse/**/*.ttl",
            "ontologies/comparativo/*.ttl", "ontologies/regulatory/instances/**/*.ttl",
            "ontologies/regulatory/cenarios/*.ttl", "ontologies/regulatory/afirmacoes/*.ttl",
-           "ontologies/regulatory/alinhamentos/*.ttl", "ontologies/regulatory/sementes/*.ttl"]
+           "ontologies/regulatory/alinhamentos/*.ttl", "ontologies/regulatory/sementes/*.ttl",
+           "ontologies/regulatory/correspondencias/*.ttl"]
 QN = {"PC1": "QN1", "PC5": "QN1", "PC9": "QN1", "PC2": "QN2", "PC3": "QN2", "PC6": "QN2/QN3", "PC4": "QN3",
       "PC7": "transversal", "PC8": "transversal", "V16": "aceite V-16"}
 

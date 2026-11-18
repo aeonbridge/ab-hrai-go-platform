@@ -1,0 +1,290 @@
+# Gerado por scripts/ontologia/correspondencias.py. Não editar à mão.
+@prefix comp: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#> .
+@prefix cor: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix eu: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/eu/aiact#> .
+@prefix hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pl: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue> a owl:Ontology ;
+    rdfs:label "Correspondências BR (PL 2338, texto do Senado) × UE (AI Act): candidatas"@pt ;
+    rdfs:comment "Gerado por scripts/ontologia/correspondencias.py. Julgamento de leitura (análise assistida por LLM), pendente de revisão humana; sem revisão, R26 não infere transposição."@pt .
+
+cor:Lote_Correspondencias a hrai:ExtractionBatch ;
+    rdfs:label "Lote de correspondências BR × UE"@pt ;
+    hrai:extractionContainsCandidate cor:Candidate_Corr_BR006_EU086,
+        cor:Candidate_Corr_BR008_EU014,
+        cor:Candidate_Corr_BR012_EU006,
+        cor:Candidate_Corr_BR013_EU005,
+        cor:Candidate_Corr_BR014_EU006,
+        cor:Candidate_Corr_BR017_EU009,
+        cor:Candidate_Corr_BR019_EU050,
+        cor:Candidate_Corr_BR025_EU027,
+        cor:Candidate_Corr_BR029_EU053,
+        cor:Candidate_Corr_BR030_EU055,
+        cor:Candidate_Corr_BR042_EU073,
+        cor:Candidate_Corr_BR044_EU071,
+        cor:Candidate_Corr_BR045_EU070,
+        cor:Candidate_Corr_BR050_EU099,
+        cor:Candidate_Corr_BR054_EU068,
+        cor:Candidate_Corr_BR055_EU057,
+        cor:Candidate_Corr_BR062_EU053,
+        cor:Candidate_Corr_BR067_EU062 .
+
+cor:Candidate_Corr_BR006_EU086 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: art. 6 × art. 86 (adaptado)"@pt ;
+    dcterms:subject cor:Corr_BR006_EU086 ;
+    hrai:candidateProducedBy cor:AnalistaSessaoLoop .
+
+cor:Candidate_Corr_BR008_EU014 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: art. 8 × art. 14 (adaptado)"@pt ;
+    dcterms:subject cor:Corr_BR008_EU014 ;
+    hrai:candidateProducedBy cor:AnalistaSessaoLoop .
+
+cor:Candidate_Corr_BR012_EU006 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: art. 12 × art. 6 (parcial)"@pt ;
+    dcterms:subject cor:Corr_BR012_EU006 ;
+    hrai:candidateProducedBy cor:AnalistaSessaoLoop .
+
+cor:Candidate_Corr_BR013_EU005 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: art. 13 × art. 5 (adaptado)"@pt ;
+    dcterms:subject cor:Corr_BR013_EU005 ;
+    hrai:candidateProducedBy cor:AnalistaSessaoLoop .
+
+cor:Candidate_Corr_BR014_EU006 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: art. 14 × art. 6 (adaptado)"@pt ;
+    dcterms:subject cor:Corr_BR014_EU006 ;
+    hrai:candidateProducedBy cor:AnalistaSessaoLoop .
+
+cor:Candidate_Corr_BR017_EU009 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: art. 17 × art. 9 (parcial)"@pt ;
+    dcterms:subject cor:Corr_BR017_EU009 ;
+    hrai:candidateProducedBy cor:AnalistaSessaoLoop .
+
+cor:Candidate_Corr_BR019_EU050 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: art. 19 × art. 50 (adaptado)"@pt ;
+    dcterms:subject cor:Corr_BR019_EU050 ;
+    hrai:candidateProducedBy cor:AnalistaSessaoLoop .
+
+cor:Candidate_Corr_BR025_EU027 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: art. 25 × art. 27 (adaptado)"@pt ;
+    dcterms:subject cor:Corr_BR025_EU027 ;
+    hrai:candidateProducedBy cor:AnalistaSessaoLoop .
+
+cor:Candidate_Corr_BR029_EU053 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: art. 29 × art. 53 (adaptado)"@pt ;
+    dcterms:subject cor:Corr_BR029_EU053 ;
+    hrai:candidateProducedBy cor:AnalistaSessaoLoop .
+
+cor:Candidate_Corr_BR030_EU055 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: art. 30 × art. 55 (adaptado)"@pt ;
+    dcterms:subject cor:Corr_BR030_EU055 ;
+    hrai:candidateProducedBy cor:AnalistaSessaoLoop .
+
+cor:Candidate_Corr_BR042_EU073 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: art. 42 × art. 73 (adaptado)"@pt ;
+    dcterms:subject cor:Corr_BR042_EU073 ;
+    hrai:candidateProducedBy cor:AnalistaSessaoLoop .
+
+cor:Candidate_Corr_BR044_EU071 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: art. 44 × art. 71 (adaptado)"@pt ;
+    dcterms:subject cor:Corr_BR044_EU071 ;
+    hrai:candidateProducedBy cor:AnalistaSessaoLoop .
+
+cor:Candidate_Corr_BR045_EU070 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: art. 45 × art. 70 (divergente)"@pt ;
+    dcterms:subject cor:Corr_BR045_EU070 ;
+    hrai:candidateProducedBy cor:AnalistaSessaoLoop .
+
+cor:Candidate_Corr_BR050_EU099 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: art. 50 × art. 99 (adaptado)"@pt ;
+    dcterms:subject cor:Corr_BR050_EU099 ;
+    hrai:candidateProducedBy cor:AnalistaSessaoLoop .
+
+cor:Candidate_Corr_BR054_EU068 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: art. 54 × art. 68 (parcial)"@pt ;
+    dcterms:subject cor:Corr_BR054_EU068 ;
+    hrai:candidateProducedBy cor:AnalistaSessaoLoop .
+
+cor:Candidate_Corr_BR055_EU057 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: art. 55 × art. 57 (adaptado)"@pt ;
+    dcterms:subject cor:Corr_BR055_EU057 ;
+    hrai:candidateProducedBy cor:AnalistaSessaoLoop .
+
+cor:Candidate_Corr_BR062_EU053 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: art. 62 × art. 53 (parcial)"@pt ;
+    dcterms:subject cor:Corr_BR062_EU053 ;
+    hrai:candidateProducedBy cor:AnalistaSessaoLoop .
+
+cor:Candidate_Corr_BR067_EU062 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: art. 67 × art. 62 (adaptado)"@pt ;
+    dcterms:subject cor:Corr_BR067_EU062 ;
+    hrai:candidateProducedBy cor:AnalistaSessaoLoop .
+
+cor:Corr_BR006_EU086 a hrai:ProvisionCorrespondence ;
+    rdfs:label "PL 2338 (Senado, 2024) art. 6 × AI Act art. 86: adaptado"@pt ;
+    dcterms:subject comp:Area_RightsRedress ;
+    rdfs:comment "Direito à explicação de decisões de sistemas de alto risco nos dois textos; o PL soma o direito de contestar e de pedir revisão humana."@pt ;
+    hrai:correspondenceAnalyst cor:AnalistaSessaoLoop ;
+    hrai:correspondenceFrom eu:Art_086 ;
+    hrai:correspondenceHasType hrai:AdaptedCorrespondence ;
+    hrai:correspondenceTo pl:Art_2024_006 .
+
+cor:Corr_BR008_EU014 a hrai:ProvisionCorrespondence ;
+    rdfs:label "PL 2338 (Senado, 2024) art. 8 × AI Act art. 14: adaptado"@pt ;
+    dcterms:subject comp:Area_RightsRedress ;
+    rdfs:comment "Supervisão humana de sistemas de alto risco nos dois textos, com finalidade de prevenir riscos a direitos; o AI Act detalha medidas técnicas do fornecedor."@pt ;
+    hrai:correspondenceAnalyst cor:AnalistaSessaoLoop ;
+    hrai:correspondenceFrom eu:Art_014 ;
+    hrai:correspondenceHasType hrai:AdaptedCorrespondence ;
+    hrai:correspondenceTo pl:Art_2024_008 .
+
+cor:Corr_BR012_EU006 a hrai:ProvisionCorrespondence ;
+    rdfs:label "PL 2338 (Senado, 2024) art. 12 × AI Act art. 6: parcial"@pt ;
+    dcterms:subject comp:Area_RiskClassification ;
+    rdfs:comment "A avaliação preliminar do PL é a autoavaliação de enquadramento; o art. 6 do AI Act prevê a autoavaliação só na derrogação do art. 6(3)."@pt ;
+    hrai:correspondenceAnalyst cor:AnalistaSessaoLoop ;
+    hrai:correspondenceFrom eu:Art_006 ;
+    hrai:correspondenceHasType hrai:PartialCorrespondence ;
+    hrai:correspondenceTo pl:Art_2024_012 .
+
+cor:Corr_BR013_EU005 a hrai:ProvisionCorrespondence ;
+    rdfs:label "PL 2338 (Senado, 2024) art. 13 × AI Act art. 5: adaptado"@pt ;
+    dcterms:subject comp:Area_RiskClassification ;
+    rdfs:comment "Ambos vedam práticas de risco inaceitável; a lista brasileira de risco excessivo segue a lógica do art. 5 com recortes próprios (por exemplo, sistemas de armas autônomas)."@pt ;
+    hrai:correspondenceAnalyst cor:AnalistaSessaoLoop ;
+    hrai:correspondenceFrom eu:Art_005 ;
+    hrai:correspondenceHasType hrai:AdaptedCorrespondence ;
+    hrai:correspondenceTo pl:Art_2024_013 .
+
+cor:Corr_BR014_EU006 a hrai:ProvisionCorrespondence ;
+    rdfs:label "PL 2338 (Senado, 2024) art. 14 × AI Act art. 6: adaptado"@pt ;
+    dcterms:subject comp:Area_RiskClassification ;
+    rdfs:comment "Ambos definem o alto risco por finalidade e contexto de uso; o PL enumera os usos no corpo da lei, o AI Act remete ao Anexo III e a produtos regulados."@pt ;
+    hrai:correspondenceAnalyst cor:AnalistaSessaoLoop ;
+    hrai:correspondenceFrom eu:Art_006 ;
+    hrai:correspondenceHasType hrai:AdaptedCorrespondence ;
+    hrai:correspondenceTo pl:Art_2024_014 .
+
+cor:Corr_BR017_EU009 a hrai:ProvisionCorrespondence ;
+    rdfs:label "PL 2338 (Senado, 2024) art. 17 × AI Act art. 9: parcial"@pt ;
+    dcterms:subject comp:Area_ImpactAssessment ;
+    rdfs:comment "Medidas gerais de governança e segurança do PL cobrem parte do sistema de gestão de riscos exigido pelo art. 9, sem o mesmo detalhamento de ciclo de vida."@pt ;
+    hrai:correspondenceAnalyst cor:AnalistaSessaoLoop ;
+    hrai:correspondenceFrom eu:Art_009 ;
+    hrai:correspondenceHasType hrai:PartialCorrespondence ;
+    hrai:correspondenceTo pl:Art_2024_017 .
+
+cor:Corr_BR019_EU050 a hrai:ProvisionCorrespondence ;
+    rdfs:label "PL 2338 (Senado, 2024) art. 19 × AI Act art. 50: adaptado"@pt ;
+    dcterms:subject comp:Area_InfoIntegrity ;
+    rdfs:comment "Identificação de conteúdo sintético gerado por IA nos dois textos, considerando o estado da arte."@pt ;
+    hrai:correspondenceAnalyst cor:AnalistaSessaoLoop ;
+    hrai:correspondenceFrom eu:Art_050 ;
+    hrai:correspondenceHasType hrai:AdaptedCorrespondence ;
+    hrai:correspondenceTo pl:Art_2024_019 .
+
+cor:Corr_BR025_EU027 a hrai:ProvisionCorrespondence ;
+    rdfs:label "PL 2338 (Senado, 2024) art. 25 × AI Act art. 27: adaptado"@pt ;
+    dcterms:subject comp:Area_ImpactAssessment ;
+    rdfs:comment "Avaliação de impacto algorítmico (PL) e avaliação de impacto sobre direitos fundamentais (AI Act); no PL a obrigação alcança desenvolvedor ou aplicador de alto risco, no AI Act só certos aplicadores."@pt ;
+    hrai:correspondenceAnalyst cor:AnalistaSessaoLoop ;
+    hrai:correspondenceFrom eu:Art_027 ;
+    hrai:correspondenceHasType hrai:AdaptedCorrespondence ;
+    hrai:correspondenceTo pl:Art_2024_025 .
+
+cor:Corr_BR029_EU053 a hrai:ProvisionCorrespondence ;
+    rdfs:label "PL 2338 (Senado, 2024) art. 29 × AI Act art. 53: adaptado"@pt ;
+    dcterms:subject comp:Area_GenerativeGpai ;
+    rdfs:comment "Obrigações do desenvolvedor de IA de propósito geral e generativa (PL) e do fornecedor de modelos de propósito geral (AI Act): documentação e avaliação."@pt ;
+    hrai:correspondenceAnalyst cor:AnalistaSessaoLoop ;
+    hrai:correspondenceFrom eu:Art_053 ;
+    hrai:correspondenceHasType hrai:AdaptedCorrespondence ;
+    hrai:correspondenceTo pl:Art_2024_029 .
+
+cor:Corr_BR030_EU055 a hrai:ProvisionCorrespondence ;
+    rdfs:label "PL 2338 (Senado, 2024) art. 30 × AI Act art. 55: adaptado"@pt ;
+    dcterms:subject comp:Area_GenerativeGpai ;
+    rdfs:comment "Obrigações adicionais para IA de propósito geral com risco sistêmico nos dois textos."@pt ;
+    hrai:correspondenceAnalyst cor:AnalistaSessaoLoop ;
+    hrai:correspondenceFrom eu:Art_055 ;
+    hrai:correspondenceHasType hrai:AdaptedCorrespondence ;
+    hrai:correspondenceTo pl:Art_2024_030 .
+
+cor:Corr_BR042_EU073 a hrai:ProvisionCorrespondence ;
+    rdfs:label "PL 2338 (Senado, 2024) art. 42 × AI Act art. 73: adaptado"@pt ;
+    dcterms:subject comp:Area_MonitoringLearning ;
+    rdfs:comment "Comunicação de incidente grave à autoridade nos dois textos; prazos e conteúdo definidos de modo diferente."@pt ;
+    hrai:correspondenceAnalyst cor:AnalistaSessaoLoop ;
+    hrai:correspondenceFrom eu:Art_073 ;
+    hrai:correspondenceHasType hrai:AdaptedCorrespondence ;
+    hrai:correspondenceTo pl:Art_2024_042 .
+
+cor:Corr_BR044_EU071 a hrai:ProvisionCorrespondence ;
+    rdfs:label "PL 2338 (Senado, 2024) art. 44 × AI Act art. 71: adaptado"@pt ;
+    dcterms:subject comp:Area_Transparency ;
+    rdfs:comment "Base de dados pública de sistemas de alto risco (PL) e base de dados da UE para sistemas do Anexo III (AI Act)."@pt ;
+    hrai:correspondenceAnalyst cor:AnalistaSessaoLoop ;
+    hrai:correspondenceFrom eu:Art_071 ;
+    hrai:correspondenceHasType hrai:AdaptedCorrespondence ;
+    hrai:correspondenceTo pl:Art_2024_044 .
+
+cor:Corr_BR045_EU070 a hrai:ProvisionCorrespondence ;
+    rdfs:label "PL 2338 (Senado, 2024) art. 45 × AI Act art. 70: divergente"@pt ;
+    dcterms:subject comp:Area_OversightInstitutions ;
+    rdfs:comment "O PL cria um sistema nacional (SIA) coordenado pela autoridade competente com as autoridades setoriais; o AI Act exige que cada Estado-membro designe autoridades nacionais competentes, sob coordenação europeia."@pt ;
+    hrai:correspondenceAnalyst cor:AnalistaSessaoLoop ;
+    hrai:correspondenceFrom eu:Art_070 ;
+    hrai:correspondenceHasType hrai:DivergentCorrespondence ;
+    hrai:correspondenceTo pl:Art_2024_045 .
+
+cor:Corr_BR050_EU099 a hrai:ProvisionCorrespondence ;
+    rdfs:label "PL 2338 (Senado, 2024) art. 50 × AI Act art. 99: adaptado"@pt ;
+    dcterms:subject comp:Area_EnforcementCapacity ;
+    rdfs:comment "Sanções administrativas com multa limitada por valor e por faturamento nos dois textos; os tetos são diferentes (R$ 50 milhões ou 2% no PL)."@pt ;
+    hrai:correspondenceAnalyst cor:AnalistaSessaoLoop ;
+    hrai:correspondenceFrom eu:Art_099 ;
+    hrai:correspondenceHasType hrai:AdaptedCorrespondence ;
+    hrai:correspondenceTo pl:Art_2024_050 .
+
+cor:Corr_BR054_EU068 a hrai:ProvisionCorrespondence ;
+    rdfs:label "PL 2338 (Senado, 2024) art. 54 × AI Act art. 68: parcial"@pt ;
+    dcterms:subject comp:Area_OversightInstitutions ;
+    rdfs:comment "O Cecia orienta e supervisiona técnica e cientificamente; o art. 68 exige peritos independentes de fornecedores. O PL não declara a independência: ver tese C04."@pt ;
+    hrai:correspondenceAnalyst cor:AnalistaSessaoLoop ;
+    hrai:correspondenceFrom eu:Art_068 ;
+    hrai:correspondenceHasType hrai:PartialCorrespondence ;
+    hrai:correspondenceTo pl:Art_2024_054 .
+
+cor:Corr_BR055_EU057 a hrai:ProvisionCorrespondence ;
+    rdfs:label "PL 2338 (Senado, 2024) art. 55 × AI Act art. 57: adaptado"@pt ;
+    dcterms:subject comp:Area_InnovationSandbox ;
+    rdfs:comment "Ambiente regulatório experimental (sandbox) promovido pelas autoridades nos dois textos."@pt ;
+    hrai:correspondenceAnalyst cor:AnalistaSessaoLoop ;
+    hrai:correspondenceFrom eu:Art_057 ;
+    hrai:correspondenceHasType hrai:AdaptedCorrespondence ;
+    hrai:correspondenceTo pl:Art_2024_055 .
+
+cor:Corr_BR062_EU053 a hrai:ProvisionCorrespondence ;
+    rdfs:label "PL 2338 (Senado, 2024) art. 62 × AI Act art. 53: parcial"@pt ;
+    dcterms:subject comp:Area_CopyrightIp ;
+    rdfs:comment "O PL dedica uma seção a direitos de autor (informação sobre conteúdos usados, exceções e remuneração); no AI Act o tema aparece só nas obrigações de modelos de propósito geral (política de direitos autorais e resumo dos dados de treinamento)."@pt ;
+    hrai:correspondenceAnalyst cor:AnalistaSessaoLoop ;
+    hrai:correspondenceFrom eu:Art_053 ;
+    hrai:correspondenceHasType hrai:PartialCorrespondence ;
+    hrai:correspondenceTo pl:Art_2024_062 .
+
+cor:Corr_BR067_EU062 a hrai:ProvisionCorrespondence ;
+    rdfs:label "PL 2338 (Senado, 2024) art. 67 × AI Act art. 62: adaptado"@pt ;
+    dcterms:subject comp:Area_SmeCompetition ;
+    rdfs:comment "Critérios diferenciados para microempresas, pequenas empresas e startups (PL) e medidas para PME e startups (AI Act)."@pt ;
+    hrai:correspondenceAnalyst cor:AnalistaSessaoLoop ;
+    hrai:correspondenceFrom eu:Art_062 ;
+    hrai:correspondenceHasType hrai:AdaptedCorrespondence ;
+    hrai:correspondenceTo pl:Art_2024_067 .
+
+cor:AnalistaSessaoLoop a hrai:MonitoringAgent ;
+    rdfs:label "Sessão do loop ESP-ONT-02 (Claude Code, análise assistida por LLM)"@pt .
+

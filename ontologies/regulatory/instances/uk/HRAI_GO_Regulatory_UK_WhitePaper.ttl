@@ -1,0 +1,132 @@
+# Gerado por scripts/ontologia/extrair_internacional.py. Não editar à mão.
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix uk: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper> a owl:Ontology ;
+    rdfs:label "Reino Unido: white paper 'A pro-innovation approach to AI regulation' e os cinco princípios"@pt ;
+    rdfs:comment "Gerado por scripts/ontologia/extrair_internacional.py (pdftotext + expressões regulares, sem LLM). Candidato pendente de revisão humana. Método: METODO_EXTRACAO.md."@pt .
+
+uk:Lote_Extracao a hrai:ExtractionBatch ;
+    rdfs:label "Lote de extração: Reino Unido: white paper 'A pro-innovation approach to AI regulation' e os cinco princípios"@pt ;
+    hrai:extractionContainsCandidate uk:Candidate_Principio_1,
+        uk:Candidate_Principio_2,
+        uk:Candidate_Principio_3,
+        uk:Candidate_Principio_4,
+        uk:Candidate_Principio_5,
+        uk:Candidate_WhitePaper2023 .
+
+uk:Candidate_Principio_1 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: princípio 'Safety, security and robustness'"@pt ;
+    dcterms:subject uk:Principio_1 ;
+    hrai:candidateFromSnapshot uk:Snapshot_WhitePaper ;
+    hrai:candidateProducedBy uk:ExtratorDeTexto .
+
+uk:Candidate_Principio_2 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: princípio 'Appropriate transparency and explainability'"@pt ;
+    dcterms:subject uk:Principio_2 ;
+    hrai:candidateFromSnapshot uk:Snapshot_WhitePaper ;
+    hrai:candidateProducedBy uk:ExtratorDeTexto .
+
+uk:Candidate_Principio_3 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: princípio 'Fairness'"@pt ;
+    dcterms:subject uk:Principio_3 ;
+    hrai:candidateFromSnapshot uk:Snapshot_WhitePaper ;
+    hrai:candidateProducedBy uk:ExtratorDeTexto .
+
+uk:Candidate_Principio_4 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: princípio 'Accountability and governance'"@pt ;
+    dcterms:subject uk:Principio_4 ;
+    hrai:candidateFromSnapshot uk:Snapshot_WhitePaper ;
+    hrai:candidateProducedBy uk:ExtratorDeTexto .
+
+uk:Candidate_Principio_5 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: princípio 'Contestability and redress'"@pt ;
+    dcterms:subject uk:Principio_5 ;
+    hrai:candidateFromSnapshot uk:Snapshot_WhitePaper ;
+    hrai:candidateProducedBy uk:ExtratorDeTexto .
+
+uk:Candidate_WhitePaper2023 a hrai:CandidateAssertion ;
+    rdfs:label "Candidato: white paper do Reino Unido"@pt ;
+    dcterms:subject uk:WhitePaper2023 ;
+    hrai:candidateFromSnapshot uk:Snapshot_WhitePaper ;
+    hrai:candidateProducedBy uk:ExtratorDeTexto .
+
+uk:Fonte_ImpactAssessment a hrai:LegalSource ;
+    rdfs:label "UK Department for Science, Innovation and Technology" ;
+    hrai:sourceURI "https://www.gov.uk/government/publications/ai-regulation-a-pro-innovation-approach"^^xsd:anyURI .
+
+uk:Fonte_WhitePaper a hrai:LegalSource ;
+    rdfs:label "UK Department for Science, Innovation and Technology" ;
+    hrai:sourceURI "https://www.gov.uk/government/publications/ai-regulation-a-pro-innovation-approach"^^xsd:anyURI .
+
+uk:Principio_1 a hrai:PolicyInstrument ;
+    rdfs:label "Safety, security and robustness"@en ;
+    dcterms:description "AI systems should function in a robust, secure and safe way throughout the AI life cycle, and risks should be continually identified, assessed and managed."@en ;
+    dcterms:isPartOf uk:WhitePaper2023 ;
+    skos:notation "1" ;
+    prov:wasDerivedFrom uk:Snapshot_WhitePaper ;
+    hrai:policyInstrumentInJurisdiction uk:UnitedKingdom .
+
+uk:Principio_2 a hrai:PolicyInstrument ;
+    rdfs:label "Appropriate transparency and explainability"@en ;
+    dcterms:description "AI systems should be appropriately transparent and explainable."@en ;
+    dcterms:isPartOf uk:WhitePaper2023 ;
+    skos:notation "2" ;
+    prov:wasDerivedFrom uk:Snapshot_WhitePaper ;
+    hrai:policyInstrumentInJurisdiction uk:UnitedKingdom .
+
+uk:Principio_3 a hrai:PolicyInstrument ;
+    rdfs:label "Fairness"@en ;
+    dcterms:description "AI systems should not undermine the legal rights of individuals or organisations, discriminate unfairly against individuals or create unfair market outcomes."@en ;
+    dcterms:isPartOf uk:WhitePaper2023 ;
+    skos:notation "3" ;
+    prov:wasDerivedFrom uk:Snapshot_WhitePaper ;
+    hrai:policyInstrumentInJurisdiction uk:UnitedKingdom .
+
+uk:Principio_4 a hrai:PolicyInstrument ;
+    rdfs:label "Accountability and governance"@en ;
+    dcterms:description "Governance measures should be in place to ensure effective oversight of the supply and use of AI systems, with clear lines of accountability established across the AI life cycle."@en ;
+    dcterms:isPartOf uk:WhitePaper2023 ;
+    skos:notation "4" ;
+    prov:wasDerivedFrom uk:Snapshot_WhitePaper ;
+    hrai:policyInstrumentInJurisdiction uk:UnitedKingdom .
+
+uk:Principio_5 a hrai:PolicyInstrument ;
+    rdfs:label "Contestability and redress"@en ;
+    dcterms:description "Where appropriate, users, impacted third parties and actors in the AI life cycle should be able to contest an AI decision or outcome that is harmful or creates material risk of harm."@en ;
+    dcterms:isPartOf uk:WhitePaper2023 ;
+    skos:notation "5" ;
+    prov:wasDerivedFrom uk:Snapshot_WhitePaper ;
+    hrai:policyInstrumentInJurisdiction uk:UnitedKingdom .
+
+uk:Snapshot_ImpactAssessment a hrai:SourceSnapshot ;
+    rdfs:label "UK Artificial Intelligence Regulation Impact Assessment (2023)" ;
+    hrai:snapshotOfSource uk:Fonte_ImpactAssessment ;
+    hrai:snapshotSHA256 "c60009d0546482b80d2dbff1e667ca52953e8bc3767346b6db0ff08d4761f049" ;
+    hrai:snapshotURI "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/docs/ai-regulations/uk/uk_ai_regulation_impact_assessment.pdf"^^xsd:anyURI .
+
+uk:ExtratorDeTexto a hrai:MonitoringAgent ;
+    rdfs:label "Extrator de texto (scripts/ontologia/extrair_internacional.py, determinístico)"@pt .
+
+uk:UnitedKingdom a hrai:Jurisdiction ;
+    rdfs:label "Reino Unido"@pt .
+
+uk:WhitePaper2023 a hrai:PolicyInstrument ;
+    rdfs:label "A pro-innovation approach to AI regulation (white paper, 2023)"@en ;
+    dcterms:references uk:Snapshot_ImpactAssessment ;
+    skos:scopeNote "Princípios não estatutários (E1): We will not put these principles on a statutory footing initially. New rigid and onerous legislative requirements on businesses could hold back AI innovation and reduce our ability to respond quickly and in a proportionate way to future technological advances."@en ;
+    prov:wasDerivedFrom uk:Snapshot_WhitePaper ;
+    hrai:policyInstrumentInJurisdiction uk:UnitedKingdom .
+
+uk:Snapshot_WhitePaper a hrai:SourceSnapshot ;
+    rdfs:label "A pro-innovation approach to AI regulation (white paper, March 2023, amended web version)" ;
+    hrai:snapshotOfSource uk:Fonte_WhitePaper ;
+    hrai:snapshotSHA256 "79d0b329134c14d0977e9819154ba1e55108b9a7d1c8890d93e6406f2ce0d9c7" ;
+    hrai:snapshotURI "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/docs/ai-regulations/uk/a-pro-innovation-approach-to-ai-regulation-amended-web-ready.pdf"^^xsd:anyURI .
+
