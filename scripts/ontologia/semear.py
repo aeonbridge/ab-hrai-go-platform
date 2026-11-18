@@ -41,6 +41,7 @@ OUT = ROOT / "ontologies/regulatory/sementes/GOV-BR-001_sementes.ttl"
 
 H = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
 SEM = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#")
+COMP = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#")
 PBIA = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#")
 GM = "https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#"
 REPO = "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/"
@@ -114,11 +115,8 @@ def build() -> rdflib.Graph:
     reg = source_registry()
 
     align = rdflib.Graph().parse(ALIGN)
-    exact = {str(s)[len(GM):] for s in align.subjects(SKOS.exactMatch, None)}
     model = json.loads(MODEL.read_text(encoding="utf-8"))
     for c in model["components"]:
-        if c["id"] in exact:
-            continue  # already backed by a primary-source individual
         key = c["id"].replace("-", "_")
         x = SEM["Componente_" + key]
         g.add((x, RDF.type, OWL.NamedIndividual))
@@ -129,6 +127,13 @@ def build() -> rdflib.Graph:
             g.add((x, SKOS.editorialNote, Literal(c["notes"], lang="pt")))
         g.add((x, SKOS.notation, Literal(c["id"])))
         g.add((x, H.displayKey, Literal("components:" + c["id"])))
+        g.add((x, H.seedKind, Literal(c["kind"])))
+        g.add((x, H.seedLegalStatus, Literal(c["legalStatus"])))
+        g.add((x, H.seedTopicsBasis, Literal(c.get("topicsBasis", "inferred"))))
+        for t in c["topics"]:
+            g.add((x, H.seedArea, COMP["Area_" + "".join(p.capitalize() for p in t.split("-"))]))
+        for same in align.objects(URIRef(GM + c["id"]), SKOS.exactMatch):
+            g.add((x, SKOS.exactMatch, same))  # primary-source individual of the same object
         g.add((x, PROV.wasDerivedFrom, snap_model))
         g.add((x, H.seedVerification, Literal(c.get("verification", "unknown"))))
         g.add((x, H.seedBasis, Literal("documentado" if c.get("origin") == "documented" else "hipótese de trabalho")))
@@ -153,6 +158,7 @@ def build() -> rdflib.Graph:
         g.add((x, RDFS.comment, Literal(f.get("description", ""), lang="pt")))
         g.add((x, SKOS.notation, Literal(f["id"])))
         g.add((x, H.displayKey, Literal("features:" + f["id"])))
+        g.add((x, H.seedKind, Literal(f["kind"])))
         g.add((x, H.indicatorRelevantToJurisdiction, PBIA.Brazil))
         g.add((x, H.hasIndicatorMethod, Literal(f"traço qualitativo ({f['kind']}) do documento de contexto; sem valor numérico nem ano-base")))
         g.add((x, PROV.wasDerivedFrom, snap_ctx))

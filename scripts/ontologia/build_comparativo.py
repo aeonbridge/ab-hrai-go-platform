@@ -205,8 +205,9 @@ def add_areas(g: rdflib.Graph) -> None:
         ch = C["AIAct_Chapter" + key]
         g.add((ch, RDF.type, OWL.NamedIndividual)); g.add((ch, RDF.type, C.AIActChapter))
         g.add((ch, RDFS.label, Literal(label, lang="en")))
-    for area in data["areas"]:
+    for order, area in enumerate(data["areas"], start=1):
         a = C["Area_" + _camel(area["id"])]
+        g.add((a, H.displayOrder, Literal(order)))
         g.add((a, RDF.type, OWL.NamedIndividual))
         g.add((a, RDF.type, H.SubstantiveArea))
         g.add((a, RDF.type, SKOS.Concept))

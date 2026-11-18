@@ -83,6 +83,12 @@ body.semgl #semgl{display:grid} body.semgl #gl{display:none}
 @media (max-width:900px){#leitura,#legenda{display:none}#falas{width:calc(100% - 44px);left:22px;transform:none}#entrar{width:220px}.n-grande{font-size:72px}}
 /* ---------- modo participante: o celular de quem entrou pelo QR (docs/07-camara.md §7.8) ---------- */
 #ver,#gaveta,#voce{display:none}
+#ficha details.proc{margin-top:8px;font-size:12.5px}
+#ficha details.proc summary{cursor:pointer;color:var(--color-text-secondary);min-height:32px;display:flex;align-items:center}
+#ficha details.proc dl{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin:6px 0 0}
+#ficha details.proc dt{color:var(--color-text-secondary)}
+#ficha details.proc dd{margin:0;overflow-wrap:anywhere}
+#ficha details.proc a{color:var(--color-text-link)}
 #ficha .selo{font-size:12.5px;line-height:1.4;margin:10px 0 0;padding:7px 10px;border-radius:8px;border:1px solid}
 #ficha .selo code{font-size:11.5px}
 #ficha .selo.ok{color:#9FE3D9;border-color:rgba(56,194,180,.45);background:rgba(56,194,180,.08)}
@@ -271,6 +277,7 @@ body.participante #ficha{left:12px!important;right:12px;top:calc(64px + env(safe
 <script src="../vendor/supabase.js"></script>
 <script src="../assets/modelo.js"></script>
 <script src="../assets/lastro.js"></script>
+<script src="../assets/grafo.js"></script>
 <script src="../assets/conteudo.js"></script>
 <script src="../assets/sala-leitura.js"></script>
 <script src="../vendor/pixel-avatar/parts.js"></script>
@@ -729,6 +736,28 @@ function selo(conjunto, id) {
   if (it && it.estado === "proximo") return `<p class="selo prox">Sem lastro exato. Próximo de <code>${esc(it.iris.map(curto).join(", "))}</code>, pendente de revisão humana.</p>`;
   return `<p class="selo sem">Sem lastro na ontologia: ainda não há indivíduo no grafo para este elemento.</p>`;
 }
+/* "De onde vem" (RF-09/RF-12): IRI, origem com hash, fontes citadas, fonte primária e estado de revisão, do grafo. */
+const GRAFO = window.HRAIGO_GRAFO || {};
+function procedencia(conjunto, id) {
+  const g = GRAFO[conjunto + ":" + id]; if (!g) return "";
+  const curto = iri => iri.split("#").pop(), link = (u, t) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`;
+  const host = u => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (e) { return u; } };
+  const linhas = [`<dt>Indivíduo</dt><dd><code>${esc(curto(g.iri))}</code></dd>`];
+  if (g.origem) linhas.push(`<dt>Derivado de</dt><dd>${link(g.origem.uri, g.origem.rotulo)}<br><span class="sub">SHA-256 ${esc(g.origem.sha256.slice(0, 12))}…</span></dd>`);
+  if (g.fontePrimaria) linhas.push(`<dt>Fonte primária</dt><dd>${g.fontePrimaria.map(x => `<code>${esc(curto(x))}</code>`).join(", ")}</dd>`);
+  if (g.fontes) linhas.push(`<dt>Fontes citadas</dt><dd>${g.fontes.map(u => link(u, host(u))).join(" · ")}</dd>`);
+  if (g.afirmacoes) linhas.push(`<dt>Afirmações em que se apoia</dt><dd>${g.afirmacoes.map(a => `${esc(curto(a.iri))}: ${esc(a.rotulo)}`).join("<br>")}</dd>`);
+  linhas.push(`<dt>Revisão humana</dt><dd>${g.revisao === "pendente" ? "pendente" : esc(g.revisao)}</dd>`);
+  return `<details class="proc"><summary>De onde vem</summary><dl>${linhas.join("")}</dl></details>`;
+}
+/* "Por quê?" da força de uma área: a regra e os componentes que a determinam. */
+function porQueArea(tp, cs) {
+  if (!cs.length) return `<p class="sub"><b>Por quê?</b> Nenhum componente do modelo aponta esta área, então ela aparece como lacuna.</p>`;
+  const est = { effective: "vigente", policy: "política pública", proposed: "proposta" };
+  const lin = cs.map(c => `${esc(c.id)} (${esc(est[c.status] || c.status)}, ${c.basis === "documented" ? "documentado" : "inferido"})`).join(", ");
+  const regra = { inForce: "há componente documentado vigente ou de política pública", proposedOnly: "os componentes documentados são só propostas", inferredOnly: "a ligação dos componentes com a área é só inferida pelo autor do modelo" }[tp.strength] || "";
+  return `<p class="sub"><b>Por quê?</b> ${esc(regra)}: ${lin}.</p>`;
+}
 function htmlFicha(f) {
   if (f.pessoa) {
     const id = f.pessoa, pr = L.participantes().find(x => x.pid === id) || {}, setor = pr.setor || setorDe(id), eu = id === L.eu();
@@ -744,14 +773,14 @@ function htmlFicha(f) {
       <dl>${linhas.map(([a, b]) => `<div><dt>${a}</dt><dd>${esc(b)}</dd></div>`).join("")}${q4 ? `<div><dt>Contribuição · ${esc(MOV[q4.mv] || "")}</dt><dd>“${esc(q4.tx)}”</dd><dd class="sub">${REACOES.map(([k, rot, , ic]) => ic + " " + rot + " " + rc[k]).join("  ·  ")}</dd></div>` : ""}</dl>
       ${linhas.length < 2 && !q4 ? `<p class="sub">Ainda não escolheu nada além do setor.</p>` : ""}`;
   }
-  if (f.comp) { const c = f.comp; return `<div class="tag">${esc(c.id)} · ${esc(TIPO[c.kind] || c.kind)} · ${esc(STATUS[c.status] || c.status)}</div><h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p>${c.note ? `<p class="nota">${esc(c.note)}</p>` : ""}<p class="sub">${c.basis === "inferred" ? "Inferido pelo autor do modelo: conferir na fonte." : "Documentado em fonte pública."}</p>${selo("components", c.id)}`; }
+  if (f.comp) { const c = f.comp; return `<div class="tag">${esc(c.id)} · ${esc(TIPO[c.kind] || c.kind)} · ${esc(STATUS[c.status] || c.status)}</div><h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p>${c.note ? `<p class="nota">${esc(c.note)}</p>` : ""}<p class="sub">${c.basis === "inferred" ? "Inferido pelo autor do modelo: conferir na fonte." : "Documentado em fonte pública."}</p>${selo("components", c.id)}${procedencia("components", c.id)}`; }
   if (f.tensao) { const s = f.tensao, a = arcos[s.id], est = (s.strata || []).map(id => (M.strata.find(x => x.id === id) || {}).label).filter(Boolean);
-    return `<div class="tag">Tensão-semente ${esc(s.id)} · ${a.votos} voto${a.votos === 1 ? "" : "s"} da sala</div><h3>${esc(s.title)}</h3>${s.desc ? `<p>${esc(s.desc)}</p>` : ""}${est.length ? `<p class="sub">Estratos do conselho em atrito: ${esc(est.join(" × "))}.</p>` : ""}${s.id === "T5" ? `<p class="sub">É a tensão do eixo de posição: cada pessoa se coloca entre “${esc((C.polos || [])[0] || "")}” e “${esc((C.polos || [])[1] || "")}”.</p>` : ""}<p class="sub">O arco liga os dois lados da tensão e acende conforme a sala a escolhe.</p>${selo("seeds", s.id)}`; }
+    return `<div class="tag">Tensão-semente ${esc(s.id)} · ${a.votos} voto${a.votos === 1 ? "" : "s"} da sala</div><h3>${esc(s.title)}</h3>${s.desc ? `<p>${esc(s.desc)}</p>` : ""}${est.length ? `<p class="sub">Estratos do conselho em atrito: ${esc(est.join(" × "))}.</p>` : ""}${s.id === "T5" ? `<p class="sub">É a tensão do eixo de posição: cada pessoa se coloca entre “${esc((C.polos || [])[0] || "")}” e “${esc((C.polos || [])[1] || "")}”.</p>` : ""}<p class="sub">O arco liga os dois lados da tensão e acende conforme a sala a escolhe.</p>${selo("seeds", s.id)}${procedencia("seeds", s.id)}`; }
   if (f.mesa) { const n = contribuicoes().length; return `<div class="tag">Mesa da sala · ${n} contribuição${n === 1 ? "" : "ões"}</div><h3>Contribuições escritas</h3><p>Cada contribuição publicada viaja da luz de quem escreveu até este anel, que acende. O texto aparece no telão e na aba Mesa do celular, onde a sala pode apoiar, contestar ou pedir fonte.</p>`; }
-  if (f.estrato) { const s = f.estrato; return `<div class="tag">Conselho sintético · ${s.seats} assento${s.seats > 1 ? "s" : ""}</div><h3>${esc(s.label)}</h3><p>Perspectiva gerada a partir de documentos públicos desse estrato. Não é uma pessoa e não fala em nome de ninguém.</p>${selo("strata", s.id)}`; }
-  if (f.vazio) return `<div class="tag">Cadeira vazia</div><h3>${esc(f.vazio)}</h3><p>Sem fonte documental suficiente para gerar esta perspectiva. O sistema não inventa o que esse grupo pensaria.</p>${selo("unrep", f.vazio)}`;
+  if (f.estrato) { const s = f.estrato; return `<div class="tag">Conselho sintético · ${s.seats} assento${s.seats > 1 ? "s" : ""}</div><h3>${esc(s.label)}</h3><p>Perspectiva gerada a partir de documentos públicos desse estrato. Não é uma pessoa e não fala em nome de ninguém.</p>${selo("strata", s.id)}${procedencia("strata", s.id)}`; }
+  if (f.vazio) return `<div class="tag">Cadeira vazia</div><h3>${esc(f.vazio)}</h3><p>Sem fonte documental suficiente para gerar esta perspectiva. O sistema não inventa o que esse grupo pensaria.</p>${selo("unrep", f.vazio)}${procedencia("unrep", f.vazio)}`;
   if (f.topico) { const tp = f.topico, cs = tp.comps.map(id => M.components.find(c => c.id === id)).filter(Boolean), votos = (cupula[tp.id].userData.votos || 0), esp = (C.esperadoPor[tp.id] || []).length;
-    return `<div class="tag">Área da taxonomia · ${esc(FORCA[tp.strength] || "")}</div><h3>${esc(tp.label)}</h3>${cs.length ? `<p>${cs.map(c => esc(c.id + " " + c.title)).join("<br>")}</p>` : `<p>Nenhum componente do modelo trata desta área. ${esp ? esp + " estrato" + (esp > 1 ? "s" : "") + " do conselho esperava" + (esp > 1 ? "m" : "") + " encontrá-la." : ""}</p><p class="sub">${votos} pessoa${votos === 1 ? "" : "s"} da sala apont${votos === 1 ? "ou" : "aram"} esta lacuna.</p>`}${selo("topics", tp.id)}`; }
+    return `<div class="tag">Área da taxonomia · ${esc(FORCA[tp.strength] || "")}</div><h3>${esc(tp.label)}</h3>${cs.length ? `<p>${cs.map(c => esc(c.id + " " + c.title)).join("<br>")}</p>` : `<p>Nenhum componente do modelo trata desta área. ${esp ? esp + " estrato" + (esp > 1 ? "s" : "") + " do conselho esperava" + (esp > 1 ? "m" : "") + " encontrá-la." : ""}</p><p class="sub">${votos} pessoa${votos === 1 ? "" : "s"} da sala apont${votos === 1 ? "ou" : "aram"} esta lacuna.</p>`}${porQueArea(tp, cs)}${selo("topics", tp.id)}${procedencia("topics", tp.id)}`; }
   return "";
 }
 rotulos.forEach(r => { if (r.tipo === "voce") return; r.el.addEventListener("click", ev => { ev.stopPropagation(); abrirFicha(r.tipo === "tensao" ? { tensao: SEMENTES.find(s => s.id === r.id) } : { topico: M.topics.find(x => x.id === r.id) }, ev); }); });

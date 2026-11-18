@@ -2164,3 +2164,15 @@ hrai:seedBasis rdf:type owl:AnnotationProperty .
 hrai:seedBasis rdfs:comment "Basis of a seeded individual: 'documentado' or 'hipótese de trabalho' (an assertion in the seed document)."@en .
 hrai:seedHasRealSource rdf:type owl:AnnotationProperty .
 hrai:seedHasRealSource rdfs:comment "False when the seed cites no source or only the fictional world pack (BRF-*): it cannot ground a QN1 specificity until a primary source backs it."@en .
+
+# v1.2.0 (RF-09): presentation attributes copied from seed documents, used to generate web/assets/modelo.js.
+hrai:seedKind rdf:type owl:AnnotationProperty .
+hrai:seedKind rdfs:comment "Kind of the displayed element as written in the seed document (instrument, institution, mechanism, resource, metric; asset, capability, constraint)."@en .
+hrai:seedLegalStatus rdf:type owl:AnnotationProperty .
+hrai:seedLegalStatus rdfs:comment "Legal status as written in the seed document (effective, policy, proposed). Reading aid, never a legal finding."@en .
+hrai:seedTopicsBasis rdf:type owl:AnnotationProperty .
+hrai:seedTopicsBasis rdfs:comment "Whether the areas linked to the element are documented or an inference of the model author ('documented' or 'inferred')."@en .
+hrai:seedArea rdf:type owl:AnnotationProperty .
+hrai:seedArea rdfs:comment "Substantive area the seed document links the element to (chamber topic)."@en .
+hrai:displayOrder rdf:type owl:AnnotationProperty .
+hrai:displayOrder rdfs:comment "Position of the element in the chamber layout (1-based); presentation only."@en .

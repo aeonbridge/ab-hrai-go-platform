@@ -26,8 +26,9 @@ só recebe extração de fonte primária; invariante I-2).
 
 1. **Captura do documento-semente.** Cada arquivo vira um `hrai:SourceSnapshot` com o SHA-256 do arquivo e o caminho no
    repositório. Mudou o arquivo, muda o hash, e a semeadura é refeita (o CI acusa se o `.ttl` estiver desatualizado).
-2. **Seleção.** Só se semeia o que ainda não tem lastro: componentes sem `skos:exactMatch` no alinhamento e traços de
-   contexto. Componentes com correspondência exata a um indivíduo de fonte primária não são duplicados.
+2. **Seleção.** Todos os componentes e traços de contexto exibidos. Componentes com correspondência exata a um
+   indivíduo de fonte primária também são semeados, mas o indivíduo semeado só guarda os atributos de apresentação e
+   aponta para o de fonte primária (`skos:exactMatch`); o selo mostra o estado "exato".
 3. **Mapeamento de campos** (tabela abaixo). Nenhum valor é inventado: título, descrição, notas, ids de fonte e estado
    de verificação são copiados do documento-semente.
 4. **Proveniência.** Cada indivíduo leva `prov:wasDerivedFrom` (o snapshot do documento-semente), `dcterms:references`
@@ -84,16 +85,26 @@ O contador (`scripts/ontologia/lastro.py`, `web/assets/lastro.js`) publica o tot
 falha se o número sem lastro subir. O slide da apresentação só diz "cada peça é um indivíduo da ontologia" com zero sem
 lastro, e então informa quantas peças ainda são sementes.
 
-## 5. O que este método não faz
+## 5. Da ontologia para a interface
+
+`scripts/ontologia/build_modelo.py` gera `web/assets/modelo.js` (o que a câmara, a apresentação e o painel exibem) e
+`web/assets/grafo.js` (a proveniência de cada elemento) a partir do grafo. Nada é editado à mão; o CI falha se os
+arquivos divergirem do grafo. A força de cada área da cúpula é derivada dos componentes, com regra explícita mostrada
+no "Por quê?" da ficha: vigente se há componente documentado vigente ou de política pública; senão proposta se há
+componente documentado proposto; senão inferida; lacuna sem componentes. Atributos só de apresentação (tipo, situação
+legal declarada, ordem de exibição) são anotações copiadas do documento-semente.
+
+## 6. O que este método não faz
 
 - Não transforma documento-semente em fonte oficial: o selo e a proveniência dizem de onde veio.
 - Não usa traço sem fonte real como evidência de especificidade (QN1) nem de lacuna (QN3).
 - Não aprova nada: semente, candidato e alinhamento ficam na fila "Aguardando decisão" do `PROGRESSO.md`.
 
-## 6. Como verificar
+## 7. Como verificar
 
 ```
 python3 scripts/ontologia/semear.py --check     # sementes atualizadas em relação aos documentos-semente
 python3 scripts/ontologia/lastro.py --check     # contador atualizado e sem regressão
+python3 scripts/ontologia/build_modelo.py --check  # modelo.js e grafo.js iguais ao que o grafo gera
 python3 -m pytest -q tests/test_sementes.py     # proveniência, marcação de hipóteses, nenhuma ReviewDecision
 ```

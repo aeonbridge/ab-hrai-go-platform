@@ -80,19 +80,22 @@ window.HRAIGO_LASTRO = {
   "components:GM-02": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Plan"
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Plan",
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_02"
    ]
   },
   "components:GM-03": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Law_13709_2018_LGPD"
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Law_13709_2018_LGPD",
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_03"
    ]
   },
   "components:GM-04": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PL_2338_2023"
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PL_2338_2023",
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_04"
    ]
   },
   "components:GM-05": {
@@ -183,7 +186,8 @@ window.HRAIGO_LASTRO = {
   "components:GM-18": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action09_PortugueseLLM"
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action09_PortugueseLLM",
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_18"
    ]
   },
   "components:GM-19": {
@@ -207,7 +211,8 @@ window.HRAIGO_LASTRO = {
   "components:GM-21": {
    "estado": "exato",
    "iris": [
-    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action51_AlgorithmicTransparencyCentre"
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action51_AlgorithmicTransparencyCentre",
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_21"
    ]
   },
   "components:GM-22": {

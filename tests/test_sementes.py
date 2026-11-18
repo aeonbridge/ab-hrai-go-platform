@@ -27,7 +27,7 @@ def test_output_is_current_and_outside_source_instances():
 def test_every_seed_has_provenance_and_a_pending_candidate():
     gr = g()
     seeded = set(gr.subjects(H.displayKey, None))
-    assert len(seeded) == 31
+    assert len(seeded) == 36  # 22 components (5 also exact) + 14 context traits
     candidates = {gr.value(c, rdflib.namespace.DCTERMS.subject): c for c in gr.subjects(RDF.type, H.CandidateAssertion)}
     for x in seeded:
         snap = gr.value(x, PROV.wasDerivedFrom)
@@ -53,7 +53,9 @@ def test_traits_without_real_source_are_flagged():
 def test_exact_components_are_not_duplicated_and_proposals_are_marked():
     gr = g()
     notations = {str(gr.value(x, SKOS.notation)) for x in gr.subjects(H.displayKey, None)}
-    assert "GM-02" not in notations and "GM-05" in notations
+    assert {"GM-02", "GM-05"} <= notations
+    pbia = next(x for x in gr.subjects(SKOS.notation, rdflib.Literal("GM-02")))
+    assert (pbia, SKOS.exactMatch, semear.PBIA.PBIA_Plan) in gr  # exact component points to the primary individual
     sia = next(x for x in gr.subjects(SKOS.notation, rdflib.Literal("GM-05")))
     assert (sia, rdflib.namespace.DCTERMS.isPartOf, semear.PBIA.PL_2338_2023) in gr
     assert (sia, RDF.type, H.Stakeholder) in gr

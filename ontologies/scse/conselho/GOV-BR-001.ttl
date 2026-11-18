@@ -326,3 +326,29 @@ gov:Ramo_NewGovernmentPriorities a owl:NamedIndividual , scse:ScenarioBranch ;
     skos:editorialNote "Ligação ao instrumento: proposta pendente de revisão humana."@pt ;
     hrai:displayKey "branches:new-government-priorities" .
 gov:GOV_BR_001 scse:hasBranch gov:Ramo_NewGovernmentPriorities .
+
+# Ordem de exibição na câmara (apresentação; hrai:displayOrder).
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_Regulators> hrai:displayOrder 1 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_PublicOperators> hrai:displayOrder 2 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_Business> hrai:displayOrder 3 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_Research> hrai:displayOrder 4 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_CivilSociety> hrai:displayOrder 5 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_Workers> hrai:displayOrder 6 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_AffectedGroups> hrai:displayOrder 7 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Estrato_Infrastructure> hrai:displayOrder 8 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T1> hrai:displayOrder 1 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T2> hrai:displayOrder 2 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T3> hrai:displayOrder 3 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T4> hrai:displayOrder 4 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T5> hrai:displayOrder 5 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T6> hrai:displayOrder 6 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_Pl2338Approved> hrai:displayOrder 1 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_Pl2338Stalled> hrai:displayOrder 2 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_PbiaFundingCut> hrai:displayOrder 3 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_NewGovernmentPriorities> hrai:displayOrder 4 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#CadeiraVazia_Povos_indigenas_e_comunidades_tradicionais> hrai:displayOrder 1 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#CadeiraVazia_Judiciario_Ministerio_Publico_e_TCU> hrai:displayOrder 2 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#CadeiraVazia_Congresso_Nacional> hrai:displayOrder 3 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#CadeiraVazia_Seguranca_publica_e_defesa> hrai:displayOrder 4 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#CadeiraVazia_Setores_regulados_financeiro_saude_telecomunicacoes> hrai:displayOrder 5 .
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#CadeiraVazia_Agronegocio> hrai:displayOrder 6 .

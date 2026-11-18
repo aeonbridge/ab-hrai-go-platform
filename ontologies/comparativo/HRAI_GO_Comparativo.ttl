@@ -28,7 +28,8 @@ comp:Area_ChildrenVulnerable a owl:NamedIndividual,
     comp:areaAIActChapter comp:AIAct_ChapterII,
         comp:AIAct_ChapterIII ;
     comp:areaNistFunction comp:NIST_Map ;
-    hrai:displayKey "topics:children-vulnerable" .
+    hrai:displayKey "topics:children-vulnerable" ;
+    hrai:displayOrder 24 .
 
 comp:Area_ComputeInfrastructure a owl:NamedIndividual,
         skos:Concept,
@@ -38,7 +39,8 @@ comp:Area_ComputeInfrastructure a owl:NamedIndividual,
     skos:notation "compute-infrastructure" ;
     skos:prefLabel "Infraestrutura computacional"@pt ;
     skos:related comp:E2_PrimaryObjective ;
-    hrai:displayKey "topics:compute-infrastructure" .
+    hrai:displayKey "topics:compute-infrastructure" ;
+    hrai:displayOrder 9 .
 
 comp:Area_CopyrightIp a owl:NamedIndividual,
         skos:Concept,
@@ -49,7 +51,8 @@ comp:Area_CopyrightIp a owl:NamedIndividual,
     skos:prefLabel "Direitos autorais"@pt ;
     comp:areaAIActChapter comp:AIAct_ChapterV ;
     comp:areaNistFunction comp:NIST_Govern ;
-    hrai:displayKey "topics:copyright-ip" .
+    hrai:displayKey "topics:copyright-ip" ;
+    hrai:displayOrder 23 .
 
 comp:Area_DataGovernance a owl:NamedIndividual,
         skos:Concept,
@@ -62,7 +65,8 @@ comp:Area_DataGovernance a owl:NamedIndividual,
     comp:areaAIActChapter comp:AIAct_ChapterIII ;
     comp:areaNistFunction comp:NIST_Manage,
         comp:NIST_Map ;
-    hrai:displayKey "topics:data-governance" .
+    hrai:displayKey "topics:data-governance" ;
+    hrai:displayOrder 11 .
 
 comp:Area_DataSovereignty a owl:NamedIndividual,
         skos:Concept,
@@ -72,7 +76,8 @@ comp:Area_DataSovereignty a owl:NamedIndividual,
     skos:notation "data-sovereignty" ;
     skos:prefLabel "Soberania de dados"@pt ;
     skos:related comp:E2_PrimaryObjective ;
-    hrai:displayKey "topics:data-sovereignty" .
+    hrai:displayKey "topics:data-sovereignty" ;
+    hrai:displayOrder 12 .
 
 comp:Area_EnergyEnvironment a owl:NamedIndividual,
         skos:Concept,
@@ -84,7 +89,8 @@ comp:Area_EnergyEnvironment a owl:NamedIndividual,
     comp:areaAIActChapter comp:AIAct_ChapterV ;
     comp:areaNistFunction comp:NIST_Map,
         comp:NIST_Measure ;
-    hrai:displayKey "topics:energy-environment" .
+    hrai:displayKey "topics:energy-environment" ;
+    hrai:displayOrder 10 .
 
 comp:Area_EnforcementCapacity a owl:NamedIndividual,
         skos:Concept,
@@ -98,7 +104,8 @@ comp:Area_EnforcementCapacity a owl:NamedIndividual,
     comp:areaAIActChapter comp:AIAct_ChapterIX,
         comp:AIAct_ChapterXII ;
     comp:areaNistFunction comp:NIST_Govern ;
-    hrai:displayKey "topics:enforcement-capacity" .
+    hrai:displayKey "topics:enforcement-capacity" ;
+    hrai:displayOrder 4 .
 
 comp:Area_FundingContinuity a owl:NamedIndividual,
         skos:Concept,
@@ -109,7 +116,8 @@ comp:Area_FundingContinuity a owl:NamedIndividual,
     skos:prefLabel "Financiamento e continuidade"@pt ;
     skos:related comp:E6_ImplementationCapacity ;
     comp:areaNistFunction comp:NIST_Govern ;
-    hrai:displayKey "topics:funding-continuity" .
+    hrai:displayKey "topics:funding-continuity" ;
+    hrai:displayOrder 27 .
 
 comp:Area_GenerativeGpai a owl:NamedIndividual,
         skos:Concept,
@@ -123,7 +131,8 @@ comp:Area_GenerativeGpai a owl:NamedIndividual,
     skos:scopeNote "Área acrescentada pela extensão E3; ainda não aparece na cúpula da câmara."@pt ;
     comp:areaAIActChapter comp:AIAct_ChapterV ;
     comp:areaNistFunction comp:NIST_Govern,
-        comp:NIST_Map .
+        comp:NIST_Map ;
+    hrai:displayOrder 29 .
 
 comp:Area_ImpactAssessment a owl:NamedIndividual,
         skos:Concept,
@@ -137,7 +146,8 @@ comp:Area_ImpactAssessment a owl:NamedIndividual,
     comp:areaAIActChapter comp:AIAct_ChapterIII ;
     comp:areaNistFunction comp:NIST_Map,
         comp:NIST_Measure ;
-    hrai:displayKey "topics:impact-assessment" .
+    hrai:displayKey "topics:impact-assessment" ;
+    hrai:displayOrder 2 .
 
 comp:Area_InfoIntegrity a owl:NamedIndividual,
         skos:Concept,
@@ -150,7 +160,8 @@ comp:Area_InfoIntegrity a owl:NamedIndividual,
     comp:areaAIActChapter comp:AIAct_ChapterIV ;
     comp:areaNistFunction comp:NIST_Manage,
         comp:NIST_Map ;
-    hrai:displayKey "topics:info-integrity" .
+    hrai:displayKey "topics:info-integrity" ;
+    hrai:displayOrder 22 .
 
 comp:Area_InnovationSandbox a owl:NamedIndividual,
         skos:Concept,
@@ -161,7 +172,8 @@ comp:Area_InnovationSandbox a owl:NamedIndividual,
     skos:prefLabel "Inovação e sandbox"@pt ;
     skos:related comp:C12_RegulatorySandboxes ;
     comp:areaAIActChapter comp:AIAct_ChapterVI ;
-    hrai:displayKey "topics:innovation-sandbox" .
+    hrai:displayKey "topics:innovation-sandbox" ;
+    hrai:displayOrder 16 .
 
 comp:Area_InternationalAlignment a owl:NamedIndividual,
         skos:Concept,
@@ -172,7 +184,8 @@ comp:Area_InternationalAlignment a owl:NamedIndividual,
     skos:prefLabel "Alinhamento internacional"@pt ;
     skos:related comp:C19_InternationalCooperation ;
     comp:areaNistFunction comp:NIST_Govern ;
-    hrai:displayKey "topics:international-alignment" .
+    hrai:displayKey "topics:international-alignment" ;
+    hrai:displayOrder 20 .
 
 comp:Area_LaborRelations a owl:NamedIndividual,
         skos:Concept,
@@ -184,7 +197,8 @@ comp:Area_LaborRelations a owl:NamedIndividual,
     skos:related comp:C05_Industry ;
     comp:areaAIActChapter comp:AIAct_ChapterIII ;
     comp:areaNistFunction comp:NIST_Map ;
-    hrai:displayKey "topics:labor-relations" .
+    hrai:displayKey "topics:labor-relations" ;
+    hrai:displayOrder 15 .
 
 comp:Area_LanguageCulture a owl:NamedIndividual,
         skos:Concept,
@@ -195,7 +209,8 @@ comp:Area_LanguageCulture a owl:NamedIndividual,
     skos:prefLabel "Língua e cultura"@pt ;
     skos:related comp:E2_PrimaryObjective ;
     comp:areaNistFunction comp:NIST_Map ;
-    hrai:displayKey "topics:language-culture" .
+    hrai:displayKey "topics:language-culture" ;
+    hrai:displayOrder 13 .
 
 comp:Area_Liability a owl:NamedIndividual,
         skos:Concept,
@@ -207,7 +222,8 @@ comp:Area_Liability a owl:NamedIndividual,
     skos:related comp:C11_Liability ;
     comp:areaNistFunction comp:NIST_Govern,
         comp:NIST_Manage ;
-    hrai:displayKey "topics:liability" .
+    hrai:displayKey "topics:liability" ;
+    hrai:displayOrder 6 .
 
 comp:Area_MonitoringLearning a owl:NamedIndividual,
         skos:Concept,
@@ -220,7 +236,8 @@ comp:Area_MonitoringLearning a owl:NamedIndividual,
     comp:areaAIActChapter comp:AIAct_ChapterIX ;
     comp:areaNistFunction comp:NIST_Manage,
         comp:NIST_Measure ;
-    hrai:displayKey "topics:monitoring-learning" .
+    hrai:displayKey "topics:monitoring-learning" ;
+    hrai:displayOrder 28 .
 
 comp:Area_OpenSourceScience a owl:NamedIndividual,
         skos:Concept,
@@ -231,7 +248,8 @@ comp:Area_OpenSourceScience a owl:NamedIndividual,
     skos:prefLabel "Ciência e modelos abertos"@pt ;
     skos:related comp:E2_PrimaryObjective ;
     comp:areaAIActChapter comp:AIAct_ChapterV ;
-    hrai:displayKey "topics:open-source-science" .
+    hrai:displayKey "topics:open-source-science" ;
+    hrai:displayOrder 18 .
 
 comp:Area_OversightInstitutions a owl:NamedIndividual,
         skos:Concept,
@@ -244,7 +262,8 @@ comp:Area_OversightInstitutions a owl:NamedIndividual,
         comp:C18_TechnicalExpertise ;
     comp:areaAIActChapter comp:AIAct_ChapterVII ;
     comp:areaNistFunction comp:NIST_Govern ;
-    hrai:displayKey "topics:oversight-institutions" .
+    hrai:displayKey "topics:oversight-institutions" ;
+    hrai:displayOrder 3 .
 
 comp:Area_Participation a owl:NamedIndividual,
         skos:Concept,
@@ -258,7 +277,8 @@ comp:Area_Participation a owl:NamedIndividual,
         comp:E7_ImplementationParticipation ;
     comp:areaAIActChapter comp:AIAct_ChapterX ;
     comp:areaNistFunction comp:NIST_Govern ;
-    hrai:displayKey "topics:participation" .
+    hrai:displayKey "topics:participation" ;
+    hrai:displayOrder 26 .
 
 comp:Area_PublicSectorUse a owl:NamedIndividual,
         skos:Concept,
@@ -270,7 +290,8 @@ comp:Area_PublicSectorUse a owl:NamedIndividual,
     skos:related comp:C06_Government ;
     comp:areaAIActChapter comp:AIAct_ChapterIII ;
     comp:areaNistFunction comp:NIST_Govern ;
-    hrai:displayKey "topics:public-sector-use" .
+    hrai:displayKey "topics:public-sector-use" ;
+    hrai:displayOrder 8 .
 
 comp:Area_RegionalInequality a owl:NamedIndividual,
         skos:Concept,
@@ -281,7 +302,8 @@ comp:Area_RegionalInequality a owl:NamedIndividual,
     skos:prefLabel "Desigualdade regional"@pt ;
     skos:related comp:E2_PrimaryObjective ;
     comp:areaNistFunction comp:NIST_Map ;
-    hrai:displayKey "topics:regional-inequality" .
+    hrai:displayKey "topics:regional-inequality" ;
+    hrai:displayOrder 25 .
 
 comp:Area_RightsRedress a owl:NamedIndividual,
         skos:Concept,
@@ -293,7 +315,8 @@ comp:Area_RightsRedress a owl:NamedIndividual,
     skos:related comp:C23_ExPost ;
     comp:areaAIActChapter comp:AIAct_ChapterIX ;
     comp:areaNistFunction comp:NIST_Manage ;
-    hrai:displayKey "topics:rights-redress" .
+    hrai:displayKey "topics:rights-redress" ;
+    hrai:displayOrder 5 .
 
 comp:Area_RiskClassification a owl:NamedIndividual,
         skos:Concept,
@@ -307,7 +330,8 @@ comp:Area_RiskClassification a owl:NamedIndividual,
     comp:areaAIActChapter comp:AIAct_ChapterII,
         comp:AIAct_ChapterIII ;
     comp:areaNistFunction comp:NIST_Map ;
-    hrai:displayKey "topics:risk-classification" .
+    hrai:displayKey "topics:risk-classification" ;
+    hrai:displayOrder 1 .
 
 comp:Area_SecurityDefense a owl:NamedIndividual,
         skos:Concept,
@@ -320,7 +344,8 @@ comp:Area_SecurityDefense a owl:NamedIndividual,
     comp:areaAIActChapter comp:AIAct_ChapterI ;
     comp:areaNistFunction comp:NIST_Manage,
         comp:NIST_Map ;
-    hrai:displayKey "topics:security-defense" .
+    hrai:displayKey "topics:security-defense" ;
+    hrai:displayOrder 21 .
 
 comp:Area_SmeCompetition a owl:NamedIndividual,
         skos:Concept,
@@ -331,7 +356,8 @@ comp:Area_SmeCompetition a owl:NamedIndividual,
     skos:prefLabel "Concorrência e pequenas empresas"@pt ;
     skos:related comp:C05_Industry ;
     comp:areaAIActChapter comp:AIAct_ChapterVI ;
-    hrai:displayKey "topics:sme-competition" .
+    hrai:displayKey "topics:sme-competition" ;
+    hrai:displayOrder 17 .
 
 comp:Area_StandardsCertification a owl:NamedIndividual,
         skos:Concept,
@@ -343,7 +369,8 @@ comp:Area_StandardsCertification a owl:NamedIndividual,
     skos:related comp:C16_StandardSetting ;
     comp:areaAIActChapter comp:AIAct_ChapterIII ;
     comp:areaNistFunction comp:NIST_Measure ;
-    hrai:displayKey "topics:standards-certification" .
+    hrai:displayKey "topics:standards-certification" ;
+    hrai:displayOrder 19 .
 
 comp:Area_Transparency a owl:NamedIndividual,
         skos:Concept,
@@ -357,7 +384,8 @@ comp:Area_Transparency a owl:NamedIndividual,
         comp:AIAct_ChapterVIII ;
     comp:areaNistFunction comp:NIST_Govern,
         comp:NIST_Measure ;
-    hrai:displayKey "topics:transparency" .
+    hrai:displayKey "topics:transparency" ;
+    hrai:displayOrder 7 .
 
 comp:Area_WorkforceSkills a owl:NamedIndividual,
         skos:Concept,
@@ -369,7 +397,8 @@ comp:Area_WorkforceSkills a owl:NamedIndividual,
     skos:related comp:C18_TechnicalExpertise ;
     comp:areaAIActChapter comp:AIAct_ChapterI ;
     comp:areaNistFunction comp:NIST_Govern ;
-    hrai:displayKey "topics:workforce-skills" .
+    hrai:displayKey "topics:workforce-skills" ;
+    hrai:displayOrder 14 .
 
 comp:C01_LawAdoption a skos:Concept,
         hrai:RegulatoryDesignCriterion ;

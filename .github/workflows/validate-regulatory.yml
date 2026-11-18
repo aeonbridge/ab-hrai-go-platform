@@ -11,6 +11,8 @@ on:
       - '.github/workflows/validate-regulatory.yml'
       - 'web/assets/modelo.js'
       - 'web/assets/lastro.js'
+      - 'web/assets/grafo.js'
+      - 'web/ao-vivo/**'
       - 'scripts/ontologia/**'
       - 'tests/test_*.py'
       - 'ontologies/scse/**'
@@ -46,6 +48,8 @@ jobs:
         run: python scripts/ontologia/build_comparativo.py --check
       - name: Seeds match the seed documents (METODO_EXTRACAO.md)
         run: python scripts/ontologia/semear.py --check
+      - name: modelo.js and grafo.js are generated from the graph (RF-09)
+        run: python scripts/ontologia/build_modelo.py --check
       - name: Competency questions PC1-PC9 still answer (RF-08)
         run: python scripts/ontologia/consultas.py --check
       - name: Displayed elements without ontology backing never increase (RF-12)

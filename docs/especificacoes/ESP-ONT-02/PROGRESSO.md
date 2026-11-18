@@ -129,6 +129,21 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
   (todos os `tests/test_*.py`) → 162 passed.
 - **Pendente (parte B)**: gerar `modelo.js` do grafo (RF-09) e "por quê?" até a fonte nas fichas (V-14, V-19).
 
+### Item 8 (parte B) · `modelo.js` gerado do grafo; "De onde vem" e "Por quê?" nas fichas — 17/11/2026
+
+- **O que mudou**
+  - `scripts/ontologia/build_modelo.py` gera `web/assets/modelo.js` e `web/assets/grafo.js` do grafo (componentes e
+    traços das sementes, áreas do módulo comparativo, estratos, tensões, ramos e cadeiras vazias da SCSE). A força de
+    cada área é derivada dos componentes com a regra que a câmara já usava (conferida nas 28 áreas antes da troca).
+  - Semeadura cobre os 22 componentes; os 5 exatos apontam para o indivíduo de fonte primária (`skos:exactMatch`).
+  - Núcleo: anotações de apresentação `seedKind`, `seedLegalStatus`, `seedTopicsBasis`, `seedArea`, `displayOrder`.
+  - Câmara: ficha com "De onde vem" (indivíduo, documento de origem com SHA-256, fontes citadas, fonte primária,
+    afirmações, revisão) e "Por quê?" da força de cada área.
+  - CI: `build_modelo.py --check` falha se `modelo.js` for editado à mão ou divergir do grafo.
+  - Única diferença visível: a ordem interna de duas listas (tópicos de um componente, estratos de uma tensão) passou
+    a seguir a ordem de exibição, porque RDF não guarda ordem; só afeta texto da ficha.
+- **Comandos**: protocolo com exit 0; os quatro `--check` (sementes, lastro, modelo, consultas) OK; pytest → 163 passed.
+
 ## Aguardando decisão
 
 | Id | Decisão | Quem | Bloqueia |
@@ -160,12 +175,12 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | V-11 | ⬜ | item 12 |
 | V-12 | ✅ | `consultas.py --check` e `tests/test_consultas.py` no CI; cada PC testada sobre fixture |
 | V-13 | ✅ | `test_rnf02_full_graph_reasons_under_five_seconds` no CI: 0,12 s para 5105 triplas |
-| V-14 | ⬜ | item 8 |
-| V-15 | 🟡 | contador = 0 sem lastro (88/88, 31 sementes), protegido no CI; falta `modelo.js` gerado do grafo (item 8, parte B) |
+| V-14 | 🟡 | ficha da área mostra o "Por quê?" da força com os componentes; cadeia de regras SWRL até a fonte na interface fica para quando houver inferência exibida de fonte primária (itens 11–12) |
+| V-15 | ✅ | `modelo.js` gerado do grafo (`build_modelo.py --check` no CI); contador = 0 sem lastro (88/88, 31 sementes) |
 | V-16 | ✅ | `ontologies/consultas/V16_sementes_sem_ligacao.rq` = 0 linhas (`tests/test_conselho.py`, CI) |
 | V-17 | 🟡 | `afirmacoes.py` classifica as 12 teses (6/4/2); falta recálculo no CI e C04 (item 10) |
 | V-18 | 🟡 | celular participante com Minhas escolhas, Mesa e Agora já existe; falta teste de toque (item 15) |
-| V-19 | 🟡 | ficha em torre, assento, arco, cúpula, pessoa e mesa; "por quê?" até a fonte no item 8 |
+| V-19 | 🟡 | ficha com "De onde vem" em componente, área, estrato, tensão e cadeira vazia; falta teste em aparelho real |
 | V-20 | ⬜ | item 14 |
 | V-21 | ⬜ | item 14 |
 | V-22 | ⬜ | item 14 |

@@ -31,6 +31,9 @@ sem:Lote_Sementes_GOV_BR_001 a hrai:ExtractionBatch ;
         sem:Candidate_CF_13,
         sem:Candidate_CF_14,
         sem:Candidate_GM_01,
+        sem:Candidate_GM_02,
+        sem:Candidate_GM_03,
+        sem:Candidate_GM_04,
         sem:Candidate_GM_05,
         sem:Candidate_GM_06,
         sem:Candidate_GM_07,
@@ -44,8 +47,10 @@ sem:Lote_Sementes_GOV_BR_001 a hrai:ExtractionBatch ;
         sem:Candidate_GM_15,
         sem:Candidate_GM_16,
         sem:Candidate_GM_17,
+        sem:Candidate_GM_18,
         sem:Candidate_GM_19,
         sem:Candidate_GM_20,
+        sem:Candidate_GM_21,
         sem:Candidate_GM_22 .
 
 sem:Candidate_CF_01 a hrai:CandidateAssertion ;
@@ -138,6 +143,24 @@ sem:Candidate_GM_01 a hrai:CandidateAssertion ;
     hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
     hrai:candidateProducedBy sem:ExtratorDeSementes .
 
+sem:Candidate_GM_02 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Plano Brasileiro de IA (PBIA) 2024-2028"@pt ;
+    dcterms:subject sem:Componente_GM_02 ;
+    hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_GM_03 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Lei Geral de Proteção de Dados (Lei 13.709/2018)"@pt ;
+    dcterms:subject sem:Componente_GM_03 ;
+    hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_GM_04 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: PL 2338/2023 (marco legal de IA)"@pt ;
+    dcterms:subject sem:Componente_GM_04 ;
+    hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
 sem:Candidate_GM_05 a hrai:CandidateAssertion ;
     rdfs:label "Semente: Sistema Nacional de Regulação e Governança de IA (SIA), supervisionado pela ANPD"@pt ;
     dcterms:subject sem:Componente_GM_05 ;
@@ -216,6 +239,12 @@ sem:Candidate_GM_17 a hrai:CandidateAssertion ;
     hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
     hrai:candidateProducedBy sem:ExtratorDeSementes .
 
+sem:Candidate_GM_18 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Modelos de linguagem em português"@pt ;
+    dcterms:subject sem:Componente_GM_18 ;
+    hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
 sem:Candidate_GM_19 a hrai:CandidateAssertion ;
     rdfs:label "Semente: Formação de especialistas e capacitação de servidores"@pt ;
     dcterms:subject sem:Componente_GM_19 ;
@@ -225,6 +254,12 @@ sem:Candidate_GM_19 a hrai:CandidateAssertion ;
 sem:Candidate_GM_20 a hrai:CandidateAssertion ;
     rdfs:label "Semente: IA Brasil: IA no serviço público (CPQD, Serpro e Dataprev)"@pt ;
     dcterms:subject sem:Componente_GM_20 ;
+    hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_GM_21 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Centro Nacional de Transparência Algorítmica e IA Confiável (UFMG)"@pt ;
+    dcterms:subject sem:Componente_GM_21 ;
     hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
     hrai:candidateProducedBy sem:ExtratorDeSementes .
 
@@ -244,9 +279,89 @@ sem:Componente_GM_01 a owl:NamedIndividual,
     skos:notation "GM-01" ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-01" ;
+    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_InternationalAlignment>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_OversightInstitutions>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_PublicSectorUse>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_SecurityDefense>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_WorkforceSkills> ;
     hrai:seedBasis "documentado" ;
+    hrai:seedKind "instrument" ;
+    hrai:seedLegalStatus "policy" ;
     hrai:seedSourceId "EBIA-DOC",
         "EBIA-TCU" ;
+    hrai:seedTopicsBasis "inferred" ;
+    hrai:seedVerification "pending" .
+
+sem:Componente_GM_02 a owl:NamedIndividual,
+        hrai:PolicyInstrument ;
+    rdfs:label "Plano Brasileiro de IA (PBIA) 2024-2028"@pt ;
+    dcterms:isPartOf pbia:PBIA_Plan ;
+    dcterms:references <https://dplnews.com/um-ano-de-plano-brasileiro-de-inteligencia-artificial-o-que-esta-sendo-feito/>,
+        <https://indico.rnp.br/event/155/contributions/1369/attachments/569/876/Plano_Brasileiro_de_IA.pdf> ;
+    rdfs:comment "Plano com cerca de R$ 23 bi no período, de orçamento, FNDCT e contrapartidas privadas, organizado em cinco eixos: infraestrutura e desenvolvimento; difusão, formação e capacitação; IA no serviço público; inovação empresarial; apoio ao processo regulatório e de governança. Não substitui o marco legal."@pt ;
+    skos:exactMatch pbia:PBIA_Plan ;
+    skos:notation "GM-02" ;
+    prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
+    hrai:displayKey "components:GM-02" ;
+    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_ComputeInfrastructure>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_FundingContinuity>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_OversightInstitutions>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_PublicSectorUse>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_SmeCompetition>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_WorkforceSkills> ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedKind "instrument" ;
+    hrai:seedLegalStatus "policy" ;
+    hrai:seedSourceId "PBIA-AXES",
+        "PBIA-BUDGET",
+        "PBIA-DOC" ;
+    hrai:seedTopicsBasis "documented" ;
+    hrai:seedVerification "pending" .
+
+sem:Componente_GM_03 a owl:NamedIndividual,
+        hrai:PolicyInstrument ;
+    rdfs:label "Lei Geral de Proteção de Dados (Lei 13.709/2018)"@pt ;
+    dcterms:references <https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm> ;
+    rdfs:comment "Regime vigente de proteção de dados pessoais, com direitos do titular e revisão de decisões tomadas apenas com base em tratamento automatizado."@pt ;
+    skos:exactMatch pbia:Law_13709_2018_LGPD ;
+    skos:notation "GM-03" ;
+    prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
+    hrai:displayKey "components:GM-03" ;
+    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_DataGovernance>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RightsRedress>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_Transparency> ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedKind "instrument" ;
+    hrai:seedLegalStatus "effective" ;
+    hrai:seedSourceId "LGPD" ;
+    hrai:seedTopicsBasis "documented" ;
+    hrai:seedVerification "pending" .
+
+sem:Componente_GM_04 a owl:NamedIndividual,
+        hrai:PolicyInstrument ;
+    rdfs:label "PL 2338/2023 (marco legal de IA)"@pt ;
+    dcterms:isPartOf pbia:PL_2338_2023 ;
+    dcterms:references <https://www.brasildefato.com.br/2024/12/10/senado-aprova-pl-da-inteligencia-artificial>,
+        <https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2487262> ;
+    rdfs:comment "Projeto aprovado no Senado em 10/12/2024 e em tramitação na Câmara. Substitutivo do relator Eduardo Gomes. Não é obrigação vigente."@pt ;
+    skos:exactMatch pbia:PL_2338_2023 ;
+    skos:notation "GM-04" ;
+    skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
+    prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
+    hrai:displayKey "components:GM-04" ;
+    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_CopyrightIp>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_LaborRelations>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_Liability>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_OversightInstitutions>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RightsRedress>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RiskClassification>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_SecurityDefense> ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedKind "instrument" ;
+    hrai:seedLegalStatus "proposed" ;
+    hrai:seedSourceId "PL2338",
+        "PL2338-SENADO" ;
+    hrai:seedTopicsBasis "documented" ;
     hrai:seedVerification "pending" .
 
 sem:Componente_GM_05 a owl:NamedIndividual,
@@ -259,8 +374,13 @@ sem:Componente_GM_05 a owl:NamedIndividual,
     skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-05" ;
+    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_EnforcementCapacity>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_OversightInstitutions> ;
     hrai:seedBasis "documentado" ;
+    hrai:seedKind "institution" ;
+    hrai:seedLegalStatus "proposed" ;
     hrai:seedSourceId "PL2338-SENADO" ;
+    hrai:seedTopicsBasis "documented" ;
     hrai:seedVerification "pending" .
 
 sem:Componente_GM_06 a owl:NamedIndividual,
@@ -273,8 +393,12 @@ sem:Componente_GM_06 a owl:NamedIndividual,
     skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-06" ;
+    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RiskClassification> ;
     hrai:seedBasis "documentado" ;
+    hrai:seedKind "mechanism" ;
+    hrai:seedLegalStatus "proposed" ;
     hrai:seedSourceId "PL2338-SENADO" ;
+    hrai:seedTopicsBasis "documented" ;
     hrai:seedVerification "pending" .
 
 sem:Componente_GM_07 a owl:NamedIndividual,
@@ -288,8 +412,13 @@ sem:Componente_GM_07 a owl:NamedIndividual,
     skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-07" ;
+    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RightsRedress>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RiskClassification> ;
     hrai:seedBasis "documentado" ;
+    hrai:seedKind "mechanism" ;
+    hrai:seedLegalStatus "proposed" ;
     hrai:seedSourceId "PL2338-SENADO" ;
+    hrai:seedTopicsBasis "inferred" ;
     hrai:seedVerification "pending" .
 
 sem:Componente_GM_08 a owl:NamedIndividual,
@@ -302,8 +431,12 @@ sem:Componente_GM_08 a owl:NamedIndividual,
     skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-08" ;
+    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_CopyrightIp> ;
     hrai:seedBasis "documentado" ;
+    hrai:seedKind "mechanism" ;
+    hrai:seedLegalStatus "proposed" ;
     hrai:seedSourceId "PL2338-SENADO" ;
+    hrai:seedTopicsBasis "documented" ;
     hrai:seedVerification "pending" .
 
 sem:Componente_GM_09 a owl:NamedIndividual,
@@ -316,8 +449,13 @@ sem:Componente_GM_09 a owl:NamedIndividual,
     skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-09" ;
+    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_LaborRelations>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_SecurityDefense> ;
     hrai:seedBasis "documentado" ;
+    hrai:seedKind "mechanism" ;
+    hrai:seedLegalStatus "proposed" ;
     hrai:seedSourceId "PL2338-SENADO" ;
+    hrai:seedTopicsBasis "documented" ;
     hrai:seedVerification "pending" .
 
 sem:Componente_GM_10 a owl:NamedIndividual,
@@ -331,8 +469,14 @@ sem:Componente_GM_10 a owl:NamedIndividual,
     skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-10" ;
+    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_ImpactAssessment>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RightsRedress>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_Transparency> ;
     hrai:seedBasis "documentado" ;
+    hrai:seedKind "mechanism" ;
+    hrai:seedLegalStatus "proposed" ;
     hrai:seedSourceId "PL2338" ;
+    hrai:seedTopicsBasis "inferred" ;
     hrai:seedVerification "pending" .
 
 sem:Componente_GM_11 a owl:NamedIndividual,
@@ -346,8 +490,12 @@ sem:Componente_GM_11 a owl:NamedIndividual,
     skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-11" ;
+    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_Liability> ;
     hrai:seedBasis "documentado" ;
+    hrai:seedKind "mechanism" ;
+    hrai:seedLegalStatus "proposed" ;
     hrai:seedSourceId "PL2338" ;
+    hrai:seedTopicsBasis "inferred" ;
     hrai:seedVerification "pending" .
 
 sem:Componente_GM_12 a owl:NamedIndividual,
@@ -361,8 +509,12 @@ sem:Componente_GM_12 a owl:NamedIndividual,
     skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-12" ;
+    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_InnovationSandbox> ;
     hrai:seedBasis "documentado" ;
+    hrai:seedKind "mechanism" ;
+    hrai:seedLegalStatus "proposed" ;
     hrai:seedSourceId "PL2338" ;
+    hrai:seedTopicsBasis "inferred" ;
     hrai:seedVerification "pending" .
 
 sem:Componente_GM_13 a owl:NamedIndividual,
@@ -374,9 +526,15 @@ sem:Componente_GM_13 a owl:NamedIndividual,
     skos:notation "GM-13" ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-13" ;
+    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_DataGovernance>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_EnforcementCapacity>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RightsRedress> ;
     hrai:seedBasis "documentado" ;
+    hrai:seedKind "institution" ;
+    hrai:seedLegalStatus "effective" ;
     hrai:seedSourceId "LGPD",
         "PL2338-SENADO" ;
+    hrai:seedTopicsBasis "documented" ;
     hrai:seedVerification "pending" .
 
 sem:Componente_GM_14 a owl:NamedIndividual,
@@ -388,8 +546,13 @@ sem:Componente_GM_14 a owl:NamedIndividual,
     skos:notation "GM-14" ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-14" ;
+    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_EnforcementCapacity>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_OversightInstitutions> ;
     hrai:seedBasis "documentado" ;
+    hrai:seedKind "institution" ;
+    hrai:seedLegalStatus "effective" ;
     hrai:seedSourceId "PL2338-SENADO" ;
+    hrai:seedTopicsBasis "inferred" ;
     hrai:seedVerification "pending" .
 
 sem:Componente_GM_15 a owl:NamedIndividual,
@@ -401,8 +564,13 @@ sem:Componente_GM_15 a owl:NamedIndividual,
     skos:notation "GM-15" ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-15" ;
+    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_MonitoringLearning>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_OversightInstitutions> ;
     hrai:seedBasis "documentado" ;
+    hrai:seedKind "institution" ;
+    hrai:seedLegalStatus "policy" ;
     hrai:seedSourceId "PBIA-GOV" ;
+    hrai:seedTopicsBasis "documented" ;
     hrai:seedVerification "pending" .
 
 sem:Componente_GM_16 a owl:NamedIndividual,
@@ -414,9 +582,14 @@ sem:Componente_GM_16 a owl:NamedIndividual,
     skos:notation "GM-16" ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-16" ;
+    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_MonitoringLearning>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_Transparency> ;
     hrai:seedBasis "documentado" ;
+    hrai:seedKind "metric" ;
+    hrai:seedLegalStatus "policy" ;
     hrai:seedSourceId "PBIA-AXES",
         "PBIA-GOV" ;
+    hrai:seedTopicsBasis "documented" ;
     hrai:seedVerification "pending" .
 
 sem:Componente_GM_17 a owl:NamedIndividual,
@@ -429,8 +602,33 @@ sem:Componente_GM_17 a owl:NamedIndividual,
     skos:notation "GM-17" ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-17" ;
+    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_ComputeInfrastructure>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_DataSovereignty> ;
     hrai:seedBasis "documentado" ;
+    hrai:seedKind "resource" ;
+    hrai:seedLegalStatus "policy" ;
     hrai:seedSourceId "PBIA-HPC" ;
+    hrai:seedTopicsBasis "documented" ;
+    hrai:seedVerification "pending" .
+
+sem:Componente_GM_18 a owl:NamedIndividual,
+        hrai:PolicyInstrument ;
+    rdfs:label "Modelos de linguagem em português"@pt ;
+    dcterms:isPartOf pbia:PBIA_Plan ;
+    dcterms:references <https://indico.rnp.br/event/155/contributions/1369/attachments/569/876/Plano_Brasileiro_de_IA.pdf> ;
+    rdfs:comment "Desenvolvimento de modelos de IA em português, na infraestrutura nacional."@pt ;
+    skos:exactMatch pbia:Action09_PortugueseLLM ;
+    skos:notation "GM-18" ;
+    prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
+    hrai:displayKey "components:GM-18" ;
+    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_ComputeInfrastructure>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_LanguageCulture> ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedKind "resource" ;
+    hrai:seedLegalStatus "policy" ;
+    hrai:seedSourceId "PBIA-DOC",
+        "PBIA-HPC" ;
+    hrai:seedTopicsBasis "documented" ;
     hrai:seedVerification "pending" .
 
 sem:Componente_GM_19 a owl:NamedIndividual,
@@ -444,9 +642,14 @@ sem:Componente_GM_19 a owl:NamedIndividual,
     skos:notation "GM-19" ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-19" ;
+    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_PublicSectorUse>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_WorkforceSkills> ;
     hrai:seedBasis "documentado" ;
+    hrai:seedKind "resource" ;
+    hrai:seedLegalStatus "policy" ;
     hrai:seedSourceId "PBIA-AXES",
         "PBIA-DOC" ;
+    hrai:seedTopicsBasis "documented" ;
     hrai:seedVerification "pending" .
 
 sem:Componente_GM_20 a owl:NamedIndividual,
@@ -459,8 +662,31 @@ sem:Componente_GM_20 a owl:NamedIndividual,
     skos:notation "GM-20" ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-20" ;
+    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_PublicSectorUse> ;
     hrai:seedBasis "documentado" ;
+    hrai:seedKind "resource" ;
+    hrai:seedLegalStatus "policy" ;
     hrai:seedSourceId "PBIA-DOC" ;
+    hrai:seedTopicsBasis "documented" ;
+    hrai:seedVerification "pending" .
+
+sem:Componente_GM_21 a owl:NamedIndividual,
+        hrai:Stakeholder ;
+    rdfs:label "Centro Nacional de Transparência Algorítmica e IA Confiável (UFMG)"@pt ;
+    dcterms:isPartOf pbia:PBIA_Plan ;
+    dcterms:references <https://indico.rnp.br/event/155/contributions/1369/attachments/569/876/Plano_Brasileiro_de_IA.pdf> ;
+    rdfs:comment "Centro de pesquisa apoiado pelo PBIA, com R$ 50 milhões previstos em dois anos."@pt ;
+    skos:exactMatch pbia:Action51_AlgorithmicTransparencyCentre ;
+    skos:notation "GM-21" ;
+    prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
+    hrai:displayKey "components:GM-21" ;
+    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_OpenSourceScience>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_Transparency> ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedKind "institution" ;
+    hrai:seedLegalStatus "policy" ;
+    hrai:seedSourceId "PBIA-DOC" ;
+    hrai:seedTopicsBasis "documented" ;
     hrai:seedVerification "pending" .
 
 sem:Componente_GM_22 a owl:NamedIndividual,
@@ -473,9 +699,14 @@ sem:Componente_GM_22 a owl:NamedIndividual,
     skos:notation "GM-22" ;
     prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
     hrai:displayKey "components:GM-22" ;
+    hrai:seedArea <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_FundingContinuity>,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_SmeCompetition> ;
     hrai:seedBasis "documentado" ;
+    hrai:seedKind "resource" ;
+    hrai:seedLegalStatus "policy" ;
     hrai:seedSourceId "PBIA-AXES",
         "PBIA-BUDGET" ;
+    hrai:seedTopicsBasis "documented" ;
     hrai:seedVerification "pending" .
 
 sem:Traco_CF_01 a owl:NamedIndividual,
@@ -489,6 +720,7 @@ sem:Traco_CF_01 a owl:NamedIndividual,
     hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
     hrai:seedBasis "hipótese de trabalho" ;
     hrai:seedHasRealSource false ;
+    hrai:seedKind "asset" ;
     hrai:seedSourceId "BRF-CTX-PUBSVC" ;
     hrai:seedVerification "pending" .
 
@@ -503,6 +735,7 @@ sem:Traco_CF_02 a owl:NamedIndividual,
     hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
     hrai:seedBasis "hipótese de trabalho" ;
     hrai:seedHasRealSource false ;
+    hrai:seedKind "asset" ;
     hrai:seedSourceId "BRF-CTX-COMPUTE",
         "BRF-POS-INF" ;
     hrai:seedVerification "pending" .
@@ -519,6 +752,7 @@ sem:Traco_CF_03 a owl:NamedIndividual,
     hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
     hrai:seedBasis "hipótese de trabalho" ;
     hrai:seedHasRealSource true ;
+    hrai:seedKind "asset" ;
     hrai:seedSourceId "PBIA-DOC",
         "PBIA-HPC" ;
     hrai:seedVerification "pending" .
@@ -534,6 +768,7 @@ sem:Traco_CF_04 a owl:NamedIndividual,
     hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
     hrai:seedBasis "hipótese de trabalho" ;
     hrai:seedHasRealSource false ;
+    hrai:seedKind "asset" ;
     hrai:seedVerification "pending" .
 
 sem:Traco_CF_05 a owl:NamedIndividual,
@@ -548,6 +783,7 @@ sem:Traco_CF_05 a owl:NamedIndividual,
     hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
     hrai:seedBasis "hipótese de trabalho" ;
     hrai:seedHasRealSource true ;
+    hrai:seedKind "asset" ;
     hrai:seedSourceId "PL2338-SENADO" ;
     hrai:seedVerification "pending" .
 
@@ -562,6 +798,7 @@ sem:Traco_CF_06 a owl:NamedIndividual,
     hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
     hrai:seedBasis "hipótese de trabalho" ;
     hrai:seedHasRealSource false ;
+    hrai:seedKind "asset" ;
     hrai:seedVerification "pending" .
 
 sem:Traco_CF_07 a owl:NamedIndividual,
@@ -575,6 +812,7 @@ sem:Traco_CF_07 a owl:NamedIndividual,
     hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
     hrai:seedBasis "hipótese de trabalho" ;
     hrai:seedHasRealSource false ;
+    hrai:seedKind "asset" ;
     hrai:seedVerification "pending" .
 
 sem:Traco_CF_08 a owl:NamedIndividual,
@@ -588,6 +826,7 @@ sem:Traco_CF_08 a owl:NamedIndividual,
     hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
     hrai:seedBasis "hipótese de trabalho" ;
     hrai:seedHasRealSource false ;
+    hrai:seedKind "capability" ;
     hrai:seedVerification "pending" .
 
 sem:Traco_CF_09 a owl:NamedIndividual,
@@ -602,6 +841,7 @@ sem:Traco_CF_09 a owl:NamedIndividual,
     hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
     hrai:seedBasis "hipótese de trabalho" ;
     hrai:seedHasRealSource true ;
+    hrai:seedKind "capability" ;
     hrai:seedSourceId "PBIA-DOC" ;
     hrai:seedVerification "pending" .
 
@@ -618,6 +858,7 @@ sem:Traco_CF_10 a owl:NamedIndividual,
     hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
     hrai:seedBasis "documentado" ;
     hrai:seedHasRealSource true ;
+    hrai:seedKind "capability" ;
     hrai:seedSourceId "BRF-CTX-GOVCAP",
         "LGPD",
         "PL2338-SENADO" ;
@@ -634,6 +875,7 @@ sem:Traco_CF_11 a owl:NamedIndividual,
     hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
     hrai:seedBasis "hipótese de trabalho" ;
     hrai:seedHasRealSource false ;
+    hrai:seedKind "constraint" ;
     hrai:seedSourceId "BRF-CTX-LABOR" ;
     hrai:seedVerification "pending" .
 
@@ -648,6 +890,7 @@ sem:Traco_CF_12 a owl:NamedIndividual,
     hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
     hrai:seedBasis "hipótese de trabalho" ;
     hrai:seedHasRealSource false ;
+    hrai:seedKind "constraint" ;
     hrai:seedSourceId "BRF-CTX-COMPUTE",
         "BRF-POS-INF" ;
     hrai:seedVerification "pending" .
@@ -664,6 +907,7 @@ sem:Traco_CF_13 a owl:NamedIndividual,
     hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
     hrai:seedBasis "hipótese de trabalho" ;
     hrai:seedHasRealSource true ;
+    hrai:seedKind "capability" ;
     hrai:seedSourceId "EBIA-TCU" ;
     hrai:seedVerification "pending" .
 
@@ -678,6 +922,7 @@ sem:Traco_CF_14 a owl:NamedIndividual,
     hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
     hrai:seedBasis "hipótese de trabalho" ;
     hrai:seedHasRealSource false ;
+    hrai:seedKind "asset" ;
     hrai:seedVerification "pending" .
 
 sem:Snapshot_Contexto a hrai:SourceSnapshot ;

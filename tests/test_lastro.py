@@ -55,3 +55,11 @@ def test_seal_and_slide_use_the_counter():
     # The unconditional claim only appears behind the zero-counter guard.
     assert slide.count("Cada peça é um indivíduo da ontologia") == 1
     assert "LASTRO.semLastro === 0" in slide
+
+
+def test_modelo_js_is_generated_from_the_graph():
+    """RF-09: modelo.js and grafo.js are what the graph generates; nothing edited by hand."""
+    import subprocess, sys
+    assert subprocess.run([sys.executable, str(ROOT / "scripts/ontologia/build_modelo.py"), "--check"]).returncode == 0
+    camara = (ROOT / "web/ao-vivo/index.html").read_text(encoding="utf-8")
+    assert "../assets/grafo.js" in camara and "porQueArea(" in camara and "procedencia(" in camara
