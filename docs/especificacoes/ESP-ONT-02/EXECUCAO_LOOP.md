@@ -124,7 +124,7 @@ A sessão deve abrir esses itens em `PROGRESSO.md`, numa seção "Aguardando dec
 
 ## Bloqueios conhecidos
 
-- ~~**Texto do Senado (RF-01)**~~ resolvido em 17/11/2026: inteiro teor da Câmara (codteor 2868197, texto aprovado pelo Senado em 10/12/2024, 80 artigos, SHA-256 `82e264056ab6622a58ce7cbb66e02d0c79c5d85ff76639841421ca415892c8ca`). Em 17/11/2026 a Câmara não tem parecer nem substitutivo; reconsultar a ficha de tramitação antes de cada release e, se surgir substitutivo, incorporá-lo como nova versão.
+- ~~**Texto do Senado (RF-01)**~~ resolvido em 17/11/2026: inteiro teor da Câmara (codteor 2868197, texto aprovado pelo Senado em 10/12/2024, numerado até o art. 80, sem o art. 31 no documento (79 artigos), SHA-256 `82e264056ab6622a58ce7cbb66e02d0c79c5d85ff76639841421ca415892c8ca`). Em 17/11/2026 a Câmara não tem parecer nem substitutivo; reconsultar a ficha de tramitação antes de cada release e, se surgir substitutivo, incorporá-lo como nova versão.
 - **PDF da "Análise Comparativa":** não está no repositório. As teses vieram de resumo do usuário.
 - **IRIs resolvíveis (RNF-01):** depende de decisão sobre domínio (w3id.org ou GitHub Pages).
 

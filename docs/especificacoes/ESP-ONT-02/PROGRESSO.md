@@ -144,6 +144,21 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
     a seguir a ordem de exibição, porque RDF não guarda ordem; só afeta texto da ficha.
 - **Comandos**: protocolo com exit 0; os quatro `--check` (sementes, lastro, modelo, consultas) OK; pytest → 163 passed.
 
+### Item 9 · RF-01 texto do Senado como nova versão do PL — 17/11/2026
+
+- **O que mudou**
+  - `scripts/ontologia/extrair_pl2338.py` (pdftotext + expressões regulares, sem LLM) →
+    `ontologies/regulatory/instances/br/HRAI_GO_Regulatory_BR_PL2338.ttl` (+ `.owl`): duas versões de
+    `pbia:PL_2338_2023` (texto inicial de 03/05/2023 e texto aprovado pelo Senado em 10/12/2024, com
+    `previousLegalVersion`), 45 e 79 artigos com citação, caput, texto integral, capítulo e seção, cada um documentado
+    no snapshot do PDF (SHA-256). Evento de mudança do texto do Senado; um candidato por versão; nenhuma decisão.
+  - **Observado**: o texto do Senado numera até o art. 80, mas o art. 31 não aparece no documento (79 artigos).
+    Registrado na versão; o `EXECUCAO_LOOP.md` dizia "80 artigos".
+  - Raciocínio: os 124 dispositivos são inferidos como `ProposedProvision` (R22, sem força vinculante) e com
+    jurisdição (R01); a mudança reabre potencialmente os 79 artigos (R10), e a PC7 passou de 6 para 85 linhas.
+  - CI instala `poppler-utils` e confere que a extração é reprodutível a partir dos PDFs.
+- **Aprovação**: humana (D-03). **Comandos**: protocolo com exit 0 (instâncias: PBIA e PL validados); pytest → 168 passed.
+
 ## Aguardando decisão
 
 | Id | Decisão | Quem | Bloqueia |
@@ -163,7 +178,7 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | Id | Estado | Evidência / observação |
 |---|---|---|
 | V-01 | 🟡 | nome completo no README e relatórios (`tests/test_nomenclatura.py`); conferir site e `dcterms:title` |
-| V-02 | 🟡 | PBIA, PL 2023 e 2024 (SHA-256 no `EXECUCAO_LOOP.md`), UE, RU e EUA no corpus; falta `SourceSnapshot` de cada um no grafo |
+| V-02 | 🟡 | `SourceSnapshot` com SHA-256 no grafo: PBIA, PL 2023, PL 2024; faltam UE, Reino Unido e EUA (item 11) |
 | V-03 | ⏸ | D-01 |
 | V-04 | ✅ | `tests/test_modulos.py` no CI (`validate-regulatory.yml`); item 2 |
 | V-05 | ✅ | TBox 1.2.0, R24–R26 (núcleo), R28 (comparativo), R29–R30 (SCSE); I-1 a I-4 em `tests/test_invariantes.py` |
