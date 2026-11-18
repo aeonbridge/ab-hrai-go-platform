@@ -160,12 +160,18 @@ resp:S1_SoberaniaComputacional a hrai:NationalSpecificity ;
     rdfs:label "Soberania computacional com orçamento público: Nuvem Soberana (R$ 1 bilhão) e supercomputador de IA no PBIA"@pt ;
     hrai:answersGuidingQuestion "QN1" ;
     hrai:differenceType hrai:BrazilOnlyDifference ;
-    hrai:specificityComparison resp:S1_SoberaniaComputacional_vs_EUA,
+    hrai:specificityComparison resp:S1_SoberaniaComputacional_vs_China,
+        resp:S1_SoberaniaComputacional_vs_EUA,
         resp:S1_SoberaniaComputacional_vs_ReinoUnido,
         resp:S1_SoberaniaComputacional_vs_UE ;
     hrai:specificityDimension hrai:StrategicObjectiveDimension ;
     hrai:specificityGroundedIn pbia:Action01_AISupercomputer,
         pbia:Action27_SovereignCloud .
+
+resp:S1_SoberaniaComputacional_vs_China a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://hrai-go.aeonbridge.io/data/regulatory/cn/china#China> ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o Plano de Desenvolvimento de IA de Nova Geração (2017) aparece só em fonte secundária, sem orçamento de computação informado"@pt .
 
 resp:S1_SoberaniaComputacional_vs_EUA a hrai:JurisdictionComparison ;
     hrai:comparisonJurisdiction <https://hrai-go.aeonbridge.io/data/regulatory/us/nist#UnitedStates> ;
@@ -186,12 +192,18 @@ resp:S2_LinguaPortuguesa a hrai:NationalSpecificity ;
     rdfs:label "Modelos de linguagem em português com dados nacionais, para o português do Brasil em escala continental"@pt ;
     hrai:answersGuidingQuestion "QN1" ;
     hrai:differenceType hrai:BrazilOnlyDifference ;
-    hrai:specificityComparison resp:S2_LinguaPortuguesa_vs_EUA,
+    hrai:specificityComparison resp:S2_LinguaPortuguesa_vs_China,
+        resp:S2_LinguaPortuguesa_vs_EUA,
         resp:S2_LinguaPortuguesa_vs_ReinoUnido,
         resp:S2_LinguaPortuguesa_vs_UE ;
     hrai:specificityDimension hrai:StrategicObjectiveDimension ;
     hrai:specificityGroundedIn pbia:Action09_PortugueseLLM,
         <https://hrai-go.aeonbridge.io/data/regulatory/br/sementes#Traco_CF_03> .
+
+resp:S2_LinguaPortuguesa_vs_China a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://hrai-go.aeonbridge.io/data/regulatory/cn/china#China> ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o corpus tem para a China só o texto oficial das medidas de IA generativa e fontes secundárias, sem valor equivalente"@pt .
 
 resp:S2_LinguaPortuguesa_vs_EUA a hrai:JurisdictionComparison ;
     hrai:comparisonJurisdiction <https://hrai-go.aeonbridge.io/data/regulatory/us/nist#UnitedStates> ;
@@ -212,11 +224,17 @@ resp:S3_MatrizRenovavel a hrai:NationalSpecificity ;
     rdfs:label "Matriz elétrica majoritariamente renovável: 89,2% em 2023, segundo o PBIA (citando a EPE)"@pt ;
     hrai:answersGuidingQuestion "QN1" ;
     hrai:differenceType hrai:ContextDifference ;
-    hrai:specificityComparison resp:S3_MatrizRenovavel_vs_EUA,
+    hrai:specificityComparison resp:S3_MatrizRenovavel_vs_China,
+        resp:S3_MatrizRenovavel_vs_EUA,
         resp:S3_MatrizRenovavel_vs_ReinoUnido,
         resp:S3_MatrizRenovavel_vs_UE ;
     hrai:specificityDimension hrai:NationalContextDimension ;
     hrai:specificityGroundedIn pbia:Ind_RenewableShareElectricityMatrix2023 .
+
+resp:S3_MatrizRenovavel_vs_China a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://hrai-go.aeonbridge.io/data/regulatory/cn/china#China> ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o corpus não traz indicador equivalente para esta jurisdição"@pt .
 
 resp:S3_MatrizRenovavel_vs_EUA a hrai:JurisdictionComparison ;
     hrai:comparisonJurisdiction <https://hrai-go.aeonbridge.io/data/regulatory/us/nist#UnitedStates> ;
@@ -230,6 +248,11 @@ resp:S3_MatrizRenovavel_vs_ReinoUnido a hrai:JurisdictionComparison ;
 
 resp:S3_MatrizRenovavel_vs_UE a hrai:JurisdictionComparison ;
     hrai:comparisonJurisdiction pbia:EuropeanUnion ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o corpus não traz indicador equivalente para esta jurisdição"@pt .
+
+resp:S4_OrcamentoGovernanca_vs_China a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://hrai-go.aeonbridge.io/data/regulatory/cn/china#China> ;
     hrai:comparisonNotCoded true ;
     hrai:comparisonValue "não codificado: o corpus não traz indicador equivalente para esta jurisdição"@pt .
 
@@ -248,6 +271,11 @@ resp:S4_OrcamentoGovernanca_vs_UE a hrai:JurisdictionComparison ;
     hrai:comparisonNotCoded true ;
     hrai:comparisonValue "não codificado: o corpus não traz indicador equivalente para esta jurisdição"@pt .
 
+resp:S5_ProfissionaisTIC_vs_China a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://hrai-go.aeonbridge.io/data/regulatory/cn/china#China> ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o corpus não traz indicador equivalente para esta jurisdição"@pt .
+
 resp:S5_ProfissionaisTIC_vs_EUA a hrai:JurisdictionComparison ;
     hrai:comparisonJurisdiction <https://hrai-go.aeonbridge.io/data/regulatory/us/nist#UnitedStates> ;
     hrai:comparisonNotCoded true ;
@@ -260,6 +288,11 @@ resp:S5_ProfissionaisTIC_vs_ReinoUnido a hrai:JurisdictionComparison ;
 
 resp:S5_ProfissionaisTIC_vs_UE a hrai:JurisdictionComparison ;
     hrai:comparisonJurisdiction pbia:EuropeanUnion ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o corpus não traz indicador equivalente para esta jurisdição"@pt .
+
+resp:S6_DadosSaudeSUS_vs_China a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://hrai-go.aeonbridge.io/data/regulatory/cn/china#China> ;
     hrai:comparisonNotCoded true ;
     hrai:comparisonValue "não codificado: o corpus não traz indicador equivalente para esta jurisdição"@pt .
 
@@ -277,6 +310,12 @@ resp:S6_DadosSaudeSUS_vs_UE a hrai:JurisdictionComparison ;
     hrai:comparisonJurisdiction pbia:EuropeanUnion ;
     hrai:comparisonNotCoded true ;
     hrai:comparisonValue "não codificado: o corpus não traz indicador equivalente para esta jurisdição"@pt .
+
+resp:S7_SupervisaoPorSistema_vs_China a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://hrai-go.aeonbridge.io/data/regulatory/cn/china#China> ;
+    hrai:comparisonNotCoded false ;
+    hrai:comparisonSource <https://hrai-go.aeonbridge.io/data/regulatory/cn/china#Snapshot_CAC_GenerativeAI> ;
+    hrai:comparisonValue "art. 16 das Medidas Provisórias para IA generativa (texto oficial da CAC): supervisão pelos departamentos de ciberespaço, desenvolvimento, educação, ciência, indústria, segurança pública, rádio e TV e imprensa, cada um em sua competência"@pt .
 
 resp:S7_SupervisaoPorSistema_vs_EUA a hrai:JurisdictionComparison ;
     hrai:comparisonJurisdiction <https://hrai-go.aeonbridge.io/data/regulatory/us/nist#UnitedStates> ;
@@ -299,13 +338,19 @@ resp:S8_ResponsabilidadeCivil a hrai:NationalSpecificity ;
     rdfs:label "Responsabilidade civil por danos de IA pelas regras do Código de Defesa do Consumidor e do Código Civil, com inversão do ônus da prova"@pt ;
     hrai:answersGuidingQuestion "QN1" ;
     hrai:differenceType hrai:BrazilOnlyDifference ;
-    hrai:specificityComparison resp:S8_ResponsabilidadeCivil_vs_EUA,
+    hrai:specificityComparison resp:S8_ResponsabilidadeCivil_vs_China,
+        resp:S8_ResponsabilidadeCivil_vs_EUA,
         resp:S8_ResponsabilidadeCivil_vs_ReinoUnido,
         resp:S8_ResponsabilidadeCivil_vs_UE ;
     hrai:specificityDimension hrai:NationalContextDimension ;
     hrai:specificityGroundedIn pl:Art_2024_035,
         pl:Art_2024_036,
         pl:Art_2024_037 .
+
+resp:S8_ResponsabilidadeCivil_vs_China a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://hrai-go.aeonbridge.io/data/regulatory/cn/china#China> ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: as medidas de IA generativa remetem as penalidades às leis de cibersegurança, dados e informação pessoal (art. 21); responsabilidade civil não está no corpus"@pt .
 
 resp:S8_ResponsabilidadeCivil_vs_EUA a hrai:JurisdictionComparison ;
     hrai:comparisonJurisdiction <https://hrai-go.aeonbridge.io/data/regulatory/us/nist#UnitedStates> ;
@@ -326,7 +371,8 @@ resp:S6_DadosSaudeSUS a hrai:NationalSpecificity ;
     rdfs:label "Dados de saúde em escala sob guarda do Estado (SUS): ativo e exposição de dados sensíveis"@pt ;
     hrai:answersGuidingQuestion "QN1" ;
     hrai:differenceType hrai:ContextDifference ;
-    hrai:specificityComparison resp:S6_DadosSaudeSUS_vs_EUA,
+    hrai:specificityComparison resp:S6_DadosSaudeSUS_vs_China,
+        resp:S6_DadosSaudeSUS_vs_EUA,
         resp:S6_DadosSaudeSUS_vs_ReinoUnido,
         resp:S6_DadosSaudeSUS_vs_UE ;
     hrai:specificityDimension hrai:RiskExposureDimension ;
@@ -337,7 +383,8 @@ resp:S4_OrcamentoGovernanca a hrai:NationalSpecificity ;
     rdfs:label "Orçamento de governança pequeno: 0,45% do PBIA (R$ 103,25 milhões de R$ 23,03 bilhões) no Eixo 5"@pt ;
     hrai:answersGuidingQuestion "QN1" ;
     hrai:differenceType hrai:ContextDifference ;
-    hrai:specificityComparison resp:S4_OrcamentoGovernanca_vs_EUA,
+    hrai:specificityComparison resp:S4_OrcamentoGovernanca_vs_China,
+        resp:S4_OrcamentoGovernanca_vs_EUA,
         resp:S4_OrcamentoGovernanca_vs_ReinoUnido,
         resp:S4_OrcamentoGovernanca_vs_UE ;
     hrai:specificityDimension hrai:InstalledCapacityDimension ;
@@ -347,7 +394,8 @@ resp:S5_ProfissionaisTIC a hrai:NationalSpecificity ;
     rdfs:label "Déficit estimado de 530 mil profissionais de TIC entre 2021 e 2025, segundo o PBIA"@pt ;
     hrai:answersGuidingQuestion "QN1" ;
     hrai:differenceType hrai:ContextDifference ;
-    hrai:specificityComparison resp:S5_ProfissionaisTIC_vs_EUA,
+    hrai:specificityComparison resp:S5_ProfissionaisTIC_vs_China,
+        resp:S5_ProfissionaisTIC_vs_EUA,
         resp:S5_ProfissionaisTIC_vs_ReinoUnido,
         resp:S5_ProfissionaisTIC_vs_UE ;
     hrai:specificityDimension hrai:InstalledCapacityDimension ;
@@ -357,7 +405,8 @@ resp:S7_SupervisaoPorSistema a hrai:NationalSpecificity ;
     rdfs:label "Supervisão por um sistema que coordena reguladores existentes (SIA, coordenado pela ANPD), com orçamento de governança pequeno"@pt ;
     hrai:answersGuidingQuestion "QN1" ;
     hrai:differenceType hrai:IntensityDifference ;
-    hrai:specificityComparison resp:S7_SupervisaoPorSistema_vs_EUA,
+    hrai:specificityComparison resp:S7_SupervisaoPorSistema_vs_China,
+        resp:S7_SupervisaoPorSistema_vs_EUA,
         resp:S7_SupervisaoPorSistema_vs_ReinoUnido,
         resp:S7_SupervisaoPorSistema_vs_UE ;
     hrai:specificityDimension hrai:InstalledCapacityDimension ;

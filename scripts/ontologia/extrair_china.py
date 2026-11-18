@@ -12,7 +12,7 @@ The corpus has two SECONDARY sources on China and no official Chinese text:
 Everything enters as a pending candidate flagged as secondary-source; an instrument is never shown as
 verified against an official text. Adding the official texts (CAC, NPC) is recorded as pending.
 
-Output: ontologies/regulatory/em-espera/cn/HRAI_GO_Regulatory_CN.ttl
+Output: ontologies/regulatory/instances/cn/HRAI_GO_Regulatory_CN.ttl
 
 ON HOLD (decision D-01b, 17/11/2026): China stays OUT of the comparison for now, so that adding a new
 jurisdiction, and measuring its impact, can be validated later. The file is generated in em-espera/,
@@ -41,12 +41,45 @@ from rdflib.compare import isomorphic
 from rdflib.namespace import DCTERMS, OWL, PROV, RDF, RDFS, SKOS, XSD
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "ontologies/regulatory/em-espera/cn/HRAI_GO_Regulatory_CN.ttl"
+OUT = ROOT / "ontologies/regulatory/instances/cn/HRAI_GO_Regulatory_CN.ttl"
 H = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/regulatory#")
 CN = rdflib.Namespace("https://hrai-go.aeonbridge.io/data/regulatory/cn/china#")
 REPO = "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/"
 OVERVIEW = "docs/ai-regulations/ch/China-china-ai-regulation-overview.pdf"
 LOC = "docs/ai-regulations/ch/service-ll-llglrd-2023555933-2023555933.pdf"
+# Official texts printed from the CAC website (primary sources), added by the author on 17/11/2026 (decision D-01c).
+CH01 = "docs/ai-regulations/ch/CH01.pdf"   # 生成式人工智能服务管理暂行办法 (CAC Order No. 15), full text
+CH02 = "docs/ai-regulations/ch/CH-02.pdf"  # CAC announcement of the Deep Synthesis Provisions (summary, not full text)
+CN_NUM = {"一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9}
+
+
+def cn_number(s: str) -> int:
+    """Chinese numerals up to 99 (一 ... 九十九)."""
+    if "十" not in s:
+        return CN_NUM[s]
+    tens, _, units = s.partition("十")
+    return (CN_NUM[tens] if tens else 1) * 10 + (CN_NUM[units] if units else 0)
+
+
+def official_articles(pdf: str) -> list[dict]:
+    """Articles 第N条 of an official Chinese measure, with the chapter 第N章 they belong to."""
+    raw = subprocess.run(["pdftotext", "-layout", str(ROOT / pdf), "-"], capture_output=True, text=True, check=True).stdout
+    out, chapter = [], ""
+    for line in raw.splitlines():
+        s = line.strip()
+        if re.match(r"^\d+/\d+/\d+, |^https?://", s):
+            continue  # browser print header and footer
+        m_ch = re.match(r"^第([一二三四五六七八九十]+)章\s*(.*)$", s)
+        m_ar = re.match(r"^第([一二三四五六七八九十]+)条\s*(.*)$", s)
+        if m_ch:
+            chapter = f"第{m_ch.group(1)}章 {m_ch.group(2).replace(' ', '')}"
+        elif m_ar:
+            out.append({"n": cn_number(m_ar.group(1)), "chapter": chapter, "lines": [m_ar.group(2)]})
+        elif out and s:
+            out[-1]["lines"].append(s)
+    for a in out:
+        a["text"] = "".join(a["lines"]).strip()
+    return out
 SECONDARY = "Fonte secundária: não há texto oficial chinês no corpus."
 
 # (id, name as written in the overview, year, kind, name to look for in the LoC report or None)
@@ -112,6 +145,11 @@ def build() -> rdflib.Graph:
     s_ov = snapshot(g, "Overview", OVERVIEW, "Regulations.AI, China AI Regulation Overview (RAI-CN-NA-SUMMARY-2026), gerado em 17/11/2026", "Regulations.AI")
     s_loc = snapshot(g, "LawLibrary", LOC, "Law Library of Congress, China: Regulation of Artificial Intelligence (June 2023)", "Law Library of Congress")
     loc_text = re.sub(r"\s+", " ", subprocess.run(["pdftotext", str(ROOT / LOC), "-"], capture_output=True, text=True, check=True).stdout)
+    s_ch01 = snapshot(g, "CAC_GenerativeAI", CH01, "国家互联网信息办公室等七部门令第15号《生成式人工智能服务管理暂行办法》(cac.gov.cn, texto oficial)", "Cyberspace Administration of China (CAC)")
+    s_ch02 = snapshot(g, "CAC_DeepSynthesis", CH02, "国家互联网信息办公室等三部门发布《互联网信息服务深度合成管理规定》(cac.gov.cn, comunicado oficial de 11/12/2022)", "Cyberspace Administration of China (CAC)")
+    for snap in (s_ch01, s_ch02):
+        g.remove((snap, RDFS.comment, None))
+        g.add((snap, RDFS.comment, Literal("Fonte primária: página oficial da CAC impressa em PDF.", lang="pt")))
     cn = CN.China
     g.add((cn, RDF.type, H.Jurisdiction))
     g.add((cn, RDFS.label, Literal("China", lang="pt")))
@@ -139,6 +177,37 @@ def build() -> rdflib.Graph:
         g.add((c, H.candidateProducedBy, agent))
         g.add((c, DCTERMS.subject, x))
         g.add((batch, H.extractionContainsCandidate, c))
+    # Official full text of the generative AI measures: one version with its articles (primary source).
+    ver = CN.GenerativeAIMeasures_2023
+    g.add((ver, RDF.type, H.LegalInstrumentVersion))
+    g.add((ver, RDFS.label, Literal("生成式人工智能服务管理暂行办法 (CAC Order No. 15, published 10/07/2023, in force 15/08/2023)", lang="zh")))
+    g.add((ver, H.versionOfInstrument, CN.GenerativeAIMeasures))
+    g.add((CN.GenerativeAIMeasures, H.hasVersion, ver))
+    g.add((ver, H.publishedAtSource, s_ch01))
+    g.add((ver, H.effectiveFrom, Literal("2023-08-15", datatype=XSD.date)))
+    g.remove((CN.GenerativeAIMeasures, SKOS.scopeNote, None))
+    g.add((CN.GenerativeAIMeasures, SKOS.scopeNote, Literal("Regra administrativa vinculante. Texto oficial da CAC no corpus (fonte primária).", lang="pt")))
+    for a in official_articles(CH01):
+        x = CN[f"GenAI_Art_{a['n']:03d}"]
+        g.add((x, RDF.type, H.LegalProvision))
+        g.add((x, RDFS.label, Literal(f"第{a['n']}条 · " + (a["text"][:80] + ("…" if len(a["text"]) > 80 else "")), lang="zh")))
+        g.add((x, H.legalCitation, Literal(f"生成式人工智能服务管理暂行办法, art. {a['n']}")))
+        g.add((x, H.provisionOfVersion, ver))
+        g.add((ver, H.versionContainsProvision, x))
+        g.add((x, H.provisionDocumentedIn, s_ch01))
+        g.add((x, DCTERMS.description, Literal(a["text"], lang="zh")))
+        g.add((x, SKOS.notation, Literal(str(a["n"]))))
+        g.add((x, SKOS.scopeNote, Literal(a["chapter"], lang="zh")))
+    c = CN.Candidate_GenerativeAIMeasures_Texto
+    g.add((c, RDF.type, H.CandidateAssertion))
+    g.add((c, RDFS.label, Literal("Candidato (fonte primária): artigos das Medidas Provisórias para IA generativa", lang="pt")))
+    g.add((c, H.candidateFromSnapshot, s_ch01)); g.add((c, H.candidateProducedBy, agent)); g.add((c, DCTERMS.subject, ver))
+    g.add((batch, H.extractionContainsCandidate, c))
+    # Official announcement of the deep synthesis provisions (summary; full text not in the corpus).
+    g.add((CN.DeepSynthesis, DCTERMS.references, s_ch02))
+    g.remove((CN.DeepSynthesis, SKOS.scopeNote, None))
+    g.add((CN.DeepSynthesis, SKOS.scopeNote, Literal("Regra administrativa vinculante, em vigor desde 10/01/2023. Comunicado oficial da CAC no corpus (resumo); o texto integral não está no corpus.", lang="pt")))
+
     for key, name in AUTHORITIES:
         a = CN["Autoridade_" + key]
         g.add((a, RDF.type, H.Stakeholder))

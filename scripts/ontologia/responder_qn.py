@@ -40,6 +40,7 @@ D = "https://hrai-go.aeonbridge.io/data/regulatory/"
 PBIA, PL, CAP = rdflib.Namespace(D + "br/pbia#"), rdflib.Namespace(D + "br/pl2338#"), rdflib.Namespace(D + "br/capacidade#")
 EU, UK, US = rdflib.Namespace(D + "eu/aiact#"), rdflib.Namespace(D + "uk/whitepaper#"), rdflib.Namespace(D + "us/nist#")
 SEM = rdflib.Namespace(D + "br/sementes#")
+CNN = rdflib.Namespace(D + "cn/china#")
 COR = rdflib.Namespace(D + "correspondencias/br-ue#")
 COMP = rdflib.Namespace("https://hrai-go.aeonbridge.io/ontology/comparativo#")
 
@@ -48,7 +49,8 @@ DIM = {"contexto": H.NationalContextDimension, "capacidade": H.InstalledCapacity
 DIF = {"exclusiva": H.BrazilOnlyDifference, "ausente": H.AbsentInBrazilDifference,
        "intensidade": H.IntensityDifference, "contexto": H.ContextDifference}
 JUR = {"UE": (PBIA.EuropeanUnion, EU.Snapshot_AIAct), "Reino Unido": (UK.UnitedKingdom, UK.Snapshot_WhitePaper),
-       "EUA": (US.UnitedStates, US.Snapshot_AIRMF)}
+       "EUA": (US.UnitedStates, US.Snapshot_AIRMF), "China": (CNN.China, CNN.Snapshot_CAC_GenerativeAI)}
+CN_NO_SOURCE = "não codificado: o corpus tem para a China só o texto oficial das medidas de IA generativa e fontes secundárias, sem valor equivalente"
 NOT_A_PLAN = "não codificado: o instrumento da jurisdição no corpus não é plano de investimento (E1) e o plano equivalente não está no corpus"
 NO_INDICATOR = "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
 
@@ -56,10 +58,11 @@ NO_INDICATOR = "não codificado: o corpus não traz indicador equivalente para e
 SPECIFICITIES = [
     ("S1_SoberaniaComputacional", "Soberania computacional com orçamento público: Nuvem Soberana (R$ 1 bilhão) e supercomputador de IA no PBIA",
      "objetivo", "exclusiva", [PBIA.Action27_SovereignCloud, PBIA.Action01_AISupercomputer],
-     {j: (NOT_A_PLAN, False) for j in JUR}),
+     {**{j: (NOT_A_PLAN, False) for j in JUR},
+      "China": ("não codificado: o Plano de Desenvolvimento de IA de Nova Geração (2017) aparece só em fonte secundária, sem orçamento de computação informado", False)}),
     ("S2_LinguaPortuguesa", "Modelos de linguagem em português com dados nacionais, para o português do Brasil em escala continental",
      "objetivo", "exclusiva", [PBIA.Action09_PortugueseLLM, SEM.Traco_CF_03],
-     {j: (NOT_A_PLAN, False) for j in JUR}),
+     {**{j: (NOT_A_PLAN, False) for j in JUR}, "China": (CN_NO_SOURCE, False)}),
     ("S3_MatrizRenovavel", "Matriz elétrica majoritariamente renovável: 89,2% em 2023, segundo o PBIA (citando a EPE)",
      "contexto", "contexto", [PBIA.Ind_RenewableShareElectricityMatrix2023],
      {j: (NO_INDICATOR, False) for j in JUR}),
@@ -76,12 +79,14 @@ SPECIFICITIES = [
      "capacidade", "intensidade", [PL.Art_2024_045, CAP.Ind_GovernanceBudgetShare],
      {"UE": ("art. 70 do AI Act: cada Estado-membro designa autoridades nacionais competentes, sob coordenação europeia", True),
       "Reino Unido": ("princípios não estatutários aplicados pelos reguladores existentes, sem autoridade nova", True),
-      "EUA": ("não codificado: o NIST AI RMF é guia voluntário e não cria autoridade", False)}),
+      "EUA": ("não codificado: o NIST AI RMF é guia voluntário e não cria autoridade", False),
+      "China": ("art. 16 das Medidas Provisórias para IA generativa (texto oficial da CAC): supervisão pelos departamentos de ciberespaço, desenvolvimento, educação, ciência, indústria, segurança pública, rádio e TV e imprensa, cada um em sua competência", True)}),
     ("S8_ResponsabilidadeCivil", "Responsabilidade civil por danos de IA pelas regras do Código de Defesa do Consumidor e do Código Civil, com inversão do ônus da prova",
      "contexto", "exclusiva", [PL.Art_2024_035, PL.Art_2024_036, PL.Art_2024_037],
      {"UE": ("não codificado: o AI Act não trata de responsabilidade civil e a diretiva de responsabilidade não está no corpus; ausência exige avaliação de cobertura (D-10)", False),
       "Reino Unido": ("não codificado: o white paper deixa a responsabilidade ao direito existente; sem avaliação de cobertura", False),
-      "EUA": ("não codificado: guia voluntário", False)}),
+      "EUA": ("não codificado: guia voluntário", False),
+      "China": ("não codificado: as medidas de IA generativa remetem as penalidades às leis de cibersegurança, dados e informação pessoal (art. 21); responsabilidade civil não está no corpus", False)}),
 ]
 
 # QN2 and QN3: id, question, label, specificities it rests on, graph individuals it cites, scope

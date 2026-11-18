@@ -117,6 +117,14 @@
       "decisao": "Revê a D-01: a China fica fora da comparação por ora. A extração fica em ontologies/regulatory/em-espera/cn/ para validar, no futuro, a inclusão de uma nova jurisdição e o seu impacto.",
       "lotes": [],
       "correspondencias": false
+    },
+    {
+      "id": "D-01c",
+      "data": "2026-11-17T22:51:00-03:00",
+      "mensagem": "CHINA ADICIONADO",
+      "decisao": "Incluir a China agora, com os textos oficiais da CAC acrescentados (CH01: Medidas Provisórias para IA generativa, texto integral; CH-02: comunicado das Regras de Síntese Profunda), e medir o impacto da inclusão de uma nova jurisdição.",
+      "lotes": [],
+      "correspondencias": false
     }
   ]
 }

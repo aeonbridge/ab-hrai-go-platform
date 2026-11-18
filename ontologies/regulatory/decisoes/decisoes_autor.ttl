@@ -189,6 +189,13 @@ dec:D_01b a hrai:ApprovalDecision ;
     hrai:approvedReason "Mensagem do autor: \"DEIXE CHINA DE FORA PARA VALIDARMOS INCLUSIVE NO FUTURO COMO ADICIONAR NOVAS E O IMPACTO\"" ;
     hrai:reviewDecisionBy dec:Autor .
 
+dec:D_01c a hrai:ApprovalDecision ;
+    rdfs:label "D-01c: Incluir a China agora, com os textos oficiais da CAC acrescentados (CH01: Medidas Provisórias para IA generativa, texto integral; CH-02: comunicado das Regras de Síntese Profunda), e medir o impacto da inclusão de uma nova jurisdição."@pt ;
+    prov:wasAttributedTo dec:Autor ;
+    hrai:approvalRecordedAt "2026-11-17T22:51:00-03:00"^^xsd:dateTime ;
+    hrai:approvedReason "Mensagem do autor: \"CHINA ADICIONADO\"" ;
+    hrai:reviewDecisionBy dec:Autor .
+
 dec:D_02 a hrai:ApprovalDecision ;
     rdfs:label "D-02: Aprovar as escalas da E4 como propostas em docs/especificacoes/ESP-ONT-02/escalas-E4-proposta.md."@pt ;
     prov:wasAttributedTo dec:Autor ;

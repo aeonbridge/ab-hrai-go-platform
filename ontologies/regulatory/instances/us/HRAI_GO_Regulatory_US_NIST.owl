@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rdf:RDF
   xmlns:hrai="https://hrai-go.aeonbridge.io/ontology/regulatory#"
-  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-  xmlns:prov="http://www.w3.org/ns/prov#"
-  xmlns:owl="http://www.w3.org/2002/07/owl#"
   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:prov="http://www.w3.org/ns/prov#"
   xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
 >
-  <owl:Ontology rdf:about="https://hrai-go.aeonbridge.io/data/regulatory/us/nist">
-    <rdfs:label xml:lang="pt">EUA: NIST AI Risk Management Framework 1.0 e as quatro funções</rdfs:label>
-    <rdfs:comment xml:lang="pt">Gerado por scripts/ontologia/extrair_internacional.py (pdftotext + expressões regulares, sem LLM). Candidato pendente de revisão humana. Método: METODO_EXTRACAO.md.</rdfs:comment>
-  </owl:Ontology>
   <hrai:ExtractionBatch rdf:about="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#Lote_Extracao">
     <rdfs:label xml:lang="pt">Lote de extração: EUA: NIST AI Risk Management Framework 1.0 e as quatro funções</rdfs:label>
     <hrai:extractionContainsCandidate>
@@ -55,9 +51,13 @@
       </hrai:CandidateAssertion>
     </hrai:extractionContainsCandidate>
   </hrai:ExtractionBatch>
-  <hrai:PolicyInstrument rdf:about="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#Function_Manage">
-    <rdfs:label xml:lang="en">MANAGE</rdfs:label>
-    <dcterms:description xml:lang="en">The MANAGE function entails allocating risk resources to mapped and measured risks on a regular basis and as defined by the GOVERN function. Risk treatment comprises plans to respond to, recover from, and communicate about incidents or events.</dcterms:description>
+  <owl:Ontology rdf:about="https://hrai-go.aeonbridge.io/data/regulatory/us/nist">
+    <rdfs:label xml:lang="pt">EUA: NIST AI Risk Management Framework 1.0 e as quatro funções</rdfs:label>
+    <rdfs:comment xml:lang="pt">Gerado por scripts/ontologia/extrair_internacional.py (pdftotext + expressões regulares, sem LLM). Candidato pendente de revisão humana. Método: METODO_EXTRACAO.md.</rdfs:comment>
+  </owl:Ontology>
+  <hrai:PolicyInstrument rdf:about="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#Function_Measure">
+    <rdfs:label xml:lang="en">MEASURE</rdfs:label>
+    <dcterms:description xml:lang="en">The MEASURE function employs quantitative, qualitative, or mixed-method tools, techniques, and methodologies to analyze, assess, benchmark, and monitor AI risk and related impacts. It uses knowledge relevant to AI risks identified in the MAP function and informs the MANAGE function.</dcterms:description>
     <dcterms:isPartOf>
       <hrai:PolicyInstrument rdf:about="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#AIRMF_1_0">
         <rdfs:label xml:lang="en">NIST AI Risk Management Framework (AI RMF 1.0)</rdfs:label>
@@ -66,7 +66,7 @@
         <hrai:policyInstrumentInJurisdiction rdf:resource="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#UnitedStates"/>
       </hrai:PolicyInstrument>
     </dcterms:isPartOf>
-    <skos:closeMatch rdf:resource="https://hrai-go.aeonbridge.io/ontology/comparativo#NIST_Manage"/>
+    <skos:closeMatch rdf:resource="https://hrai-go.aeonbridge.io/ontology/comparativo#NIST_Measure"/>
     <prov:wasDerivedFrom>
       <hrai:SourceSnapshot rdf:about="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#Snapshot_AIRMF">
         <rdfs:label>NIST AI 100-1, Artificial Intelligence Risk Management Framework (AI RMF 1.0), January 2023</rdfs:label>
@@ -81,19 +81,11 @@
       </hrai:Jurisdiction>
     </hrai:policyInstrumentInJurisdiction>
   </hrai:PolicyInstrument>
-  <hrai:PolicyInstrument rdf:about="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#Function_Map">
-    <rdfs:label xml:lang="en">MAP</rdfs:label>
-    <dcterms:description xml:lang="en">The MAP function establishes the context to frame risks related to an AI system. The AI lifecycle consists of many interdependent activities involving a diverse set of actors (See Figure 3).</dcterms:description>
+  <hrai:PolicyInstrument rdf:about="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#Function_Manage">
+    <rdfs:label xml:lang="en">MANAGE</rdfs:label>
+    <dcterms:description xml:lang="en">The MANAGE function entails allocating risk resources to mapped and measured risks on a regular basis and as defined by the GOVERN function. Risk treatment comprises plans to respond to, recover from, and communicate about incidents or events.</dcterms:description>
     <dcterms:isPartOf rdf:resource="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#AIRMF_1_0"/>
-    <skos:closeMatch rdf:resource="https://hrai-go.aeonbridge.io/ontology/comparativo#NIST_Map"/>
-    <prov:wasDerivedFrom rdf:resource="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#Snapshot_AIRMF"/>
-    <hrai:policyInstrumentInJurisdiction rdf:resource="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#UnitedStates"/>
-  </hrai:PolicyInstrument>
-  <hrai:PolicyInstrument rdf:about="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#Function_Measure">
-    <rdfs:label xml:lang="en">MEASURE</rdfs:label>
-    <dcterms:description xml:lang="en">The MEASURE function employs quantitative, qualitative, or mixed-method tools, techniques, and methodologies to analyze, assess, benchmark, and monitor AI risk and related impacts. It uses knowledge relevant to AI risks identified in the MAP function and informs the MANAGE function.</dcterms:description>
-    <dcterms:isPartOf rdf:resource="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#AIRMF_1_0"/>
-    <skos:closeMatch rdf:resource="https://hrai-go.aeonbridge.io/ontology/comparativo#NIST_Measure"/>
+    <skos:closeMatch rdf:resource="https://hrai-go.aeonbridge.io/ontology/comparativo#NIST_Manage"/>
     <prov:wasDerivedFrom rdf:resource="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#Snapshot_AIRMF"/>
     <hrai:policyInstrumentInJurisdiction rdf:resource="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#UnitedStates"/>
   </hrai:PolicyInstrument>
@@ -105,11 +97,19 @@
     <prov:wasDerivedFrom rdf:resource="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#Snapshot_AIRMF"/>
     <hrai:policyInstrumentInJurisdiction rdf:resource="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#UnitedStates"/>
   </hrai:PolicyInstrument>
-  <hrai:MonitoringAgent rdf:about="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#ExtratorDeTexto">
-    <rdfs:label xml:lang="pt">Extrator de texto (scripts/ontologia/extrair_internacional.py, determinístico)</rdfs:label>
-  </hrai:MonitoringAgent>
   <hrai:LegalSource rdf:about="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#Fonte_AIRMF">
     <rdfs:label>National Institute of Standards and Technology</rdfs:label>
     <hrai:sourceURI rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://doi.org/10.6028/NIST.AI.100-1</hrai:sourceURI>
   </hrai:LegalSource>
+  <hrai:PolicyInstrument rdf:about="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#Function_Map">
+    <rdfs:label xml:lang="en">MAP</rdfs:label>
+    <dcterms:description xml:lang="en">The MAP function establishes the context to frame risks related to an AI system. The AI lifecycle consists of many interdependent activities involving a diverse set of actors (See Figure 3).</dcterms:description>
+    <dcterms:isPartOf rdf:resource="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#AIRMF_1_0"/>
+    <skos:closeMatch rdf:resource="https://hrai-go.aeonbridge.io/ontology/comparativo#NIST_Map"/>
+    <prov:wasDerivedFrom rdf:resource="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#Snapshot_AIRMF"/>
+    <hrai:policyInstrumentInJurisdiction rdf:resource="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#UnitedStates"/>
+  </hrai:PolicyInstrument>
+  <hrai:MonitoringAgent rdf:about="https://hrai-go.aeonbridge.io/data/regulatory/us/nist#ExtratorDeTexto">
+    <rdfs:label xml:lang="pt">Extrator de texto (scripts/ontologia/extrair_internacional.py, determinístico)</rdfs:label>
+  </hrai:MonitoringAgent>
 </rdf:RDF>

@@ -5,6 +5,12 @@ window.HRAIGO_RESPOSTAS = {
    "comparacoes": [
     {
      "fonte": "",
+     "jurisdicao": "China",
+     "naoCodificado": true,
+     "valor": "não codificado: o Plano de Desenvolvimento de IA de Nova Geração (2017) aparece só em fonte secundária, sem orçamento de computação informado"
+    },
+    {
+     "fonte": "",
      "jurisdicao": "Estados Unidos da América",
      "naoCodificado": true,
      "valor": "não codificado: o instrumento da jurisdição no corpus não é plano de investimento (E1) e o plano equivalente não está no corpus"
@@ -34,6 +40,12 @@ window.HRAIGO_RESPOSTAS = {
   },
   {
    "comparacoes": [
+    {
+     "fonte": "",
+     "jurisdicao": "China",
+     "naoCodificado": true,
+     "valor": "não codificado: o corpus tem para a China só o texto oficial das medidas de IA generativa e fontes secundárias, sem valor equivalente"
+    },
     {
      "fonte": "",
      "jurisdicao": "Estados Unidos da América",
@@ -67,6 +79,12 @@ window.HRAIGO_RESPOSTAS = {
    "comparacoes": [
     {
      "fonte": "",
+     "jurisdicao": "China",
+     "naoCodificado": true,
+     "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
+    },
+    {
+     "fonte": "",
      "jurisdicao": "Estados Unidos da América",
      "naoCodificado": true,
      "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
@@ -95,6 +113,12 @@ window.HRAIGO_RESPOSTAS = {
   },
   {
    "comparacoes": [
+    {
+     "fonte": "",
+     "jurisdicao": "China",
+     "naoCodificado": true,
+     "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
+    },
     {
      "fonte": "",
      "jurisdicao": "Estados Unidos da América",
@@ -127,6 +151,12 @@ window.HRAIGO_RESPOSTAS = {
    "comparacoes": [
     {
      "fonte": "",
+     "jurisdicao": "China",
+     "naoCodificado": true,
+     "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
+    },
+    {
+     "fonte": "",
      "jurisdicao": "Estados Unidos da América",
      "naoCodificado": true,
      "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
@@ -155,6 +185,12 @@ window.HRAIGO_RESPOSTAS = {
   },
   {
    "comparacoes": [
+    {
+     "fonte": "",
+     "jurisdicao": "China",
+     "naoCodificado": true,
+     "valor": "não codificado: o corpus não traz indicador equivalente para esta jurisdição"
+    },
     {
      "fonte": "",
      "jurisdicao": "Estados Unidos da América",
@@ -187,6 +223,12 @@ window.HRAIGO_RESPOSTAS = {
   {
    "comparacoes": [
     {
+     "fonte": "国家互联网信息办公室等七部门令第15号《生成式人工智能服务管理暂行办法》(cac.gov.cn, texto oficial)",
+     "jurisdicao": "China",
+     "naoCodificado": false,
+     "valor": "art. 16 das Medidas Provisórias para IA generativa (texto oficial da CAC): supervisão pelos departamentos de ciberespaço, desenvolvimento, educação, ciência, indústria, segurança pública, rádio e TV e imprensa, cada um em sua competência"
+    },
+    {
      "fonte": "",
      "jurisdicao": "Estados Unidos da América",
      "naoCodificado": true,
@@ -217,6 +259,12 @@ window.HRAIGO_RESPOSTAS = {
   },
   {
    "comparacoes": [
+    {
+     "fonte": "",
+     "jurisdicao": "China",
+     "naoCodificado": true,
+     "valor": "não codificado: as medidas de IA generativa remetem as penalidades às leis de cibersegurança, dados e informação pessoal (art. 21); responsabilidade civil não está no corpus"
+    },
     {
      "fonte": "",
      "jurisdicao": "Estados Unidos da América",

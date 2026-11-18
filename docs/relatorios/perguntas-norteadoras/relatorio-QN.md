@@ -13,6 +13,7 @@ HRAI-GO (Human-centred Regulatory AI, Governance Observatory). Relatório gerado
 
 | Jurisdição | Valor comparado | Fonte |
 |---|---|---|
+| China | não codificado: o Plano de Desenvolvimento de IA de Nova Geração (2017) aparece só em fonte secundária, sem orçamento de computação informado | — |
 | Estados Unidos da América | não codificado: o instrumento da jurisdição no corpus não é plano de investimento (E1) e o plano equivalente não está no corpus | — |
 | Reino Unido | não codificado: o instrumento da jurisdição no corpus não é plano de investimento (E1) e o plano equivalente não está no corpus | — |
 | União Europeia | não codificado: o instrumento da jurisdição no corpus não é plano de investimento (E1) e o plano equivalente não está no corpus | — |
@@ -24,6 +25,7 @@ HRAI-GO (Human-centred Regulatory AI, Governance Observatory). Relatório gerado
 
 | Jurisdição | Valor comparado | Fonte |
 |---|---|---|
+| China | não codificado: o corpus tem para a China só o texto oficial das medidas de IA generativa e fontes secundárias, sem valor equivalente | — |
 | Estados Unidos da América | não codificado: o instrumento da jurisdição no corpus não é plano de investimento (E1) e o plano equivalente não está no corpus | — |
 | Reino Unido | não codificado: o instrumento da jurisdição no corpus não é plano de investimento (E1) e o plano equivalente não está no corpus | — |
 | União Europeia | não codificado: o instrumento da jurisdição no corpus não é plano de investimento (E1) e o plano equivalente não está no corpus | — |
@@ -35,6 +37,7 @@ HRAI-GO (Human-centred Regulatory AI, Governance Observatory). Relatório gerado
 
 | Jurisdição | Valor comparado | Fonte |
 |---|---|---|
+| China | não codificado: o corpus não traz indicador equivalente para esta jurisdição | — |
 | Estados Unidos da América | não codificado: o corpus não traz indicador equivalente para esta jurisdição | — |
 | Reino Unido | não codificado: o corpus não traz indicador equivalente para esta jurisdição | — |
 | União Europeia | não codificado: o corpus não traz indicador equivalente para esta jurisdição | — |
@@ -46,6 +49,7 @@ HRAI-GO (Human-centred Regulatory AI, Governance Observatory). Relatório gerado
 
 | Jurisdição | Valor comparado | Fonte |
 |---|---|---|
+| China | não codificado: o corpus não traz indicador equivalente para esta jurisdição | — |
 | Estados Unidos da América | não codificado: o corpus não traz indicador equivalente para esta jurisdição | — |
 | Reino Unido | não codificado: o corpus não traz indicador equivalente para esta jurisdição | — |
 | União Europeia | não codificado: o corpus não traz indicador equivalente para esta jurisdição | — |
@@ -57,6 +61,7 @@ HRAI-GO (Human-centred Regulatory AI, Governance Observatory). Relatório gerado
 
 | Jurisdição | Valor comparado | Fonte |
 |---|---|---|
+| China | não codificado: o corpus não traz indicador equivalente para esta jurisdição | — |
 | Estados Unidos da América | não codificado: o corpus não traz indicador equivalente para esta jurisdição | — |
 | Reino Unido | não codificado: o corpus não traz indicador equivalente para esta jurisdição | — |
 | União Europeia | não codificado: o corpus não traz indicador equivalente para esta jurisdição | — |
@@ -68,6 +73,7 @@ HRAI-GO (Human-centred Regulatory AI, Governance Observatory). Relatório gerado
 
 | Jurisdição | Valor comparado | Fonte |
 |---|---|---|
+| China | não codificado: o corpus não traz indicador equivalente para esta jurisdição | — |
 | Estados Unidos da América | não codificado: o corpus não traz indicador equivalente para esta jurisdição | — |
 | Reino Unido | não codificado: o corpus não traz indicador equivalente para esta jurisdição | — |
 | União Europeia | não codificado: o corpus não traz indicador equivalente para esta jurisdição | — |
@@ -79,6 +85,7 @@ HRAI-GO (Human-centred Regulatory AI, Governance Observatory). Relatório gerado
 
 | Jurisdição | Valor comparado | Fonte |
 |---|---|---|
+| China | art. 16 das Medidas Provisórias para IA generativa (texto oficial da CAC): supervisão pelos departamentos de ciberespaço, desenvolvimento, educação, ciência, indústria, segurança pública, rádio e TV e imprensa, cada um em sua competência | 国家互联网信息办公室等七部门令第15号《生成式人工智能服务管理暂行办法》(cac.gov.cn, texto oficial) |
 | Estados Unidos da América | não codificado: o NIST AI RMF é guia voluntário e não cria autoridade | — |
 | Reino Unido | princípios não estatutários aplicados pelos reguladores existentes, sem autoridade nova | A pro-innovation approach to AI regulation (white paper, March 2023, amended web version) |
 | União Europeia | art. 70 do AI Act: cada Estado-membro designa autoridades nacionais competentes, sob coordenação europeia | Regulation (EU) 2024/1689 (AI Act), OJ L, 12.7.2024 |
@@ -90,6 +97,7 @@ HRAI-GO (Human-centred Regulatory AI, Governance Observatory). Relatório gerado
 
 | Jurisdição | Valor comparado | Fonte |
 |---|---|---|
+| China | não codificado: as medidas de IA generativa remetem as penalidades às leis de cibersegurança, dados e informação pessoal (art. 21); responsabilidade civil não está no corpus | — |
 | Estados Unidos da América | não codificado: guia voluntário | — |
 | Reino Unido | não codificado: o white paper deixa a responsabilidade ao direito existente; sem avaliação de cobertura | — |
 | União Europeia | não codificado: o AI Act não trata de responsabilidade civil e a diretiva de responsabilidade não está no corpus; ausência exige avaliação de cobertura (D-10) | — |

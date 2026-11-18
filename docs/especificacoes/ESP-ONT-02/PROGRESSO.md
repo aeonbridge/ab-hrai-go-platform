@@ -301,11 +301,19 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
   comparar só com UE, Reino Unido e EUA (PC9: 42 linhas). Para incluir: mover para `instances/cn/`, gerar o gêmeo OWL
   e rodar o CI; a consulta V30 lista o que precisa de comparação e o monitoramento mostra o que reabre.
 
+### Decisão D-01c · China incluída com textos oficiais; impacto medido — 17/11/2026
+
+- Textos oficiais da CAC no corpus (Medidas Provisórias para IA generativa, 24 artigos; comunicado das Regras de Síntese
+  Profunda). A China entrou em `instances/cn/`; a V30 acusou as 8 especificidades sem comparação com a nova jurisdição, e
+  todas ganharam a comparação (S7 com o art. 16 do texto oficial).
+- Relatório de impacto: `docs/especificacoes/ESP-ONT-02/impacto-inclusao-china.md` (+509 triplas; PC9 de 42 para 56;
+  câmara e monitoramento inalterados). Achado: a V30 multiplicava linhas; agora usa `DISTINCT`.
+
 ## Aguardando decisão
 
 | Id | Decisão | Quem | Bloqueia |
 |---|---|---|---|
-| D-01 | ~~China~~ resolvida em 17/11/2026 e revista pela D-01b: **fora da comparação, em espera** | autor | — |
+| D-01 | ~~China~~ resolvida (D-01, D-01b, **D-01c: incluída com textos oficiais da CAC**) | autor | — |
 | D-02 | ~~escalas da E4 aprovadas~~ **resolvida em 17/11/2026** (`decisoes.json`) | autor | — |
 | D-03 | ~~extrações e correspondências revisadas~~ **resolvida em 17/11/2026** (`decisoes.json`) | autor | — |
 | D-04 | ~~alinhamentos e ligações aprovados~~ **resolvida em 17/11/2026** (`decisoes.json`) | autor | — |
@@ -316,7 +324,7 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
 | D-09 | ~~limiar~~ **resolvida em 17/11/2026: 5% do plano** (`decisoes.json`) | autor | — |
 | D-10 | Declarar os escopos de avaliação de cobertura (`CoverageAssessment`: jurisdição, snapshot, área) para a PC4 valer | autor | PC4, QN3 |
 | D-11 | ~~resposta inicial~~ **aprovada em 17/11/2026, sujeita a mudanças** (`decisoes.json`) | autor | — |
-| D-12 | Quando quiser validar a inclusão de nova jurisdição: tirar a China de `em-espera/` (de preferência com texto oficial chinês) e medir o impacto | autor | — |
+| D-12 | Textos oficiais chineses que faltam (leis de cibersegurança, dados e informação pessoal; regras de algoritmos e de síntese profunda na íntegra) | autor | comparações com a China ainda "não codificado" |
 | D-06 | PDF da "Análise Comparativa" no repositório (hoje as teses vêm de resumo) | autor | rastreabilidade das teses |
 
 ## Checklist V-01 a V-31
