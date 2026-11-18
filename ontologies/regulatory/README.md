@@ -8,7 +8,7 @@ Parte do **HRAI-GO (Human-centred Regulatory AI, Governance Observatory)**. O pr
 
 Ontologia geral de inteligência regulatória multinacional. Sua função é representar instrumentos, versões, dispositivos, requisitos, contextos nacionais, indicadores, tensões, lacunas, argumentos, stakeholders, deliberações e impactos sobre aplicações de IA.
 
-Este módulo é **independente do SCSE (Shadow Council)** e poderá ser reutilizado por ele mediante alinhamentos semânticos documentados.
+Este módulo é o **núcleo regulatório** e não depende do SCSE (Shadow Council). O módulo SCSE (`ontologies/scse/`) importa este núcleo com `owl:imports` e não redeclara suas classes (ESP-ONT-02, RF-17). As classes de deliberação (`Deliberation`, `StakeholderPosition`, `SyntheticStakeholderPerspective`, `SyntheticStakeholderPosition`) continuam aqui só por compatibilidade com as instâncias e as regras R07 e R21; a casa delas passou a ser o SCSE, com `owl:equivalentClass` declarada lá. Modelagem nova de deliberação usa as classes do SCSE.
 
 ## Arquivos
 

@@ -26,6 +26,19 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
 - **Medido**: componentes 5/22, áreas 0/28, traços de contexto 0/14, estratos 0/8, tensões 0/6, ramos 0/4, cadeiras vazias 0/6.
 - **Pendente**: zerar o contador é o item 8 (RF-09/RF-12); os 5 componentes "próximos" dependem da revisão A1.
 
+### Item 2 · RF-17 separar núcleo e SCSE — 17/11/2026
+
+- **O que mudou**
+  - SCSE 1.1.0 com namespace próprio (`.../ontology/scse#`), sem `example.org`, com `owl:imports` do núcleo.
+  - Deixou de redeclarar 8 classes e a propriedade `claimText`; passou a usar as do núcleo. Termos homônimos com sentido
+    diferente ganharam nome próprio (`provisionStateHasStatus`, `positionGroundedInEvidence`).
+  - Classes de deliberação com casa na SCSE e `owl:equivalentClass` para as do núcleo (compatibilidade com instâncias e
+    regras R07/R21). Alinhamentos `PolicyTension ⊑ RegulatoryTension`, `ArgumentClaim ⊑ PolicyClaim`, `EvidenceRecord ⊑ Evidence`.
+  - `ontologies/scse/README.md` novo; README do núcleo atualizado; CI roda `tests/test_modulos.py` e `tests/test_lastro.py`.
+- **Comandos**: os quatro do protocolo com exit 0; `pytest tests/test_modulos.py` → 4 passed. As 8 regras da SCSE que
+  disparavam antes disparam igual depois (mesma contagem por regra), agora com o núcleo importado (32 regras no total).
+- **Aceite RF-17**: nenhum termo declarado nos dois módulos (teste); testes dos dois módulos passam.
+
 ## Aguardando decisão
 
 | Id | Decisão | Quem | Bloqueia |
@@ -46,7 +59,7 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | V-01 | 🟡 | nome completo no README e relatórios (`tests/test_nomenclatura.py`); conferir site e `dcterms:title` |
 | V-02 | 🟡 | PBIA, PL 2023 e 2024 (SHA-256 no `EXECUCAO_LOOP.md`), UE, RU e EUA no corpus; falta `SourceSnapshot` de cada um no grafo |
 | V-03 | ⏸ | D-01 |
-| V-04 | ⬜ | item 2 |
+| V-04 | ✅ | `tests/test_modulos.py` no CI (`validate-regulatory.yml`); item 2 |
 | V-05 | ⬜ | item 3 |
 | V-06 | ⬜ | item 4 |
 | V-07 | ⏸ | D-02 |

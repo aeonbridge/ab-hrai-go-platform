@@ -1,118 +1,124 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ex: <https://example.org/hrai-go/scse/example#> .
-@prefix hrai: <https://example.org/hrai-go#> .
+@prefix ex: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/example#> .
+@prefix hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix scse: <https://example.org/hrai-go/scse#> .
+@prefix scse: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#> .
 @prefix swrl: <http://www.w3.org/2003/11/swrl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://example.org/hrai-go/scse> a owl:Ontology ;
-    dcterms:description "Standalone proposed OWL 2 ontology for regulatory-policy and solution-compliance shadow-council simulations. Includes synthetic illustration individuals and safe positive SWRL inference rules. No legal certification or population representativeness is implied."@en ;
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse> a owl:Ontology ;
+    dcterms:description "SCSE module of HRAI-GO (Human-centred Regulatory AI, Governance Observatory): deliberation, council, strata, seats, rounds, positions, scenarios and decisions. Imports the regulatory core instead of redeclaring its classes (ESP-ONT-02, RF-17). Includes synthetic illustration individuals and safe positive SWRL rules. No legal certification or population representativeness is implied."@en ;
     dcterms:source "SCSE Shadow Council Simulation Specification v1.0 and HRAI-GO conceptual proposal (user-provided documents)." ;
     dcterms:title "Shadow Council Simulation Environment Ontology"@en ;
-    rdfs:comment "Example.org is an intentionally nonproduction namespace; substitute an owned persistent identifier before publication."@en ;
-    owl:versionIRI <https://example.org/hrai-go/scse/1.0.0> ;
-    owl:versionInfo "1.0.0" .
+    rdfs:comment "1.1.0: own namespace; imports the core; regulatory classes (LegalProvision, NormativeRequirement, LegalStatus, LegalException, Jurisdiction, ComplianceAssessment, PolicyAlternative, PolicyObjective) now come from the core; deliberation classes have their home here, with owl:equivalentClass to the legacy core classes kept for compatibility."@en ;
+    owl:imports <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> ;
+    owl:versionIRI <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/1.1.0> ;
+    owl:versionInfo "1.1.0" .
+
+scse:Deliberation a owl:Class ;
+    rdfs:label "Deliberation"@en ;
+    rdfs:comment "Structured discussion of a tension by people, with or without the synthetic council. Home of the concept since RF-17."@en ;
+    owl:equivalentClass hrai:Deliberation .
 
 scse:R01_CouncilAgent a swrl:Imp ;
     rdfs:label "R01_CouncilAgent"@en ;
     rdfs:comment "Infer a synthetic council agent through its allocated seat."@en ;
     swrl:body ( [ a swrl:ClassAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R01_council> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R01_council> ;
                 swrl:classPredicate scse:ShadowCouncil ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R01_council> ;
-                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R01_seat> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R01_council> ;
+                swrl:argument2 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R01_seat> ;
                 swrl:propertyPredicate scse:hasSeat ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R01_seat> ;
-                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R01_agent> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R01_seat> ;
+                swrl:argument2 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R01_agent> ;
                 swrl:propertyPredicate scse:assignedAgent ] ) ;
     swrl:head ( [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R01_council> ;
-                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R01_agent> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R01_council> ;
+                swrl:argument2 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R01_agent> ;
                 swrl:propertyPredicate scse:hasCouncilAgent ] ) .
 
 scse:R02_CouncilCoversStratum a swrl:Imp ;
     rdfs:label "R02_CouncilCoversStratum"@en ;
     rdfs:comment "Infer declared stratum coverage; never infer actual population representativeness."@en ;
     swrl:body ( [ a swrl:ClassAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R02_council> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R02_council> ;
                 swrl:classPredicate scse:ShadowCouncil ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R02_council> ;
-                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R02_seat> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R02_council> ;
+                swrl:argument2 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R02_seat> ;
                 swrl:propertyPredicate scse:hasSeat ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R02_seat> ;
-                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R02_stratum> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R02_seat> ;
+                swrl:argument2 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R02_stratum> ;
                 swrl:propertyPredicate scse:hasStratum ] ) ;
     swrl:head ( [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R02_council> ;
-                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R02_stratum> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R02_council> ;
+                swrl:argument2 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R02_stratum> ;
                 swrl:propertyPredicate scse:coversStratum ] ) .
 
 scse:R03_AgentEvidenceGrounding a swrl:Imp ;
     rdfs:label "R03_AgentEvidenceGrounding"@en ;
     rdfs:comment "Infer agent documentary grounding via its charter."@en ;
     swrl:body ( [ a swrl:ClassAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R03_agent> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R03_agent> ;
                 swrl:classPredicate scse:PerspectiveAgent ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R03_agent> ;
-                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R03_charter> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R03_agent> ;
+                swrl:argument2 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R03_charter> ;
                 swrl:propertyPredicate scse:hasCharter ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R03_charter> ;
-                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R03_evidence> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R03_charter> ;
+                swrl:argument2 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R03_evidence> ;
                 swrl:propertyPredicate scse:charterGroundedIn ] ) ;
     swrl:head ( [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R03_agent> ;
-                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R03_evidence> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R03_agent> ;
+                swrl:argument2 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R03_evidence> ;
                 swrl:propertyPredicate scse:isGroundedIn ] ) .
 
 scse:R04_RunProducesClaim a swrl:Imp ;
     rdfs:label "R04_RunProducesClaim"@en ;
     rdfs:comment "Infer which claims were produced during a specific run."@en ;
     swrl:body ( [ a swrl:ClassAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R04_run> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R04_run> ;
                 swrl:classPredicate scse:SimulationRun ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R04_run> ;
-                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R04_round> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R04_run> ;
+                swrl:argument2 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R04_round> ;
                 swrl:propertyPredicate scse:hasRound ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R04_round> ;
-                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R04_claim> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R04_round> ;
+                swrl:argument2 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R04_claim> ;
                 swrl:propertyPredicate scse:produces ] ) ;
     swrl:head ( [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R04_run> ;
-                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R04_claim> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R04_run> ;
+                swrl:argument2 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R04_claim> ;
                 swrl:propertyPredicate scse:runHasClaim ] ) .
 
 scse:R05_AssessmentRequiresEvidenceReview a swrl:Imp ;
     rdfs:label "R05_AssessmentRequiresEvidenceReview"@en ;
     rdfs:comment "Known unverified requirement evidence triggers review, but never a noncompliance conclusion."@en ;
     swrl:body ( [ a swrl:ClassAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R05_assessment> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R05_assessment> ;
                 swrl:classPredicate hrai:ComplianceAssessment ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R05_assessment> ;
-                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R05_requirement> ;
-                swrl:propertyPredicate hrai:hasApplicableRequirement ] [ a swrl:DatavaluedPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R05_requirement> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R05_assessment> ;
+                swrl:argument2 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R05_requirement> ;
+                swrl:propertyPredicate scse:hasApplicableRequirement ] [ a swrl:DatavaluedPropertyAtom ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R05_requirement> ;
                 swrl:argument2 true ;
-                swrl:propertyPredicate hrai:hasUnverifiedEvidence ] ) ;
+                swrl:propertyPredicate scse:hasUnverifiedEvidence ] ) ;
     swrl:head ( [ a swrl:DatavaluedPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R05_assessment> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R05_assessment> ;
                 swrl:argument2 true ;
-                swrl:propertyPredicate hrai:requiresEvidenceReview ] ) .
+                swrl:propertyPredicate scse:requiresEvidenceReview ] ) .
 
 scse:R06_FindingRequiresEvidenceReview a swrl:Imp ;
     rdfs:label "R06_FindingRequiresEvidenceReview"@en ;
     rdfs:comment "Insufficient-evidence finding requires review; missing evidence is not proof of violation."@en ;
     swrl:body ( [ a swrl:ClassAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R06_finding> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R06_finding> ;
                 swrl:classPredicate scse:ComplianceFinding ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R06_finding> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R06_finding> ;
                 swrl:argument2 scse:InsufficientEvidenceStatus ;
                 swrl:propertyPredicate scse:hasFindingStatus ] ) ;
     swrl:head ( [ a swrl:DatavaluedPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R06_finding> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R06_finding> ;
                 swrl:argument2 true ;
                 swrl:propertyPredicate scse:needsEvidenceReview ] ) .
 
@@ -120,16 +126,16 @@ scse:R07_ProposedProvisionNeedsProspectiveReview a swrl:Imp ;
     rdfs:label "R07_ProposedProvisionNeedsProspectiveReview"@en ;
     rdfs:comment "Proposed legal states trigger prospective review only; they are not current binding obligations."@en ;
     swrl:body ( [ a swrl:ClassAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R07_finding> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R07_finding> ;
                 swrl:classPredicate scse:ComplianceFinding ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R07_finding> ;
-                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R07_legalstate> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R07_finding> ;
+                swrl:argument2 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R07_legalstate> ;
                 swrl:propertyPredicate scse:groundedIn ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R07_legalstate> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R07_legalstate> ;
                 swrl:argument2 scse:ProposedStatus ;
-                swrl:propertyPredicate scse:hasLegalStatus ] ) ;
+                swrl:propertyPredicate scse:provisionStateHasStatus ] ) ;
     swrl:head ( [ a swrl:DatavaluedPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R07_finding> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R07_finding> ;
                 swrl:argument2 true ;
                 swrl:propertyPredicate scse:requiresProspectiveReview ] ) .
 
@@ -137,34 +143,34 @@ scse:R08_RoundProducesEventClaim a swrl:Imp ;
     rdfs:label "R08_RoundProducesEventClaim"@en ;
     rdfs:comment "Associate claims with recorded round events, not with human respondents."@en ;
     swrl:body ( [ a swrl:ClassAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R08_round> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R08_round> ;
                 swrl:classPredicate scse:DeliberationRound ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R08_round> ;
-                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R08_event> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R08_round> ;
+                swrl:argument2 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R08_event> ;
                 swrl:propertyPredicate scse:hasEvent ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R08_event> ;
-                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R08_claim> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R08_event> ;
+                swrl:argument2 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R08_claim> ;
                 swrl:propertyPredicate scse:eventClaim ] ) ;
     swrl:head ( [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R08_round> ;
-                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R08_claim> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R08_round> ;
+                swrl:argument2 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R08_claim> ;
                 swrl:propertyPredicate scse:produces ] ) .
 
 scse:R09_ProjectRegulation a swrl:Imp ;
     rdfs:label "R09_ProjectRegulation"@en ;
     rdfs:comment "Infer project references to regulatory snapshots through scenarios."@en ;
     swrl:body ( [ a swrl:ClassAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R09_project> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R09_project> ;
                 swrl:classPredicate scse:SimulationProject ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R09_project> ;
-                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R09_scenario> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R09_project> ;
+                swrl:argument2 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R09_scenario> ;
                 swrl:propertyPredicate scse:hasScenario ] [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R09_scenario> ;
-                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R09_regulation> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R09_scenario> ;
+                swrl:argument2 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R09_regulation> ;
                 swrl:propertyPredicate scse:usesRegulation ] ) ;
     swrl:head ( [ a swrl:IndividualPropertyAtom ;
-                swrl:argument1 <https://example.org/hrai-go/scse/swrl-var#R09_project> ;
-                swrl:argument2 <https://example.org/hrai-go/scse/swrl-var#R09_regulation> ;
+                swrl:argument1 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R09_project> ;
+                swrl:argument2 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R09_regulation> ;
                 swrl:propertyPredicate scse:projectUsesRegulation ] ) .
 
 scse:RegulatoryPolicyScenario a owl:Class ;
@@ -175,6 +181,17 @@ scse:RegulatoryPolicyScenario a owl:Class ;
             owl:onProperty scse:hasMode ],
         scse:ScenarioDefinition ;
     owl:disjointWith scse:SolutionComplianceScenario .
+
+scse:SyntheticStakeholderPerspective a owl:Class ;
+    rdfs:label "Synthetic stakeholder perspective"@en ;
+    rdfs:comment "Documented perspective voiced by a synthetic agent; never a real person or group. Home of the concept since RF-17."@en ;
+    owl:equivalentClass hrai:SyntheticStakeholderPerspective .
+
+scse:SyntheticStakeholderPosition a owl:Class ;
+    rdfs:label "Synthetic stakeholder position"@en ;
+    rdfs:comment "Position expressed by a synthetic perspective; never read as a stakeholder's actual view. Home of the concept since RF-17."@en ;
+    rdfs:subClassOf scse:StakeholderPosition ;
+    owl:equivalentClass hrai:SyntheticStakeholderPosition .
 
 scse:allowedActions a owl:DatatypeProperty ;
     rdfs:label "allowedActions"@en ;
@@ -218,12 +235,6 @@ scse:challenges a owl:ObjectProperty ;
     rdfs:comment "A claim that challenges another claim."@en ;
     rdfs:domain scse:ArgumentClaim ;
     rdfs:range scse:ArgumentClaim .
-
-scse:claimText a owl:DatatypeProperty ;
-    rdfs:label "claimText"@en ;
-    rdfs:comment "Proposition expressed by an agent."@en ;
-    rdfs:domain scse:ArgumentClaim ;
-    rdfs:range xsd:string .
 
 scse:conflictOfInterest a owl:DatatypeProperty ;
     rdfs:label "conflictOfInterest"@en ;
@@ -345,12 +356,6 @@ scse:gapAffectsStratum a owl:ObjectProperty ;
     rdfs:domain scse:CoverageGap ;
     rdfs:range scse:StakeholderStratum .
 
-scse:hasApplicableRequirement a owl:ObjectProperty ;
-    rdfs:label "hasApplicableRequirement"@en ;
-    rdfs:comment "Requirement evaluated by the finding."@en ;
-    rdfs:domain scse:ComplianceFinding ;
-    rdfs:range hrai:NormativeRequirement .
-
 scse:hasBranch a owl:ObjectProperty ;
     rdfs:label "hasBranch"@en ;
     rdfs:comment "An explicit counterfactual branch."@en ;
@@ -392,7 +397,7 @@ scse:hasException a owl:ObjectProperty ;
     rdfs:label "hasException"@en ;
     rdfs:comment "Records a possible legal exception (never silently assumed)."@en ;
     rdfs:domain scse:LegalProvisionState ;
-    rdfs:range scse:LegalException .
+    rdfs:range hrai:LegalException .
 
 scse:hasFinding a owl:ObjectProperty ;
     rdfs:label "hasFinding"@en ;
@@ -528,7 +533,7 @@ scse:nextAction a owl:DatatypeProperty ;
     rdfs:domain scse:CouncilReport ;
     rdfs:range xsd:string .
 
-scse:perspectiveGroundedIn a owl:ObjectProperty ;
+scse:positionGroundedInEvidence a owl:ObjectProperty ;
     rdfs:label "perspectiveGroundedIn"@en ;
     rdfs:comment "Grounding of a documented perspective in evidence."@en ;
     rdfs:domain scse:DocumentedPerspective ;
@@ -538,7 +543,7 @@ scse:proposesAlternative a owl:ObjectProperty ;
     rdfs:label "proposesAlternative"@en ;
     rdfs:comment "Links a claim to a proposed alternative."@en ;
     rdfs:domain scse:ArgumentClaim ;
-    rdfs:range scse:PolicyAlternative .
+    rdfs:range hrai:PolicyAlternative .
 
 scse:question a owl:DatatypeProperty ;
     rdfs:label "question"@en ;
@@ -568,7 +573,7 @@ scse:relatesToObjective a owl:ObjectProperty ;
     rdfs:label "relatesToObjective"@en ;
     rdfs:comment "Associates a tension with a public-policy objective."@en ;
     rdfs:domain scse:PolicyTension ;
-    rdfs:range scse:PolicyObjective .
+    rdfs:range hrai:PolicyObjective .
 
 scse:replicateIndex a owl:DatatypeProperty ;
     rdfs:label "replicateIndex"@en ;
@@ -772,39 +777,14 @@ ex:SampleReport a scse:CouncilReport ;
     scse:reportsRun ex:SampleRun ;
     scse:requiresHumanVerification true .
 
-hrai:hasApplicableRequirement a owl:ObjectProperty ;
-    rdfs:label "hasApplicableRequirement"@en ;
-    rdfs:comment "Requirement determined applicable to an assessment in a contextualized evaluation."@en ;
-    rdfs:domain hrai:ComplianceAssessment ;
-    rdfs:range hrai:NormativeRequirement .
-
-hrai:hasUnverifiedEvidence a owl:DatatypeProperty ;
-    rdfs:label "hasUnverifiedEvidence"@en ;
-    rdfs:comment "Explicit review flag on a known requirement; missing values are not interpreted as false."@en ;
-    rdfs:domain hrai:NormativeRequirement ;
-    rdfs:range xsd:boolean .
-
-hrai:requiresEvidenceReview a owl:DatatypeProperty ;
-    rdfs:label "requiresEvidenceReview"@en ;
-    rdfs:comment "Positive review-needed indicator inferred from known unverified evidence."@en ;
-    rdfs:domain hrai:ComplianceAssessment ;
-    rdfs:range xsd:boolean .
-
 scse:CoverageDimension a owl:Class ;
     rdfs:label "CoverageDimension"@en ;
     rdfs:comment "Dimension of perspective coverage such as role, impact exposure or territory."@en .
 
-scse:LegalException a owl:Class ;
-    rdfs:label "LegalException"@en ;
-    rdfs:comment "Expressly represented possible exception to a versioned legal provision."@en .
-
-scse:PolicyAlternative a owl:Class ;
-    rdfs:label "PolicyAlternative"@en ;
-    rdfs:comment "Candidate regulatory intervention or alternative policy design."@en .
-
-scse:PolicyObjective a owl:Class ;
-    rdfs:label "PolicyObjective"@en ;
-    rdfs:comment "Explicit regulatory or public-policy objective."@en .
+scse:StakeholderPosition a owl:Class ;
+    rdfs:label "Stakeholder position"@en ;
+    rdfs:comment "Position attributed to a stakeholder on a claim or alternative. Home of the concept since RF-17."@en ;
+    owl:equivalentClass hrai:StakeholderPosition .
 
 scse:assignedAgent a owl:ObjectProperty ;
     rdfs:label "assignedAgent"@en ;
@@ -836,6 +816,14 @@ scse:groundedIn a owl:ObjectProperty ;
     rdfs:domain scse:ComplianceFinding ;
     rdfs:range scse:LegalProvisionState .
 
+scse:hasApplicableRequirement a owl:ObjectProperty ;
+    rdfs:label "hasApplicableRequirement"@en ;
+    rdfs:comment "Requirement determined applicable to an assessment in a contextualized evaluation."@en,
+        "Requirement evaluated by the finding."@en ;
+    rdfs:domain hrai:ComplianceAssessment,
+        scse:ComplianceFinding ;
+    rdfs:range hrai:NormativeRequirement .
+
 scse:hasCharter a owl:ObjectProperty ;
     rdfs:label "hasCharter"@en ;
     rdfs:comment "Connects an agent to its bounded perspective charter."@en ;
@@ -861,13 +849,6 @@ scse:hasFindingStatus a owl:FunctionalProperty,
     rdfs:domain scse:ComplianceFinding ;
     rdfs:range scse:FindingStatus .
 
-scse:hasLegalStatus a owl:FunctionalProperty,
-        owl:ObjectProperty ;
-    rdfs:label "hasLegalStatus"@en ;
-    rdfs:comment "Legal status as evaluated for a dated source snapshot."@en ;
-    rdfs:domain scse:LegalProvisionState ;
-    rdfs:range scse:LegalStatus .
-
 scse:hasRound a owl:ObjectProperty ;
     rdfs:label "hasRound"@en ;
     rdfs:comment "Contains a recorded deliberation round."@en ;
@@ -886,6 +867,12 @@ scse:hasStratum a owl:ObjectProperty ;
     rdfs:domain scse:CouncilSeat ;
     rdfs:range scse:StakeholderStratum .
 
+scse:hasUnverifiedEvidence a owl:DatatypeProperty ;
+    rdfs:label "hasUnverifiedEvidence"@en ;
+    rdfs:comment "Explicit review flag on a known requirement; missing values are not interpreted as false."@en ;
+    rdfs:domain hrai:NormativeRequirement ;
+    rdfs:range xsd:boolean .
+
 scse:isGroundedIn a owl:ObjectProperty ;
     rdfs:label "isGroundedIn"@en ;
     rdfs:comment "Documentation grounding a perspective agent."@en ;
@@ -903,6 +890,19 @@ scse:projectUsesRegulation a owl:ObjectProperty ;
     rdfs:comment "Regulatory snapshot used by a project through a scenario."@en ;
     rdfs:domain scse:SimulationProject ;
     rdfs:range scse:RegulatorySnapshot .
+
+scse:provisionStateHasStatus a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "hasLegalStatus"@en ;
+    rdfs:comment "Legal status as evaluated for a dated source snapshot."@en ;
+    rdfs:domain scse:LegalProvisionState ;
+    rdfs:range hrai:LegalStatus .
+
+scse:requiresEvidenceReview a owl:DatatypeProperty ;
+    rdfs:label "requiresEvidenceReview"@en ;
+    rdfs:comment "Positive review-needed indicator inferred from known unverified evidence."@en ;
+    rdfs:domain hrai:ComplianceAssessment ;
+    rdfs:range xsd:boolean .
 
 scse:requiresProspectiveReview a owl:DatatypeProperty ;
     rdfs:label "requiresProspectiveReview"@en ;
@@ -923,7 +923,7 @@ scse:usesRegulation a owl:ObjectProperty ;
     rdfs:range scse:RegulatorySnapshot .
 
 ex:DemoAssessment a hrai:ComplianceAssessment ;
-    hrai:hasApplicableRequirement ex:DemoRequirement ;
+    scse:hasApplicableRequirement ex:DemoRequirement ;
     scse:hasFinding ex:DemoFinding .
 
 ex:HypotheticalProvision a hrai:LegalProvision .
@@ -985,10 +985,6 @@ ex:WorkerRightsSeat a scse:CouncilSeat ;
 
 ex:WorkerRightsStratum a scse:StakeholderStratum .
 
-hrai:LegalProvision a owl:Class ;
-    rdfs:label "LegalProvision"@en ;
-    rdfs:comment "Identifiable source legal provision, independent of its versioned state."@en .
-
 scse:CompliantEvidencedStatus a owl:NamedIndividual,
         scse:FindingStatus ;
     rdfs:label "CompliantEvidencedStatus"@en ;
@@ -1003,12 +999,12 @@ scse:DocumentedPerspective a owl:Class ;
     rdfs:comment "Evidence-attributed position, not a fabricated claim of stakeholder identity."@en .
 
 scse:EffectiveStatus a owl:NamedIndividual,
-        scse:LegalStatus ;
+        hrai:LegalStatus ;
     rdfs:label "EffectiveStatus"@en ;
     rdfs:comment "Currently effective for a scope and date"@en .
 
 scse:EnactedNotEffectiveStatus a owl:NamedIndividual,
-        scse:LegalStatus ;
+        hrai:LegalStatus ;
     rdfs:label "EnactedNotEffectiveStatus"@en ;
     rdfs:comment "Enacted but not yet effective"@en .
 
@@ -1053,7 +1049,7 @@ scse:RejectedReview a owl:NamedIndividual,
     rdfs:comment "Rejected by reviewer"@en .
 
 scse:RepealedStatus a owl:NamedIndividual,
-        scse:LegalStatus ;
+        hrai:LegalStatus ;
     rdfs:label "RepealedStatus"@en ;
     rdfs:comment "Repealed"@en .
 
@@ -1080,12 +1076,12 @@ scse:SolutionComplianceScenario a owl:Class ;
         scse:ScenarioDefinition .
 
 scse:SupersededStatus a owl:NamedIndividual,
-        scse:LegalStatus ;
+        hrai:LegalStatus ;
     rdfs:label "SupersededStatus"@en ;
     rdfs:comment "Replaced by a successor"@en .
 
 scse:SuspendedStatus a owl:NamedIndividual,
-        scse:LegalStatus ;
+        hrai:LegalStatus ;
     rdfs:label "SuspendedStatus"@en ;
     rdfs:comment "Temporarily suspended"@en .
 
@@ -1095,7 +1091,7 @@ scse:UnknownClaimClass a owl:NamedIndividual,
     rdfs:comment "Unclassified claim"@en .
 
 scse:UnknownLegalStatus a owl:NamedIndividual,
-        scse:LegalStatus ;
+        hrai:LegalStatus ;
     rdfs:label "UnknownLegalStatus"@en ;
     rdfs:comment "Status not sufficiently verified"@en .
 
@@ -1139,13 +1135,13 @@ ex:DemoFinding a scse:ComplianceFinding ;
     scse:reviewedByHuman false .
 
 ex:DemoRequirement a hrai:NormativeRequirement ;
-    hrai:hasUnverifiedEvidence true .
+    scse:hasUnverifiedEvidence true .
 
 ex:DraftProvisionState a scse:LegalProvisionState ;
     scse:describesProvision ex:HypotheticalProvision ;
-    scse:hasLegalStatus scse:ProposedStatus ;
     scse:hasReviewState scse:PendingReview ;
     scse:hasSource ex:HypotheticalSource ;
+    scse:provisionStateHasStatus scse:ProposedStatus ;
     scse:recordedAt "2026-11-11T12:00:00+00:00"^^xsd:dateTime .
 
 ex:IllustrativeRegulatorySnapshot a scse:RegulatorySnapshot ;
@@ -1153,7 +1149,7 @@ ex:IllustrativeRegulatorySnapshot a scse:RegulatorySnapshot ;
     scse:snapshotJurisdiction ex:Brazil .
 
 ex:SampleClaim a scse:ArgumentClaim ;
-    scse:claimText "A synthetic stakeholder perspective suggests documenting routes for appeal." ;
+    hrai:claimText "A synthetic stakeholder perspective suggests documenting routes for appeal." ;
     scse:hasClaimClassification scse:SyntheticPerspective ;
     scse:supportedBy ex:SyntheticEvidence .
 
@@ -1173,33 +1169,33 @@ ex:SampleRecruitmentScenario a scse:SolutionComplianceScenario ;
     scse:usesContext ex:BrazilContextSnapshot ;
     scse:usesRegulation ex:IllustrativeRegulatorySnapshot .
 
-<https://example.org/hrai-go/scse/swrl-var#R01_agent> a swrl:Variable .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R01_agent> a swrl:Variable .
 
-<https://example.org/hrai-go/scse/swrl-var#R01_seat> a swrl:Variable .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R01_seat> a swrl:Variable .
 
-<https://example.org/hrai-go/scse/swrl-var#R02_seat> a swrl:Variable .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R02_seat> a swrl:Variable .
 
-<https://example.org/hrai-go/scse/swrl-var#R02_stratum> a swrl:Variable .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R02_stratum> a swrl:Variable .
 
-<https://example.org/hrai-go/scse/swrl-var#R03_charter> a swrl:Variable .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R03_charter> a swrl:Variable .
 
-<https://example.org/hrai-go/scse/swrl-var#R03_evidence> a swrl:Variable .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R03_evidence> a swrl:Variable .
 
-<https://example.org/hrai-go/scse/swrl-var#R04_claim> a swrl:Variable .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R04_claim> a swrl:Variable .
 
-<https://example.org/hrai-go/scse/swrl-var#R04_round> a swrl:Variable .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R04_round> a swrl:Variable .
 
-<https://example.org/hrai-go/scse/swrl-var#R05_requirement> a swrl:Variable .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R05_requirement> a swrl:Variable .
 
-<https://example.org/hrai-go/scse/swrl-var#R07_legalstate> a swrl:Variable .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R07_legalstate> a swrl:Variable .
 
-<https://example.org/hrai-go/scse/swrl-var#R08_claim> a swrl:Variable .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R08_claim> a swrl:Variable .
 
-<https://example.org/hrai-go/scse/swrl-var#R08_event> a swrl:Variable .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R08_event> a swrl:Variable .
 
-<https://example.org/hrai-go/scse/swrl-var#R09_regulation> a swrl:Variable .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R09_regulation> a swrl:Variable .
 
-<https://example.org/hrai-go/scse/swrl-var#R09_scenario> a swrl:Variable .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R09_scenario> a swrl:Variable .
 
 scse:MinorityOpinion a owl:Class ;
     rdfs:label "MinorityOpinion"@en ;
@@ -1236,27 +1232,23 @@ ex:SyntheticEvidence a scse:EvidenceRecord ;
     scse:evidenceText "Synthetic placeholder evidence; must be replaced with verifiable publications before real use." ;
     scse:sourceEvidence ex:SyntheticPerspectiveSource .
 
-<https://example.org/hrai-go/scse/swrl-var#R01_council> a swrl:Variable .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R01_council> a swrl:Variable .
 
-<https://example.org/hrai-go/scse/swrl-var#R02_council> a swrl:Variable .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R02_council> a swrl:Variable .
 
-<https://example.org/hrai-go/scse/swrl-var#R03_agent> a swrl:Variable .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R03_agent> a swrl:Variable .
 
-<https://example.org/hrai-go/scse/swrl-var#R04_run> a swrl:Variable .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R04_run> a swrl:Variable .
 
-<https://example.org/hrai-go/scse/swrl-var#R05_assessment> a swrl:Variable .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R05_assessment> a swrl:Variable .
 
-<https://example.org/hrai-go/scse/swrl-var#R06_finding> a swrl:Variable .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R06_finding> a swrl:Variable .
 
-<https://example.org/hrai-go/scse/swrl-var#R07_finding> a swrl:Variable .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R07_finding> a swrl:Variable .
 
-<https://example.org/hrai-go/scse/swrl-var#R08_round> a swrl:Variable .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R08_round> a swrl:Variable .
 
-<https://example.org/hrai-go/scse/swrl-var#R09_project> a swrl:Variable .
-
-hrai:NormativeRequirement a owl:Class ;
-    rdfs:label "NormativeRequirement"@en ;
-    rdfs:comment "Normative requirement interpreted from legal provisions and assessed in a specified context."@en .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R09_project> a swrl:Variable .
 
 scse:InsufficientEvidenceStatus a owl:NamedIndividual,
         scse:FindingStatus ;
@@ -1274,10 +1266,11 @@ scse:PendingSourceVerification a owl:NamedIndividual,
 
 scse:PolicyTension a owl:Class ;
     rdfs:label "PolicyTension"@en ;
-    rdfs:comment "Claimed conflict or trade-off among policy objectives requiring examination."@en .
+    rdfs:comment "Claimed conflict or trade-off among policy objectives requiring examination."@en ;
+    rdfs:subClassOf hrai:RegulatoryTension .
 
 scse:ProposedStatus a owl:NamedIndividual,
-        scse:LegalStatus ;
+        hrai:LegalStatus ;
     rdfs:label "ProposedStatus"@en ;
     rdfs:comment "Unenacted proposal only"@en .
 
@@ -1300,10 +1293,6 @@ scse:SourceVerificationStatus a owl:Class ;
     rdfs:comment "Controlled status of provenance/source verification."@en ;
     owl:oneOf ( scse:VerifiedSource scse:PendingSourceVerification scse:FailedSourceVerification ) .
 
-hrai:Jurisdiction a owl:Class ;
-    rdfs:label "Jurisdiction"@en ;
-    rdfs:comment "Territorial jurisdiction governing applicability of legal provisions."@en .
-
 scse:DeliberationEvent a owl:Class ;
     rdfs:label "DeliberationEvent"@en ;
     rdfs:comment "Auditable action within a deliberation round linked to claims and execution."@en .
@@ -1323,10 +1312,6 @@ scse:StakeholderStratum a owl:Class ;
 scse:WorldSnapshot a owl:Class ;
     rdfs:label "WorldSnapshot"@en ;
     rdfs:comment "Frozen simulation world state containing legal, national and application inputs."@en .
-
-hrai:ComplianceAssessment a owl:Class ;
-    rdfs:label "ComplianceAssessment"@en ;
-    rdfs:comment "Evidence-bounded assessment concerning applicability and satisfaction of requirements."@en .
 
 scse:ClaimClassification a owl:Class ;
     rdfs:label "ClaimClassification"@en ;
@@ -1357,11 +1342,6 @@ scse:FindingStatus a owl:Class ;
     rdfs:comment "Controlled evidence-bounded status for a compliance finding."@en ;
     owl:oneOf ( scse:CompliantEvidencedStatus scse:NoncompliantEvidencedStatus scse:InsufficientEvidenceStatus scse:NotApplicableStatus scse:RequiresLegalReviewStatus scse:FutureObligationStatus scse:ProposalOnlyStatus ) .
 
-scse:LegalStatus a owl:Class ;
-    rdfs:label "LegalStatus"@en ;
-    rdfs:comment "Controlled legal-status value for a specific provision state at a given time."@en ;
-    owl:oneOf ( scse:ProposedStatus scse:EnactedNotEffectiveStatus scse:EffectiveStatus scse:SuspendedStatus scse:RepealedStatus scse:SupersededStatus scse:UnknownLegalStatus ) .
-
 scse:PerspectiveAgent a owl:Class ;
     rdfs:label "PerspectiveAgent"@en ;
     rdfs:comment "Artificial agent whose bounded simulated perspective is linked to a charter and sources."@en ;
@@ -1383,12 +1363,18 @@ scse:SolutionArtifact a owl:Class ;
 scse:EvidenceRecord a owl:Class ;
     rdfs:label "EvidenceRecord"@en ;
     rdfs:comment "Citable record with provenance, verification status and version metadata."@en ;
-    rdfs:subClassOf prov:Entity .
+    rdfs:subClassOf prov:Entity,
+        hrai:Evidence .
 
 scse:SimulationRun a owl:Class ;
     rdfs:label "SimulationRun"@en ;
     rdfs:comment "One execution with configuration, random seed, replay data and immutable inputs."@en ;
     rdfs:subClassOf prov:Activity .
+
+scse:ArgumentClaim a owl:Class ;
+    rdfs:label "ArgumentClaim"@en ;
+    rdfs:comment "Proposition open to support, challenge, withdrawal and evidence review."@en ;
+    rdfs:subClassOf hrai:PolicyClaim .
 
 scse:ComplianceFinding a owl:Class ;
     rdfs:label "ComplianceFinding"@en ;
@@ -1402,10 +1388,6 @@ scse:LegalProvisionState a owl:Class ;
 scse:PerspectiveCharter a owl:Class ;
     rdfs:label "PerspectiveCharter"@en ;
     rdfs:comment "Explicit constraints, documented positions, blind spots and permitted actions of a perspective agent."@en .
-
-scse:ArgumentClaim a owl:Class ;
-    rdfs:label "ArgumentClaim"@en ;
-    rdfs:comment "Proposition open to support, challenge, withdrawal and evidence review."@en .
 
 scse:ScenarioDefinition a owl:Class ;
     rdfs:label "ScenarioDefinition"@en ;
@@ -1428,4 +1410,7 @@ scse:ScenarioDefinition a owl:Class ;
 
 [] a owl:AllDifferent ;
     owl:distinctMembers ( scse:RegulatoryPolicyMode scse:SolutionComplianceMode ) .
+
+[] rdf:first scse:ProposedStatus ;
+    rdf:rest ( scse:EnactedNotEffectiveStatus scse:EffectiveStatus scse:SuspendedStatus scse:RepealedStatus scse:SupersededStatus scse:UnknownLegalStatus ) .
 
