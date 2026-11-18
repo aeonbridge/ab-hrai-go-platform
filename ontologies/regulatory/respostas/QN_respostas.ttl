@@ -135,7 +135,7 @@ resp:Q2_AvaliacaoImpactoSemProfissionais a hrai:PolicyClaim ;
 
 resp:Q2_SupervisaoSemOrcamento a hrai:PolicyClaim ;
     rdfs:label "A supervisão, a fiscalização e a acreditação pela autoridade competente (arts. 34 e 49) pressupõem orçamento que o Eixo 5 do PBIA não prevê em escala"@pt ;
-    hrai:answerScope "texto do Senado de 2024 e Tabela 2 do PBIA; sem limiar aprovado (D-09)"@pt ;
+    hrai:answerScope "texto do Senado de 2024 e Tabela 2 do PBIA; limiar aprovado pelo autor: 5% do plano (D-09), e o Eixo 5 tem 0,45%"@pt ;
     hrai:answersGuidingQuestion "QN2" ;
     hrai:claimSupportedByEvidence resp:Ev_Q2_SupervisaoSemOrcamento ;
     hrai:groundedInSpecificity resp:S4_OrcamentoGovernanca,

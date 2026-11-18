@@ -35,8 +35,19 @@ def test_governance_budget_share_matches_the_pbia_table():
 
 
 def test_no_threshold_is_set_by_the_session():
-    """Thresholds are normative (decision D-09): without one, R25 flags nothing and PC3 says so."""
+    """Thresholds are normative: the session sets none in the instances; the author's comes from decisoes (D-09)."""
     g = instances()
     assert not list(g.subject_objects(H.hasLowerAlertThreshold))
     reqs = list(g.subjects(H.requirementAssumesCapacity, None))
     assert len(set(reqs)) == 3 and all(g.value(r, H.derivedFromProvision) is not None for r in reqs)
+
+
+def test_author_threshold_flags_the_budget_dependent_requirements():
+    import sys
+    sys.path.insert(0, str(ROOT / "scripts/ontologia"))
+    import consultas
+    g = consultas.reasoned_graph()
+    assert float(g.value(CAP.Ind_GovernanceBudgetShare, H.hasLowerAlertThreshold)) == 5.0
+    assert (CAP.Ind_GovernanceBudgetShare, RDF.type, H.CapacityShortfallIndicator) in g
+    flagged = set(g.subjects(H.requirementHasCapacityRisk, CAP.Ind_GovernanceBudgetShare))
+    assert flagged == {CAP.Req_CompetentAuthoritySupervision, CAP.Req_ConformityAccreditation}

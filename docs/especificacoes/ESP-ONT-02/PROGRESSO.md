@@ -277,6 +277,17 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
 - **D-05 (domínio dos IRIs: aeonbridge.io)**: decisão registrada. Implementar exige escolher o caminho dos IRIs e apontar
   um endereço do domínio para a publicação (DNS fora do repositório); pendente de confirmação dos detalhes (D-05a).
 
+### Decisões D-09 e D-05a registradas — 17/11/2026
+
+- **D-09 (limiar)**: alerta quando o orçamento de governança e apoio regulatório (Eixo 5) fica abaixo de **5% do plano**;
+  hoje é 0,45%. O valor entra pelo registro de decisões (não pela sessão). R25 passa a sinalizar o indicador e os
+  requisitos dos arts. 34 e 49 do texto do Senado; a PC3 mostra "abaixo do limiar"; o item da QN2 sobre supervisão
+  cita o limiar aprovado. Profissionais técnicos continuam sem limiar.
+- **D-05a (caminho dos IRIs)**: subdomínio `hrai-go.aeonbridge.io`. Próximo passo técnico: com o CNAME
+  `hrai-go.aeonbridge.io → aeonbridge.github.io` criado no DNS, trocar os namespaces `github.com/.../ontology/*` e
+  `.../data/*` pelo subdomínio e publicar páginas de resolução por IRI. Sem o DNS, ativar o domínio no GitHub Pages
+  derrubaria o site atual, por isso fica aguardando o apontamento.
+
 ## Aguardando decisão
 
 | Id | Decisão | Quem | Bloqueia |
@@ -286,10 +297,10 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
 | D-03 | ~~extrações e correspondências revisadas~~ **resolvida em 17/11/2026** (`decisoes.json`) | autor | — |
 | D-04 | ~~alinhamentos e ligações aprovados~~ **resolvida em 17/11/2026** (`decisoes.json`) | autor | — |
 | D-05 | ~~domínio dos IRIs~~ **resolvida em 17/11/2026: aeonbridge.io** | autor | — |
-| D-05a | Detalhes da D-05: caminho dos IRIs (por exemplo `https://aeonbridge.io/hrai-go/ontology/regulatory#`) e apontamento do domínio para a publicação | autor | V-24 |
+| D-05a | Caminho decidido: `hrai-go.aeonbridge.io`. Falta criar o CNAME `hrai-go.aeonbridge.io → aeonbridge.github.io` no DNS | autor | V-24 |
 | D-07 | ~~sementes~~ **resolvida em 17/11/2026** (`decisoes.json`) | autor | — |
 | D-08 | Conferir a localização do parágrafo sobre micro e pequenas empresas e startups no texto de 2023 (art. 32 na extração; art. 33 no rótulo da evidência) | autor | rótulo de `a1:Ev_PL_Art33PU` |
-| D-09 | Limiar inferior de alerta para o orçamento de governança (hoje 0,45% do PBIA) e para profissionais técnicos; sem limiar, R25 não sinaliza | autor | PC3 "abaixo do limiar" |
+| D-09 | ~~limiar~~ **resolvida em 17/11/2026: 5% do plano** (`decisoes.json`) | autor | — |
 | D-10 | Declarar os escopos de avaliação de cobertura (`CoverageAssessment`: jurisdição, snapshot, área) para a PC4 valer | autor | PC4, QN3 |
 | D-11 | Decidir cada item da resposta inicial (8 especificidades da QN1, 2 itens da QN2, 2 da QN3, 1 achado) em `docs/relatorios/perguntas-norteadoras/relatorio-QN.md` | autor | V-26, V-29 |
 | D-12 | Incluir textos oficiais chineses (CAC, Assembleia Popular Nacional) para substituir as fontes secundárias | autor | comparações com a China "não codificado" |
@@ -324,7 +335,7 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | V-21 | ⬜ | item 14 |
 | V-22 | ⬜ | item 14 |
 | V-23 | ✅ | texto do Senado como nova versão reabre dispositivos, requisitos e afirmações (`tests/test_monitoramento.py`); codificações e especificidades entram na mesma consulta quando existirem |
-| V-24 | ⏸ | domínio decidido (aeonbridge.io, D-05); falta caminho e apontamento (D-05a) |
+| V-24 | ⏸ | domínio e caminho decididos (`hrai-go.aeonbridge.io`); falta o CNAME no DNS, depois a troca dos namespaces |
 | V-25 | ⬜ | item 15 |
 | V-26 | 🟡 | relatório gerado pela plataforma (`relatorio-QN.md`), seções QN1, QN2, QN3; "publicado" depende das decisões (D-11) |
 | V-27 | ✅ | PC9 responde; `V27_especificidades_sem_evidencia.rq` = 0 |

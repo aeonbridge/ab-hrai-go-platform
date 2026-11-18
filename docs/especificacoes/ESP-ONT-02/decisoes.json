@@ -76,6 +76,29 @@
       "decisao": "Os IRIs resolvíveis (RNF-01) usarão o domínio aeonbridge.io.",
       "lotes": [],
       "correspondencias": false
+    },
+    {
+      "id": "D-09",
+      "data": "2026-11-17T22:41:00-03:00",
+      "mensagem": "D-09-ok; limiar escolhido: '5% do plano'",
+      "decisao": "Limiar inferior de alerta para o orçamento de governança e apoio regulatório (Eixo 5 do PBIA): 5% do plano. Sem limiar para profissionais técnicos por enquanto.",
+      "lotes": [],
+      "correspondencias": false,
+      "valores": [
+        {
+          "sujeito": "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Ind_GovernanceBudgetShare",
+          "propriedade": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#hasLowerAlertThreshold",
+          "valor": "5.0"
+        }
+      ]
+    },
+    {
+      "id": "D-05a",
+      "data": "2026-11-17T22:41:00-03:00",
+      "mensagem": "D-05a: 'hrai-go.aeonbridge.io'",
+      "decisao": "IRIs resolvíveis no subdomínio hrai-go.aeonbridge.io (registro CNAME para a publicação).",
+      "lotes": [],
+      "correspondencias": false
     }
   ]
 }

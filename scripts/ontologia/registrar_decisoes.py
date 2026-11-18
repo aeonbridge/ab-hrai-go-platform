@@ -60,6 +60,9 @@ def build() -> rdflib.Graph:
         g.add((x, H.approvalRecordedAt, Literal(d["data"], datatype=XSD.dateTime)))
         g.add((x, H.approvedReason, Literal(f"Mensagem do autor: \"{d['mensagem']}\"")))
         g.add((x, PROV.wasAttributedTo, author))
+        for v in d.get("valores", []):   # values the author set (for example an alert threshold)
+            g.add((URIRef(v["sujeito"]), URIRef(v["propriedade"]), Literal(v["valor"], datatype=XSD.decimal)))
+            g.add((URIRef(v["sujeito"]), rdflib.namespace.DCTERMS.isReferencedBy, x))
         for target in d.get("aprovados", []):   # individuals approved directly (alignments, links)
             g.add((URIRef(target), rdflib.namespace.DCTERMS.isReferencedBy, x))
         for batch in d.get("lotes", []):

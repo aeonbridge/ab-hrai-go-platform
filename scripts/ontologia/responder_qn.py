@@ -97,7 +97,7 @@ ITEMS = [
     ("Q2_SupervisaoSemOrcamento", "QN2",
      "A supervisão, a fiscalização e a acreditação pela autoridade competente (arts. 34 e 49) pressupõem orçamento que o Eixo 5 do PBIA não prevê em escala",
      ["S4_OrcamentoGovernanca", "S7_SupervisaoPorSistema"], [CAP.Req_CompetentAuthoritySupervision, CAP.Req_ConformityAccreditation],
-     "texto do Senado de 2024 e Tabela 2 do PBIA; sem limiar aprovado (D-09)"),
+     "texto do Senado de 2024 e Tabela 2 do PBIA; limiar aprovado pelo autor: 5% do plano (D-09), e o Eixo 5 tem 0,45%"),
     ("Q3_DadosSUSTreinamento", "QN3",
      "Uso de dados públicos sensíveis, como os do SUS, para treinar modelos: o texto do Senado não tem regra específica; a escala desses dados pede salvaguarda própria",
      ["S6_DadosSaudeSUS"], [CAP.Exp_HealthDataSUS],

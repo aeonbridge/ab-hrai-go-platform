@@ -21,6 +21,9 @@
 
 <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Candidate_Requisitos> hrai:hasReviewDecision dec:D_03 .
 
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Ind_GovernanceBudgetShare> dcterms:isReferencedBy dec:D_09 ;
+    hrai:hasLowerAlertThreshold 5.0 .
+
 <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338#Candidate_2023> hrai:hasReviewDecision dec:D_03 .
 
 <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338#Candidate_2024> hrai:hasReviewDecision dec:D_03 .
@@ -193,6 +196,13 @@ dec:D_05 a hrai:ApprovalDecision ;
     hrai:approvedReason "Mensagem do autor: \"D-05 aeonbridge.io (antes: 'd05 w3id.org', 'd05 aeonbridge.io')\"" ;
     hrai:reviewDecisionBy dec:Autor .
 
+dec:D_05a a hrai:ApprovalDecision ;
+    rdfs:label "D-05a: IRIs resolvíveis no subdomínio hrai-go.aeonbridge.io (registro CNAME para a publicação)."@pt ;
+    prov:wasAttributedTo dec:Autor ;
+    hrai:approvalRecordedAt "2026-11-17T22:41:00-03:00"^^xsd:dateTime ;
+    hrai:approvedReason "Mensagem do autor: \"D-05a: 'hrai-go.aeonbridge.io'\"" ;
+    hrai:reviewDecisionBy dec:Autor .
+
 <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/eu/aiact#Candidate_AIAct_2024> hrai:hasReviewDecision dec:D_03 .
 
 <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Candidate_Principio_1> hrai:hasReviewDecision dec:D_03 .
@@ -237,8 +247,12 @@ dec:D_05 a hrai:ApprovalDecision ;
 
 <https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T6> dcterms:isReferencedBy dec:D_04 .
 
-dec:Autor a hrai:ReviewActor ;
-    rdfs:label "Jefferson Wellington da Cunha (autor do trabalho)"@pt .
+dec:D_09 a hrai:ApprovalDecision ;
+    rdfs:label "D-09: Limiar inferior de alerta para o orçamento de governança e apoio regulatório (Eixo 5 do PBIA): 5% do plano. Sem limiar para profissionais técnicos por enquanto."@pt ;
+    prov:wasAttributedTo dec:Autor ;
+    hrai:approvalRecordedAt "2026-11-17T22:41:00-03:00"^^xsd:dateTime ;
+    hrai:approvedReason "Mensagem do autor: \"D-09-ok; limiar escolhido: '5% do plano'\"" ;
+    hrai:reviewDecisionBy dec:Autor .
 
 dec:D_04 a hrai:ApprovalDecision ;
     rdfs:label "D-04: Aprovar o alinhamento A1 (os 5 componentes próximos GM-15, GM-17, GM-19, GM-20 e GM-22 ficam como correspondência aproximada), as ligações das tensões-semente T1 a T6 às afirmações e as ligações dos ramos de cenário ao PL 2338 e ao PBIA."@pt ;
@@ -246,6 +260,9 @@ dec:D_04 a hrai:ApprovalDecision ;
     hrai:approvalRecordedAt "2026-11-17T22:36:00-03:00"^^xsd:dateTime ;
     hrai:approvedReason "Mensagem do autor: \"D-04 ij (confirmado pelo autor: 'Sim, aprovado')\"" ;
     hrai:reviewDecisionBy dec:Autor .
+
+dec:Autor a hrai:ReviewActor ;
+    rdfs:label "Jefferson Wellington da Cunha (autor do trabalho)"@pt .
 
 dec:D_07 a hrai:ApprovalDecision ;
     rdfs:label "D-07: Aprovar as sementes do cenário GOV-BR-001 (22 componentes e 14 traços de contexto derivados dos documentos-semente), revisadas pelo autor."@pt ;

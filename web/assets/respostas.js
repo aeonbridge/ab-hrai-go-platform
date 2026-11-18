@@ -317,7 +317,7 @@ window.HRAIGO_RESPOSTAS = {
     "Supervisão, fiscalização e sanção pela autoridade competente (art. 49)"
    ],
    "decisao": "pendente",
-   "escopo": "texto do Senado de 2024 e Tabela 2 do PBIA; sem limiar aprovado (D-09)",
+   "escopo": "texto do Senado de 2024 e Tabela 2 do PBIA; limiar aprovado pelo autor: 5% do plano (D-09), e o Eixo 5 tem 0,45%",
    "especificidades": [
     "Orçamento de governança pequeno: 0,45% do PBIA (R$ 103,25 milhões de R$ 23,03 bilhões) no Eixo 5",
     "Supervisão por um sistema que coordena reguladores existentes (SIA, coordenado pela ANPD), com orçamento de governança pequeno"
