@@ -1,0 +1,12 @@
+# V-30: especificidade sem dimensão, sem tipo de diferença ou sem comparação com cada uma das demais jurisdições
+# que têm instrumento no corpus (UE, Reino Unido, EUA). Aceite: zero linhas.
+PREFIX hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#>
+SELECT ?s ?falta WHERE {
+  ?s a hrai:NationalSpecificity .
+  { FILTER NOT EXISTS { ?s hrai:specificityDimension ?d } BIND("dimensão" AS ?falta) }
+  UNION { FILTER NOT EXISTS { ?s hrai:differenceType ?t } BIND("tipo" AS ?falta) }
+  UNION { ?j a hrai:Jurisdiction . ?inst hrai:instrumentInJurisdiction|hrai:policyInstrumentInJurisdiction ?j .
+          FILTER (!STRENDS(STR(?j), "#Brazil"))
+          FILTER NOT EXISTS { ?s hrai:specificityComparison ?c . ?c hrai:comparisonJurisdiction ?j }
+          BIND(CONCAT("comparação com ", STR(?j)) AS ?falta) }
+}

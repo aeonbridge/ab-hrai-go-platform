@@ -1,0 +1,369 @@
+# Gerado por scripts/ontologia/responder_qn.py. Não editar à mão. Candidato pendente de decisão humana.
+@prefix cap: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#> .
+@prefix cor: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pbia: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#> .
+@prefix pl: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix resp: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/respostas#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+cor:Corr_BR045_EU070 hrai:groundedInSpecificity resp:S7_SupervisaoPorSistema .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/respostas> a owl:Ontology ;
+    rdfs:label "Resposta inicial às perguntas norteadoras QN1, QN2 e QN3 (candidata)"@pt ;
+    rdfs:comment "Gerado por scripts/ontologia/responder_qn.py. Detecção feita pela sessão do loop sobre o grafo (análise assistida por LLM), por falta de codificações aprovadas (D-02). Tudo pendente de decisão humana."@pt .
+
+resp:A_EnergiaNoTextoDoSenado a hrai:PolicyClaim ;
+    rdfs:label "A lacuna 'Energia e meio ambiente' da cúpula vem do modelo-semente; o texto do Senado trata o tema: eficiência energética de IA de propósito geral (art. 30), data centers sustentáveis (art. 59), uso eficiente de recursos (art. 60) e certificação ambiental com o Ministério do Meio Ambiente (art. 61)"@pt ;
+    hrai:answerScope "modelo da câmara (documento-semente) frente ao texto do Senado de 2024; corrigir o modelo na revisão das sementes (D-07)"@pt ;
+    hrai:answersGuidingQuestion "achado" ;
+    hrai:claimSupportedByEvidence resp:Ev_A_EnergiaNoTextoDoSenado .
+
+resp:Lote_Respostas a hrai:ExtractionBatch ;
+    rdfs:label "Lote: resposta inicial às perguntas norteadoras"@pt ;
+    hrai:extractionContainsCandidate resp:Candidate_Q2_AvaliacaoImpactoSemProfissionais,
+        resp:Candidate_Q2_SupervisaoSemOrcamento,
+        resp:Candidate_Q3_AutoridadeComOrcamentoProprio,
+        resp:Candidate_Q3_DadosSUSTreinamento,
+        resp:Candidate_S1_SoberaniaComputacional,
+        resp:Candidate_S2_LinguaPortuguesa,
+        resp:Candidate_S3_MatrizRenovavel,
+        resp:Candidate_S4_OrcamentoGovernanca,
+        resp:Candidate_S5_ProfissionaisTIC,
+        resp:Candidate_S6_DadosSaudeSUS,
+        resp:Candidate_S7_SupervisaoPorSistema,
+        resp:Candidate_S8_ResponsabilidadeCivil .
+
+cor:Corr_BR025_EU027 hrai:groundedInSpecificity resp:S5_ProfissionaisTIC .
+
+resp:Candidate_Q2_AvaliacaoImpactoSemProfissionais a hrai:CandidateAssertion ;
+    rdfs:label "Candidato QN2: A avaliação de impacto algorítmico obrigatória (art. 25 do texto do Senado, adaptada do art. 27 do AI Act) pressupõe profissionais técnicos que o déficit estimado de TIC indica faltar"@pt ;
+    dcterms:subject resp:Q2_AvaliacaoImpactoSemProfissionais ;
+    hrai:candidateProducedBy resp:SessaoLoop .
+
+resp:Candidate_Q2_SupervisaoSemOrcamento a hrai:CandidateAssertion ;
+    rdfs:label "Candidato QN2: A supervisão, a fiscalização e a acreditação pela autoridade competente (arts. 34 e 49) pressupõem orçamento que o Eixo 5 do PBIA não prevê em escala"@pt ;
+    dcterms:subject resp:Q2_SupervisaoSemOrcamento ;
+    hrai:candidateProducedBy resp:SessaoLoop .
+
+resp:Candidate_Q3_AutoridadeComOrcamentoProprio a hrai:CandidateAssertion ;
+    rdfs:label "Candidato QN3: Fonte de financiamento própria e estável para o sistema de supervisão (SIA): o texto do Senado cria o sistema, mas nenhum artigo vincula orçamento a ele"@pt ;
+    dcterms:subject resp:Q3_AutoridadeComOrcamentoProprio ;
+    hrai:candidateProducedBy resp:SessaoLoop .
+
+resp:Candidate_Q3_DadosSUSTreinamento a hrai:CandidateAssertion ;
+    rdfs:label "Candidato QN3: Uso de dados públicos sensíveis, como os do SUS, para treinar modelos: o texto do Senado não tem regra específica; a escala desses dados pede salvaguarda própria"@pt ;
+    dcterms:subject resp:Q3_DadosSUSTreinamento ;
+    hrai:candidateProducedBy resp:SessaoLoop .
+
+resp:Candidate_S1_SoberaniaComputacional a hrai:CandidateAssertion ;
+    rdfs:label "Candidato QN1: Soberania computacional com orçamento público: Nuvem Soberana (R$ 1 bilhão) e supercomputador de IA no PBIA"@pt ;
+    dcterms:subject resp:S1_SoberaniaComputacional ;
+    hrai:candidateProducedBy resp:SessaoLoop .
+
+resp:Candidate_S2_LinguaPortuguesa a hrai:CandidateAssertion ;
+    rdfs:label "Candidato QN1: Modelos de linguagem em português com dados nacionais, para o português do Brasil em escala continental"@pt ;
+    dcterms:subject resp:S2_LinguaPortuguesa ;
+    hrai:candidateProducedBy resp:SessaoLoop .
+
+resp:Candidate_S3_MatrizRenovavel a hrai:CandidateAssertion ;
+    rdfs:label "Candidato QN1: Matriz elétrica majoritariamente renovável: 89,2% em 2023, segundo o PBIA (citando a EPE)"@pt ;
+    dcterms:subject resp:S3_MatrizRenovavel ;
+    hrai:candidateProducedBy resp:SessaoLoop .
+
+resp:Candidate_S4_OrcamentoGovernanca a hrai:CandidateAssertion ;
+    rdfs:label "Candidato QN1: Orçamento de governança pequeno: 0,45% do PBIA (R$ 103,25 milhões de R$ 23,03 bilhões) no Eixo 5"@pt ;
+    dcterms:subject resp:S4_OrcamentoGovernanca ;
+    hrai:candidateProducedBy resp:SessaoLoop .
+
+resp:Candidate_S5_ProfissionaisTIC a hrai:CandidateAssertion ;
+    rdfs:label "Candidato QN1: Déficit estimado de 530 mil profissionais de TIC entre 2021 e 2025, segundo o PBIA"@pt ;
+    dcterms:subject resp:S5_ProfissionaisTIC ;
+    hrai:candidateProducedBy resp:SessaoLoop .
+
+resp:Candidate_S6_DadosSaudeSUS a hrai:CandidateAssertion ;
+    rdfs:label "Candidato QN1: Dados de saúde em escala sob guarda do Estado (SUS): ativo e exposição de dados sensíveis"@pt ;
+    dcterms:subject resp:S6_DadosSaudeSUS ;
+    hrai:candidateProducedBy resp:SessaoLoop .
+
+resp:Candidate_S7_SupervisaoPorSistema a hrai:CandidateAssertion ;
+    rdfs:label "Candidato QN1: Supervisão por um sistema que coordena reguladores existentes (SIA, coordenado pela ANPD), com orçamento de governança pequeno"@pt ;
+    dcterms:subject resp:S7_SupervisaoPorSistema ;
+    hrai:candidateProducedBy resp:SessaoLoop .
+
+resp:Candidate_S8_ResponsabilidadeCivil a hrai:CandidateAssertion ;
+    rdfs:label "Candidato QN1: Responsabilidade civil por danos de IA pelas regras do Código de Defesa do Consumidor e do Código Civil, com inversão do ônus da prova"@pt ;
+    dcterms:subject resp:S8_ResponsabilidadeCivil ;
+    hrai:candidateProducedBy resp:SessaoLoop .
+
+resp:Ev_A_EnergiaNoTextoDoSenado a hrai:Evidence ;
+    rdfs:label "Evidência do grafo para A_EnergiaNoTextoDoSenado"@pt ;
+    dcterms:references pl:Art_2024_030,
+        pl:Art_2024_059,
+        pl:Art_2024_060,
+        pl:Art_2024_061,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_EnergyEnvironment> .
+
+resp:Ev_Q2_AvaliacaoImpactoSemProfissionais a hrai:Evidence ;
+    rdfs:label "Evidência do grafo para Q2_AvaliacaoImpactoSemProfissionais"@pt ;
+    dcterms:references cap:Req_AlgorithmicImpactAssessment,
+        cor:Corr_BR025_EU027 .
+
+resp:Ev_Q2_SupervisaoSemOrcamento a hrai:Evidence ;
+    rdfs:label "Evidência do grafo para Q2_SupervisaoSemOrcamento"@pt ;
+    dcterms:references cap:Req_CompetentAuthoritySupervision,
+        cap:Req_ConformityAccreditation .
+
+resp:Ev_Q3_AutoridadeComOrcamentoProprio a hrai:Evidence ;
+    rdfs:label "Evidência do grafo para Q3_AutoridadeComOrcamentoProprio"@pt ;
+    dcterms:references cap:Ind_GovernanceBudgetShare,
+        pl:Art_2024_045 .
+
+resp:Ev_Q3_DadosSUSTreinamento a hrai:Evidence ;
+    rdfs:label "Evidência do grafo para Q3_DadosSUSTreinamento"@pt ;
+    dcterms:references cap:Exp_HealthDataSUS .
+
+resp:Q2_AvaliacaoImpactoSemProfissionais a hrai:PolicyClaim ;
+    rdfs:label "A avaliação de impacto algorítmico obrigatória (art. 25 do texto do Senado, adaptada do art. 27 do AI Act) pressupõe profissionais técnicos que o déficit estimado de TIC indica faltar"@pt ;
+    hrai:answerScope "texto do Senado de 2024 e indicador do PBIA; sem limiar aprovado (D-09)"@pt ;
+    hrai:answersGuidingQuestion "QN2" ;
+    hrai:claimSupportedByEvidence resp:Ev_Q2_AvaliacaoImpactoSemProfissionais ;
+    hrai:groundedInSpecificity resp:S5_ProfissionaisTIC .
+
+resp:Q2_SupervisaoSemOrcamento a hrai:PolicyClaim ;
+    rdfs:label "A supervisão, a fiscalização e a acreditação pela autoridade competente (arts. 34 e 49) pressupõem orçamento que o Eixo 5 do PBIA não prevê em escala"@pt ;
+    hrai:answerScope "texto do Senado de 2024 e Tabela 2 do PBIA; sem limiar aprovado (D-09)"@pt ;
+    hrai:answersGuidingQuestion "QN2" ;
+    hrai:claimSupportedByEvidence resp:Ev_Q2_SupervisaoSemOrcamento ;
+    hrai:groundedInSpecificity resp:S4_OrcamentoGovernanca,
+        resp:S7_SupervisaoPorSistema .
+
+resp:Q3_AutoridadeComOrcamentoProprio a hrai:PolicyClaim ;
+    rdfs:label "Fonte de financiamento própria e estável para o sistema de supervisão (SIA): o texto do Senado cria o sistema, mas nenhum artigo vincula orçamento a ele"@pt ;
+    hrai:answerScope "leitura dos arts. 45 a 49 do texto do Senado de 2024; sem avaliação de cobertura aprovada (D-10)"@pt ;
+    hrai:answersGuidingQuestion "QN3" ;
+    hrai:claimSupportedByEvidence resp:Ev_Q3_AutoridadeComOrcamentoProprio ;
+    hrai:groundedInSpecificity resp:S4_OrcamentoGovernanca,
+        resp:S7_SupervisaoPorSistema .
+
+resp:Q3_DadosSUSTreinamento a hrai:PolicyClaim ;
+    rdfs:label "Uso de dados públicos sensíveis, como os do SUS, para treinar modelos: o texto do Senado não tem regra específica; a escala desses dados pede salvaguarda própria"@pt ;
+    hrai:answerScope "busca no texto do Senado de 2024: 'treinamento' aparece só em definições, IA de propósito geral, Cade e direitos autorais; sem avaliação de cobertura aprovada (D-10)"@pt ;
+    hrai:answersGuidingQuestion "QN3" ;
+    hrai:claimSupportedByEvidence resp:Ev_Q3_DadosSUSTreinamento ;
+    hrai:groundedInSpecificity resp:S6_DadosSaudeSUS .
+
+resp:S1_SoberaniaComputacional a hrai:NationalSpecificity ;
+    rdfs:label "Soberania computacional com orçamento público: Nuvem Soberana (R$ 1 bilhão) e supercomputador de IA no PBIA"@pt ;
+    hrai:answersGuidingQuestion "QN1" ;
+    hrai:differenceType hrai:BrazilOnlyDifference ;
+    hrai:specificityComparison resp:S1_SoberaniaComputacional_vs_EUA,
+        resp:S1_SoberaniaComputacional_vs_ReinoUnido,
+        resp:S1_SoberaniaComputacional_vs_UE ;
+    hrai:specificityDimension hrai:StrategicObjectiveDimension ;
+    hrai:specificityGroundedIn pbia:Action01_AISupercomputer,
+        pbia:Action27_SovereignCloud .
+
+resp:S1_SoberaniaComputacional_vs_EUA a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#UnitedStates> ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o instrumento da jurisdição no corpus não é plano de investimento (E1) e o plano equivalente não está no corpus"@pt .
+
+resp:S1_SoberaniaComputacional_vs_ReinoUnido a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#UnitedKingdom> ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o instrumento da jurisdição no corpus não é plano de investimento (E1) e o plano equivalente não está no corpus"@pt .
+
+resp:S1_SoberaniaComputacional_vs_UE a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction pbia:EuropeanUnion ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o instrumento da jurisdição no corpus não é plano de investimento (E1) e o plano equivalente não está no corpus"@pt .
+
+resp:S2_LinguaPortuguesa a hrai:NationalSpecificity ;
+    rdfs:label "Modelos de linguagem em português com dados nacionais, para o português do Brasil em escala continental"@pt ;
+    hrai:answersGuidingQuestion "QN1" ;
+    hrai:differenceType hrai:BrazilOnlyDifference ;
+    hrai:specificityComparison resp:S2_LinguaPortuguesa_vs_EUA,
+        resp:S2_LinguaPortuguesa_vs_ReinoUnido,
+        resp:S2_LinguaPortuguesa_vs_UE ;
+    hrai:specificityDimension hrai:StrategicObjectiveDimension ;
+    hrai:specificityGroundedIn pbia:Action09_PortugueseLLM,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_03> .
+
+resp:S2_LinguaPortuguesa_vs_EUA a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#UnitedStates> ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o instrumento da jurisdição no corpus não é plano de investimento (E1) e o plano equivalente não está no corpus"@pt .
+
+resp:S2_LinguaPortuguesa_vs_ReinoUnido a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#UnitedKingdom> ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o instrumento da jurisdição no corpus não é plano de investimento (E1) e o plano equivalente não está no corpus"@pt .
+
+resp:S2_LinguaPortuguesa_vs_UE a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction pbia:EuropeanUnion ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o instrumento da jurisdição no corpus não é plano de investimento (E1) e o plano equivalente não está no corpus"@pt .
+
+resp:S3_MatrizRenovavel a hrai:NationalSpecificity ;
+    rdfs:label "Matriz elétrica majoritariamente renovável: 89,2% em 2023, segundo o PBIA (citando a EPE)"@pt ;
+    hrai:answersGuidingQuestion "QN1" ;
+    hrai:differenceType hrai:ContextDifference ;
+    hrai:specificityComparison resp:S3_MatrizRenovavel_vs_EUA,
+        resp:S3_MatrizRenovavel_vs_ReinoUnido,
+        resp:S3_MatrizRenovavel_vs_UE ;
+    hrai:specificityDimension hrai:NationalContextDimension ;
+    hrai:specificityGroundedIn pbia:Ind_RenewableShareElectricityMatrix2023 .
+
+resp:S3_MatrizRenovavel_vs_EUA a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#UnitedStates> ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o corpus não traz indicador equivalente para esta jurisdição"@pt .
+
+resp:S3_MatrizRenovavel_vs_ReinoUnido a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#UnitedKingdom> ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o corpus não traz indicador equivalente para esta jurisdição"@pt .
+
+resp:S3_MatrizRenovavel_vs_UE a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction pbia:EuropeanUnion ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o corpus não traz indicador equivalente para esta jurisdição"@pt .
+
+resp:S4_OrcamentoGovernanca_vs_EUA a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#UnitedStates> ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o corpus não traz indicador equivalente para esta jurisdição"@pt .
+
+resp:S4_OrcamentoGovernanca_vs_ReinoUnido a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#UnitedKingdom> ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o corpus não traz indicador equivalente para esta jurisdição"@pt .
+
+resp:S4_OrcamentoGovernanca_vs_UE a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction pbia:EuropeanUnion ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o corpus não traz indicador equivalente para esta jurisdição"@pt .
+
+resp:S5_ProfissionaisTIC_vs_EUA a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#UnitedStates> ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o corpus não traz indicador equivalente para esta jurisdição"@pt .
+
+resp:S5_ProfissionaisTIC_vs_ReinoUnido a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#UnitedKingdom> ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o corpus não traz indicador equivalente para esta jurisdição"@pt .
+
+resp:S5_ProfissionaisTIC_vs_UE a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction pbia:EuropeanUnion ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o corpus não traz indicador equivalente para esta jurisdição"@pt .
+
+resp:S6_DadosSaudeSUS_vs_EUA a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#UnitedStates> ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o corpus não traz indicador equivalente para esta jurisdição"@pt .
+
+resp:S6_DadosSaudeSUS_vs_ReinoUnido a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#UnitedKingdom> ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o corpus não traz indicador equivalente para esta jurisdição"@pt .
+
+resp:S6_DadosSaudeSUS_vs_UE a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction pbia:EuropeanUnion ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o corpus não traz indicador equivalente para esta jurisdição"@pt .
+
+resp:S7_SupervisaoPorSistema_vs_EUA a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#UnitedStates> ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o NIST AI RMF é guia voluntário e não cria autoridade"@pt .
+
+resp:S7_SupervisaoPorSistema_vs_ReinoUnido a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#UnitedKingdom> ;
+    hrai:comparisonNotCoded false ;
+    hrai:comparisonSource <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Snapshot_WhitePaper> ;
+    hrai:comparisonValue "princípios não estatutários aplicados pelos reguladores existentes, sem autoridade nova"@pt .
+
+resp:S7_SupervisaoPorSistema_vs_UE a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction pbia:EuropeanUnion ;
+    hrai:comparisonNotCoded false ;
+    hrai:comparisonSource <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/eu/aiact#Snapshot_AIAct> ;
+    hrai:comparisonValue "art. 70 do AI Act: cada Estado-membro designa autoridades nacionais competentes, sob coordenação europeia"@pt .
+
+resp:S8_ResponsabilidadeCivil a hrai:NationalSpecificity ;
+    rdfs:label "Responsabilidade civil por danos de IA pelas regras do Código de Defesa do Consumidor e do Código Civil, com inversão do ônus da prova"@pt ;
+    hrai:answersGuidingQuestion "QN1" ;
+    hrai:differenceType hrai:BrazilOnlyDifference ;
+    hrai:specificityComparison resp:S8_ResponsabilidadeCivil_vs_EUA,
+        resp:S8_ResponsabilidadeCivil_vs_ReinoUnido,
+        resp:S8_ResponsabilidadeCivil_vs_UE ;
+    hrai:specificityDimension hrai:NationalContextDimension ;
+    hrai:specificityGroundedIn pl:Art_2024_035,
+        pl:Art_2024_036,
+        pl:Art_2024_037 .
+
+resp:S8_ResponsabilidadeCivil_vs_EUA a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#UnitedStates> ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: guia voluntário"@pt .
+
+resp:S8_ResponsabilidadeCivil_vs_ReinoUnido a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#UnitedKingdom> ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o white paper deixa a responsabilidade ao direito existente; sem avaliação de cobertura"@pt .
+
+resp:S8_ResponsabilidadeCivil_vs_UE a hrai:JurisdictionComparison ;
+    hrai:comparisonJurisdiction pbia:EuropeanUnion ;
+    hrai:comparisonNotCoded true ;
+    hrai:comparisonValue "não codificado: o AI Act não trata de responsabilidade civil e a diretiva de responsabilidade não está no corpus; ausência exige avaliação de cobertura (D-10)"@pt .
+
+resp:S6_DadosSaudeSUS a hrai:NationalSpecificity ;
+    rdfs:label "Dados de saúde em escala sob guarda do Estado (SUS): ativo e exposição de dados sensíveis"@pt ;
+    hrai:answersGuidingQuestion "QN1" ;
+    hrai:differenceType hrai:ContextDifference ;
+    hrai:specificityComparison resp:S6_DadosSaudeSUS_vs_EUA,
+        resp:S6_DadosSaudeSUS_vs_ReinoUnido,
+        resp:S6_DadosSaudeSUS_vs_UE ;
+    hrai:specificityDimension hrai:RiskExposureDimension ;
+    hrai:specificityGroundedIn cap:Exp_HealthDataSUS,
+        <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_05> .
+
+resp:S4_OrcamentoGovernanca a hrai:NationalSpecificity ;
+    rdfs:label "Orçamento de governança pequeno: 0,45% do PBIA (R$ 103,25 milhões de R$ 23,03 bilhões) no Eixo 5"@pt ;
+    hrai:answersGuidingQuestion "QN1" ;
+    hrai:differenceType hrai:ContextDifference ;
+    hrai:specificityComparison resp:S4_OrcamentoGovernanca_vs_EUA,
+        resp:S4_OrcamentoGovernanca_vs_ReinoUnido,
+        resp:S4_OrcamentoGovernanca_vs_UE ;
+    hrai:specificityDimension hrai:InstalledCapacityDimension ;
+    hrai:specificityGroundedIn cap:Ind_GovernanceBudgetShare .
+
+resp:S5_ProfissionaisTIC a hrai:NationalSpecificity ;
+    rdfs:label "Déficit estimado de 530 mil profissionais de TIC entre 2021 e 2025, segundo o PBIA"@pt ;
+    hrai:answersGuidingQuestion "QN1" ;
+    hrai:differenceType hrai:ContextDifference ;
+    hrai:specificityComparison resp:S5_ProfissionaisTIC_vs_EUA,
+        resp:S5_ProfissionaisTIC_vs_ReinoUnido,
+        resp:S5_ProfissionaisTIC_vs_UE ;
+    hrai:specificityDimension hrai:InstalledCapacityDimension ;
+    hrai:specificityGroundedIn pbia:Ind_ICTTalentDeficit2021_2025 .
+
+resp:S7_SupervisaoPorSistema a hrai:NationalSpecificity ;
+    rdfs:label "Supervisão por um sistema que coordena reguladores existentes (SIA, coordenado pela ANPD), com orçamento de governança pequeno"@pt ;
+    hrai:answersGuidingQuestion "QN1" ;
+    hrai:differenceType hrai:IntensityDifference ;
+    hrai:specificityComparison resp:S7_SupervisaoPorSistema_vs_EUA,
+        resp:S7_SupervisaoPorSistema_vs_ReinoUnido,
+        resp:S7_SupervisaoPorSistema_vs_UE ;
+    hrai:specificityDimension hrai:InstalledCapacityDimension ;
+    hrai:specificityGroundedIn cap:Ind_GovernanceBudgetShare,
+        pl:Art_2024_045 .
+
+resp:SessaoLoop a hrai:MonitoringAgent ;
+    rdfs:label "Sessão do loop ESP-ONT-02 (Claude Code, análise assistida por LLM)"@pt .
+

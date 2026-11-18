@@ -66,7 +66,7 @@
    "qualificacoes",
    "complementos"
   ],
-  "linhas": 26,
+  "linhas": 31,
   "pergunta": "QN2/QN3"
  },
  "PC7_reaberto_por_mudanca": {
@@ -101,7 +101,7 @@
    "naoCodificado",
    "revisao"
   ],
-  "linhas": 0,
+  "linhas": 42,
   "pergunta": "QN1"
  },
  "V16_sementes_sem_ligacao": {
@@ -111,5 +111,27 @@
   ],
   "linhas": 0,
   "pergunta": "aceite V-16"
+ },
+ "V27_especificidades_sem_evidencia": {
+  "colunas": [
+   "s"
+  ],
+  "linhas": 0,
+  "pergunta": "aceite V-27"
+ },
+ "V28_itens_sem_especificidade": {
+  "colunas": [
+   "item"
+  ],
+  "linhas": 0,
+  "pergunta": "aceite V-28"
+ },
+ "V30_especificidades_incompletas": {
+  "colunas": [
+   "s",
+   "falta"
+  ],
+  "linhas": 0,
+  "pergunta": "aceite V-30"
  }
 }

@@ -35,9 +35,10 @@ SOURCES = ["ontologies/regulatory/HRAI_GO_Regulatory_General.ttl", "ontologies/s
            "ontologies/comparativo/*.ttl", "ontologies/regulatory/instances/**/*.ttl",
            "ontologies/regulatory/cenarios/*.ttl", "ontologies/regulatory/afirmacoes/*.ttl",
            "ontologies/regulatory/alinhamentos/*.ttl", "ontologies/regulatory/sementes/*.ttl",
-           "ontologies/regulatory/correspondencias/*.ttl"]
+           "ontologies/regulatory/correspondencias/*.ttl", "ontologies/regulatory/respostas/*.ttl"]
 QN = {"PC1": "QN1", "PC5": "QN1", "PC9": "QN1", "PC2": "QN2", "PC3": "QN2", "PC6": "QN2/QN3", "PC4": "QN3",
-      "PC7": "transversal", "PC8": "transversal", "V16": "aceite V-16"}
+      "PC7": "transversal", "PC8": "transversal", "V16": "aceite V-16", "V27": "aceite V-27",
+      "V28": "aceite V-28", "V30": "aceite V-30"}
 
 
 def files() -> list[Path]:

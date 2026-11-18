@@ -218,6 +218,31 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
   - `tests/test_monitoramento.py` e `monitorar.py --check` no CI.
 - **Comandos**: protocolo com exit 0; pytest → todos passam.
 
+### Itens 16 e 17 · RF-18 especificidades (QN1) e relatório das perguntas norteadoras — 17/11/2026
+
+- **Como foi feito**: o passo M5 pede todas as jurisdições na mesma régua; as codificações esperam as escalas (D-02).
+  Nesta primeira execução a detecção foi feita pela sessão sobre o grafo, item a item (análise assistida por LLM), e
+  cada linha cita os indivíduos do grafo em que se apoia. Comparação sem valor equivalente no corpus = "não codificado".
+- **O que mudou**
+  - Núcleo: anotações `answersGuidingQuestion` e `answerScope`.
+  - `scripts/ontologia/responder_qn.py` → `ontologies/regulatory/respostas/QN_respostas.ttl`:
+    - **QN1, 8 especificidades**: soberania computacional com orçamento (S1), LLM em português (S2), matriz renovável
+      (S3), orçamento de governança de 0,45% (S4), déficit de 530 mil profissionais de TIC (S5), dados de saúde do SUS
+      (S6), supervisão por sistema que coordena reguladores existentes (S7, comparada com o art. 70 do AI Act e com o
+      Reino Unido), responsabilidade civil pelo CDC e Código Civil com inversão do ônus (S8). Cada uma com dimensão, tipo,
+      evidência brasileira e comparação com UE, Reino Unido e EUA;
+    - **QN2, 2 itens**: avaliação de impacto obrigatória sem profissionais (S5); supervisão e acreditação sem orçamento (S4, S7);
+    - **QN3, 2 itens**: uso de dados públicos sensíveis (SUS) para treinar modelos sem regra específica (S6); sistema de
+      supervisão sem fonte de financiamento própria (S4, S7). Ambos com o escopo declarado (busca/leitura no texto do Senado);
+    - **achado**: a "lacuna" de energia e meio ambiente da cúpula vem do modelo-semente; o texto do Senado trata o tema
+      (arts. 30, 59, 60, 61). Vai para a revisão das sementes (D-07);
+    - correspondências 45×70 e 25×27 ligadas às especificidades que as explicam (PC2).
+  - Consultas de aceite `V27`, `V28`, `V30` = zero linhas; PC9 responde (42 linhas).
+  - `scripts/ontologia/relatorio_qn.py` → `docs/relatorios/perguntas-norteadoras/relatorio-QN.md` (+ `web/assets/respostas.js`):
+    seções QN1, QN2, QN3 nesta ordem, cada item com estado e decisão "pendente", marcado como resposta inicial.
+  - CI regenera respostas e relatório e falha se divergirem do grafo; `tests/test_respostas_qn.py`.
+- **Comandos**: protocolo com exit 0; pytest → 186 passed.
+
 ## Aguardando decisão
 
 | Id | Decisão | Quem | Bloqueia |
@@ -231,6 +256,7 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
 | D-08 | Conferir a localização do parágrafo sobre micro e pequenas empresas e startups no texto de 2023 (art. 32 na extração; art. 33 no rótulo da evidência) | autor | rótulo de `a1:Ev_PL_Art33PU` |
 | D-09 | Limiar inferior de alerta para o orçamento de governança (hoje 0,45% do PBIA) e para profissionais técnicos; sem limiar, R25 não sinaliza | autor | PC3 "abaixo do limiar" |
 | D-10 | Declarar os escopos de avaliação de cobertura (`CoverageAssessment`: jurisdição, snapshot, área) para a PC4 valer | autor | PC4, QN3 |
+| D-11 | Decidir cada item da resposta inicial (8 especificidades da QN1, 2 itens da QN2, 2 da QN3, 1 achado) em `docs/relatorios/perguntas-norteadoras/relatorio-QN.md` | autor | V-26, V-29 |
 | D-06 | PDF da "Análise Comparativa" no repositório (hoje as teses vêm de resumo) | autor | rastreabilidade das teses |
 
 ## Checklist V-01 a V-31
@@ -264,9 +290,9 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | V-23 | ✅ | texto do Senado como nova versão reabre dispositivos, requisitos e afirmações (`tests/test_monitoramento.py`); codificações e especificidades entram na mesma consulta quando existirem |
 | V-24 | ⏸ | D-05 |
 | V-25 | ⬜ | item 15 |
-| V-26 | ⬜ | item 17 |
-| V-27 | ⬜ | item 16 |
-| V-28 | ⬜ | item 17 |
-| V-29 | ⏸ | decisão humana por item (item 17) |
-| V-30 | ⬜ | item 16 |
+| V-26 | 🟡 | relatório gerado pela plataforma (`relatorio-QN.md`), seções QN1, QN2, QN3; "publicado" depende das decisões (D-11) |
+| V-27 | ✅ | PC9 responde; `V27_especificidades_sem_evidencia.rq` = 0 |
+| V-28 | ✅ | `V28_itens_sem_especificidade.rq` = 0 |
+| V-29 | ⏸ | 8 especificidades e 4 itens aguardam decisão humana (D-11) |
+| V-30 | ✅ | `V30_especificidades_incompletas.rq` = 0: dimensão, tipo e comparação com UE, Reino Unido e EUA em todas |
 | V-31 | ✅ | `tests/test_identificacao_ao_vivo.py`; migração aplicada no Supabase em 17/11/2026 (rejeição por `respostas_nome_check` confirmada); commit 285407a |

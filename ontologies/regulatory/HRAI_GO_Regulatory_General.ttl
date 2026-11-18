@@ -2183,3 +2183,9 @@ hrai:baseYear rdfs:label "baseYear"@en .
 hrai:baseYear rdfs:comment "Base year or period of the indicator value as stated by the source (for example '2023' or '2021-2025'); 'não informado na fonte' when the source gives none. Never inferred."@en .
 hrai:baseYear rdfs:domain hrai:ContextIndicator .
 hrai:baseYear rdfs:range xsd:string .
+
+# v1.2.0 (RF-18): guiding question an item answers.
+hrai:answersGuidingQuestion rdf:type owl:AnnotationProperty .
+hrai:answersGuidingQuestion rdfs:comment "Guiding question the item answers: 'QN1' (specificity), 'QN2' (considered and should not be) or 'QN3' (not considered and should be). Items are initial answers pending human decision."@en .
+hrai:answerScope rdf:type owl:AnnotationProperty .
+hrai:answerScope rdfs:comment "Scope within which the item holds (for example 'busca no texto do Senado de 2024'); an absence never holds outside its scope."@en .
