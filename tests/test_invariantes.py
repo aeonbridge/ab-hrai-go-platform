@@ -144,7 +144,8 @@ def test_i4_synthetic_and_identified_are_disjoint():
 
 def test_rnf02_full_graph_reasons_under_five_seconds():
     files = [CORE, SCSE, COMP] + [Path(f) for pattern in ("ontologies/regulatory/instances/**/*.ttl", "ontologies/regulatory/cenarios/*.ttl",
-                                                     "ontologies/regulatory/afirmacoes/*.ttl", "ontologies/regulatory/alinhamentos/*.ttl")
+                                                     "ontologies/regulatory/afirmacoes/*.ttl", "ontologies/regulatory/alinhamentos/*.ttl",
+                                                     "ontologies/regulatory/sementes/*.ttl")
                             for f in sorted(glob.glob(str(ROOT / pattern), recursive=True))]
     t0 = time.perf_counter()
     rz = raciocinar.Raciocinador(*files)

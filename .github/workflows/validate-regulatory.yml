@@ -16,6 +16,7 @@ on:
       - 'ontologies/scse/**'
       - 'ontologies/comparativo/**'
       - 'ontologies/consultas/**'
+      - 'scenarios/governanca-brasil/**'
       - 'docs/especificacoes/ESP-ONT-02/consultas-resultado.json'
       - 'docs/references/**'
   workflow_dispatch:
@@ -43,9 +44,11 @@ jobs:
         run: python tests/verify_regulatory_instances.py
       - name: Comparative module is up to date (RF-16)
         run: python scripts/ontologia/build_comparativo.py --check
+      - name: Seeds match the seed documents (METODO_EXTRACAO.md)
+        run: python scripts/ontologia/semear.py --check
       - name: Competency questions PC1-PC9 still answer (RF-08)
         run: python scripts/ontologia/consultas.py --check
       - name: Displayed elements without ontology backing never increase (RF-12)
         run: python scripts/ontologia/lastro.py --check --base-ref HEAD~1
       - name: Core and SCSE modules, lastro counter (RF-12, RF-17)
-        run: python -m pytest -q tests/test_modulos.py tests/test_lastro.py tests/test_invariantes.py tests/test_comparativo.py tests/test_conselho.py tests/test_consultas.py
+        run: python -m pytest -q tests/test_modulos.py tests/test_lastro.py tests/test_invariantes.py tests/test_comparativo.py tests/test_conselho.py tests/test_consultas.py tests/test_sementes.py

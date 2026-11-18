@@ -1,0 +1,697 @@
+# Gerado por scripts/ontologia/semear.py. Não editar à mão.
+# Método: docs/especificacoes/ESP-ONT-02/METODO_EXTRACAO.md. Sementes pendentes de revisão humana.
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pbia: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sem: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes> a owl:Ontology ;
+    rdfs:label "Sementes do cenário GOV-BR-001: elementos da câmara derivados de documentos-semente"@pt ;
+    rdfs:comment "Gerado por scripts/ontologia/semear.py (determinístico). Método: docs/especificacoes/ESP-ONT-02/METODO_EXTRACAO.md. Tudo aqui é semente pendente de revisão humana; nada é fonte primária."@pt .
+
+sem:Lote_Sementes_GOV_BR_001 a hrai:ExtractionBatch ;
+    rdfs:label "Lote de sementes do cenário GOV-BR-001"@pt ;
+    hrai:extractionContainsCandidate sem:Candidate_CF_01,
+        sem:Candidate_CF_02,
+        sem:Candidate_CF_03,
+        sem:Candidate_CF_04,
+        sem:Candidate_CF_05,
+        sem:Candidate_CF_06,
+        sem:Candidate_CF_07,
+        sem:Candidate_CF_08,
+        sem:Candidate_CF_09,
+        sem:Candidate_CF_10,
+        sem:Candidate_CF_11,
+        sem:Candidate_CF_12,
+        sem:Candidate_CF_13,
+        sem:Candidate_CF_14,
+        sem:Candidate_GM_01,
+        sem:Candidate_GM_05,
+        sem:Candidate_GM_06,
+        sem:Candidate_GM_07,
+        sem:Candidate_GM_08,
+        sem:Candidate_GM_09,
+        sem:Candidate_GM_10,
+        sem:Candidate_GM_11,
+        sem:Candidate_GM_12,
+        sem:Candidate_GM_13,
+        sem:Candidate_GM_14,
+        sem:Candidate_GM_15,
+        sem:Candidate_GM_16,
+        sem:Candidate_GM_17,
+        sem:Candidate_GM_19,
+        sem:Candidate_GM_20,
+        sem:Candidate_GM_22 .
+
+sem:Candidate_CF_01 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Infraestrutura pública digital de escala nacional"@pt ;
+    dcterms:subject sem:Traco_CF_01 ;
+    hrai:candidateFromSnapshot sem:Snapshot_Contexto ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_CF_02 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Matriz elétrica com forte participação renovável"@pt ;
+    dcterms:subject sem:Traco_CF_02 ;
+    hrai:candidateFromSnapshot sem:Snapshot_Contexto ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_CF_03 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Português do Brasil em escala continental"@pt ;
+    dcterms:subject sem:Traco_CF_03 ;
+    hrai:candidateFromSnapshot sem:Snapshot_Contexto ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_CF_04 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Biodiversidade, Amazônia e bioeconomia"@pt ;
+    dcterms:subject sem:Traco_CF_04 ;
+    hrai:candidateFromSnapshot sem:Snapshot_Contexto ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_CF_05 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Dados de saúde pública em escala (SUS)"@pt ;
+    dcterms:subject sem:Traco_CF_05 ;
+    hrai:candidateFromSnapshot sem:Snapshot_Contexto ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_CF_06 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Agronegócio e dados de campo e clima"@pt ;
+    dcterms:subject sem:Traco_CF_06 ;
+    hrai:candidateFromSnapshot sem:Snapshot_Contexto ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_CF_07 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Mercado doméstico amplo e liderança regional"@pt ;
+    dcterms:subject sem:Traco_CF_07 ;
+    hrai:candidateFromSnapshot sem:Snapshot_Contexto ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_CF_08 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Protagonismo diplomático recente"@pt ;
+    dcterms:subject sem:Traco_CF_08 ;
+    hrai:candidateFromSnapshot sem:Snapshot_Contexto ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_CF_09 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Base científica pública"@pt ;
+    dcterms:subject sem:Traco_CF_09 ;
+    hrai:candidateFromSnapshot sem:Snapshot_Contexto ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_CF_10 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Autoridade de dados já em operação"@pt ;
+    dcterms:subject sem:Traco_CF_10 ;
+    hrai:candidateFromSnapshot sem:Snapshot_Contexto ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_CF_11 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Desigualdade regional e digital"@pt ;
+    dcterms:subject sem:Traco_CF_11 ;
+    hrai:candidateFromSnapshot sem:Snapshot_Contexto ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_CF_12 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Dependência de computação e chips estrangeiros"@pt ;
+    dcterms:subject sem:Traco_CF_12 ;
+    hrai:candidateFromSnapshot sem:Snapshot_Contexto ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_CF_13 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Controle externo e cultura de contestação"@pt ;
+    dcterms:subject sem:Traco_CF_13 ;
+    hrai:candidateFromSnapshot sem:Snapshot_Contexto ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_CF_14 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Pluralismo linguístico e cultural"@pt ;
+    dcterms:subject sem:Traco_CF_14 ;
+    hrai:candidateFromSnapshot sem:Snapshot_Contexto ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_GM_01 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Estratégia Brasileira de IA (EBIA, 2021)"@pt ;
+    dcterms:subject sem:Componente_GM_01 ;
+    hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_GM_05 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Sistema Nacional de Regulação e Governança de IA (SIA), supervisionado pela ANPD"@pt ;
+    dcterms:subject sem:Componente_GM_05 ;
+    hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_GM_06 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Classificação por níveis de risco, com proibição de risco excessivo"@pt ;
+    dcterms:subject sem:Componente_GM_06 ;
+    hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_GM_07 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Regime de alto risco, incluindo o uso em saúde"@pt ;
+    dcterms:subject sem:Componente_GM_07 ;
+    hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_GM_08 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Direitos autorais e IA no PL"@pt ;
+    dcterms:subject sem:Componente_GM_08 ;
+    hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_GM_09 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Trabalho e segurança no PL"@pt ;
+    dcterms:subject sem:Componente_GM_09 ;
+    hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_GM_10 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Avaliação de impacto algorítmico e direitos das pessoas afetadas"@pt ;
+    dcterms:subject sem:Componente_GM_10 ;
+    hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_GM_11 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Responsabilização civil por danos de sistemas de IA"@pt ;
+    dcterms:subject sem:Componente_GM_11 ;
+    hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_GM_12 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Sandbox regulatório e ambiente de testes"@pt ;
+    dcterms:subject sem:Componente_GM_12 ;
+    hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_GM_13 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Autoridade Nacional de Proteção de Dados (ANPD)"@pt ;
+    dcterms:subject sem:Componente_GM_13 ;
+    hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_GM_14 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Reguladores setoriais existentes"@pt ;
+    dcterms:subject sem:Componente_GM_14 ;
+    hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_GM_15 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Grupo de trabalho interministerial do PBIA, coordenado pelo MCTI"@pt ;
+    dcterms:subject sem:Componente_GM_15 ;
+    hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_GM_16 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Painel público de acompanhamento do PBIA"@pt ;
+    dcterms:subject sem:Componente_GM_16 ;
+    hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_GM_17 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Infraestrutura nacional de computação (supercomputador e armazenamento)"@pt ;
+    dcterms:subject sem:Componente_GM_17 ;
+    hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_GM_19 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Formação de especialistas e capacitação de servidores"@pt ;
+    dcterms:subject sem:Componente_GM_19 ;
+    hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_GM_20 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: IA Brasil: IA no serviço público (CPQD, Serpro e Dataprev)"@pt ;
+    dcterms:subject sem:Componente_GM_20 ;
+    hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Candidate_GM_22 a hrai:CandidateAssertion ;
+    rdfs:label "Semente: Crédito e apoio à inovação empresarial em IA"@pt ;
+    dcterms:subject sem:Componente_GM_22 ;
+    hrai:candidateFromSnapshot sem:Snapshot_ModeloCamara ;
+    hrai:candidateProducedBy sem:ExtratorDeSementes .
+
+sem:Componente_GM_01 a owl:NamedIndividual,
+        hrai:PolicyInstrument ;
+    rdfs:label "Estratégia Brasileira de IA (EBIA, 2021)"@pt ;
+    dcterms:references <https://portal.tcu.gov.br/data/files/6D/03/8F/FC/857519101C466F09F18818A8/Primeira%20etapa%20do%20acompanhamento%20da%20Estrat%C3%A9gia%20Brasileira%20de%20Intelig%C3%AAncia%20Artificial.pdf>,
+        <https://ses.sp.bvs.br/wp-content/uploads/2021/07/U_PT-MCTI-GM-4979_130721.pdf> ;
+    rdfs:comment "Estratégia nacional instituída pela Portaria MCTI nº 4.617/2021 e alterada pela Portaria nº 4.979/2021, com eixos temáticos e ações estratégicas. Serviu de base ao PBIA."@pt ;
+    skos:editorialNote "A lista de eixos varia entre fontes (fala-se em nove eixos e 73 ações). Conferir no documento oficial; os tópicos acima são leitura do autor do modelo."@pt ;
+    skos:notation "GM-01" ;
+    prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
+    hrai:displayKey "components:GM-01" ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedSourceId "EBIA-DOC",
+        "EBIA-TCU" ;
+    hrai:seedVerification "pending" .
+
+sem:Componente_GM_05 a owl:NamedIndividual,
+        hrai:Stakeholder ;
+    rdfs:label "Sistema Nacional de Regulação e Governança de IA (SIA), supervisionado pela ANPD"@pt ;
+    dcterms:isPartOf pbia:PL_2338_2023 ;
+    dcterms:references <https://www.brasildefato.com.br/2024/12/10/senado-aprova-pl-da-inteligencia-artificial> ;
+    rdfs:comment "Sistema de coordenação criado pelo PL 2338, supervisionado pela Autoridade Nacional de Proteção de Dados, com articulação entre autoridades setoriais."@pt ;
+    skos:notation "GM-05" ;
+    skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
+    prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
+    hrai:displayKey "components:GM-05" ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedSourceId "PL2338-SENADO" ;
+    hrai:seedVerification "pending" .
+
+sem:Componente_GM_06 a owl:NamedIndividual,
+        hrai:PolicyInstrument ;
+    rdfs:label "Classificação por níveis de risco, com proibição de risco excessivo"@pt ;
+    dcterms:isPartOf pbia:PL_2338_2023 ;
+    dcterms:references <https://www.brasildefato.com.br/2024/12/10/senado-aprova-pl-da-inteligencia-artificial> ;
+    rdfs:comment "O PL divide os sistemas por nível de risco, com regime distinto para alto risco e proibição de usos de risco excessivo, como armas autônomas sem intervenção humana."@pt ;
+    skos:notation "GM-06" ;
+    skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
+    prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
+    hrai:displayKey "components:GM-06" ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedSourceId "PL2338-SENADO" ;
+    hrai:seedVerification "pending" .
+
+sem:Componente_GM_07 a owl:NamedIndividual,
+        hrai:PolicyInstrument ;
+    rdfs:label "Regime de alto risco, incluindo o uso em saúde"@pt ;
+    dcterms:isPartOf pbia:PL_2338_2023 ;
+    dcterms:references <https://www.brasildefato.com.br/2024/12/10/senado-aprova-pl-da-inteligencia-artificial> ;
+    rdfs:comment "Obrigações reforçadas para sistemas de alto risco. Segundo a imprensa, o texto aprovado no Senado classifica o uso na saúde como de alto risco."@pt ;
+    skos:editorialNote "Os tópicos além de risk-classification são leitura do autor do modelo; conferir no texto."@pt ;
+    skos:notation "GM-07" ;
+    skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
+    prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
+    hrai:displayKey "components:GM-07" ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedSourceId "PL2338-SENADO" ;
+    hrai:seedVerification "pending" .
+
+sem:Componente_GM_08 a owl:NamedIndividual,
+        hrai:PolicyInstrument ;
+    rdfs:label "Direitos autorais e IA no PL"@pt ;
+    dcterms:isPartOf pbia:PL_2338_2023 ;
+    dcterms:references <https://www.brasildefato.com.br/2024/12/10/senado-aprova-pl-da-inteligencia-artificial> ;
+    rdfs:comment "O texto trata de direitos autorais entre os temas regulados. O conteúdo exato das regras sobre treinamento de modelos precisa ser conferido no texto."@pt ;
+    skos:notation "GM-08" ;
+    skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
+    prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
+    hrai:displayKey "components:GM-08" ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedSourceId "PL2338-SENADO" ;
+    hrai:seedVerification "pending" .
+
+sem:Componente_GM_09 a owl:NamedIndividual,
+        hrai:PolicyInstrument ;
+    rdfs:label "Trabalho e segurança no PL"@pt ;
+    dcterms:isPartOf pbia:PL_2338_2023 ;
+    dcterms:references <https://www.brasildefato.com.br/2024/12/10/senado-aprova-pl-da-inteligencia-artificial> ;
+    rdfs:comment "O texto cria regras para temas como trabalho e segurança. O alcance exato precisa ser conferido no texto."@pt ;
+    skos:notation "GM-09" ;
+    skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
+    prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
+    hrai:displayKey "components:GM-09" ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedSourceId "PL2338-SENADO" ;
+    hrai:seedVerification "pending" .
+
+sem:Componente_GM_10 a owl:NamedIndividual,
+        hrai:PolicyInstrument ;
+    rdfs:label "Avaliação de impacto algorítmico e direitos das pessoas afetadas"@pt ;
+    dcterms:isPartOf pbia:PL_2338_2023 ;
+    dcterms:references <https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2487262> ;
+    rdfs:comment "Mecanismo esperado em marcos de IA baseados em risco: avaliação de impacto prévia e direitos de explicação e contestação."@pt ;
+    skos:editorialNote "NÃO confirmado nas fontes consultadas. Conferir no texto do PL antes de tratar como parte do modelo."@pt ;
+    skos:notation "GM-10" ;
+    skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
+    prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
+    hrai:displayKey "components:GM-10" ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedSourceId "PL2338" ;
+    hrai:seedVerification "pending" .
+
+sem:Componente_GM_11 a owl:NamedIndividual,
+        hrai:PolicyInstrument ;
+    rdfs:label "Responsabilização civil por danos de sistemas de IA"@pt ;
+    dcterms:isPartOf pbia:PL_2338_2023 ;
+    dcterms:references <https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2487262> ;
+    rdfs:comment "Regras de responsabilidade civil ao longo da cadeia de IA."@pt ;
+    skos:editorialNote "NÃO confirmado nas fontes consultadas. Conferir no texto do PL."@pt ;
+    skos:notation "GM-11" ;
+    skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
+    prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
+    hrai:displayKey "components:GM-11" ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedSourceId "PL2338" ;
+    hrai:seedVerification "pending" .
+
+sem:Componente_GM_12 a owl:NamedIndividual,
+        hrai:PolicyInstrument ;
+    rdfs:label "Sandbox regulatório e ambiente de testes"@pt ;
+    dcterms:isPartOf pbia:PL_2338_2023 ;
+    dcterms:references <https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2487262> ;
+    rdfs:comment "Ambiente experimental supervisionado para inovação em IA."@pt ;
+    skos:editorialNote "NÃO confirmado nas fontes consultadas. Conferir no texto do PL."@pt ;
+    skos:notation "GM-12" ;
+    skos:scopeNote "Previsto em proposta legislativa: sem força vinculante."@pt ;
+    prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
+    hrai:displayKey "components:GM-12" ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedSourceId "PL2338" ;
+    hrai:seedVerification "pending" .
+
+sem:Componente_GM_13 a owl:NamedIndividual,
+        hrai:Stakeholder ;
+    rdfs:label "Autoridade Nacional de Proteção de Dados (ANPD)"@pt ;
+    dcterms:references <https://www.brasildefato.com.br/2024/12/10/senado-aprova-pl-da-inteligencia-artificial>,
+        <https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm> ;
+    rdfs:comment "Autoridade com mandato vigente em proteção de dados e designada pelo PL para supervisionar o SIA."@pt ;
+    skos:notation "GM-13" ;
+    prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
+    hrai:displayKey "components:GM-13" ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedSourceId "LGPD",
+        "PL2338-SENADO" ;
+    hrai:seedVerification "pending" .
+
+sem:Componente_GM_14 a owl:NamedIndividual,
+        hrai:Stakeholder ;
+    rdfs:label "Reguladores setoriais existentes"@pt ;
+    dcterms:references <https://www.brasildefato.com.br/2024/12/10/senado-aprova-pl-da-inteligencia-artificial> ;
+    rdfs:comment "Autoridades de setores regulados que passariam a articular-se ao SIA nas respectivas competências."@pt ;
+    skos:editorialNote "Quais autoridades e com que competências em IA deve ser detalhado pelos revisores."@pt ;
+    skos:notation "GM-14" ;
+    prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
+    hrai:displayKey "components:GM-14" ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedSourceId "PL2338-SENADO" ;
+    hrai:seedVerification "pending" .
+
+sem:Componente_GM_15 a owl:NamedIndividual,
+        hrai:Stakeholder ;
+    rdfs:label "Grupo de trabalho interministerial do PBIA, coordenado pelo MCTI"@pt ;
+    dcterms:isPartOf pbia:PBIA_Plan ;
+    rdfs:comment "Grupo criado em 2025 para monitorar a execução do plano, com relatório anual de acompanhamento."@pt ;
+    skos:closeMatch pbia:PBIA_GovernanceByCITDigital ;
+    skos:notation "GM-15" ;
+    prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
+    hrai:displayKey "components:GM-15" ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedSourceId "PBIA-GOV" ;
+    hrai:seedVerification "pending" .
+
+sem:Componente_GM_16 a owl:NamedIndividual,
+        hrai:PolicyInstrument ;
+    rdfs:label "Painel público de acompanhamento do PBIA"@pt ;
+    dcterms:isPartOf pbia:PBIA_Plan ;
+    dcterms:references <https://dplnews.com/um-ano-de-plano-brasileiro-de-inteligencia-artificial-o-que-esta-sendo-feito/> ;
+    rdfs:comment "Sistema público de monitoramento da execução das 54 ações do plano. Os relatos sobre o nível de execução divergem entre fontes."@pt ;
+    skos:notation "GM-16" ;
+    prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
+    hrai:displayKey "components:GM-16" ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedSourceId "PBIA-AXES",
+        "PBIA-GOV" ;
+    hrai:seedVerification "pending" .
+
+sem:Componente_GM_17 a owl:NamedIndividual,
+        hrai:PolicyInstrument ;
+    rdfs:label "Infraestrutura nacional de computação (supercomputador e armazenamento)"@pt ;
+    dcterms:isPartOf pbia:PBIA_Plan ;
+    rdfs:comment "Edital de supercomputador e infraestrutura nacional de processamento e armazenamento de dados."@pt ;
+    skos:closeMatch pbia:Action01_AISupercomputer,
+        pbia:Action27_SovereignCloud ;
+    skos:notation "GM-17" ;
+    prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
+    hrai:displayKey "components:GM-17" ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedSourceId "PBIA-HPC" ;
+    hrai:seedVerification "pending" .
+
+sem:Componente_GM_19 a owl:NamedIndividual,
+        hrai:PolicyInstrument ;
+    rdfs:label "Formação de especialistas e capacitação de servidores"@pt ;
+    dcterms:isPartOf pbia:PBIA_Plan ;
+    dcterms:references <https://dplnews.com/um-ano-de-plano-brasileiro-de-inteligencia-artificial-o-que-esta-sendo-feito/>,
+        <https://indico.rnp.br/event/155/contributions/1369/attachments/569/876/Plano_Brasileiro_de_IA.pdf> ;
+    rdfs:comment "Metas de formação de profissionais de IA e de capacitação de servidores públicos."@pt ;
+    skos:closeMatch pbia:PBIA_Axis2_DiffusionTraining ;
+    skos:notation "GM-19" ;
+    prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
+    hrai:displayKey "components:GM-19" ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedSourceId "PBIA-AXES",
+        "PBIA-DOC" ;
+    hrai:seedVerification "pending" .
+
+sem:Componente_GM_20 a owl:NamedIndividual,
+        hrai:PolicyInstrument ;
+    rdfs:label "IA Brasil: IA no serviço público (CPQD, Serpro e Dataprev)"@pt ;
+    dcterms:isPartOf pbia:PBIA_Plan ;
+    dcterms:references <https://indico.rnp.br/event/155/contributions/1369/attachments/569/876/Plano_Brasileiro_de_IA.pdf> ;
+    rdfs:comment "Iniciativa para aplicar IA em serviços públicos com empresas públicas de tecnologia."@pt ;
+    skos:closeMatch pbia:PBIA_Axis3_PublicServices ;
+    skos:notation "GM-20" ;
+    prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
+    hrai:displayKey "components:GM-20" ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedSourceId "PBIA-DOC" ;
+    hrai:seedVerification "pending" .
+
+sem:Componente_GM_22 a owl:NamedIndividual,
+        hrai:PolicyInstrument ;
+    rdfs:label "Crédito e apoio à inovação empresarial em IA"@pt ;
+    dcterms:isPartOf pbia:PBIA_Plan ;
+    dcterms:references <https://dplnews.com/um-ano-de-plano-brasileiro-de-inteligencia-artificial-o-que-esta-sendo-feito/> ;
+    rdfs:comment "Eixo do PBIA de inovação empresarial, com recursos do FNDCT e contrapartidas privadas."@pt ;
+    skos:closeMatch pbia:PBIA_Axis4_BusinessInnovation ;
+    skos:notation "GM-22" ;
+    prov:wasDerivedFrom sem:Snapshot_ModeloCamara ;
+    hrai:displayKey "components:GM-22" ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedSourceId "PBIA-AXES",
+        "PBIA-BUDGET" ;
+    hrai:seedVerification "pending" .
+
+sem:Traco_CF_01 a owl:NamedIndividual,
+        hrai:ContextIndicator ;
+    rdfs:label "Infraestrutura pública digital de escala nacional"@pt ;
+    rdfs:comment "Pagamentos instantâneos (Pix) e identidade e serviços digitais (gov.br) alcançam grande parte da população e podem servir de base para IA no serviço público."@pt ;
+    skos:notation "CF-01" ;
+    prov:wasDerivedFrom sem:Snapshot_Contexto ;
+    hrai:displayKey "features:CF-01" ;
+    hrai:hasIndicatorMethod "traço qualitativo (asset) do documento de contexto; sem valor numérico nem ano-base" ;
+    hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
+    hrai:seedBasis "hipótese de trabalho" ;
+    hrai:seedHasRealSource false ;
+    hrai:seedSourceId "BRF-CTX-PUBSVC" ;
+    hrai:seedVerification "pending" .
+
+sem:Traco_CF_02 a owl:NamedIndividual,
+        hrai:ContextIndicator ;
+    rdfs:label "Matriz elétrica com forte participação renovável"@pt ;
+    rdfs:comment "Eletricidade majoritariamente renovável é relevante para computação intensiva. Limites: gargalos de transmissão e a demanda crescente de data centers."@pt ;
+    skos:notation "CF-02" ;
+    prov:wasDerivedFrom sem:Snapshot_Contexto ;
+    hrai:displayKey "features:CF-02" ;
+    hrai:hasIndicatorMethod "traço qualitativo (asset) do documento de contexto; sem valor numérico nem ano-base" ;
+    hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
+    hrai:seedBasis "hipótese de trabalho" ;
+    hrai:seedHasRealSource false ;
+    hrai:seedSourceId "BRF-CTX-COMPUTE",
+        "BRF-POS-INF" ;
+    hrai:seedVerification "pending" .
+
+sem:Traco_CF_03 a owl:NamedIndividual,
+        hrai:ContextIndicator ;
+    rdfs:label "Português do Brasil em escala continental"@pt ;
+    dcterms:references <https://indico.rnp.br/event/155/contributions/1369/attachments/569/876/Plano_Brasileiro_de_IA.pdf> ;
+    rdfs:comment "Mais de 200 milhões de falantes e baixa representação do português brasileiro em corpora e avaliações dos grandes modelos criam espaço para dados, modelos e avaliações próprios."@pt ;
+    skos:notation "CF-03" ;
+    prov:wasDerivedFrom sem:Snapshot_Contexto ;
+    hrai:displayKey "features:CF-03" ;
+    hrai:hasIndicatorMethod "traço qualitativo (asset) do documento de contexto; sem valor numérico nem ano-base" ;
+    hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
+    hrai:seedBasis "hipótese de trabalho" ;
+    hrai:seedHasRealSource true ;
+    hrai:seedSourceId "PBIA-DOC",
+        "PBIA-HPC" ;
+    hrai:seedVerification "pending" .
+
+sem:Traco_CF_04 a owl:NamedIndividual,
+        hrai:ContextIndicator ;
+    rdfs:label "Biodiversidade, Amazônia e bioeconomia"@pt ;
+    rdfs:comment "Ativos de dados biológicos e ambientais de relevância global. Tensões: soberania, repartição de benefícios e direitos de povos e comunidades tradicionais."@pt ;
+    skos:notation "CF-04" ;
+    prov:wasDerivedFrom sem:Snapshot_Contexto ;
+    hrai:displayKey "features:CF-04" ;
+    hrai:hasIndicatorMethod "traço qualitativo (asset) do documento de contexto; sem valor numérico nem ano-base" ;
+    hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
+    hrai:seedBasis "hipótese de trabalho" ;
+    hrai:seedHasRealSource false ;
+    hrai:seedVerification "pending" .
+
+sem:Traco_CF_05 a owl:NamedIndividual,
+        hrai:ContextIndicator ;
+    rdfs:label "Dados de saúde pública em escala (SUS)"@pt ;
+    dcterms:references <https://www.brasildefato.com.br/2024/12/10/senado-aprova-pl-da-inteligencia-artificial> ;
+    rdfs:comment "Base de saúde pública de escala nacional. O texto do PL aprovado no Senado trata o uso de IA na saúde como alto risco, o que une oportunidade e risco."@pt ;
+    skos:notation "CF-05" ;
+    prov:wasDerivedFrom sem:Snapshot_Contexto ;
+    hrai:displayKey "features:CF-05" ;
+    hrai:hasIndicatorMethod "traço qualitativo (asset) do documento de contexto; sem valor numérico nem ano-base" ;
+    hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
+    hrai:seedBasis "hipótese de trabalho" ;
+    hrai:seedHasRealSource true ;
+    hrai:seedSourceId "PL2338-SENADO" ;
+    hrai:seedVerification "pending" .
+
+sem:Traco_CF_06 a owl:NamedIndividual,
+        hrai:ContextIndicator ;
+    rdfs:label "Agronegócio e dados de campo e clima"@pt ;
+    rdfs:comment "Setor produtivo de peso global com dados de campo, clima e logística."@pt ;
+    skos:notation "CF-06" ;
+    prov:wasDerivedFrom sem:Snapshot_Contexto ;
+    hrai:displayKey "features:CF-06" ;
+    hrai:hasIndicatorMethod "traço qualitativo (asset) do documento de contexto; sem valor numérico nem ano-base" ;
+    hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
+    hrai:seedBasis "hipótese de trabalho" ;
+    hrai:seedHasRealSource false ;
+    hrai:seedVerification "pending" .
+
+sem:Traco_CF_07 a owl:NamedIndividual,
+        hrai:ContextIndicator ;
+    rdfs:label "Mercado doméstico amplo e liderança regional"@pt ;
+    rdfs:comment "Demanda interna grande e posição de referência na América Latina para padrões e para modelos adaptados à região."@pt ;
+    skos:notation "CF-07" ;
+    prov:wasDerivedFrom sem:Snapshot_Contexto ;
+    hrai:displayKey "features:CF-07" ;
+    hrai:hasIndicatorMethod "traço qualitativo (asset) do documento de contexto; sem valor numérico nem ano-base" ;
+    hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
+    hrai:seedBasis "hipótese de trabalho" ;
+    hrai:seedHasRealSource false ;
+    hrai:seedVerification "pending" .
+
+sem:Traco_CF_08 a owl:NamedIndividual,
+        hrai:ContextIndicator ;
+    rdfs:label "Protagonismo diplomático recente"@pt ;
+    rdfs:comment "Presidência do G20 em 2024 e sede da COP30 em Belém em 2025 dão acesso a foros globais onde se definem padrões de IA e de clima."@pt ;
+    skos:notation "CF-08" ;
+    prov:wasDerivedFrom sem:Snapshot_Contexto ;
+    hrai:displayKey "features:CF-08" ;
+    hrai:hasIndicatorMethod "traço qualitativo (capability) do documento de contexto; sem valor numérico nem ano-base" ;
+    hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
+    hrai:seedBasis "hipótese de trabalho" ;
+    hrai:seedHasRealSource false ;
+    hrai:seedVerification "pending" .
+
+sem:Traco_CF_09 a owl:NamedIndividual,
+        hrai:ContextIndicator ;
+    rdfs:label "Base científica pública"@pt ;
+    dcterms:references <https://indico.rnp.br/event/155/contributions/1369/attachments/569/876/Plano_Brasileiro_de_IA.pdf> ;
+    rdfs:comment "Universidades e institutos públicos, e o Centro de Transparência Algorítmica da UFMG, apoiado pelo PBIA."@pt ;
+    skos:notation "CF-09" ;
+    prov:wasDerivedFrom sem:Snapshot_Contexto ;
+    hrai:displayKey "features:CF-09" ;
+    hrai:hasIndicatorMethod "traço qualitativo (capability) do documento de contexto; sem valor numérico nem ano-base" ;
+    hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
+    hrai:seedBasis "hipótese de trabalho" ;
+    hrai:seedHasRealSource true ;
+    hrai:seedSourceId "PBIA-DOC" ;
+    hrai:seedVerification "pending" .
+
+sem:Traco_CF_10 a owl:NamedIndividual,
+        hrai:ContextIndicator ;
+    rdfs:label "Autoridade de dados já em operação"@pt ;
+    dcterms:references <https://www.brasildefato.com.br/2024/12/10/senado-aprova-pl-da-inteligencia-artificial>,
+        <https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm> ;
+    rdfs:comment "A ANPD existe, tem experiência com a LGPD e é designada pelo PL para supervisionar o SIA. A capacidade para IA é a dúvida."@pt ;
+    skos:notation "CF-10" ;
+    prov:wasDerivedFrom sem:Snapshot_Contexto ;
+    hrai:displayKey "features:CF-10" ;
+    hrai:hasIndicatorMethod "traço qualitativo (capability) do documento de contexto; sem valor numérico nem ano-base" ;
+    hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
+    hrai:seedBasis "documentado" ;
+    hrai:seedHasRealSource true ;
+    hrai:seedSourceId "BRF-CTX-GOVCAP",
+        "LGPD",
+        "PL2338-SENADO" ;
+    hrai:seedVerification "pending" .
+
+sem:Traco_CF_11 a owl:NamedIndividual,
+        hrai:ContextIndicator ;
+    rdfs:label "Desigualdade regional e digital"@pt ;
+    rdfs:comment "Acesso, infraestrutura e requalificação são desiguais entre regiões, com menor cobertura no Norte e no Nordeste."@pt ;
+    skos:notation "CF-11" ;
+    prov:wasDerivedFrom sem:Snapshot_Contexto ;
+    hrai:displayKey "features:CF-11" ;
+    hrai:hasIndicatorMethod "traço qualitativo (constraint) do documento de contexto; sem valor numérico nem ano-base" ;
+    hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
+    hrai:seedBasis "hipótese de trabalho" ;
+    hrai:seedHasRealSource false ;
+    hrai:seedSourceId "BRF-CTX-LABOR" ;
+    hrai:seedVerification "pending" .
+
+sem:Traco_CF_12 a owl:NamedIndividual,
+        hrai:ContextIndicator ;
+    rdfs:label "Dependência de computação e chips estrangeiros"@pt ;
+    rdfs:comment "A maior parte da computação de IA roda em nuvens de controle estrangeiro e depende de aceleradores importados."@pt ;
+    skos:notation "CF-12" ;
+    prov:wasDerivedFrom sem:Snapshot_Contexto ;
+    hrai:displayKey "features:CF-12" ;
+    hrai:hasIndicatorMethod "traço qualitativo (constraint) do documento de contexto; sem valor numérico nem ano-base" ;
+    hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
+    hrai:seedBasis "hipótese de trabalho" ;
+    hrai:seedHasRealSource false ;
+    hrai:seedSourceId "BRF-CTX-COMPUTE",
+        "BRF-POS-INF" ;
+    hrai:seedVerification "pending" .
+
+sem:Traco_CF_13 a owl:NamedIndividual,
+        hrai:ContextIndicator ;
+    rdfs:label "Controle externo e cultura de contestação"@pt ;
+    dcterms:references <https://portal.tcu.gov.br/data/files/6D/03/8F/FC/857519101C466F09F18818A8/Primeira%20etapa%20do%20acompanhamento%20da%20Estrat%C3%A9gia%20Brasileira%20de%20Intelig%C3%AAncia%20Artificial.pdf> ;
+    rdfs:comment "Tribunal de Contas, Ministério Público e Judiciário atuam sobre políticas públicas e podem tornar a governança de IA justiciável."@pt ;
+    skos:notation "CF-13" ;
+    prov:wasDerivedFrom sem:Snapshot_Contexto ;
+    hrai:displayKey "features:CF-13" ;
+    hrai:hasIndicatorMethod "traço qualitativo (capability) do documento de contexto; sem valor numérico nem ano-base" ;
+    hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
+    hrai:seedBasis "hipótese de trabalho" ;
+    hrai:seedHasRealSource true ;
+    hrai:seedSourceId "EBIA-TCU" ;
+    hrai:seedVerification "pending" .
+
+sem:Traco_CF_14 a owl:NamedIndividual,
+        hrai:ContextIndicator ;
+    rdfs:label "Pluralismo linguístico e cultural"@pt ;
+    rdfs:comment "Línguas indígenas, variedades do português e culturas regionais são fonte de dados e de requisitos de inclusão."@pt ;
+    skos:notation "CF-14" ;
+    prov:wasDerivedFrom sem:Snapshot_Contexto ;
+    hrai:displayKey "features:CF-14" ;
+    hrai:hasIndicatorMethod "traço qualitativo (asset) do documento de contexto; sem valor numérico nem ano-base" ;
+    hrai:indicatorRelevantToJurisdiction pbia:Brazil ;
+    hrai:seedBasis "hipótese de trabalho" ;
+    hrai:seedHasRealSource false ;
+    hrai:seedVerification "pending" .
+
+sem:Snapshot_Contexto a hrai:SourceSnapshot ;
+    rdfs:label "Contexto nacional de 14/11/2026 (documento-semente)"@pt ;
+    rdfs:comment "Documento-semente do projeto (não é fonte oficial): ver METODO_EXTRACAO.md."@pt ;
+    hrai:snapshotSHA256 "727e453b2090518613f80da55e24cdd0ea70f9a236640edb0a4d685f7a86db2d" ;
+    hrai:snapshotURI "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/context/2026-11-14.json"^^xsd:anyURI .
+
+sem:ExtratorDeSementes a hrai:MonitoringAgent ;
+    rdfs:label "Extrator de sementes (scripts/ontologia/semear.py, determinístico, sem modelo de linguagem)"@pt .
+
+sem:Snapshot_ModeloCamara a hrai:SourceSnapshot ;
+    rdfs:label "Modelo da câmara brasil-governanca-v0 (documento-semente)"@pt ;
+    rdfs:comment "Documento-semente do projeto (não é fonte oficial): ver METODO_EXTRACAO.md."@pt ;
+    hrai:snapshotSHA256 "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99" ;
+    hrai:snapshotURI "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"^^xsd:anyURI .
+

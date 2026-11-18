@@ -2154,3 +2154,13 @@ _:rr26__24 swrl:propertyPredicate hrai:provisionTransposedFrom .
 hrai:displayKey rdf:type owl:AnnotationProperty .
 hrai:displayKey rdfs:label "displayKey"@en .
 hrai:displayKey rdfs:comment "Key of the element displayed by the platform that this individual backs, as '<set>:<id>' of web/assets/modelo.js (for example 'topics:energy-environment'). Used by the 'sem lastro' counter; not a semantic relation."@en .
+
+# v1.2.0 (RF-12): provenance of individuals seeded from the project's seed documents (METODO_EXTRACAO.md).
+hrai:seedSourceId rdf:type owl:AnnotationProperty .
+hrai:seedSourceId rdfs:comment "Id of a source cited by the seed document, as written there."@en .
+hrai:seedVerification rdf:type owl:AnnotationProperty .
+hrai:seedVerification rdfs:comment "Verification state copied from the seed document (for example 'pending')."@en .
+hrai:seedBasis rdf:type owl:AnnotationProperty .
+hrai:seedBasis rdfs:comment "Basis of a seeded individual: 'documentado' or 'hipótese de trabalho' (an assertion in the seed document)."@en .
+hrai:seedHasRealSource rdf:type owl:AnnotationProperty .
+hrai:seedHasRealSource rdfs:comment "False when the seed cites no source or only the fictional world pack (BRF-*): it cannot ground a QN1 specificity until a primary source backs it."@en .

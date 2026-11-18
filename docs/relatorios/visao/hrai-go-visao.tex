@@ -185,6 +185,8 @@ Cada documento entra como \texttt{SourceSnapshot}, com identificador uniforme de
 \section{M2 · Extração candidata e revisão humana}
 Agentes de extração propõem dispositivos, requisitos, codificações, correspondências e indicadores. Tudo entra como \texttt{CandidateAssertion} num lote de extração. Um revisor humano aprova ou rejeita com \texttt{ReviewDecision}. A publicação num \texttt{KnowledgeGraphRelease} é um ato explícito e autorizado, nunca uma inferência. Agentes não aprovam o que extraíram \rf{RF-04, invariante I-3}.
 
+O observatório distingue três origens. \textbf{Fontes primárias} (textos oficiais capturados com hash) passam pela extração candidata descrita acima, sempre citando dispositivo ou página. \textbf{Documentos-semente} são documentos escritos pelo projeto para dar partida à plataforma: o modelo da câmara, o contexto nacional, o cenário e os alinhamentos. Deles, um extrator determinístico, sem modelo de linguagem, cria automaticamente os indivíduos que a interface exibe, cada um com o hash do documento de origem, as fontes que ele cita e um registro de extração; esses indivíduos levam o estado \emph{semente}, visível na ficha, e aguardam revisão humana. Traços sem fonte real ficam marcados como hipótese e não sustentam especificidade da QN1. \textbf{Análises externas} entram só como afirmações (seção~\ref{sec:afirmacoes}). O método completo, com o mapeamento de campos e os estados de lastro (sem lastro, semente, próximo, exato), está em \texttt{docs/especificacoes/ESP-ONT-02/METODO\_EXTRACAO.md} \rf{RF-04, RF-12}.
+
 \section{M3 · Taxonomia de base e extensões}\label{sec:taxonomia}
 \destaque{\textbf{Declaração de método.} Para a camada comparativa, o HRAI-GO utiliza, onde possível, a taxonomia de Alanoca, Gur-Arieh, Zick e Klyman, \emph{Comparing Apples to Oranges: A Taxonomy for Navigating the Global Landscape of AI Regulation} (ACM Conference on Fairness, Accountability, and Transparency, FAccT~'25, doi:10.1145/3715275.3732059) \cite{alanoca2025}.
 \begin{itemize}[leftmargin=*]
@@ -274,7 +276,7 @@ QN3 & PC4 & O que o contexto expõe a risco e nenhum instrumento cobre? & Câmar
 \fonte{Elaborado pelos autores (2026).}
 \end{table}
 
-\section{M8 · Afirmações com contra-evidência}
+\section{M8 · Afirmações com contra-evidência}\label{sec:afirmacoes}
 Análises externas não entram como fato. Cada tese vira \texttt{PolicyClaim}, ligada às evidências do corpus que a sustentam e às contra-afirmações que a contestam, com relações distintas para contestar, qualificar e complementar. O observatório mostra o estado de cada tese: \emph{contestada}, \emph{com evidência} ou \emph{sem evidência no corpus}. Nunca diz ``verdadeira'' ou ``falsa'' \rf{RF-11}.
 
 \destaque{\textbf{Resultado já medido (17/11/2026).} As 12 teses do documento ``Análise Comparativa e Diretrizes Estratégicas'' \cite{estudo-comparativo} foram processadas pelo método: 4 contestadas, 6 com evidência e 2 sem evidência no corpus (ESP-ONT-02, apêndice~A). No estado-alvo, essa classificação é recalculada automaticamente a cada versão do corpus. Por exemplo, a tese C04 é reavaliada quando o substitutivo do Senado entra como fonte primária.}

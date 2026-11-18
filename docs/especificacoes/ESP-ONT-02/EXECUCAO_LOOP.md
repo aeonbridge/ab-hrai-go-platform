@@ -26,10 +26,12 @@ serve. Se ele não servir a nenhuma, pergunte antes de seguir.
 
 1. `docs/relatorios/visao/hrai-go-visao.pdf` (RT-VIS-03): estado-alvo, método M1–M10 e checklist V-01 a V-31.
    Cada item da tabela abaixo indica os V-xx que fecha.
-2. `docs/especificacoes/ESP-ONT-02/especificacao.pdf`: requisitos RF-01 a RF-18 e RNF-01/02 (capítulo de especificação de implementação).
-3. `docs/relatorios/ontologia/relatorio.pdf` (RT-ONT-01): motor de raciocínio e resultados de base.
-4. `ontologies/regulatory/README.md` e `ontologies/scse/`: as duas ontologias que serão separadas (RF-17).
-5. `scripts/ontologia/raciocinar.py`, `experimentos.py`, `afirmacoes.py`: ferramentas já prontas.
+2. `docs/especificacoes/ESP-ONT-02/METODO_EXTRACAO.md`: origens (fonte primária, documento-semente, análise externa),
+   semeadura e estados de lastro.
+3. `docs/especificacoes/ESP-ONT-02/especificacao.pdf`: requisitos RF-01 a RF-18 e RNF-01/02 (capítulo de especificação de implementação).
+4. `docs/relatorios/ontologia/relatorio.pdf` (RT-ONT-01): motor de raciocínio e resultados de base.
+5. `ontologies/regulatory/README.md` e `ontologies/scse/`: as duas ontologias que serão separadas (RF-17).
+6. `scripts/ontologia/raciocinar.py`, `experimentos.py`, `afirmacoes.py`: ferramentas já prontas.
 
 ## Ordem de execução (dependências)
 
@@ -102,6 +104,8 @@ especificidade se apoia em dispositivo ou objetivo do PBIA; isso permite fechar 
 - I-4: sintético nunca é contado como humano (disjunção na TBox, regra R21; cor e rótulo distintos na interface).
 - Cenários (`ontologies/regulatory/cenarios/`) e afirmações (`ontologies/regulatory/afirmacoes/`) nunca vão para `instances/`.
 - Todo conteúdo extraído entra como `CandidateAssertion`. **A sessão nunca cria `ApprovalDecision` nem `ReviewDecision`**: aprovação é humana.
+- Elementos vindos de documentos-semente do projeto são semeados automaticamente (`scripts/ontologia/semear.py`) e
+  contam como lastro com o estado "semente" (decisão do autor, 17/11/2026). Método: `METODO_EXTRACAO.md`.
 - Nenhuma jurisdição exibida sem `SourceSnapshot` com SHA-256.
 - O contador de elementos "sem lastro" nunca sobe em relação ao `main`; a meta final é zero (V-15).
 - Participação humana anônima por padrão: apelido e avatar vêm do identificador anônimo. A identificação é opcional,

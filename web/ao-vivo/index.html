@@ -725,6 +725,7 @@ const LASTRO = window.HRAIGO_LASTRO || { itens: {} };
 function selo(conjunto, id) {
   const it = LASTRO.itens[conjunto + ":" + id], curto = iri => iri.split("#").pop();
   if (it && it.estado === "exato") return `<p class="selo ok">Na ontologia: <code>${esc(it.iris.map(curto).join(", "))}</code></p>`;
+  if (it && it.estado === "semente") return `<p class="selo prox">Semente: indivíduo <code>${esc(it.iris.map(curto).join(", "))}</code> derivado de documento-semente do projeto, pendente de revisão humana.${it.proximo ? ` Próximo de <code>${esc(it.proximo.map(curto).join(", "))}</code>.` : ""}</p>`;
   if (it && it.estado === "proximo") return `<p class="selo prox">Sem lastro exato. Próximo de <code>${esc(it.iris.map(curto).join(", "))}</code>, pendente de revisão humana.</p>`;
   return `<p class="selo sem">Sem lastro na ontologia: ainda não há indivíduo no grafo para este elemento.</p>`;
 }

@@ -1,7 +1,7 @@
 /* Gerado por scripts/ontologia/lastro.py. Não editar à mão.
    Elementos exibidos com e sem lastro na ontologia (RF-12); usado no selo das fichas e no slide (RF-15). */
 window.HRAIGO_LASTRO = {
- "comLastro": 57,
+ "comLastro": 88,
  "conjuntos": {
   "branches": {
    "comLastro": 4,
@@ -10,15 +10,15 @@ window.HRAIGO_LASTRO = {
    "total": 4
   },
   "components": {
-   "comLastro": 5,
+   "comLastro": 22,
    "rotulo": "Componentes do modelo",
-   "semLastro": 17,
+   "semLastro": 0,
    "total": 22
   },
   "features": {
-   "comLastro": 0,
+   "comLastro": 14,
    "rotulo": "Traços de contexto",
-   "semLastro": 14,
+   "semLastro": 0,
    "total": 14
   },
   "seeds": {
@@ -71,6 +71,12 @@ window.HRAIGO_LASTRO = {
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_Pl2338Stalled"
    ]
   },
+  "components:GM-01": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_01"
+   ]
+  },
   "components:GM-02": {
    "estado": "exato",
    "iris": [
@@ -89,15 +95,87 @@ window.HRAIGO_LASTRO = {
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PL_2338_2023"
    ]
   },
-  "components:GM-15": {
-   "estado": "proximo",
+  "components:GM-05": {
+   "estado": "semente",
    "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_05"
+   ]
+  },
+  "components:GM-06": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_06"
+   ]
+  },
+  "components:GM-07": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_07"
+   ]
+  },
+  "components:GM-08": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_08"
+   ]
+  },
+  "components:GM-09": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_09"
+   ]
+  },
+  "components:GM-10": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_10"
+   ]
+  },
+  "components:GM-11": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_11"
+   ]
+  },
+  "components:GM-12": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_12"
+   ]
+  },
+  "components:GM-13": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_13"
+   ]
+  },
+  "components:GM-14": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_14"
+   ]
+  },
+  "components:GM-15": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_15"
+   ],
+   "proximo": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_GovernanceByCITDigital"
    ]
   },
-  "components:GM-17": {
-   "estado": "proximo",
+  "components:GM-16": {
+   "estado": "semente",
    "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_16"
+   ]
+  },
+  "components:GM-17": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_17"
+   ],
+   "proximo": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action01_AISupercomputer",
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#Action27_SovereignCloud"
    ]
@@ -109,14 +187,20 @@ window.HRAIGO_LASTRO = {
    ]
   },
   "components:GM-19": {
-   "estado": "proximo",
+   "estado": "semente",
    "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_19"
+   ],
+   "proximo": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis2_DiffusionTraining"
    ]
   },
   "components:GM-20": {
-   "estado": "proximo",
+   "estado": "semente",
    "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_20"
+   ],
+   "proximo": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis3_PublicServices"
    ]
   },
@@ -127,9 +211,96 @@ window.HRAIGO_LASTRO = {
    ]
   },
   "components:GM-22": {
-   "estado": "proximo",
+   "estado": "semente",
    "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_22"
+   ],
+   "proximo": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis4_BusinessInnovation"
+   ]
+  },
+  "features:CF-01": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_01"
+   ]
+  },
+  "features:CF-02": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_02"
+   ]
+  },
+  "features:CF-03": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_03"
+   ]
+  },
+  "features:CF-04": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_04"
+   ]
+  },
+  "features:CF-05": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_05"
+   ]
+  },
+  "features:CF-06": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_06"
+   ]
+  },
+  "features:CF-07": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_07"
+   ]
+  },
+  "features:CF-08": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_08"
+   ]
+  },
+  "features:CF-09": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_09"
+   ]
+  },
+  "features:CF-10": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_10"
+   ]
+  },
+  "features:CF-11": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_11"
+   ]
+  },
+  "features:CF-12": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_12"
+   ]
+  },
+  "features:CF-13": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_13"
+   ]
+  },
+  "features:CF-14": {
+   "estado": "semente",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_14"
    ]
   },
   "seeds:T1": {
@@ -421,6 +592,7 @@ window.HRAIGO_LASTRO = {
    ]
   }
  },
- "semLastro": 31,
+ "semLastro": 0,
+ "sementes": 31,
  "total": 88
 };

@@ -109,6 +109,26 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
   extrações (itens 11, 12) e das especificidades (item 16). Zero linhas = nada registrado, não "não existe".
 - **Comandos**: protocolo com exit 0; `consultas.py --check` OK; pytest → 3 passed (consultas).
 
+### Item 8 (parte A) · lastro zero com sementes; método de extração documentado — 17/11/2026
+
+- **Decisão do autor**: elementos de documentos-semente são criados automaticamente e contam como lastro, com o estado
+  "semente" visível na ficha; a metodologia fica explícita.
+- **O que mudou**
+  - `docs/especificacoes/ESP-ONT-02/METODO_EXTRACAO.md`: três origens (fonte primária, documento-semente, análise
+    externa), passos da semeadura, mapeamento de campos, estados de lastro, o que o método não faz.
+  - `scripts/ontologia/semear.py` (determinístico, sem LLM) → `ontologies/regulatory/sementes/GOV-BR-001_sementes.ttl`:
+    17 componentes e 14 traços de contexto, cada um com snapshot do documento-semente (SHA-256), fontes citadas,
+    `displayKey` e `CandidateAssertion` no lote `Lote_Sementes_GOV_BR_001`; nenhuma decisão de revisão.
+  - Traços sem fonte real (sem fonte ou só "Brasil fictício", `BRF-*`) marcados `seedHasRealSource false`; asserções
+    do documento marcadas como "hipótese de trabalho".
+  - Núcleo: anotações `seedSourceId`, `seedVerification`, `seedBasis`, `seedHasRealSource`.
+  - Contador: **88 de 88 com lastro (31 sementes), 0 sem lastro**. Selo "Semente ... pendente de revisão" na câmara;
+    o slide passa a dizer que cada peça é indivíduo da ontologia e quantas ainda são sementes.
+  - RT-VIS-03, M2: parágrafo sobre as três origens e os documentos-semente (PDF recompilado).
+- **Comandos**: protocolo com exit 0; `semear.py --check`, `lastro.py --check` e `consultas.py --check` OK; pytest
+  (todos os `tests/test_*.py`) → 162 passed.
+- **Pendente (parte B)**: gerar `modelo.js` do grafo (RF-09) e "por quê?" até a fonte nas fichas (V-14, V-19).
+
 ## Aguardando decisão
 
 | Id | Decisão | Quem | Bloqueia |
@@ -118,6 +138,7 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
 | D-03 | Revisão das extrações (dispositivos, correspondências BR↔UE, codificações, indicadores) e do mapeamento das 29 áreas para NIST, AI Act e critérios (`areas.json`) | revisor humano | V-08 a V-11 |
 | D-04 | Alinhamento A1: os 5 componentes "próximos" (GM-15, GM-17, GM-19, GM-20, GM-22) e as teses do anexo; ligações semente→afirmação e ramo→instrumento (`conselho/GOV-BR-001.ttl`) | autor | contador sem lastro |
 | D-05 | RNF-01: domínio dos IRIs (w3id.org ou GitHub Pages) | autor | V-24 |
+| D-07 | Revisar as 31 sementes (`ontologies/regulatory/sementes/GOV-BR-001_sementes.ttl`): confirmar, corrigir ou retirar; 9 traços de contexto sem fonte real | autor | selo "semente" vira revisado |
 | D-06 | PDF da "Análise Comparativa" no repositório (hoje as teses vêm de resumo) | autor | rastreabilidade das teses |
 
 ## Checklist V-01 a V-31
@@ -140,7 +161,7 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | V-12 | ✅ | `consultas.py --check` e `tests/test_consultas.py` no CI; cada PC testada sobre fixture |
 | V-13 | ✅ | `test_rnf02_full_graph_reasons_under_five_seconds` no CI: 0,12 s para 5105 triplas |
 | V-14 | ⬜ | item 8 |
-| V-15 | 🟡 | contador publicado e protegido no CI: 31 sem lastro de 88 (faltam 17 componentes e 14 traços de contexto); meta zero no item 8 |
+| V-15 | 🟡 | contador = 0 sem lastro (88/88, 31 sementes), protegido no CI; falta `modelo.js` gerado do grafo (item 8, parte B) |
 | V-16 | ✅ | `ontologies/consultas/V16_sementes_sem_ligacao.rq` = 0 linhas (`tests/test_conselho.py`, CI) |
 | V-17 | 🟡 | `afirmacoes.py` classifica as 12 teses (6/4/2); falta recálculo no CI e C04 (item 10) |
 | V-18 | 🟡 | celular participante com Minhas escolhas, Mesa e Agora já existe; falta teste de toque (item 15) |

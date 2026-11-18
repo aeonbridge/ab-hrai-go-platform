@@ -5,7 +5,8 @@ Every element the chamber, the presentation and the panel display comes from
 ``web/assets/modelo.js``. An element has backing ("lastro") only when an alignment file in
 ``ontologies/regulatory/alinhamentos/`` maps it by ``skos:exactMatch`` to an individual that
 exists in the instance graph, or when a typed individual of the ontologies declares
-``hrai:displayKey "<set>:<id>"`` for it. ``skos:closeMatch`` is recorded as "próximo" (pending human review)
+``hrai:displayKey "<set>:<id>"`` for it. Individuals seeded from the project's seed documents
+(``ontologies/regulatory/sementes/``, METODO_EXTRACAO.md) count as backed with state "semente". ``skos:closeMatch`` is recorded as "próximo" (pending human review)
 and still counts as without backing. Anything not aligned is "sem lastro".
 
 Output: ``web/assets/lastro.js`` (``window.HRAIGO_LASTRO``), read by the chamber fichas (seal)
@@ -36,7 +37,8 @@ MODELO = ROOT / "web/assets/modelo.js"
 OUT = ROOT / "web/assets/lastro.js"
 ALIGNMENTS = ROOT / "ontologies/regulatory/alinhamentos"
 INSTANCES = ["ontologies/regulatory/instances/**/*.ttl", "ontologies/scse/**/*.ttl", "ontologies/comparativo/*.ttl",
-             "ontologies/regulatory/afirmacoes/*.ttl"]
+             "ontologies/regulatory/afirmacoes/*.ttl", "ontologies/regulatory/sementes/*.ttl"]
+SEED_NS = "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#"
 DISPLAY_KEY = rdflib.URIRef("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#displayKey")
 GM_NS = "https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#"
 
@@ -117,13 +119,20 @@ def build() -> dict:
             near = sorted(i for i in close.get(eid, []) if i in known) if key == "components" else []
             if hits:
                 backed += 1
-                items[f"{key}:{eid}"] = {"estado": "exato", "iris": hits}
+                # Seeded individuals (METODO_EXTRACAO.md) count as backed but keep their own state on the seal.
+                seeded = [i for i in hits if i.startswith(SEED_NS)]
+                if seeded and len(seeded) == len(hits):
+                    near_seed = sorted(i for i in close.get(eid, []) if i in known) if key == "components" else []
+                    items[f"{key}:{eid}"] = {"estado": "semente", "iris": seeded, **({"proximo": near_seed} if near_seed else {})}
+                else:
+                    items[f"{key}:{eid}"] = {"estado": "exato", "iris": hits}
             elif near:
                 items[f"{key}:{eid}"] = {"estado": "proximo", "iris": near}
         sets[key] = {"rotulo": label, "total": len(elements), "comLastro": backed, "semLastro": len(elements) - backed}
     total = sum(s["total"] for s in sets.values())
     com = sum(s["comLastro"] for s in sets.values())
-    return {"total": total, "comLastro": com, "semLastro": total - com, "conjuntos": sets, "itens": items}
+    seeds = sum(1 for v in items.values() if v["estado"] == "semente")
+    return {"total": total, "comLastro": com, "semLastro": total - com, "sementes": seeds, "conjuntos": sets, "itens": items}
 
 
 def render(data: dict) -> str:
@@ -179,7 +188,7 @@ def main() -> int:
         print(f"sem lastro: {data['semLastro']} de {data['total']}")
         return 1 if problems else 0
     OUT.write_text(render(data), encoding="utf-8")
-    print(f"{OUT.relative_to(ROOT)}: {data['comLastro']} com lastro, {data['semLastro']} sem lastro, de {data['total']}")
+    print(f"{OUT.relative_to(ROOT)}: {data['comLastro']} com lastro ({data['sementes']} sementes), {data['semLastro']} sem lastro, de {data['total']}")
     for key, s in data["conjuntos"].items():
         print(f"  {key:11s} {s['comLastro']:3d}/{s['total']:3d}")
     return 0
