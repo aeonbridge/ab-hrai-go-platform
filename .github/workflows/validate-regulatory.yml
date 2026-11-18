@@ -14,6 +14,8 @@ on:
       - 'web/assets/grafo.js'
       - 'web/assets/monitoramento.js'
       - 'web/assets/respostas.js'
+      - 'web/ontology/**'
+      - 'web/data/**'
       - 'docs/relatorios/perguntas-norteadoras/**'
       - 'web/ao-vivo/**'
       - 'scripts/ontologia/**'
@@ -72,9 +74,11 @@ jobs:
         run: |
           python scripts/ontologia/responder_qn.py --check
           python scripts/ontologia/relatorio_qn.py --check
+      - name: IRI resolution pages are generated from the graph (RNF-01)
+        run: python scripts/ontologia/publicar_iris.py --check
       - name: Competency questions PC1-PC9 still answer (RF-08)
         run: python scripts/ontologia/consultas.py --check
       - name: Displayed elements without ontology backing never increase (RF-12)
         run: python scripts/ontologia/lastro.py --check --base-ref HEAD~1
       - name: Core and SCSE modules, lastro counter (RF-12, RF-17)
-        run: python -m pytest -q tests/test_modulos.py tests/test_lastro.py tests/test_invariantes.py tests/test_comparativo.py tests/test_conselho.py tests/test_consultas.py tests/test_sementes.py tests/test_pl2338.py tests/test_afirmacoes.py tests/test_internacional.py tests/test_capacidade.py tests/test_monitoramento.py tests/test_respostas_qn.py tests/test_china.py tests/test_decisoes.py
+        run: python -m pytest -q tests/test_modulos.py tests/test_lastro.py tests/test_invariantes.py tests/test_comparativo.py tests/test_conselho.py tests/test_consultas.py tests/test_sementes.py tests/test_pl2338.py tests/test_afirmacoes.py tests/test_internacional.py tests/test_capacidade.py tests/test_monitoramento.py tests/test_respostas_qn.py tests/test_china.py tests/test_decisoes.py tests/test_iris.py

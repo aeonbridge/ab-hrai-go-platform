@@ -309,6 +309,16 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
 - Relatório de impacto: `docs/especificacoes/ESP-ONT-02/impacto-inclusao-china.md` (+509 triplas; PC9 de 42 para 56;
   câmara e monitoramento inalterados). Achado: a V30 multiplicava linhas; agora usa `DISTINCT`.
 
+### RNF-01 · IRIs resolvíveis em `hrai-go.aeonbridge.io` — 17/11/2026
+
+- DNS (CNAME, só DNS) criado pelo autor; domínio próprio ativado no GitHub Pages (verificação de DNS OK). O endereço
+  antigo `aeonbridge.github.io/ab-hrai-go-platform/` redireciona preservando os parâmetros (link do evento continua
+  valendo). Certificado HTTPS em emissão; ativar "Enforce HTTPS" quando sair.
+- `scripts/ontologia/publicar_iris.py` gera 20 páginas (`web/ontology/**`, `web/data/**`), uma por namespace, com uma
+  seção ancorada por termo ou indivíduo: rótulo, tipos, descrição, propriedades com links que também resolvem e o que o
+  raciocinador inferiu, com a regra (ajuda o "por quê?" da V-14). CI confere que as páginas batem com o grafo.
+- `tests/test_iris.py`: três IRIs sorteados e dois fixos caem na âncora certa (V-24); inferências mostram a regra.
+
 ## Aguardando decisão
 
 | Id | Decisão | Quem | Bloqueia |
@@ -318,7 +328,7 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
 | D-03 | ~~extrações e correspondências revisadas~~ **resolvida em 17/11/2026** (`decisoes.json`) | autor | — |
 | D-04 | ~~alinhamentos e ligações aprovados~~ **resolvida em 17/11/2026** (`decisoes.json`) | autor | — |
 | D-05 | ~~domínio dos IRIs~~ **resolvida em 17/11/2026: aeonbridge.io** | autor | — |
-| D-05a | Caminho decidido: `hrai-go.aeonbridge.io`. Falta criar o CNAME `hrai-go.aeonbridge.io → aeonbridge.github.io` no DNS | autor | V-24 |
+| D-05a | ~~DNS~~ **resolvida**: CNAME criado e domínio ativo no Pages; falta só o certificado HTTPS (automático) | autor | — |
 | D-07 | ~~sementes~~ **resolvida em 17/11/2026** (`decisoes.json`) | autor | — |
 | D-08 | Conferir a localização do parágrafo sobre micro e pequenas empresas e startups no texto de 2023 (art. 32 na extração; art. 33 no rótulo da evidência) | autor | rótulo de `a1:Ev_PL_Art33PU` |
 | D-09 | ~~limiar~~ **resolvida em 17/11/2026: 5% do plano** (`decisoes.json`) | autor | — |
@@ -356,7 +366,7 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | V-21 | ⬜ | item 14 |
 | V-22 | ⬜ | item 14 |
 | V-23 | ✅ | texto do Senado como nova versão reabre dispositivos, requisitos e afirmações (`tests/test_monitoramento.py`); codificações e especificidades entram na mesma consulta quando existirem |
-| V-24 | ⏸ | domínio e caminho decididos (`hrai-go.aeonbridge.io`); falta o CNAME no DNS, depois a troca dos namespaces |
+| V-24 | ✅ | IRIs sob `hrai-go.aeonbridge.io` com páginas de resolução geradas do grafo (`tests/test_iris.py`); HTTPS em emissão |
 | V-25 | ⬜ | item 15 |
 | V-26 | ✅ | relatório gerado pela plataforma (`relatorio-QN.md`), seções QN1, QN2, QN3, aprovado pelo autor (D-11, sujeito a mudanças) |
 | V-27 | ✅ | PC9 responde; `V27_especificidades_sem_evidencia.rq` = 0 |
