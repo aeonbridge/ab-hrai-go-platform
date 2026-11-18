@@ -23,7 +23,7 @@ a1:Snap_PL2338_2023 a hrai:SourceSnapshot ; rdfs:label "PL 2338/2023, texto inic
 a1:Snap_AIAct a hrai:SourceSnapshot ; rdfs:label "Regulamento (UE) 2024/1689 (AI Act), Jornal Oficial L"@pt ;
     hrai:snapshotSHA256 "bba630444b3278e881066774002a1d7824308934f49ccfa203e65be43692f55e" .
 
-a1:Ev_PL_Art33PU a hrai:Evidence ; rdfs:label "PL 2338/2023 (2023), art. 33, parágrafo único: condições diferenciadas para ME/EPP (LC 123/2006) e startups (LC 182/2021)"@pt ; prov:wasDerivedFrom a1:Snap_PL2338_2023 .
+a1:Ev_PL_Art33PU a hrai:Evidence ; rdfs:label "PL 2338/2023 (2023), art. 32, parágrafo único (premissa P-02; rótulo antigo dizia art. 33): condições diferenciadas para ME/EPP (LC 123/2006) e startups (LC 182/2021)"@pt ; prov:wasDerivedFrom a1:Snap_PL2338_2023 .
 a1:Ev_PL_Arts38a41 a hrai:Evidence ; rdfs:label "PL 2338/2023 (2023), arts. 38 a 41: sandbox regulatório"@pt ; prov:wasDerivedFrom a1:Snap_PL2338_2023 .
 a1:Ev_PL_Art14 a hrai:Evidence ; rdfs:label "PL 2338/2023 (2023), art. 14: vedação de sistemas de risco excessivo"@pt ; prov:wasDerivedFrom a1:Snap_PL2338_2023 .
 a1:Ev_PL_Arts13a18 a hrai:Evidence ; rdfs:label "PL 2338/2023 (2023), arts. 13 a 18: avaliação preliminar e classificação de risco ex ante"@pt ; prov:wasDerivedFrom a1:Snap_PL2338_2023 .

@@ -336,6 +336,9 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
 
 ## Aguardando decisão
 
+Pendências com premissa provisória registrada em `PREMISSAS.md` seguem abertas para decisão do autor; a premissa só evita que o loop pare.
+
+
 | Id | Decisão | Quem | Bloqueia |
 |---|---|---|---|
 | D-01 | ~~China~~ resolvida (D-01, D-01b, **D-01c: incluída com textos oficiais da CAC**) | autor | — |
@@ -345,13 +348,13 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
 | D-05 | ~~domínio dos IRIs~~ **resolvida em 17/11/2026: aeonbridge.io** | autor | — |
 | D-05a | ~~DNS~~ **resolvida**: CNAME criado e domínio ativo no Pages; falta só o certificado HTTPS (automático) | autor | — |
 | D-07 | ~~sementes~~ **resolvida em 17/11/2026** (`decisoes.json`) | autor | — |
-| D-08 | Conferir a localização do parágrafo sobre micro e pequenas empresas e startups no texto de 2023 (art. 32 na extração; art. 33 no rótulo da evidência) | autor | rótulo de `a1:Ev_PL_Art33PU` |
+| D-08 | Conferir a localização do parágrafo sobre micro e pequenas empresas e startups no texto de 2023 (art. 32 na extração; art. 33 no rótulo da evidência) — **premissa P-02 adotada** (`PREMISSAS.md`) | autor | rótulo de `a1:Ev_PL_Art33PU` |
 | D-09 | ~~limiar~~ **resolvida em 17/11/2026: 5% do plano** (`decisoes.json`) | autor | — |
-| D-10 | Declarar os escopos de avaliação de cobertura (`CoverageAssessment`: jurisdição, snapshot, área) para a PC4 valer | autor | PC4, QN3 |
+| D-10 | Declarar os escopos de avaliação de cobertura (`CoverageAssessment`: jurisdição, snapshot, área) para a PC4 valer — **premissa P-03 adotada** (`PREMISSAS.md`) | autor | PC4, QN3 |
 | D-11 | ~~resposta inicial~~ **aprovada em 17/11/2026, sujeita a mudanças** (`decisoes.json`) | autor | — |
-| D-12 | Textos oficiais chineses que faltam (leis de cibersegurança, dados e informação pessoal; regras de algoritmos e de síntese profunda na íntegra) | autor | comparações com a China ainda "não codificado" |
-| D-13 | Revisar as 52 codificações (`ontologies/comparativo/codificacoes/`), em especial as 10 divergências com os autores; aprovadas, R28 passa a derivar o perfil de desenho | autor | R28, comparação na mesma régua (M5) |
-| D-06 | PDF da "Análise Comparativa" no repositório (hoje as teses vêm de resumo) | autor | rastreabilidade das teses |
+| D-12 | Textos oficiais chineses que faltam (leis de cibersegurança, dados e informação pessoal; regras de algoritmos e de síntese profunda na íntegra) — **premissa P-05 adotada** (`PREMISSAS.md`) | autor | comparações com a China ainda "não codificado" |
+| D-13 | Revisar as 52 codificações (`ontologies/comparativo/codificacoes/`), em especial as 10 divergências com os autores; aprovadas, R28 passa a derivar o perfil de desenho — **premissa P-04 adotada** (`PREMISSAS.md`) | autor | R28, comparação na mesma régua (M5) |
+| D-06 | PDF da "Análise Comparativa" no repositório (hoje as teses vêm de resumo) — **premissa P-01 adotada** (`PREMISSAS.md`) | autor | rastreabilidade das teses |
 
 ## Checklist V-01 a V-31
 
