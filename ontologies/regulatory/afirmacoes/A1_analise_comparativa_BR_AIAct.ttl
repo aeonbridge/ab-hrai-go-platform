@@ -70,7 +70,7 @@ a1:C03 a hrai:PolicyClaim ; rdfs:label "Diante da escassez de profissionais STEM
     prov:wasDerivedFrom a1:Fonte_Analise ; rdfs:comment "Sem evidência no corpus: o PBIA não quantifica escassez STEM. Exige indicador (ContextIndicator) com fonte."@pt .
 a1:C04 a hrai:PolicyClaim ; rdfs:label "O Brasil não prevê instância consultiva técnica independente equivalente ao painel científico do AI Act"@pt ;
     prov:wasDerivedFrom a1:Fonte_Analise ; hrai:claimSupportedByEvidence a1:Ev_AIAct_Art68 , a1:Ev_PL_Art32 ; hrai:challengedByClaim a1:K04 ;
-    rdfs:comment "Válida só para o texto de 2023. Segundo Alanoca et al. (2025), o substitutivo do Senado cria o CECIA: incorporar o texto primário (RF-01)."@pt .
+    rdfs:comment "Reavaliada em 17/11/2026 contra o texto primário (RF-01): vale só para o texto de 2023 (art. 32). O texto aprovado pelo Senado em 2024 cria o Comitê de Especialistas e Cientistas de IA, Cecia (art. 54). A tese continua contestada; a pergunta aberta é se o Cecia tem independência e mandato equivalentes ao painel do art. 68 do AI Act."@pt .
 a1:C05 a hrai:PolicyClaim ; rdfs:label "O Brasil carece de salvaguardas rígidas contra vieses em serviços públicos e no uso estatal de dados"@pt ;
     prov:wasDerivedFrom a1:Fonte_Analise ; hrai:challengedByClaim a1:K05 .
 a1:K05 a hrai:PolicyClaim ; rdfs:label "O PL prevê direito à não discriminação e à correção de vieses e exige, no uso estatal de alto risco, dados testados contra vieses; a lacuna real é que nada disso está em vigor"@pt ;
@@ -96,3 +96,21 @@ a1:C11 a hrai:PolicyClaim ; rdfs:label "A Nuvem Soberana gerida por Serpro e Dat
     prov:wasDerivedFrom a1:Fonte_Analise ; hrai:claimSupportedByEvidence a1:Ev_PBIA_Acao27 .
 a1:C12 a hrai:PolicyClaim ; rdfs:label "A expansão do supercomputador Santos Dumont sustenta a capacidade soberana de computação"@pt ;
     prov:wasDerivedFrom a1:Fonte_Analise ; hrai:claimSupportedByEvidence a1:Ev_PBIA_SantosDumont .
+
+# ---------- ligação ao texto primário do PL 2338 (RF-01, item 10 do loop, 17/11/2026) ----------
+# As evidências acima foram escritas a partir do resumo da análise; aqui cada uma aponta o artigo extraído do PDF
+# (ontologies/regulatory/instances/br/HRAI_GO_Regulatory_BR_PL2338.ttl). Ligação proposta, pendente de revisão.
+@prefix pl:      <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+a1:Ev_PL_Art14 dcterms:references pl:Art_2023_014 .
+a1:Ev_PL_Arts13a18 dcterms:references pl:Art_2023_013 , pl:Art_2023_014 , pl:Art_2023_015 , pl:Art_2023_016 , pl:Art_2023_017 , pl:Art_2023_018 .
+a1:Ev_PL_Arts38a41 dcterms:references pl:Art_2023_038 , pl:Art_2023_039 , pl:Art_2023_040 , pl:Art_2023_041 .
+a1:Ev_PL_Vieses dcterms:references pl:Art_2023_005 , pl:Art_2023_012 , pl:Art_2023_021 .
+a1:Ev_PL_Art32 dcterms:references pl:Art_2023_032 .
+a1:Ev_PL_Art33PU dcterms:references pl:Art_2023_032 ;
+    rdfs:comment "Divergência para revisão: na extração do PDF de 2023, o parágrafo único sobre condições diferenciadas para micro e pequenas empresas (LC 123/2006) e startups (LC 182/2021) aparece antes do art. 33, isto é, no art. 32, e não no art. 33 como diz o rótulo."@pt .
+a1:Ev_PL2024_Art54 a hrai:Evidence ;
+    rdfs:label "PL 2338/2023 (texto do Senado, 2024), art. 54: cria o Comitê de Especialistas e Cientistas de Inteligência Artificial (Cecia) para orientar e supervisionar técnica e cientificamente o desenvolvimento e a aplicação da IA"@pt ;
+    prov:wasDerivedFrom pl:Snapshot_2024 ;
+    dcterms:references pl:Art_2024_054 .
+a1:K04 hrai:claimSupportedByEvidence a1:Ev_PL2024_Art54 .

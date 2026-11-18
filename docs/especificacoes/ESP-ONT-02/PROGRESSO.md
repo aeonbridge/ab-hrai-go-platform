@@ -159,6 +159,20 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
   - CI instala `poppler-utils` e confere que a extração é reprodutível a partir dos PDFs.
 - **Aprovação**: humana (D-03). **Comandos**: protocolo com exit 0 (instâncias: PBIA e PL validados); pytest → 168 passed.
 
+### Item 10 · RF-11 teses com estado recalculado; tese C04 reavaliada — 17/11/2026
+
+- **O que mudou**
+  - Afirmações (`A1_analise_comparativa_BR_AIAct.ttl`): cada evidência do PL aponta o artigo extraído do PDF de 2023;
+    evidência nova `Ev_PL2024_Art54` (texto do Senado, art. 54, cria o Cecia) sustenta a contra-afirmação K04.
+  - **C04 reavaliada**: continua contestada, agora pelo texto primário; nota registra que a pergunta aberta é
+    independência e mandato do Cecia frente ao painel do art. 68 do AI Act. Classificação geral inalterada: 6 com
+    evidência, 4 contestadas, 2 sem evidência.
+  - **Divergência encontrada** (para revisão): a evidência rotulada "art. 33, parágrafo único" (condições diferenciadas
+    para micro e pequenas empresas e startups) aparece, na extração do PDF de 2023, antes do art. 33, no art. 32.
+  - `tests/test_afirmacoes.py` no CI: o estado gravado tem de ser igual a um recálculo a partir do grafo (V-17).
+  - Apêndice de afirmações da ESP-ONT-02 regenerado e PDF recompilado.
+- **Comandos**: protocolo com exit 0; pytest → todos passam.
+
 ## Aguardando decisão
 
 | Id | Decisão | Quem | Bloqueia |
@@ -169,6 +183,7 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
 | D-04 | Alinhamento A1: os 5 componentes "próximos" (GM-15, GM-17, GM-19, GM-20, GM-22) e as teses do anexo; ligações semente→afirmação e ramo→instrumento (`conselho/GOV-BR-001.ttl`) | autor | contador sem lastro |
 | D-05 | RNF-01: domínio dos IRIs (w3id.org ou GitHub Pages) | autor | V-24 |
 | D-07 | Revisar as 31 sementes (`ontologies/regulatory/sementes/GOV-BR-001_sementes.ttl`): confirmar, corrigir ou retirar; 9 traços de contexto sem fonte real | autor | selo "semente" vira revisado |
+| D-08 | Conferir a localização do parágrafo sobre micro e pequenas empresas e startups no texto de 2023 (art. 32 na extração; art. 33 no rótulo da evidência) | autor | rótulo de `a1:Ev_PL_Art33PU` |
 | D-06 | PDF da "Análise Comparativa" no repositório (hoje as teses vêm de resumo) | autor | rastreabilidade das teses |
 
 ## Checklist V-01 a V-31
@@ -193,7 +208,7 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | V-14 | 🟡 | ficha da área mostra o "Por quê?" da força com os componentes; cadeia de regras SWRL até a fonte na interface fica para quando houver inferência exibida de fonte primária (itens 11–12) |
 | V-15 | ✅ | `modelo.js` gerado do grafo (`build_modelo.py --check` no CI); contador = 0 sem lastro (88/88, 31 sementes) |
 | V-16 | ✅ | `ontologies/consultas/V16_sementes_sem_ligacao.rq` = 0 linhas (`tests/test_conselho.py`, CI) |
-| V-17 | 🟡 | `afirmacoes.py` classifica as 12 teses (6/4/2); falta recálculo no CI e C04 (item 10) |
+| V-17 | ✅ | `tests/test_afirmacoes.py` no CI recalcula as 12 teses e compara com o estado gravado; C04 reavaliada contra o art. 54 do texto do Senado |
 | V-18 | 🟡 | celular participante com Minhas escolhas, Mesa e Agora já existe; falta teste de toque (item 15) |
 | V-19 | 🟡 | ficha com "De onde vem" em componente, área, estrato, tensão e cadeira vazia; falta teste em aparelho real |
 | V-20 | ⬜ | item 14 |

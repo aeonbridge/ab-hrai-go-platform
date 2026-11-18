@@ -44,11 +44,12 @@
       {
         "afirmacao": "O texto aprovado pelo Senado em dez/2024 cria um comitê de especialistas e cientistas (CECIA) dentro do SIA; a comparação com o painel do AI Act depende de independência e mandato, não de existência",
         "evidencias": [
-          "Alanoca et al. (2025), seção 6.6: o SIA, coordenado pela ANPD, integra o Conselho Permanente de Cooperação Regulatória (CRIA) e o Comitê de Especialistas e Cientistas de IA (CECIA)"
+          "Alanoca et al. (2025), seção 6.6: o SIA, coordenado pela ANPD, integra o Conselho Permanente de Cooperação Regulatória (CRIA) e o Comitê de Especialistas e Cientistas de IA (CECIA)",
+          "PL 2338/2023 (texto do Senado, 2024), art. 54: cria o Comitê de Especialistas e Cientistas de Inteligência Artificial (Cecia) para orientar e supervisionar técnica e cientificamente o desenvolvimento e a aplicação da IA"
         ]
       }
     ],
-    "nota": "Válida só para o texto de 2023. Segundo Alanoca et al. (2025), o substitutivo do Senado cria o CECIA: incorporar o texto primário (RF-01)."
+    "nota": "Reavaliada em 17/11/2026 contra o texto primário (RF-01): vale só para o texto de 2023 (art. 32). O texto aprovado pelo Senado em 2024 cria o Comitê de Especialistas e Cientistas de IA, Cecia (art. 54). A tese continua contestada; a pergunta aberta é se o Cecia tem independência e mandato equivalentes ao painel do art. 68 do AI Act."
   },
   {
     "id": "C05",
