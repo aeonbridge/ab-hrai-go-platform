@@ -58,6 +58,24 @@
         "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_PbiaFundingCut",
         "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_NewGovernmentPriorities"
       ]
+    },
+    {
+      "id": "D-07",
+      "data": "2026-11-17T22:39:00-03:00",
+      "mensagem": "D-07-revisado, ok",
+      "decisao": "Aprovar as sementes do cenário GOV-BR-001 (22 componentes e 14 traços de contexto derivados dos documentos-semente), revisadas pelo autor.",
+      "lotes": [
+        "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Lote_Sementes_GOV_BR_001"
+      ],
+      "correspondencias": false
+    },
+    {
+      "id": "D-05",
+      "data": "2026-11-17T22:40:00-03:00",
+      "mensagem": "D-05 aeonbridge.io (antes: 'd05 w3id.org', 'd05 aeonbridge.io')",
+      "decisao": "Os IRIs resolvíveis (RNF-01) usarão o domínio aeonbridge.io.",
+      "lotes": [],
+      "correspondencias": false
     }
   ]
 }

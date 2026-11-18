@@ -17,15 +17,15 @@ def test_counter_covers_the_seven_sets_and_matches_alignment():
     assert data["total"] == sum(len(modelo[k]) for k in lastro.SETS)
     assert data["comLastro"] + data["semLastro"] == data["total"]
     # Only exactMatch to an existing individual counts; closeMatch stays "próximo" and without backing.
-    exact = [k for k, v in data["itens"].items() if v["estado"] in ("exato", "semente")]
+    exact = [k for k, v in data["itens"].items() if v["estado"] in ("exato", "semente", "semente revisada")]
     near = [k for k, v in data["itens"].items() if v["estado"] == "proximo"]
     assert len(exact) == data["comLastro"]
     exact = [k for k in exact if data["itens"][k]["estado"] == "exato"]
     assert "topics:energy-environment" in exact  # area backed by hrai:displayKey in the comparative module
     assert "components:GM-02" in exact
-    seeds = [k for k, v in data["itens"].items() if v["estado"] == "semente"]
+    seeds = [k for k, v in data["itens"].items() if v["estado"] in ("semente", "semente revisada")]
     assert "components:GM-15" in seeds and data["itens"]["components:GM-15"].get("proximo")
-    assert data["sementes"] == len(seeds)
+    assert data["sementes"] + data["sementesRevisadas"] == len(seeds) == 31
     assert not set(exact) & set(near)
 
 

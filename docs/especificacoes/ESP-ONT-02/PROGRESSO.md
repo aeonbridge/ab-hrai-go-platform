@@ -269,6 +269,14 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
   ligações tensão→afirmação (T1 a T6) e ramo→instrumento aprovadas. As fichas mostram "aprovado pelo autor (D-04)".
 - Fora das decisões (continuam pendentes): PBIA (lote anterior), China (D-12), sementes (D-07), respostas (D-11).
 
+### Decisões D-05 e D-07 registradas — 17/11/2026
+
+- **D-07 (sementes revisadas)**: os 36 candidatos do lote de sementes aprovados pelo autor. Contador: 88 de 88 com lastro,
+  0 sementes pendentes, 31 revisadas; o selo da câmara diz "Semente revisada pelo autor" e as fichas, "aprovado pelo
+  autor (D-07)"; o slide deixa de mencionar sementes pendentes.
+- **D-05 (domínio dos IRIs: aeonbridge.io)**: decisão registrada. Implementar exige escolher o caminho dos IRIs e apontar
+  um endereço do domínio para a publicação (DNS fora do repositório); pendente de confirmação dos detalhes (D-05a).
+
 ## Aguardando decisão
 
 | Id | Decisão | Quem | Bloqueia |
@@ -277,8 +285,9 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
 | D-02 | ~~escalas da E4 aprovadas~~ **resolvida em 17/11/2026** (`decisoes.json`) | autor | — |
 | D-03 | ~~extrações e correspondências revisadas~~ **resolvida em 17/11/2026** (`decisoes.json`) | autor | — |
 | D-04 | ~~alinhamentos e ligações aprovados~~ **resolvida em 17/11/2026** (`decisoes.json`) | autor | — |
-| D-05 | RNF-01: domínio dos IRIs (w3id.org ou GitHub Pages) | autor | V-24 |
-| D-07 | Revisar as 31 sementes (`ontologies/regulatory/sementes/GOV-BR-001_sementes.ttl`): confirmar, corrigir ou retirar; 9 traços de contexto sem fonte real | autor | selo "semente" vira revisado |
+| D-05 | ~~domínio dos IRIs~~ **resolvida em 17/11/2026: aeonbridge.io** | autor | — |
+| D-05a | Detalhes da D-05: caminho dos IRIs (por exemplo `https://aeonbridge.io/hrai-go/ontology/regulatory#`) e apontamento do domínio para a publicação | autor | V-24 |
+| D-07 | ~~sementes~~ **resolvida em 17/11/2026** (`decisoes.json`) | autor | — |
 | D-08 | Conferir a localização do parágrafo sobre micro e pequenas empresas e startups no texto de 2023 (art. 32 na extração; art. 33 no rótulo da evidência) | autor | rótulo de `a1:Ev_PL_Art33PU` |
 | D-09 | Limiar inferior de alerta para o orçamento de governança (hoje 0,45% do PBIA) e para profissionais técnicos; sem limiar, R25 não sinaliza | autor | PC3 "abaixo do limiar" |
 | D-10 | Declarar os escopos de avaliação de cobertura (`CoverageAssessment`: jurisdição, snapshot, área) para a PC4 valer | autor | PC4, QN3 |
@@ -315,7 +324,7 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | V-21 | ⬜ | item 14 |
 | V-22 | ⬜ | item 14 |
 | V-23 | ✅ | texto do Senado como nova versão reabre dispositivos, requisitos e afirmações (`tests/test_monitoramento.py`); codificações e especificidades entram na mesma consulta quando existirem |
-| V-24 | ⏸ | D-05 |
+| V-24 | ⏸ | domínio decidido (aeonbridge.io, D-05); falta caminho e apontamento (D-05a) |
 | V-25 | ⬜ | item 15 |
 | V-26 | 🟡 | relatório gerado pela plataforma (`relatorio-QN.md`), seções QN1, QN2, QN3; "publicado" depende das decisões (D-11) |
 | V-27 | ✅ | PC9 responde; `V27_especificidades_sem_evidencia.rq` = 0 |

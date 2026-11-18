@@ -25,6 +25,78 @@
 
 <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338#Candidate_2024> hrai:hasReviewDecision dec:D_03 .
 
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_01> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_02> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_03> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_04> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_05> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_06> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_07> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_08> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_09> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_10> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_11> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_12> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_13> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_CF_14> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_01> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_02> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_03> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_04> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_05> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_06> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_07> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_08> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_09> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_10> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_11> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_12> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_13> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_14> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_15> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_16> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_17> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_18> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_19> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_20> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_21> hrai:hasReviewDecision dec:D_07 .
+
+<https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Candidate_GM_22> hrai:hasReviewDecision dec:D_07 .
+
 <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR006_EU086> hrai:hasReviewDecision dec:D_03 .
 
 <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Candidate_Corr_BR008_EU014> hrai:hasReviewDecision dec:D_03 .
@@ -114,6 +186,13 @@ dec:D_02 a hrai:ApprovalDecision ;
     hrai:approvedReason "Mensagem do autor: \"D-02 aprovado\"" ;
     hrai:reviewDecisionBy dec:Autor .
 
+dec:D_05 a hrai:ApprovalDecision ;
+    rdfs:label "D-05: Os IRIs resolvíveis (RNF-01) usarão o domínio aeonbridge.io."@pt ;
+    prov:wasAttributedTo dec:Autor ;
+    hrai:approvalRecordedAt "2026-11-17T22:40:00-03:00"^^xsd:dateTime ;
+    hrai:approvedReason "Mensagem do autor: \"D-05 aeonbridge.io (antes: 'd05 w3id.org', 'd05 aeonbridge.io')\"" ;
+    hrai:reviewDecisionBy dec:Autor .
+
 <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/eu/aiact#Candidate_AIAct_2024> hrai:hasReviewDecision dec:D_03 .
 
 <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Candidate_Principio_1> hrai:hasReviewDecision dec:D_03 .
@@ -166,6 +245,13 @@ dec:D_04 a hrai:ApprovalDecision ;
     prov:wasAttributedTo dec:Autor ;
     hrai:approvalRecordedAt "2026-11-17T22:36:00-03:00"^^xsd:dateTime ;
     hrai:approvedReason "Mensagem do autor: \"D-04 ij (confirmado pelo autor: 'Sim, aprovado')\"" ;
+    hrai:reviewDecisionBy dec:Autor .
+
+dec:D_07 a hrai:ApprovalDecision ;
+    rdfs:label "D-07: Aprovar as sementes do cenário GOV-BR-001 (22 componentes e 14 traços de contexto derivados dos documentos-semente), revisadas pelo autor."@pt ;
+    prov:wasAttributedTo dec:Autor ;
+    hrai:approvalRecordedAt "2026-11-17T22:39:00-03:00"^^xsd:dateTime ;
+    hrai:approvedReason "Mensagem do autor: \"D-07-revisado, ok\"" ;
     hrai:reviewDecisionBy dec:Autor .
 
 dec:D_03 a hrai:ApprovalDecision ;

@@ -30,15 +30,17 @@ import sys
 from pathlib import Path
 
 import rdflib
-from rdflib.namespace import RDF, SKOS
+from rdflib.namespace import DCTERMS, RDF, SKOS
 
 ROOT = Path(__file__).resolve().parents[2]
 MODELO = ROOT / "web/assets/modelo.js"
 OUT = ROOT / "web/assets/lastro.js"
 ALIGNMENTS = ROOT / "ontologies/regulatory/alinhamentos"
 INSTANCES = ["ontologies/regulatory/instances/**/*.ttl", "ontologies/scse/**/*.ttl", "ontologies/comparativo/*.ttl",
-             "ontologies/regulatory/afirmacoes/*.ttl", "ontologies/regulatory/sementes/*.ttl"]
+             "ontologies/regulatory/afirmacoes/*.ttl", "ontologies/regulatory/sementes/*.ttl",
+             "ontologies/regulatory/decisoes/*.ttl"]
 SEED_NS = "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#"
+H_REVIEW = rdflib.URIRef("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#hasReviewDecision")
 DISPLAY_KEY = rdflib.URIRef("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#displayKey")
 GM_NS = "https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#"
 
@@ -108,6 +110,7 @@ def build() -> dict:
     graph = instance_graph()
     known = known_individuals(graph)
     keyed = display_keys(graph)
+    reviewed = {str(graph.value(c, DCTERMS.subject)) for c in graph.subjects(H_REVIEW, None)}
     sets, items = {}, {}
     for key, (label, ident) in SETS.items():
         elements = modelo.get(key, [])
@@ -123,7 +126,8 @@ def build() -> dict:
                 seeded = [i for i in hits if i.startswith(SEED_NS)]
                 if seeded and len(seeded) == len(hits):
                     near_seed = sorted(i for i in close.get(eid, []) if i in known) if key == "components" else []
-                    items[f"{key}:{eid}"] = {"estado": "semente", "iris": seeded, **({"proximo": near_seed} if near_seed else {})}
+                    state = "semente revisada" if all(i in reviewed for i in seeded) else "semente"
+                    items[f"{key}:{eid}"] = {"estado": state, "iris": seeded, **({"proximo": near_seed} if near_seed else {})}
                 else:
                     items[f"{key}:{eid}"] = {"estado": "exato", "iris": hits}
             elif near:
@@ -131,8 +135,10 @@ def build() -> dict:
         sets[key] = {"rotulo": label, "total": len(elements), "comLastro": backed, "semLastro": len(elements) - backed}
     total = sum(s["total"] for s in sets.values())
     com = sum(s["comLastro"] for s in sets.values())
-    seeds = sum(1 for v in items.values() if v["estado"] == "semente")
-    return {"total": total, "comLastro": com, "semLastro": total - com, "sementes": seeds, "conjuntos": sets, "itens": items}
+    seeds = sum(1 for v in items.values() if v["estado"] == "semente")   # pending human review
+    reviewed_seeds = sum(1 for v in items.values() if v["estado"] == "semente revisada")
+    return {"total": total, "comLastro": com, "semLastro": total - com, "sementes": seeds, "sementesRevisadas": reviewed_seeds,
+            "conjuntos": sets, "itens": items}
 
 
 def render(data: dict) -> str:
@@ -188,7 +194,8 @@ def main() -> int:
         print(f"sem lastro: {data['semLastro']} de {data['total']}")
         return 1 if problems else 0
     OUT.write_text(render(data), encoding="utf-8")
-    print(f"{OUT.relative_to(ROOT)}: {data['comLastro']} com lastro ({data['sementes']} sementes), {data['semLastro']} sem lastro, de {data['total']}")
+    print(f"{OUT.relative_to(ROOT)}: {data['comLastro']} com lastro ({data['sementes']} sementes pendentes, {data['sementesRevisadas']} revisadas), "
+          f"{data['semLastro']} sem lastro, de {data['total']}")
     for key, s in data["conjuntos"].items():
         print(f"  {key:11s} {s['comLastro']:3d}/{s['total']:3d}")
     return 0

@@ -72,7 +72,7 @@ window.HRAIGO_LASTRO = {
    ]
   },
   "components:GM-01": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_01"
    ]
@@ -99,67 +99,67 @@ window.HRAIGO_LASTRO = {
    ]
   },
   "components:GM-05": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_05"
    ]
   },
   "components:GM-06": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_06"
    ]
   },
   "components:GM-07": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_07"
    ]
   },
   "components:GM-08": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_08"
    ]
   },
   "components:GM-09": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_09"
    ]
   },
   "components:GM-10": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_10"
    ]
   },
   "components:GM-11": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_11"
    ]
   },
   "components:GM-12": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_12"
    ]
   },
   "components:GM-13": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_13"
    ]
   },
   "components:GM-14": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_14"
    ]
   },
   "components:GM-15": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_15"
    ],
@@ -168,13 +168,13 @@ window.HRAIGO_LASTRO = {
    ]
   },
   "components:GM-16": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_16"
    ]
   },
   "components:GM-17": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_17"
    ],
@@ -191,7 +191,7 @@ window.HRAIGO_LASTRO = {
    ]
   },
   "components:GM-19": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_19"
    ],
@@ -200,7 +200,7 @@ window.HRAIGO_LASTRO = {
    ]
   },
   "components:GM-20": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_20"
    ],
@@ -216,7 +216,7 @@ window.HRAIGO_LASTRO = {
    ]
   },
   "components:GM-22": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Componente_GM_22"
    ],
@@ -225,85 +225,85 @@ window.HRAIGO_LASTRO = {
    ]
   },
   "features:CF-01": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_01"
    ]
   },
   "features:CF-02": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_02"
    ]
   },
   "features:CF-03": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_03"
    ]
   },
   "features:CF-04": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_04"
    ]
   },
   "features:CF-05": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_05"
    ]
   },
   "features:CF-06": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_06"
    ]
   },
   "features:CF-07": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_07"
    ]
   },
   "features:CF-08": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_08"
    ]
   },
   "features:CF-09": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_09"
    ]
   },
   "features:CF-10": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_10"
    ]
   },
   "features:CF-11": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_11"
    ]
   },
   "features:CF-12": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_12"
    ]
   },
   "features:CF-13": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_13"
    ]
   },
   "features:CF-14": {
-   "estado": "semente",
+   "estado": "semente revisada",
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#Traco_CF_14"
    ]
@@ -598,6 +598,7 @@ window.HRAIGO_LASTRO = {
   }
  },
  "semLastro": 0,
- "sementes": 31,
+ "sementes": 0,
+ "sementesRevisadas": 31,
  "total": 88
 };

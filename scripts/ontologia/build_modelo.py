@@ -107,6 +107,8 @@ def build(g: rdflib.Graph) -> tuple[dict, dict]:
         for eid, s in keyed(g, setname):
             snap = g.value(s, PROV.wasDerivedFrom)
             decisions = [d for d in g.objects(s, DCTERMS.isReferencedBy) if (d, RDF.type, H.ApprovalDecision) in g]
+            decisions += [d for c in g.subjects(DCTERMS.subject, s) for d in g.objects(c, H.hasReviewDecision)
+                          if (d, RDF.type, H.ApprovalDecision) in g]
             entry = {"iri": str(s), "estado": "semente" if str(s).startswith(SEED_NS) else "ontologia",
                      "revisao": ("aprovado pelo autor (" + ", ".join(sorted(str(d).split("#")[-1].replace("_", "-") for d in decisions)) + ")")
                                 if decisions else "pendente"}

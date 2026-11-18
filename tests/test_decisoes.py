@@ -28,4 +28,5 @@ def test_decisions_match_the_log_and_quote_the_message():
 def test_only_logged_batches_are_reviewed():
     g = rdflib.Graph().parse(OUT)
     reviewed = {str(c) for c in g.subjects(H.hasReviewDecision, None)}
-    assert not any("/sementes#" in c or "/respostas#" in c or "/cn/china#" in c for c in reviewed)  # D-07, D-11, D-12 pending
+    assert not any("/respostas#" in c or "/cn/china#" in c for c in reviewed)  # D-11 and D-12 still pending
+    assert any("/sementes#" in c for c in reviewed)  # D-07 approved the seeds

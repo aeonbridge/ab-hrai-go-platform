@@ -32,7 +32,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "components:GM-02": {
   "estado": "semente",
@@ -49,7 +49,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "components:GM-03": {
   "estado": "semente",
@@ -65,7 +65,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "components:GM-04": {
   "estado": "semente",
@@ -82,7 +82,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "components:GM-05": {
   "estado": "semente",
@@ -95,7 +95,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "components:GM-06": {
   "estado": "semente",
@@ -108,7 +108,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "components:GM-07": {
   "estado": "semente",
@@ -121,7 +121,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "components:GM-08": {
   "estado": "semente",
@@ -134,7 +134,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "components:GM-09": {
   "estado": "semente",
@@ -147,7 +147,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "components:GM-10": {
   "estado": "semente",
@@ -160,7 +160,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "components:GM-11": {
   "estado": "semente",
@@ -173,7 +173,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "components:GM-12": {
   "estado": "semente",
@@ -186,7 +186,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "components:GM-13": {
   "estado": "semente",
@@ -200,7 +200,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "components:GM-14": {
   "estado": "semente",
@@ -213,7 +213,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "components:GM-15": {
   "estado": "semente",
@@ -223,7 +223,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "components:GM-16": {
   "estado": "semente",
@@ -236,7 +236,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "components:GM-17": {
   "estado": "semente",
@@ -246,7 +246,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "components:GM-18": {
   "estado": "semente",
@@ -262,7 +262,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "components:GM-19": {
   "estado": "semente",
@@ -276,7 +276,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "components:GM-20": {
   "estado": "semente",
@@ -289,7 +289,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "components:GM-21": {
   "estado": "semente",
@@ -305,7 +305,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "components:GM-22": {
   "estado": "semente",
@@ -318,7 +318,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "9206dd0ea3f1acd593ab8e9a0fb2ab072593989d75cecf25f3ed5bbda8976e99",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/model/brasil-governanca-v0.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "features:CF-01": {
   "estado": "semente",
@@ -328,7 +328,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "727e453b2090518613f80da55e24cdd0ea70f9a236640edb0a4d685f7a86db2d",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/context/2026-11-14.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "features:CF-02": {
   "estado": "semente",
@@ -338,7 +338,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "727e453b2090518613f80da55e24cdd0ea70f9a236640edb0a4d685f7a86db2d",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/context/2026-11-14.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "features:CF-03": {
   "estado": "semente",
@@ -351,7 +351,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "727e453b2090518613f80da55e24cdd0ea70f9a236640edb0a4d685f7a86db2d",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/context/2026-11-14.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "features:CF-04": {
   "estado": "semente",
@@ -361,7 +361,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "727e453b2090518613f80da55e24cdd0ea70f9a236640edb0a4d685f7a86db2d",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/context/2026-11-14.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "features:CF-05": {
   "estado": "semente",
@@ -374,7 +374,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "727e453b2090518613f80da55e24cdd0ea70f9a236640edb0a4d685f7a86db2d",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/context/2026-11-14.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "features:CF-06": {
   "estado": "semente",
@@ -384,7 +384,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "727e453b2090518613f80da55e24cdd0ea70f9a236640edb0a4d685f7a86db2d",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/context/2026-11-14.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "features:CF-07": {
   "estado": "semente",
@@ -394,7 +394,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "727e453b2090518613f80da55e24cdd0ea70f9a236640edb0a4d685f7a86db2d",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/context/2026-11-14.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "features:CF-08": {
   "estado": "semente",
@@ -404,7 +404,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "727e453b2090518613f80da55e24cdd0ea70f9a236640edb0a4d685f7a86db2d",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/context/2026-11-14.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "features:CF-09": {
   "estado": "semente",
@@ -417,7 +417,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "727e453b2090518613f80da55e24cdd0ea70f9a236640edb0a4d685f7a86db2d",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/context/2026-11-14.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "features:CF-10": {
   "estado": "semente",
@@ -431,7 +431,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "727e453b2090518613f80da55e24cdd0ea70f9a236640edb0a4d685f7a86db2d",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/context/2026-11-14.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "features:CF-11": {
   "estado": "semente",
@@ -441,7 +441,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "727e453b2090518613f80da55e24cdd0ea70f9a236640edb0a4d685f7a86db2d",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/context/2026-11-14.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "features:CF-12": {
   "estado": "semente",
@@ -451,7 +451,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "727e453b2090518613f80da55e24cdd0ea70f9a236640edb0a4d685f7a86db2d",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/context/2026-11-14.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "features:CF-13": {
   "estado": "semente",
@@ -464,7 +464,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "727e453b2090518613f80da55e24cdd0ea70f9a236640edb0a4d685f7a86db2d",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/context/2026-11-14.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "features:CF-14": {
   "estado": "semente",
@@ -474,7 +474,7 @@ window.HRAIGO_GRAFO = {
    "sha256": "727e453b2090518613f80da55e24cdd0ea70f9a236640edb0a4d685f7a86db2d",
    "uri": "https://github.com/aeonbridge/ab-hrai-go-platform/blob/main/scenarios/governanca-brasil/context/2026-11-14.json"
   },
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-07)"
  },
  "seeds:T1": {
   "afirmacoes": [
