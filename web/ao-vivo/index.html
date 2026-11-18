@@ -705,7 +705,13 @@ $("#abaMinhas").addEventListener("click", async e => {
     b.disabled = true; if (await mandar("q4", { mv, tx }, "publicado na mesa e no telão")) { b.textContent = "Atualizar"; abrirAba("mesa"); } b.disabled = false;
   }
 });
-$("#abaMinhas").addEventListener("change", e => { if (e.target.id === "q2") mandar("q2", Number(e.target.value) / 100, "sua posição entrou no eixo"); });
+$("#abaMinhas").addEventListener("change", e => {
+  if (e.target.id !== "q2") return;
+  const v = Number(e.target.value) / 100, eu = L.participantes().find(p => p.pid === L.eu());
+  /* Rodada 1 (posição cega): a primeira posição fica em q2r1 e nunca muda (RF-10, premissa P-06). */
+  if (!eu || !eu.q2r1) L.enviar("q2r1", v).catch(() => {});
+  mandar("q2", v, "sua posição entrou no eixo");
+});
 $("#abaMinhas").addEventListener("input", e => { if (e.target.id === "q4tx") $("#q4n").textContent = e.target.value.length + "/280"; });
 function renderAgora() {
   const eu = L.eu(), novos = agora.filter(a => a.ts > T0 - 2000).length;

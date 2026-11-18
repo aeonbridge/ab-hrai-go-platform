@@ -1,0 +1,36 @@
+{
+ "afirmacoesConsideradas": [
+  "https://hrai-go.aeonbridge.io/data/regulatory/claims/a1#C01",
+  "https://hrai-go.aeonbridge.io/data/regulatory/claims/a1#C02",
+  "https://hrai-go.aeonbridge.io/data/regulatory/claims/a1#C04",
+  "https://hrai-go.aeonbridge.io/data/regulatory/claims/a1#C05",
+  "https://hrai-go.aeonbridge.io/data/regulatory/claims/a1#C07",
+  "https://hrai-go.aeonbridge.io/data/regulatory/claims/a1#K01",
+  "https://hrai-go.aeonbridge.io/data/regulatory/claims/a1#K05",
+  "https://hrai-go.aeonbridge.io/data/regulatory/claims/a1#K09",
+  "https://hrai-go.aeonbridge.io/data/sessoes/ensaio-simulado#Contribuicao_simensaio00",
+  "https://hrai-go.aeonbridge.io/data/sessoes/ensaio-simulado#Contribuicao_simensaio01",
+  "https://hrai-go.aeonbridge.io/data/sessoes/ensaio-simulado#Contribuicao_simensaio02",
+  "https://hrai-go.aeonbridge.io/data/sessoes/ensaio-simulado#Contribuicao_simensaio03",
+  "https://hrai-go.aeonbridge.io/data/sessoes/ensaio-simulado#Contribuicao_simensaio04",
+  "https://hrai-go.aeonbridge.io/data/sessoes/ensaio-simulado#Contribuicao_simensaio05"
+ ],
+ "divergentes": [
+  "https://hrai-go.aeonbridge.io/data/sessoes/ensaio-simulado#Contribuicao_simensaio01",
+  "https://hrai-go.aeonbridge.io/data/sessoes/ensaio-simulado#Contribuicao_simensaio02",
+  "https://hrai-go.aeonbridge.io/data/sessoes/ensaio-simulado#Contribuicao_simensaio04",
+  "https://hrai-go.aeonbridge.io/data/sessoes/ensaio-simulado#Contribuicao_simensaio05"
+ ],
+ "metricas": {
+  "amplitude": 14,
+  "ancoragem": 0.286,
+  "divergenciaPreservada": 4,
+  "participantes": 14,
+  "pedidosDeFonte": 15,
+  "revisaoDePosicao": {
+   "comPosicaoNasDuasRodadas": 14,
+   "revisaram": 8
+  },
+  "simulados": 14
+ }
+}

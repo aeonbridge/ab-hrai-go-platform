@@ -1,0 +1,964 @@
+[
+ {
+  "pid": "sim-ensaio-00",
+  "setor": "gov",
+  "sim": true,
+  "k": "setor",
+  "v": "gov",
+  "ts": 1763420004742
+ },
+ {
+  "pid": "sim-ensaio-00",
+  "setor": "gov",
+  "sim": true,
+  "k": "q1",
+  "v": "T6",
+  "ts": 1763420008513
+ },
+ {
+  "pid": "sim-ensaio-00",
+  "setor": "gov",
+  "sim": true,
+  "k": "q2r1",
+  "v": 0.59,
+  "ts": 1763420011609
+ },
+ {
+  "pid": "sim-ensaio-00",
+  "setor": "gov",
+  "sim": true,
+  "k": "q2",
+  "v": 0.59,
+  "ts": 1763420012639
+ },
+ {
+  "pid": "sim-ensaio-00",
+  "setor": "gov",
+  "sim": true,
+  "k": "q3",
+  "v": "children-vulnerable",
+  "ts": 1763420014702
+ },
+ {
+  "pid": "sim-ensaio-00",
+  "setor": "gov",
+  "sim": true,
+  "k": "q4",
+  "v": {
+   "mv": "challenge",
+   "tx": "Auditoria prévia sem credenciamento de auditores vira carimbo."
+  },
+  "ts": 1763420016872
+ },
+ {
+  "pid": "sim-ensaio-01",
+  "setor": "reg",
+  "sim": true,
+  "k": "setor",
+  "v": "reg",
+  "ts": 1763420018708
+ },
+ {
+  "pid": "sim-ensaio-01",
+  "setor": "reg",
+  "sim": true,
+  "k": "q1",
+  "v": "T5",
+  "ts": 1763420019629
+ },
+ {
+  "pid": "sim-ensaio-01",
+  "setor": "reg",
+  "sim": true,
+  "k": "q2r1",
+  "v": 0.62,
+  "ts": 1763420023644
+ },
+ {
+  "pid": "sim-ensaio-01",
+  "setor": "reg",
+  "sim": true,
+  "k": "q2",
+  "v": 0.92,
+  "ts": 1763420027967
+ },
+ {
+  "pid": "sim-ensaio-01",
+  "setor": "reg",
+  "sim": true,
+  "k": "q3",
+  "v": "participation",
+  "ts": 1763420032704
+ },
+ {
+  "pid": "sim-ensaio-01",
+  "setor": "reg",
+  "sim": true,
+  "k": "q4",
+  "v": {
+   "mv": "evidence",
+   "tx": "Qual o custo médio de uma auditoria para uma startup brasileira?"
+  },
+  "ts": 1763420034620
+ },
+ {
+  "pid": "sim-ensaio-02",
+  "setor": "leg",
+  "sim": true,
+  "k": "setor",
+  "v": "leg",
+  "ts": 1763420038235
+ },
+ {
+  "pid": "sim-ensaio-02",
+  "setor": "leg",
+  "sim": true,
+  "k": "q1",
+  "v": "T5",
+  "ts": 1763420040384
+ },
+ {
+  "pid": "sim-ensaio-02",
+  "setor": "leg",
+  "sim": true,
+  "k": "q2r1",
+  "v": 0.12,
+  "ts": 1763420042485
+ },
+ {
+  "pid": "sim-ensaio-02",
+  "setor": "leg",
+  "sim": true,
+  "k": "q2",
+  "v": 0.42,
+  "ts": 1763420046378
+ },
+ {
+  "pid": "sim-ensaio-02",
+  "setor": "leg",
+  "sim": true,
+  "k": "q3",
+  "v": "participation",
+  "ts": 1763420049248
+ },
+ {
+  "pid": "sim-ensaio-02",
+  "setor": "leg",
+  "sim": true,
+  "k": "q4",
+  "v": {
+   "mv": "amend",
+   "tx": "Escalonar por risco e porte, com prazo maior para pequenas empresas."
+  },
+  "ts": 1763420053746
+ },
+ {
+  "pid": "sim-ensaio-03",
+  "setor": "est",
+  "sim": true,
+  "k": "setor",
+  "v": "est",
+  "ts": 1763420054594
+ },
+ {
+  "pid": "sim-ensaio-03",
+  "setor": "est",
+  "sim": true,
+  "k": "q1",
+  "v": "T4",
+  "ts": 1763420059553
+ },
+ {
+  "pid": "sim-ensaio-03",
+  "setor": "est",
+  "sim": true,
+  "k": "q2r1",
+  "v": 0.1,
+  "ts": 1763420061646
+ },
+ {
+  "pid": "sim-ensaio-03",
+  "setor": "est",
+  "sim": true,
+  "k": "q2",
+  "v": 0.4,
+  "ts": 1763420065847
+ },
+ {
+  "pid": "sim-ensaio-03",
+  "setor": "est",
+  "sim": true,
+  "k": "q3",
+  "v": "participation",
+  "ts": 1763420067418
+ },
+ {
+  "pid": "sim-ensaio-03",
+  "setor": "est",
+  "sim": true,
+  "k": "q4",
+  "v": {
+   "mv": "support",
+   "tx": "Serviços públicos essenciais precisam de auditoria antes de operar."
+  },
+  "ts": 1763420069651
+ },
+ {
+  "pid": "sim-ensaio-04",
+  "setor": "aca",
+  "sim": true,
+  "k": "setor",
+  "v": "aca",
+  "ts": 1763420072314
+ },
+ {
+  "pid": "sim-ensaio-04",
+  "setor": "aca",
+  "sim": true,
+  "k": "q1",
+  "v": "T5",
+  "ts": 1763420077298
+ },
+ {
+  "pid": "sim-ensaio-04",
+  "setor": "aca",
+  "sim": true,
+  "k": "q2r1",
+  "v": -0.19,
+  "ts": 1763420077893
+ },
+ {
+  "pid": "sim-ensaio-04",
+  "setor": "aca",
+  "sim": true,
+  "k": "q2",
+  "v": 0.11,
+  "ts": 1763420080938
+ },
+ {
+  "pid": "sim-ensaio-04",
+  "setor": "aca",
+  "sim": true,
+  "k": "q3",
+  "v": "energy-environment",
+  "ts": 1763420084221
+ },
+ {
+  "pid": "sim-ensaio-04",
+  "setor": "aca",
+  "sim": true,
+  "k": "q4",
+  "v": {
+   "mv": "challenge",
+   "tx": "Testes com dados sintéticos não captam o viés do histórico real."
+  },
+  "ts": 1763420087705
+ },
+ {
+  "pid": "sim-ensaio-05",
+  "setor": "soc",
+  "sim": true,
+  "k": "setor",
+  "v": "soc",
+  "ts": 1763420089523
+ },
+ {
+  "pid": "sim-ensaio-05",
+  "setor": "soc",
+  "sim": true,
+  "k": "q1",
+  "v": "T5",
+  "ts": 1763420092513
+ },
+ {
+  "pid": "sim-ensaio-05",
+  "setor": "soc",
+  "sim": true,
+  "k": "q2r1",
+  "v": -0.41,
+  "ts": 1763420093547
+ },
+ {
+  "pid": "sim-ensaio-05",
+  "setor": "soc",
+  "sim": true,
+  "k": "q2",
+  "v": -0.41,
+  "ts": 1763420094266
+ },
+ {
+  "pid": "sim-ensaio-05",
+  "setor": "soc",
+  "sim": true,
+  "k": "q3",
+  "v": "energy-environment",
+  "ts": 1763420096925
+ },
+ {
+  "pid": "sim-ensaio-05",
+  "setor": "soc",
+  "sim": true,
+  "k": "q4",
+  "v": {
+   "mv": "amend",
+   "tx": "Registro público obrigatório de algoritmos usados por órgãos federais."
+  },
+  "ts": 1763420097717
+ },
+ {
+  "pid": "sim-ensaio-06",
+  "setor": "pri",
+  "sim": true,
+  "k": "setor",
+  "v": "pri",
+  "ts": 1763420100055
+ },
+ {
+  "pid": "sim-ensaio-06",
+  "setor": "pri",
+  "sim": true,
+  "k": "q1",
+  "v": "T4",
+  "ts": 1763420101025
+ },
+ {
+  "pid": "sim-ensaio-06",
+  "setor": "pri",
+  "sim": true,
+  "k": "q2r1",
+  "v": 0.75,
+  "ts": 1763420103234
+ },
+ {
+  "pid": "sim-ensaio-06",
+  "setor": "pri",
+  "sim": true,
+  "k": "q2",
+  "v": 0.75,
+  "ts": 1763420103843
+ },
+ {
+  "pid": "sim-ensaio-06",
+  "setor": "pri",
+  "sim": true,
+  "k": "q3",
+  "v": "children-vulnerable",
+  "ts": 1763420107995
+ },
+ {
+  "pid": "sim-ensaio-07",
+  "setor": "out",
+  "sim": true,
+  "k": "setor",
+  "v": "out",
+  "ts": 1763420108654
+ },
+ {
+  "pid": "sim-ensaio-07",
+  "setor": "out",
+  "sim": true,
+  "k": "q1",
+  "v": "T6",
+  "ts": 1763420110241
+ },
+ {
+  "pid": "sim-ensaio-07",
+  "setor": "out",
+  "sim": true,
+  "k": "q2r1",
+  "v": -0.87,
+  "ts": 1763420110857
+ },
+ {
+  "pid": "sim-ensaio-07",
+  "setor": "out",
+  "sim": true,
+  "k": "q2",
+  "v": -0.87,
+  "ts": 1763420114246
+ },
+ {
+  "pid": "sim-ensaio-07",
+  "setor": "out",
+  "sim": true,
+  "k": "q3",
+  "v": "children-vulnerable",
+  "ts": 1763420117433
+ },
+ {
+  "pid": "sim-ensaio-08",
+  "setor": "gov",
+  "sim": true,
+  "k": "setor",
+  "v": "gov",
+  "ts": 1763420121843
+ },
+ {
+  "pid": "sim-ensaio-08",
+  "setor": "gov",
+  "sim": true,
+  "k": "q1",
+  "v": "T5",
+  "ts": 1763420123127
+ },
+ {
+  "pid": "sim-ensaio-08",
+  "setor": "gov",
+  "sim": true,
+  "k": "q2r1",
+  "v": -0.27,
+  "ts": 1763420123923
+ },
+ {
+  "pid": "sim-ensaio-08",
+  "setor": "gov",
+  "sim": true,
+  "k": "q2",
+  "v": -0.67,
+  "ts": 1763420128502
+ },
+ {
+  "pid": "sim-ensaio-08",
+  "setor": "gov",
+  "sim": true,
+  "k": "q3",
+  "v": "children-vulnerable",
+  "ts": 1763420129404
+ },
+ {
+  "pid": "sim-ensaio-09",
+  "setor": "reg",
+  "sim": true,
+  "k": "setor",
+  "v": "reg",
+  "ts": 1763420131152
+ },
+ {
+  "pid": "sim-ensaio-09",
+  "setor": "reg",
+  "sim": true,
+  "k": "q1",
+  "v": "T5",
+  "ts": 1763420131962
+ },
+ {
+  "pid": "sim-ensaio-09",
+  "setor": "reg",
+  "sim": true,
+  "k": "q2r1",
+  "v": -0.12,
+  "ts": 1763420133256
+ },
+ {
+  "pid": "sim-ensaio-09",
+  "setor": "reg",
+  "sim": true,
+  "k": "q2",
+  "v": -0.12,
+  "ts": 1763420137885
+ },
+ {
+  "pid": "sim-ensaio-09",
+  "setor": "reg",
+  "sim": true,
+  "k": "q3",
+  "v": "energy-environment",
+  "ts": 1763420142364
+ },
+ {
+  "pid": "sim-ensaio-10",
+  "setor": "leg",
+  "sim": true,
+  "k": "setor",
+  "v": "leg",
+  "ts": 1763420146397
+ },
+ {
+  "pid": "sim-ensaio-10",
+  "setor": "leg",
+  "sim": true,
+  "k": "q1",
+  "v": "T4",
+  "ts": 1763420146906
+ },
+ {
+  "pid": "sim-ensaio-10",
+  "setor": "leg",
+  "sim": true,
+  "k": "q2r1",
+  "v": -0.53,
+  "ts": 1763420149583
+ },
+ {
+  "pid": "sim-ensaio-10",
+  "setor": "leg",
+  "sim": true,
+  "k": "q2",
+  "v": -0.23,
+  "ts": 1763420152956
+ },
+ {
+  "pid": "sim-ensaio-10",
+  "setor": "leg",
+  "sim": true,
+  "k": "q3",
+  "v": "children-vulnerable",
+  "ts": 1763420153638
+ },
+ {
+  "pid": "sim-ensaio-11",
+  "setor": "est",
+  "sim": true,
+  "k": "setor",
+  "v": "est",
+  "ts": 1763420156734
+ },
+ {
+  "pid": "sim-ensaio-11",
+  "setor": "est",
+  "sim": true,
+  "k": "q1",
+  "v": "T6",
+  "ts": 1763420160092
+ },
+ {
+  "pid": "sim-ensaio-11",
+  "setor": "est",
+  "sim": true,
+  "k": "q2r1",
+  "v": 0.81,
+  "ts": 1763420165084
+ },
+ {
+  "pid": "sim-ensaio-11",
+  "setor": "est",
+  "sim": true,
+  "k": "q2",
+  "v": 0.41,
+  "ts": 1763420166726
+ },
+ {
+  "pid": "sim-ensaio-11",
+  "setor": "est",
+  "sim": true,
+  "k": "q3",
+  "v": "energy-environment",
+  "ts": 1763420169668
+ },
+ {
+  "pid": "sim-ensaio-12",
+  "setor": "aca",
+  "sim": true,
+  "k": "setor",
+  "v": "aca",
+  "ts": 1763420173568
+ },
+ {
+  "pid": "sim-ensaio-12",
+  "setor": "aca",
+  "sim": true,
+  "k": "q1",
+  "v": "T5",
+  "ts": 1763420177672
+ },
+ {
+  "pid": "sim-ensaio-12",
+  "setor": "aca",
+  "sim": true,
+  "k": "q2r1",
+  "v": -0.44,
+  "ts": 1763420180481
+ },
+ {
+  "pid": "sim-ensaio-12",
+  "setor": "aca",
+  "sim": true,
+  "k": "q2",
+  "v": -0.84,
+  "ts": 1763420183498
+ },
+ {
+  "pid": "sim-ensaio-12",
+  "setor": "aca",
+  "sim": true,
+  "k": "q3",
+  "v": "energy-environment",
+  "ts": 1763420184076
+ },
+ {
+  "pid": "sim-ensaio-13",
+  "setor": "soc",
+  "sim": true,
+  "k": "setor",
+  "v": "soc",
+  "ts": 1763420185431
+ },
+ {
+  "pid": "sim-ensaio-13",
+  "setor": "soc",
+  "sim": true,
+  "k": "q1",
+  "v": "T6",
+  "ts": 1763420188337
+ },
+ {
+  "pid": "sim-ensaio-13",
+  "setor": "soc",
+  "sim": true,
+  "k": "q2r1",
+  "v": -0.67,
+  "ts": 1763420189775
+ },
+ {
+  "pid": "sim-ensaio-13",
+  "setor": "soc",
+  "sim": true,
+  "k": "q2",
+  "v": -0.67,
+  "ts": 1763420194748
+ },
+ {
+  "pid": "sim-ensaio-13",
+  "setor": "soc",
+  "sim": true,
+  "k": "q3",
+  "v": "participation",
+  "ts": 1763420196044
+ },
+ {
+  "pid": "sim-ensaio-00",
+  "setor": "gov",
+  "sim": true,
+  "k": "r:sim-ensaio-02",
+  "v": "apoio",
+  "ts": 1763420197044
+ },
+ {
+  "pid": "sim-ensaio-00",
+  "setor": "gov",
+  "sim": true,
+  "k": "r:sim-ensaio-03",
+  "v": "fonte",
+  "ts": 1763420198044
+ },
+ {
+  "pid": "sim-ensaio-01",
+  "setor": "reg",
+  "sim": true,
+  "k": "r:sim-ensaio-02",
+  "v": "apoio",
+  "ts": 1763420199044
+ },
+ {
+  "pid": "sim-ensaio-01",
+  "setor": "reg",
+  "sim": true,
+  "k": "r:sim-ensaio-03",
+  "v": "apoio",
+  "ts": 1763420200044
+ },
+ {
+  "pid": "sim-ensaio-01",
+  "setor": "reg",
+  "sim": true,
+  "k": "r:sim-ensaio-05",
+  "v": "contesto",
+  "ts": 1763420201044
+ },
+ {
+  "pid": "sim-ensaio-03",
+  "setor": "est",
+  "sim": true,
+  "k": "r:sim-ensaio-01",
+  "v": "contesto",
+  "ts": 1763420202044
+ },
+ {
+  "pid": "sim-ensaio-04",
+  "setor": "aca",
+  "sim": true,
+  "k": "r:sim-ensaio-03",
+  "v": "fonte",
+  "ts": 1763420203044
+ },
+ {
+  "pid": "sim-ensaio-05",
+  "setor": "soc",
+  "sim": true,
+  "k": "r:sim-ensaio-01",
+  "v": "fonte",
+  "ts": 1763420204044
+ },
+ {
+  "pid": "sim-ensaio-05",
+  "setor": "soc",
+  "sim": true,
+  "k": "r:sim-ensaio-02",
+  "v": "apoio",
+  "ts": 1763420205044
+ },
+ {
+  "pid": "sim-ensaio-05",
+  "setor": "soc",
+  "sim": true,
+  "k": "r:sim-ensaio-04",
+  "v": "apoio",
+  "ts": 1763420206044
+ },
+ {
+  "pid": "sim-ensaio-06",
+  "setor": "pri",
+  "sim": true,
+  "k": "r:sim-ensaio-00",
+  "v": "fonte",
+  "ts": 1763420207044
+ },
+ {
+  "pid": "sim-ensaio-06",
+  "setor": "pri",
+  "sim": true,
+  "k": "r:sim-ensaio-01",
+  "v": "apoio",
+  "ts": 1763420208044
+ },
+ {
+  "pid": "sim-ensaio-06",
+  "setor": "pri",
+  "sim": true,
+  "k": "r:sim-ensaio-02",
+  "v": "apoio",
+  "ts": 1763420209044
+ },
+ {
+  "pid": "sim-ensaio-06",
+  "setor": "pri",
+  "sim": true,
+  "k": "r:sim-ensaio-04",
+  "v": "fonte",
+  "ts": 1763420210044
+ },
+ {
+  "pid": "sim-ensaio-07",
+  "setor": "out",
+  "sim": true,
+  "k": "r:sim-ensaio-01",
+  "v": "fonte",
+  "ts": 1763420211044
+ },
+ {
+  "pid": "sim-ensaio-07",
+  "setor": "out",
+  "sim": true,
+  "k": "r:sim-ensaio-02",
+  "v": "contesto",
+  "ts": 1763420212044
+ },
+ {
+  "pid": "sim-ensaio-07",
+  "setor": "out",
+  "sim": true,
+  "k": "r:sim-ensaio-04",
+  "v": "fonte",
+  "ts": 1763420213044
+ },
+ {
+  "pid": "sim-ensaio-07",
+  "setor": "out",
+  "sim": true,
+  "k": "r:sim-ensaio-05",
+  "v": "apoio",
+  "ts": 1763420214044
+ },
+ {
+  "pid": "sim-ensaio-08",
+  "setor": "gov",
+  "sim": true,
+  "k": "r:sim-ensaio-00",
+  "v": "fonte",
+  "ts": 1763420215044
+ },
+ {
+  "pid": "sim-ensaio-08",
+  "setor": "gov",
+  "sim": true,
+  "k": "r:sim-ensaio-01",
+  "v": "apoio",
+  "ts": 1763420216044
+ },
+ {
+  "pid": "sim-ensaio-08",
+  "setor": "gov",
+  "sim": true,
+  "k": "r:sim-ensaio-03",
+  "v": "apoio",
+  "ts": 1763420217044
+ },
+ {
+  "pid": "sim-ensaio-08",
+  "setor": "gov",
+  "sim": true,
+  "k": "r:sim-ensaio-05",
+  "v": "fonte",
+  "ts": 1763420218044
+ },
+ {
+  "pid": "sim-ensaio-09",
+  "setor": "reg",
+  "sim": true,
+  "k": "r:sim-ensaio-01",
+  "v": "contesto",
+  "ts": 1763420219044
+ },
+ {
+  "pid": "sim-ensaio-09",
+  "setor": "reg",
+  "sim": true,
+  "k": "r:sim-ensaio-03",
+  "v": "apoio",
+  "ts": 1763420220044
+ },
+ {
+  "pid": "sim-ensaio-09",
+  "setor": "reg",
+  "sim": true,
+  "k": "r:sim-ensaio-04",
+  "v": "contesto",
+  "ts": 1763420221044
+ },
+ {
+  "pid": "sim-ensaio-09",
+  "setor": "reg",
+  "sim": true,
+  "k": "r:sim-ensaio-05",
+  "v": "apoio",
+  "ts": 1763420222044
+ },
+ {
+  "pid": "sim-ensaio-10",
+  "setor": "leg",
+  "sim": true,
+  "k": "r:sim-ensaio-01",
+  "v": "contesto",
+  "ts": 1763420223044
+ },
+ {
+  "pid": "sim-ensaio-10",
+  "setor": "leg",
+  "sim": true,
+  "k": "r:sim-ensaio-03",
+  "v": "fonte",
+  "ts": 1763420224044
+ },
+ {
+  "pid": "sim-ensaio-10",
+  "setor": "leg",
+  "sim": true,
+  "k": "r:sim-ensaio-04",
+  "v": "apoio",
+  "ts": 1763420225044
+ },
+ {
+  "pid": "sim-ensaio-10",
+  "setor": "leg",
+  "sim": true,
+  "k": "r:sim-ensaio-05",
+  "v": "apoio",
+  "ts": 1763420226044
+ },
+ {
+  "pid": "sim-ensaio-11",
+  "setor": "est",
+  "sim": true,
+  "k": "r:sim-ensaio-00",
+  "v": "fonte",
+  "ts": 1763420227044
+ },
+ {
+  "pid": "sim-ensaio-11",
+  "setor": "est",
+  "sim": true,
+  "k": "r:sim-ensaio-01",
+  "v": "contesto",
+  "ts": 1763420228044
+ },
+ {
+  "pid": "sim-ensaio-11",
+  "setor": "est",
+  "sim": true,
+  "k": "r:sim-ensaio-02",
+  "v": "fonte",
+  "ts": 1763420229044
+ },
+ {
+  "pid": "sim-ensaio-11",
+  "setor": "est",
+  "sim": true,
+  "k": "r:sim-ensaio-04",
+  "v": "fonte",
+  "ts": 1763420230044
+ },
+ {
+  "pid": "sim-ensaio-12",
+  "setor": "aca",
+  "sim": true,
+  "k": "r:sim-ensaio-01",
+  "v": "apoio",
+  "ts": 1763420231044
+ },
+ {
+  "pid": "sim-ensaio-12",
+  "setor": "aca",
+  "sim": true,
+  "k": "r:sim-ensaio-02",
+  "v": "fonte",
+  "ts": 1763420232044
+ },
+ {
+  "pid": "sim-ensaio-12",
+  "setor": "aca",
+  "sim": true,
+  "k": "r:sim-ensaio-03",
+  "v": "apoio",
+  "ts": 1763420233044
+ },
+ {
+  "pid": "sim-ensaio-12",
+  "setor": "aca",
+  "sim": true,
+  "k": "r:sim-ensaio-04",
+  "v": "contesto",
+  "ts": 1763420234044
+ },
+ {
+  "pid": "sim-ensaio-12",
+  "setor": "aca",
+  "sim": true,
+  "k": "r:sim-ensaio-05",
+  "v": "fonte",
+  "ts": 1763420235044
+ },
+ {
+  "pid": "sim-ensaio-13",
+  "setor": "soc",
+  "sim": true,
+  "k": "r:sim-ensaio-00",
+  "v": "apoio",
+  "ts": 1763420236044
+ },
+ {
+  "pid": "sim-ensaio-13",
+  "setor": "soc",
+  "sim": true,
+  "k": "r:sim-ensaio-03",
+  "v": "apoio",
+  "ts": 1763420237044
+ },
+ {
+  "pid": "sim-ensaio-13",
+  "setor": "soc",
+  "sim": true,
+  "k": "r:sim-ensaio-04",
+  "v": "contesto",
+  "ts": 1763420238044
+ }
+]

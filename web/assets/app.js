@@ -79,6 +79,8 @@ async function iniciarSupabase() {
 }
 
 async function registrar(k, v) {
+  /* Rodada 1 (posição cega): a primeira posição no eixo fica guardada em q2r1 e nunca muda (RF-10, premissa P-06). */
+  if (k === "q2" && S.resp.q2r1 == null) registrar("q2r1", v);
   S.resp[k] = v; ls.set("hraigo.resp." + SALA, JSON.stringify(S.resp));
   const m = { pid: S.pid, k, v, setor: S.setor, ts: Date.now() };
   const r = $("#registro");

@@ -1,0 +1,379 @@
+# Gerado por scripts/ontologia/sessao.py.
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix gov: <https://hrai-go.aeonbridge.io/data/scse/gov-br-001#> .
+@prefix hrai: <https://hrai-go.aeonbridge.io/ontology/regulatory#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix scse: <https://hrai-go.aeonbridge.io/ontology/scse#> .
+@prefix ses: <https://hrai-go.aeonbridge.io/data/sessoes/ensaio-simulado#> .
+
+<https://hrai-go.aeonbridge.io/data/sessoes/ensaio-simulado> a owl:Ontology ;
+    rdfs:label "Sessão ao vivo 'ensaio-simulado': posições humanas sobre afirmações (RF-10)"@pt ;
+    rdfs:comment "Gerado por scripts/ontologia/sessao.py. Pessoas anônimas (apelido). Camada de deliberação (SCSE)."@pt .
+
+ses:PosicaoT5_R1_simensaio01 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio01 ;
+    hrai:positionText "posição no eixo de T5: +0.62 (rodada 1, cega)" ;
+    scse:positionRevisedAs ses:PosicaoT5_R3_simensaio01 .
+
+ses:PosicaoT5_R1_simensaio02 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio02 ;
+    hrai:positionText "posição no eixo de T5: +0.12 (rodada 1, cega)" ;
+    scse:positionRevisedAs ses:PosicaoT5_R3_simensaio02 .
+
+ses:PosicaoT5_R1_simensaio03 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio03 ;
+    hrai:positionText "posição no eixo de T5: +0.10 (rodada 1, cega)" ;
+    scse:positionRevisedAs ses:PosicaoT5_R3_simensaio03 .
+
+ses:PosicaoT5_R1_simensaio04 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio04 ;
+    hrai:positionText "posição no eixo de T5: -0.19 (rodada 1, cega)" ;
+    scse:positionRevisedAs ses:PosicaoT5_R3_simensaio04 .
+
+ses:PosicaoT5_R1_simensaio08 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio08 ;
+    hrai:positionText "posição no eixo de T5: -0.27 (rodada 1, cega)" ;
+    scse:positionRevisedAs ses:PosicaoT5_R3_simensaio08 .
+
+ses:PosicaoT5_R1_simensaio10 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio10 ;
+    hrai:positionText "posição no eixo de T5: -0.53 (rodada 1, cega)" ;
+    scse:positionRevisedAs ses:PosicaoT5_R3_simensaio10 .
+
+ses:PosicaoT5_R1_simensaio11 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio11 ;
+    hrai:positionText "posição no eixo de T5: +0.81 (rodada 1, cega)" ;
+    scse:positionRevisedAs ses:PosicaoT5_R3_simensaio11 .
+
+ses:PosicaoT5_R1_simensaio12 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio12 ;
+    hrai:positionText "posição no eixo de T5: -0.44 (rodada 1, cega)" ;
+    scse:positionRevisedAs ses:PosicaoT5_R3_simensaio12 .
+
+ses:PosicaoT5_R3_simensaio00 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio00 ;
+    hrai:positionText "posição no eixo de T5: +0.59 (rodada 3)" .
+
+ses:PosicaoT5_R3_simensaio05 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio05 ;
+    hrai:positionText "posição no eixo de T5: -0.41 (rodada 3)" .
+
+ses:PosicaoT5_R3_simensaio06 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio06 ;
+    hrai:positionText "posição no eixo de T5: +0.75 (rodada 3)" .
+
+ses:PosicaoT5_R3_simensaio07 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio07 ;
+    hrai:positionText "posição no eixo de T5: -0.87 (rodada 3)" .
+
+ses:PosicaoT5_R3_simensaio09 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio09 ;
+    hrai:positionText "posição no eixo de T5: -0.12 (rodada 3)" .
+
+ses:PosicaoT5_R3_simensaio13 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio13 ;
+    hrai:positionText "posição no eixo de T5: -0.67 (rodada 3)" .
+
+ses:Sessao a scse:Deliberation ;
+    rdfs:label "Sessão 'ensaio-simulado'"@pt ;
+    hrai:deliberatesOnTension gov:Semente_T4,
+        gov:Semente_T5,
+        gov:Semente_T6 ;
+    hrai:deliberationIncludesPosition ses:Reacao_simensaio00_simensaio02,
+        ses:Reacao_simensaio01_simensaio02,
+        ses:Reacao_simensaio01_simensaio03,
+        ses:Reacao_simensaio01_simensaio05,
+        ses:Reacao_simensaio03_simensaio01,
+        ses:Reacao_simensaio05_simensaio02,
+        ses:Reacao_simensaio05_simensaio04,
+        ses:Reacao_simensaio06_simensaio01,
+        ses:Reacao_simensaio06_simensaio02,
+        ses:Reacao_simensaio07_simensaio02,
+        ses:Reacao_simensaio07_simensaio05,
+        ses:Reacao_simensaio08_simensaio01,
+        ses:Reacao_simensaio08_simensaio03,
+        ses:Reacao_simensaio09_simensaio01,
+        ses:Reacao_simensaio09_simensaio03,
+        ses:Reacao_simensaio09_simensaio04,
+        ses:Reacao_simensaio09_simensaio05,
+        ses:Reacao_simensaio10_simensaio01,
+        ses:Reacao_simensaio10_simensaio04,
+        ses:Reacao_simensaio10_simensaio05,
+        ses:Reacao_simensaio11_simensaio01,
+        ses:Reacao_simensaio12_simensaio01,
+        ses:Reacao_simensaio12_simensaio03,
+        ses:Reacao_simensaio12_simensaio04,
+        ses:Reacao_simensaio13_simensaio00,
+        ses:Reacao_simensaio13_simensaio03,
+        ses:Reacao_simensaio13_simensaio04 ;
+    hrai:deliberationIncludesStakeholder ses:Pessoa_simensaio00,
+        ses:Pessoa_simensaio01,
+        ses:Pessoa_simensaio02,
+        ses:Pessoa_simensaio03,
+        ses:Pessoa_simensaio04,
+        ses:Pessoa_simensaio05,
+        ses:Pessoa_simensaio06,
+        ses:Pessoa_simensaio07,
+        ses:Pessoa_simensaio08,
+        ses:Pessoa_simensaio09,
+        ses:Pessoa_simensaio10,
+        ses:Pessoa_simensaio11,
+        ses:Pessoa_simensaio12,
+        ses:Pessoa_simensaio13 .
+
+ses:Contribuicao_simensaio00 a hrai:PolicyClaim ;
+    rdfs:label "Auditoria prévia sem credenciamento de auditores vira carimbo."@pt ;
+    dcterms:creator ses:Pessoa_simensaio00 ;
+    dcterms:type "challenge" ;
+    scse:evidenceRequestedBy ses:Pessoa_simensaio06,
+        ses:Pessoa_simensaio08,
+        ses:Pessoa_simensaio11 .
+
+ses:PosicaoT5_R3_simensaio01 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio01 ;
+    hrai:positionText "posição no eixo de T5: +0.92 (rodada 3)" .
+
+ses:PosicaoT5_R3_simensaio02 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio02 ;
+    hrai:positionText "posição no eixo de T5: +0.42 (rodada 3)" .
+
+ses:PosicaoT5_R3_simensaio03 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio03 ;
+    hrai:positionText "posição no eixo de T5: +0.40 (rodada 3)" .
+
+ses:PosicaoT5_R3_simensaio04 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio04 ;
+    hrai:positionText "posição no eixo de T5: +0.11 (rodada 3)" .
+
+ses:PosicaoT5_R3_simensaio08 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio08 ;
+    hrai:positionText "posição no eixo de T5: -0.67 (rodada 3)" .
+
+ses:PosicaoT5_R3_simensaio10 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio10 ;
+    hrai:positionText "posição no eixo de T5: -0.23 (rodada 3)" .
+
+ses:PosicaoT5_R3_simensaio11 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio11 ;
+    hrai:positionText "posição no eixo de T5: +0.41 (rodada 3)" .
+
+ses:PosicaoT5_R3_simensaio12 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio12 ;
+    hrai:positionText "posição no eixo de T5: -0.84 (rodada 3)" .
+
+ses:Reacao_simensaio00_simensaio02 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio00 ;
+    hrai:positionSupportsClaim ses:Contribuicao_simensaio02 .
+
+ses:Reacao_simensaio01_simensaio02 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio01 ;
+    hrai:positionSupportsClaim ses:Contribuicao_simensaio02 .
+
+ses:Reacao_simensaio01_simensaio03 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio01 ;
+    hrai:positionSupportsClaim ses:Contribuicao_simensaio03 .
+
+ses:Reacao_simensaio01_simensaio05 a hrai:StakeholderPosition ;
+    hrai:positionChallengesClaim ses:Contribuicao_simensaio05 ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio01 .
+
+ses:Reacao_simensaio03_simensaio01 a hrai:StakeholderPosition ;
+    hrai:positionChallengesClaim ses:Contribuicao_simensaio01 ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio03 .
+
+ses:Reacao_simensaio05_simensaio02 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio05 ;
+    hrai:positionSupportsClaim ses:Contribuicao_simensaio02 .
+
+ses:Reacao_simensaio05_simensaio04 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio05 ;
+    hrai:positionSupportsClaim ses:Contribuicao_simensaio04 .
+
+ses:Reacao_simensaio06_simensaio01 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio06 ;
+    hrai:positionSupportsClaim ses:Contribuicao_simensaio01 .
+
+ses:Reacao_simensaio06_simensaio02 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio06 ;
+    hrai:positionSupportsClaim ses:Contribuicao_simensaio02 .
+
+ses:Reacao_simensaio07_simensaio02 a hrai:StakeholderPosition ;
+    hrai:positionChallengesClaim ses:Contribuicao_simensaio02 ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio07 .
+
+ses:Reacao_simensaio07_simensaio05 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio07 ;
+    hrai:positionSupportsClaim ses:Contribuicao_simensaio05 .
+
+ses:Reacao_simensaio08_simensaio01 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio08 ;
+    hrai:positionSupportsClaim ses:Contribuicao_simensaio01 .
+
+ses:Reacao_simensaio08_simensaio03 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio08 ;
+    hrai:positionSupportsClaim ses:Contribuicao_simensaio03 .
+
+ses:Reacao_simensaio09_simensaio01 a hrai:StakeholderPosition ;
+    hrai:positionChallengesClaim ses:Contribuicao_simensaio01 ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio09 .
+
+ses:Reacao_simensaio09_simensaio03 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio09 ;
+    hrai:positionSupportsClaim ses:Contribuicao_simensaio03 .
+
+ses:Reacao_simensaio09_simensaio04 a hrai:StakeholderPosition ;
+    hrai:positionChallengesClaim ses:Contribuicao_simensaio04 ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio09 .
+
+ses:Reacao_simensaio09_simensaio05 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio09 ;
+    hrai:positionSupportsClaim ses:Contribuicao_simensaio05 .
+
+ses:Reacao_simensaio10_simensaio01 a hrai:StakeholderPosition ;
+    hrai:positionChallengesClaim ses:Contribuicao_simensaio01 ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio10 .
+
+ses:Reacao_simensaio10_simensaio04 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio10 ;
+    hrai:positionSupportsClaim ses:Contribuicao_simensaio04 .
+
+ses:Reacao_simensaio10_simensaio05 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio10 ;
+    hrai:positionSupportsClaim ses:Contribuicao_simensaio05 .
+
+ses:Reacao_simensaio11_simensaio01 a hrai:StakeholderPosition ;
+    hrai:positionChallengesClaim ses:Contribuicao_simensaio01 ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio11 .
+
+ses:Reacao_simensaio12_simensaio01 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio12 ;
+    hrai:positionSupportsClaim ses:Contribuicao_simensaio01 .
+
+ses:Reacao_simensaio12_simensaio03 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio12 ;
+    hrai:positionSupportsClaim ses:Contribuicao_simensaio03 .
+
+ses:Reacao_simensaio12_simensaio04 a hrai:StakeholderPosition ;
+    hrai:positionChallengesClaim ses:Contribuicao_simensaio04 ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio12 .
+
+ses:Reacao_simensaio13_simensaio00 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio13 ;
+    hrai:positionSupportsClaim ses:Contribuicao_simensaio00 .
+
+ses:Reacao_simensaio13_simensaio03 a hrai:StakeholderPosition ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio13 ;
+    hrai:positionSupportsClaim ses:Contribuicao_simensaio03 .
+
+ses:Reacao_simensaio13_simensaio04 a hrai:StakeholderPosition ;
+    hrai:positionChallengesClaim ses:Contribuicao_simensaio04 ;
+    hrai:positionExpressedBy ses:Pessoa_simensaio13 .
+
+ses:Contribuicao_simensaio05 a hrai:PolicyClaim ;
+    rdfs:label "Registro público obrigatório de algoritmos usados por órgãos federais."@pt ;
+    dcterms:creator ses:Pessoa_simensaio05 ;
+    dcterms:type "amend" ;
+    scse:evidenceRequestedBy ses:Pessoa_simensaio08,
+        ses:Pessoa_simensaio12 .
+
+ses:Pessoa_simensaio02 a hrai:Stakeholder ;
+    rdfs:label "Legislativo·o02"@pt ;
+    rdfs:comment "Participante simulado (ensaio)."@pt ;
+    scse:stakeholderInStratum gov:Estrato_PublicOperators .
+
+ses:Contribuicao_simensaio02 a hrai:PolicyClaim ;
+    rdfs:label "Escalonar por risco e porte, com prazo maior para pequenas empresas."@pt ;
+    dcterms:creator ses:Pessoa_simensaio02 ;
+    dcterms:type "amend" ;
+    scse:evidenceRequestedBy ses:Pessoa_simensaio11,
+        ses:Pessoa_simensaio12 .
+
+ses:Contribuicao_simensaio03 a hrai:PolicyClaim ;
+    rdfs:label "Serviços públicos essenciais precisam de auditoria antes de operar."@pt ;
+    dcterms:creator ses:Pessoa_simensaio03 ;
+    dcterms:type "support" ;
+    scse:evidenceRequestedBy ses:Pessoa_simensaio00,
+        ses:Pessoa_simensaio04,
+        ses:Pessoa_simensaio10 .
+
+ses:Contribuicao_simensaio04 a hrai:PolicyClaim ;
+    rdfs:label "Testes com dados sintéticos não captam o viés do histórico real."@pt ;
+    dcterms:creator ses:Pessoa_simensaio04 ;
+    dcterms:type "challenge" ;
+    scse:evidenceRequestedBy ses:Pessoa_simensaio06,
+        ses:Pessoa_simensaio07,
+        ses:Pessoa_simensaio11 .
+
+ses:Pessoa_simensaio00 a hrai:Stakeholder ;
+    rdfs:label "Governo·o00"@pt ;
+    rdfs:comment "Participante simulado (ensaio)."@pt ;
+    scse:stakeholderInStratum gov:Estrato_PublicOperators .
+
+ses:Pessoa_simensaio03 a hrai:Stakeholder ;
+    rdfs:label "Estados·o03"@pt ;
+    rdfs:comment "Participante simulado (ensaio)."@pt ;
+    scse:stakeholderInStratum gov:Estrato_PublicOperators .
+
+ses:Pessoa_simensaio04 a hrai:Stakeholder ;
+    rdfs:label "Academia·o04"@pt ;
+    rdfs:comment "Participante simulado (ensaio)."@pt ;
+    scse:stakeholderInStratum gov:Estrato_Research .
+
+ses:Pessoa_simensaio13 a hrai:Stakeholder ;
+    rdfs:label "Sociedade·o13"@pt ;
+    rdfs:comment "Participante simulado (ensaio)."@pt ;
+    scse:stakeholderInStratum gov:Estrato_CivilSociety .
+
+ses:Pessoa_simensaio05 a hrai:Stakeholder ;
+    rdfs:label "Sociedade·o05"@pt ;
+    rdfs:comment "Participante simulado (ensaio)."@pt ;
+    scse:stakeholderInStratum gov:Estrato_CivilSociety .
+
+ses:Pessoa_simensaio06 a hrai:Stakeholder ;
+    rdfs:label "Privado·o06"@pt ;
+    rdfs:comment "Participante simulado (ensaio)."@pt ;
+    scse:stakeholderInStratum gov:Estrato_Business .
+
+ses:Pessoa_simensaio07 a hrai:Stakeholder ;
+    rdfs:label "Outro·o07"@pt ;
+    rdfs:comment "Participante simulado (ensaio)."@pt ;
+    scse:stakeholderInStratum gov:Estrato_AffectedGroups .
+
+ses:Pessoa_simensaio09 a hrai:Stakeholder ;
+    rdfs:label "Regulador·o09"@pt ;
+    rdfs:comment "Participante simulado (ensaio)."@pt ;
+    scse:stakeholderInStratum gov:Estrato_Regulators .
+
+ses:Contribuicao_simensaio01 a hrai:PolicyClaim ;
+    rdfs:label "Qual o custo médio de uma auditoria para uma startup brasileira?"@pt ;
+    dcterms:creator ses:Pessoa_simensaio01 ;
+    dcterms:type "evidence" ;
+    scse:evidenceRequestedBy ses:Pessoa_simensaio05,
+        ses:Pessoa_simensaio07 .
+
+ses:Pessoa_simensaio01 a hrai:Stakeholder ;
+    rdfs:label "Regulador·o01"@pt ;
+    rdfs:comment "Participante simulado (ensaio)."@pt ;
+    scse:stakeholderInStratum gov:Estrato_Regulators .
+
+ses:Pessoa_simensaio08 a hrai:Stakeholder ;
+    rdfs:label "Governo·o08"@pt ;
+    rdfs:comment "Participante simulado (ensaio)."@pt ;
+    scse:stakeholderInStratum gov:Estrato_PublicOperators .
+
+ses:Pessoa_simensaio10 a hrai:Stakeholder ;
+    rdfs:label "Legislativo·o10"@pt ;
+    rdfs:comment "Participante simulado (ensaio)."@pt ;
+    scse:stakeholderInStratum gov:Estrato_PublicOperators .
+
+ses:Pessoa_simensaio11 a hrai:Stakeholder ;
+    rdfs:label "Estados·o11"@pt ;
+    rdfs:comment "Participante simulado (ensaio)."@pt ;
+    scse:stakeholderInStratum gov:Estrato_PublicOperators .
+
+ses:Pessoa_simensaio12 a hrai:Stakeholder ;
+    rdfs:label "Academia·o12"@pt ;
+    rdfs:comment "Participante simulado (ensaio)."@pt ;
+    scse:stakeholderInStratum gov:Estrato_Research .
+

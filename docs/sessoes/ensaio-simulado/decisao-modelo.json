@@ -1,0 +1,14 @@
+{
+ "registradoPor": "nome da pessoa da coordenação que registra a decisão",
+ "data": "AAAA-MM-DD",
+ "texto": "decisão tomada na rodada 4, com a justificativa",
+ "afirmacoesCitadas": [
+  "IRI das afirmações em que a decisão se apoia (ver metricas.json)"
+ ],
+ "divergenciasPreservadas": [
+  "https://hrai-go.aeonbridge.io/data/sessoes/ensaio-simulado#Contribuicao_simensaio01",
+  "https://hrai-go.aeonbridge.io/data/sessoes/ensaio-simulado#Contribuicao_simensaio02",
+  "https://hrai-go.aeonbridge.io/data/sessoes/ensaio-simulado#Contribuicao_simensaio04",
+  "https://hrai-go.aeonbridge.io/data/sessoes/ensaio-simulado#Contribuicao_simensaio05"
+ ]
+}

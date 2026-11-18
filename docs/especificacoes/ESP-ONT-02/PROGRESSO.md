@@ -334,6 +334,21 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
   consultivo), anotado em cada valor.
 - R28 (perfil "regulação horizontal por risco") só dispara depois da revisão humana das codificações (D-13).
 
+### Item 14 · RF-10 sessão ao vivo: rodadas, Mesa como posições, métricas, decisão — 17/11/2026
+
+- **Posição cega (rodada 1)**: a página de participação e a câmara guardam a primeira posição no eixo de T5 em `q2r1`
+  (nunca muda); `q2` é a posição atual (rodada 3). Migração `supabase/migrations/20261118000000_rodada1.sql` pronta,
+  a aplicar (premissa P-07).
+- `scripts/ontologia/sessao.py`: lê as respostas da sala (Supabase ou arquivo) e grava `docs/sessoes/<sala>/`:
+  `sessao.ttl` (pessoas anônimas por estrato, contribuições como afirmações humanas, apoio e contestação como posições,
+  "falta fonte" como pedido de evidência, revisão de posição), `relatorio.md` com as quatro métricas (amplitude,
+  ancoragem, revisão de posição, divergência preservada) e `decisao-modelo.json`, que só uma pessoa preenche; com
+  `decisao.json`, o `DecisionRecord` entra no grafo.
+- Ensaio **simulado** (premissa P-10): 14 participantes fictícios; amplitude 14, ancoragem 29%, revisão 8 de 14,
+  divergência preservada 4, pedidos de fonte 15.
+- Premissas P-06 a P-10 e P-12 registradas; `tests/test_sessao.py` no CI.
+- **Falta** (aceite humano): ensaio com pessoas e decisão registrada pela coordenação (V-20 a V-22).
+
 ## Aguardando decisão
 
 Pendências com premissa provisória registrada em `PREMISSAS.md` seguem abertas para decisão do autor; a premissa só evita que o loop pare.
@@ -381,9 +396,9 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | V-17 | ✅ | `tests/test_afirmacoes.py` no CI recalcula as 12 teses e compara com o estado gravado; C04 reavaliada contra o art. 54 do texto do Senado |
 | V-18 | 🟡 | celular participante com Minhas escolhas, Mesa e Agora já existe; falta teste de toque (item 15) |
 | V-19 | 🟡 | ficha com "De onde vem" em componente, área, estrato, tensão e cadeira vazia; falta teste em aparelho real |
-| V-20 | ⬜ | item 14 |
-| V-21 | ⬜ | item 14 |
-| V-22 | ⬜ | item 14 |
+| V-20 | 🟡 | posição cega capturada (`q2r1`) e métrica de revisão; controle de rodadas pelo apresentador e ensaio real pendentes (P-06, P-10) |
+| V-21 | 🟡 | `sessao.py` gera o relatório com as quatro métricas; exercitado em ensaio simulado (P-10) |
+| V-22 | 🟡 | `DecisionRecord` gerado só a partir de `decisao.json` preenchido por pessoa; nenhum registrado ainda |
 | V-23 | ✅ | texto do Senado como nova versão reabre dispositivos, requisitos e afirmações (`tests/test_monitoramento.py`); codificações e especificidades entram na mesma consulta quando existirem |
 | V-24 | ✅ | IRIs sob `hrai-go.aeonbridge.io` com páginas de resolução geradas do grafo (`tests/test_iris.py`); HTTPS em emissão |
 | V-25 | ⬜ | item 15 |

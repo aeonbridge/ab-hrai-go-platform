@@ -408,6 +408,12 @@ scse:evidenceHash a owl:DatatypeProperty ;
     rdfs:domain scse:EvidenceRecord ;
     rdfs:range xsd:string .
 
+scse:evidenceRequestedBy a owl:ObjectProperty ;
+    rdfs:label "evidenceRequestedBy"@en ;
+    rdfs:comment "A person asked for the source of the claim (reaction 'falta fonte' at the Mesa). An evidence request, not a challenge."@en ;
+    rdfs:domain hrai:PolicyClaim ;
+    rdfs:range hrai:Stakeholder .
+
 scse:evidenceText a owl:DatatypeProperty ;
     rdfs:label "evidenceText"@en ;
     rdfs:comment "Citable evidence excerpt or summary."@en ;
