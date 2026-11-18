@@ -1,0 +1,17 @@
+# PC8: Que posições humanas e sintéticas apoiam ou contestam cada alternativa ou afirmação, e o que mudou?
+# A origem (humana ou sintética) nunca se mistura: R21 marca a posição sintética (I-4).
+PREFIX hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#>
+PREFIX scse: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#>
+PREFIX comp: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+SELECT ?posicao ?origem ?relacao ?alvo ?revisadaComo WHERE {
+  ?posicao a hrai:StakeholderPosition .
+  BIND(IF(EXISTS { ?posicao a hrai:SyntheticStakeholderPosition }, "sintética", "humana") AS ?origem)
+  { ?posicao hrai:positionSupportsClaim ?alvo . BIND("apoia afirmação" AS ?relacao) }
+  UNION { ?posicao hrai:positionChallengesClaim ?alvo . BIND("contesta afirmação" AS ?relacao) }
+  UNION { ?posicao scse:positionSupportsAlternative ?alvo . BIND("apoia alternativa" AS ?relacao) }
+  UNION { ?posicao scse:positionChallengesAlternative ?alvo . BIND("contesta alternativa" AS ?relacao) }
+  OPTIONAL { ?posicao scse:positionRevisedAs ?revisadaComo }
+} ORDER BY ?alvo ?origem ?posicao

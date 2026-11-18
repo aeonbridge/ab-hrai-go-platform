@@ -1,0 +1,15 @@
+# PC2 (QN2): Que dispositivos do Brasil correspondem, adaptam ou divergem do AI Act, e qual especificidade explica ou
+# contraria cada divergência? Uma linha por correspondência; a especificidade vem de groundedInSpecificity.
+PREFIX hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#>
+PREFIX scse: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#>
+PREFIX comp: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+SELECT ?correspondencia ?origem ?destino ?tipo ?transposto ?especificidade ?revisao WHERE {
+  ?correspondencia a hrai:ProvisionCorrespondence ; hrai:correspondenceFrom ?origem ; hrai:correspondenceTo ?destino .
+  OPTIONAL { ?correspondencia hrai:correspondenceHasType ?tipo }
+  OPTIONAL { ?destino hrai:provisionTransposedFrom ?origem . BIND(true AS ?transposto) }
+  OPTIONAL { ?correspondencia hrai:groundedInSpecificity ?especificidade }
+  OPTIONAL { ?correspondencia hrai:correspondenceReview ?revisao }
+} ORDER BY ?destino

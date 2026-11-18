@@ -1,0 +1,115 @@
+{
+ "PC1_cobertura_por_area": {
+  "colunas": [
+   "jurisdicao",
+   "area",
+   "rotuloArea",
+   "forca"
+  ],
+  "linhas": 0,
+  "pergunta": "QN1"
+ },
+ "PC2_correspondencias": {
+  "colunas": [
+   "correspondencia",
+   "origem",
+   "destino",
+   "tipo",
+   "transposto",
+   "especificidade",
+   "revisao"
+  ],
+  "linhas": 0,
+  "pergunta": "QN2"
+ },
+ "PC3_incorporado_sem_capacidade": {
+  "colunas": [
+   "requisito",
+   "capacidade",
+   "indicador",
+   "situacao"
+  ],
+  "linhas": 0,
+  "pergunta": "QN2"
+ },
+ "PC4_exposicao_sem_cobertura": {
+  "colunas": [
+   "exposicao",
+   "area",
+   "jurisdicao",
+   "avaliacao",
+   "snapshot"
+  ],
+  "linhas": 0,
+  "pergunta": "QN3"
+ },
+ "PC5_codificacoes": {
+  "colunas": [
+   "codificacao",
+   "versao",
+   "criterio",
+   "notacao",
+   "valor",
+   "rotuloValor",
+   "dispositivo",
+   "revisao"
+  ],
+  "linhas": 0,
+  "pergunta": "QN1"
+ },
+ "PC6_afirmacoes": {
+  "colunas": [
+   "afirmacao",
+   "rotulo",
+   "evidencias",
+   "contestacoes",
+   "qualificacoes",
+   "complementos"
+  ],
+  "linhas": 26,
+  "pergunta": "QN2/QN3"
+ },
+ "PC7_reaberto_por_mudanca": {
+  "colunas": [
+   "evento",
+   "tipoAfetado",
+   "afetado"
+  ],
+  "linhas": 6,
+  "pergunta": "transversal"
+ },
+ "PC8_posicoes": {
+  "colunas": [
+   "posicao",
+   "origem",
+   "relacao",
+   "alvo",
+   "revisadaComo"
+  ],
+  "linhas": 5,
+  "pergunta": "transversal"
+ },
+ "PC9_especificidades": {
+  "colunas": [
+   "especificidade",
+   "rotulo",
+   "dimensao",
+   "tipo",
+   "evidencia",
+   "jurisdicao",
+   "valor",
+   "naoCodificado",
+   "revisao"
+  ],
+  "linhas": 0,
+  "pergunta": "QN1"
+ },
+ "V16_sementes_sem_ligacao": {
+  "colunas": [
+   "semente",
+   "id"
+  ],
+  "linhas": 0,
+  "pergunta": "aceite V-16"
+ }
+}

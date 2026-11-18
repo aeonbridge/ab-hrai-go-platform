@@ -1,0 +1,16 @@
+# PC5 (QN1): Como cada modelo se classifica nos critérios da taxonomia, e com que evidência? Uma linha por codificação:
+# versão codificada, critério, valor na escala aprovada, dispositivo que justifica e revisão.
+PREFIX hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#>
+PREFIX scse: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#>
+PREFIX comp: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+SELECT ?codificacao ?versao ?criterio ?notacao ?valor ?rotuloValor ?dispositivo ?revisao WHERE {
+  ?codificacao a hrai:CriterionCoding ; hrai:codingSubject ?versao ; hrai:codingCriterion ?criterio .
+  OPTIONAL { ?criterio skos:notation ?notacao }
+  OPTIONAL { ?codificacao hrai:codingScaleValue ?valor }
+  OPTIONAL { ?codificacao hrai:codingValueLabel ?rotuloValor }
+  OPTIONAL { ?codificacao hrai:codingJustifiedBy ?dispositivo }
+  OPTIONAL { ?codificacao hrai:codingReview ?revisao }
+} ORDER BY ?versao ?notacao

@@ -97,6 +97,18 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
   da SCSE" depende de gerar `modelo.js` do grafo (item 8).
 - **Comandos**: protocolo com exit 0; pytest → 38 passed.
 
+### Item 7 · RF-08 consultas PC1–PC9 + regressão no CI — 17/11/2026
+
+- **O que mudou**
+  - `ontologies/consultas/PC1..PC9_*.rq` (SPARQL versionado, PC9 = QN1) e `README.md` com a pergunta de cada uma.
+  - `scripts/ontologia/consultas.py`: raciocina sobre o grafo completo e roda as consultas; grava
+    `consultas-resultado.json`; `--check` falha se uma consulta quebrar ou perder linhas (CI).
+  - `tests/test_consultas.py`: as nove versionadas; regressão no grafo real; cada PC responde certo sobre fixture.
+  - Scripts ignoram arquivos `._*` (AppleDouble do disco exFAT), que quebravam a leitura.
+- **Respostas hoje**: PC6 26 linhas, PC7 6, PC8 5; PC1, PC2, PC3, PC4, PC5 e PC9 com zero linhas porque dependem das
+  extrações (itens 11, 12) e das especificidades (item 16). Zero linhas = nada registrado, não "não existe".
+- **Comandos**: protocolo com exit 0; `consultas.py --check` OK; pytest → 3 passed (consultas).
+
 ## Aguardando decisão
 
 | Id | Decisão | Quem | Bloqueia |
@@ -125,7 +137,7 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | V-09 | ⬜ | item 11 |
 | V-10 | ⬜ | item 11 |
 | V-11 | ⬜ | item 12 |
-| V-12 | ⬜ | item 7 |
+| V-12 | ✅ | `consultas.py --check` e `tests/test_consultas.py` no CI; cada PC testada sobre fixture |
 | V-13 | ✅ | `test_rnf02_full_graph_reasons_under_five_seconds` no CI: 0,12 s para 5105 triplas |
 | V-14 | ⬜ | item 8 |
 | V-15 | 🟡 | contador publicado e protegido no CI: 31 sem lastro de 88 (faltam 17 componentes e 14 traços de contexto); meta zero no item 8 |

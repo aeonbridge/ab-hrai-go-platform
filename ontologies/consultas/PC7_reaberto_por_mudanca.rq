@@ -1,0 +1,14 @@
+# PC7: Quando um texto muda, o que é reaberto? Evento de mudança e o que ele potencialmente afeta (R10 a R13).
+PREFIX hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#>
+PREFIX scse: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#>
+PREFIX comp: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+SELECT ?evento ?tipoAfetado ?afetado WHERE {
+  ?evento a hrai:RegulatoryChangeEvent .
+  { ?evento hrai:changePotentiallyAffectsProvision ?afetado . BIND("dispositivo" AS ?tipoAfetado) }
+  UNION { ?evento hrai:changePotentiallyAffectsRequirement ?afetado . BIND("requisito" AS ?tipoAfetado) }
+  UNION { ?afetado hrai:assessmentNeedsReviewDueTo ?evento . BIND("avaliação" AS ?tipoAfetado) }
+  UNION { ?afetado hrai:applicationPotentiallyImpactedBy ?evento . BIND("aplicação" AS ?tipoAfetado) }
+} ORDER BY ?evento ?tipoAfetado ?afetado

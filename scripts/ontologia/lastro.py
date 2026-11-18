@@ -64,7 +64,7 @@ def load_modelo(path: Path = MODELO) -> dict:
 def load_alignments() -> tuple[dict[str, list[str]], dict[str, list[str]]]:
     """exactMatch and closeMatch targets per GM id, from every alignment file."""
     g = rdflib.Graph()
-    for f in sorted(ALIGNMENTS.glob("*.ttl")):
+    for f in sorted(x for x in ALIGNMENTS.glob("*.ttl") if not x.name.startswith("._")):
         g.parse(f)
     exact: dict[str, list[str]] = {}
     close: dict[str, list[str]] = {}
@@ -79,7 +79,8 @@ def instance_graph() -> rdflib.Graph:
     g = rdflib.Graph()
     for pattern in INSTANCES:
         for f in sorted(glob.glob(str(ROOT / pattern), recursive=True)):
-            g.parse(f)
+            if not Path(f).name.startswith("._"):  # skip macOS AppleDouble files
+                g.parse(f)
     return g
 
 

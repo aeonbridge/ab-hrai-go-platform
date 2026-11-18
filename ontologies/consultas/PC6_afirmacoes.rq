@@ -1,0 +1,17 @@
+# PC6 (QN2/QN3): Que afirmações sustentam cada recomendação, quem as contesta, com que evidência? Uma linha por
+# afirmação, com contagem de evidências, contestações, qualificações e complementos.
+PREFIX hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#>
+PREFIX scse: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#>
+PREFIX comp: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+SELECT ?afirmacao ?rotulo (COUNT(DISTINCT ?ev) AS ?evidencias) (COUNT(DISTINCT ?contra) AS ?contestacoes)
+       (COUNT(DISTINCT ?qual) AS ?qualificacoes) (COUNT(DISTINCT ?comp) AS ?complementos) WHERE {
+  ?afirmacao a hrai:PolicyClaim .
+  OPTIONAL { ?afirmacao rdfs:label ?rotulo }
+  OPTIONAL { ?afirmacao hrai:claimSupportedByEvidence ?ev }
+  OPTIONAL { ?afirmacao hrai:challengedByClaim ?contra }
+  OPTIONAL { ?qual hrai:claimQualifies ?afirmacao }
+  OPTIONAL { ?comp hrai:claimComplements ?afirmacao }
+} GROUP BY ?afirmacao ?rotulo ORDER BY ?afirmacao

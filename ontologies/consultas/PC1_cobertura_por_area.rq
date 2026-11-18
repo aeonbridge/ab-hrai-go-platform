@@ -1,0 +1,15 @@
+# PC1 (QN1): Que áreas cada modelo cobre, e com que força jurídica? A força vem da classe do instrumento (R24a/b/c):
+# vigente, proposta ou plano. Sem linha para uma área = sem cobertura registrada, não "lacuna" (lacuna exige
+# CoverageAssessment, PC4).
+PREFIX hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#>
+PREFIX scse: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#>
+PREFIX comp: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+SELECT ?jurisdicao ?area ?rotuloArea ?forca WHERE {
+  { ?jurisdicao hrai:jurisdictionAddressesFunction ?area . BIND("vigente" AS ?forca) }
+  UNION { ?jurisdicao hrai:jurisdictionProposesFunction ?area . BIND("proposta" AS ?forca) }
+  UNION { ?jurisdicao hrai:jurisdictionPlansFunction ?area . BIND("plano" AS ?forca) }
+  OPTIONAL { ?area skos:prefLabel ?rotuloArea }
+} ORDER BY ?jurisdicao ?area ?forca

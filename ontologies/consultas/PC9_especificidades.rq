@@ -1,0 +1,21 @@
+# PC9 (QN1): Que especificidades do Brasil frente às demais jurisdições (contexto nacional, capacidades, exposições e
+# objetivos estratégicos) devem orientar o modelo de governança, e com que evidência? Lida antes das demais.
+# Uma linha por especificidade e jurisdição comparada (passo M5 do RT-VIS-03).
+PREFIX hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#>
+PREFIX scse: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#>
+PREFIX comp: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+SELECT ?especificidade ?rotulo ?dimensao ?tipo ?evidencia ?jurisdicao ?valor ?naoCodificado ?revisao WHERE {
+  ?especificidade a hrai:NationalSpecificity .
+  OPTIONAL { ?especificidade rdfs:label ?rotulo }
+  OPTIONAL { ?especificidade hrai:specificityDimension ?dimensao }
+  OPTIONAL { ?especificidade hrai:differenceType ?tipo }
+  OPTIONAL { ?especificidade hrai:specificityGroundedIn ?evidencia }
+  OPTIONAL { ?especificidade hrai:specificityComparison ?cmp .
+             ?cmp hrai:comparisonJurisdiction ?jurisdicao .
+             OPTIONAL { ?cmp hrai:comparisonValue ?valor }
+             OPTIONAL { ?cmp hrai:comparisonNotCoded ?naoCodificado } }
+  OPTIONAL { ?especificidade hrai:specificityReview ?revisao }
+} ORDER BY ?especificidade ?jurisdicao
