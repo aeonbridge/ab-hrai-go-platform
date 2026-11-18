@@ -66,6 +66,6 @@ jobs:
             # main may move while the build runs (another push); rebase the artifact commit and retry.
             for attempt in 1 2 3; do
               git push origin HEAD:main && break
-              git pull --rebase origin main
+              git pull --rebase --autostash origin main
             done
           fi
