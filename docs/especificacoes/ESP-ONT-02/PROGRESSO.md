@@ -255,14 +255,28 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
 - Especificidades da QN1 ganharam a comparação com a China (V-30 continua em zero); S7 compara com a supervisão
   centralizada pela CAC, segundo fonte secundária.
 
+### Decisões D-02, D-03 e D-04 registradas — 17/11/2026
+
+- **Como**: `docs/especificacoes/ESP-ONT-02/decisoes.json` guarda cada decisão do autor com data e o texto da mensagem;
+  `scripts/ontologia/registrar_decisoes.py` gera `ontologies/regulatory/decisoes/decisoes_autor.ttl` com uma
+  `ApprovalDecision` por decisão, atribuída ao autor (`ReviewActor`). A sessão transcreve; não decide (I-3, testado).
+- **D-02 (escalas da E4 aprovadas)**: `ontologies/comparativo/escalas-E4.json`; o módulo comparativo ganhou os níveis de
+  cada escala (`comp:ScaleLevel`, número e rótulo) ligados à decisão.
+- **D-03 (extrações revisadas)**: 34 candidatos aprovados (PL 2023 e 2024, AI Act, Reino Unido, NIST, capacidade, 18
+  correspondências) e o mapeamento das 29 áreas. Com a revisão, **R26 infere 13 transposições**, exatamente as
+  correspondências adaptadas; parciais e divergentes não transpõem (testado).
+- **D-04 (alinhamentos e ligações aprovados)**: os 5 componentes "próximos" ficam como correspondência aproximada; as
+  ligações tensão→afirmação (T1 a T6) e ramo→instrumento aprovadas. As fichas mostram "aprovado pelo autor (D-04)".
+- Fora das decisões (continuam pendentes): PBIA (lote anterior), China (D-12), sementes (D-07), respostas (D-11).
+
 ## Aguardando decisão
 
 | Id | Decisão | Quem | Bloqueia |
 |---|---|---|---|
 | D-01 | ~~China~~ **resolvida em 17/11/2026**: incluída com fontes secundárias | autor | — |
-| D-02 | E4: aprovar as escalas dos 25 critérios; proposta pronta em `escalas-E4-proposta.md` | autor | V-07, codificações (item 11), R28 |
-| D-03 | Revisão das extrações (dispositivos do PL, do AI Act, princípios do Reino Unido, funções do NIST; 18 correspondências BR↔UE em `correspondencias/`; codificações, indicadores) e do mapeamento das 29 áreas para NIST, AI Act e critérios (`areas.json`) | revisor humano | V-08 a V-11 |
-| D-04 | Alinhamento A1: os 5 componentes "próximos" (GM-15, GM-17, GM-19, GM-20, GM-22) e as teses do anexo; ligações semente→afirmação e ramo→instrumento (`conselho/GOV-BR-001.ttl`) | autor | contador sem lastro |
+| D-02 | ~~escalas da E4 aprovadas~~ **resolvida em 17/11/2026** (`decisoes.json`) | autor | — |
+| D-03 | ~~extrações e correspondências revisadas~~ **resolvida em 17/11/2026** (`decisoes.json`) | autor | — |
+| D-04 | ~~alinhamentos e ligações aprovados~~ **resolvida em 17/11/2026** (`decisoes.json`) | autor | — |
 | D-05 | RNF-01: domínio dos IRIs (w3id.org ou GitHub Pages) | autor | V-24 |
 | D-07 | Revisar as 31 sementes (`ontologies/regulatory/sementes/GOV-BR-001_sementes.ttl`): confirmar, corrigir ou retirar; 9 traços de contexto sem fonte real | autor | selo "semente" vira revisado |
 | D-08 | Conferir a localização do parágrafo sobre micro e pequenas empresas e startups no texto de 2023 (art. 32 na extração; art. 33 no rótulo da evidência) | autor | rótulo de `a1:Ev_PL_Art33PU` |
@@ -284,10 +298,10 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | V-04 | ✅ | `tests/test_modulos.py` no CI (`validate-regulatory.yml`); item 2 |
 | V-05 | ✅ | TBox 1.2.0, R24–R26 (núcleo), R28 (comparativo), R29–R30 (SCSE); I-1 a I-4 em `tests/test_invariantes.py` |
 | V-06 | ✅ | `tests/test_comparativo.py`: 25 critérios com definições originais conferidas no PDF, E1–E7 com crédito e DOI |
-| V-07 | ⏸ | D-02 |
-| V-08 | ⏸ | depende das escalas da E4 (D-02) |
+| V-07 | ✅ | escalas aprovadas pelo autor (D-02), `ApprovalDecision` em `decisoes_autor.ttl`; níveis no módulo comparativo |
+| V-08 | ⬜ | escalas aprovadas; falta codificar BR e UE nos 25 critérios com dispositivo de origem |
 | V-09 | ⬜ | registrar codificações dos autores do paper e publicar concordância (após D-02) |
-| V-10 | ⏸ | 18 correspondências BR × UE candidatas (PC2 responde); falta revisão humana (D-03) |
+| V-10 | ✅ | 18 correspondências revisadas (D-03); sem correspondência pendente; R26 infere 13 transposições |
 | V-11 | 🟡 | indicadores do Brasil com fonte e ano-base (teste); PC3 responde (8 linhas: "indicador sem limiar"); PC4 sem `CoverageAssessment`; falta revisão (D-03) e limiar (D-09) |
 | V-12 | ✅ | `consultas.py --check` e `tests/test_consultas.py` no CI; cada PC testada sobre fixture |
 | V-13 | ✅ | `test_rnf02_full_graph_reasons_under_five_seconds` no CI: 0,12 s para 5105 triplas |

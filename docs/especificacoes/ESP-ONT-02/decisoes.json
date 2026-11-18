@@ -1,0 +1,63 @@
+{
+  "nota": "Registro das decisões humanas do autor. A sessão do loop só transcreve: cada decisão traz a data e o texto da mensagem em que o autor decidiu. scripts/ontologia/registrar_decisoes.py gera daqui as ApprovalDecision no grafo, atribuídas ao autor.",
+  "autor": "Jefferson Wellington da Cunha",
+  "decisoes": [
+    {
+      "id": "D-01",
+      "data": "2026-11-17T22:31:00-03:00",
+      "mensagem": "D-01 adicionado",
+      "decisao": "Incluir a China na comparação, com as fontes acrescentadas em docs/ai-regulations/ch/ (secundárias).",
+      "lotes": [],
+      "correspondencias": false
+    },
+    {
+      "id": "D-02",
+      "data": "2026-11-17T22:32:00-03:00",
+      "mensagem": "D-02 aprovado",
+      "decisao": "Aprovar as escalas da E4 como propostas em docs/especificacoes/ESP-ONT-02/escalas-E4-proposta.md.",
+      "lotes": [],
+      "correspondencias": false
+    },
+    {
+      "id": "D-03",
+      "data": "2026-11-17T22:33:00-03:00",
+      "mensagem": "D03 -revisado e ok",
+      "decisao": "Aprovar as extrações revisadas: textos do PL 2338 (2023 e 2024), AI Act, princípios do Reino Unido, funções do NIST, indicadores de capacidade e exposição, as 18 correspondências BR × UE e o mapeamento das 29 áreas.",
+      "lotes": [
+        "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pl2338#Lote_PL2338_Textos",
+        "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/eu/aiact#Lote_Extracao",
+        "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/uk/whitepaper#Lote_Extracao",
+        "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/us/nist#Lote_Extracao",
+        "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/capacidade#Lote_Capacidade",
+        "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/correspondencias/br-ue#Lote_Correspondencias"
+      ],
+      "correspondencias": true,
+      "mapeamentoAreas": true
+    },
+    {
+      "id": "D-04",
+      "data": "2026-11-17T22:36:00-03:00",
+      "mensagem": "D-04 ij (confirmado pelo autor: 'Sim, aprovado')",
+      "decisao": "Aprovar o alinhamento A1 (os 5 componentes próximos GM-15, GM-17, GM-19, GM-20 e GM-22 ficam como correspondência aproximada), as ligações das tensões-semente T1 a T6 às afirmações e as ligações dos ramos de cenário ao PL 2338 e ao PBIA.",
+      "lotes": [],
+      "correspondencias": false,
+      "aprovados": [
+        "https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#GM-15",
+        "https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#GM-17",
+        "https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#GM-19",
+        "https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#GM-20",
+        "https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#GM-22",
+        "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T1",
+        "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T2",
+        "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T3",
+        "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T4",
+        "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T5",
+        "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T6",
+        "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_Pl2338Approved",
+        "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_Pl2338Stalled",
+        "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_PbiaFundingCut",
+        "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_NewGovernmentPriorities"
+      ]
+    }
+  ]
+}

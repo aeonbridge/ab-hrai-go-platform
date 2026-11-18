@@ -104,6 +104,8 @@ especificidade se apoia em dispositivo ou objetivo do PBIA; isso permite fechar 
 - I-4: sintético nunca é contado como humano (disjunção na TBox, regra R21; cor e rótulo distintos na interface).
 - Cenários (`ontologies/regulatory/cenarios/`) e afirmações (`ontologies/regulatory/afirmacoes/`) nunca vão para `instances/`.
 - Todo conteúdo extraído entra como `CandidateAssertion`. **A sessão nunca cria `ApprovalDecision` nem `ReviewDecision`**: aprovação é humana.
+  Decisões do autor são transcritas de `decisoes.json` (data e texto da mensagem) por `registrar_decisoes.py`, atribuídas
+  ao autor; a sessão nunca decide por conta própria.
 - Elementos vindos de documentos-semente do projeto são semeados automaticamente (`scripts/ontologia/semear.py`) e
   contam como lastro com o estado "semente" (decisão do autor, 17/11/2026). Método: `METODO_EXTRACAO.md`.
 - Nenhuma jurisdição exibida sem `SourceSnapshot` com SHA-256.

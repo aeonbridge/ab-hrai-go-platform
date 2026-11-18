@@ -4,7 +4,7 @@
 # Estratos, assentos, cadeiras vazias, tensões-semente e ramos de cenário que a câmara e o mural exibem.
 # Este arquivo é a fonte desses elementos: web/assets/modelo.js deve ser gerado dele (item 8 do loop).
 # Camada de deliberação (SCSE), nunca instância de fonte: não vai para ontologies/regulatory/instances (I-2).
-# As ligações semente -> afirmação e ramo -> instrumento são PROPOSTA pendente de revisão humana.
+# As ligações semente -> afirmação e ramo -> instrumento foram aprovadas pelo autor (D-04, 17/11/2026).
 # =============================================================================
 @prefix scse: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#> .
 @prefix hrai: <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#> .
@@ -239,7 +239,7 @@ gov:Semente_T1 a owl:NamedIndividual , scse:PolicyTension ;
     scse:tensionDescription "Se o orçamento pós-2028 encolher, o que se protege primeiro: infraestrutura e pesquisa, ou a capacidade de supervisionar e avaliar?"@pt ;
     scse:tensionBetweenStrata gov:Estrato_Research , gov:Estrato_Regulators ;
     hrai:hasPolicyClaim a1:C07 ;
-    skos:editorialNote "Ligação às afirmações: proposta pendente de revisão humana."@pt ;
+    skos:editorialNote "Ligação às afirmações: aprovada pelo autor (D-04, 17/11/2026)."@pt ;
     hrai:displayKey "seeds:T1" .
 
 gov:Semente_T2 a owl:NamedIndividual , scse:PolicyTension ;
@@ -248,7 +248,7 @@ gov:Semente_T2 a owl:NamedIndividual , scse:PolicyTension ;
     scse:tensionDescription "Reduzir a dependência de nuvem estrangeira exige capacidade nacional, energia e chips, com custo para quem usa IA hoje."@pt ;
     scse:tensionBetweenStrata gov:Estrato_Infrastructure , gov:Estrato_Business ;
     hrai:hasPolicyClaim a1:C08 , a1:C11 , a1:C12 ;
-    skos:editorialNote "Ligação às afirmações: proposta pendente de revisão humana."@pt ;
+    skos:editorialNote "Ligação às afirmações: aprovada pelo autor (D-04, 17/11/2026)."@pt ;
     hrai:displayKey "seeds:T2" .
 
 gov:Semente_T3 a owl:NamedIndividual , scse:PolicyTension ;
@@ -257,7 +257,7 @@ gov:Semente_T3 a owl:NamedIndividual , scse:PolicyTension ;
     scse:tensionDescription "Adoção rápida e ganho de produtividade de um lado; ocupações expostas e requalificação desigual entre regiões do outro."@pt ;
     scse:tensionBetweenStrata gov:Estrato_Workers , gov:Estrato_Business ;
     hrai:hasPolicyClaim a1:C03 ;
-    skos:editorialNote "Ligação às afirmações: proposta pendente de revisão humana."@pt ;
+    skos:editorialNote "Ligação às afirmações: aprovada pelo autor (D-04, 17/11/2026)."@pt ;
     hrai:displayKey "seeds:T3" .
 
 gov:Semente_T4 a owl:NamedIndividual , scse:PolicyTension ;
@@ -266,7 +266,7 @@ gov:Semente_T4 a owl:NamedIndividual , scse:PolicyTension ;
     scse:tensionDescription "Avaliação de impacto e transparência algorítmica de um lado; a carga de documentação para PMEs e startups do outro."@pt ;
     scse:tensionBetweenStrata gov:Estrato_CivilSociety , gov:Estrato_Business ;
     hrai:hasPolicyClaim a1:C01 , a1:K01 , a1:C02 ;
-    skos:editorialNote "Ligação às afirmações: proposta pendente de revisão humana."@pt ;
+    skos:editorialNote "Ligação às afirmações: aprovada pelo autor (D-04, 17/11/2026)."@pt ;
     hrai:displayKey "seeds:T4" .
 
 gov:Semente_T5 a owl:NamedIndividual , scse:PolicyTension ;
@@ -275,7 +275,7 @@ gov:Semente_T5 a owl:NamedIndividual , scse:PolicyTension ;
     scse:tensionDescription "Exigir auditoria em todo sistema público de alto impacto depende de quem consegue fiscalizar e de quantos sistemas já estão em produção."@pt ;
     scse:tensionBetweenStrata gov:Estrato_Regulators , gov:Estrato_PublicOperators ;
     hrai:hasPolicyClaim a1:C04 , a1:C07 ;
-    skos:editorialNote "Ligação às afirmações: proposta pendente de revisão humana."@pt ;
+    skos:editorialNote "Ligação às afirmações: aprovada pelo autor (D-04, 17/11/2026)."@pt ;
     hrai:displayKey "seeds:T5" .
 
 gov:Semente_T6 a owl:NamedIndividual , scse:PolicyTension ;
@@ -284,7 +284,7 @@ gov:Semente_T6 a owl:NamedIndividual , scse:PolicyTension ;
     scse:tensionDescription "A triagem automática acelera o atendimento; o cidadão precisa entender e contestar uma negativa."@pt ;
     scse:tensionBetweenStrata gov:Estrato_PublicOperators , gov:Estrato_AffectedGroups ;
     hrai:hasPolicyClaim a1:C05 , a1:K05 , a1:K09 ;
-    skos:editorialNote "Ligação às afirmações: proposta pendente de revisão humana."@pt ;
+    skos:editorialNote "Ligação às afirmações: aprovada pelo autor (D-04, 17/11/2026)."@pt ;
     hrai:displayKey "seeds:T6" .
 
 gov:Ramo_Pl2338Approved a owl:NamedIndividual , scse:ScenarioBranch ;
@@ -293,7 +293,7 @@ gov:Ramo_Pl2338Approved a owl:NamedIndividual , scse:ScenarioBranch ;
     scse:assumption "A Câmara aprova o PL 2338 sem alterações relevantes ao texto do Senado." ;
     scse:branchDerivedFrom gov:GOV_BR_001 ;
     scse:branchConcernsInstrument pbia:PL_2338_2023 ;
-    skos:editorialNote "Ligação ao instrumento: proposta pendente de revisão humana."@pt ;
+    skos:editorialNote "Ligação ao instrumento: aprovada pelo autor (D-04, 17/11/2026)."@pt ;
     hrai:displayKey "branches:pl2338-approved" .
 gov:GOV_BR_001 scse:hasBranch gov:Ramo_Pl2338Approved .
 
@@ -303,7 +303,7 @@ gov:Ramo_Pl2338Stalled a owl:NamedIndividual , scse:ScenarioBranch ;
     scse:assumption "O PL 2338 não é votado em 2027 e o Brasil segue sem marco legal geral." ;
     scse:branchDerivedFrom gov:GOV_BR_001 ;
     scse:branchConcernsInstrument pbia:PL_2338_2023 ;
-    skos:editorialNote "Ligação ao instrumento: proposta pendente de revisão humana."@pt ;
+    skos:editorialNote "Ligação ao instrumento: aprovada pelo autor (D-04, 17/11/2026)."@pt ;
     hrai:displayKey "branches:pl2338-stalled" .
 gov:GOV_BR_001 scse:hasBranch gov:Ramo_Pl2338Stalled .
 
@@ -313,7 +313,7 @@ gov:Ramo_PbiaFundingCut a owl:NamedIndividual , scse:ScenarioBranch ;
     scse:assumption "O financiamento do PBIA cai pela metade a partir de 2027." ;
     scse:branchDerivedFrom gov:GOV_BR_001 ;
     scse:branchConcernsInstrument pbia:PBIA_Plan ;
-    skos:editorialNote "Ligação ao instrumento: proposta pendente de revisão humana."@pt ;
+    skos:editorialNote "Ligação ao instrumento: aprovada pelo autor (D-04, 17/11/2026)."@pt ;
     hrai:displayKey "branches:pbia-funding-cut" .
 gov:GOV_BR_001 scse:hasBranch gov:Ramo_PbiaFundingCut .
 
@@ -323,7 +323,7 @@ gov:Ramo_NewGovernmentPriorities a owl:NamedIndividual , scse:ScenarioBranch ;
     scse:assumption "O governo empossado em 2027 redefine as prioridades e a coordenação institucional da IA." ;
     scse:branchDerivedFrom gov:GOV_BR_001 ;
     scse:branchConcernsInstrument pbia:PBIA_Plan ;
-    skos:editorialNote "Ligação ao instrumento: proposta pendente de revisão humana."@pt ;
+    skos:editorialNote "Ligação ao instrumento: aprovada pelo autor (D-04, 17/11/2026)."@pt ;
     hrai:displayKey "branches:new-government-priorities" .
 gov:GOV_BR_001 scse:hasBranch gov:Ramo_NewGovernmentPriorities .
 

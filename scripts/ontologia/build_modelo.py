@@ -38,7 +38,7 @@ GRAFO = ROOT / "web/assets/grafo.js"
 SOURCES = ["ontologies/regulatory/HRAI_GO_Regulatory_General.ttl", "ontologies/regulatory/sementes/*.ttl",
            "ontologies/comparativo/HRAI_GO_Comparativo.ttl", "ontologies/scse/SCSE_Shadow_Council_Ontology.ttl",
            "ontologies/scse/conselho/*.ttl", "ontologies/regulatory/instances/**/*.ttl",
-           "ontologies/regulatory/afirmacoes/*.ttl"]
+           "ontologies/regulatory/afirmacoes/*.ttl", "ontologies/regulatory/decisoes/*.ttl"]
 H = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#")
 S = rdflib.Namespace("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#")
 SEED_NS = "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/sementes#"
@@ -106,8 +106,10 @@ def build(g: rdflib.Graph) -> tuple[dict, dict]:
     for setname in ("components", "topics", "features", "strata", "seeds", "branches", "unrep"):
         for eid, s in keyed(g, setname):
             snap = g.value(s, PROV.wasDerivedFrom)
+            decisions = [d for d in g.objects(s, DCTERMS.isReferencedBy) if (d, RDF.type, H.ApprovalDecision) in g]
             entry = {"iri": str(s), "estado": "semente" if str(s).startswith(SEED_NS) else "ontologia",
-                     "revisao": "pendente"}
+                     "revisao": ("aprovado pelo autor (" + ", ".join(sorted(str(d).split("#")[-1].replace("_", "-") for d in decisions)) + ")")
+                                if decisions else "pendente"}
             same = sorted(str(x) for x in g.objects(s, SKOS.exactMatch))
             if same:
                 entry["fontePrimaria"] = same

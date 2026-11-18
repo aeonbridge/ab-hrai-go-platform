@@ -3,22 +3,22 @@ window.HRAIGO_GRAFO = {
  "branches:new-government-priorities": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_NewGovernmentPriorities",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-04)"
  },
  "branches:pbia-funding-cut": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_PbiaFundingCut",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-04)"
  },
  "branches:pl2338-approved": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_Pl2338Approved",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-04)"
  },
  "branches:pl2338-stalled": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Ramo_Pl2338Stalled",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-04)"
  },
  "components:GM-01": {
   "estado": "semente",
@@ -485,7 +485,7 @@ window.HRAIGO_GRAFO = {
   ],
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T1",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-04)"
  },
  "seeds:T2": {
   "afirmacoes": [
@@ -504,7 +504,7 @@ window.HRAIGO_GRAFO = {
   ],
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T2",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-04)"
  },
  "seeds:T3": {
   "afirmacoes": [
@@ -515,7 +515,7 @@ window.HRAIGO_GRAFO = {
   ],
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T3",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-04)"
  },
  "seeds:T4": {
   "afirmacoes": [
@@ -534,7 +534,7 @@ window.HRAIGO_GRAFO = {
   ],
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T4",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-04)"
  },
  "seeds:T5": {
   "afirmacoes": [
@@ -549,7 +549,7 @@ window.HRAIGO_GRAFO = {
   ],
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T5",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-04)"
  },
  "seeds:T6": {
   "afirmacoes": [
@@ -568,7 +568,7 @@ window.HRAIGO_GRAFO = {
   ],
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/data/scse/gov-br-001#Semente_T6",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-04)"
  },
  "strata:affectedGroups": {
   "estado": "ontologia",
@@ -613,142 +613,142 @@ window.HRAIGO_GRAFO = {
  "topics:children-vulnerable": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_ChildrenVulnerable",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:compute-infrastructure": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_ComputeInfrastructure",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:copyright-ip": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_CopyrightIp",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:data-governance": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_DataGovernance",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:data-sovereignty": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_DataSovereignty",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:energy-environment": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_EnergyEnvironment",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:enforcement-capacity": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_EnforcementCapacity",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:funding-continuity": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_FundingContinuity",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:impact-assessment": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_ImpactAssessment",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:info-integrity": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_InfoIntegrity",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:innovation-sandbox": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_InnovationSandbox",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:international-alignment": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_InternationalAlignment",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:labor-relations": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_LaborRelations",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:language-culture": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_LanguageCulture",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:liability": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_Liability",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:monitoring-learning": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_MonitoringLearning",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:open-source-science": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_OpenSourceScience",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:oversight-institutions": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_OversightInstitutions",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:participation": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_Participation",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:public-sector-use": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_PublicSectorUse",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:regional-inequality": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RegionalInequality",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:rights-redress": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RightsRedress",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:risk-classification": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RiskClassification",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:security-defense": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_SecurityDefense",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:sme-competition": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_SmeCompetition",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:standards-certification": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_StandardsCertification",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:transparency": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_Transparency",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "topics:workforce-skills": {
   "estado": "ontologia",
   "iri": "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_WorkforceSkills",
-  "revisao": "pendente"
+  "revisao": "aprovado pelo autor (D-03)"
  },
  "unrep:Agronegócio": {
   "estado": "ontologia",

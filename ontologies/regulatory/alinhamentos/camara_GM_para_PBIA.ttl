@@ -6,7 +6,8 @@
 # skos:closeMatch  = objeto relacionado, mas não idêntico (ex.: componente amplo vs. eixo do plano)
 # sem alinhamento  = o componente não existe na instância (lacuna de cobertura do grafo)
 #
-# Proposta do autor deste relatório, PENDENTE DE REVISÃO. Cada linha registra o motivo.
+# Proposto pela sessão do RT-ONT-01 e aprovado pelo autor (decisão D-04, 17/11/2026): os 5 componentes
+# "próximos" ficam como skos:closeMatch (não viram correspondência exata). Cada linha registra o motivo.
 # =============================================================================
 @prefix gm:   <https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#> .
 @prefix pbia: <https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#> .

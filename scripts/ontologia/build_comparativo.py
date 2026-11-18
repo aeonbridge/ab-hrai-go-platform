@@ -38,6 +38,9 @@ ROOT = Path(__file__).resolve().parents[2]
 DIR = ROOT / "ontologies/comparativo"
 DEFS = DIR / "alanoca2025-definicoes.json"
 AREAS = DIR / "areas.json"
+SCALES = DIR / "escalas-E4.json"
+D02 = URIRef("https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_02")
+D03 = URIRef("https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/decisoes#D_03")
 TTL = DIR / "HRAI_GO_Comparativo.ttl"
 OWL_FILE = DIR / "HRAI_GO_Comparativo.owl"
 BASE = "https://github.com/aeonbridge/ab-hrai-go-platform/ontology"
@@ -165,11 +168,40 @@ def build() -> rdflib.Graph:
         "Lei ou projeto de lei (E1), com requisitos ex ante altos (C22) e foco em aplicações (C25).", lang="pt")))
 
     add_areas(g)
+    add_scales(g)
 
     name, comment, text = R28
     g += swrl_texto.to_graph(name, comment, text, {"hrai": str(H), "comp": str(C)}, str(C),
                              {str(H.codingScaleValue)})
     return g
+
+
+def add_scales(g: rdflib.Graph) -> None:
+    """E4 scales approved by the author (decision D-02): one SKOS level per value, linked to its criterion."""
+    data = json.loads(SCALES.read_text(encoding="utf-8"))
+    g.add((C.scaleLevelOf, RDF.type, OWL.ObjectProperty))
+    g.add((C.scaleLevelOf, RDFS.label, Literal("scaleLevelOf", lang="en")))
+    g.add((C.scaleLevelOf, RDFS.comment, Literal("Criterion whose approved E4 scale this level belongs to.", lang="en")))
+    g.add((C.scaleLevelOf, RDFS.range, H.RegulatoryDesignCriterion))
+    g.add((C.ScaleLevel, RDF.type, OWL.Class))
+    g.add((C.ScaleLevel, RDFS.label, Literal("ScaleLevel", lang="en")))
+    g.add((C.ScaleLevel, RDFS.comment, Literal("Level of an approved E4 scale: numeric value (skos:notation) and label. Approved by the author (D-02).", lang="en")))
+    for crit, labels in data["escalas"].items():
+        g.add((C[crit], SKOS.editorialNote, Literal("Escala E4 aprovada pelo autor (D-02, 17/11/2026).", lang="pt")))
+        g.add((C[crit], DCTERMS.isReferencedBy, D02))
+        for value, label in enumerate(labels):
+            lv = C[f"Nivel_{crit.split('_')[0]}_{value}"]
+            g.add((lv, RDF.type, C.ScaleLevel))
+            g.add((lv, RDF.type, SKOS.Concept))
+            g.add((lv, C.scaleLevelOf, C[crit]))
+            g.add((lv, SKOS.notation, Literal(str(value))))
+            g.add((lv, SKOS.prefLabel, Literal(label, lang="pt")))
+    for crit, labels in data.get("categoricas", {}).items():
+        g.add((C[crit], DCTERMS.isReferencedBy, D02))
+        for label in labels:
+            lv = C[f"Valor_{crit.split('_')[0]}_{_camel(label.replace(' ', '-'))}"]
+            g.add((lv, RDF.type, C.ScaleLevel)); g.add((lv, RDF.type, SKOS.Concept))
+            g.add((lv, C.scaleLevelOf, C[crit])); g.add((lv, SKOS.prefLabel, Literal(label, lang="pt")))
 
 
 def _camel(key: str) -> str:
@@ -224,7 +256,8 @@ def add_areas(g: rdflib.Graph) -> None:
             g.add((a, C.areaAIActChapter, C["AIAct_Chapter" + ch]))
         for cr in area["criterios"]:
             g.add((a, SKOS.related, C[cr]))
-        g.add((a, SKOS.editorialNote, Literal("Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana.", lang="pt")))
+        g.add((a, SKOS.editorialNote, Literal("Mapeamentos para NIST, AI Act e critérios: revisados pelo autor (D-03, 17/11/2026).", lang="pt")))
+        g.add((a, DCTERMS.isReferencedBy, D03))
 
 
 def main() -> int:

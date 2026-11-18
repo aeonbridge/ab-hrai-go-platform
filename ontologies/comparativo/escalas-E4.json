@@ -1,0 +1,170 @@
+{
+ "fonte": "docs/especificacoes/ESP-ONT-02/escalas-E4-proposta.md",
+ "aprovacao": "D-02 (autor, 17/11/2026, mensagem 'D-02 aprovado')",
+ "categoricas": {
+  "E2_PrimaryObjective": [
+   "direitos",
+   "inovação",
+   "desenvolvimento e soberania",
+   "segurança"
+  ]
+ },
+ "naoEscala": {
+  "E5_VersionedCoding": "toda codificação aponta a versão do instrumento (codingSubject)"
+ },
+ "escalas": {
+  "C01_LawAdoption": [
+   "sem texto formal",
+   "proposta em tramitação",
+   "aprovada em uma casa",
+   "adotada"
+  ],
+  "C02_NoveltyOfLegalRegime": [
+   "adapta marco existente",
+   "misto",
+   "lei nova específica para IA"
+  ],
+  "C03_DigitalLegalMaturity": [
+   "incipiente",
+   "emergente",
+   "intermediário",
+   "maduro"
+  ],
+  "C04_AppliesToGenerativeAI": [
+   "não se aplica",
+   "menção secundária",
+   "regras específicas"
+  ],
+  "C05_Industry": [
+   "não visa",
+   "visa de forma secundária",
+   "alvo principal"
+  ],
+  "C06_Government": [
+   "não visa",
+   "visa de forma secundária",
+   "alvo principal"
+  ],
+  "C07_Individuals": [
+   "não visa",
+   "visa de forma secundária",
+   "alvo principal"
+  ],
+  "C08_ContinuedReporting": [
+   "ausente",
+   "previsto de forma genérica",
+   "previsto com regra operacional"
+  ],
+  "C09_ThirdPartyAudits": [
+   "ausente",
+   "previsto de forma genérica",
+   "previsto com regra operacional"
+  ],
+  "C10_ExistingOrNewAgency": [
+   "só agências existentes",
+   "sistema que coordena as existentes",
+   "agência nova"
+  ],
+  "C11_Liability": [
+   "ausente",
+   "previsto de forma genérica",
+   "previsto com regra operacional"
+  ],
+  "C12_RegulatorySandboxes": [
+   "ausente",
+   "previsto de forma genérica",
+   "previsto com regra operacional"
+  ],
+  "C13_CriminalCharges": [
+   "ausente",
+   "previsto de forma genérica",
+   "previsto com regra operacional"
+  ],
+  "C14_Fines": [
+   "ausente",
+   "previstas sem teto",
+   "previstas com teto definido"
+  ],
+  "C15_TemporaryInjunctions": [
+   "ausente",
+   "previsto de forma genérica",
+   "previsto com regra operacional"
+  ],
+  "C16_StandardSetting": [
+   "ausente",
+   "previsto de forma genérica",
+   "previsto com regra operacional"
+  ],
+  "C17_Auditing": [
+   "ausente",
+   "previsto de forma genérica",
+   "previsto com regra operacional"
+  ],
+  "C18_TechnicalExpertise": [
+   "ausente",
+   "previsto de forma genérica",
+   "previsto com regra operacional"
+  ],
+  "C19_InternationalCooperation": [
+   "sem alinhamento",
+   "alinha definições",
+   "alinhamento explícito a marcos globais"
+  ],
+  "C20_CivilSocietyInclusion": [
+   "ausente",
+   "baixa",
+   "média",
+   "alta"
+  ],
+  "C21_PrivateSectorInclusion": [
+   "ausente",
+   "baixa",
+   "média",
+   "alta"
+  ],
+  "C22_ExAnte": [
+   "nenhum",
+   "baixo",
+   "médio",
+   "alto"
+  ],
+  "C23_ExPost": [
+   "nenhum",
+   "baixo",
+   "médio",
+   "alto"
+  ],
+  "C24_TechnologyFocused": [
+   "não",
+   "camada secundária",
+   "camada principal"
+  ],
+  "C25_ApplicationFocused": [
+   "não",
+   "camada secundária",
+   "camada principal"
+  ],
+  "E1_LegalForm": [
+   "guia voluntário",
+   "princípios não estatutários",
+   "plano ou estratégia",
+   "lei ou projeto de lei"
+  ],
+  "E3_SubstantiveCoverage": [
+   "sem cobertura",
+   "só em proposta ou plano",
+   "em instrumento vigente"
+  ],
+  "E6_ImplementationCapacity": [
+   "sem indicador",
+   "indicador abaixo do limiar",
+   "indicador no limiar ou acima"
+  ],
+  "E7_ImplementationParticipation": [
+   "ausente",
+   "baixa",
+   "média",
+   "alta"
+  ]
+ }
+}

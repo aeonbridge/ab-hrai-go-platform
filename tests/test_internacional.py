@@ -60,16 +60,20 @@ def test_every_jurisdiction_has_a_hashed_snapshot():
         assert needle in labels, needle
 
 
-def test_correspondences_are_pending_and_infer_no_transposition():
+def test_correspondences_reviewed_and_only_transposing_ones_transpose():
+    """D-03 approved the 18 correspondences: R26 infers transposition only for equivalent or adapted ones."""
     g = rdflib.Graph().parse(COR)
     corrs = list(g.subjects(RDF.type, H.ProvisionCorrespondence))
     assert len(corrs) == 18
     assert all(g.value(c, H.correspondenceAnalyst) is not None and g.value(c, rdflib.RDFS.comment) for c in corrs)
-    assert not list(g.objects(None, H.correspondenceReview))
     sys.path.insert(0, str(ROOT / "scripts/ontologia"))
     import consultas
     rg = consultas.reasoned_graph()
-    assert not list(rg.subject_objects(H.provisionTransposedFrom)), "R26 must wait for human approval"
+    transposing = {H.EquivalentCorrespondence, H.AdaptedCorrespondence}
+    expected = {(g.value(c, H.correspondenceTo), g.value(c, H.correspondenceFrom)) for c in corrs
+                if g.value(c, H.correspondenceHasType) in transposing}
+    assert set(rg.subject_objects(H.provisionTransposedFrom)) == expected and len(expected) == 13
+    assert all(rg.value(c, H.correspondenceReview) is not None for c in corrs)
 
 
 @pytest.mark.skipif(shutil.which("pdftotext") is None, reason="pdftotext not installed")

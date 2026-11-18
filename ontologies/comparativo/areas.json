@@ -1,5 +1,5 @@
 {
-  "nota": "Áreas substantivas (extensão E3, RF-05): as 28 áreas da cúpula da câmara mais IA generativa/GPAI. Os mapeamentos para funções do NIST AI RMF 1.0, capítulos do AI Act (Regulamento (UE) 2024/1689) e critérios da taxonomia são PROPOSTA do autor deste arquivo, pendente de revisão humana.",
+  "nota": "Áreas substantivas (extensão E3, RF-05): as 28 áreas da cúpula da câmara mais IA generativa/GPAI. Os mapeamentos para funções do NIST AI RMF 1.0, capítulos do AI Act (Regulamento (UE) 2024/1689) e critérios da taxonomia foram propostos pela sessão do loop e revisados pelo autor (decisão D-03, 17/11/2026).",
   "nist": {"Govern": "GOVERN", "Map": "MAP", "Measure": "MEASURE", "Manage": "MANAGE"},
   "aiact": {
     "I": "Chapter I: General provisions (Art. 1-4, including AI literacy, Art. 4)",

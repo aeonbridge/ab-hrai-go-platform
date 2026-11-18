@@ -111,4 +111,13 @@ def test_substantive_areas_back_the_chamber_dome(g):
     gpai = [a for a in areas if str(g.value(a, SKOS.notation)) == "generative-gpai"]
     assert gpai and (gpai[0], C.areaAIActChapter, C["AIAct_ChapterV"]) in g
     for a in areas:
-        assert "pendente de revisão" in str(g.value(a, SKOS.editorialNote)), a
+        assert "revisados pelo autor (D-03" in str(g.value(a, SKOS.editorialNote)), a
+
+
+def test_e4_scales_are_approved_levels(g):
+    """D-02: every base criterion has its approved scale as numbered levels."""
+    for cat in DEFS["categorias"]:
+        for cr in cat["criterios"]:
+            levels = list(g.subjects(C.scaleLevelOf, C[cr["id"]]))
+            assert len(levels) >= 3, cr["id"]
+            assert all(g.value(lv, SKOS.notation) is not None for lv in levels)
