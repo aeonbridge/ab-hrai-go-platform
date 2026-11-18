@@ -1,7 +1,7 @@
 /* Gerado por scripts/ontologia/lastro.py. Não editar à mão.
    Elementos exibidos com e sem lastro na ontologia (RF-12); usado no selo das fichas e no slide (RF-15). */
 window.HRAIGO_LASTRO = {
- "comLastro": 5,
+ "comLastro": 33,
  "conjuntos": {
   "branches": {
    "comLastro": 0,
@@ -34,9 +34,9 @@ window.HRAIGO_LASTRO = {
    "total": 8
   },
   "topics": {
-   "comLastro": 0,
+   "comLastro": 28,
    "rotulo": "Áreas da taxonomia (cúpula)",
-   "semLastro": 28,
+   "semLastro": 0,
    "total": 28
   },
   "unrep": {
@@ -107,8 +107,176 @@ window.HRAIGO_LASTRO = {
    "iris": [
     "https://github.com/aeonbridge/ab-hrai-go-platform/data/regulatory/br/pbia#PBIA_Axis4_BusinessInnovation"
    ]
+  },
+  "topics:children-vulnerable": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_ChildrenVulnerable"
+   ]
+  },
+  "topics:compute-infrastructure": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_ComputeInfrastructure"
+   ]
+  },
+  "topics:copyright-ip": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_CopyrightIp"
+   ]
+  },
+  "topics:data-governance": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_DataGovernance"
+   ]
+  },
+  "topics:data-sovereignty": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_DataSovereignty"
+   ]
+  },
+  "topics:energy-environment": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_EnergyEnvironment"
+   ]
+  },
+  "topics:enforcement-capacity": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_EnforcementCapacity"
+   ]
+  },
+  "topics:funding-continuity": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_FundingContinuity"
+   ]
+  },
+  "topics:impact-assessment": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_ImpactAssessment"
+   ]
+  },
+  "topics:info-integrity": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_InfoIntegrity"
+   ]
+  },
+  "topics:innovation-sandbox": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_InnovationSandbox"
+   ]
+  },
+  "topics:international-alignment": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_InternationalAlignment"
+   ]
+  },
+  "topics:labor-relations": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_LaborRelations"
+   ]
+  },
+  "topics:language-culture": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_LanguageCulture"
+   ]
+  },
+  "topics:liability": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_Liability"
+   ]
+  },
+  "topics:monitoring-learning": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_MonitoringLearning"
+   ]
+  },
+  "topics:open-source-science": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_OpenSourceScience"
+   ]
+  },
+  "topics:oversight-institutions": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_OversightInstitutions"
+   ]
+  },
+  "topics:participation": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_Participation"
+   ]
+  },
+  "topics:public-sector-use": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_PublicSectorUse"
+   ]
+  },
+  "topics:regional-inequality": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RegionalInequality"
+   ]
+  },
+  "topics:rights-redress": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RightsRedress"
+   ]
+  },
+  "topics:risk-classification": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_RiskClassification"
+   ]
+  },
+  "topics:security-defense": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_SecurityDefense"
+   ]
+  },
+  "topics:sme-competition": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_SmeCompetition"
+   ]
+  },
+  "topics:standards-certification": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_StandardsCertification"
+   ]
+  },
+  "topics:transparency": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_Transparency"
+   ]
+  },
+  "topics:workforce-skills": {
+   "estado": "exato",
+   "iris": [
+    "https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo#Area_WorkforceSkills"
+   ]
   }
  },
- "semLastro": 83,
+ "semLastro": 55,
  "total": 88
 };

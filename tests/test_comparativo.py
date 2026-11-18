@@ -96,3 +96,19 @@ def test_r28_needs_justified_and_approved_codings(tmp_path):
     assert (ex.PLv, C.hasDesignProfile, C.HorizontalRiskBasedRegulation) in rz.g
     # ex:d2 has no review decision: the profile is not derived.
     assert (ex.SoV, C.hasDesignProfile, C.HorizontalRiskBasedRegulation) not in rz.g
+
+
+def test_substantive_areas_back_the_chamber_dome(g):
+    """RF-05: 28 chamber areas plus generative AI/GPAI; the dome's areas match the scheme (ids and labels)."""
+    areas = set(g.subjects(RDF.type, H.SubstantiveArea))
+    assert len(areas) == 29
+    keyed = {str(o).split(":", 1)[1]: a for a, o in g.subject_objects(H.displayKey) if str(o).startswith("topics:")}
+    modelo = json.loads(re.search(r"window\.HRAIGO_MODELO\s*=\s*(\{.*\})\s*;?\s*$",
+                                  (ROOT / "web/assets/modelo.js").read_text(encoding="utf-8"), re.S).group(1))
+    assert {t["id"] for t in modelo["topics"]} == set(keyed)
+    for t in modelo["topics"]:
+        assert str(g.value(keyed[t["id"]], SKOS.prefLabel)) == t["label"], t["id"]
+    gpai = [a for a in areas if str(g.value(a, SKOS.notation)) == "generative-gpai"]
+    assert gpai and (gpai[0], C.areaAIActChapter, C["AIAct_ChapterV"]) in g
+    for a in areas:
+        assert "pendente de revisão" in str(g.value(a, SKOS.editorialNote)), a

@@ -19,7 +19,8 @@ def test_counter_covers_the_seven_sets_and_matches_alignment():
     # Only exactMatch to an existing individual counts; closeMatch stays "próximo" and without backing.
     exact = [k for k, v in data["itens"].items() if v["estado"] == "exato"]
     near = [k for k, v in data["itens"].items() if v["estado"] == "proximo"]
-    assert len(exact) == data["comLastro"] == data["conjuntos"]["components"]["comLastro"]
+    assert len(exact) == data["comLastro"]
+    assert "topics:energy-environment" in exact  # area backed by hrai:displayKey in the comparative module
     assert "components:GM-02" in exact and "components:GM-15" in near
     assert not set(exact) & set(near)
 

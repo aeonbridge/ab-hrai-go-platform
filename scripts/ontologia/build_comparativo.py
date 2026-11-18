@@ -5,6 +5,9 @@ Sources:
   ontologies/comparativo/alanoca2025-definicoes.json  12 categories and 25 criteria of Alanoca et al.
                                                       (FAccT '25), definitions copied verbatim.
   EXTENSIONS below                                    declared extensions E1-E7, with credit and DOI.
+  ontologies/comparativo/areas.json                   substantive areas (E3, RF-05): the 28 chamber areas
+                                                      plus generative AI/GPAI, with PROPOSED mappings to
+                                                      NIST AI RMF functions, AI Act chapters and criteria.
 
 Output: ontologies/comparativo/HRAI_GO_Comparativo.ttl (+ .owl twin). The module imports the core
 (``hrai:RegulatoryDesignCriterion``, ``hrai:CriterionCoding``) and holds rule R28 (design profile),
@@ -34,6 +37,7 @@ import swrl_texto  # noqa: E402
 ROOT = Path(__file__).resolve().parents[2]
 DIR = ROOT / "ontologies/comparativo"
 DEFS = DIR / "alanoca2025-definicoes.json"
+AREAS = DIR / "areas.json"
 TTL = DIR / "HRAI_GO_Comparativo.ttl"
 OWL_FILE = DIR / "HRAI_GO_Comparativo.owl"
 BASE = "https://github.com/aeonbridge/ab-hrai-go-platform/ontology"
@@ -160,10 +164,66 @@ def build() -> rdflib.Graph:
     g.add((C.HorizontalRiskBasedRegulation, RDFS.comment, Literal(
         "Lei ou projeto de lei (E1), com requisitos ex ante altos (C22) e foco em aplicações (C25).", lang="pt")))
 
+    add_areas(g)
+
     name, comment, text = R28
     g += swrl_texto.to_graph(name, comment, text, {"hrai": str(H), "comp": str(C)}, str(C),
                              {str(H.codingScaleValue)})
     return g
+
+
+def _camel(key: str) -> str:
+    return "".join(part.capitalize() for part in key.split("-"))
+
+
+def add_areas(g: rdflib.Graph) -> None:
+    """Substantive areas (E3) as SKOS concepts and hrai:SubstantiveArea individuals, with proposed mappings."""
+    data = json.loads(AREAS.read_text(encoding="utf-8"))
+    scheme = C.AreasSubstantivas
+    g.add((scheme, RDF.type, SKOS.ConceptScheme))
+    g.add((scheme, SKOS.prefLabel, Literal("Áreas substantivas do HRAI-GO (extensão E3)", lang="pt")))
+    g.add((scheme, SKOS.scopeNote, Literal(data["nota"], lang="pt")))
+    for prop, label, comment, rng in (
+        ("areaNistFunction", "areaNistFunction", "NIST AI RMF 1.0 function related to the area (proposed mapping, pending review).", C.NistFunction),
+        ("areaAIActChapter", "areaAIActChapter", "AI Act chapter that addresses the area (proposed mapping, pending review).", C.AIActChapter),
+    ):
+        g.add((C[prop], RDF.type, OWL.ObjectProperty))
+        g.add((C[prop], RDFS.label, Literal(label, lang="en")))
+        g.add((C[prop], RDFS.comment, Literal(comment, lang="en")))
+        g.add((C[prop], RDFS.domain, H.SubstantiveArea))
+        g.add((C[prop], RDFS.range, rng))
+    for cls, comment in ((C.NistFunction, "Function of the NIST AI Risk Management Framework 1.0 (govern, map, measure, manage)."),
+                         (C.AIActChapter, "Chapter of Regulation (EU) 2024/1689 (AI Act).")):
+        g.add((cls, RDF.type, OWL.Class))
+        g.add((cls, RDFS.label, Literal(str(cls).split("#")[-1], lang="en")))
+        g.add((cls, RDFS.comment, Literal(comment, lang="en")))
+    for key, label in data["nist"].items():
+        n = C["NIST_" + key]
+        g.add((n, RDF.type, OWL.NamedIndividual)); g.add((n, RDF.type, C.NistFunction))
+        g.add((n, RDFS.label, Literal(label, lang="en")))
+    for key, label in data["aiact"].items():
+        ch = C["AIAct_Chapter" + key]
+        g.add((ch, RDF.type, OWL.NamedIndividual)); g.add((ch, RDF.type, C.AIActChapter))
+        g.add((ch, RDFS.label, Literal(label, lang="en")))
+    for area in data["areas"]:
+        a = C["Area_" + _camel(area["id"])]
+        g.add((a, RDF.type, OWL.NamedIndividual))
+        g.add((a, RDF.type, H.SubstantiveArea))
+        g.add((a, RDF.type, SKOS.Concept))
+        g.add((a, SKOS.inScheme, scheme))
+        g.add((a, SKOS.prefLabel, Literal(area["rotulo"], lang="pt")))
+        g.add((a, SKOS.notation, Literal(area["id"])))
+        if area.get("naCamara", True):
+            g.add((a, H.displayKey, Literal("topics:" + area["id"])))
+        else:
+            g.add((a, SKOS.scopeNote, Literal("Área acrescentada pela extensão E3; ainda não aparece na cúpula da câmara.", lang="pt")))
+        for f in area["nist"]:
+            g.add((a, C.areaNistFunction, C["NIST_" + f]))
+        for ch in area["aiact"]:
+            g.add((a, C.areaAIActChapter, C["AIAct_Chapter" + ch]))
+        for cr in area["criterios"]:
+            g.add((a, SKOS.related, C[cr]))
+        g.add((a, SKOS.editorialNote, Literal("Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana.", lang="pt")))
 
 
 def main() -> int:

@@ -2149,3 +2149,8 @@ _:rr26__24 rdf:type swrl:IndividualPropertyAtom .
 _:rr26__24 swrl:argument1 hrai:var_R26_Transposition_dst .
 _:rr26__24 swrl:argument2 hrai:var_R26_Transposition_src .
 _:rr26__24 swrl:propertyPredicate hrai:provisionTransposedFrom .
+
+# v1.2.0 (RF-05, RF-12): link from an ontology individual to the element the chamber displays.
+hrai:displayKey rdf:type owl:AnnotationProperty .
+hrai:displayKey rdfs:label "displayKey"@en .
+hrai:displayKey rdfs:comment "Key of the element displayed by the platform that this individual backs, as '<set>:<id>' of web/assets/modelo.js (for example 'topics:energy-environment'). Used by the 'sem lastro' counter; not a semantic relation."@en .

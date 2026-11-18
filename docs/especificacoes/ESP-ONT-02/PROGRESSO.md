@@ -72,13 +72,25 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
 - **Comandos**: os quatro do protocolo com exit 0; `pytest tests/test_comparativo.py` → 7 passed; R28 dispara só com
   codificações justificadas e aprovadas (fixture).
 
+### Item 5 · RF-05 esquema `SubstantiveArea` — 17/11/2026
+
+- **O que mudou**
+  - `ontologies/comparativo/areas.json` + `build_comparativo.py`: 29 áreas (`hrai:SubstantiveArea` e `skos:Concept`),
+    as 28 da cúpula e "IA generativa e modelos de propósito geral". Mapeamento proposto para funções do NIST AI RMF,
+    capítulos do AI Act e critérios da taxonomia, marcado como pendente de revisão em cada área.
+  - Núcleo: anotação `hrai:displayKey` liga um indivíduo ao elemento exibido (`topics:<id>`); o contador de lastro a usa.
+  - Contador: áreas 28/28 com lastro; total 33 com lastro e 55 sem lastro, de 88 (antes 5 e 83).
+- **Aceite RF-05**: parcial. As áreas da cúpula têm o mesmo id e rótulo no esquema e em `modelo.js` (teste), mas
+  `modelo.js` ainda não é gerado do esquema; a geração é o item 8.
+- **Comandos**: protocolo com exit 0; pytest (módulos, lastro, invariantes, comparativo, nomenclatura) → 35 passed.
+
 ## Aguardando decisão
 
 | Id | Decisão | Quem | Bloqueia |
 |---|---|---|---|
 | D-01 | RF-02, China: incluir fontes primárias ou retirar da comparação | autor | V-03, item 11 (parte) |
 | D-02 | E4: aprovar as escalas dos 25 critérios; proposta pronta em `escalas-E4-proposta.md` | autor | V-07, codificações (item 11), R28 |
-| D-03 | Revisão das extrações (dispositivos, correspondências BR↔UE, codificações, indicadores) | revisor humano | V-08 a V-11 |
+| D-03 | Revisão das extrações (dispositivos, correspondências BR↔UE, codificações, indicadores) e do mapeamento das 29 áreas para NIST, AI Act e critérios (`areas.json`) | revisor humano | V-08 a V-11 |
 | D-04 | Alinhamento A1: os 5 componentes "próximos" (GM-15, GM-17, GM-19, GM-20, GM-22) e as teses do anexo | autor | contador sem lastro |
 | D-05 | RNF-01: domínio dos IRIs (w3id.org ou GitHub Pages) | autor | V-24 |
 | D-06 | PDF da "Análise Comparativa" no repositório (hoje as teses vêm de resumo) | autor | rastreabilidade das teses |
@@ -103,7 +115,7 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | V-12 | ⬜ | item 7 |
 | V-13 | ✅ | `test_rnf02_full_graph_reasons_under_five_seconds` no CI: 0,12 s para 5105 triplas |
 | V-14 | ⬜ | item 8 |
-| V-15 | 🟡 | contador publicado e protegido no CI (item 1): 83 sem lastro de 88; meta zero no item 8 |
+| V-15 | 🟡 | contador publicado e protegido no CI: 55 sem lastro de 88 (áreas 28/28 desde o item 5); meta zero no item 8 |
 | V-16 | ⬜ | item 6 |
 | V-17 | 🟡 | `afirmacoes.py` classifica as 12 teses (6/4/2); falta recálculo no CI e C04 (item 10) |
 | V-18 | 🟡 | celular participante com Minhas escolhas, Mesa e Agora já existe; falta teste de toque (item 15) |

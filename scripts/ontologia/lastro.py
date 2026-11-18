@@ -4,7 +4,8 @@
 Every element the chamber, the presentation and the panel display comes from
 ``web/assets/modelo.js``. An element has backing ("lastro") only when an alignment file in
 ``ontologies/regulatory/alinhamentos/`` maps it by ``skos:exactMatch`` to an individual that
-exists in the instance graph. ``skos:closeMatch`` is recorded as "próximo" (pending human review)
+exists in the instance graph, or when a typed individual of the ontologies declares
+``hrai:displayKey "<set>:<id>"`` for it. ``skos:closeMatch`` is recorded as "próximo" (pending human review)
 and still counts as without backing. Anything not aligned is "sem lastro".
 
 Output: ``web/assets/lastro.js`` (``window.HRAIGO_LASTRO``), read by the chamber fichas (seal)
@@ -34,7 +35,8 @@ ROOT = Path(__file__).resolve().parents[2]
 MODELO = ROOT / "web/assets/modelo.js"
 OUT = ROOT / "web/assets/lastro.js"
 ALIGNMENTS = ROOT / "ontologies/regulatory/alinhamentos"
-INSTANCES = ["ontologies/regulatory/instances/**/*.ttl", "ontologies/scse/*.ttl"]
+INSTANCES = ["ontologies/regulatory/instances/**/*.ttl", "ontologies/scse/*.ttl", "ontologies/comparativo/*.ttl"]
+DISPLAY_KEY = rdflib.URIRef("https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory#displayKey")
 GM_NS = "https://github.com/aeonbridge/ab-hrai-go-platform/data/governance/br#"
 
 # The seven displayed sets (ESP-ONT-02, chapter "Fonte única") and how each element is keyed.
@@ -72,20 +74,36 @@ def load_alignments() -> tuple[dict[str, list[str]], dict[str, list[str]]]:
     return exact, close
 
 
-def known_individuals() -> set[str]:
-    """IRIs typed in the instance graphs; an alignment only counts if its target exists."""
+def instance_graph() -> rdflib.Graph:
     g = rdflib.Graph()
     for pattern in INSTANCES:
         for f in sorted(glob.glob(str(ROOT / pattern), recursive=True)):
             g.parse(f)
+    return g
+
+
+def known_individuals(g: rdflib.Graph | None = None) -> set[str]:
+    """IRIs typed in the instance graphs; an alignment only counts if its target exists."""
+    g = g if g is not None else instance_graph()
     return {str(s) for s in g.subjects(RDF.type, None)}
+
+
+def display_keys(g: rdflib.Graph) -> dict[str, list[str]]:
+    """'<set>:<id>' -> typed individuals that declare hrai:displayKey for that displayed element."""
+    keys: dict[str, list[str]] = {}
+    for s, o in g.subject_objects(DISPLAY_KEY):
+        if (s, RDF.type, None) in g:
+            keys.setdefault(str(o), []).append(str(s))
+    return keys
 
 
 def build() -> dict:
     """Counter per set plus the state of every backed or near element."""
     modelo = load_modelo()
     exact, close = load_alignments()
-    known = known_individuals()
+    graph = instance_graph()
+    known = known_individuals(graph)
+    keyed = display_keys(graph)
     sets, items = {}, {}
     for key, (label, ident) in SETS.items():
         elements = modelo.get(key, [])
@@ -93,6 +111,7 @@ def build() -> dict:
         for e in elements:
             eid = ident(e)
             hits = sorted(i for i in exact.get(eid, []) if i in known) if key == "components" else []
+            hits = sorted(set(hits) | set(keyed.get(f"{key}:{eid}", [])))
             near = sorted(i for i in close.get(eid, []) if i in known) if key == "components" else []
             if hits:
                 backed += 1

@@ -17,6 +17,360 @@
     owl:versionIRI <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/comparativo/1.0.0> ;
     owl:versionInfo "1.0.0" .
 
+comp:Area_ChildrenVulnerable a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "children-vulnerable" ;
+    skos:prefLabel "Crianças e vulneráveis"@pt ;
+    skos:related comp:C07_Individuals ;
+    comp:areaAIActChapter comp:AIAct_ChapterII,
+        comp:AIAct_ChapterIII ;
+    comp:areaNistFunction comp:NIST_Map ;
+    hrai:displayKey "topics:children-vulnerable" .
+
+comp:Area_ComputeInfrastructure a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "compute-infrastructure" ;
+    skos:prefLabel "Infraestrutura computacional"@pt ;
+    skos:related comp:E2_PrimaryObjective ;
+    hrai:displayKey "topics:compute-infrastructure" .
+
+comp:Area_CopyrightIp a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "copyright-ip" ;
+    skos:prefLabel "Direitos autorais"@pt ;
+    comp:areaAIActChapter comp:AIAct_ChapterV ;
+    comp:areaNistFunction comp:NIST_Govern ;
+    hrai:displayKey "topics:copyright-ip" .
+
+comp:Area_DataGovernance a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "data-governance" ;
+    skos:prefLabel "Governança de dados"@pt ;
+    skos:related comp:C03_DigitalLegalMaturity ;
+    comp:areaAIActChapter comp:AIAct_ChapterIII ;
+    comp:areaNistFunction comp:NIST_Manage,
+        comp:NIST_Map ;
+    hrai:displayKey "topics:data-governance" .
+
+comp:Area_DataSovereignty a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "data-sovereignty" ;
+    skos:prefLabel "Soberania de dados"@pt ;
+    skos:related comp:E2_PrimaryObjective ;
+    hrai:displayKey "topics:data-sovereignty" .
+
+comp:Area_EnergyEnvironment a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "energy-environment" ;
+    skos:prefLabel "Energia e meio ambiente"@pt ;
+    comp:areaAIActChapter comp:AIAct_ChapterV ;
+    comp:areaNistFunction comp:NIST_Map,
+        comp:NIST_Measure ;
+    hrai:displayKey "topics:energy-environment" .
+
+comp:Area_EnforcementCapacity a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "enforcement-capacity" ;
+    skos:prefLabel "Capacidade de fiscalização"@pt ;
+    skos:related comp:C10_ExistingOrNewAgency,
+        comp:E6_ImplementationCapacity ;
+    comp:areaAIActChapter comp:AIAct_ChapterIX,
+        comp:AIAct_ChapterXII ;
+    comp:areaNistFunction comp:NIST_Govern ;
+    hrai:displayKey "topics:enforcement-capacity" .
+
+comp:Area_FundingContinuity a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "funding-continuity" ;
+    skos:prefLabel "Financiamento e continuidade"@pt ;
+    skos:related comp:E6_ImplementationCapacity ;
+    comp:areaNistFunction comp:NIST_Govern ;
+    hrai:displayKey "topics:funding-continuity" .
+
+comp:Area_GenerativeGpai a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "generative-gpai" ;
+    skos:prefLabel "IA generativa e modelos de propósito geral"@pt ;
+    skos:related comp:C04_AppliesToGenerativeAI,
+        comp:C24_TechnologyFocused ;
+    skos:scopeNote "Área acrescentada pela extensão E3; ainda não aparece na cúpula da câmara."@pt ;
+    comp:areaAIActChapter comp:AIAct_ChapterV ;
+    comp:areaNistFunction comp:NIST_Govern,
+        comp:NIST_Map .
+
+comp:Area_ImpactAssessment a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "impact-assessment" ;
+    skos:prefLabel "Avaliação de impacto"@pt ;
+    skos:related comp:C09_ThirdPartyAudits,
+        comp:C17_Auditing ;
+    comp:areaAIActChapter comp:AIAct_ChapterIII ;
+    comp:areaNistFunction comp:NIST_Map,
+        comp:NIST_Measure ;
+    hrai:displayKey "topics:impact-assessment" .
+
+comp:Area_InfoIntegrity a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "info-integrity" ;
+    skos:prefLabel "Integridade da informação"@pt ;
+    skos:related comp:C04_AppliesToGenerativeAI ;
+    comp:areaAIActChapter comp:AIAct_ChapterIV ;
+    comp:areaNistFunction comp:NIST_Manage,
+        comp:NIST_Map ;
+    hrai:displayKey "topics:info-integrity" .
+
+comp:Area_InnovationSandbox a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "innovation-sandbox" ;
+    skos:prefLabel "Inovação e sandbox"@pt ;
+    skos:related comp:C12_RegulatorySandboxes ;
+    comp:areaAIActChapter comp:AIAct_ChapterVI ;
+    hrai:displayKey "topics:innovation-sandbox" .
+
+comp:Area_InternationalAlignment a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "international-alignment" ;
+    skos:prefLabel "Alinhamento internacional"@pt ;
+    skos:related comp:C19_InternationalCooperation ;
+    comp:areaNistFunction comp:NIST_Govern ;
+    hrai:displayKey "topics:international-alignment" .
+
+comp:Area_LaborRelations a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "labor-relations" ;
+    skos:prefLabel "Trabalho"@pt ;
+    skos:related comp:C05_Industry ;
+    comp:areaAIActChapter comp:AIAct_ChapterIII ;
+    comp:areaNistFunction comp:NIST_Map ;
+    hrai:displayKey "topics:labor-relations" .
+
+comp:Area_LanguageCulture a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "language-culture" ;
+    skos:prefLabel "Língua e cultura"@pt ;
+    skos:related comp:E2_PrimaryObjective ;
+    comp:areaNistFunction comp:NIST_Map ;
+    hrai:displayKey "topics:language-culture" .
+
+comp:Area_Liability a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "liability" ;
+    skos:prefLabel "Responsabilização"@pt ;
+    skos:related comp:C11_Liability ;
+    comp:areaNistFunction comp:NIST_Govern,
+        comp:NIST_Manage ;
+    hrai:displayKey "topics:liability" .
+
+comp:Area_MonitoringLearning a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "monitoring-learning" ;
+    skos:prefLabel "Monitoramento e revisão"@pt ;
+    skos:related comp:C08_ContinuedReporting ;
+    comp:areaAIActChapter comp:AIAct_ChapterIX ;
+    comp:areaNistFunction comp:NIST_Manage,
+        comp:NIST_Measure ;
+    hrai:displayKey "topics:monitoring-learning" .
+
+comp:Area_OpenSourceScience a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "open-source-science" ;
+    skos:prefLabel "Ciência e modelos abertos"@pt ;
+    skos:related comp:E2_PrimaryObjective ;
+    comp:areaAIActChapter comp:AIAct_ChapterV ;
+    hrai:displayKey "topics:open-source-science" .
+
+comp:Area_OversightInstitutions a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "oversight-institutions" ;
+    skos:prefLabel "Instituições de supervisão"@pt ;
+    skos:related comp:C10_ExistingOrNewAgency,
+        comp:C18_TechnicalExpertise ;
+    comp:areaAIActChapter comp:AIAct_ChapterVII ;
+    comp:areaNistFunction comp:NIST_Govern ;
+    hrai:displayKey "topics:oversight-institutions" .
+
+comp:Area_Participation a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "participation" ;
+    skos:prefLabel "Participação social"@pt ;
+    skos:related comp:C20_CivilSocietyInclusion,
+        comp:C21_PrivateSectorInclusion,
+        comp:E7_ImplementationParticipation ;
+    comp:areaAIActChapter comp:AIAct_ChapterX ;
+    comp:areaNistFunction comp:NIST_Govern ;
+    hrai:displayKey "topics:participation" .
+
+comp:Area_PublicSectorUse a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "public-sector-use" ;
+    skos:prefLabel "IA no setor público"@pt ;
+    skos:related comp:C06_Government ;
+    comp:areaAIActChapter comp:AIAct_ChapterIII ;
+    comp:areaNistFunction comp:NIST_Govern ;
+    hrai:displayKey "topics:public-sector-use" .
+
+comp:Area_RegionalInequality a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "regional-inequality" ;
+    skos:prefLabel "Desigualdade regional"@pt ;
+    skos:related comp:E2_PrimaryObjective ;
+    comp:areaNistFunction comp:NIST_Map ;
+    hrai:displayKey "topics:regional-inequality" .
+
+comp:Area_RightsRedress a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "rights-redress" ;
+    skos:prefLabel "Direitos e contestação"@pt ;
+    skos:related comp:C23_ExPost ;
+    comp:areaAIActChapter comp:AIAct_ChapterIX ;
+    comp:areaNistFunction comp:NIST_Manage ;
+    hrai:displayKey "topics:rights-redress" .
+
+comp:Area_RiskClassification a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "risk-classification" ;
+    skos:prefLabel "Classificação de risco"@pt ;
+    skos:related comp:C22_ExAnte,
+        comp:C25_ApplicationFocused ;
+    comp:areaAIActChapter comp:AIAct_ChapterII,
+        comp:AIAct_ChapterIII ;
+    comp:areaNistFunction comp:NIST_Map ;
+    hrai:displayKey "topics:risk-classification" .
+
+comp:Area_SecurityDefense a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "security-defense" ;
+    skos:prefLabel "Segurança e defesa"@pt ;
+    skos:related comp:E2_PrimaryObjective ;
+    comp:areaAIActChapter comp:AIAct_ChapterI ;
+    comp:areaNistFunction comp:NIST_Manage,
+        comp:NIST_Map ;
+    hrai:displayKey "topics:security-defense" .
+
+comp:Area_SmeCompetition a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "sme-competition" ;
+    skos:prefLabel "Concorrência e pequenas empresas"@pt ;
+    skos:related comp:C05_Industry ;
+    comp:areaAIActChapter comp:AIAct_ChapterVI ;
+    hrai:displayKey "topics:sme-competition" .
+
+comp:Area_StandardsCertification a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "standards-certification" ;
+    skos:prefLabel "Normas e certificação"@pt ;
+    skos:related comp:C16_StandardSetting ;
+    comp:areaAIActChapter comp:AIAct_ChapterIII ;
+    comp:areaNistFunction comp:NIST_Measure ;
+    hrai:displayKey "topics:standards-certification" .
+
+comp:Area_Transparency a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "transparency" ;
+    skos:prefLabel "Transparência e registro"@pt ;
+    skos:related comp:C08_ContinuedReporting ;
+    comp:areaAIActChapter comp:AIAct_ChapterIV,
+        comp:AIAct_ChapterVIII ;
+    comp:areaNistFunction comp:NIST_Govern,
+        comp:NIST_Measure ;
+    hrai:displayKey "topics:transparency" .
+
+comp:Area_WorkforceSkills a owl:NamedIndividual,
+        skos:Concept,
+        hrai:SubstantiveArea ;
+    skos:editorialNote "Mapeamentos para NIST, AI Act e critérios: proposta pendente de revisão humana."@pt ;
+    skos:inScheme comp:AreasSubstantivas ;
+    skos:notation "workforce-skills" ;
+    skos:prefLabel "Formação e capacitação"@pt ;
+    skos:related comp:C18_TechnicalExpertise ;
+    comp:areaAIActChapter comp:AIAct_ChapterI ;
+    comp:areaNistFunction comp:NIST_Govern ;
+    hrai:displayKey "topics:workforce-skills" .
+
 comp:C01_LawAdoption a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
@@ -36,107 +390,6 @@ comp:C02_NoveltyOfLegalRegime a skos:Concept,
     skos:inScheme comp:TaxonomiaAlanoca2025 ;
     skos:notation "C02" ;
     skos:prefLabel "Novelty of legal regime"@en .
-
-comp:C03_DigitalLegalMaturity a skos:Concept,
-        hrai:RegulatoryDesignCriterion ;
-    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Maturidade do ecossistema regulatório relevante para IA"@pt ;
-    skos:broader comp:Cat_DigitalLegalMaturity ;
-    skos:definition "Maturity assesses the overall advancement and robustness of a jurisdiction’s digital and AI governance framework. Jurisdictions with mature digital regulatory landscapes typically demonstrate comprehensive AI strategies and AI-adjacent regulations (e.g., data protection, platform content moderation)."@en ;
-    skos:inScheme comp:TaxonomiaAlanoca2025 ;
-    skos:notation "C03" ;
-    skos:prefLabel "Maturity of AI-relevant regulatory landscape"@en .
-
-comp:C04_AppliesToGenerativeAI a skos:Concept,
-        hrai:RegulatoryDesignCriterion ;
-    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Aplica-se a IA generativa/GPAI"@pt ;
-    skos:broader comp:Cat_Scope ;
-    skos:definition "Applies to Generative AI"@en ;
-    skos:editorialNote "Tabelas 1 a 10 (critério sem definição em prosa na seção 5.1)"@pt ;
-    skos:inScheme comp:TaxonomiaAlanoca2025 ;
-    skos:notation "C04" ;
-    skos:prefLabel "Applies to Generative AI"@en .
-
-comp:C05_Industry a skos:Concept,
-        hrai:RegulatoryDesignCriterion ;
-    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Indústria"@pt ;
-    skos:broader comp:Cat_Reach ;
-    skos:definition "Regulations targeting private sector companies and their AI applications."@en ;
-    skos:inScheme comp:TaxonomiaAlanoca2025 ;
-    skos:notation "C05" ;
-    skos:prefLabel "Industry"@en .
-
-comp:C06_Government a skos:Concept,
-        hrai:RegulatoryDesignCriterion ;
-    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Governo"@pt ;
-    skos:broader comp:Cat_Reach ;
-    skos:definition "Regulations guiding AI use within public sector entities."@en ;
-    skos:inScheme comp:TaxonomiaAlanoca2025 ;
-    skos:notation "C06" ;
-    skos:prefLabel "Government/Federal Agencies"@en .
-
-comp:C07_Individuals a skos:Concept,
-        hrai:RegulatoryDesignCriterion ;
-    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Indivíduos"@pt ;
-    skos:broader comp:Cat_Reach ;
-    skos:definition "Regulations addressing the use of AI systems by individuals."@en ;
-    skos:inScheme comp:TaxonomiaAlanoca2025 ;
-    skos:notation "C07" ;
-    skos:prefLabel "Individuals/Citizens"@en .
-
-comp:C08_ContinuedReporting a skos:Concept,
-        hrai:RegulatoryDesignCriterion ;
-    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Relatórios contínuos"@pt ;
-    skos:broader comp:Cat_Enforcement ;
-    skos:definition "Mandates periodic updates or assessments to monitor compliance over time."@en ;
-    skos:inScheme comp:TaxonomiaAlanoca2025 ;
-    skos:notation "C08" ;
-    skos:prefLabel "Continued Reporting"@en .
-
-comp:C09_ThirdPartyAudits a skos:Concept,
-        hrai:RegulatoryDesignCriterion ;
-    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Auditoria de terceiros"@pt ;
-    skos:broader comp:Cat_Enforcement ;
-    skos:definition "Independent assessments conducted by external organizations to evaluate and verify compliance with certain standards."@en ;
-    skos:inScheme comp:TaxonomiaAlanoca2025 ;
-    skos:notation "C09" ;
-    skos:prefLabel "Third-Party Audits"@en .
-
-comp:C10_ExistingOrNewAgency a skos:Concept,
-        hrai:RegulatoryDesignCriterion ;
-    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Agência existente ou nova"@pt ;
-    skos:broader comp:Cat_Enforcement ;
-    skos:definition "Reflects whether enforcement is handled by existing regulatory bodies or if new agencies are established specifically for AI oversight."@en ;
-    skos:inScheme comp:TaxonomiaAlanoca2025 ;
-    skos:notation "C10" ;
-    skos:prefLabel "Existing Agency or New Agency"@en .
-
-comp:C11_Liability a skos:Concept,
-        hrai:RegulatoryDesignCriterion ;
-    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Responsabilização"@pt ;
-    skos:broader comp:Cat_Enforcement ;
-    skos:definition "This metric examines whether actors bear legal responsibility when AI systems cause harm or fail to comply with regulations."@en ;
-    skos:inScheme comp:TaxonomiaAlanoca2025 ;
-    skos:notation "C11" ;
-    skos:prefLabel "Liability"@en .
-
-comp:C12_RegulatorySandboxes a skos:Concept,
-        hrai:RegulatoryDesignCriterion ;
-    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Sandbox regulatório"@pt ;
-    skos:broader comp:Cat_Enforcement ;
-    skos:definition "Controlled environments allowing companies to test AI systems under regulatory supervision."@en ;
-    skos:inScheme comp:TaxonomiaAlanoca2025 ;
-    skos:notation "C12" ;
-    skos:prefLabel "Regulatory Sandboxes"@en .
 
 comp:C13_CriminalCharges a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
@@ -167,98 +420,6 @@ comp:C15_TemporaryInjunctions a skos:Concept,
     skos:inScheme comp:TaxonomiaAlanoca2025 ;
     skos:notation "C15" ;
     skos:prefLabel "Temporary Injunctions"@en .
-
-comp:C16_StandardSetting a skos:Concept,
-        hrai:RegulatoryDesignCriterion ;
-    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Definição de padrões"@pt ;
-    skos:broader comp:Cat_Operationalization ;
-    skos:definition "Establishes technical and procedural benchmarks for AI development and deployment."@en ;
-    skos:inScheme comp:TaxonomiaAlanoca2025 ;
-    skos:notation "C16" ;
-    skos:prefLabel "Standard Setting"@en .
-
-comp:C17_Auditing a skos:Concept,
-        hrai:RegulatoryDesignCriterion ;
-    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Auditoria"@pt ;
-    skos:broader comp:Cat_Operationalization ;
-    skos:definition "Internal or external audits evaluate AI system performance and adherence to standards."@en ;
-    skos:inScheme comp:TaxonomiaAlanoca2025 ;
-    skos:notation "C17" ;
-    skos:prefLabel "Auditing"@en .
-
-comp:C18_TechnicalExpertise a skos:Concept,
-        hrai:RegulatoryDesignCriterion ;
-    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Expertise técnica"@pt ;
-    skos:broader comp:Cat_Operationalization ;
-    skos:definition "Highlights whether frameworks mandate and have the means to include technical expertise within regulatory bodies, ensuring informed oversight."@en ;
-    skos:inScheme comp:TaxonomiaAlanoca2025 ;
-    skos:notation "C18" ;
-    skos:prefLabel "Technical Expertise"@en .
-
-comp:C19_InternationalCooperation a skos:Concept,
-        hrai:RegulatoryDesignCriterion ;
-    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Alinhamento a marcos globais"@pt ;
-    skos:broader comp:Cat_InternationalCooperation ;
-    skos:definition "This metric evaluates alignment with global frameworks (e.g., OECD AI principles), which reflects efforts and the willingness of jurisdictions to contribute to international AI governance norms."@en ;
-    skos:inScheme comp:TaxonomiaAlanoca2025 ;
-    skos:notation "C19" ;
-    skos:prefLabel "International Cooperation"@en .
-
-comp:C20_CivilSocietyInclusion a skos:Concept,
-        hrai:RegulatoryDesignCriterion ;
-    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Inclusão da sociedade civil"@pt ;
-    skos:broader comp:Cat_StakeholderConsultation ;
-    skos:definition "Reflects engagement with nongovernmental organizations, ensuring public interest is represented."@en ;
-    skos:inScheme comp:TaxonomiaAlanoca2025 ;
-    skos:notation "C20" ;
-    skos:prefLabel "Civil Society Inclusion"@en .
-
-comp:C21_PrivateSectorInclusion a skos:Concept,
-        hrai:RegulatoryDesignCriterion ;
-    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Inclusão do setor privado"@pt ;
-    skos:broader comp:Cat_StakeholderConsultation ;
-    skos:definition "Captures whether industry stakeholders contribute to the legislative process."@en ;
-    skos:inScheme comp:TaxonomiaAlanoca2025 ;
-    skos:notation "C21" ;
-    skos:prefLabel "Private Sector Inclusion"@en .
-
-comp:C23_ExPost a skos:Concept,
-        hrai:RegulatoryDesignCriterion ;
-    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Ex post"@pt ;
-    skos:broader comp:Cat_RegulatoryApproach ;
-    skos:definition "A reactive approach that evaluates AI systems after deployment, focusing on retrospective assessments and legal remedies. It allows individuals affected by AI to pursue recourse, including the right to file lawsuits."@en ;
-    skos:inScheme comp:TaxonomiaAlanoca2025 ;
-    skos:notation "C23" ;
-    skos:prefLabel "Ex Post"@en .
-
-comp:C24_TechnologyFocused a skos:Concept,
-        hrai:RegulatoryDesignCriterion ;
-    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Tecnologia"@pt ;
-    skos:broader comp:Cat_RegulationLayer ;
-    skos:definition "Regulations target AI infrastructure (e.g., dual-use foundation models)."@en ;
-    skos:inScheme comp:TaxonomiaAlanoca2025 ;
-    skos:notation "C24" ;
-    skos:prefLabel "Technology-Focused"@en .
-
-comp:E2_PrimaryObjective a skos:Concept,
-        hrai:RegulatoryDesignCriterion ;
-    rdfs:seeAlso <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Primary objective"@en ;
-    skos:definition "Objetivo que o instrumento declara como principal: direitos, inovação, desenvolvimento e soberania, ou segurança."@pt ;
-    skos:example "O caráter desenvolvimentista e de soberania do modelo brasileiro (PBIA)."@pt ;
-    skos:inScheme comp:ExtensoesHRAIGO ;
-    skos:notation "E2" ;
-    skos:prefLabel "Objetivo primário"@pt ;
-    skos:scopeNote "Extensão declarada da taxonomia de Alanoca, Gur-Arieh, Zick e Klyman (2025), Comparing Apples to Oranges, FAccT '25, doi:10.1145/3715275.3732059. Não altera as definições originais."@pt ;
-    skos:topConceptOf comp:ExtensoesHRAIGO .
 
 comp:E3_SubstantiveCoverage a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
@@ -293,30 +454,6 @@ comp:E5_VersionedCoding a skos:Concept,
     skos:inScheme comp:ExtensoesHRAIGO ;
     skos:notation "E5" ;
     skos:prefLabel "Codificação por versão do instrumento"@pt ;
-    skos:scopeNote "Extensão declarada da taxonomia de Alanoca, Gur-Arieh, Zick e Klyman (2025), Comparing Apples to Oranges, FAccT '25, doi:10.1145/3715275.3732059. Não altera as definições originais."@pt ;
-    skos:topConceptOf comp:ExtensoesHRAIGO .
-
-comp:E6_ImplementationCapacity a skos:Concept,
-        hrai:RegulatoryDesignCriterion ;
-    rdfs:seeAlso <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Implementation capacity"@en ;
-    skos:definition "Orçamento e pessoal disponíveis para supervisionar e implementar o instrumento."@pt ;
-    skos:example "Orçamento e pessoal de supervisão (Eixo 5 do PBIA)."@pt ;
-    skos:inScheme comp:ExtensoesHRAIGO ;
-    skos:notation "E6" ;
-    skos:prefLabel "Capacidade de implementação"@pt ;
-    skos:scopeNote "Extensão declarada da taxonomia de Alanoca, Gur-Arieh, Zick e Klyman (2025), Comparing Apples to Oranges, FAccT '25, doi:10.1145/3715275.3732059. Não altera as definições originais."@pt ;
-    skos:topConceptOf comp:ExtensoesHRAIGO .
-
-comp:E7_ImplementationParticipation a skos:Concept,
-        hrai:RegulatoryDesignCriterion ;
-    rdfs:seeAlso <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Participation in implementation"@en ;
-    skos:definition "Participação de pessoas e grupos na implementação e na padronização, além da consulta no processo legislativo."@pt ;
-    skos:example "Deliberação pública ao vivo e Shadow Council."@pt ;
-    skos:inScheme comp:ExtensoesHRAIGO ;
-    skos:notation "E7" ;
-    skos:prefLabel "Participação na implementação"@pt ;
     skos:scopeNote "Extensão declarada da taxonomia de Alanoca, Gur-Arieh, Zick e Klyman (2025), Comparing Apples to Oranges, FAccT '25, doi:10.1145/3715275.3732059. Não altera as definições originais."@pt ;
     skos:topConceptOf comp:ExtensoesHRAIGO .
 
@@ -392,25 +529,163 @@ comp:R28_HorizontalRiskBasedProfile a swrl:Imp ;
                 swrl:argument2 comp:HorizontalRiskBasedRegulation ;
                 swrl:propertyPredicate comp:hasDesignProfile ] ) .
 
-comp:C22_ExAnte a skos:Concept,
-        hrai:RegulatoryDesignCriterion ;
-    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Ex ante"@pt ;
-    skos:broader comp:Cat_RegulatoryApproach ;
-    skos:definition "A preventive approach that addresses risks before they arise, emphasizing measures like pre-market approval to ensure AI systems meet safety and compliance standards in advance."@en ;
-    skos:inScheme comp:TaxonomiaAlanoca2025 ;
-    skos:notation "C22" ;
-    skos:prefLabel "Ex Ante"@en .
+comp:areaAIActChapter a owl:ObjectProperty ;
+    rdfs:label "areaAIActChapter"@en ;
+    rdfs:comment "AI Act chapter that addresses the area (proposed mapping, pending review)."@en ;
+    rdfs:domain hrai:SubstantiveArea ;
+    rdfs:range comp:AIActChapter .
 
-comp:C25_ApplicationFocused a skos:Concept,
+comp:areaNistFunction a owl:ObjectProperty ;
+    rdfs:label "areaNistFunction"@en ;
+    rdfs:comment "NIST AI RMF 1.0 function related to the area (proposed mapping, pending review)."@en ;
+    rdfs:domain hrai:SubstantiveArea ;
+    rdfs:range comp:NistFunction .
+
+comp:AIAct_ChapterVII a owl:NamedIndividual,
+        comp:AIActChapter ;
+    rdfs:label "Chapter VII: Governance (Art. 64-70)"@en .
+
+comp:AIAct_ChapterVIII a owl:NamedIndividual,
+        comp:AIActChapter ;
+    rdfs:label "Chapter VIII: EU database for high-risk AI systems (Art. 71)"@en .
+
+comp:AIAct_ChapterX a owl:NamedIndividual,
+        comp:AIActChapter ;
+    rdfs:label "Chapter X: Codes of conduct and guidelines (Art. 95-96)"@en .
+
+comp:AIAct_ChapterXII a owl:NamedIndividual,
+        comp:AIActChapter ;
+    rdfs:label "Chapter XII: Penalties (Art. 99-101)"@en .
+
+comp:C03_DigitalLegalMaturity a skos:Concept,
         hrai:RegulatoryDesignCriterion ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
-    skos:altLabel "Aplicação"@pt ;
-    skos:broader comp:Cat_RegulationLayer ;
-    skos:definition "Legislative focus on specific AI use cases (e.g., social scoring). This provides tailored oversight for distinct risk categories and applications."@en ;
+    skos:altLabel "Maturidade do ecossistema regulatório relevante para IA"@pt ;
+    skos:broader comp:Cat_DigitalLegalMaturity ;
+    skos:definition "Maturity assesses the overall advancement and robustness of a jurisdiction’s digital and AI governance framework. Jurisdictions with mature digital regulatory landscapes typically demonstrate comprehensive AI strategies and AI-adjacent regulations (e.g., data protection, platform content moderation)."@en ;
     skos:inScheme comp:TaxonomiaAlanoca2025 ;
-    skos:notation "C25" ;
-    skos:prefLabel "Application-Focused"@en .
+    skos:notation "C03" ;
+    skos:prefLabel "Maturity of AI-relevant regulatory landscape"@en .
+
+comp:C06_Government a skos:Concept,
+        hrai:RegulatoryDesignCriterion ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    skos:altLabel "Governo"@pt ;
+    skos:broader comp:Cat_Reach ;
+    skos:definition "Regulations guiding AI use within public sector entities."@en ;
+    skos:inScheme comp:TaxonomiaAlanoca2025 ;
+    skos:notation "C06" ;
+    skos:prefLabel "Government/Federal Agencies"@en .
+
+comp:C07_Individuals a skos:Concept,
+        hrai:RegulatoryDesignCriterion ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    skos:altLabel "Indivíduos"@pt ;
+    skos:broader comp:Cat_Reach ;
+    skos:definition "Regulations addressing the use of AI systems by individuals."@en ;
+    skos:inScheme comp:TaxonomiaAlanoca2025 ;
+    skos:notation "C07" ;
+    skos:prefLabel "Individuals/Citizens"@en .
+
+comp:C09_ThirdPartyAudits a skos:Concept,
+        hrai:RegulatoryDesignCriterion ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    skos:altLabel "Auditoria de terceiros"@pt ;
+    skos:broader comp:Cat_Enforcement ;
+    skos:definition "Independent assessments conducted by external organizations to evaluate and verify compliance with certain standards."@en ;
+    skos:inScheme comp:TaxonomiaAlanoca2025 ;
+    skos:notation "C09" ;
+    skos:prefLabel "Third-Party Audits"@en .
+
+comp:C11_Liability a skos:Concept,
+        hrai:RegulatoryDesignCriterion ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    skos:altLabel "Responsabilização"@pt ;
+    skos:broader comp:Cat_Enforcement ;
+    skos:definition "This metric examines whether actors bear legal responsibility when AI systems cause harm or fail to comply with regulations."@en ;
+    skos:inScheme comp:TaxonomiaAlanoca2025 ;
+    skos:notation "C11" ;
+    skos:prefLabel "Liability"@en .
+
+comp:C12_RegulatorySandboxes a skos:Concept,
+        hrai:RegulatoryDesignCriterion ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    skos:altLabel "Sandbox regulatório"@pt ;
+    skos:broader comp:Cat_Enforcement ;
+    skos:definition "Controlled environments allowing companies to test AI systems under regulatory supervision."@en ;
+    skos:inScheme comp:TaxonomiaAlanoca2025 ;
+    skos:notation "C12" ;
+    skos:prefLabel "Regulatory Sandboxes"@en .
+
+comp:C16_StandardSetting a skos:Concept,
+        hrai:RegulatoryDesignCriterion ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    skos:altLabel "Definição de padrões"@pt ;
+    skos:broader comp:Cat_Operationalization ;
+    skos:definition "Establishes technical and procedural benchmarks for AI development and deployment."@en ;
+    skos:inScheme comp:TaxonomiaAlanoca2025 ;
+    skos:notation "C16" ;
+    skos:prefLabel "Standard Setting"@en .
+
+comp:C17_Auditing a skos:Concept,
+        hrai:RegulatoryDesignCriterion ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    skos:altLabel "Auditoria"@pt ;
+    skos:broader comp:Cat_Operationalization ;
+    skos:definition "Internal or external audits evaluate AI system performance and adherence to standards."@en ;
+    skos:inScheme comp:TaxonomiaAlanoca2025 ;
+    skos:notation "C17" ;
+    skos:prefLabel "Auditing"@en .
+
+comp:C19_InternationalCooperation a skos:Concept,
+        hrai:RegulatoryDesignCriterion ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    skos:altLabel "Alinhamento a marcos globais"@pt ;
+    skos:broader comp:Cat_InternationalCooperation ;
+    skos:definition "This metric evaluates alignment with global frameworks (e.g., OECD AI principles), which reflects efforts and the willingness of jurisdictions to contribute to international AI governance norms."@en ;
+    skos:inScheme comp:TaxonomiaAlanoca2025 ;
+    skos:notation "C19" ;
+    skos:prefLabel "International Cooperation"@en .
+
+comp:C20_CivilSocietyInclusion a skos:Concept,
+        hrai:RegulatoryDesignCriterion ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    skos:altLabel "Inclusão da sociedade civil"@pt ;
+    skos:broader comp:Cat_StakeholderConsultation ;
+    skos:definition "Reflects engagement with nongovernmental organizations, ensuring public interest is represented."@en ;
+    skos:inScheme comp:TaxonomiaAlanoca2025 ;
+    skos:notation "C20" ;
+    skos:prefLabel "Civil Society Inclusion"@en .
+
+comp:C21_PrivateSectorInclusion a skos:Concept,
+        hrai:RegulatoryDesignCriterion ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    skos:altLabel "Inclusão do setor privado"@pt ;
+    skos:broader comp:Cat_StakeholderConsultation ;
+    skos:definition "Captures whether industry stakeholders contribute to the legislative process."@en ;
+    skos:inScheme comp:TaxonomiaAlanoca2025 ;
+    skos:notation "C21" ;
+    skos:prefLabel "Private Sector Inclusion"@en .
+
+comp:C23_ExPost a skos:Concept,
+        hrai:RegulatoryDesignCriterion ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    skos:altLabel "Ex post"@pt ;
+    skos:broader comp:Cat_RegulatoryApproach ;
+    skos:definition "A reactive approach that evaluates AI systems after deployment, focusing on retrospective assessments and legal remedies. It allows individuals affected by AI to pursue recourse, including the right to file lawsuits."@en ;
+    skos:inScheme comp:TaxonomiaAlanoca2025 ;
+    skos:notation "C23" ;
+    skos:prefLabel "Ex Post"@en .
+
+comp:C24_TechnologyFocused a skos:Concept,
+        hrai:RegulatoryDesignCriterion ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    skos:altLabel "Tecnologia"@pt ;
+    skos:broader comp:Cat_RegulationLayer ;
+    skos:definition "Regulations target AI infrastructure (e.g., dual-use foundation models)."@en ;
+    skos:inScheme comp:TaxonomiaAlanoca2025 ;
+    skos:notation "C24" ;
+    skos:prefLabel "Technology-Focused"@en .
 
 comp:Cat_DigitalLegalMaturity a skos:Concept ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
@@ -464,6 +739,18 @@ comp:E1_LegalForm a skos:Concept,
     skos:scopeNote "Extensão declarada da taxonomia de Alanoca, Gur-Arieh, Zick e Klyman (2025), Comparing Apples to Oranges, FAccT '25, doi:10.1145/3715275.3732059. Não altera as definições originais."@pt ;
     skos:topConceptOf comp:ExtensoesHRAIGO .
 
+comp:E7_ImplementationParticipation a skos:Concept,
+        hrai:RegulatoryDesignCriterion ;
+    rdfs:seeAlso <https://doi.org/10.1145/3715275.3732059> ;
+    skos:altLabel "Participation in implementation"@en ;
+    skos:definition "Participação de pessoas e grupos na implementação e na padronização, além da consulta no processo legislativo."@pt ;
+    skos:example "Deliberação pública ao vivo e Shadow Council."@pt ;
+    skos:inScheme comp:ExtensoesHRAIGO ;
+    skos:notation "E7" ;
+    skos:prefLabel "Participação na implementação"@pt ;
+    skos:scopeNote "Extensão declarada da taxonomia de Alanoca, Gur-Arieh, Zick e Klyman (2025), Comparing Apples to Oranges, FAccT '25, doi:10.1145/3715275.3732059. Não altera as definições originais."@pt ;
+    skos:topConceptOf comp:ExtensoesHRAIGO .
+
 comp:HorizontalRiskBasedRegulation a owl:NamedIndividual,
         comp:DesignProfile ;
     rdfs:label "Regulação horizontal por risco"@pt ;
@@ -479,6 +766,93 @@ comp:var_R28_HorizontalRiskBasedProfile_p1 a swrl:Variable .
 comp:var_R28_HorizontalRiskBasedProfile_p2 a swrl:Variable .
 
 comp:var_R28_HorizontalRiskBasedProfile_p3 a swrl:Variable .
+
+comp:AIAct_ChapterI a owl:NamedIndividual,
+        comp:AIActChapter ;
+    rdfs:label "Chapter I: General provisions (Art. 1-4, including AI literacy, Art. 4)"@en .
+
+comp:AIAct_ChapterII a owl:NamedIndividual,
+        comp:AIActChapter ;
+    rdfs:label "Chapter II: Prohibited AI practices (Art. 5)"@en .
+
+comp:AIAct_ChapterIV a owl:NamedIndividual,
+        comp:AIActChapter ;
+    rdfs:label "Chapter IV: Transparency obligations for certain AI systems (Art. 50)"@en .
+
+comp:AIAct_ChapterVI a owl:NamedIndividual,
+        comp:AIActChapter ;
+    rdfs:label "Chapter VI: Measures in support of innovation (Art. 57-63)"@en .
+
+comp:C04_AppliesToGenerativeAI a skos:Concept,
+        hrai:RegulatoryDesignCriterion ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    skos:altLabel "Aplica-se a IA generativa/GPAI"@pt ;
+    skos:broader comp:Cat_Scope ;
+    skos:definition "Applies to Generative AI"@en ;
+    skos:editorialNote "Tabelas 1 a 10 (critério sem definição em prosa na seção 5.1)"@pt ;
+    skos:inScheme comp:TaxonomiaAlanoca2025 ;
+    skos:notation "C04" ;
+    skos:prefLabel "Applies to Generative AI"@en .
+
+comp:C05_Industry a skos:Concept,
+        hrai:RegulatoryDesignCriterion ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    skos:altLabel "Indústria"@pt ;
+    skos:broader comp:Cat_Reach ;
+    skos:definition "Regulations targeting private sector companies and their AI applications."@en ;
+    skos:inScheme comp:TaxonomiaAlanoca2025 ;
+    skos:notation "C05" ;
+    skos:prefLabel "Industry"@en .
+
+comp:C08_ContinuedReporting a skos:Concept,
+        hrai:RegulatoryDesignCriterion ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    skos:altLabel "Relatórios contínuos"@pt ;
+    skos:broader comp:Cat_Enforcement ;
+    skos:definition "Mandates periodic updates or assessments to monitor compliance over time."@en ;
+    skos:inScheme comp:TaxonomiaAlanoca2025 ;
+    skos:notation "C08" ;
+    skos:prefLabel "Continued Reporting"@en .
+
+comp:C10_ExistingOrNewAgency a skos:Concept,
+        hrai:RegulatoryDesignCriterion ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    skos:altLabel "Agência existente ou nova"@pt ;
+    skos:broader comp:Cat_Enforcement ;
+    skos:definition "Reflects whether enforcement is handled by existing regulatory bodies or if new agencies are established specifically for AI oversight."@en ;
+    skos:inScheme comp:TaxonomiaAlanoca2025 ;
+    skos:notation "C10" ;
+    skos:prefLabel "Existing Agency or New Agency"@en .
+
+comp:C18_TechnicalExpertise a skos:Concept,
+        hrai:RegulatoryDesignCriterion ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    skos:altLabel "Expertise técnica"@pt ;
+    skos:broader comp:Cat_Operationalization ;
+    skos:definition "Highlights whether frameworks mandate and have the means to include technical expertise within regulatory bodies, ensuring informed oversight."@en ;
+    skos:inScheme comp:TaxonomiaAlanoca2025 ;
+    skos:notation "C18" ;
+    skos:prefLabel "Technical Expertise"@en .
+
+comp:C22_ExAnte a skos:Concept,
+        hrai:RegulatoryDesignCriterion ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    skos:altLabel "Ex ante"@pt ;
+    skos:broader comp:Cat_RegulatoryApproach ;
+    skos:definition "A preventive approach that addresses risks before they arise, emphasizing measures like pre-market approval to ensure AI systems meet safety and compliance standards in advance."@en ;
+    skos:inScheme comp:TaxonomiaAlanoca2025 ;
+    skos:notation "C22" ;
+    skos:prefLabel "Ex Ante"@en .
+
+comp:C25_ApplicationFocused a skos:Concept,
+        hrai:RegulatoryDesignCriterion ;
+    dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
+    skos:altLabel "Aplicação"@pt ;
+    skos:broader comp:Cat_RegulationLayer ;
+    skos:definition "Legislative focus on specific AI use cases (e.g., social scoring). This provides tailored oversight for distinct risk categories and applications."@en ;
+    skos:inScheme comp:TaxonomiaAlanoca2025 ;
+    skos:notation "C25" ;
+    skos:prefLabel "Application-Focused"@en .
 
 comp:Cat_RegulationLayer a skos:Concept ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
@@ -505,6 +879,18 @@ comp:DesignProfile a owl:Class ;
     rdfs:label "DesignProfile"@en ;
     rdfs:comment "Reading label derived from a combination of coded criteria (R28); the criteria stay visible."@en .
 
+comp:E6_ImplementationCapacity a skos:Concept,
+        hrai:RegulatoryDesignCriterion ;
+    rdfs:seeAlso <https://doi.org/10.1145/3715275.3732059> ;
+    skos:altLabel "Implementation capacity"@en ;
+    skos:definition "Orçamento e pessoal disponíveis para supervisionar e implementar o instrumento."@pt ;
+    skos:example "Orçamento e pessoal de supervisão (Eixo 5 do PBIA)."@pt ;
+    skos:inScheme comp:ExtensoesHRAIGO ;
+    skos:notation "E6" ;
+    skos:prefLabel "Capacidade de implementação"@pt ;
+    skos:scopeNote "Extensão declarada da taxonomia de Alanoca, Gur-Arieh, Zick e Klyman (2025), Comparing Apples to Oranges, FAccT '25, doi:10.1145/3715275.3732059. Não altera as definições originais."@pt ;
+    skos:topConceptOf comp:ExtensoesHRAIGO .
+
 comp:var_R28_HorizontalRiskBasedProfile_d1 a swrl:Variable .
 
 comp:var_R28_HorizontalRiskBasedProfile_d2 a swrl:Variable .
@@ -516,6 +902,10 @@ comp:var_R28_HorizontalRiskBasedProfile_x1 a swrl:Variable .
 comp:var_R28_HorizontalRiskBasedProfile_x2 a swrl:Variable .
 
 comp:var_R28_HorizontalRiskBasedProfile_x3 a swrl:Variable .
+
+comp:AIAct_ChapterIX a owl:NamedIndividual,
+        comp:AIActChapter ;
+    rdfs:label "Chapter IX: Post-market monitoring, information sharing and market surveillance (Art. 72-94)"@en .
 
 comp:Cat_Operationalization a skos:Concept ;
     dcterms:source <https://doi.org/10.1145/3715275.3732059> ;
@@ -540,6 +930,10 @@ comp:Cat_Sanctions a skos:Concept ;
     skos:prefLabel "Sanctions"@en ;
     skos:topConceptOf comp:TaxonomiaAlanoca2025 .
 
+comp:AIAct_ChapterV a owl:NamedIndividual,
+        comp:AIActChapter ;
+    rdfs:label "Chapter V: General-purpose AI models (Art. 51-56)"@en .
+
 comp:var_R28_HorizontalRiskBasedProfile_v a swrl:Variable .
 
 comp:Cat_Enforcement a skos:Concept ;
@@ -550,16 +944,60 @@ comp:Cat_Enforcement a skos:Concept ;
     skos:prefLabel "Enforcement"@en ;
     skos:topConceptOf comp:TaxonomiaAlanoca2025 .
 
+comp:NIST_Measure a owl:NamedIndividual,
+        comp:NistFunction ;
+    rdfs:label "MEASURE"@en .
+
+comp:NistFunction a owl:Class ;
+    rdfs:label "NistFunction"@en ;
+    rdfs:comment "Function of the NIST AI Risk Management Framework 1.0 (govern, map, measure, manage)."@en .
+
+comp:E2_PrimaryObjective a skos:Concept,
+        hrai:RegulatoryDesignCriterion ;
+    rdfs:seeAlso <https://doi.org/10.1145/3715275.3732059> ;
+    skos:altLabel "Primary objective"@en ;
+    skos:definition "Objetivo que o instrumento declara como principal: direitos, inovação, desenvolvimento e soberania, ou segurança."@pt ;
+    skos:example "O caráter desenvolvimentista e de soberania do modelo brasileiro (PBIA)."@pt ;
+    skos:inScheme comp:ExtensoesHRAIGO ;
+    skos:notation "E2" ;
+    skos:prefLabel "Objetivo primário"@pt ;
+    skos:scopeNote "Extensão declarada da taxonomia de Alanoca, Gur-Arieh, Zick e Klyman (2025), Comparing Apples to Oranges, FAccT '25, doi:10.1145/3715275.3732059. Não altera as definições originais."@pt ;
+    skos:topConceptOf comp:ExtensoesHRAIGO .
+
+comp:NIST_Manage a owl:NamedIndividual,
+        comp:NistFunction ;
+    rdfs:label "MANAGE"@en .
+
 comp:var_R28_HorizontalRiskBasedProfile_c1 a swrl:Variable .
 
 comp:var_R28_HorizontalRiskBasedProfile_c2 a swrl:Variable .
 
 comp:var_R28_HorizontalRiskBasedProfile_c3 a swrl:Variable .
 
+comp:AIAct_ChapterIII a owl:NamedIndividual,
+        comp:AIActChapter ;
+    rdfs:label "Chapter III: High-risk AI systems (Art. 6-49)"@en .
+
+comp:NIST_Govern a owl:NamedIndividual,
+        comp:NistFunction ;
+    rdfs:label "GOVERN"@en .
+
+comp:NIST_Map a owl:NamedIndividual,
+        comp:NistFunction ;
+    rdfs:label "MAP"@en .
+
+comp:AIActChapter a owl:Class ;
+    rdfs:label "AIActChapter"@en ;
+    rdfs:comment "Chapter of Regulation (EU) 2024/1689 (AI Act)."@en .
+
 comp:ExtensoesHRAIGO a skos:ConceptScheme ;
     rdfs:seeAlso <https://doi.org/10.1145/3715275.3732059> ;
     skos:prefLabel "Extensões declaradas E1 a E7 do HRAI-GO"@pt ;
     skos:scopeNote "Extensão declarada da taxonomia de Alanoca, Gur-Arieh, Zick e Klyman (2025), Comparing Apples to Oranges, FAccT '25, doi:10.1145/3715275.3732059. Não altera as definições originais."@pt .
+
+comp:AreasSubstantivas a skos:ConceptScheme ;
+    skos:prefLabel "Áreas substantivas do HRAI-GO (extensão E3)"@pt ;
+    skos:scopeNote "Áreas substantivas (extensão E3, RF-05): as 28 áreas da cúpula da câmara mais IA generativa/GPAI. Os mapeamentos para funções do NIST AI RMF 1.0, capítulos do AI Act (Regulamento (UE) 2024/1689) e critérios da taxonomia são PROPOSTA do autor deste arquivo, pendente de revisão humana."@pt .
 
 comp:TaxonomiaAlanoca2025 a skos:ConceptScheme ;
     dcterms:bibliographicCitation "Alanoca, S.; Gur-Arieh, S.; Zick, T.; Klyman, K. Comparing Apples to Oranges: A Taxonomy for Navigating the Global Landscape of AI Regulation. FAccT '25. doi:10.1145/3715275.3732059. Seção 5.1 (Selected Metrics); critério Scope a partir das Tabelas 1 a 10." ;

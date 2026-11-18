@@ -14,6 +14,10 @@ importa o núcleo regulatório.
   original em inglês (`skos:definition`), rótulo em português (`skos:altLabel`) e a fonte (`dcterms:source`). As
   definições ficam congeladas em `alanoca2025-definicoes.json` e são conferidas contra o PDF do paper.
 - **Extensões declaradas** (`comp:ExtensoesHRAIGO`): E1 a E7, cada uma com o caso que comporta, crédito e DOI.
+- **Áreas substantivas** (`comp:AreasSubstantivas`, extensão E3, RF-05): as 28 áreas da cúpula da câmara e a área de
+  IA generativa e modelos de propósito geral, como `hrai:SubstantiveArea`, com mapeamento proposto (pendente de
+  revisão) para as funções do NIST AI RMF, os capítulos do AI Act e os critérios da taxonomia. Cada área da cúpula
+  declara `hrai:displayKey "topics:<id>"`, que o contador de lastro usa. Fonte: `areas.json`.
 - **Perfis de desenho** e a regra **R28** (`comp:R28_HorizontalRiskBasedProfile`): rótulo de leitura derivado de valores
   codificados com dispositivo e revisão aprovada; os critérios continuam visíveis.
 
