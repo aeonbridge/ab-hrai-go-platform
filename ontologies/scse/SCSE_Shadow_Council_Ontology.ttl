@@ -13,10 +13,11 @@
     dcterms:description "SCSE module of HRAI-GO (Human-centred Regulatory AI, Governance Observatory): deliberation, council, strata, seats, rounds, positions, scenarios and decisions. Imports the regulatory core instead of redeclaring its classes (ESP-ONT-02, RF-17). Includes synthetic illustration individuals and safe positive SWRL rules. No legal certification or population representativeness is implied."@en ;
     dcterms:source "SCSE Shadow Council Simulation Specification v1.0 and HRAI-GO conceptual proposal (user-provided documents)." ;
     dcterms:title "Shadow Council Simulation Environment Ontology"@en ;
-    rdfs:comment "1.1.0: own namespace; imports the core; regulatory classes (LegalProvision, NormativeRequirement, LegalStatus, LegalException, Jurisdiction, ComplianceAssessment, PolicyAlternative, PolicyObjective) now come from the core; deliberation classes have their home here, with owl:equivalentClass to the legacy core classes kept for compatibility."@en ;
+    rdfs:comment "1.1.0: own namespace; imports the core; regulatory classes (LegalProvision, NormativeRequirement, LegalStatus, LegalException, Jurisdiction, ComplianceAssessment, PolicyAlternative, PolicyObjective) now come from the core; deliberation classes have their home here, with owl:equivalentClass to the legacy core classes kept for compatibility."@en,
+        "1.2.0 (ESP-ONT-02, RF-03): DecisionRecord, position revision and alternative positions, stratum of a stakeholder; rules R29a/R29b (synthetic support never counts as human) and R30 (divergent alternative)."@en ;
     owl:imports <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> ;
-    owl:versionIRI <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/1.1.0> ;
-    owl:versionInfo "1.1.0" .
+    owl:versionIRI <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/1.2.0> ;
+    owl:versionInfo "1.2.0" .
 
 scse:Deliberation a owl:Class ;
     rdfs:label "Deliberation"@en ;
@@ -173,6 +174,64 @@ scse:R09_ProjectRegulation a swrl:Imp ;
                 swrl:argument2 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R09_regulation> ;
                 swrl:propertyPredicate scse:projectUsesRegulation ] ) .
 
+scse:R29a_SyntheticSupport a swrl:Imp ;
+    rdfs:label "R29a_SyntheticSupport"@en ;
+    rdfs:comment "Synthetic support stays synthetic: it is never human support."@en ;
+    swrl:body ( [ a swrl:ClassAtom ;
+                swrl:argument1 scse:var_R29a_SyntheticSupport_p ;
+                swrl:classPredicate hrai:SyntheticStakeholderPosition ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 scse:var_R29a_SyntheticSupport_p ;
+                swrl:argument2 scse:var_R29a_SyntheticSupport_c ;
+                swrl:propertyPredicate hrai:positionSupportsClaim ] ) ;
+    swrl:head ( [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 scse:var_R29a_SyntheticSupport_c ;
+                swrl:argument2 scse:var_R29a_SyntheticSupport_p ;
+                swrl:propertyPredicate scse:hasSyntheticSupport ] ) .
+
+scse:R29b_SyntheticChallenge a swrl:Imp ;
+    rdfs:label "R29b_SyntheticChallenge"@en ;
+    rdfs:comment "Synthetic challenge stays synthetic: it is never a human challenge."@en ;
+    swrl:body ( [ a swrl:ClassAtom ;
+                swrl:argument1 scse:var_R29b_SyntheticChallenge_p ;
+                swrl:classPredicate hrai:SyntheticStakeholderPosition ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 scse:var_R29b_SyntheticChallenge_p ;
+                swrl:argument2 scse:var_R29b_SyntheticChallenge_c ;
+                swrl:propertyPredicate hrai:positionChallengesClaim ] ) ;
+    swrl:head ( [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 scse:var_R29b_SyntheticChallenge_c ;
+                swrl:argument2 scse:var_R29b_SyntheticChallenge_p ;
+                swrl:propertyPredicate scse:hasSyntheticChallenge ] ) .
+
+scse:R30_DivergentAlternative a swrl:Imp ;
+    rdfs:label "R30_DivergentAlternative"@en ;
+    rdfs:comment "Support and challenge from different strata; shows disagreement, decides nothing."@en ;
+    swrl:body ( [ a swrl:ClassAtom ;
+                swrl:argument1 scse:var_R30_DivergentAlternative_a ;
+                swrl:classPredicate hrai:PolicyAlternative ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 scse:var_R30_DivergentAlternative_p1 ;
+                swrl:argument2 scse:var_R30_DivergentAlternative_a ;
+                swrl:propertyPredicate scse:positionSupportsAlternative ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 scse:var_R30_DivergentAlternative_p1 ;
+                swrl:argument2 scse:var_R30_DivergentAlternative_s1 ;
+                swrl:propertyPredicate hrai:positionExpressedBy ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 scse:var_R30_DivergentAlternative_s1 ;
+                swrl:argument2 scse:var_R30_DivergentAlternative_t1 ;
+                swrl:propertyPredicate scse:stakeholderInStratum ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 scse:var_R30_DivergentAlternative_p2 ;
+                swrl:argument2 scse:var_R30_DivergentAlternative_a ;
+                swrl:propertyPredicate scse:positionChallengesAlternative ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 scse:var_R30_DivergentAlternative_p2 ;
+                swrl:argument2 scse:var_R30_DivergentAlternative_s2 ;
+                swrl:propertyPredicate hrai:positionExpressedBy ] [ a swrl:IndividualPropertyAtom ;
+                swrl:argument1 scse:var_R30_DivergentAlternative_s2 ;
+                swrl:argument2 scse:var_R30_DivergentAlternative_t2 ;
+                swrl:propertyPredicate scse:stakeholderInStratum ] [ a swrl:BuiltinAtom ;
+                swrl:arguments ( scse:var_R30_DivergentAlternative_t1 scse:var_R30_DivergentAlternative_t2 ) ;
+                swrl:builtin <http://www.w3.org/2003/11/swrlb#notEqual> ] ) ;
+    swrl:head ( [ a swrl:ClassAtom ;
+                swrl:argument1 scse:var_R30_DivergentAlternative_a ;
+                swrl:classPredicate scse:DivergentAlternative ] ) .
+
 scse:RegulatoryPolicyScenario a owl:Class ;
     rdfs:label "RegulatoryPolicyScenario"@en ;
     rdfs:comment "Scenario dedicated to regulatory policy evaluation."@en ;
@@ -277,6 +336,24 @@ scse:decisionAutonomy a owl:DatatypeProperty ;
     rdfs:comment "Human approval, automated, advisory or unknown decision autonomy."@en ;
     rdfs:domain scse:SolutionArtifact ;
     rdfs:range xsd:string .
+
+scse:decisionCitesClaim a owl:ObjectProperty ;
+    rdfs:label "decisionCitesClaim"@en ;
+    rdfs:comment "Claim the decision rests on."@en ;
+    rdfs:domain scse:DecisionRecord ;
+    rdfs:range hrai:PolicyClaim .
+
+scse:decisionPreservesDivergence a owl:ObjectProperty ;
+    rdfs:label "decisionPreservesDivergence"@en ;
+    rdfs:comment "Alternative whose disagreement the decision keeps on record."@en ;
+    rdfs:domain scse:DecisionRecord ;
+    rdfs:range hrai:PolicyAlternative .
+
+scse:decisionSelects a owl:ObjectProperty ;
+    rdfs:label "decisionSelects"@en ;
+    rdfs:comment "Alternative chosen by the human decision."@en ;
+    rdfs:domain scse:DecisionRecord ;
+    rdfs:range hrai:PolicyAlternative .
 
 scse:describesProvision a owl:ObjectProperty ;
     rdfs:label "describesProvision"@en ;
@@ -539,6 +616,12 @@ scse:positionGroundedInEvidence a owl:ObjectProperty ;
     rdfs:domain scse:DocumentedPerspective ;
     rdfs:range scse:EvidenceRecord .
 
+scse:positionRevisedAs a owl:ObjectProperty ;
+    rdfs:label "positionRevisedAs"@en ;
+    rdfs:comment "A person changed position between rounds 1 and 3: the earlier position was revised as the later one."@en ;
+    rdfs:domain hrai:StakeholderPosition ;
+    rdfs:range hrai:StakeholderPosition .
+
 scse:proposesAlternative a owl:ObjectProperty ;
     rdfs:label "proposesAlternative"@en ;
     rdfs:comment "Links a claim to a proposed alternative."@en ;
@@ -781,6 +864,11 @@ scse:CoverageDimension a owl:Class ;
     rdfs:label "CoverageDimension"@en ;
     rdfs:comment "Dimension of perspective coverage such as role, impact exposure or territory."@en .
 
+scse:DivergentAlternative a owl:Class ;
+    rdfs:label "DivergentAlternative"@en ;
+    rdfs:comment "Inferred (R30): alternative supported and challenged by positions from different strata; shows where real disagreement is."@en ;
+    rdfs:subClassOf hrai:PolicyAlternative .
+
 scse:StakeholderPosition a owl:Class ;
     rdfs:label "Stakeholder position"@en ;
     rdfs:comment "Position attributed to a stakeholder on a claim or alternative. Home of the concept since RF-17."@en ;
@@ -867,6 +955,18 @@ scse:hasStratum a owl:ObjectProperty ;
     rdfs:domain scse:CouncilSeat ;
     rdfs:range scse:StakeholderStratum .
 
+scse:hasSyntheticChallenge a owl:ObjectProperty ;
+    rdfs:label "hasSyntheticChallenge"@en ;
+    rdfs:comment "Inferred (R29b): a synthetic position challenges the claim. Never counted as human challenge."@en ;
+    rdfs:domain hrai:PolicyClaim ;
+    rdfs:range hrai:StakeholderPosition .
+
+scse:hasSyntheticSupport a owl:ObjectProperty ;
+    rdfs:label "hasSyntheticSupport"@en ;
+    rdfs:comment "Inferred (R29a): a synthetic position supports the claim. Never counted as human support."@en ;
+    rdfs:domain hrai:PolicyClaim ;
+    rdfs:range hrai:StakeholderPosition .
+
 scse:hasUnverifiedEvidence a owl:DatatypeProperty ;
     rdfs:label "hasUnverifiedEvidence"@en ;
     rdfs:comment "Explicit review flag on a known requirement; missing values are not interpreted as false."@en ;
@@ -884,6 +984,18 @@ scse:needsEvidenceReview a owl:DatatypeProperty ;
     rdfs:comment "A finding explicitly requires evidence review."@en ;
     rdfs:domain scse:ComplianceFinding ;
     rdfs:range xsd:boolean .
+
+scse:positionChallengesAlternative a owl:ObjectProperty ;
+    rdfs:label "positionChallengesAlternative"@en ;
+    rdfs:comment "The position challenges the alternative."@en ;
+    rdfs:domain hrai:StakeholderPosition ;
+    rdfs:range hrai:PolicyAlternative .
+
+scse:positionSupportsAlternative a owl:ObjectProperty ;
+    rdfs:label "positionSupportsAlternative"@en ;
+    rdfs:comment "The position supports the alternative."@en ;
+    rdfs:domain hrai:StakeholderPosition ;
+    rdfs:range hrai:PolicyAlternative .
 
 scse:projectUsesRegulation a owl:ObjectProperty ;
     rdfs:label "projectUsesRegulation"@en ;
@@ -1124,6 +1236,28 @@ scse:produces a owl:ObjectProperty ;
     rdfs:domain scse:DeliberationRound ;
     rdfs:range scse:ArgumentClaim .
 
+scse:stakeholderInStratum a owl:ObjectProperty ;
+    rdfs:label "stakeholderInStratum"@en ;
+    rdfs:comment "Stratum of the council from which the stakeholder (human or synthetic) speaks."@en ;
+    rdfs:domain hrai:Stakeholder ;
+    rdfs:range scse:StakeholderStratum .
+
+scse:var_R29a_SyntheticSupport_c a swrl:Variable .
+
+scse:var_R29b_SyntheticChallenge_c a swrl:Variable .
+
+scse:var_R30_DivergentAlternative_p1 a swrl:Variable .
+
+scse:var_R30_DivergentAlternative_p2 a swrl:Variable .
+
+scse:var_R30_DivergentAlternative_s1 a swrl:Variable .
+
+scse:var_R30_DivergentAlternative_s2 a swrl:Variable .
+
+scse:var_R30_DivergentAlternative_t1 a swrl:Variable .
+
+scse:var_R30_DivergentAlternative_t2 a swrl:Variable .
+
 ex:BrazilContextSnapshot a scse:NationalContextSnapshot ;
     scse:contextJurisdiction ex:Brazil .
 
@@ -1197,6 +1331,10 @@ ex:SampleRecruitmentScenario a scse:SolutionComplianceScenario ;
 
 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse/swrl-var#R09_scenario> a swrl:Variable .
 
+scse:DecisionRecord a owl:Class ;
+    rdfs:label "DecisionRecord"@en ;
+    rdfs:comment "Human decision at the end of a deliberation: selects an alternative, cites the claims it rests on and keeps the divergences that remain (round 4). Enters the graph as a candidate."@en .
+
 scse:MinorityOpinion a owl:Class ;
     rdfs:label "MinorityOpinion"@en ;
     rdfs:comment "Preserved dissenting view with rationale and documentary limitations."@en .
@@ -1224,6 +1362,10 @@ scse:SyntheticPerspective a owl:NamedIndividual,
         scse:ClaimClassification ;
     rdfs:label "SyntheticPerspective"@en ;
     rdfs:comment "Synthetic stakeholder perspective"@en .
+
+scse:var_R29a_SyntheticSupport_p a swrl:Variable .
+
+scse:var_R29b_SyntheticChallenge_p a swrl:Variable .
 
 ex:Brazil a hrai:Jurisdiction ;
     scse:jurisdictionCode "BR" .
@@ -1293,6 +1435,8 @@ scse:SourceVerificationStatus a owl:Class ;
     rdfs:comment "Controlled status of provenance/source verification."@en ;
     owl:oneOf ( scse:VerifiedSource scse:PendingSourceVerification scse:FailedSourceVerification ) .
 
+scse:var_R30_DivergentAlternative_a a swrl:Variable .
+
 scse:DeliberationEvent a owl:Class ;
     rdfs:label "DeliberationEvent"@en ;
     rdfs:comment "Auditable action within a deliberation round linked to claims and execution."@en .
@@ -1304,10 +1448,6 @@ scse:NationalContextSnapshot a owl:Class ;
 scse:ScenarioBranch a owl:Class ;
     rdfs:label "ScenarioBranch"@en ;
     rdfs:comment "Controlled intervention, patch and assumptions applied to a base scenario."@en .
-
-scse:StakeholderStratum a owl:Class ;
-    rdfs:label "StakeholderStratum"@en ;
-    rdfs:comment "Documented perspective category used for synthetic council coverage, not a human probability sample."@en .
 
 scse:WorldSnapshot a owl:Class ;
     rdfs:label "WorldSnapshot"@en ;
@@ -1326,6 +1466,10 @@ scse:RegulatorySnapshot a owl:Class ;
     rdfs:label "RegulatorySnapshot"@en ;
     rdfs:comment "As-of collection of versioned legal provision states and source material."@en ;
     owl:disjointWith scse:NationalContextSnapshot .
+
+scse:StakeholderStratum a owl:Class ;
+    rdfs:label "StakeholderStratum"@en ;
+    rdfs:comment "Documented perspective category used for synthetic council coverage, not a human probability sample."@en .
 
 scse:CouncilSeat a owl:Class ;
     rdfs:label "CouncilSeat"@en ;
@@ -1394,12 +1538,6 @@ scse:ScenarioDefinition a owl:Class ;
     rdfs:comment "Frozen question, jurisdiction, mode, relevant sources, and assumptions of a simulation."@en .
 
 [] a owl:AllDifferent ;
-    owl:distinctMembers ( scse:VerifiedLegalFact scse:EvidenceBasedFinding scse:SyntheticPerspective scse:Hypothesis scse:UnknownClaimClass ) .
-
-[] a owl:AllDifferent ;
-    owl:distinctMembers ( scse:ProposedStatus scse:EnactedNotEffectiveStatus scse:EffectiveStatus scse:SuspendedStatus scse:RepealedStatus scse:SupersededStatus scse:UnknownLegalStatus ) .
-
-[] a owl:AllDifferent ;
     owl:distinctMembers ( scse:VerifiedSource scse:PendingSourceVerification scse:FailedSourceVerification ) .
 
 [] a owl:AllDifferent ;
@@ -1413,4 +1551,10 @@ scse:ScenarioDefinition a owl:Class ;
 
 [] rdf:first scse:ProposedStatus ;
     rdf:rest ( scse:EnactedNotEffectiveStatus scse:EffectiveStatus scse:SuspendedStatus scse:RepealedStatus scse:SupersededStatus scse:UnknownLegalStatus ) .
+
+[] a owl:AllDifferent ;
+    owl:distinctMembers ( scse:VerifiedLegalFact scse:EvidenceBasedFinding scse:SyntheticPerspective scse:Hypothesis scse:UnknownClaimClass ) .
+
+[] a owl:AllDifferent ;
+    owl:distinctMembers ( scse:ProposedStatus scse:EnactedNotEffectiveStatus scse:EffectiveStatus scse:SuspendedStatus scse:RepealedStatus scse:SupersededStatus scse:UnknownLegalStatus ) .
 

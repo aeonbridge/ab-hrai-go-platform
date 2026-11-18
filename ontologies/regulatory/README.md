@@ -2,7 +2,7 @@
 
 Parte do **HRAI-GO (Human-centred Regulatory AI, Governance Observatory)**. O prefixo `hrai:` e os nomes de arquivo `HRAI_GO_*` são identificadores legados (a sigla nasceu como *High-Risk AI*, significado aposentado); ver `docs/NOMENCLATURA.md`.
 
-**Versão:** 1.1.0 (proposta; anterior: 1.0.0) · **Idioma dos identificadores:** inglês · **Explicações:** pt-BR
+**Versão:** 1.2.0 (proposta; anteriores: 1.1.0, 1.0.0) · **Idioma dos identificadores:** inglês · **Explicações:** pt-BR
 
 ## Objetivo
 
@@ -58,6 +58,25 @@ A modelagem inclui classes auxiliares para versões e estados jurídicos, proven
 - `R21_SyntheticPosition`: Synthetic origin propagates to the position.
 - `R22_ProposedProvision`: Provision of a proposal; no binding force.
 - `R23_ProspectiveRequirement`: Requirement derived from a proposal; prospective, not binding.
+
+### v1.2.0 (ESP-ONT-02, RF-03)
+
+Termos aditivos para comparação, cobertura, capacidade, correspondência e especificidade: `RegulatoryDesignCriterion`,
+`CriterionCoding`, `SubstantiveArea`, `ProvisionCorrespondence` (tipos equivalente, adaptado, parcial, divergente),
+`CapacityRequirement`, `CapacityShortfallIndicator`, `RiskExposureIndicator`, `CoverageAssessment`, `claimQualifies`,
+`claimComplements` e `NationalSpecificity` (dimensão da QN1, tipo de diferença, `JurisdictionComparison`,
+`groundedInSpecificity`). Regras novas, todas de sinalização:
+
+- `R24a_FunctionCoverageInForce`, `R24b_FunctionCoverageProposed`, `R24c_FunctionCoveragePlanned`: cobertura de área
+  por jurisdição, com a força jurídica vinda da classe do instrumento (vigente, proposta ou plano).
+- `R25a_CapacityShortfall`, `R25b_RequirementCapacityRisk`: indicador abaixo do limiar inferior e requisito que
+  pressupõe essa capacidade. Sinal para investigar, não juízo de inviabilidade.
+- `R26_Transposition`: correspondência equivalente ou adaptada, revisada e aprovada, entre jurisdições diferentes.
+- R27 não existe: SWRL não tem negação; "exposição sem cobertura" é consulta SPARQL sob um `CoverageAssessment`.
+- R28 (perfil de desenho) fica no módulo comparativo, junto dos critérios que combina; R29 e R30 (apoio sintético e
+  alternativa divergente) ficam no módulo SCSE, casa das classes de deliberação.
+
+Invariantes I-1 a I-4 e tempo de raciocínio do grafo completo: `tests/test_invariantes.py`.
 
 ## Separações epistemológicas obrigatórias
 

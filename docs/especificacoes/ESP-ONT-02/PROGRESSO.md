@@ -39,6 +39,22 @@ Registro de cada iteração do roteiro `EXECUCAO_LOOP.md`. Referência de aceite
   disparavam antes disparam igual depois (mesma contagem por regra), agora com o núcleo importado (32 regras no total).
 - **Aceite RF-17**: nenhum termo declarado nos dois módulos (teste); testes dos dois módulos passam.
 
+### Item 3 · RF-03 TBox v1.2.0, regras R24–R30, invariantes, tempo no CI — 17/11/2026
+
+- **O que mudou**
+  - Núcleo 1.2.0: 14 classes, 34 propriedades de objeto e 5 de dados com comentário em cada uma; vocabulários
+    controlados (tipos de correspondência, dimensões da QN1, tipos de diferença). Regras R24a/b/c, R25a/b e R26.
+  - SCSE 1.2.0: `DecisionRecord`, revisão de posição, posições sobre alternativas, estrato do stakeholder; R29a/b e R30.
+  - `scripts/ontologia/swrl_texto.py`: converte SWRL textual em `swrl:Imp`; `raciocinar.py` ganhou `swrlb:notEqual`.
+  - Testes: `tests/verify_regulatory_ontology.py` estendido (29 regras, classes v1.2.0, cabeças proibidas);
+    `tests/test_invariantes.py` (regras novas sobre fixture, I-1 a I-4, tempo do grafo completo).
+- **Decisões de modelagem**: R27 não existe (sem negação em SWRL); R28 vai para o módulo comparativo no item 4, porque
+  combina valores dos critérios; R29–R30 ficam no SCSE (casa da deliberação desde o RF-17).
+- **Comandos**: os quatro do protocolo com exit 0; `build_regulatory_instances.py --check` OK; pytest dos módulos,
+  lastro e invariantes → 27 passed. Grafo completo (núcleo, SCSE, instâncias, cenários, afirmações, alinhamentos):
+  5105 triplas em 0,12 s (RNF-02 < 5 s).
+- **Pendente**: R28 (item 4).
+
 ## Aguardando decisão
 
 | Id | Decisão | Quem | Bloqueia |
@@ -60,7 +76,7 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | V-02 | 🟡 | PBIA, PL 2023 e 2024 (SHA-256 no `EXECUCAO_LOOP.md`), UE, RU e EUA no corpus; falta `SourceSnapshot` de cada um no grafo |
 | V-03 | ⏸ | D-01 |
 | V-04 | ✅ | `tests/test_modulos.py` no CI (`validate-regulatory.yml`); item 2 |
-| V-05 | ⬜ | item 3 |
+| V-05 | 🟡 | TBox 1.2.0, R24–R26, R29–R30, I-1 a I-4 testadas (`tests/test_invariantes.py`); falta R28 (item 4) |
 | V-06 | ⬜ | item 4 |
 | V-07 | ⏸ | D-02 |
 | V-08 | ⬜ | item 11 |
@@ -68,7 +84,7 @@ Legenda: ✅ verificado com evidência · 🟡 parcial · ⬜ não iniciado · �
 | V-10 | ⬜ | item 11 |
 | V-11 | ⬜ | item 12 |
 | V-12 | ⬜ | item 7 |
-| V-13 | 🟡 | raciocínio do grafo atual em ~0,06 s (`experimentos.py`); falta medir no CI (item 3) |
+| V-13 | ✅ | `test_rnf02_full_graph_reasons_under_five_seconds` no CI: 0,12 s para 5105 triplas |
 | V-14 | ⬜ | item 8 |
 | V-15 | 🟡 | contador publicado e protegido no CI (item 1): 83 sem lastro de 88; meta zero no item 8 |
 | V-16 | ⬜ | item 6 |

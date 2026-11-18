@@ -171,6 +171,9 @@ class Raciocinador:
                 ok = {"greaterThan": x > y, "lessThan": x < y, "greaterThanOrEqual": x >= y, "lessThanOrEqual": x <= y, "equal": x == y}[nome]
                 if ok:
                     yield from self._casar(atomos[1:], lig, usadas)
+            elif nome == "notEqual":   # swrlb:notEqual(?a, ?b): both bound and different terms
+                if vs[0] is not None and vs[1] is not None and vs[0] != vs[1]:
+                    yield from self._casar(atomos[1:], lig, usadas)
             elif nome == "divide":   # swrlb:divide(?r, ?a, ?b): r = a / b
                 a, b = _num(vs[1]), _num(vs[2])
                 if a is None or b is None or b == 0:

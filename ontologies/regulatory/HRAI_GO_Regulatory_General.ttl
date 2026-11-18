@@ -9,9 +9,9 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> rdf:type owl:Ontology .
-<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> owl:versionIRI <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory/1.1.0> .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> owl:versionIRI <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory/1.2.0> .
 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> owl:priorVersion <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory/1.0.0> .
-<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> owl:versionInfo "1.1.0" .
+<https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> owl:versionInfo "1.2.0" .
 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> dcterms:title "HRAI-GO General Regulatory Intelligence Ontology"@en .
 <https://github.com/aeonbridge/ab-hrai-go-platform/ontology/regulatory> rdfs:comment "Canonical legal, policy and national-context model. OWL/SWRL do not certify legal applicability, review, validity or compliance."@en .
 hrai:Jurisdiction rdf:type owl:Class .
@@ -1571,3 +1571,581 @@ hrai:R23_ProspectiveRequirement swrl:body _:r23_5 .
 _:r23_8 rdf:first _:r23_4 .
 _:r23_8 rdf:rest rdf:nil .
 hrai:R23_ProspectiveRequirement swrl:head _:r23_8 .
+
+# ---------------------------------------------------------------------------
+# v1.2.0 (ESP-ONT-02, RF-03): comparison, coverage, capacity, correspondence and specificity terms; rules R24-R26.
+# R27 does not exist (SWRL has no negation: uncovered exposure is a SPARQL query under a CoverageAssessment).
+# R28 (design profile) lives in the comparative module with the criteria it combines; R29-R30 live in SCSE.
+# ---------------------------------------------------------------------------
+hrai:RegulatoryDesignCriterion rdf:type owl:Class .
+hrai:RegulatoryDesignCriterion rdfs:label "RegulatoryDesignCriterion"@en .
+hrai:RegulatoryDesignCriterion rdfs:comment "Criterion of the comparative taxonomy of Alanoca et al. (FAccT 2025, doi:10.1145/3715275.3732059), with its original definition, or one of the declared extensions E1-E7. The concepts themselves live in the comparative module."@en .
+hrai:CriterionCoding rdf:type owl:Class .
+hrai:CriterionCoding rdfs:label "CriterionCoding"@en .
+hrai:CriterionCoding rdfs:comment "N-ary coding of one instrument version (or plan) on one criterion: value on an approved scale, justifying provision, coder and review decision (extensions E4, E5)."@en .
+hrai:SubstantiveArea rdf:type owl:Class .
+hrai:SubstantiveArea rdfs:label "SubstantiveArea"@en .
+hrai:SubstantiveArea rdfs:comment "Substantive area of governance (extension E3): the 28 areas of the chamber plus generative AI and general-purpose models, mapped to NIST functions and AI Act chapters where a relation exists."@en .
+hrai:ProvisionCorrespondence rdf:type owl:Class .
+hrai:ProvisionCorrespondence rdfs:label "ProvisionCorrespondence"@en .
+hrai:ProvisionCorrespondence rdfs:comment "N-ary correspondence between a provision of one jurisdiction and a provision of another: type, evidence, analyst and review decision."@en .
+hrai:CorrespondenceType rdf:type owl:Class .
+hrai:CorrespondenceType rdfs:label "CorrespondenceType"@en .
+hrai:CorrespondenceType rdfs:comment "Controlled value for the type of a provision correspondence: equivalent, adapted, partial or divergent."@en .
+hrai:TransposingCorrespondenceType rdf:type owl:Class .
+hrai:TransposingCorrespondenceType rdfs:label "TransposingCorrespondenceType"@en .
+hrai:TransposingCorrespondenceType rdfs:comment "Correspondence types that indicate transposition (equivalent or adapted)."@en .
+hrai:TransposingCorrespondenceType rdfs:subClassOf hrai:CorrespondenceType .
+hrai:CapacityRequirement rdf:type owl:Class .
+hrai:CapacityRequirement rdfs:label "CapacityRequirement"@en .
+hrai:CapacityRequirement rdfs:comment "Capacity of the State or of the ecosystem that a normative requirement presupposes (budget, staff, infrastructure)."@en .
+hrai:CapacityShortfallIndicator rdf:type owl:Class .
+hrai:CapacityShortfallIndicator rdfs:label "CapacityShortfallIndicator"@en .
+hrai:CapacityShortfallIndicator rdfs:comment "Indicator whose value is below its explicit lower alert threshold. A signal to investigate, not a finding of infeasibility."@en .
+hrai:CapacityShortfallIndicator rdfs:subClassOf hrai:ContextIndicator .
+hrai:RiskExposureIndicator rdf:type owl:Class .
+hrai:RiskExposureIndicator rdfs:label "RiskExposureIndicator"@en .
+hrai:RiskExposureIndicator rdfs:comment "Indicator of how much the national context is exposed to a risk (for example, volume of sensitive data in state use)."@en .
+hrai:RiskExposureIndicator rdfs:subClassOf hrai:ContextIndicator .
+hrai:CoverageAssessment rdf:type owl:Class .
+hrai:CoverageAssessment rdfs:label "CoverageAssessment"@en .
+hrai:CoverageAssessment rdfs:comment "Explicit closed-world statement: for jurisdiction J, in snapshot S, the corpus was searched for area F. Only under it does an absence become a gap."@en .
+hrai:NationalSpecificity rdf:type owl:Class .
+hrai:NationalSpecificity rdfs:label "NationalSpecificity"@en .
+hrai:NationalSpecificity rdfs:comment "Specificity of Brazil relative to the other jurisdictions of the corpus (QN1): a difference explained by a national dimension, with mandatory evidence. Proposed; produced as a candidate and accepted only by human review (RF-18; RT-VIS-03 step M5)."@en .
+hrai:SpecificityDimension rdf:type owl:Class .
+hrai:SpecificityDimension rdfs:label "SpecificityDimension"@en .
+hrai:SpecificityDimension rdfs:comment "Dimension of QN1 that explains a specificity: national context, installed capacity, risk exposure or strategic objective."@en .
+hrai:DifferenceType rdf:type owl:Class .
+hrai:DifferenceType rdfs:label "DifferenceType"@en .
+hrai:DifferenceType rdfs:comment "Type of difference behind a specificity: Brazil only, absent in Brazil, intensity or context."@en .
+hrai:JurisdictionComparison rdf:type owl:Class .
+hrai:JurisdictionComparison rdfs:label "JurisdictionComparison"@en .
+hrai:JurisdictionComparison rdfs:comment "Value of one other jurisdiction for the point compared by a specificity, with its source, or the explicit statement that it is not coded."@en .
+hrai:EquivalentCorrespondence rdf:type owl:NamedIndividual .
+hrai:EquivalentCorrespondence rdf:type hrai:TransposingCorrespondenceType .
+hrai:EquivalentCorrespondence rdfs:label "EquivalentCorrespondence"@en .
+hrai:EquivalentCorrespondence rdfs:comment "Same obligation with the same scope."@en .
+hrai:AdaptedCorrespondence rdf:type owl:NamedIndividual .
+hrai:AdaptedCorrespondence rdf:type hrai:TransposingCorrespondenceType .
+hrai:AdaptedCorrespondence rdfs:label "AdaptedCorrespondence"@en .
+hrai:AdaptedCorrespondence rdfs:comment "Same obligation, adapted in scope, actor or procedure."@en .
+hrai:PartialCorrespondence rdf:type owl:NamedIndividual .
+hrai:PartialCorrespondence rdf:type hrai:CorrespondenceType .
+hrai:PartialCorrespondence rdfs:label "PartialCorrespondence"@en .
+hrai:PartialCorrespondence rdfs:comment "Only part of the obligation corresponds."@en .
+hrai:DivergentCorrespondence rdf:type owl:NamedIndividual .
+hrai:DivergentCorrespondence rdf:type hrai:CorrespondenceType .
+hrai:DivergentCorrespondence rdfs:label "DivergentCorrespondence"@en .
+hrai:DivergentCorrespondence rdfs:comment "Both address the area with different obligations."@en .
+hrai:NationalContextDimension rdf:type owl:NamedIndividual .
+hrai:NationalContextDimension rdf:type hrai:SpecificityDimension .
+hrai:NationalContextDimension rdfs:label "NationalContextDimension"@en .
+hrai:NationalContextDimension rdfs:comment "Explained by the national context (territory, population, legal system, economy)."@en .
+hrai:InstalledCapacityDimension rdf:type owl:NamedIndividual .
+hrai:InstalledCapacityDimension rdf:type hrai:SpecificityDimension .
+hrai:InstalledCapacityDimension rdfs:label "InstalledCapacityDimension"@en .
+hrai:InstalledCapacityDimension rdfs:comment "Explained by installed capacity (budget, staff, infrastructure, supervision)."@en .
+hrai:RiskExposureDimension rdf:type owl:NamedIndividual .
+hrai:RiskExposureDimension rdf:type hrai:SpecificityDimension .
+hrai:RiskExposureDimension rdfs:label "RiskExposureDimension"@en .
+hrai:RiskExposureDimension rdfs:comment "Explained by exposure to a risk specific to the country."@en .
+hrai:StrategicObjectiveDimension rdf:type owl:NamedIndividual .
+hrai:StrategicObjectiveDimension rdf:type hrai:SpecificityDimension .
+hrai:StrategicObjectiveDimension rdfs:label "StrategicObjectiveDimension"@en .
+hrai:StrategicObjectiveDimension rdfs:comment "Explained by a strategic objective of the country (sovereignty, development)."@en .
+hrai:BrazilOnlyDifference rdf:type owl:NamedIndividual .
+hrai:BrazilOnlyDifference rdf:type hrai:DifferenceType .
+hrai:BrazilOnlyDifference rdfs:label "BrazilOnlyDifference"@en .
+hrai:BrazilOnlyDifference rdfs:comment "Brazil covers the area or objective and no other jurisdiction of the corpus does."@en .
+hrai:AbsentInBrazilDifference rdf:type owl:NamedIndividual .
+hrai:AbsentInBrazilDifference rdf:type hrai:DifferenceType .
+hrai:AbsentInBrazilDifference rdfs:label "AbsentInBrazilDifference"@en .
+hrai:AbsentInBrazilDifference rdfs:comment "Other jurisdictions cover the area and Brazil does not, within a coverage assessment."@en .
+hrai:IntensityDifference rdf:type owl:NamedIndividual .
+hrai:IntensityDifference rdf:type hrai:DifferenceType .
+hrai:IntensityDifference rdfs:label "IntensityDifference"@en .
+hrai:IntensityDifference rdfs:comment "All cover it, with different values on the approved scale (E4) or different legal force (E1)."@en .
+hrai:ContextDifference rdf:type owl:NamedIndividual .
+hrai:ContextDifference rdf:type hrai:DifferenceType .
+hrai:ContextDifference rdfs:label "ContextDifference"@en .
+hrai:ContextDifference rdfs:comment "A capacity or exposure indicator in which Brazil differs from the others."@en .
+hrai:codingCriterion rdf:type owl:ObjectProperty .
+hrai:codingCriterion rdfs:label "codingCriterion"@en .
+hrai:codingCriterion rdfs:comment "Criterion coded."@en .
+hrai:codingCriterion rdfs:domain hrai:CriterionCoding .
+hrai:codingCriterion rdfs:range hrai:RegulatoryDesignCriterion .
+hrai:codingSubject rdf:type owl:ObjectProperty .
+hrai:codingSubject rdfs:label "codingSubject"@en .
+hrai:codingSubject rdfs:comment "Instrument version or policy instrument that was coded (E5: coding is per version)."@en .
+hrai:codingSubject rdfs:domain hrai:CriterionCoding .
+hrai:codingJustifiedBy rdf:type owl:ObjectProperty .
+hrai:codingJustifiedBy rdfs:label "codingJustifiedBy"@en .
+hrai:codingJustifiedBy rdfs:comment "Provision that justifies the coded value (evidence per value, E4)."@en .
+hrai:codingJustifiedBy rdfs:domain hrai:CriterionCoding .
+hrai:codingJustifiedBy rdfs:range hrai:LegalProvision .
+hrai:codingCoder rdf:type owl:ObjectProperty .
+hrai:codingCoder rdfs:label "codingCoder"@en .
+hrai:codingCoder rdfs:comment "Person or agent that proposed the coding; agents only propose."@en .
+hrai:codingCoder rdfs:domain hrai:CriterionCoding .
+hrai:codingReview rdf:type owl:ObjectProperty .
+hrai:codingReview rdfs:label "codingReview"@en .
+hrai:codingReview rdfs:comment "Human review decision on the coding."@en .
+hrai:codingReview rdfs:domain hrai:CriterionCoding .
+hrai:codingReview rdfs:range hrai:ReviewDecision .
+hrai:provisionAddressesFunction rdf:type owl:ObjectProperty .
+hrai:provisionAddressesFunction rdfs:label "provisionAddressesFunction"@en .
+hrai:provisionAddressesFunction rdfs:comment "A provision, principle or plan action addresses a substantive area."@en .
+hrai:provisionAddressesFunction rdfs:range hrai:SubstantiveArea .
+hrai:jurisdictionAddressesFunction rdf:type owl:ObjectProperty .
+hrai:jurisdictionAddressesFunction rdfs:label "jurisdictionAddressesFunction"@en .
+hrai:jurisdictionAddressesFunction rdfs:comment "Inferred (R24a): the jurisdiction covers the area through an instrument in force."@en .
+hrai:jurisdictionAddressesFunction rdfs:domain hrai:Jurisdiction .
+hrai:jurisdictionAddressesFunction rdfs:range hrai:SubstantiveArea .
+hrai:jurisdictionProposesFunction rdf:type owl:ObjectProperty .
+hrai:jurisdictionProposesFunction rdfs:label "jurisdictionProposesFunction"@en .
+hrai:jurisdictionProposesFunction rdfs:comment "Inferred (R24b): the area is covered only by a legislative proposal; no binding force."@en .
+hrai:jurisdictionProposesFunction rdfs:domain hrai:Jurisdiction .
+hrai:jurisdictionProposesFunction rdfs:range hrai:SubstantiveArea .
+hrai:jurisdictionPlansFunction rdf:type owl:ObjectProperty .
+hrai:jurisdictionPlansFunction rdfs:label "jurisdictionPlansFunction"@en .
+hrai:jurisdictionPlansFunction rdfs:comment "Inferred (R24c): the area is covered by a plan or policy action, not by law."@en .
+hrai:jurisdictionPlansFunction rdfs:domain hrai:Jurisdiction .
+hrai:jurisdictionPlansFunction rdfs:range hrai:SubstantiveArea .
+hrai:correspondenceFrom rdf:type owl:ObjectProperty .
+hrai:correspondenceFrom rdfs:label "correspondenceFrom"@en .
+hrai:correspondenceFrom rdfs:comment "Provision of origin (for example, an AI Act article)."@en .
+hrai:correspondenceFrom rdfs:domain hrai:ProvisionCorrespondence .
+hrai:correspondenceFrom rdfs:range hrai:LegalProvision .
+hrai:correspondenceTo rdf:type owl:ObjectProperty .
+hrai:correspondenceTo rdfs:label "correspondenceTo"@en .
+hrai:correspondenceTo rdfs:comment "Provision compared with the origin (for example, a PL 2338 article)."@en .
+hrai:correspondenceTo rdfs:domain hrai:ProvisionCorrespondence .
+hrai:correspondenceTo rdfs:range hrai:LegalProvision .
+hrai:correspondenceHasType rdf:type owl:ObjectProperty .
+hrai:correspondenceHasType rdfs:label "correspondenceHasType"@en .
+hrai:correspondenceHasType rdfs:comment "Type of the correspondence."@en .
+hrai:correspondenceHasType rdfs:domain hrai:ProvisionCorrespondence .
+hrai:correspondenceHasType rdfs:range hrai:CorrespondenceType .
+hrai:correspondenceEvidence rdf:type owl:ObjectProperty .
+hrai:correspondenceEvidence rdfs:label "correspondenceEvidence"@en .
+hrai:correspondenceEvidence rdfs:comment "Evidence for the correspondence."@en .
+hrai:correspondenceEvidence rdfs:domain hrai:ProvisionCorrespondence .
+hrai:correspondenceEvidence rdfs:range hrai:Evidence .
+hrai:correspondenceAnalyst rdf:type owl:ObjectProperty .
+hrai:correspondenceAnalyst rdfs:label "correspondenceAnalyst"@en .
+hrai:correspondenceAnalyst rdfs:comment "Person or agent that proposed the correspondence."@en .
+hrai:correspondenceAnalyst rdfs:domain hrai:ProvisionCorrespondence .
+hrai:correspondenceReview rdf:type owl:ObjectProperty .
+hrai:correspondenceReview rdfs:label "correspondenceReview"@en .
+hrai:correspondenceReview rdfs:comment "Human review decision on the correspondence."@en .
+hrai:correspondenceReview rdfs:domain hrai:ProvisionCorrespondence .
+hrai:correspondenceReview rdfs:range hrai:ReviewDecision .
+hrai:provisionTransposedFrom rdf:type owl:ObjectProperty .
+hrai:provisionTransposedFrom rdfs:label "provisionTransposedFrom"@en .
+hrai:provisionTransposedFrom rdfs:comment "Inferred (R26): reviewed equivalent or adapted correspondence with a provision of another jurisdiction."@en .
+hrai:provisionTransposedFrom rdfs:domain hrai:LegalProvision .
+hrai:provisionTransposedFrom rdfs:range hrai:LegalProvision .
+hrai:requirementAssumesCapacity rdf:type owl:ObjectProperty .
+hrai:requirementAssumesCapacity rdfs:label "requirementAssumesCapacity"@en .
+hrai:requirementAssumesCapacity rdfs:comment "Capacity that the requirement presupposes."@en .
+hrai:requirementAssumesCapacity rdfs:domain hrai:NormativeRequirement .
+hrai:requirementAssumesCapacity rdfs:range hrai:CapacityRequirement .
+hrai:capacityMeasuredBy rdf:type owl:ObjectProperty .
+hrai:capacityMeasuredBy rdfs:label "capacityMeasuredBy"@en .
+hrai:capacityMeasuredBy rdfs:comment "Indicator, with source, that measures the capacity."@en .
+hrai:capacityMeasuredBy rdfs:domain hrai:CapacityRequirement .
+hrai:capacityMeasuredBy rdfs:range hrai:ContextIndicator .
+hrai:requirementHasCapacityRisk rdf:type owl:ObjectProperty .
+hrai:requirementHasCapacityRisk rdfs:label "requirementHasCapacityRisk"@en .
+hrai:requirementHasCapacityRisk rdfs:comment "Inferred (R25b): the capacity the requirement presupposes is below its alert threshold, per this indicator. Signal to investigate."@en .
+hrai:requirementHasCapacityRisk rdfs:domain hrai:NormativeRequirement .
+hrai:requirementHasCapacityRisk rdfs:range hrai:ContextIndicator .
+hrai:exposureConcernsFunction rdf:type owl:ObjectProperty .
+hrai:exposureConcernsFunction rdfs:label "exposureConcernsFunction"@en .
+hrai:exposureConcernsFunction rdfs:comment "Area that should cover the exposure."@en .
+hrai:exposureConcernsFunction rdfs:domain hrai:RiskExposureIndicator .
+hrai:exposureConcernsFunction rdfs:range hrai:SubstantiveArea .
+hrai:coverageForJurisdiction rdf:type owl:ObjectProperty .
+hrai:coverageForJurisdiction rdfs:label "coverageForJurisdiction"@en .
+hrai:coverageForJurisdiction rdfs:comment "Jurisdiction whose corpus was searched."@en .
+hrai:coverageForJurisdiction rdfs:domain hrai:CoverageAssessment .
+hrai:coverageForJurisdiction rdfs:range hrai:Jurisdiction .
+hrai:coverageInSnapshot rdf:type owl:ObjectProperty .
+hrai:coverageInSnapshot rdfs:label "coverageInSnapshot"@en .
+hrai:coverageInSnapshot rdfs:comment "Snapshot searched."@en .
+hrai:coverageInSnapshot rdfs:domain hrai:CoverageAssessment .
+hrai:coverageInSnapshot rdfs:range hrai:SourceSnapshot .
+hrai:coverageOfFunction rdf:type owl:ObjectProperty .
+hrai:coverageOfFunction rdfs:label "coverageOfFunction"@en .
+hrai:coverageOfFunction rdfs:comment "Area searched."@en .
+hrai:coverageOfFunction rdfs:domain hrai:CoverageAssessment .
+hrai:coverageOfFunction rdfs:range hrai:SubstantiveArea .
+hrai:claimQualifies rdf:type owl:ObjectProperty .
+hrai:claimQualifies rdfs:label "claimQualifies"@en .
+hrai:claimQualifies rdfs:comment "The subject claim qualifies the object claim (narrows it); not a challenge."@en .
+hrai:claimQualifies rdfs:domain hrai:PolicyClaim .
+hrai:claimQualifies rdfs:range hrai:PolicyClaim .
+hrai:claimComplements rdf:type owl:ObjectProperty .
+hrai:claimComplements rdfs:label "claimComplements"@en .
+hrai:claimComplements rdfs:comment "The subject claim complements the object claim; not a challenge."@en .
+hrai:claimComplements rdfs:domain hrai:PolicyClaim .
+hrai:claimComplements rdfs:range hrai:PolicyClaim .
+hrai:specificityDimension rdf:type owl:ObjectProperty .
+hrai:specificityDimension rdfs:label "specificityDimension"@en .
+hrai:specificityDimension rdfs:comment "QN1 dimension that explains the specificity."@en .
+hrai:specificityDimension rdfs:domain hrai:NationalSpecificity .
+hrai:specificityDimension rdfs:range hrai:SpecificityDimension .
+hrai:differenceType rdf:type owl:ObjectProperty .
+hrai:differenceType rdfs:label "differenceType"@en .
+hrai:differenceType rdfs:comment "Type of difference behind the specificity."@en .
+hrai:differenceType rdfs:domain hrai:NationalSpecificity .
+hrai:differenceType rdfs:range hrai:DifferenceType .
+hrai:specificityGroundedIn rdf:type owl:ObjectProperty .
+hrai:specificityGroundedIn rdfs:label "specificityGroundedIn"@en .
+hrai:specificityGroundedIn rdfs:comment "Brazilian evidence: provision, indicator with source and base year, or PBIA objective. Mandatory."@en .
+hrai:specificityGroundedIn rdfs:domain hrai:NationalSpecificity .
+hrai:specificityComparison rdf:type owl:ObjectProperty .
+hrai:specificityComparison rdfs:label "specificityComparison"@en .
+hrai:specificityComparison rdfs:comment "One comparison per other jurisdiction of the corpus."@en .
+hrai:specificityComparison rdfs:domain hrai:NationalSpecificity .
+hrai:specificityComparison rdfs:range hrai:JurisdictionComparison .
+hrai:comparisonJurisdiction rdf:type owl:ObjectProperty .
+hrai:comparisonJurisdiction rdfs:label "comparisonJurisdiction"@en .
+hrai:comparisonJurisdiction rdfs:comment "Jurisdiction compared."@en .
+hrai:comparisonJurisdiction rdfs:domain hrai:JurisdictionComparison .
+hrai:comparisonJurisdiction rdfs:range hrai:Jurisdiction .
+hrai:comparisonSource rdf:type owl:ObjectProperty .
+hrai:comparisonSource rdfs:label "comparisonSource"@en .
+hrai:comparisonSource rdfs:comment "Source of the compared value."@en .
+hrai:comparisonSource rdfs:domain hrai:JurisdictionComparison .
+hrai:comparisonSource rdfs:range hrai:SourceSnapshot .
+hrai:specificityScope rdf:type owl:ObjectProperty .
+hrai:specificityScope rdfs:label "specificityScope"@en .
+hrai:specificityScope rdfs:comment "Scope within which an absence is valid."@en .
+hrai:specificityScope rdfs:domain hrai:NationalSpecificity .
+hrai:specificityScope rdfs:range hrai:CoverageAssessment .
+hrai:specificityReview rdf:type owl:ObjectProperty .
+hrai:specificityReview rdfs:label "specificityReview"@en .
+hrai:specificityReview rdfs:comment "Human review decision; only accepted specificities ground QN2/QN3 items."@en .
+hrai:specificityReview rdfs:domain hrai:NationalSpecificity .
+hrai:specificityReview rdfs:range hrai:ReviewDecision .
+hrai:groundedInSpecificity rdf:type owl:ObjectProperty .
+hrai:groundedInSpecificity rdfs:label "groundedInSpecificity"@en .
+hrai:groundedInSpecificity rdfs:comment "A QN2 or QN3 item points to the QN1 specificity it rests on."@en .
+hrai:groundedInSpecificity rdfs:range hrai:NationalSpecificity .
+hrai:codingScaleValue rdf:type owl:DatatypeProperty .
+hrai:codingScaleValue rdfs:label "codingScaleValue"@en .
+hrai:codingScaleValue rdfs:comment "Value on the approved scale of the criterion (E4)."@en .
+hrai:codingScaleValue rdfs:domain hrai:CriterionCoding .
+hrai:codingScaleValue rdfs:range xsd:decimal .
+hrai:codingValueLabel rdf:type owl:DatatypeProperty .
+hrai:codingValueLabel rdfs:label "codingValueLabel"@en .
+hrai:codingValueLabel rdfs:comment "Label of the coded value as written in the approved scale."@en .
+hrai:codingValueLabel rdfs:domain hrai:CriterionCoding .
+hrai:codingValueLabel rdfs:range xsd:string .
+hrai:hasLowerAlertThreshold rdf:type owl:DatatypeProperty .
+hrai:hasLowerAlertThreshold rdfs:label "hasLowerAlertThreshold"@en .
+hrai:hasLowerAlertThreshold rdfs:comment "Explicit lower alert threshold; mirrors hasUpperAlertThreshold (R18) for insufficient capacities."@en .
+hrai:hasLowerAlertThreshold rdfs:domain hrai:ContextIndicator .
+hrai:hasLowerAlertThreshold rdfs:range xsd:decimal .
+hrai:comparisonValue rdf:type owl:DatatypeProperty .
+hrai:comparisonValue rdfs:label "comparisonValue"@en .
+hrai:comparisonValue rdfs:comment "Value of the other jurisdiction, as coded."@en .
+hrai:comparisonValue rdfs:domain hrai:JurisdictionComparison .
+hrai:comparisonValue rdfs:range xsd:string .
+hrai:comparisonNotCoded rdf:type owl:DatatypeProperty .
+hrai:comparisonNotCoded rdfs:label "comparisonNotCoded"@en .
+hrai:comparisonNotCoded rdfs:comment "True when the jurisdiction is not coded on this point: never read as 'does not have'."@en .
+hrai:comparisonNotCoded rdfs:domain hrai:JurisdictionComparison .
+hrai:comparisonNotCoded rdfs:range xsd:boolean .
+
+hrai:R24a_FunctionCoverageInForce rdf:type swrl:Imp .
+hrai:R24a_FunctionCoverageInForce rdfs:comment "Coverage by an instrument in force; says nothing about enforcement or effectiveness."@en .
+hrai:R24a_FunctionCoverageInForce rdfs:label "R24a_FunctionCoverageInForce"@en .
+hrai:R24a_FunctionCoverageInForce swrl:body _:rr24a_1 .
+hrai:R24a_FunctionCoverageInForce swrl:head _:rr24a_2 .
+hrai:var_R24a_FunctionCoverageInForce_f rdf:type swrl:Variable .
+hrai:var_R24a_FunctionCoverageInForce_i rdf:type swrl:Variable .
+hrai:var_R24a_FunctionCoverageInForce_j rdf:type swrl:Variable .
+hrai:var_R24a_FunctionCoverageInForce_p rdf:type swrl:Variable .
+hrai:var_R24a_FunctionCoverageInForce_v rdf:type swrl:Variable .
+_:rr24a_1 rdf:first _:rr24a_3 .
+_:rr24a_1 rdf:rest _:rr24a_4 .
+_:rr24a_3 rdf:type swrl:ClassAtom .
+_:rr24a_3 swrl:argument1 hrai:var_R24a_FunctionCoverageInForce_p .
+_:rr24a_3 swrl:classPredicate hrai:LegalProvision .
+_:rr24a_4 rdf:first _:rr24a_5 .
+_:rr24a_4 rdf:rest _:rr24a_6 .
+_:rr24a_5 rdf:type swrl:IndividualPropertyAtom .
+_:rr24a_5 swrl:argument1 hrai:var_R24a_FunctionCoverageInForce_p .
+_:rr24a_5 swrl:argument2 hrai:var_R24a_FunctionCoverageInForce_f .
+_:rr24a_5 swrl:propertyPredicate hrai:provisionAddressesFunction .
+_:rr24a_6 rdf:first _:rr24a_7 .
+_:rr24a_6 rdf:rest _:rr24a_8 .
+_:rr24a_7 rdf:type swrl:IndividualPropertyAtom .
+_:rr24a_7 swrl:argument1 hrai:var_R24a_FunctionCoverageInForce_p .
+_:rr24a_7 swrl:argument2 hrai:var_R24a_FunctionCoverageInForce_v .
+_:rr24a_7 swrl:propertyPredicate hrai:provisionOfVersion .
+_:rr24a_8 rdf:first _:rr24a_9 .
+_:rr24a_8 rdf:rest _:rr24a_10 .
+_:rr24a_9 rdf:type swrl:IndividualPropertyAtom .
+_:rr24a_9 swrl:argument1 hrai:var_R24a_FunctionCoverageInForce_v .
+_:rr24a_9 swrl:argument2 hrai:var_R24a_FunctionCoverageInForce_i .
+_:rr24a_9 swrl:propertyPredicate hrai:versionOfInstrument .
+_:rr24a_10 rdf:first _:rr24a_11 .
+_:rr24a_10 rdf:rest _:rr24a_12 .
+_:rr24a_11 rdf:type swrl:ClassAtom .
+_:rr24a_11 swrl:argument1 hrai:var_R24a_FunctionCoverageInForce_i .
+_:rr24a_11 swrl:classPredicate hrai:EnactedLegalInstrument .
+_:rr24a_12 rdf:first _:rr24a_13 .
+_:rr24a_12 rdf:rest rdf:nil .
+_:rr24a_13 rdf:type swrl:IndividualPropertyAtom .
+_:rr24a_13 swrl:argument1 hrai:var_R24a_FunctionCoverageInForce_i .
+_:rr24a_13 swrl:argument2 hrai:var_R24a_FunctionCoverageInForce_j .
+_:rr24a_13 swrl:propertyPredicate hrai:instrumentInJurisdiction .
+_:rr24a_2 rdf:first _:rr24a_14 .
+_:rr24a_2 rdf:rest rdf:nil .
+_:rr24a_14 rdf:type swrl:IndividualPropertyAtom .
+_:rr24a_14 swrl:argument1 hrai:var_R24a_FunctionCoverageInForce_j .
+_:rr24a_14 swrl:argument2 hrai:var_R24a_FunctionCoverageInForce_f .
+_:rr24a_14 swrl:propertyPredicate hrai:jurisdictionAddressesFunction .
+
+hrai:R24b_FunctionCoverageProposed rdf:type swrl:Imp .
+hrai:R24b_FunctionCoverageProposed rdfs:comment "Coverage only in a legislative proposal; no binding force."@en .
+hrai:R24b_FunctionCoverageProposed rdfs:label "R24b_FunctionCoverageProposed"@en .
+hrai:R24b_FunctionCoverageProposed swrl:body _:rr24b_1 .
+hrai:R24b_FunctionCoverageProposed swrl:head _:rr24b_2 .
+hrai:var_R24b_FunctionCoverageProposed_f rdf:type swrl:Variable .
+hrai:var_R24b_FunctionCoverageProposed_i rdf:type swrl:Variable .
+hrai:var_R24b_FunctionCoverageProposed_j rdf:type swrl:Variable .
+hrai:var_R24b_FunctionCoverageProposed_p rdf:type swrl:Variable .
+hrai:var_R24b_FunctionCoverageProposed_v rdf:type swrl:Variable .
+_:rr24b_1 rdf:first _:rr24b_3 .
+_:rr24b_1 rdf:rest _:rr24b_4 .
+_:rr24b_3 rdf:type swrl:ClassAtom .
+_:rr24b_3 swrl:argument1 hrai:var_R24b_FunctionCoverageProposed_p .
+_:rr24b_3 swrl:classPredicate hrai:LegalProvision .
+_:rr24b_4 rdf:first _:rr24b_5 .
+_:rr24b_4 rdf:rest _:rr24b_6 .
+_:rr24b_5 rdf:type swrl:IndividualPropertyAtom .
+_:rr24b_5 swrl:argument1 hrai:var_R24b_FunctionCoverageProposed_p .
+_:rr24b_5 swrl:argument2 hrai:var_R24b_FunctionCoverageProposed_f .
+_:rr24b_5 swrl:propertyPredicate hrai:provisionAddressesFunction .
+_:rr24b_6 rdf:first _:rr24b_7 .
+_:rr24b_6 rdf:rest _:rr24b_8 .
+_:rr24b_7 rdf:type swrl:IndividualPropertyAtom .
+_:rr24b_7 swrl:argument1 hrai:var_R24b_FunctionCoverageProposed_p .
+_:rr24b_7 swrl:argument2 hrai:var_R24b_FunctionCoverageProposed_v .
+_:rr24b_7 swrl:propertyPredicate hrai:provisionOfVersion .
+_:rr24b_8 rdf:first _:rr24b_9 .
+_:rr24b_8 rdf:rest _:rr24b_10 .
+_:rr24b_9 rdf:type swrl:IndividualPropertyAtom .
+_:rr24b_9 swrl:argument1 hrai:var_R24b_FunctionCoverageProposed_v .
+_:rr24b_9 swrl:argument2 hrai:var_R24b_FunctionCoverageProposed_i .
+_:rr24b_9 swrl:propertyPredicate hrai:versionOfInstrument .
+_:rr24b_10 rdf:first _:rr24b_11 .
+_:rr24b_10 rdf:rest _:rr24b_12 .
+_:rr24b_11 rdf:type swrl:ClassAtom .
+_:rr24b_11 swrl:argument1 hrai:var_R24b_FunctionCoverageProposed_i .
+_:rr24b_11 swrl:classPredicate hrai:LegislativeProposal .
+_:rr24b_12 rdf:first _:rr24b_13 .
+_:rr24b_12 rdf:rest rdf:nil .
+_:rr24b_13 rdf:type swrl:IndividualPropertyAtom .
+_:rr24b_13 swrl:argument1 hrai:var_R24b_FunctionCoverageProposed_i .
+_:rr24b_13 swrl:argument2 hrai:var_R24b_FunctionCoverageProposed_j .
+_:rr24b_13 swrl:propertyPredicate hrai:proposalInJurisdiction .
+_:rr24b_2 rdf:first _:rr24b_14 .
+_:rr24b_2 rdf:rest rdf:nil .
+_:rr24b_14 rdf:type swrl:IndividualPropertyAtom .
+_:rr24b_14 swrl:argument1 hrai:var_R24b_FunctionCoverageProposed_j .
+_:rr24b_14 swrl:argument2 hrai:var_R24b_FunctionCoverageProposed_f .
+_:rr24b_14 swrl:propertyPredicate hrai:jurisdictionProposesFunction .
+
+hrai:R24c_FunctionCoveragePlanned rdf:type swrl:Imp .
+hrai:R24c_FunctionCoveragePlanned rdfs:comment "Coverage by a plan or policy action; not a legal obligation."@en .
+hrai:R24c_FunctionCoveragePlanned rdfs:label "R24c_FunctionCoveragePlanned"@en .
+hrai:R24c_FunctionCoveragePlanned swrl:body _:rr24c_1 .
+hrai:R24c_FunctionCoveragePlanned swrl:head _:rr24c_2 .
+hrai:var_R24c_FunctionCoveragePlanned_f rdf:type swrl:Variable .
+hrai:var_R24c_FunctionCoveragePlanned_i rdf:type swrl:Variable .
+hrai:var_R24c_FunctionCoveragePlanned_j rdf:type swrl:Variable .
+_:rr24c_1 rdf:first _:rr24c_3 .
+_:rr24c_1 rdf:rest _:rr24c_4 .
+_:rr24c_3 rdf:type swrl:ClassAtom .
+_:rr24c_3 swrl:argument1 hrai:var_R24c_FunctionCoveragePlanned_i .
+_:rr24c_3 swrl:classPredicate hrai:PolicyInstrument .
+_:rr24c_4 rdf:first _:rr24c_5 .
+_:rr24c_4 rdf:rest _:rr24c_6 .
+_:rr24c_5 rdf:type swrl:IndividualPropertyAtom .
+_:rr24c_5 swrl:argument1 hrai:var_R24c_FunctionCoveragePlanned_i .
+_:rr24c_5 swrl:argument2 hrai:var_R24c_FunctionCoveragePlanned_f .
+_:rr24c_5 swrl:propertyPredicate hrai:provisionAddressesFunction .
+_:rr24c_6 rdf:first _:rr24c_7 .
+_:rr24c_6 rdf:rest rdf:nil .
+_:rr24c_7 rdf:type swrl:IndividualPropertyAtom .
+_:rr24c_7 swrl:argument1 hrai:var_R24c_FunctionCoveragePlanned_i .
+_:rr24c_7 swrl:argument2 hrai:var_R24c_FunctionCoveragePlanned_j .
+_:rr24c_7 swrl:propertyPredicate hrai:policyInstrumentInJurisdiction .
+_:rr24c_2 rdf:first _:rr24c_8 .
+_:rr24c_2 rdf:rest rdf:nil .
+_:rr24c_8 rdf:type swrl:IndividualPropertyAtom .
+_:rr24c_8 swrl:argument1 hrai:var_R24c_FunctionCoveragePlanned_j .
+_:rr24c_8 swrl:argument2 hrai:var_R24c_FunctionCoveragePlanned_f .
+_:rr24c_8 swrl:propertyPredicate hrai:jurisdictionPlansFunction .
+
+hrai:R25a_CapacityShortfall rdf:type swrl:Imp .
+hrai:R25a_CapacityShortfall rdfs:comment "Below an explicit lower threshold: a signal to investigate, not a judgment of infeasibility."@en .
+hrai:R25a_CapacityShortfall rdfs:label "R25a_CapacityShortfall"@en .
+hrai:R25a_CapacityShortfall swrl:body _:rr25a_1 .
+hrai:R25a_CapacityShortfall swrl:head _:rr25a_2 .
+hrai:var_R25a_CapacityShortfall_i rdf:type swrl:Variable .
+hrai:var_R25a_CapacityShortfall_t rdf:type swrl:Variable .
+hrai:var_R25a_CapacityShortfall_v rdf:type swrl:Variable .
+_:rr25a_1 rdf:first _:rr25a_3 .
+_:rr25a_1 rdf:rest _:rr25a_4 .
+_:rr25a_3 rdf:type swrl:ClassAtom .
+_:rr25a_3 swrl:argument1 hrai:var_R25a_CapacityShortfall_i .
+_:rr25a_3 swrl:classPredicate hrai:ContextIndicator .
+_:rr25a_4 rdf:first _:rr25a_5 .
+_:rr25a_4 rdf:rest _:rr25a_6 .
+_:rr25a_5 rdf:type swrl:DatavaluedPropertyAtom .
+_:rr25a_5 swrl:argument1 hrai:var_R25a_CapacityShortfall_i .
+_:rr25a_5 swrl:argument2 hrai:var_R25a_CapacityShortfall_v .
+_:rr25a_5 swrl:propertyPredicate hrai:hasNumericValue .
+_:rr25a_6 rdf:first _:rr25a_7 .
+_:rr25a_6 rdf:rest _:rr25a_8 .
+_:rr25a_7 rdf:type swrl:DatavaluedPropertyAtom .
+_:rr25a_7 swrl:argument1 hrai:var_R25a_CapacityShortfall_i .
+_:rr25a_7 swrl:argument2 hrai:var_R25a_CapacityShortfall_t .
+_:rr25a_7 swrl:propertyPredicate hrai:hasLowerAlertThreshold .
+_:rr25a_8 rdf:first _:rr25a_9 .
+_:rr25a_8 rdf:rest rdf:nil .
+_:rr25a_9 rdf:type swrl:BuiltinAtom .
+_:rr25a_9 swrl:arguments _:rr25a_10 .
+_:rr25a_9 swrl:builtin swrlb:lessThan .
+_:rr25a_10 rdf:first hrai:var_R25a_CapacityShortfall_v .
+_:rr25a_10 rdf:rest _:rr25a_11 .
+_:rr25a_11 rdf:first hrai:var_R25a_CapacityShortfall_t .
+_:rr25a_11 rdf:rest rdf:nil .
+_:rr25a_2 rdf:first _:rr25a_12 .
+_:rr25a_2 rdf:rest rdf:nil .
+_:rr25a_12 rdf:type swrl:ClassAtom .
+_:rr25a_12 swrl:argument1 hrai:var_R25a_CapacityShortfall_i .
+_:rr25a_12 swrl:classPredicate hrai:CapacityShortfallIndicator .
+
+hrai:R25b_RequirementCapacityRisk rdf:type swrl:Imp .
+hrai:R25b_RequirementCapacityRisk rdfs:comment "The requirement presupposes a capacity flagged as short; investigate before concluding anything."@en .
+hrai:R25b_RequirementCapacityRisk rdfs:label "R25b_RequirementCapacityRisk"@en .
+hrai:R25b_RequirementCapacityRisk swrl:body _:rr25b_1 .
+hrai:R25b_RequirementCapacityRisk swrl:head _:rr25b_2 .
+hrai:var_R25b_RequirementCapacityRisk_c rdf:type swrl:Variable .
+hrai:var_R25b_RequirementCapacityRisk_i rdf:type swrl:Variable .
+hrai:var_R25b_RequirementCapacityRisk_r rdf:type swrl:Variable .
+_:rr25b_1 rdf:first _:rr25b_3 .
+_:rr25b_1 rdf:rest _:rr25b_4 .
+_:rr25b_3 rdf:type swrl:ClassAtom .
+_:rr25b_3 swrl:argument1 hrai:var_R25b_RequirementCapacityRisk_r .
+_:rr25b_3 swrl:classPredicate hrai:NormativeRequirement .
+_:rr25b_4 rdf:first _:rr25b_5 .
+_:rr25b_4 rdf:rest _:rr25b_6 .
+_:rr25b_5 rdf:type swrl:IndividualPropertyAtom .
+_:rr25b_5 swrl:argument1 hrai:var_R25b_RequirementCapacityRisk_r .
+_:rr25b_5 swrl:argument2 hrai:var_R25b_RequirementCapacityRisk_c .
+_:rr25b_5 swrl:propertyPredicate hrai:requirementAssumesCapacity .
+_:rr25b_6 rdf:first _:rr25b_7 .
+_:rr25b_6 rdf:rest _:rr25b_8 .
+_:rr25b_7 rdf:type swrl:IndividualPropertyAtom .
+_:rr25b_7 swrl:argument1 hrai:var_R25b_RequirementCapacityRisk_c .
+_:rr25b_7 swrl:argument2 hrai:var_R25b_RequirementCapacityRisk_i .
+_:rr25b_7 swrl:propertyPredicate hrai:capacityMeasuredBy .
+_:rr25b_8 rdf:first _:rr25b_9 .
+_:rr25b_8 rdf:rest rdf:nil .
+_:rr25b_9 rdf:type swrl:ClassAtom .
+_:rr25b_9 swrl:argument1 hrai:var_R25b_RequirementCapacityRisk_i .
+_:rr25b_9 swrl:classPredicate hrai:CapacityShortfallIndicator .
+_:rr25b_2 rdf:first _:rr25b_10 .
+_:rr25b_2 rdf:rest rdf:nil .
+_:rr25b_10 rdf:type swrl:IndividualPropertyAtom .
+_:rr25b_10 swrl:argument1 hrai:var_R25b_RequirementCapacityRisk_r .
+_:rr25b_10 swrl:argument2 hrai:var_R25b_RequirementCapacityRisk_i .
+_:rr25b_10 swrl:propertyPredicate hrai:requirementHasCapacityRisk .
+
+hrai:R26_Transposition rdf:type swrl:Imp .
+hrai:R26_Transposition rdfs:comment "Reviewed equivalent or adapted correspondence across jurisdictions; transposition is a reading aid, not a legal finding."@en .
+hrai:R26_Transposition rdfs:label "R26_Transposition"@en .
+hrai:R26_Transposition swrl:body _:rr26__1 .
+hrai:R26_Transposition swrl:head _:rr26__2 .
+hrai:var_R26_Transposition_c rdf:type swrl:Variable .
+hrai:var_R26_Transposition_d rdf:type swrl:Variable .
+hrai:var_R26_Transposition_dst rdf:type swrl:Variable .
+hrai:var_R26_Transposition_j1 rdf:type swrl:Variable .
+hrai:var_R26_Transposition_j2 rdf:type swrl:Variable .
+hrai:var_R26_Transposition_src rdf:type swrl:Variable .
+hrai:var_R26_Transposition_t rdf:type swrl:Variable .
+_:rr26__1 rdf:first _:rr26__3 .
+_:rr26__1 rdf:rest _:rr26__4 .
+_:rr26__3 rdf:type swrl:ClassAtom .
+_:rr26__3 swrl:argument1 hrai:var_R26_Transposition_c .
+_:rr26__3 swrl:classPredicate hrai:ProvisionCorrespondence .
+_:rr26__4 rdf:first _:rr26__5 .
+_:rr26__4 rdf:rest _:rr26__6 .
+_:rr26__5 rdf:type swrl:IndividualPropertyAtom .
+_:rr26__5 swrl:argument1 hrai:var_R26_Transposition_c .
+_:rr26__5 swrl:argument2 hrai:var_R26_Transposition_src .
+_:rr26__5 swrl:propertyPredicate hrai:correspondenceFrom .
+_:rr26__6 rdf:first _:rr26__7 .
+_:rr26__6 rdf:rest _:rr26__8 .
+_:rr26__7 rdf:type swrl:IndividualPropertyAtom .
+_:rr26__7 swrl:argument1 hrai:var_R26_Transposition_c .
+_:rr26__7 swrl:argument2 hrai:var_R26_Transposition_dst .
+_:rr26__7 swrl:propertyPredicate hrai:correspondenceTo .
+_:rr26__8 rdf:first _:rr26__9 .
+_:rr26__8 rdf:rest _:rr26__10 .
+_:rr26__9 rdf:type swrl:IndividualPropertyAtom .
+_:rr26__9 swrl:argument1 hrai:var_R26_Transposition_c .
+_:rr26__9 swrl:argument2 hrai:var_R26_Transposition_t .
+_:rr26__9 swrl:propertyPredicate hrai:correspondenceHasType .
+_:rr26__10 rdf:first _:rr26__11 .
+_:rr26__10 rdf:rest _:rr26__12 .
+_:rr26__11 rdf:type swrl:ClassAtom .
+_:rr26__11 swrl:argument1 hrai:var_R26_Transposition_t .
+_:rr26__11 swrl:classPredicate hrai:TransposingCorrespondenceType .
+_:rr26__12 rdf:first _:rr26__13 .
+_:rr26__12 rdf:rest _:rr26__14 .
+_:rr26__13 rdf:type swrl:IndividualPropertyAtom .
+_:rr26__13 swrl:argument1 hrai:var_R26_Transposition_c .
+_:rr26__13 swrl:argument2 hrai:var_R26_Transposition_d .
+_:rr26__13 swrl:propertyPredicate hrai:correspondenceReview .
+_:rr26__14 rdf:first _:rr26__15 .
+_:rr26__14 rdf:rest _:rr26__16 .
+_:rr26__15 rdf:type swrl:ClassAtom .
+_:rr26__15 swrl:argument1 hrai:var_R26_Transposition_d .
+_:rr26__15 swrl:classPredicate hrai:ApprovalDecision .
+_:rr26__16 rdf:first _:rr26__17 .
+_:rr26__16 rdf:rest _:rr26__18 .
+_:rr26__17 rdf:type swrl:IndividualPropertyAtom .
+_:rr26__17 swrl:argument1 hrai:var_R26_Transposition_src .
+_:rr26__17 swrl:argument2 hrai:var_R26_Transposition_j1 .
+_:rr26__17 swrl:propertyPredicate hrai:provisionInJurisdiction .
+_:rr26__18 rdf:first _:rr26__19 .
+_:rr26__18 rdf:rest _:rr26__20 .
+_:rr26__19 rdf:type swrl:IndividualPropertyAtom .
+_:rr26__19 swrl:argument1 hrai:var_R26_Transposition_dst .
+_:rr26__19 swrl:argument2 hrai:var_R26_Transposition_j2 .
+_:rr26__19 swrl:propertyPredicate hrai:provisionInJurisdiction .
+_:rr26__20 rdf:first _:rr26__21 .
+_:rr26__20 rdf:rest rdf:nil .
+_:rr26__21 rdf:type swrl:BuiltinAtom .
+_:rr26__21 swrl:arguments _:rr26__22 .
+_:rr26__21 swrl:builtin swrlb:notEqual .
+_:rr26__22 rdf:first hrai:var_R26_Transposition_j1 .
+_:rr26__22 rdf:rest _:rr26__23 .
+_:rr26__23 rdf:first hrai:var_R26_Transposition_j2 .
+_:rr26__23 rdf:rest rdf:nil .
+_:rr26__2 rdf:first _:rr26__24 .
+_:rr26__2 rdf:rest rdf:nil .
+_:rr26__24 rdf:type swrl:IndividualPropertyAtom .
+_:rr26__24 swrl:argument1 hrai:var_R26_Transposition_dst .
+_:rr26__24 swrl:argument2 hrai:var_R26_Transposition_src .
+_:rr26__24 swrl:propertyPredicate hrai:provisionTransposedFrom .

@@ -32,10 +32,30 @@ assert (H.SyntheticStakeholderPerspective, OWL.disjointWith, H.IdentifiedStakeho
 assert (H.LegislativeProposal, OWL.disjointWith, H.EnactedLegalInstrument) in ttl
 assert (H.impactReviewStatus, OWL.deprecated, Literal(True)) in ttl
 
+# v1.2.0 (ESP-ONT-02, RF-03): extensões aditivas da comparação, cobertura, capacidade e especificidade
+v120_classes = {"RegulatoryDesignCriterion": None, "CriterionCoding": None, "SubstantiveArea": None,
+                "ProvisionCorrespondence": None, "CorrespondenceType": None, "TransposingCorrespondenceType": "CorrespondenceType",
+                "CapacityRequirement": None, "CapacityShortfallIndicator": "ContextIndicator",
+                "RiskExposureIndicator": "ContextIndicator", "CoverageAssessment": None, "NationalSpecificity": None,
+                "SpecificityDimension": None, "DifferenceType": None, "JurisdictionComparison": None}
+for name, sup in v120_classes.items():
+    assert (H[name], RDF.type, OWL.Class) in ttl, name
+    assert ttl.value(H[name], RDFS.comment) is not None, f"{name}: classe sem comentário"
+    if sup:
+        assert (H[name], RDFS.subClassOf, H[sup]) in ttl, (name, sup)
+for prop in ("provisionAddressesFunction", "jurisdictionAddressesFunction", "jurisdictionProposesFunction",
+             "jurisdictionPlansFunction", "provisionTransposedFrom", "requirementHasCapacityRisk", "claimQualifies",
+             "claimComplements", "groundedInSpecificity", "specificityComparison", "hasLowerAlertThreshold"):
+    assert ttl.value(H[prop], RDFS.comment) is not None, f"{prop}: propriedade ausente ou sem comentário"
+assert (None, None, Literal("1.2.0")) in ttl
+
 # Regras SWRL: contagem, estrutura e segurança
 rules = sorted(set(ttl.subjects(RDF.type, SW.Imp)))
-assert len(rules) == 23, (len(rules), "SWRL rule count")
-forbidden_heads = {H.assessmentHasStatus, H.hasLegalStatus, H.releasePublishesCandidate}
+assert len(rules) == 29, (len(rules), "SWRL rule count")
+# I-1: nenhuma regra afirma status jurídico, conformidade, publicação ou decisão (humana ou de revisão).
+forbidden_heads = {H.assessmentHasStatus, H.hasLegalStatus, H.releasePublishesCandidate, H.hasReviewDecision,
+                   H.ReviewDecision, H.ApprovalDecision, H.codingReview, H.correspondenceReview, H.specificityReview,
+                   H.NationalSpecificity}
 VAR_PROPS = (SW.argument1, SW.argument2)
 
 
@@ -60,5 +80,6 @@ for r in rules:
     head_vars = set().union(*(atom_vars(a) for a in head_atoms))
     assert head_vars <= body_vars, f"{r}: variável da cabeça ausente do corpo (regra insegura)"
 
-print(f"OK: {len(ttl)} RDF triples, {len(mandatory)} canonical classes, {len(v110_classes)} v1.1.0 classes "
+print(f"OK: {len(ttl)} RDF triples, {len(mandatory)} canonical classes, {len(v110_classes)} v1.1.0 classes, "
+      f"{len(v120_classes)} v1.2.0 classes "
       f"and {len(rules)} safe SWRL rules")

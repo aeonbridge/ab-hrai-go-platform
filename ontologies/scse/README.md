@@ -3,7 +3,7 @@
 Módulo de deliberação do **HRAI-GO (Human-centred Regulatory AI, Governance Observatory)**: tensões de deliberação,
 conselho, estratos, assentos, rodadas, posições, cenários e decisões.
 
-**Versão:** 1.1.0 · **Namespace:** `https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#`
+**Versão:** 1.2.0 · **Namespace:** `https://github.com/aeonbridge/ab-hrai-go-platform/ontology/scse#`
 
 ## Relação com o núcleo regulatório (RF-17)
 
@@ -22,9 +22,15 @@ conselho, estratos, assentos, rodadas, posições, cenários e decisões.
 
 A versão 1.0.0 usava o namespace provisório `example.org` e redeclarava classes do núcleo.
 
+## v1.2.0 (ESP-ONT-02, RF-03)
+
+`DecisionRecord` (decisão humana da rodada 4), `positionRevisedAs`, posições sobre alternativas, `stakeholderInStratum`
+e as regras `R29a_SyntheticSupport` / `R29b_SyntheticChallenge` (apoio sintético nunca conta como humano) e
+`R30_DivergentAlternative` (apoio e contestação vindos de estratos diferentes).
+
 ## Arquivos
 
-- `SCSE_Shadow_Council_Ontology.ttl`: ontologia OWL 2 em Turtle, com as regras SWRL (R01–R09) serializadas em RDF.
+- `SCSE_Shadow_Council_Ontology.ttl`: ontologia OWL 2 em Turtle, com as regras SWRL (R01–R09, R29a, R29b, R30) serializadas em RDF.
 - `SCSE_Shadow_Council_Ontology.owl`: o mesmo grafo em RDF/XML.
 
 Os indivíduos do namespace `scse/example#` são ilustrações sintéticas, não dados reais.

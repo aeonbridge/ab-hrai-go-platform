@@ -69,3 +69,19 @@ hrai:StakeholderPosition(?pos) ^ hrai:positionExpressedBy(?pos,?s) ^ hrai:Synthe
 hrai:LegalProvision(?p) ^ hrai:provisionOfVersion(?p,?v) ^ hrai:versionOfInstrument(?v,?ins) ^ hrai:LegislativeProposal(?ins) -> hrai:ProposedProvision(?p)
 # R23_ProspectiveRequirement: Requirement derived from a proposal; prospective, not currently binding.
 hrai:NormativeRequirement(?req) ^ hrai:derivedFromProvision(?req,?p) ^ hrai:ProposedProvision(?p) -> hrai:ProspectiveRequirement(?req)
+
+# --- v1.2.0 (ESP-ONT-02, RF-03) ---
+# R24a_FunctionCoverageInForce: Coverage by an instrument in force; says nothing about enforcement or effectiveness.
+hrai:LegalProvision(?p) ^ hrai:provisionAddressesFunction(?p,?f) ^ hrai:provisionOfVersion(?p,?v) ^ hrai:versionOfInstrument(?v,?i) ^ hrai:EnactedLegalInstrument(?i) ^ hrai:instrumentInJurisdiction(?i,?j) -> hrai:jurisdictionAddressesFunction(?j,?f)
+# R24b_FunctionCoverageProposed: Coverage only in a legislative proposal; no binding force.
+hrai:LegalProvision(?p) ^ hrai:provisionAddressesFunction(?p,?f) ^ hrai:provisionOfVersion(?p,?v) ^ hrai:versionOfInstrument(?v,?i) ^ hrai:LegislativeProposal(?i) ^ hrai:proposalInJurisdiction(?i,?j) -> hrai:jurisdictionProposesFunction(?j,?f)
+# R24c_FunctionCoveragePlanned: Coverage by a plan or policy action; not a legal obligation.
+hrai:PolicyInstrument(?i) ^ hrai:provisionAddressesFunction(?i,?f) ^ hrai:policyInstrumentInJurisdiction(?i,?j) -> hrai:jurisdictionPlansFunction(?j,?f)
+# R25a_CapacityShortfall: Below an explicit lower threshold: a signal to investigate, not a judgment of infeasibility.
+hrai:ContextIndicator(?i) ^ hrai:hasNumericValue(?i,?v) ^ hrai:hasLowerAlertThreshold(?i,?t) ^ swrlb:lessThan(?v,?t) -> hrai:CapacityShortfallIndicator(?i)
+# R25b_RequirementCapacityRisk: The requirement presupposes a capacity flagged as short; investigate before concluding anything.
+hrai:NormativeRequirement(?r) ^ hrai:requirementAssumesCapacity(?r,?c) ^ hrai:capacityMeasuredBy(?c,?i) ^ hrai:CapacityShortfallIndicator(?i) -> hrai:requirementHasCapacityRisk(?r,?i)
+# R26_Transposition: Reviewed equivalent or adapted correspondence across jurisdictions; transposition is a reading aid, not a legal finding.
+hrai:ProvisionCorrespondence(?c) ^ hrai:correspondenceFrom(?c,?src) ^ hrai:correspondenceTo(?c,?dst) ^ hrai:correspondenceHasType(?c,?t) ^ hrai:TransposingCorrespondenceType(?t) ^ hrai:correspondenceReview(?c,?d) ^ hrai:ApprovalDecision(?d) ^ hrai:provisionInJurisdiction(?src,?j1) ^ hrai:provisionInJurisdiction(?dst,?j2) ^ swrlb:notEqual(?j1,?j2) -> hrai:provisionTransposedFrom(?dst,?src)
+# R27 does not exist: SWRL has no negation; uncovered exposure is a SPARQL query under a CoverageAssessment.
+# R28 lives in the comparative module; R29-R30 live in the SCSE module.
